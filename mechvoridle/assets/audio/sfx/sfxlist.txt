@@ -1,0 +1,66 @@
+Menu SFX:
+
+	Navigation buttons:
+
+		
+button press sfx for pressing arrows to navigate to other menus
+sound for initial press
+transition effect for changing menus
+optional: a sound effect for going to shop/mining page and return back to main page
+optional: hovering over item effect
+other: - alarm sound effect for UFO attack
+Shop Pane:
+	
+sound effect for purchasing equipment
+optional: a unique sound effect for purchasing item in each category of gear: heads, torsos, legs, arms, guns, swords
+text crawl effect:
+sound (a beep or chirp or something) for letter as appears during text crawl - will be dialogue for arms dealer describing details of particular item equipped
+
+Mining/Refinery Page:
+
+space ambiance
+sfx for manual click mining
+optional: sfx for hitting a critical strike
+drone mining sfx
+asteroid hitting drone sfx - might be able to repurpose for laser hitting drone
+optional: sfx for asteroid flying through space
+asteroid being destroyed by player clicking on it
+UFO flying onto screen
+UFO hovering
+UFO firing laser
+UFO damage by player clicking
+drone destroyed sfx
+
+upgrade button press
+  optionally one for: purchasing drone, purchasing refinery station, purchasing mining laser upgrade, purchasing critical strike chance upgrade
+
+
+
+Combat Page:
+	
+will probably take some time to flesh things out as we go - as we balance things
+
+	
+player attack:
+machine gun 
+rocket launcher
+plasma gun
+battle axe
+plasma sword
+
+	
+player taking damage
+player death
+
+	
+enemy attack:
+might be able to repurpose the player sfx just with different effect to sound like it's coming from a different distance
+enemy taking damage
+enemy death
+optional: synthesized - or radio style voice of enemy mech addressing player and wishing him to his doom (or something silly of the sort)
+
+Main Menu:
+   
+start game button click
+hover over button (reused for other parts of game?)
+optional: start game sfx - maybe like mecha gyros revving or mecha starting up

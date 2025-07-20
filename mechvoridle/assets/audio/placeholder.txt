@@ -1,0 +1,77 @@
+placeholder
+Art assets:
+
+	
+main page:
+Start fight button
+	
+button to navigate to mining/refining page
+button to navigate to shop pane
+UI background art
+UI silo for showing currently attained resources
+UI silo for section showing enemy tips
+Button for purchasing tip (max 3 tips?)
+UI silo for tracking currently attained mecha parts **ideally I would love to do a low poly rendition of the mech you put together - but for time sake, it will probably be 2D icons
+image for head component slot
+image for torso component slot
+image for arms component slot
+image for legs component slot
+image for weapon 1 slot
+image for weapon 2 slot
+
+Mining/Refinery Page
+background UI 
+silo for upgrade panel
+silo for resource tracker text
+section for mining area
+space background
+giant asteroid player can click on and mine
+drones
+drones being destroyed animation
+small asteroids for flying across screen (may randomize size in code)
+ufo
+lasers ufo shoots
+effects for clicking on asteroid
+progress bar for mining efforts (individual or all together efforts?)
+section for refinery
+refinery area background
+refinery stations
+optional: refinery station operating
+
+progress bar for refinery efforts (individual or all together efforts?)
+
+	
+other:
+red shader for simulating alarm
+Combat Section
+
+		
+model for enemy mecha - may be just static image with minimal distortions to image (probably idle animation or something and distortions when hit/attack)
+optional: animations for enemy attack with melee weapon
+heat axe
+plasma sword
+optional: animations for enemy attack with ranged weapon
+machine gun
+rocket launcher
+enemy health bar
+progress bars for charge time for attack
+
+		
+dashboard for player cockpit (our vantage point)
+border art
+panel for weapon 1 charge bar
+panel for weapon 2 charge bar
+panel for health bar
+optional: panel showing components (enrichment - no functionality)
+
+		
+explosion effects for boss death
+boss death animation (maybe a pose and falling off screen)
+explosions for player cock pit (then fade to black)
+
+	
+Main Menu:
+Title text
+art work - could be image of a mech or player character
+start game button
+optional: settings button
