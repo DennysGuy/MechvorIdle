@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu5ql32vaxyid"]
+
+[ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
+
+[node name="MiningRefiningPane" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tutbl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.273207, 0.52756, 0.790258, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -11.5
+offset_right = 47.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Mining Refining Pane"
+
+[node name="CentralHubNavigation" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_top = 19.0
+offset_right = -22.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "Central Hub"
+
+[connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]

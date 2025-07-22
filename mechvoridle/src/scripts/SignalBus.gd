@@ -1,0 +1,7 @@
+extends Node
+
+signal move_to_mining_pane
+signal move_to_shop_pane
+signal move_to_central_hub_from_mining_page
+signal move_to_central_hub_from_shop_pane
+signal start_fight

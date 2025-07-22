@@ -11,10 +11,26 @@ config_version=5
 [application]
 
 config/name="MechvorIdle"
+run/main_scene="uid://d3gd8inykd321"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://src/scripts/SignalBus.gd"
+AudioHandler="*res://src/scripts/AudioHandler.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
