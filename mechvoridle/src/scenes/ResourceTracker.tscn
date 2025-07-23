@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc7liqf41bqti"]
+
+[ext_resource type="Script" uid="uid://b02iljlmno0xg" path="res://src/scripts/Panels/resource_tracker.gd" id="1_qyq3t"]
+
+[node name="ResourceTracker" type="Panel"]
+offset_left = 467.0
+offset_top = 250.0
+offset_right = 610.0
+offset_bottom = 354.0
+script = ExtResource("1_qyq3t")
+
+[node name="ResourcesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 1.0
+offset_right = 140.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 9
+text = "Resources"
+
+[node name="FerriteLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 35.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 9
+text = "Ferrite"
+
+[node name="FerriteBarsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 42.0
+offset_right = 52.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 8
+text = "Ferrite Bars"
+
+[node name="FerriteCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 23.0
+offset_right = 94.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 11
+text = "10000000000000"
+
+[node name="FerriteBarsCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 53.0
+offset_right = 94.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 11
+text = "10000000000000"
+
+[node name="PlatinumLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 72.0
+offset_right = 47.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 9
+text = "Platinum"
+
+[node name="PlatinumCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 84.0
+offset_right = 94.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 11
+text = "10000000000000"

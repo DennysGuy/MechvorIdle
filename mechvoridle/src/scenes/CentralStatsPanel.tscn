@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dio1yrjtiu67"]
+[gd_scene load_steps=3 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
+[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
 
 [node name="CentralHubPanel" type="Control"]
 layout_mode = 3
@@ -37,6 +38,7 @@ offset_right = 291.0
 offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_constants/separation = 150
+alignment = 1
 
 [node name="MiningPaneNavigation" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
@@ -51,21 +53,162 @@ layout_mode = 2
 text = "Shop
 "
 
-[node name="Label" type="Label" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -47.0
-offset_top = -11.5
-offset_right = 47.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Central Hub"
+[node name="ResourcesPanel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 75.0
+offset_right = 356.0
+offset_bottom = 205.0
+
+[node name="ResourcesLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 63.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 12
+text = "Resources"
+
+[node name="ElapsedTimeLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 5.0
+offset_right = 220.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 12
+text = "Elapsed Time:"
+
+[node name="ElapsedTime" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 6.0
+offset_right = 295.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "00:00:00"
+
+[node name="RawFerriteLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 37.0
+offset_right = 78.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 12
+text = "Raw Ferrite:"
+
+[node name="RawFerriteCount" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 37.0
+offset_right = 313.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 12
+text = "100"
+
+[node name="FerriteBarsLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 61.0
+offset_right = 79.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 12
+text = "Ferrite Bars:"
+
+[node name="FerriteBarsCount" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 61.0
+offset_right = 313.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 12
+text = "100"
+
+[node name="PlatinumBarsLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 79.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 12
+text = "Platinum:"
+
+[node name="PlatinumBarsCount" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 85.0
+offset_right = 313.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 12
+text = "100"
+
+[node name="TipsPanel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 222.0
+offset_right = 358.0
+offset_bottom = 343.0
+
+[node name="ResourcesLabel2" type="Label" parent="ColorRect/TipsPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 67.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "Reconnaissance"
+
+[node name="PurchaseReconScout" type="Button" parent="ColorRect/TipsPanel"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 9
+text = "Buy Recon Scout"
+
+[node name="Platinum" type="Label" parent="ColorRect/TipsPanel"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 3.0
+offset_right = 242.0
+offset_bottom = 15.0
+theme_override_font_sizes/font_size = 8
+text = "Platinum"
+
+[node name="PlatinumCost" type="Label" parent="ColorRect/TipsPanel"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 13.0
+offset_right = 242.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 8
+text = "1000000000000000000000000"
+
+[node name="MechComponentsTrackerPanel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 73.0
+offset_right = 623.0
+offset_bottom = 340.0
+
+[node name="Label" type="Label" parent="ColorRect/MechComponentsTrackerPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 128.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 12
+text = "Components Tracker"
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/MechComponentsTrackerPanel"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 76.0
+offset_right = 195.0
+offset_bottom = 204.0
+texture = ExtResource("2_liohg")
 
 [connection signal="button_up" from="ColorRect/HBoxContainer/MiningPaneNavigation" to="." method="_on_mining_pane_navigation_button_up"]
 [connection signal="button_up" from="ColorRect/HBoxContainer/StartFight" to="." method="_on_start_fight_button_up"]
 [connection signal="button_up" from="ColorRect/HBoxContainer/ShopPaneNavigation" to="." method="_on_shop_pane_navigation_button_up"]
+[connection signal="button_down" from="ColorRect/TipsPanel/PurchaseReconScout" to="." method="_on_purchase_recon_scout_button_down"]
