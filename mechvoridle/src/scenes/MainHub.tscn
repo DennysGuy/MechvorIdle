@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3gd8inykd321"]
+
+[ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
+[ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
+[ext_resource type="PackedScene" uid="uid://cu5ql32vaxyid" path="res://src/scenes/MiningPane.tscn" id="2_kflli"]
+[ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/scenes/ShopPane.tscn" id="4_0av82"]
+
+[sub_resource type="Animation" id="Animation_k282t"]
+resource_name = "NavigateFromMiningPageToCentralHub"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-639, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_id2nt"]
+resource_name = "NavigateFromShopToCentralHub"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1280, 0), Vector2(-639, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0av82"]
+resource_name = "NavigateToMiningPage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-639, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0c4kj"]
+resource_name = "NavigateToShopPane"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-639, 0), Vector2(-1280, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7cw1w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-639, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k282t"]
+_data = {
+&"NavigateFromMiningPageToCentralHub": SubResource("Animation_k282t"),
+&"NavigateFromShopToCentralHub": SubResource("Animation_id2nt"),
+&"NavigateToMiningPage": SubResource("Animation_0av82"),
+&"NavigateToShopPane": SubResource("Animation_0c4kj"),
+&"RESET": SubResource("Animation_7cw1w")
+}
+
+[node name="MainHub" type="Node2D"]
+script = ExtResource("1_ekml7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k282t")
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_right = 1281.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 640
+alignment = 1
+
+[node name="MiningRefiningPane" parent="HBoxContainer" instance=ExtResource("2_kflli")]
+layout_mode = 2
+
+[node name="CentralHubPanel2" parent="HBoxContainer" instance=ExtResource("1_4kaqy")]
+layout_mode = 2
+
+[node name="ShopPane" parent="HBoxContainer" instance=ExtResource("4_0av82")]
+layout_mode = 2

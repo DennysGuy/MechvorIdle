@@ -1,0 +1,330 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccmj71mwg532g"]
+
+[ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
+
+[node name="UpgradePanel" type="ColorRect"]
+offset_right = 124.0
+offset_bottom = 339.0
+color = Color(0.601223, 0.601223, 0.601223, 1)
+script = ExtResource("1_ffqcc")
+
+[node name="UpgradesAccess" type="Button" parent="."]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 45.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 8
+text = "upgrades"
+
+[node name="UpgradeDamage" type="Button" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 59.0
+offset_right = 48.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 7
+text = "+damage"
+
+[node name="UpgradeCritChance" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 97.0
+offset_right = 48.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 6
+text = "+Crit Chance"
+
+[node name="UpgradesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 53.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 11
+text = "Upgrades"
+
+[node name="MiningLaserlabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 24.0
+offset_right = 72.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 11
+text = "Mining Laser"
+
+[node name="CurrentDamageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 45.0
+offset_right = 35.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 7
+text = "damage:"
+
+[node name="CurrentDamageTracker" type="Label" parent="."]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 45.0
+offset_right = 105.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="DamagePlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 58.0
+offset_right = 107.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="CurrentDamageCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 68.0
+offset_right = 120.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="CurrentCritChanceLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 84.0
+offset_right = 43.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 7
+text = "crit chance:"
+
+[node name="CurrentCritChanceTracker" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 84.0
+offset_right = 106.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 7
+text = "0.0%"
+
+[node name="CritChancePlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 96.0
+offset_right = 99.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="CurrentCritChanceCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 106.0
+offset_right = 119.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="DronesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 137.0
+offset_right = 42.0
+offset_bottom = 153.0
+theme_override_font_sizes/font_size = 11
+text = "Drones"
+
+[node name="DronesCountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 154.0
+offset_right = 43.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 7
+text = "Drones:"
+
+[node name="DronesCountTrackerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 154.0
+offset_right = 112.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 7
+text = "12"
+
+[node name="DronesPlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 164.0
+offset_right = 105.0
+offset_bottom = 175.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="DronesCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 175.0
+offset_right = 119.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PurchaseDrone" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 167.0
+offset_right = 48.0
+offset_bottom = 187.0
+theme_override_font_sizes/font_size = 6
+text = "+1 Drone"
+
+[node name="DroneDamageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 188.0
+offset_right = 56.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 7
+text = "Drone Damage:"
+
+[node name="DroneDamage" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 189.0
+offset_right = 118.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 7
+text = "5"
+
+[node name="DroneDamagePlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 199.0
+offset_right = 105.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="DroneDamageCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 208.0
+offset_right = 104.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeDroneDamage" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 200.0
+offset_right = 48.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 6
+text = "+ Damage"
+
+[node name="FerriteRefineries" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 237.0
+offset_right = 42.0
+offset_bottom = 253.0
+theme_override_font_sizes/font_size = 11
+text = "Ferrite Refineries"
+
+[node name="FerriteRefineriesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 254.0
+offset_right = 43.0
+offset_bottom = 265.0
+theme_override_font_sizes/font_size = 7
+text = "Refineries:"
+
+[node name="FerriteRefineryCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 254.0
+offset_right = 112.0
+offset_bottom = 265.0
+theme_override_font_sizes/font_size = 7
+text = "4"
+
+[node name="FerritePlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 264.0
+offset_right = 105.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="FerriteRefineryCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 275.0
+offset_right = 127.0
+offset_bottom = 286.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PurchaseRefinery" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 267.0
+offset_right = 48.0
+offset_bottom = 287.0
+theme_override_font_sizes/font_size = 6
+text = "+1 Refinery"
+
+[node name="RefineryEfficiency" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 288.0
+offset_right = 56.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 7
+text = "Effici. Bonus:"
+
+[node name="EfficiencyBonus" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 289.0
+offset_right = 118.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 7
+text = "10 (per station)"
+
+[node name="RefineryEfficiencyBonusCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 299.0
+offset_right = 105.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="EfficiencyBonusCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 308.0
+offset_right = 104.0
+offset_bottom = 319.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeEfficiency" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 300.0
+offset_right = 48.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 6
+text = "+ Efficiency"
+
+[connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
+[connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]
+[connection signal="button_down" from="UpgradeCritChance" to="." method="_on_upgrade_crit_chance_button_down"]
+[connection signal="button_down" from="UpgradeDroneDamage" to="." method="_on_upgrade_drone_damage_button_down"]
+[connection signal="button_down" from="PurchaseRefinery" to="." method="_on_purchase_refinery_button_down"]
+[connection signal="button_down" from="UpgradeEfficiency" to="." method="_on_upgrade_efficiency_button_down"]

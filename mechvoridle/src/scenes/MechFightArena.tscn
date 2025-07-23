@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://c68p1ei57ngk7"]
+
+[ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
+
+[node name="MechFightArena" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mj4vx")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[node name="Weapon1" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 292.0
+offset_right = 90.0
+offset_bottom = 315.0
+text = "Weapon 1"
+
+[node name="Weapon1ChargeBar" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 322.0
+offset_right = 202.0
+offset_bottom = 349.0
+show_percentage = false
+
+[node name="Weapon2" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 291.0
+offset_right = 308.0
+offset_bottom = 314.0
+text = "Weapon 2"
+
+[node name="Weapon1ChargeBar2" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 322.0
+offset_right = 420.0
+offset_bottom = 349.0
+show_percentage = false
+
+[node name="Health" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 291.0
+offset_right = 519.0
+offset_bottom = 314.0
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 322.0
+offset_right = 631.0
+offset_bottom = 349.0
+show_percentage = false
+
+[node name="BossTitle" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 26.0
+text = "Boss"
+
+[node name="BossHealthBar" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 28.0
+offset_right = 567.0
+offset_bottom = 55.0
+show_percentage = false
+
+[node name="BossWeapon1" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 55.0
+offset_right = 133.0
+offset_bottom = 78.0
+text = "Weapon1"
+
+[node name="BossWeapon1ChargeBar" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 79.0
+offset_right = 246.0
+offset_bottom = 106.0
+show_percentage = false
+
+[node name="BossWeapon2" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 55.0
+offset_right = 452.0
+offset_bottom = 78.0
+text = "Weapon2"
+
+[node name="BossWeapon2ChargeBar" type="ProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 79.0
+offset_right = 565.0
+offset_bottom = 106.0
+show_percentage = false

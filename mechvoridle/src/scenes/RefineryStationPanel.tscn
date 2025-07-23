@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg8jxc7r6vcat"]
+
+[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_ua2jw"]
+
+[node name="RefineryStationPanel" type="Panel"]
+offset_left = 31.0
+offset_top = 249.0
+offset_right = 462.0
+offset_bottom = 352.0
+
+[node name="RefineryStationLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 97.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 11
+text = "Refinery Stations x"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 6.0
+offset_right = 343.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 10
+text = "0 - 1 refinery station needed to start automation"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 23.0
+offset_right = 421.0
+offset_bottom = 92.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(410, 70)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
+
+[node name="TextureRect3" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
+
+[node name="TextureRect4" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
+
+[node name="TextureRect5" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
+
+[node name="TextureRect6" type="TextureRect" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ua2jw")
