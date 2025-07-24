@@ -9,8 +9,8 @@ var platinum_count : int
 #mining panel
 var ufo_attacking : bool = false
 
-var ferrite_refinery_cost : int = 1500
-var plasma_generator_cost : int = 2000
+var ferrite_refinery_cost : int = 50 #test values
+var plasma_generator_cost : int = 50 #test values
 
 var drone_count : int
 var refinery_stations_count : int
@@ -64,21 +64,34 @@ var platinum_drone_mining_speed_interval : float = 0.2
 
 var ferrite_refinery_station_purchased = false
 
-var ferrite_refinery_speed : float = 0.0
+var ferrite_refinery_speed : float = 0.12
 var ferrite_refinery_speed_cost : int = 100
-var output_amount : int = 1 
-var output_upgrade_cost : int = 250
+var ferrite_refinery_speed_base_cost : int = 100
+var ferrite_refinery_speed_level : int = 0
+var ferrite_refinery_speed_upgrade_interval : float = 0.15
+
+var ferrite_refinery_output_level : int = 0
+var output_amount : int = 4
+var output_upgrade_cost : int = 300
+var output_upgrade_base_cost : int = 300
+
 var ferrite_cost : int = 8
 var ferrite_cost_platinum_cost : int = 500
+var ferrite_cost_platinum_base_cost : int = 500
 
 var plasma_generator_station_purchased = false
 
-var plasma_generator_speed : float = 0.0
+var plasma_generator_speed_level : int = 0
+var plasma_generator_speed : float = 0.1
 var plasma_generator_speed_cost : int = 200
-var plasma_generator_output : int = 0
+
+var plasma_generator_output_level : int = 0
+var plasma_generator_output : int = 4
 var plasma_generator_output_cost : int = 500
+
+var plasma_generator_fuel_level : int = 0
 var plasma_generator_fuel_consumption : int = 8
-var plasma_generator_fuel_cost : int = 700
+var plasma_generator_fuel_cost : int = 3000
 
 #stats page
 var recon_scout_platinum_cost : int = 1500

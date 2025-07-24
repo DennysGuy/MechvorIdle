@@ -149,14 +149,20 @@ func _on_upgrade_drone_damage_button_down():
 	drone_damage_cost.text = str(GameManager.drone_damage_cost)
 	SignalBus.update_platinum_count.emit()
 
-func _on_purchase_refinery_button_down():
-	pass # Replace with function body.
 
 func _on_upgrade_efficiency_button_down():
-	pass # Replace with function body.
+	GameManager.platinum_count -= GameManager.output_upgrade_cost
+	GameManager.ferrite_refinery_output_level += 1
+	GameManager.output_amount *= 2
+	GameManager.ferrite_cost  *= 2
+	GameManager.output_upgrade_cost = GameManager.output_upgrade_base_cost * pow(2, GameManager.ferrite_refinery_output_level)
+	
+	efficiency_bonus_cost.text = str(GameManager.output_upgrade_cost)
+	efficiency_bonus.text = str(GameManager.output_amount)
+	
 
 func _on_generator_output_upgrade_button_down():
-	pass # Replace with function body.
+	pass
 
 func _on_upgrade_fuel_cost_button_down():
 	pass # Replace with function body.
@@ -164,11 +170,8 @@ func _on_upgrade_fuel_cost_button_down():
 func _on_plasma_generator_speed_upgrade_button_down():
 	pass # Replace with function body.
 
-func _on_upgrade_ferrite_cost_button_down():
-	pass # Replace with function body.
 
-func _on_upgrade_refinery_speed_button_down():
-	pass # Replace with function body.
+
 
 func _on_hide_upgrades_panel_button_down():
 	upgrade_panel_showing = false
@@ -248,3 +251,11 @@ func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
 	GameManager.platinum_drone_mining_speed_cost = GameManager.platinum_drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
+
+func _on_upgrade_refinery_speed_button_down() -> void:
+	GameManager.platinum_count -= GameManager.ferrite_refinery_speed_cost
+	GameManager.ferrite_refinery_speed_level += 1
+	GameManager.ferrite_refinery_speed += GameManager.ferrite_refinery_speed_upgrade_interval
+	GameManager.ferrite_refinery_speed_cost = GameManager.ferrite_refinery_speed_base_cost * pow(2, GameManager.ferrite_refinery_speed_level)
+	ferrite_refinery_speed.text = str(GameManager.ferrite_refinery_speed * 100) +"%"
+	ferrite_refinery_speed_cost.text = str(GameManager.ferrite_refinery_speed_cost)
