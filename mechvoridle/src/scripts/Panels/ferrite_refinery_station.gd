@@ -39,7 +39,6 @@ func _process(delta: float) -> void:
 			print(refinery_stock)
 		
 		if refinery_stock == GameManager.ferrite_cost:
-			print("here!")
 			progress_bar.value += GameManager.ferrite_refinery_speed
 			if progress_bar.value == progress_bar.max_value:
 				obtain_resources()
