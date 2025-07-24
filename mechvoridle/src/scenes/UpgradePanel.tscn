@@ -234,29 +234,11 @@ text = "+ Damage"
 [node name="FerriteRefinery" type="Label" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 208.0
+offset_top = 215.0
 offset_right = 71.0
-offset_bottom = 224.0
+offset_bottom = 231.0
 theme_override_font_sizes/font_size = 9
 text = "Ferrite Refinery"
-
-[node name="FerriteRefineryPlatinum" type="Label" parent="."]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 219.0
-offset_right = 37.0
-offset_bottom = 230.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum:"
-
-[node name="FerriteRefineryPlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 219.0
-offset_right = 70.0
-offset_bottom = 230.0
-theme_override_font_sizes/font_size = 7
-text = "1234"
 
 [node name="FerriteAutoSpeed" type="Label" parent="."]
 layout_mode = 0
@@ -396,29 +378,11 @@ text = "Lower Cost"
 [node name="PlasmaGenerator" type="Label" parent="."]
 layout_mode = 0
 offset_left = 125.0
-offset_top = 211.0
+offset_top = 215.0
 offset_right = 204.0
-offset_bottom = 227.0
+offset_bottom = 231.0
 theme_override_font_sizes/font_size = 9
 text = "Plasma Generator"
-
-[node name="PlasmaGeneratorPlatinum" type="Label" parent="."]
-layout_mode = 0
-offset_left = 125.0
-offset_top = 221.0
-offset_right = 158.0
-offset_bottom = 232.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum:"
-
-[node name="PlasmaGeneratorCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 187.0
-offset_top = 221.0
-offset_right = 203.0
-offset_bottom = 232.0
-theme_override_font_sizes/font_size = 7
-text = "1234"
 
 [node name="PlasmaGeneratorAutoSpeed" type="Label" parent="."]
 layout_mode = 0
@@ -555,38 +519,6 @@ offset_bottom = 327.0
 theme_override_font_sizes/font_size = 5
 text = "Lower Cost"
 
-[node name="PurchaseFerriteRefinery" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = 42.5
-offset_right = -7.0
-offset_bottom = 59.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 6
-text = "Purchase"
-
-[node name="PurchasePlasmaGenerator" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 87.0
-offset_top = 45.5
-offset_right = 122.0
-offset_bottom = 62.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 6
-text = "Purchase"
-
 [node name="HideUpgradesPanel" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -611,6 +543,4 @@ text = "Hide"
 [connection signal="button_down" from="PlasmaGeneratorSpeedUpgrade" to="." method="_on_plasma_generator_speed_upgrade_button_down"]
 [connection signal="button_down" from="GeneratorOutputUpgrade" to="." method="_on_generator_output_upgrade_button_down"]
 [connection signal="button_down" from="UpgradeFuelCost" to="." method="_on_upgrade_fuel_cost_button_down"]
-[connection signal="button_down" from="PurchaseFerriteRefinery" to="." method="_on_purchase_ferrite_refinery_button_down"]
-[connection signal="button_down" from="PurchasePlasmaGenerator" to="." method="_on_purchase_plasma_generator_button_down"]
 [connection signal="button_down" from="HideUpgradesPanel" to="." method="_on_hide_upgrades_panel_button_down"]

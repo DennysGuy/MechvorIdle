@@ -6,7 +6,7 @@
 [node name="RefineryStationPanel" type="Panel"]
 offset_left = 31.0
 offset_top = 249.0
-offset_right = 462.0
+offset_right = 608.0
 offset_bottom = 352.0
 
 [node name="FerriteRefinery" parent="." instance=ExtResource("1_ua2jw")]
@@ -25,17 +25,18 @@ layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -179.0
-offset_top = -34.5
-offset_right = -76.0
-offset_bottom = 54.5
+offset_left = -180.0
+offset_top = -45.5
+offset_right = -77.0
+offset_bottom = 43.5
 grow_horizontal = 0
 
 [node name="TogglePlasmaGenerator" type="CheckButton" parent="."]
 layout_mode = 0
-offset_left = 269.0
-offset_right = 342.0
-offset_bottom = 24.0
+offset_left = 501.0
+offset_top = 7.0
+offset_right = 574.0
+offset_bottom = 31.0
 theme_override_font_sizes/font_size = 5
 text = "Toggle
 Generator"

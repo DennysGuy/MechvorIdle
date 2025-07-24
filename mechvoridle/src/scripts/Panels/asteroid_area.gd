@@ -65,7 +65,7 @@ func platinum_gained() -> bool:
 func add_drone_to_scene() -> void:
 	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
 	var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(0, area_collision_shape.shape.get_rect().size.x)
-	var random_y_pos : float = randf_range(0, area_collision_shape.shape.get_rect().size.y)
+	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x, area_collision_shape.shape.get_rect().size.x)
+	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y, area_collision_shape.shape.get_rect().size.y)
 	drone.global_position = asteroid_area_2d.global_position + Vector2(random_x_pos, random_y_pos)
 	add_child(drone)
