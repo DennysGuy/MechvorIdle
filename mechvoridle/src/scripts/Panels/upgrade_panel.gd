@@ -23,6 +23,20 @@ class_name UpgradePanel extends ColorRect
 @onready var drone_mining_speed_cost: Label = $DroneMiningSpeedCost
 @onready var upgrade_drone_mining_speed: Button = $UpgradeDroneMiningSpeed
 
+#plat drones stuff
+
+@onready var platinum_drones_cost: Label = $PlatinumDronesCost
+@onready var purchase_platinum_drone: Button = $PurchasePlatinumDrone
+@onready var platinum_drones_count: Label = $PlatinumDronesCount
+
+@onready var plat_drone_damage: Label = $PlatDroneDamage
+@onready var plat_drone_damage_cost: Label = $PlatDroneDamageCost
+@onready var upgrade_plat_drone_damage: Button = $UpgradePlatDroneDamage
+
+@onready var plat_drone_speed: Label = $PlatDroneSpeed
+@onready var plat_drone_speed_cost: Label = $PlatDroneSpeedCost
+@onready var upgrade_platinum_drone_mining_speed: Button = $UpgradePlatinumDroneMiningSpeed
+
 
 
 #refinery stuff
@@ -60,6 +74,13 @@ func _ready() -> void:
 	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
 	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
 	
+	platinum_drones_count.text = str(GameManager.platinum_drone_count)
+	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
+	plat_drone_damage.text = str(GameManager.platinum_drone_damage_cost)
+	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
+	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
+	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
+	
 	efficiency_bonus.text = str(GameManager.output_amount)
 	efficiency_bonus_cost.text = str(GameManager.output_upgrade_cost)
 
@@ -67,12 +88,21 @@ func _process(delta: float) -> void:
 	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
 	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
 	purchase_drone.disabled = GameManager.platinum_count < GameManager.drones_cost
+	purchase_platinum_drone.disabled = GameManager.platinum_count < GameManager.platinum_drone_cost
+	
 	if GameManager.drone_count > 0:
 		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
 		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
 		upgrade_drone_damage.disabled = true
 		upgrade_drone_mining_speed.disabled = true
+		
+	if GameManager.platinum_drone_count > 0:
+		upgrade_plat_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
+		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
+	else:
+		upgrade_plat_drone_damage.disabled = true
+		upgrade_platinum_drone_mining_speed.disabled = true
 	
 	if GameManager.ferrite_refinery_station_purchased:
 		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
@@ -182,7 +212,7 @@ func purchased_drone() -> void:
 func upgrade_drones_damage() -> void:
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
-	GameManager.drone_damage = GameManager.drone_damage + GameManager.mining_laser_level * 2
+	GameManager.drone_damage = GameManager.drone_damage + GameManager.drone_level * 2
 	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(2, GameManager.drone_level)
 
 
@@ -193,3 +223,28 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 	GameManager.drone_mining_speed_cost = GameManager.drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
 	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
 	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
+
+
+func _on_purchase_platinum_drone_button_down() -> void:
+	GameManager.platinum_count -= GameManager.platinum_drone_cost
+	GameManager.platinum_drone_count += 1
+	GameManager.platinum_drone_cost = GameManager.platinum_drone_cost * pow(2, GameManager.platinum_drone_count)
+	platinum_drones_count.text = str(GameManager.platinum_drone_count)
+	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
+	SignalBus.add_platinum_drone.emit()
+
+func _on_upgrade_plat_drone_damage_button_down() -> void:
+	GameManager.platinum_count -= GameManager.platinum_drone_damage_cost
+	GameManager.platinum_drone_damage_level += 1
+	GameManager.platinum_drone_damage = GameManager.platinum_drone_damage + GameManager.platinum_drone_damage_level * 2
+	GameManager.platinum_drone_damage_cost = GameManager.platinum_drone_damage_base_cost * pow(2, GameManager.platinum_drone_damage_level)
+	plat_drone_damage.text = str(GameManager.platinum_drone_damage)
+	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
+
+func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
+	GameManager.platinum_count -= GameManager.platinum_drone_mining_speed_cost
+	GameManager.platinum_drone_mining_speed_level += 1
+	GameManager.platinum_drone_mining_speed += GameManager.platinum_drone_mining_speed_interval
+	GameManager.platinum_drone_mining_speed_cost = GameManager.platinum_drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
+	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
+	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)

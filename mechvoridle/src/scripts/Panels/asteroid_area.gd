@@ -7,6 +7,7 @@ class_name AsteroidArea extends Node2D
 var _offset : int = 20
 func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
+	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	animation_player.play("hover")
 
 func _process(delta : float) -> void:
@@ -72,3 +73,11 @@ func add_drone_to_scene() -> void:
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 	add_child(drone)
+
+func add_platinum_drone_to_scene() -> void:
+	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+	var platinum_drone : PlatinumMiningDrone = preload("res://src/scenes/PlatinumMiningDrone.tscn").instantiate()
+	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+	add_child(platinum_drone)
