@@ -6,17 +6,19 @@ class_name CentralHubPanel extends Control
 @onready var raw_ferrite_count = $ColorRect/ResourcesPanel/RawFerriteCount
 @onready var ferrite_bars_count = $ColorRect/ResourcesPanel/FerriteBarsCount
 @onready var platinum_bars_count = $ColorRect/ResourcesPanel/PlatinumBarsCount
+@onready var plasma_count: Label = $ColorRect/ResourcesPanel/PlasmaCount
 
 
 func _ready() -> void:
 	SignalBus.update_ferrite_count.connect(update_raw_ferrite_count)
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_platinum_count.connect(update_platinum_count)
+	SignalBus.update_plasma_count.connect(update_plasma_count)
 	
 	update_raw_ferrite_count()
 	update_ferrite_bars_count()
 	update_platinum_count()
-	
+	update_plasma_count()
 
 func _process(delta) -> void:
 	pass
@@ -48,3 +50,6 @@ func update_ferrite_bars_count() -> void:
 
 func update_platinum_count() -> void:
 	platinum_bars_count.text = str(GameManager.platinum_count)
+
+func update_plasma_count() -> void:
+	plasma_count.text = str(GameManager.plasma_count)

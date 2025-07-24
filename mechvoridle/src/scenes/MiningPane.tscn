@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cg8jxc7r6vcat" path="res://src/scenes/RefineryStationPanel.tscn" id="4_l11te"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
 
-[sub_resource type="Animation" id="Animation_l11te"]
-resource_name = "ShowUpgradePanel"
+[sub_resource type="Animation" id="Animation_t7rsg"]
+resource_name = "HideAnimationPanel"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -15,10 +15,10 @@ tracks/0/path = NodePath("ColorRect/UpgradePanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667),
+"times": PackedFloat32Array(0, 0.22),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -339), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -339)]
 }
 
 [sub_resource type="Animation" id="Animation_ooyll"]
@@ -36,8 +36,8 @@ tracks/0/keys = {
 "values": [Vector2(0, -339)]
 }
 
-[sub_resource type="Animation" id="Animation_t7rsg"]
-resource_name = "HideAnimationPanel"
+[sub_resource type="Animation" id="Animation_l11te"]
+resource_name = "ShowUpgradePanel"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,10 +45,10 @@ tracks/0/path = NodePath("ColorRect/UpgradePanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22),
+"times": PackedFloat32Array(0, 0.166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -339)]
+"values": [Vector2(0, -339), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7rsg"]
@@ -115,6 +115,18 @@ offset_bottom = 55.0
 grow_horizontal = 0
 text = "Central Hub"
 
+[node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 248.0
+offset_right = 613.0
+offset_bottom = 353.0
+
+[node name="UpgradePanel" parent="ColorRect" instance=ExtResource("5_l11te")]
+layout_mode = 0
+offset_top = -339.0
+offset_bottom = 0.0
+
 [node name="ResourceTracker" parent="ColorRect" instance=ExtResource("3_d2ayj")]
 layout_mode = 1
 anchors_preset = 3
@@ -122,23 +134,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -172.0
-offset_top = -112.0
-offset_right = -29.0
-offset_bottom = -8.0
+offset_left = -405.0
+offset_top = -111.0
+offset_right = -262.0
+offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
-layout_mode = 0
-offset_left = 29.0
-offset_top = 250.0
-offset_right = 460.0
-offset_bottom = 353.0
-
-[node name="UpgradePanel" parent="ColorRect" instance=ExtResource("5_l11te")]
-layout_mode = 0
-offset_top = -339.0
-offset_bottom = 0.0
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]

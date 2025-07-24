@@ -3,10 +3,17 @@
 [ext_resource type="Script" uid="uid://b02iljlmno0xg" path="res://src/scripts/Panels/resource_tracker.gd" id="1_qyq3t"]
 
 [node name="ResourceTracker" type="Panel"]
-offset_left = 467.0
-offset_top = 250.0
-offset_right = 610.0
-offset_bottom = 354.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -52.0
+offset_right = 71.5
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_qyq3t")
 
 [node name="ResourcesLabel" type="Label" parent="."]
@@ -21,53 +28,71 @@ text = "Resources"
 [node name="FerriteLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 11.0
+offset_top = 1.0
 offset_right = 35.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 9
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 8
 text = "Ferrite"
 
 [node name="FerriteBarsLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 42.0
+offset_top = 26.0
 offset_right = 52.0
-offset_bottom = 54.0
+offset_bottom = 38.0
 theme_override_font_sizes/font_size = 8
 text = "Ferrite Bars"
 
 [node name="FerriteCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 23.0
+offset_top = 12.0
 offset_right = 94.0
-offset_bottom = 39.0
-theme_override_font_sizes/font_size = 11
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="FerriteBarsCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 53.0
+offset_top = 38.0
 offset_right = 94.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 11
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="PlatinumLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 7.0
-offset_top = 72.0
+offset_top = 50.0
 offset_right = 47.0
-offset_bottom = 85.0
-theme_override_font_sizes/font_size = 9
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 8
 text = "Platinum"
 
 [node name="PlatinumCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 84.0
+offset_top = 63.0
 offset_right = 94.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 11
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 8
+text = "10000000000000"
+
+[node name="PlasmaLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.5
+offset_top = 74.0
+offset_right = 47.5
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 8
+text = "Plasma"
+
+[node name="PlasmaCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 87.0
+offset_right = 94.5
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"

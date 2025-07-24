@@ -8,6 +8,14 @@ offset_bottom = 339.0
 color = Color(0.601223, 0.601223, 0.601223, 1)
 script = ExtResource("1_ffqcc")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 128.0
+offset_right = 262.0
+offset_bottom = 339.0
+color = Color(0.6, 0.6, 0.6, 1)
+
 [node name="UpgradesAccess" type="Button" parent="."]
 layout_mode = 0
 offset_top = 340.0
@@ -22,7 +30,7 @@ offset_left = 4.0
 offset_top = 59.0
 offset_right = 48.0
 offset_bottom = 79.0
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 5
 text = "+damage"
 
 [node name="UpgradeCritChance" type="Button" parent="."]
@@ -31,7 +39,7 @@ offset_left = 3.0
 offset_top = 97.0
 offset_right = 48.0
 offset_bottom = 117.0
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 5
 text = "+Crit Chance"
 
 [node name="UpgradesLabel" type="Label" parent="."]
@@ -49,7 +57,7 @@ offset_left = 3.0
 offset_top = 24.0
 offset_right = 72.0
 offset_bottom = 40.0
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 9
 text = "Mining Laser"
 
 [node name="CurrentDamageLabel" type="Label" parent="."]
@@ -59,7 +67,7 @@ offset_top = 45.0
 offset_right = 35.0
 offset_bottom = 56.0
 theme_override_font_sizes/font_size = 7
-text = "damage:"
+text = "Damage:"
 
 [node name="CurrentDamageTracker" type="Label" parent="."]
 layout_mode = 0
@@ -95,7 +103,7 @@ offset_top = 84.0
 offset_right = 43.0
 offset_bottom = 95.0
 theme_override_font_sizes/font_size = 7
-text = "crit chance:"
+text = "Crit Chance:"
 
 [node name="CurrentCritChanceTracker" type="Label" parent="."]
 layout_mode = 0
@@ -127,204 +135,550 @@ text = "100"
 [node name="DronesLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 137.0
+offset_top = 123.0
 offset_right = 42.0
-offset_bottom = 153.0
-theme_override_font_sizes/font_size = 11
+offset_bottom = 139.0
+theme_override_font_sizes/font_size = 9
 text = "Drones"
 
 [node name="DronesCountLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 154.0
+offset_top = 140.0
 offset_right = 43.0
-offset_bottom = 165.0
+offset_bottom = 151.0
 theme_override_font_sizes/font_size = 7
 text = "Drones:"
 
 [node name="DronesCountTrackerLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 154.0
+offset_top = 140.0
 offset_right = 112.0
-offset_bottom = 165.0
+offset_bottom = 151.0
 theme_override_font_sizes/font_size = 7
 text = "12"
 
 [node name="DronesPlatinumCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 164.0
+offset_top = 150.0
 offset_right = 105.0
-offset_bottom = 175.0
+offset_bottom = 161.0
 theme_override_font_sizes/font_size = 7
 text = "Platinum Cost"
 
 [node name="DronesCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 175.0
+offset_top = 161.0
 offset_right = 119.0
-offset_bottom = 186.0
+offset_bottom = 172.0
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="PurchaseDrone" type="Button" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 167.0
-offset_right = 48.0
-offset_bottom = 187.0
-theme_override_font_sizes/font_size = 6
+offset_top = 153.0
+offset_right = 33.0
+offset_bottom = 169.0
+theme_override_font_sizes/font_size = 5
 text = "+1 Drone"
 
 [node name="DroneDamageLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 188.0
+offset_top = 174.0
 offset_right = 56.0
-offset_bottom = 199.0
+offset_bottom = 185.0
 theme_override_font_sizes/font_size = 7
 text = "Drone Damage:"
 
 [node name="DroneDamage" type="Label" parent="."]
 layout_mode = 0
 offset_left = 58.0
-offset_top = 189.0
+offset_top = 175.0
 offset_right = 118.0
-offset_bottom = 200.0
+offset_bottom = 186.0
 theme_override_font_sizes/font_size = 7
 text = "5"
 
 [node name="DroneDamagePlatinumCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 199.0
+offset_top = 185.0
 offset_right = 105.0
-offset_bottom = 210.0
+offset_bottom = 196.0
 theme_override_font_sizes/font_size = 7
 text = "Platinum Cost"
 
 [node name="DroneDamageCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 208.0
+offset_top = 194.0
 offset_right = 104.0
-offset_bottom = 219.0
+offset_bottom = 205.0
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="UpgradeDroneDamage" type="Button" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 200.0
-offset_right = 48.0
-offset_bottom = 220.0
-theme_override_font_sizes/font_size = 6
+offset_top = 186.0
+offset_right = 36.0
+offset_bottom = 202.0
+theme_override_font_sizes/font_size = 5
 text = "+ Damage"
 
-[node name="FerriteRefineries" type="Label" parent="."]
+[node name="DroneMiningSpeed" type="Label" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 237.0
-offset_right = 42.0
-offset_bottom = 253.0
-theme_override_font_sizes/font_size = 11
-text = "Ferrite Refineries"
-
-[node name="FerriteRefineriesLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 254.0
-offset_right = 43.0
-offset_bottom = 265.0
+offset_top = 207.0
+offset_right = 56.0
+offset_bottom = 218.0
 theme_override_font_sizes/font_size = 7
-text = "Refineries:"
+text = "Drone Speed:"
 
-[node name="FerriteRefineryCount" type="Label" parent="."]
+[node name="DroneSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 207.0
+offset_right = 118.0
+offset_bottom = 218.0
+theme_override_font_sizes/font_size = 7
+text = "5"
+
+[node name="DroneMiningSpeedPlatinum" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 218.0
+offset_right = 105.0
+offset_bottom = 229.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="DroneMiningSpeedCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 254.0
-offset_right = 112.0
-offset_bottom = 265.0
+offset_top = 227.0
+offset_right = 104.0
+offset_bottom = 238.0
 theme_override_font_sizes/font_size = 7
-text = "4"
+text = "100"
+
+[node name="UpgradeDroneMiningSpeed" type="Button" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 219.0
+offset_right = 36.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 5
+text = "+ Speed"
+
+[node name="PlatinumDrones" type="Label" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 134.0
+offset_right = 165.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 7
+text = "Plat. Drones"
+
+[node name="PlatinumDronesCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 134.0
+offset_right = 234.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 7
+text = "12"
+
+[node name="PlatinumDronesPlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 144.0
+offset_right = 227.0
+offset_bottom = 155.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="PlatinumDronesCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 155.0
+offset_right = 241.0
+offset_bottom = 166.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PurchasePlatinumDrone" type="Button" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 147.0
+offset_right = 155.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 5
+text = "+1 Drone"
+
+[node name="PlatinumDroneDamage" type="Label" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 168.0
+offset_right = 178.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 7
+text = "Plat. Drone Damage:"
+
+[node name="PlatDroneDamage" type="Label" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 168.0
+offset_right = 259.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 7
+text = "5"
+
+[node name="PlatDroneDamagePlatCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 179.0
+offset_right = 247.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="PlatDroneDamageCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 188.0
+offset_right = 246.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradePlatDroneDamage" type="Button" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 180.0
+offset_right = 158.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 5
+text = "+ Damage"
+
+[node name="PlatinumDroneSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 201.0
+offset_right = 178.0
+offset_bottom = 212.0
+theme_override_font_sizes/font_size = 7
+text = "Plat Drone Speed:"
+
+[node name="PlatDroneSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 201.0
+offset_right = 258.0
+offset_bottom = 212.0
+theme_override_font_sizes/font_size = 7
+text = "5"
+
+[node name="PlatDroneSpeedPlatCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 212.0
+offset_right = 246.0
+offset_bottom = 223.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="PlatDroneSpeedCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 221.0
+offset_right = 245.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradePlatinumDroneMiningSpeed" type="Button" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 213.0
+offset_right = 158.0
+offset_bottom = 229.0
+theme_override_font_sizes/font_size = 5
+text = "+ Speed"
+
+[node name="FerriteRefinery" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 248.0
+offset_right = 71.0
+offset_bottom = 264.0
+theme_override_font_sizes/font_size = 9
+text = "Ferrite Refinery"
+
+[node name="FerriteAutoSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 267.0
+offset_right = 43.0
+offset_bottom = 278.0
+theme_override_font_sizes/font_size = 7
+text = "Auto Speed"
+
+[node name="FerriteRefinerySpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 267.0
+offset_right = 112.0
+offset_bottom = 278.0
+theme_override_font_sizes/font_size = 7
+text = "0"
 
 [node name="FerritePlatinumCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 264.0
+offset_top = 277.0
 offset_right = 105.0
-offset_bottom = 275.0
+offset_bottom = 288.0
 theme_override_font_sizes/font_size = 7
 text = "Platinum Cost"
 
-[node name="FerriteRefineryCost" type="Label" parent="."]
+[node name="FerriteRefinerySpeedCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 275.0
+offset_top = 288.0
 offset_right = 127.0
-offset_bottom = 286.0
+offset_bottom = 299.0
 theme_override_font_sizes/font_size = 7
-text = "100"
+text = "200"
 
-[node name="PurchaseRefinery" type="Button" parent="."]
+[node name="UpgradeRefinerySpeed" type="Button" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 267.0
-offset_right = 48.0
-offset_bottom = 287.0
-theme_override_font_sizes/font_size = 6
-text = "+1 Refinery"
+offset_top = 280.0
+offset_right = 39.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 5
+text = "+ Speed"
 
 [node name="RefineryEfficiency" type="Label" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 288.0
+offset_top = 301.0
 offset_right = 56.0
-offset_bottom = 299.0
+offset_bottom = 312.0
 theme_override_font_sizes/font_size = 7
-text = "Effici. Bonus:"
+text = "Output:"
 
 [node name="EfficiencyBonus" type="Label" parent="."]
 layout_mode = 0
 offset_left = 58.0
-offset_top = 289.0
+offset_top = 302.0
 offset_right = 118.0
-offset_bottom = 300.0
+offset_bottom = 313.0
 theme_override_font_sizes/font_size = 7
-text = "10 (per station)"
+text = "1"
 
 [node name="RefineryEfficiencyBonusCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 57.0
-offset_top = 299.0
+offset_top = 312.0
 offset_right = 105.0
-offset_bottom = 310.0
+offset_bottom = 323.0
 theme_override_font_sizes/font_size = 7
 text = "Platinum Cost"
 
 [node name="EfficiencyBonusCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 308.0
+offset_top = 321.0
 offset_right = 104.0
-offset_bottom = 319.0
+offset_bottom = 332.0
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="UpgradeEfficiency" type="Button" parent="."]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 300.0
-offset_right = 48.0
-offset_bottom = 320.0
-theme_override_font_sizes/font_size = 6
+offset_top = 313.0
+offset_right = 39.0
+offset_bottom = 329.0
+theme_override_font_sizes/font_size = 5
 text = "+ Efficiency"
+
+[node name="PlasmaGenerator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 230.0
+offset_right = 204.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 9
+text = "Plasma Generator"
+
+[node name="PlasmaGeneratorAutoSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 245.0
+offset_right = 168.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 7
+text = "Auto Speed:"
+
+[node name="GeneratorAutoSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 245.0
+offset_right = 235.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 7
+text = "0"
+
+[node name="GeneratorAutoSpeedPlatCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 255.0
+offset_right = 228.0
+offset_bottom = 266.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="AutoSpeedPlatCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 266.0
+offset_right = 250.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 7
+text = "200"
+
+[node name="PlasmaGeneratorSpeedUpgrade" type="Button" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 258.0
+offset_right = 162.0
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 5
+text = "+ Speed"
+
+[node name="PlasmaGeneratorOutput" type="Label" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 275.0
+offset_right = 179.0
+offset_bottom = 286.0
+theme_override_font_sizes/font_size = 7
+text = "Output:"
+
+[node name="GeneratorOutput" type="Label" parent="."]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 276.0
+offset_right = 241.0
+offset_bottom = 287.0
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="OutputPlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 286.0
+offset_right = 228.0
+offset_bottom = 297.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="OutputCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 295.0
+offset_right = 253.0
+offset_bottom = 306.0
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="GeneratorOutputUpgrade" type="Button" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 287.0
+offset_right = 162.0
+offset_bottom = 303.0
+theme_override_font_sizes/font_size = 5
+text = "+1 Output"
+
+[node name="GeneratorFuelCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 305.0
+offset_right = 179.0
+offset_bottom = 316.0
+theme_override_font_sizes/font_size = 7
+text = "Fuel Cost:"
+
+[node name="FuelCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 305.0
+offset_right = 239.0
+offset_bottom = 316.0
+theme_override_font_sizes/font_size = 7
+text = "8"
+
+[node name="GeneratorFuelPlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 316.0
+offset_right = 227.0
+offset_bottom = 327.0
+theme_override_font_sizes/font_size = 7
+text = "Platinum Cost"
+
+[node name="FuelPlatinumCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 325.0
+offset_right = 244.0
+offset_bottom = 336.0
+theme_override_font_sizes/font_size = 7
+text = "500"
+
+[node name="UpgradeFuelCost" type="Button" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 318.0
+offset_right = 165.0
+offset_bottom = 334.0
+theme_override_font_sizes/font_size = 5
+text = "Lower Cost"
+
+[node name="HideUpgradesPanel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 19.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 6
+text = "Hide"
 
 [connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
 [connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]
 [connection signal="button_down" from="UpgradeCritChance" to="." method="_on_upgrade_crit_chance_button_down"]
+[connection signal="button_down" from="PurchaseDrone" to="." method="_on_purchase_drone_button_down"]
 [connection signal="button_down" from="UpgradeDroneDamage" to="." method="_on_upgrade_drone_damage_button_down"]
-[connection signal="button_down" from="PurchaseRefinery" to="." method="_on_purchase_refinery_button_down"]
+[connection signal="button_down" from="UpgradeDroneMiningSpeed" to="." method="_on_upgrade_drone_mining_speed_button_down"]
+[connection signal="button_down" from="PurchasePlatinumDrone" to="." method="_on_purchase_platinum_drone_button_down"]
+[connection signal="button_down" from="UpgradePlatDroneDamage" to="." method="_on_upgrade_plat_drone_damage_button_down"]
+[connection signal="button_down" from="UpgradePlatinumDroneMiningSpeed" to="." method="_on_upgrade_platinum_drone_mining_speed_button_down"]
+[connection signal="button_down" from="UpgradeRefinerySpeed" to="." method="_on_upgrade_refinery_speed_button_down"]
 [connection signal="button_down" from="UpgradeEfficiency" to="." method="_on_upgrade_efficiency_button_down"]
+[connection signal="button_down" from="PlasmaGeneratorSpeedUpgrade" to="." method="_on_plasma_generator_speed_upgrade_button_down"]
+[connection signal="button_down" from="GeneratorOutputUpgrade" to="." method="_on_generator_output_upgrade_button_down"]
+[connection signal="button_down" from="UpgradeFuelCost" to="." method="_on_upgrade_fuel_cost_button_down"]
+[connection signal="button_down" from="HideUpgradesPanel" to="." method="_on_hide_upgrades_panel_button_down"]
