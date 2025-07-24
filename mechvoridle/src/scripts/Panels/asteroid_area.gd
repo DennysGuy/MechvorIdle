@@ -2,12 +2,15 @@ class_name AsteroidArea extends Node2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var asteroid_area_2d : Area2D = $AsteroidArea2D
 
+@onready var mining_asteroid: TextureRect = $MiningAsteroid
+
+var _offset : int = 20
 func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	animation_player.play("hover")
 
 func _process(delta : float) -> void:
-	pass
+	mining_asteroid.rotation += 0.0005
 
 
 func _on_texture_rect_gui_input(event : InputEvent) -> void:
@@ -65,7 +68,7 @@ func platinum_gained() -> bool:
 func add_drone_to_scene() -> void:
 	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
 	var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x, area_collision_shape.shape.get_rect().size.x)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y, area_collision_shape.shape.get_rect().size.y)
-	drone.global_position = asteroid_area_2d.global_position + Vector2(random_x_pos, random_y_pos)
+	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+	drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 	add_child(drone)

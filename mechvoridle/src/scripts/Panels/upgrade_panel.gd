@@ -1,11 +1,6 @@
 class_name UpgradePanel extends ColorRect
 
 
-#stations
-@onready var purchase_ferrite_refinery = $PurchaseFerriteRefinery
-@onready var purchase_plasma_generator = $PurchasePlasmaGenerator
-
-
 
 #mining laser stuff
 @onready var current_damage_tracker : Label = $CurrentDamageTracker
@@ -74,25 +69,21 @@ func _process(delta: float) -> void:
 		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
 		upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
 		upgrade_ferrite_cost.disabled = GameManager.platinum_count < GameManager.ferrite_cost_platinum_cost
-		purchase_ferrite_refinery.disabled = true
-		purchase_ferrite_refinery.hide()
 	else:
 		upgrade_refinery_speed.disabled = true
 		upgrade_efficiency.disabled = true
 		upgrade_ferrite_cost.disabled = true
-		purchase_ferrite_refinery.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_cost
+
 	
 	if GameManager.plasma_generator_station_purchased:
 		upgrade_fuel_cost.disabled = GameManager.platinum_count < GameManager.plasma_generator_fuel_cost
 		plasma_generator_speed_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_speed_cost
 		generator_output_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_output_cost
-		purchase_plasma_generator.disabled = true
-		purchase_plasma_generator.hide()
 	else:
 		upgrade_fuel_cost.disabled = true
 		plasma_generator_speed_upgrade.disabled = true
 		generator_output_upgrade.disabled = true
-		purchase_plasma_generator.disabled = GameManager.platinum_count < GameManager.plasma_generator_cost
+
 	
 	
 func _on_upgrades_access_button_down():
