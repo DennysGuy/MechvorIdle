@@ -21,7 +21,7 @@ var mining_laser_damage_upgrade_cost : int = 100
 var mining_laser_damage_base_cost : int = 100
 
 
-var mining_laser_crit_chance_level : int = 1
+var mining_laser_crit_chance_level : int = 0
 var mining_laser_crit_chance : float = 0.0
 var mining_laser_crit_chance_cost : int = 150
 var mining_laser_crit_chance_interval : float = 0.05
@@ -34,10 +34,15 @@ var platinum_gain_chance : float = 0.6
 
 var drones_count : int = 0
 var drones_cost : int = 50
-var drone_level : int = 1
+var drone_level : int = 0
 var drone_base_cost : int = 200
 var drone_damage : int = 1
+
+var drone_mining_speed_level : int = 0
 var drone_mining_speed : float = 0.3
+var drone_mining_speed_base_cost : int = 200
+var drone_mining_speed_cost : int = 200
+var drone_mining_speed_upgrade_interval : float = 0.1
 var drone_damage_cost : int = 100
 var drone_damage_base_cost : int = 150
 

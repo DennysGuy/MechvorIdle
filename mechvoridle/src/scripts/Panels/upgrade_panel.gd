@@ -17,8 +17,13 @@ class_name UpgradePanel extends ColorRect
 @onready var drones_cost : Label = $DronesCost
 @onready var drone_damage : Label = $DroneDamage
 @onready var drone_damage_cost : Label = $DroneDamageCost
-@onready var purchase_drone = $PurchaseDrone
-@onready var upgrade_drone_damage = $UpgradeDroneDamage
+@onready var purchase_drone : Button = $PurchaseDrone
+@onready var upgrade_drone_damage : Button = $UpgradeDroneDamage
+@onready var drone_speed: Label = $DroneSpeed
+@onready var drone_mining_speed_cost: Label = $DroneMiningSpeedCost
+@onready var upgrade_drone_mining_speed: Button = $UpgradeDroneMiningSpeed
+
+
 
 #refinery stuff
 @onready var ferrite_refinery_speed = $FerriteRefinerySpeed
@@ -52,6 +57,8 @@ func _ready() -> void:
 	drones_cost.text = str(GameManager.drones_cost)
 	drone_damage.text = str(GameManager.drone_damage)
 	drone_damage_cost.text = str(GameManager.drone_damage_cost)
+	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
+	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
 	
 	efficiency_bonus.text = str(GameManager.output_amount)
 	efficiency_bonus_cost.text = str(GameManager.output_upgrade_cost)
@@ -62,17 +69,17 @@ func _process(delta: float) -> void:
 	purchase_drone.disabled = GameManager.platinum_count < GameManager.drones_cost
 	if GameManager.drone_count > 0:
 		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
+		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
 		upgrade_drone_damage.disabled = true
+		upgrade_drone_mining_speed.disabled = true
 	
 	if GameManager.ferrite_refinery_station_purchased:
 		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
 		upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
-		upgrade_ferrite_cost.disabled = GameManager.platinum_count < GameManager.ferrite_cost_platinum_cost
 	else:
 		upgrade_refinery_speed.disabled = true
 		upgrade_efficiency.disabled = true
-		upgrade_ferrite_cost.disabled = true
 
 	
 	if GameManager.plasma_generator_station_purchased:
@@ -177,3 +184,12 @@ func upgrade_drones_damage() -> void:
 	GameManager.drone_level += 1
 	GameManager.drone_damage = GameManager.drone_damage + GameManager.mining_laser_level * 2
 	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(2, GameManager.drone_level)
+
+
+func _on_upgrade_drone_mining_speed_button_down() -> void:
+	GameManager.platinum_count -= GameManager.drone_mining_speed_cost
+	GameManager.drone_mining_speed_level += 1
+	GameManager.drone_mining_speed += GameManager.drone_mining_speed_upgrade_interval
+	GameManager.drone_mining_speed_cost = GameManager.drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
+	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
+	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
