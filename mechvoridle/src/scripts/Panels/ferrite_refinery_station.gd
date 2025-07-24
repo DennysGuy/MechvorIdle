@@ -30,6 +30,10 @@ func _process(delta: float) -> void:
 		#give resources
 		if GameManager.raw_ferrite_count >= GameManager.ferrite_cost and refinery_stock == 0:
 			GameManager.raw_ferrite_count -= GameManager.ferrite_cost
+			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
+			resource_acquired_label.output = "-"+str(GameManager.ferrite_cost)+" Ferrite"
+			resource_acquired_label.position = Vector2(130,0)
+			add_child(resource_acquired_label)
 			refinery_stock = GameManager.ferrite_cost
 			SignalBus.update_ferrite_count.emit()
 			print(refinery_stock)
@@ -47,9 +51,14 @@ func _on_purchase_refinery_station_button_down() -> void:
 	GameManager.ferrite_refinery_station_purchased = true
 	progress_bar.show()
 	purchase_panel.queue_free()
+	SignalBus.update_platinum_count.emit()
 
 
 func obtain_resources() -> void:
 	refinery_stock = 0
 	GameManager.ferrite_bars_count += GameManager.output_amount
 	SignalBus.update_ferrite_bars_count.emit()
+	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
+	resource_acquired_label.output = "+"+str(GameManager.output_amount)+" Ferrite Bars"
+	resource_acquired_label.position = Vector2.ZERO
+	add_child(resource_acquired_label)

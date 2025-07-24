@@ -123,18 +123,36 @@ offset_bottom = 249.0
 [node name="FerriteBars" type="Label" parent="ColorRect/Shop"]
 layout_mode = 0
 offset_left = 10.0
-offset_top = 250.0
+offset_top = 222.0
 offset_right = 76.0
-offset_bottom = 266.0
+offset_bottom = 238.0
 theme_override_font_sizes/font_size = 11
 text = "Ferrite Bars:"
 
 [node name="FerriteBarsCount" type="Label" parent="ColorRect/Shop"]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 265.0
-offset_right = 77.0
-offset_bottom = 281.0
+offset_top = 237.0
+offset_right = 118.0
+offset_bottom = 253.0
+theme_override_font_sizes/font_size = 11
+text = "15000000000000000"
+
+[node name="Plasma" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 252.0
+offset_right = 52.0
+offset_bottom = 268.0
+theme_override_font_sizes/font_size = 11
+text = "Plasma:"
+
+[node name="PlasmaCount" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 267.0
+offset_right = 118.0
+offset_bottom = 283.0
 theme_override_font_sizes/font_size = 11
 text = "15000000000000000"
 

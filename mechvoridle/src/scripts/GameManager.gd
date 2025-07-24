@@ -5,6 +5,7 @@ var can_fight_boss : bool = true
 var raw_ferrite_count : int
 var ferrite_bars_count : int
 var platinum_count : int
+var plasma_count : int
 
 #mining panel
 var ufo_attacking : bool = false
@@ -64,11 +65,11 @@ var platinum_drone_mining_speed_interval : float = 0.2
 
 var ferrite_refinery_station_purchased = false
 
-var ferrite_refinery_speed : float = 0.12
+var ferrite_refinery_speed : float = 0.08
 var ferrite_refinery_speed_cost : int = 100
 var ferrite_refinery_speed_base_cost : int = 100
 var ferrite_refinery_speed_level : int = 0
-var ferrite_refinery_speed_upgrade_interval : float = 0.15
+var ferrite_refinery_speed_upgrade_interval : float = 0.05
 
 var ferrite_refinery_output_level : int = 0
 var output_amount : int = 4
@@ -83,18 +84,26 @@ var plasma_generator_station_purchased = false
 
 var plasma_generator_speed_level : int = 0
 var plasma_generator_speed : float = 0.1
-var plasma_generator_speed_cost : int = 200
+var plasma_generator_speed_upgrade_interval : float = 0.05
+var plasma_generator_speed_cost : int = 300
+var plasma_generator_speed_base_cost : int = 300
 
 var plasma_generator_output_level : int = 0
 var plasma_generator_output : int = 4
 var plasma_generator_output_cost : int = 500
+var plasma_generator_output_base_const : int = 500
+var plasma_generator_output_upgrade_interval : int = 2
 
 var plasma_generator_fuel_level : int = 0
-var plasma_generator_fuel_consumption : int = 8
+var plasma_generator_fuel_consumption : int = 50
+var plasma_generator_fuel_consumption_upgrade_interval : int = 5
+var plasma_generator_fuel_consumption_speed : float = 0.05
 var plasma_generator_fuel_cost : int = 3000
+var plasma_generator_fuel_base_cost : int = 3000
 
 #stats page
-var recon_scout_platinum_cost : int = 1500
+var recon_scout_platinum_cost : int = 2000
+var recon_scout_platinum_base_cost : int = 2000
 var recon_scout_ferrite_bars_cost : int = 100
 
 #mech stats
@@ -110,6 +119,3 @@ var owned_mech_components : Dictionary = {
 }
 
 #shop panel
-
-func calculate_total_damage() -> void:
-	pass

@@ -15,3 +15,7 @@ signal show_upgrade_panel
 signal hide_upgrade_panel
 signal add_drone
 signal add_platinum_drone
+signal update_plasma_count
+signal update_plasma_generator_speed
+signal update_fuel_consumption
+signal update_plasma_generator_output

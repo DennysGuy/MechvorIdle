@@ -141,6 +141,24 @@ offset_bottom = 102.0
 theme_override_font_sizes/font_size = 12
 text = "100"
 
+[node name="PlasmaLabel" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 79.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 12
+text = "Plasma:"
+
+[node name="PlasmaCount" type="Label" parent="ColorRect/ResourcesPanel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 104.0
+offset_right = 313.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 12
+text = "100"
+
 [node name="TipsPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
 offset_left = 30.0

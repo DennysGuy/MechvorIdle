@@ -16,10 +16,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
-offset_left = 37.0
-offset_top = -48.5
-offset_right = 185.0
-offset_bottom = 44.5
+offset_left = 6.0
+offset_top = -50.5
+offset_right = 154.0
+offset_bottom = 47.5
 grow_horizontal = 1
 
 [node name="PlasmaGenerator" parent="." instance=ExtResource("2_1gsvm")]
@@ -27,18 +27,8 @@ layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_top = -45.5
-offset_right = -77.0
-offset_bottom = 43.5
+offset_left = -192.0
+offset_top = -47.5
+offset_right = -89.0
+offset_bottom = 41.5
 grow_horizontal = 0
-
-[node name="TogglePlasmaGenerator" type="CheckButton" parent="."]
-layout_mode = 0
-offset_left = 501.0
-offset_top = 7.0
-offset_right = 574.0
-offset_bottom = 31.0
-theme_override_font_sizes/font_size = 5
-text = "Toggle
-Generator"

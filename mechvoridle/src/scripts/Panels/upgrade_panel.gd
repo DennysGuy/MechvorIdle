@@ -58,6 +58,8 @@ class_name UpgradePanel extends ColorRect
 @onready var plasma_generator_speed_upgrade : Button = $PlasmaGeneratorSpeedUpgrade
 @onready var generator_output_upgrade : Button = $GeneratorOutputUpgrade
 @onready var upgrade_fuel_cost : Button = $UpgradeFuelCost
+@onready var auto_speed_plat_cost: Label = $AutoSpeedPlatCost
+@onready var generator_auto_speed: Label = $GeneratorAutoSpeed
 
 var upgrade_panel_showing : bool = false
 
@@ -80,6 +82,17 @@ func _ready() -> void:
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
+	
+	#plasma generator
+	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
+	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
+	
+	output_cost.text = str(GameManager.plasma_generator_output_cost)
+	generator_output.text = str(GameManager.plasma_generator_output)
+	
+	fuel_cost.text = str(GameManager.plasma_generator_fuel_consumption)
+	fuel_platinum_cost.text = str(GameManager.plasma_generator_fuel_cost)
+	
 	
 	efficiency_bonus.text = str(GameManager.output_amount)
 	efficiency_bonus_cost.text = str(GameManager.output_upgrade_cost)
@@ -162,28 +175,36 @@ func _on_upgrade_efficiency_button_down():
 	
 
 func _on_generator_output_upgrade_button_down():
-	pass
+	GameManager.platinum_count -= GameManager.plasma_generator_output_cost
+	GameManager.plasma_generator_output *= GameManager.plasma_generator_output_upgrade_interval
+	GameManager.plasma_generator_output_level += 1
+	GameManager.plasma_generator_output_cost = GameManager.plasma_generator_output_base_const * pow(2, GameManager.plasma_generator_output_level)
+	generator_output.text = str(GameManager.plasma_generator_output)
+	output_cost.text = str(GameManager.plasma_generator_output_cost)
+	SignalBus.update_plasma_generator_output.emit()
 
 func _on_upgrade_fuel_cost_button_down():
-	pass # Replace with function body.
-
+	GameManager.platinum_count -= GameManager.plasma_generator_fuel_cost
+	GameManager.plasma_generator_fuel_consumption -= GameManager.plasma_generator_fuel_consumption_upgrade_interval
+	GameManager.plasma_generator_fuel_level += 1
+	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_fuel_base_cost * pow(2, GameManager.plasma_generator_fuel_level)
+	fuel_cost.text = str(GameManager.plasma_generator_fuel_consumption)
+	fuel_platinum_cost.text = str(GameManager.plasma_generator_fuel_cost)
+	SignalBus.update_fuel_consumption.emit()
+	
 func _on_plasma_generator_speed_upgrade_button_down():
-	pass # Replace with function body.
-
-
-
-
+	GameManager.platinum_count -= GameManager.plasma_generator_speed_cost
+	GameManager.plasma_generator_speed += GameManager.plasma_generator_speed_upgrade_interval
+	GameManager.plasma_generator_speed_level += 1
+	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_speed_base_cost * pow(2, GameManager.plasma_generator_speed_level)
+	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
+	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
+	SignalBus.update_plasma_generator_speed.emit()
+	
+	
 func _on_hide_upgrades_panel_button_down():
 	upgrade_panel_showing = false
 	SignalBus.hide_upgrade_panel.emit()
-
-
-func _on_purchase_ferrite_refinery_button_down():
-	pass # Replace with function body.
-
-
-func _on_purchase_plasma_generator_button_down():
-	pass # Replace with function body.
 
 
 func _on_purchase_drone_button_down():

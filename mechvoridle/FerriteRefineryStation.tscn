@@ -45,14 +45,14 @@ show_percentage = false
 [node name="PurchasePanel" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 150.0
-offset_bottom = 94.0
+offset_bottom = 102.0
 
 [node name="PurchaseRefineryStation" type="Button" parent="PurchasePanel"]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 41.0
+offset_top = 48.0
 offset_right = 123.0
-offset_bottom = 83.0
+offset_bottom = 90.0
 text = "PURCHASE"
 
 [node name="RefineryCostLabel" type="Label" parent="PurchasePanel"]
