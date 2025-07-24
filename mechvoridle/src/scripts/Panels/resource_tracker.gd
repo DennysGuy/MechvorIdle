@@ -21,4 +21,4 @@ func update_ferrite_bars_count() -> void:
 	ferrite_bars_count.text = str(GameManager.ferrite_bars_count)
 
 func update_platinum_count() -> void:
-	ferrite_bars_count.text = str(GameManager.platinum_count)
+	platinum_count.text = str(GameManager.platinum_count)

@@ -13,3 +13,4 @@ signal update_ferrite_bars_count
 signal update_platinum_count
 signal show_upgrade_panel
 signal hide_upgrade_panel
+signal add_drone

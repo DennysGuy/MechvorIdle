@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://q2lvrrcqcirf"]
+
+[ext_resource type="Script" uid="uid://bmdl7trph1eue" path="res://src/scripts/Panels/ferrite_refinery_station.gd" id="1_ai323"]
+[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_ph523"]
+
+[node name="FerriteRefinery" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -55.0
+offset_right = 71.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ai323")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = -15.0
+offset_right = 71.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ph523")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 146.0
+offset_bottom = 27.0
+show_percentage = false
