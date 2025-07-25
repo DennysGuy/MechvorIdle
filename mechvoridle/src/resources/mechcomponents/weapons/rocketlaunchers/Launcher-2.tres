@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://d0us0h3brlcaf"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_upxg4"]
+
+[resource]
+script = ExtResource("1_upxg4")
+weapon_type = 1
+weapon_class = 2
+damage = 250
+number_of_hits = 1
+charge_time = 180.0
+charge_speed = 0.2
+accuracy = 0.6
+component_name = "BIGK1X33ZOMG"
+description = "A power plasma based rocket launcher. "
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 4
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

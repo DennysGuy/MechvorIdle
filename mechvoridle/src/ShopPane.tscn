@@ -115,9 +115,9 @@ color = Color(0.681205, 0.221813, 0.239773, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/Shop"]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 17.0
 offset_top = 4.0
-offset_right = 282.0
+offset_right = 274.0
 offset_bottom = 24.0
 
 [node name="HeadsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
@@ -153,7 +153,7 @@ text = "Swords"
 [node name="RocketLaunchersButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "Rocket Launchers"
+text = "Launchers"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Shop"]
 layout_mode = 2

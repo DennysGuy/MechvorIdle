@@ -7,6 +7,7 @@ class_name CentralHubPanel extends Control
 @onready var ferrite_bars_count = $ColorRect/ResourcesPanel/FerriteBarsCount
 @onready var platinum_bars_count = $ColorRect/ResourcesPanel/PlatinumBarsCount
 @onready var plasma_count: Label = $ColorRect/ResourcesPanel/PlasmaCount
+@onready var start_fight_button: Button = $ColorRect/HBoxContainer/StartFight
 
 
 func _ready() -> void:
@@ -21,13 +22,14 @@ func _ready() -> void:
 	update_plasma_count()
 
 func _process(delta) -> void:
-	pass
-
+	if not GameManager.can_fight_boss:
+		start_fight_button.disabled = true
+	else:
+		start_fight_button.disabled = false
 
 func _on_start_fight_button_up():
 	if GameManager.can_fight_boss:
 		start_fight()
-
 
 func _on_mining_pane_navigation_button_up() -> void:
 	SignalBus.move_to_mining_pane.emit()

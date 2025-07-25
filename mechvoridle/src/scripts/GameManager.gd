@@ -141,9 +141,15 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	if owned_components_count == MECH_PARTS_NEEDED:
 		can_fight_boss = true
-		GameManager.unlock_fight_button.emit()
+		
 	
 	print(owned_mech_components)
 
 func mech_component_slot_is_empty(category : String) -> bool:
+	if category == "Weapon":
+		if owned_mech_components["LeftWeapon"] == null or owned_mech_components["RightWeapon"] == null :
+			return true
+		else:
+			return false
+		
 	return owned_mech_components[category] == null

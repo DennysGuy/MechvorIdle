@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://dbxh8e0i8qfhr"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_fd1e0"]
+
+[resource]
+script = ExtResource("1_fd1e0")
+weapon_type = 0
+weapon_class = 1
+damage = 40
+number_of_hits = 3
+charge_time = 95.0
+charge_speed = 0.3
+accuracy = 0.7
+component_name = "AUTO1X4FFZ"
+description = "Semi-long range rifle - great for barraging the enemy - though the bullets aren't the highest caliber"
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 4
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"
