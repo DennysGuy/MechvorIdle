@@ -1,11 +1,16 @@
 extends Node
 
-var can_fight_boss : bool = true
-
+var can_fight_boss : bool = false
+var on_mining_panel : bool = false
+var on_shop_panel : bool = false
+var on_central_panel : bool = true
 var raw_ferrite_count : int
 var ferrite_bars_count : int
 var platinum_count : int
 var plasma_count : int
+var owned_weapons_count : int
+var owned_components_count : int
+const MECH_PARTS_NEEDED = 6
 
 #mining panel
 var ufo_attacking : bool = false
@@ -52,7 +57,7 @@ var platinum_drone_count : int = 0
 var platinum_drone_base_cost : int = 180
 
 var platinum_drone_damage_level : int = 1
-var platinum_drone_damage : int = 25
+var platinum_drone_damage : int = 10
 var platinum_drone_damage_cost : int = 150
 var platinum_drone_damage_base_cost : int = 150
 
@@ -109,7 +114,7 @@ var recon_scout_ferrite_bars_cost : int = 100
 #mech stats
 var total_health : int = 0
 
-var owned_mech_components : Dictionary = {
+var owned_mech_components : Dictionary[String, MechComponent] = {
 	"Head" : null,
 	"Torso" : null,
 	"Legs" : null,
@@ -119,3 +124,32 @@ var owned_mech_components : Dictionary = {
 }
 
 #shop panel
+func add_mech_component(component : MechComponent) -> void: 
+	var component_category : String = component.get_category_type()
+	
+	if component_category == "Weapon":
+		if owned_mech_components["LeftWeapon"] == null:
+			owned_mech_components["LeftWeapon"] = component
+		else:
+			owned_mech_components["RightWeapon"] = component
+			
+		owned_weapons_count += 1
+	else:	
+		owned_mech_components[component_category] = component
+	
+	owned_components_count += 1
+	
+	if owned_components_count == MECH_PARTS_NEEDED:
+		can_fight_boss = true
+		
+	
+	print(owned_mech_components)
+
+func mech_component_slot_is_empty(category : String) -> bool:
+	if category == "Weapon":
+		if owned_mech_components["LeftWeapon"] == null or owned_mech_components["RightWeapon"] == null :
+			return true
+		else:
+			return false
+		
+	return owned_mech_components[category] == null

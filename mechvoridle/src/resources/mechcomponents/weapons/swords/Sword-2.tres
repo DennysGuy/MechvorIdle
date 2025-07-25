@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://brltesmvysom"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_3d8cd"]
+
+[resource]
+script = ExtResource("1_3d8cd")
+weapon_type = 1
+weapon_class = 0
+damage = 150
+number_of_hits = 2
+charge_time = 115.0
+charge_speed = 0.3
+accuracy = 0.95
+component_name = "SAMJ-PSAM-MKII"
+description = "A great weapon for Plasma protected armor. Very accurate, but takes a little longer to charge."
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 4
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

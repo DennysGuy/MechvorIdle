@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://baw08qvkimdvm"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_wp7av"]
+
+[resource]
+script = ExtResource("1_wp7av")
+weapon_type = 0
+weapon_class = 0
+damage = 100
+number_of_hits = 2
+charge_time = 80.0
+charge_speed = 0.4
+accuracy = 0.9
+component_name = "ZZ19223X"
+description = "Short ranged swords that hit harder on lighter mechs."
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 4
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

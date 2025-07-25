@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechArms" load_steps=2 format=3 uid="uid://dx4e1hvellmxq"]
+
+[ext_resource type="Script" uid="uid://marmnfdtywpd" path="res://src/scripts/mechcomponents/mech_arms.gd" id="1_e578v"]
+
+[resource]
+script = ExtResource("1_e578v")
+component_name = "ARM2YSAB343"
+description = "The kids selected random colors for their art project, creating a vibrant masterpiece. "
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 3
+metadata/_custom_type_script = "uid://marmnfdtywpd"

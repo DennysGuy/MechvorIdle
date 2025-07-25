@@ -83,6 +83,8 @@ func _ready() -> void:
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
 	
+	ferrite_refinery_speed.text = str(GameManager.ferrite_refinery_speed * 100) + "%"
+	
 	#plasma generator
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
 	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
