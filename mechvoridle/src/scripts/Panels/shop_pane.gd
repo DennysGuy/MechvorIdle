@@ -28,6 +28,7 @@ func _ready() -> void:
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_plasma_count.connect(update_plasma_count)
 	SignalBus.transfer_item_to_shop_panel.connect(update_description_box)
+	slot_is_filled_label.hide()
 	display_component_list("Heads")
 	update_ferrite_bars_count()
 	update_plasma_count()
@@ -62,6 +63,7 @@ func update_description_box(component: MechComponent) -> void:
 	
 	if not GameManager.mech_component_slot_is_empty(component_category) \
 	or component_category == "Weapon" and GameManager.owned_weapons_count == 2:
+		slot_is_filled_label.text = component_category + " component already owned."
 		slot_is_filled_label.show()
 	else:
 		slot_is_filled_label.hide()

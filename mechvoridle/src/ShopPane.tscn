@@ -230,7 +230,6 @@ offset_bottom = -22.0
 text = "Black Market"
 
 [node name="SlotIsFilledLabel" type="Label" parent="ColorRect/Shop"]
-visible = false
 layout_mode = 0
 offset_left = 334.0
 offset_top = 139.0
