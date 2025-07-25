@@ -35,7 +35,7 @@ func _process(delta : float) -> void:
 			resource_acquired_label.position = Vector2(125, 0)
 			add_child(resource_acquired_label)
 			
-		if fuel_tank == GameManager.plasma_generator_fuel_consumption:
+		if fuel_tank > 0:
 			fuel_bar.value -= GameManager.plasma_generator_fuel_consumption_speed
 			if fuel_bar.value == 0:
 				fuel_tank = 0
