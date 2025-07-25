@@ -12,16 +12,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		if GameManager.on_shop_panel:
 			move_from_shop_pane_to_central_pane()
-		else:
-			if GameManager.on_central_panel:
-				move_to_mining_pane()
-	
+		elif GameManager.on_central_panel:
+			move_to_mining_pane()
+
 	if Input.is_action_just_pressed("move_right"):
 		if GameManager.on_mining_panel:
 			move_from_mining_pane_to_central_pane()
-		else:
-			if GameManager.on_central_panel:
-				move_to_shop_pane()
+		elif GameManager.on_central_panel:
+			move_to_shop_pane()
 
 func _process(delta : float) ->void:
 	pass
