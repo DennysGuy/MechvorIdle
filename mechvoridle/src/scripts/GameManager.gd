@@ -52,7 +52,7 @@ var platinum_drone_count : int = 0
 var platinum_drone_base_cost : int = 180
 
 var platinum_drone_damage_level : int = 1
-var platinum_drone_damage : int = 10
+var platinum_drone_damage : int = 25
 var platinum_drone_damage_cost : int = 150
 var platinum_drone_damage_base_cost : int = 150
 

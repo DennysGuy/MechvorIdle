@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 			SignalBus.update_ferrite_count.emit()
 			print(refinery_stock)
 		
-		if refinery_stock == GameManager.ferrite_cost:
+		if refinery_stock > 0:
 			progress_bar.value += GameManager.ferrite_refinery_speed
 			if progress_bar.value == progress_bar.max_value:
 				obtain_resources()
