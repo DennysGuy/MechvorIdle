@@ -6,7 +6,7 @@
 script = ExtResource("1_aa1gm")
 component_name = "GUARDS23XY34Z"
 description = "Randomly choosing words can create interesting sentences that spark our imagination and creativity. "
-refined_ferrite_cost = 0
+refined_ferrite_cost = 25
 plasma_cost = 0
 platinum_cost = 0
 category = 3
