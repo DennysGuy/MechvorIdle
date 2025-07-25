@@ -5,6 +5,7 @@ class_name ShopPane extends Control
 @onready var description_text_box: RichTextLabel = $ColorRect/DetailsPanel/DescriptionTextBox
 @onready var item_menu: VBoxContainer = $ColorRect/Shop/ScrollContainer/ItemMenu
 @onready var slot_is_filled_label: Label = $ColorRect/Shop/SlotIsFilledLabel
+@onready var part_class: Label = $ColorRect/DetailsPanel/PartClass
 
 @onready var purchase_button: Button = $ColorRect/Shop/PurchaseButton
 
@@ -15,7 +16,13 @@ class_name ShopPane extends Control
 @onready var plasma_cost: Label = $ColorRect/DetailsPanel/PlasmaCost
 @onready var platinum_cost: Label = $ColorRect/DetailsPanel/PlatinumCost
 
+@onready var confirmation_box: ColorRect = $ColorRect/ConfirmationBox
+@onready var confirmation_button: Button = $ColorRect/ConfirmationBox/ConfirmationButton
+@onready var cancellation_button: Button = $ColorRect/ConfirmationBox/CancellationButton
+
+
 var selected_component : MechComponent
+var confirmation_box_is_showing : bool = false
 
 func _ready() -> void:
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
@@ -24,12 +31,13 @@ func _ready() -> void:
 	display_component_list("Heads")
 	update_ferrite_bars_count()
 	update_plasma_count()
+	hide_confirmation_panel()
 	
 	
 func _process(delta : float) -> void:
 	
 	if selected_component:
-		if selected_component.get_category_type() == "Weapon" and GameManager.owned_weapons_count == 2:
+		if selected_component.get_category_type() == "Weapon" and GameManager.owned_weapons_count == 2 or confirmation_box_is_showing:
 			purchase_button.disabled = true
 		else:
 			if GameManager.mech_component_slot_is_empty(selected_component.get_category_type()):
@@ -63,6 +71,7 @@ func update_description_box(component: MechComponent) -> void:
 	part_name.text = selected_component.component_name
 	ferrite_cost.text = "Ferrite Bars: " + str(selected_component.refined_ferrite_cost)
 	plasma_cost.text = "Plasma: " + str(selected_component.plasma_cost)
+	part_class.text = "Class: " + selected_component.get_category_type()
 
 func _on_heads_button_button_down() -> void:
 	display_component_list("Heads")
@@ -102,6 +111,29 @@ func clear_container() -> void:
 		item.queue_free()
 
 func _on_purchase_button_button_down() -> void:
+	show_confirmation_panel()
+
+
+func _on_confirmation_button_button_down() -> void:
 	GameManager.ferrite_bars_count -= selected_component.refined_ferrite_cost
 	GameManager.plasma_count -= selected_component.plasma_cost
 	GameManager.add_mech_component(selected_component)
+	update_description_box(selected_component)
+	hide_confirmation_panel()
+
+func show_confirmation_panel() -> void:
+	confirmation_box_is_showing = true
+	confirmation_box.show()
+	disable_confirmation_button(false)
+
+func hide_confirmation_panel() -> void:
+	confirmation_box_is_showing = false
+	confirmation_box.hide()
+	disable_confirmation_button(true)
+
+func _on_cancellation_button_button_down() -> void:
+	hide_confirmation_panel()
+	
+func disable_confirmation_button(value : bool) -> void:
+	confirmation_button.disabled = value
+	cancellation_button.disabled = value
