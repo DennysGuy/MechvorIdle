@@ -1,7 +1,9 @@
 extends Node
 
 var can_fight_boss : bool = true
-
+var on_mining_panel : bool = false
+var on_shop_panel : bool = false
+var on_central_panel : bool = true
 var raw_ferrite_count : int
 var ferrite_bars_count : int
 var platinum_count : int
