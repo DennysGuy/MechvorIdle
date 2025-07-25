@@ -4,7 +4,7 @@ class_name AsteroidArea extends Node2D
 
 @onready var mining_asteroid: TextureRect = $MiningAsteroid
 
-var _offset : int = 20
+var _offset : int = 50
 func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)

@@ -28,14 +28,14 @@ func _process(delta : float) -> void:
 	if GameManager.plasma_generator_station_purchased:
 		if GameManager.raw_ferrite_count >= GameManager.plasma_generator_fuel_consumption and fuel_tank == 0:
 			GameManager.raw_ferrite_count -= GameManager.plasma_generator_fuel_consumption
-			fuel_tank = GameManager.plasma_generator_fuel_cost
+			fuel_tank = GameManager.plasma_generator_fuel_consumption
 			fuel_bar.value = fuel_bar.max_value
 			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 			resource_acquired_label.output = "-"+str(GameManager.plasma_generator_fuel_consumption)+" Ferrite"
 			resource_acquired_label.position = Vector2(125, 0)
 			add_child(resource_acquired_label)
 			
-		if fuel_tank == GameManager.plasma_generator_fuel_cost:
+		if fuel_tank == GameManager.plasma_generator_fuel_consumption:
 			fuel_bar.value -= GameManager.plasma_generator_fuel_consumption_speed
 			if fuel_bar.value == 0:
 				fuel_tank = 0
