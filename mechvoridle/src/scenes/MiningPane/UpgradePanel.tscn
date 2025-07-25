@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccmj71mwg532g"]
 
-[ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
+[ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/MiningPanel/upgrade_panel.gd" id="1_ffqcc"]
 
 [node name="UpgradePanel" type="ColorRect"]
 offset_right = 124.0

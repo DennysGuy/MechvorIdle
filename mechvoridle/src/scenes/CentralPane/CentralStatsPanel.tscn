@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dio1yrjtiu67"]
 
-[ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
+[ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/CentralPane/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
 
 [node name="CentralHubPanel" type="Control"]

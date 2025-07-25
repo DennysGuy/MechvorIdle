@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechLegs" load_steps=2 format=3 uid="uid://cpmb51aj71fpr"]
+
+[ext_resource type="Script" uid="uid://cqa88tl10c011" path="res://src/scripts/mechcomponents/mech_legs.gd" id="1_tbmo3"]
+
+[resource]
+script = ExtResource("1_tbmo3")
+component_name = "STX237HI453"
+description = "The teacher asked her students to randomly share their favorite books this week. "
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 2
+metadata/_custom_type_script = "uid://cqa88tl10c011"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d375q0gwrc3vy"]
 
-[ext_resource type="Script" uid="uid://cgbea3nssdy3n" path="res://src/scripts/Panels/combat_pane.gd" id="1_474v7"]
+[ext_resource type="Script" uid="uid://cgbea3nssdy3n" path="res://src/scripts/Panels/CombatPane/combat_pane.gd" id="1_474v7"]
 
 [node name="CombatPane" type="Control"]
 layout_mode = 3

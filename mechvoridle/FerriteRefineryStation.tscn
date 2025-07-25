@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://q2lvrrcqcirf"]
 
-[ext_resource type="Script" uid="uid://bmdl7trph1eue" path="res://src/scripts/Panels/ferrite_refinery_station.gd" id="1_ai323"]
+[ext_resource type="Script" uid="uid://bmdl7trph1eue" path="res://src/scripts/Panels/MiningPanel/ferrite_refinery_station.gd" id="1_ai323"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_ph523"]
 
 [node name="FerriteRefinery" type="Control"]

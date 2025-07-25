@@ -60,6 +60,7 @@ class_name UpgradePanel extends ColorRect
 @onready var upgrade_fuel_cost : Button = $UpgradeFuelCost
 @onready var auto_speed_plat_cost: Label = $AutoSpeedPlatCost
 @onready var generator_auto_speed: Label = $GeneratorAutoSpeed
+@onready var ferrite_auto_speed: Label = $FerriteAutoSpeed
 
 var upgrade_panel_showing : bool = false
 
@@ -82,6 +83,8 @@ func _ready() -> void:
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
+	
+	ferrite_auto_speed.text = str(GameManager.ferrite_refinery_speed)
 	
 	#plasma generator
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"

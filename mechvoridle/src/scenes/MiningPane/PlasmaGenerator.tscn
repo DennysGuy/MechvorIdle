@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hjbnj2tod3ol"]
 
-[ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/plasma_generator.gd" id="1_2eac4"]
+[ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/MiningPanel/plasma_generator.gd" id="1_2eac4"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_x74x1"]
 
 [node name="PlasmaGenerator" type="Control"]

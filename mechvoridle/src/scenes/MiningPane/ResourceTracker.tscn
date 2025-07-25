@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cc7liqf41bqti"]
 
-[ext_resource type="Script" uid="uid://b02iljlmno0xg" path="res://src/scripts/Panels/resource_tracker.gd" id="1_qyq3t"]
+[ext_resource type="Script" uid="uid://b02iljlmno0xg" path="res://src/scripts/Panels/MiningPanel/resource_tracker.gd" id="1_qyq3t"]
 
 [node name="ResourceTracker" type="Panel"]
 anchors_preset = 8

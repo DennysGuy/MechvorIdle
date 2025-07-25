@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MechHead" load_steps=2 format=3 uid="uid://upu7rl2b14if"]
+
+[ext_resource type="Script" uid="uid://byj1i2hfctw2l" path="res://src/scripts/mechcomponents/mech_head.gd" id="1_dm8st"]
+
+[resource]
+script = ExtResource("1_dm8st")
+mymeat = 0
+component_name = "HELM132QUADX"
+description = "On a rainy afternoon, they decided to play a random board game together, enjoying each other's company while laughing and having fun."
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 0
+metadata/_custom_type_script = "uid://byj1i2hfctw2l"

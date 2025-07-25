@@ -8,6 +8,7 @@ var raw_ferrite_count : int
 var ferrite_bars_count : int
 var platinum_count : int
 var plasma_count : int
+var owned_weapons_count : int
 
 #mining panel
 var ufo_attacking : bool = false
@@ -111,7 +112,7 @@ var recon_scout_ferrite_bars_cost : int = 100
 #mech stats
 var total_health : int = 0
 
-var owned_mech_components : Dictionary = {
+var owned_mech_components : Dictionary[String, MechComponent] = {
 	"Head" : null,
 	"Torso" : null,
 	"Legs" : null,
@@ -121,3 +122,21 @@ var owned_mech_components : Dictionary = {
 }
 
 #shop panel
+func add_mech_component(component : MechComponent) -> void: 
+	var component_category : String = component.get_category_type()
+	
+	if component_category == "Weapon":
+		if owned_mech_components["LeftWeapon"] == null:
+			owned_mech_components["LeftWeapon"] = component
+		else:
+			owned_mech_components["RightWeapon"] = component
+			
+		owned_weapons_count += 1
+		return
+		
+	owned_mech_components[component_category] = component
+	
+	print(owned_mech_components)
+
+func mech_component_slot_is_empty(category : String) -> bool:
+	return owned_mech_components[category] == null

@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://d3gd8inykd321"]
 
-[ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
+[ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralPane/CentralStatsPanel.tscn" id="1_4kaqy"]
 [ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
 [ext_resource type="PackedScene" uid="uid://cu5ql32vaxyid" path="res://src/scenes/MiningPane.tscn" id="2_kflli"]
-[ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/scenes/ShopPane.tscn" id="4_0av82"]
+[ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/scenes/ShopPane/ShopPane.tscn" id="4_0av82"]
 
 [sub_resource type="Animation" id="Animation_k282t"]
 resource_name = "NavigateFromMiningPageToCentralHub"

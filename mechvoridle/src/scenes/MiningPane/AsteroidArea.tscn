@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://caw51s5447gtc"]
 
-[ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
+[ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/MiningPanel/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://ghoq3njhb4ly" path="res://assets/graphics/AsteroidPlaceHolder.png" id="1_80q61"]
 
 [sub_resource type="Animation" id="Animation_6ww1j"]

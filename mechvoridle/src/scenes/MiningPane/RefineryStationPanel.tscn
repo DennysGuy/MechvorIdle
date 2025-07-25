@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwbftu6igxvc5" path="res://src/scripts/refinery_station_panel.gd" id="1_nk53r"]
 [ext_resource type="PackedScene" uid="uid://q2lvrrcqcirf" path="res://FerriteRefineryStation.tscn" id="1_ua2jw"]
-[ext_resource type="PackedScene" uid="uid://hjbnj2tod3ol" path="res://src/scenes/PlasmaGenerator.tscn" id="2_1gsvm"]
+[ext_resource type="PackedScene" uid="uid://hjbnj2tod3ol" path="res://src/scenes/MiningPane/PlasmaGenerator.tscn" id="2_1gsvm"]
 
 [node name="RefineryStationPanel" type="Panel"]
 offset_left = 31.0
