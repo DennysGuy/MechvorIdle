@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechArms" load_steps=2 format=3 uid="uid://cjuugvmjr36lj"]
+
+[ext_resource type="Script" uid="uid://marmnfdtywpd" path="res://src/scripts/mechcomponents/mech_arms.gd" id="1_aa1gm"]
+
+[resource]
+script = ExtResource("1_aa1gm")
+component_name = "GUARDS23XY34Z"
+description = "Randomly choosing words can create interesting sentences that spark our imagination and creativity. "
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 3
+metadata/_custom_type_script = "uid://marmnfdtywpd"

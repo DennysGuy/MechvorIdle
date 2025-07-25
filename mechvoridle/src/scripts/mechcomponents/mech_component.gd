@@ -1,0 +1,30 @@
+class_name MechComponent extends Resource
+
+@export_group("Descriptors")
+@export var component_name : String
+@export var icon : Texture2D
+@export_multiline var description : String
+
+@export_group("Resources Costs")
+@export var refined_ferrite_cost : int
+@export var plasma_cost : int
+@export var platinum_cost : int #might just make the ferrite bars and plasma the only resources need but maybe some require plat
+
+@export_group("Category")
+@export_enum("Head", "Torso", "Legs", "Arms", "Weapon") var category : int
+enum CATEGORY{HEAD, TORSO, LEGS, ARMS, WEAPON}
+
+func get_category_type() -> String:
+	match(category):
+		CATEGORY.HEAD:
+			return "Head"
+		CATEGORY.TORSO:
+			return "Torso"
+		CATEGORY.LEGS:
+			return "Legs"
+		CATEGORY.ARMS:
+			return "Arms"
+		CATEGORY.WEAPON:
+			return "Weapon"
+		_:
+			return ""

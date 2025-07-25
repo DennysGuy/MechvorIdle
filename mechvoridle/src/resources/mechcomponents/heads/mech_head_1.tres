@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MechHead" load_steps=2 format=3 uid="uid://b7cbnbqyrpcv1"]
+
+[ext_resource type="Script" uid="uid://byj1i2hfctw2l" path="res://src/scripts/mechcomponents/mech_head.gd" id="1_ct6rc"]
+
+[resource]
+script = ExtResource("1_ct6rc")
+mymeat = 0
+component_name = "HELM18XQC4"
+description = "She randomly picked a novel from the shelf and began reading immediately. "
+refined_ferrite_cost = 2500
+plasma_cost = 0
+platinum_cost = 0
+category = 0
+metadata/_custom_type_script = "uid://byj1i2hfctw2l"

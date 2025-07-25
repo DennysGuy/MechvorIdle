@@ -1,0 +1,241 @@
+[gd_scene load_steps=4 format=3 uid="uid://1oy74758gv62"]
+
+[ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
+[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_mi2d3"]
+[ext_resource type="PackedScene" uid="uid://gtctbxlpobla" path="res://src/scenes/ShopMenuItemPanel.tscn" id="3_6crgc"]
+
+[node name="ShopPane" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pkk0g")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.757123, 0.374746, 0.457367, 1)
+
+[node name="CentralHubNavigation" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 19.0
+offset_right = 121.0
+offset_bottom = 50.0
+text = "Central Hub"
+
+[node name="ArmsDealerArt" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 14.0
+offset_right = 625.0
+offset_bottom = 233.0
+texture = ExtResource("2_mi2d3")
+
+[node name="DetailsPanel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 240.0
+offset_right = 618.0
+offset_bottom = 351.0
+
+[node name="DescriptionTextBox" type="RichTextLabel" parent="ColorRect/DetailsPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 55.0
+offset_right = 282.0
+offset_bottom = 106.0
+theme_override_font_sizes/normal_font_size = 12
+text = "Select a component to unveil details."
+
+[node name="Label" type="Label" parent="ColorRect/DetailsPanel"]
+layout_mode = 1
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 41.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 10
+text = "Details"
+
+[node name="PartName" type="Label" parent="ColorRect/DetailsPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 20.0
+offset_right = 91.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 10
+text = "Part Name"
+
+[node name="FerriteCost" type="Label" parent="ColorRect/DetailsPanel"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 16.0
+offset_right = 286.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 10
+text = "Ferrite Bars: 12345678"
+
+[node name="PlasmaCost" type="Label" parent="ColorRect/DetailsPanel"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 4.0
+offset_right = 286.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 10
+text = "Plasma : 12230943094"
+
+[node name="Shop" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 62.0
+offset_right = 309.0
+offset_bottom = 348.0
+color = Color(0.681205, 0.221813, 0.239773, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 282.0
+offset_bottom = 24.0
+
+[node name="HeadsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Heads"
+
+[node name="TorsosButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Torso"
+
+[node name="ArmsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Arms"
+
+[node name="LegsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Legs"
+
+[node name="RiflesButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Rifles"
+
+[node name="SwordsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Swords"
+
+[node name="RocketLaunchersButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Rocket Launchers"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Shop"]
+layout_mode = 2
+offset_left = 38.0
+offset_top = 34.0
+offset_right = 248.0
+offset_bottom = 205.0
+
+[node name="ItemMenu" type="VBoxContainer" parent="ColorRect/Shop/ScrollContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Control" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
+layout_mode = 2
+
+[node name="Control2" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Control3" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
+layout_mode = 2
+
+[node name="FerriteBars" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 211.0
+offset_right = 76.0
+offset_bottom = 227.0
+theme_override_font_sizes/font_size = 11
+text = "Ferrite Bars:"
+
+[node name="FerriteBarsCount" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 226.0
+offset_right = 117.0
+offset_bottom = 242.0
+theme_override_font_sizes/font_size = 11
+text = "15000000000000000"
+
+[node name="Plasma" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 246.0
+offset_right = 52.0
+offset_bottom = 262.0
+theme_override_font_sizes/font_size = 11
+text = "Plasma:"
+
+[node name="PlasmaCount" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 261.0
+offset_right = 117.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 11
+text = "15000000000000000"
+
+[node name="PurchaseButton" type="Button" parent="ColorRect/Shop"]
+layout_mode = 2
+offset_left = 192.0
+offset_top = 248.0
+offset_right = 272.0
+offset_bottom = 276.0
+text = "Purchase"
+
+[node name="Label" type="Label" parent="ColorRect/Shop"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = -45.0
+offset_right = 289.0
+offset_bottom = -22.0
+text = "Black Market"
+
+[node name="SlotIsFilledLabel" type="Label" parent="ColorRect/Shop"]
+visible = false
+layout_mode = 0
+offset_left = 334.0
+offset_top = 139.0
+offset_right = 580.0
+offset_bottom = 162.0
+theme_override_font_sizes/font_size = 15
+text = "Arms Component Already Owned."
+
+[connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
+[connection signal="button_down" from="ColorRect/Shop/PurchaseButton" to="." method="_on_purchase_button_button_down"]

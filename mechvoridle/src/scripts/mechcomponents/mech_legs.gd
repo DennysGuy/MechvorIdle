@@ -1,0 +1,1 @@
+class_name MechLegs extends MechComponent

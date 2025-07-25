@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechLegs" load_steps=2 format=3 uid="uid://k1p5grxnndv3"]
+
+[ext_resource type="Script" uid="uid://cqa88tl10c011" path="res://src/scripts/mechcomponents/mech_legs.gd" id="1_vd6vd"]
+
+[resource]
+script = ExtResource("1_vd6vd")
+component_name = "HOP113456"
+description = "Mecha are large robotic machines used in various types of entertainment and media. "
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 2
+metadata/_custom_type_script = "uid://cqa88tl10c011"
