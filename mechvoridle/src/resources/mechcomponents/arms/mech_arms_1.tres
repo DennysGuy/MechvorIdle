@@ -4,10 +4,16 @@
 
 [resource]
 script = ExtResource("1_aa1gm")
+crit_chance_modifier = 0.3
+charge_time_modifier = 0.0
 component_name = "GUARDS23XY34Z"
 description = "Randomly choosing words can create interesting sentences that spark our imagination and creativity. "
+health = 1200
+plasma_resistance = 0.0
 refined_ferrite_cost = 25
 plasma_cost = 0
 platinum_cost = 0
 category = 3
+component_type = 1
+weight_class = 1
 metadata/_custom_type_script = "uid://marmnfdtywpd"

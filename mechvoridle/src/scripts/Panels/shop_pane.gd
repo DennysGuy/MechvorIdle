@@ -19,6 +19,8 @@ class_name ShopPane extends Control
 @onready var confirmation_box: ColorRect = $ColorRect/ConfirmationBox
 @onready var confirmation_button: Button = $ColorRect/ConfirmationBox/ConfirmationButton
 @onready var cancellation_button: Button = $ColorRect/ConfirmationBox/CancellationButton
+@onready var weight_class : Label = $ColorRect/DetailsPanel/WeightClass
+@onready var weapon_type_focus : Label = $ColorRect/DetailsPanel/WeaponTypeFocus
 
 
 var selected_component : MechComponent
@@ -74,34 +76,41 @@ func update_description_box(component: MechComponent) -> void:
 	ferrite_cost.text = "Ferrite Bars: " + str(selected_component.refined_ferrite_cost)
 	plasma_cost.text = "Plasma: " + str(selected_component.plasma_cost)
 	part_class.text = "Class: " + selected_component.get_category_type()
+	weight_class.text = "Weight Class: " + selected_component.get_weight_class()
+	weapon_type_focus.text = "Focus: " + selected_component.get_weapon_focus()
 
 func _on_heads_button_button_down() -> void:
 	display_component_list("Heads")
-
+	show_already_purchased_label("Head")
 
 func _on_torsos_button_button_down() -> void:
 	display_component_list("Torsos")
-
+	show_already_purchased_label("Torso")
 
 func _on_arms_button_button_down() -> void:
 	display_component_list("Arms")
-
+	show_already_purchased_label("Arms")
 
 func _on_legs_button_button_down() -> void:
 	display_component_list("Legs")
-
+	show_already_purchased_label("Legs")
 
 func _on_rifles_button_button_down() -> void:
 	display_component_list("Rifles")
-
+	show_already_purchased_label("Weapon")
+	
 func _on_swords_button_button_down() -> void:
 	display_component_list("Swords")
+	show_already_purchased_label("Weapon")
 
 func _on_rocket_launchers_button_button_down() -> void:
 	display_component_list("Rocket Launchers")
+	show_already_purchased_label("Weapon")
 
 func display_component_list(component_name : String):
 	clear_container()
+	
+
 	var list : Dictionary = ShopList.shop_list[component_name]
 	for key in list.keys():
 		var list_item : ShopMenuItemPanel = preload("uid://gtctbxlpobla").instantiate()
@@ -139,3 +148,13 @@ func _on_cancellation_button_button_down() -> void:
 func disable_confirmation_button(value : bool) -> void:
 	confirmation_button.disabled = value
 	cancellation_button.disabled = value
+
+
+func show_already_purchased_label(component_name : String):
+	if not GameManager.mech_component_slot_is_empty(component_name) \
+	or component_name == "Weapon" and GameManager.owned_weapons_count == 2:
+		slot_is_filled_label.text = component_name+ " component already owned."
+		slot_is_filled_label.show()
+	else:
+		slot_is_filled_label.hide()
+	

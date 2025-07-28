@@ -4,10 +4,15 @@
 
 [resource]
 script = ExtResource("1_tbmo3")
+dodge_chance_modifier = 0.2
 component_name = "STX237HI453"
 description = "The teacher asked her students to randomly share their favorite books this week. "
+health = 3700
+plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0
 platinum_cost = 0
 category = 2
+component_type = 0
+weight_class = 0
 metadata/_custom_type_script = "uid://cqa88tl10c011"

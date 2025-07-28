@@ -88,7 +88,6 @@ func _ready() -> void:
 	#plasma generator
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
 	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
-	
 	output_cost.text = str(GameManager.plasma_generator_output_cost)
 	generator_output.text = str(GameManager.plasma_generator_output)
 	

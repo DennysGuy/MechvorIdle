@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MechArms" load_steps=2 format=3 uid="uid://d21v0qox7c7ox"]
+
+[ext_resource type="Script" uid="uid://marmnfdtywpd" path="res://src/scripts/mechcomponents/mech_arms.gd" id="1_ydm1k"]
+
+[resource]
+script = ExtResource("1_ydm1k")
+crit_chance_modifier = 0.3
+charge_time_modifier = 0.0
+component_name = "Wizzy2232"
+description = ""
+health = 800
+plasma_resistance = 0.0
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 0
+component_type = 1
+weight_class = 2
+metadata/_custom_type_script = "uid://marmnfdtywpd"

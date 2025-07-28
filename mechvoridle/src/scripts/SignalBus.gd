@@ -23,6 +23,13 @@ signal update_plasma_generator_output
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
 
-
 #main panel
 signal unlock_fight_button
+
+#combat
+signal win_game #execute win procedure and go to win panel
+signal lose_game #execute loss procedure and go to lose panel
+signal update_player_health_bar
+signal update_opponent_health_bar
+signal fill_bar_on_start_up
+signal shake_camera

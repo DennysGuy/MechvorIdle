@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="OpponentMech" load_steps=9 format=3 uid="uid://cy8iv6fo3ll0h"]
+
+[ext_resource type="Script" uid="uid://dxhtcmsjot0co" path="res://src/scripts/mechcomponents/mech_component.gd" id="1_a4lru"]
+[ext_resource type="Resource" uid="uid://cvhmxnr5f3uka" path="res://src/resources/mechcomponents/heads/boss_head_1.tres" id="2_5ukra"]
+[ext_resource type="Script" uid="uid://cwtn70nmowsro" path="res://src/scripts/opponent_mech.gd" id="2_7sy3x"]
+[ext_resource type="Resource" uid="uid://cet384uojv4i8" path="res://src/resources/mechcomponents/torsos/boss_torso_1.tres" id="3_vkpbj"]
+[ext_resource type="Resource" uid="uid://clefx2krelxka" path="res://src/resources/mechcomponents/legs/boss_legs_1.tres" id="4_mcydp"]
+[ext_resource type="Resource" uid="uid://d21v0qox7c7ox" path="res://src/resources/mechcomponents/arms/boss_arms_1.tres" id="5_owllt"]
+[ext_resource type="Resource" uid="uid://dwbfehar4vt7b" path="res://src/resources/mechcomponents/weapons/swords/Boss-1-Weapon-1.tres" id="6_mcydp"]
+[ext_resource type="Resource" uid="uid://d6rjm6567wvh" path="res://src/resources/mechcomponents/weapons/swords/Boss-1-Weapon-2.tres" id="7_owllt"]
+
+[resource]
+script = ExtResource("2_7sy3x")
+mech_name = "Zypher Slide"
+total_health = 0
+current_health = 0
+total_crit_chance = 0
+total_stun_chance = 0
+total_plasma_resistance = 0.0
+opponent_mech_components = Dictionary[String, ExtResource("1_a4lru")]({
+"Arms": ExtResource("5_owllt"),
+"Head": ExtResource("2_5ukra"),
+"LeftWeapon": ExtResource("6_mcydp"),
+"Legs": ExtResource("4_mcydp"),
+"RightWeapon": ExtResource("7_owllt"),
+"Torso": ExtResource("3_vkpbj")
+})
+tip_1 = "Word says that your opponent pilot is one of the quickest in his weight class. Be careful, these guys are more slippery than a snake."
+tip_2 = "Word says that they preference swords.. you might want to keep your distance here."
+tip_3 = "Plasma. They have plasma weapons! I knew it! Those mother fuckers!"
+metadata/_custom_type_script = "uid://cwtn70nmowsro"

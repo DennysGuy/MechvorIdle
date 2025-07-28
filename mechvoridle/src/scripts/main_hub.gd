@@ -1,8 +1,9 @@
-class_name MainHub extends Node2D
+class_name MainHub extends Control
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
+	animation_player.play("fade_in")
 	SignalBus.move_to_mining_pane.connect(move_to_mining_pane)
 	SignalBus.move_to_shop_pane.connect(move_to_shop_pane)
 	SignalBus.move_to_central_hub_from_mining_page.connect(move_from_mining_pane_to_central_pane)

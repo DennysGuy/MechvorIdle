@@ -4,11 +4,15 @@
 
 [resource]
 script = ExtResource("1_dm8st")
-mymeat = 0
+accuracy_bonus = 0.4
 component_name = "HELM132QUADX"
 description = "On a rainy afternoon, they decided to play a random board game together, enjoying each other's company while laughing and having fun."
+health = 1200
+plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0
 platinum_cost = 0
 category = 0
+component_type = 1
+weight_class = 2
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"

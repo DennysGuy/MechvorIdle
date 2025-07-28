@@ -177,9 +177,9 @@ text = "Reconnaissance"
 
 [node name="PurchaseReconScout" type="Button" parent="ColorRect/TipsPanel"]
 layout_mode = 0
-offset_left = 117.0
+offset_left = 112.0
 offset_top = 5.0
-offset_right = 197.0
+offset_right = 192.0
 offset_bottom = 26.0
 theme_override_font_sizes/font_size = 9
 text = "Buy Recon Scout"
@@ -201,6 +201,22 @@ offset_right = 242.0
 offset_bottom = 25.0
 theme_override_font_sizes/font_size = 8
 text = "1000000000000000000000000"
+
+[node name="ReconText" type="RichTextLabel" parent="ColorRect/TipsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -31.5
+offset_right = 153.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "Hire a Recon Scout to get some information on your opponent..."
 
 [node name="MechComponentsTrackerPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
@@ -226,7 +242,62 @@ offset_right = 195.0
 offset_bottom = 204.0
 texture = ExtResource("2_liohg")
 
+[node name="NameEntryBox" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -44.5
+offset_right = 71.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.422314, 0.504722, 0.704522, 1)
+
+[node name="LineEdit" type="LineEdit" parent="NameEntryBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -12.5
+offset_right = 66.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "RAVEN562A"
+max_length = 20
+
+[node name="Label" type="Label" parent="NameEntryBox"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.5
+offset_top = 4.0
+offset_right = 65.5
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 15
+text = "Enter Mech Name"
+
+[node name="ConfirmStartFight" type="Button" parent="NameEntryBox"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 61.0
+offset_right = 92.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 11
+text = "START"
+
 [connection signal="button_up" from="ColorRect/HBoxContainer/MiningPaneNavigation" to="." method="_on_mining_pane_navigation_button_up"]
 [connection signal="button_up" from="ColorRect/HBoxContainer/StartFight" to="." method="_on_start_fight_button_up"]
 [connection signal="button_up" from="ColorRect/HBoxContainer/ShopPaneNavigation" to="." method="_on_shop_pane_navigation_button_up"]
 [connection signal="button_down" from="ColorRect/TipsPanel/PurchaseReconScout" to="." method="_on_purchase_recon_scout_button_down"]
+[connection signal="button_down" from="NameEntryBox/ConfirmStartFight" to="." method="_on_confirm_start_fight_button_down"]
