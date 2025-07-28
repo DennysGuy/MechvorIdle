@@ -11,7 +11,10 @@ func _ready() -> void:
 	boss_health_bar.value = boss_health_bar.max_value
 
 func _process(delta : float) -> void:
-	pass
+	if GameManager.fill_bars:
+		boss_health_bar.value += 0.01
+		if boss_health_bar.value >= boss_health_bar.max_value:
+			GameManager.fill_bars = false
 
 func update_health_bar() -> void:
 	boss_health_bar.value = GameManager.chosen_opponent.current_health

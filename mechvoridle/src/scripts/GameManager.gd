@@ -122,6 +122,7 @@ var current_health : int = 0
 #combat
 var player_stunned : bool = false
 var opponent_stunned  : bool = false
+var fill_bars : bool = false
 const BASE_DODGE_CHANCE : float = 0.25
 
 var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_1.tres")
