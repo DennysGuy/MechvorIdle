@@ -1,3 +1,4 @@
 class_name MechHead extends MechComponent
 
-@export var mymeat : int
+@export_group("Head Modifiers")
+@export var accuracy_bonus : float

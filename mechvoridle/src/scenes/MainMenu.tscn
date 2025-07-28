@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=3 uid="uid://cacjpcdeurq7f"]
+
+[ext_resource type="Script" uid="uid://dwec0olorx8de" path="res://src/scripts/Panels/main_menu.gd" id="1_1bg10"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3228i"]
+bg_color = Color(0.303286, 0.574834, 0.640218, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_1bg10"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a00hu"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oll1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oll1y"]
+_data = {
+&"RESET": SubResource("Animation_oll1y"),
+&"fade_in": SubResource("Animation_1bg10"),
+&"fade_out": SubResource("Animation_a00hu")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1bg10")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.123244, 0.1744, 0.279652, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -153.5
+offset_top = 69.0
+offset_right = 153.5
+offset_bottom = 127.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 42
+text = "MECHVOR IDLE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.0
+offset_top = -191.0
+offset_right = 64.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3228i")
+text = "Play"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3228i")
+text = "Settings"
+
+[node name="Authors" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -21.0
+offset_right = 345.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Created By: Dan Galleti, PMYA, ProtoPixel, and Denny'sGuy"
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../VBoxContainer/Settings")
+libraries = {
+&"": SubResource("AnimationLibrary_oll1y")
+}
+
+[connection signal="button_down" from="VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="VBoxContainer/Settings" to="." method="_on_settings_button_down"]

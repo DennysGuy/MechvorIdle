@@ -1,6 +1,10 @@
 extends Node
 
 var can_fight_boss : bool = false
+var player_name : String = "Diabolical Bitch"
+enum GAME_STATE {WON, LOST}
+var current_game_state : int = -1
+var fight_on : bool = false #give us time to do intro animations - if possible - will toggle off when game signals go off
 var on_mining_panel : bool = false
 var on_shop_panel : bool = false
 var on_central_panel : bool = true
@@ -10,6 +14,7 @@ var platinum_count : int
 var plasma_count : int
 var owned_weapons_count : int
 var owned_components_count : int
+var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
 #mining panel
@@ -113,6 +118,17 @@ var recon_scout_ferrite_bars_cost : int = 100
 
 #mech stats
 var total_health : int = 0
+var current_health : int = 0
+#combat
+var player_stunned : bool = false
+var opponent_stunned  : bool = false
+const BASE_DODGE_CHANCE : float = 0.25
+
+var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_1.tres")
+var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres")
+var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres")
+
+var opponents_list : Array[OpponentMech] = [opponent_option_1, opponent_option_2, opponent_option_3]
 
 var owned_mech_components : Dictionary[String, MechComponent] = {
 	"Head" : null,
@@ -123,6 +139,28 @@ var owned_mech_components : Dictionary[String, MechComponent] = {
 	"RightWeapon" : null
 }
 
+func get_owned_mech_head() -> MechHead:
+	return owned_mech_components["Head"]
+
+func get_owned_mech_torso() -> MechTorso:
+	return owned_mech_components["Torso"]
+
+func get_owned_mech_legs() -> MechLegs:
+	return owned_mech_components["Legs"]
+
+func get_owned_mech_arms() -> MechArms:
+	return owned_mech_components["Arms"]
+
+func get_left_weapon() -> MechWeapon:
+	return owned_mech_components["LeftWeapon"]
+
+func get_right_weapon() -> MechWeapon:
+	return owned_mech_components["RightWeapon"]
+
+func calculate_health() -> void:
+	total_health = get_owned_mech_arms().health + get_owned_mech_head().health + get_owned_mech_legs().health + get_owned_mech_torso().health
+	current_health = total_health
+
 #shop panel
 func add_mech_component(component : MechComponent) -> void: 
 	var component_category : String = component.get_category_type()
@@ -132,8 +170,6 @@ func add_mech_component(component : MechComponent) -> void:
 			owned_mech_components["LeftWeapon"] = component
 		else:
 			owned_mech_components["RightWeapon"] = component
-			
-		owned_weapons_count += 1
 	else:	
 		owned_mech_components[component_category] = component
 	
@@ -142,8 +178,8 @@ func add_mech_component(component : MechComponent) -> void:
 	if owned_components_count == MECH_PARTS_NEEDED:
 		can_fight_boss = true
 		
-	
 	print(owned_mech_components)
+
 
 func mech_component_slot_is_empty(category : String) -> bool:
 	if category == "Weapon":
@@ -153,3 +189,8 @@ func mech_component_slot_is_empty(category : String) -> bool:
 			return false
 		
 	return owned_mech_components[category] == null
+
+
+func choose_mech_opponent() -> void:
+	var rng_mech = opponents_list.pick_random()
+	chosen_opponent = rng_mech

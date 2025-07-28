@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxymnlcu4rltp"]
+
+[ext_resource type="Script" uid="uid://x3jisfmrlsev" path="res://src/scripts/Panels/ArenaScene/boss_health.gd" id="1_bngwp"]
+
+[node name="BossHealth" type="ColorRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -28.5
+offset_right = 262.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.355929, 0.527638, 0.765871, 1)
+script = ExtResource("1_bngwp")
+
+[node name="BossTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 129.0
+offset_bottom = 22.0
+text = "Boss"
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -255.5
+offset_top = -33.0
+offset_right = 255.5
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false

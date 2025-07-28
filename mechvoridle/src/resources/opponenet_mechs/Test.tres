@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="OpponentMech" load_steps=3 format=3 uid="uid://ci14a1h0c0mdq"]
+
+[ext_resource type="Script" uid="uid://dxhtcmsjot0co" path="res://src/scripts/mechcomponents/mech_component.gd" id="1_6fqby"]
+[ext_resource type="Script" uid="uid://cwtn70nmowsro" path="res://src/scripts/opponent_mech.gd" id="1_qsig3"]
+
+[resource]
+script = ExtResource("1_qsig3")
+total_health = 0
+total_crit_chance = 0
+total_stun_ability = 0
+total_dodge_chance = 0
+opponent_mech_components = Dictionary[String, ExtResource("1_6fqby")]({
+"Arms": null,
+"Head": null,
+"LeftWeapon": null,
+"Legs": null,
+"RightWeapon": null,
+"Torso": null
+})
+tip_1 = ""
+metadata/_custom_type_script = "uid://cwtn70nmowsro"

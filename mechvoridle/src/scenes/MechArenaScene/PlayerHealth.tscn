@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkv7ay3ce6vyg"]
+
+[ext_resource type="Script" uid="uid://dx3nhc7adqctq" path="res://src/scripts/Panels/ArenaScene/player_health.gd" id="1_vnn6w"]
+
+[node name="PlayerHealth" type="ColorRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -29.5
+offset_right = 98.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.297266, 0.473593, 0.371917, 1)
+script = ExtResource("1_vnn6w")
+
+[node name="PlayerName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 108.0
+offset_bottom = 24.0
+text = "Player Health"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 32.0
+offset_right = 193.0
+offset_bottom = 52.0
+show_percentage = false

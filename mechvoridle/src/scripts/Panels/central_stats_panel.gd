@@ -39,6 +39,7 @@ func _on_shop_pane_navigation_button_up() -> void:
 
 
 func start_fight() -> void:
+	
 	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
 
 func _on_purchase_recon_scout_button_down():
