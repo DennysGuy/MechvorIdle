@@ -59,7 +59,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	
 	if GameManager.fight_on:
-		weapon_charge_bar.value += true_charge_speed
+		weapon_charge_bar.value += true_charge_speed * delta
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
 				damage_target(GameManager.chosen_opponent.current_health)
