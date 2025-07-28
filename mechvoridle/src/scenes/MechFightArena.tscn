@@ -1,17 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://c68p1ei57ngk7"]
+[gd_scene load_steps=16 format=3 uid="uid://c68p1ei57ngk7"]
 
 [ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_aoeri"]
 [ext_resource type="PackedScene" uid="uid://2mw5axtfuca0" path="res://src/scenes/MechArenaScene/ChargeBar.tscn" id="2_hlut8"]
-[ext_resource type="Shader" uid="uid://cpphjrg11j1pv" path="res://src/scripts/hit_flash.gdshader" id="2_qmqxp"]
+[ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="2_s2l3r"]
 [ext_resource type="PackedScene" uid="uid://bkv7ay3ce6vyg" path="res://src/scenes/MechArenaScene/PlayerHealth.tscn" id="3_8olsk"]
 [ext_resource type="Script" uid="uid://bab3vn7oeytv8" path="res://src/scripts/boss_stand_in.gd" id="4_naye7"]
 [ext_resource type="PackedScene" uid="uid://dxymnlcu4rltp" path="res://src/scenes/MechArenaScene/BossHealth.tscn" id="4_vd1uu"]
 [ext_resource type="Script" uid="uid://bw1t8ugmc22kd" path="res://src/scripts/cockpit_camera.gd" id="7_naye7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_naye7"]
-shader = ExtResource("2_qmqxp")
-shader_parameter/flash_amount = 0.0
 
 [sub_resource type="Animation" id="Animation_naye7"]
 length = 0.001
@@ -197,7 +193,7 @@ offset_bottom = 360.0
 color = Color(0.450648, 0.450648, 0.450648, 1)
 
 [node name="BossStandIn" type="TextureRect" parent="Background"]
-material = SubResource("ShaderMaterial_naye7")
+material = ExtResource("2_s2l3r")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

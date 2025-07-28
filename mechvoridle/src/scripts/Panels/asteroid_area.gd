@@ -4,11 +4,19 @@ class_name AsteroidArea extends Node2D
 
 @onready var mining_asteroid: TextureRect = $MiningAsteroid
 
+@onready var asteroid_spawn_timer: Timer = $AsteroidSpawnTimer
+var asteroid_spawn_timer_length : float = 10.0
+@onready var asteroid_spawn_points: Node = $AsteroidSpawnPoints
+
+
+
 var _offset : int = 50
 func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	animation_player.play("hover")
+	asteroid_spawn_timer.wait_time = asteroid_spawn_timer_length
+	asteroid_spawn_timer.start()
 
 func _process(delta : float) -> void:
 	mining_asteroid.rotation += 0.0005
@@ -81,3 +89,23 @@ func add_platinum_drone_to_scene() -> void:
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 	add_child(platinum_drone)
+
+
+func _on_asteroid_spawn_timer_timeout() -> void:
+	var random_spawn_time : int = randi_range(asteroid_spawn_timer_length-5, asteroid_spawn_timer_length+5)
+	asteroid_spawn_timer.wait_time = random_spawn_time
+	spawn_asteroid()
+
+
+func spawn_asteroid() -> void:
+	var selected_spawn_point : Marker2D = asteroid_spawn_points.get_children().pick_random()
+	var asteroid_1 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid1.tscn").instantiate()
+	var asteroid_2 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid2.tscn").instantiate()
+	var asteroid_3 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid3.tscn").instantiate()
+	var asteroid_list : Array[Asteroid] = [asteroid_1, asteroid_2, asteroid_3]
+	var asteroid : Asteroid = asteroid_list.pick_random()
+	asteroid.position = selected_spawn_point.position
+	asteroid.mining_asteroid = asteroid_area_2d
+	add_child(asteroid)
+
+	

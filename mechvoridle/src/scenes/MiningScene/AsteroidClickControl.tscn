@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://caifkek63qji4"]
+
+[node name="AsteroidClickControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0

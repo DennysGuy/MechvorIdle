@@ -15,6 +15,7 @@ func _ready() -> void:
 	update_ferrite_bars_count()
 	update_ferrite_count()
 	update_plasma_count()
+	update_platinum_count()
 
 func update_ferrite_count() -> void:
 	ferrite_count.text = str(GameManager.raw_ferrite_count)

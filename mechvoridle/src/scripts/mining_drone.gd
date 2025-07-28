@@ -2,7 +2,7 @@ class_name MiningDrone extends Node2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
 
-var health : int = 15
+var health : int = 12
 
 func _ready() -> void:
 	pass
@@ -50,3 +50,22 @@ func platinum_gained() -> bool:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf() < GameManager.platinum_gain_chance
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	var area_parent : Asteroid = area.get_parent()
+	
+	if area.get_parent() is Asteroid:
+		health -= area_parent.damage
+		if health <= 0:
+			kill_mining_drone()
+	
+	area_parent.queue_free() #we'll change to animation explode sequence
+		
+func kill_mining_drone():
+	GameManager.drones_count -= 1
+	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, GameManager.drones_count)
+	SignalBus.update_drone_count.emit()
+	SignalBus.update_drone_cost.emit()
+	#play animation
+	queue_free()

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmbcn51ivls4" path="res://assets/graphics/PlatinumDroneMockup.png" id="2_kkmdx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsfdw"]
-size = Vector2(12, 12)
+size = Vector2(22, 18)
 
 [node name="PlatinumMiningDrone" type="Node2D"]
 script = ExtResource("1_kkmdx")
@@ -20,6 +20,10 @@ offset_bottom = -7.0
 show_percentage = false
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_qsfdw")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

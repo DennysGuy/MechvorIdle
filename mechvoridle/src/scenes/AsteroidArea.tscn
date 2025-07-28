@@ -47,6 +47,8 @@ size = Vector2(123.75, 121)
 [node name="AsteroidArea" type="Node2D"]
 script = ExtResource("1_6ww1j")
 
+[node name="AsteroidSpawnTimer" type="Timer" parent="."]
+
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,10 +75,37 @@ offset_bottom = 215.0
 pivot_offset = Vector2(95, 96)
 texture = ExtResource("1_80q61")
 
+[node name="AsteroidSpawnPoints" type="Node" parent="."]
+
+[node name="AstroidSpawnPoint" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(68, 119)
+
+[node name="AstroidSpawnPoint2" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(149, 246)
+
+[node name="AstroidSpawnPoint3" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(151, -9)
+
+[node name="AstroidSpawnPoint4" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(304, -28)
+
+[node name="AstroidSpawnPoint5" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(448, -7)
+
+[node name="AstroidSpawnPoint6" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(543, 115)
+
+[node name="AstroidSpawnPoint7" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(489, 218)
+
+[node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(299, 290)
+
 [node name="AsteroidArea2D" type="Area2D" parent="."]
 position = Vector2(306, 124)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AsteroidArea2D"]
 shape = SubResource("RectangleShape2D_6ww1j")
 
+[connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="gui_input" from="MiningAsteroid" to="." method="_on_texture_rect_gui_input"]

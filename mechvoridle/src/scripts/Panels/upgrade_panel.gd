@@ -64,6 +64,11 @@ class_name UpgradePanel extends ColorRect
 var upgrade_panel_showing : bool = false
 
 func _ready() -> void:
+	SignalBus.update_drone_cost.connect(update_drone_cost)
+	SignalBus.update_drone_count.connect(update_drone_count)
+	SignalBus.update_platinum_drone_cost.connect(update_platinum_drone_cost)
+	SignalBus.update_platinum_drone_count.connect(update_platinum_drone_count)
+	
 	current_damage_tracker.text = str(GameManager.mining_laser_damage)
 	current_damage_cost.text = str(GameManager.mining_laser_damage_upgrade_cost)
 	current_crit_chance_tracker.text = str(GameManager.mining_laser_crit_chance)
@@ -211,6 +216,7 @@ func _on_hide_upgrades_panel_button_down():
 func _on_purchase_drone_button_down():
 	purchased_drone()
 	SignalBus.add_drone.emit()
+	#GameManager.drone_count +=1
 	drones_count_tracker_label.text = str(GameManager.drone_count)
 	drones_cost.text = str(GameManager.drones_cost)
 	SignalBus.update_platinum_count.emit()
@@ -281,3 +287,15 @@ func _on_upgrade_refinery_speed_button_down() -> void:
 	GameManager.ferrite_refinery_speed_cost = GameManager.ferrite_refinery_speed_base_cost * pow(2, GameManager.ferrite_refinery_speed_level)
 	ferrite_refinery_speed.text = str(GameManager.ferrite_refinery_speed * 100) +"%"
 	ferrite_refinery_speed_cost.text = str(GameManager.ferrite_refinery_speed_cost)
+
+func update_drone_count() -> void:
+	drones_count_tracker_label.text = str(GameManager.drones_count)
+	
+func update_drone_cost() -> void:
+	drones_cost.text = str(GameManager.drones_cost)
+
+func update_platinum_drone_count() -> void:
+	platinum_drones_count.text = str(GameManager.platinum_drone_count)
+
+func update_platinum_drone_cost() -> void:
+	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
