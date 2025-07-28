@@ -31,7 +31,6 @@ var mining_laser_damage : int  = 1
 var mining_laser_damage_upgrade_cost : int = 100
 var mining_laser_damage_base_cost : int = 100
 
-
 var mining_laser_crit_chance_level : int = 0
 var mining_laser_crit_chance : float = 0.0
 var mining_laser_crit_chance_cost : int = 150
@@ -112,8 +111,8 @@ var plasma_generator_fuel_cost : int = 3000
 var plasma_generator_fuel_base_cost : int = 3000
 
 #stats page
-var recon_scout_platinum_cost : int = 2000
-var recon_scout_platinum_base_cost : int = 2000
+var recon_scout_platinum_cost : int = 20
+var recon_scout_platinum_base_cost : int = 20
 var recon_scout_ferrite_bars_cost : int = 100
 
 #mech stats
@@ -129,7 +128,7 @@ var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_me
 var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres")
 var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres")
 
-var opponents_list : Array[OpponentMech] = [opponent_option_1, opponent_option_2, opponent_option_3]
+var opponents_list : Array[OpponentMech] = [opponent_option_1]
 
 var owned_mech_components : Dictionary[String, MechComponent] = {
 	"Head" : null,
@@ -176,10 +175,11 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	owned_components_count += 1
 	
-	if owned_components_count == MECH_PARTS_NEEDED:
+	if owned_components_count >= MECH_PARTS_NEEDED:
 		can_fight_boss = true
 		
 	print(owned_mech_components)
+	print(owned_components_count)
 
 
 func mech_component_slot_is_empty(category : String) -> bool:
@@ -195,3 +195,103 @@ func mech_component_slot_is_empty(category : String) -> bool:
 func choose_mech_opponent() -> void:
 	var rng_mech = opponents_list.pick_random()
 	chosen_opponent = rng_mech
+
+func reset():
+	# Resources
+	raw_ferrite_count = 0
+	ferrite_bars_count = 0
+	platinum_count = 0
+	plasma_count = 0
+	owned_weapons_count = 0
+	owned_components_count = 0
+	chosen_opponent = null
+
+	# Mining panel
+	ufo_attacking = false
+	ferrite_refinery_cost = ferrite_cost_platinum_base_cost
+	plasma_generator_cost = plasma_generator_fuel_base_cost
+
+	# Mining Laser
+	mining_laser_level = 1
+	mining_laser_damage = 1
+	mining_laser_damage_upgrade_cost = mining_laser_damage_base_cost
+	mining_laser_crit_chance_level = 0
+	mining_laser_crit_chance = 0.0
+	mining_laser_crit_chance_cost = mining_laser_crit_chance_base_cost
+
+	platinum_gain_min = 2
+	platinum_gain_max = 10
+	platinum_gain_chance = 0.6
+
+	# Drones
+	drones_count = 0
+	drone_count = 0
+	refinery_stations_count = 0
+	drone_level = 0
+	drone_damage = 1
+	drone_damage_cost = drone_damage_base_cost
+	drone_mining_speed_level = 0
+	drone_mining_speed = 0.3
+	drone_mining_speed_cost = drone_mining_speed_base_cost
+
+	platinum_drone_count = 0
+	platinum_drone_cost = platinum_drone_base_cost
+	platinum_drone_damage_level = 1
+	platinum_drone_damage = 10
+	platinum_drone_damage_cost = platinum_drone_damage_base_cost
+	platinum_drone_mining_speed_level = 0
+	platinum_drone_mining_speed = 0.2
+	platinum_drone_mining_speed_cost = platinum_drone_mining_speed_base_cost
+
+	# Refinery Station
+	ferrite_refinery_station_purchased = false
+	ferrite_refinery_speed_level = 0
+	ferrite_refinery_speed = 0.08
+	ferrite_refinery_speed_cost = ferrite_refinery_speed_base_cost
+
+	ferrite_refinery_output_level = 0
+	output_amount = 4
+	output_upgrade_cost = output_upgrade_base_cost
+
+	ferrite_cost = 8
+	ferrite_cost_platinum_cost = ferrite_cost_platinum_base_cost
+
+	# Plasma Generator Station
+	plasma_generator_station_purchased = false
+	plasma_generator_speed_level = 0
+	plasma_generator_speed = 0.1
+	plasma_generator_speed_cost = plasma_generator_speed_base_cost
+
+	plasma_generator_output_level = 0
+	plasma_generator_output = 4
+	plasma_generator_output_cost = plasma_generator_output_base_const
+
+	plasma_generator_fuel_level = 0
+	plasma_generator_fuel_consumption = 50
+	plasma_generator_fuel_cost = plasma_generator_fuel_base_cost
+
+	# Stats Page
+	recon_scout_platinum_cost = recon_scout_platinum_base_cost
+	recon_scout_ferrite_bars_cost = 600
+
+	# Mech Stats
+	total_health = 0
+	current_health = 0
+
+	# Combat
+	player_stunned = false
+	opponent_stunned = false
+	fill_bars = false
+
+	# Mech Component Slots
+	owned_mech_components = {
+		"Head": null,
+		"Torso": null,
+		"Legs": null,
+		"Arms": null,
+		"LeftWeapon": null,
+		"RightWeapon": null
+	}
+
+	
+	

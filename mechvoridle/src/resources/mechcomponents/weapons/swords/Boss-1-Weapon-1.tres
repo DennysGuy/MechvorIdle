@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://dwbfehar4vt7b"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_f0ccl"]
+
+[resource]
+script = ExtResource("1_f0ccl")
+weapon_type = 0
+weapon_class = 0
+damage = 100
+number_of_hits = 1
+charge_time = 100.0
+charge_speed = 0.6
+crit_chance = 0.3
+accuracy = 0.8
+stun_chance = 0.2
+component_name = "Test Boss 1 Sword 1"
+description = ""
+health = 0
+plasma_resistance = 0.0
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 4
+component_type = 0
+weight_class = 0
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

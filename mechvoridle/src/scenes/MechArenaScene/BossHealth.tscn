@@ -39,3 +39,27 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false
+
+[node name="MaxHealth" type="Label" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 26.5
+offset_right = 513.0
+offset_bottom = 49.5
+text = "15000"
+
+[node name="Slash" type="Label" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 26.5
+offset_right = 467.0
+offset_bottom = 49.5
+text = "/"
+
+[node name="CurrentHealth" type="Label" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 26.5
+offset_right = 465.0
+offset_bottom = 49.5
+text = "15000"

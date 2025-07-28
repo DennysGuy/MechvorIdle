@@ -4,10 +4,15 @@
 
 [resource]
 script = ExtResource("1_fyltt")
+charge_speed_modifier = 0.35
 component_name = "TOR456XY23"
 description = "These torsos often house important systems such as power sources and control interfaces, making them vital for operation. "
+health = 1500
+plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0
 platinum_cost = 0
 category = 1
+component_type = 0
+weight_class = 2
 metadata/_custom_type_script = "uid://d35b44mou7bkr"

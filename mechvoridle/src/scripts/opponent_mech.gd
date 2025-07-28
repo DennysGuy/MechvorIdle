@@ -25,11 +25,15 @@ class_name OpponentMech extends Resource
 @export_multiline var tip_2 : String
 @export_multiline var tip_3 : String
 
-var recon_tips : Dictionary[int, String] = {
-	0: tip_1,
-	1: tip_2,
-	2: tip_3,
-}
+
+func get_tip_1() -> String:
+	return tip_1
+
+func get_tip_2() -> String:
+	return tip_2
+
+func get_tip_3() -> String:
+	return tip_3
 
 func set_current_health(value : int) -> void:
 	current_health = value

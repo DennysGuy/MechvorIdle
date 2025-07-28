@@ -40,6 +40,28 @@ func get_category_type() -> String:
 			return ""
 
 
+func get_weight_class() -> String:
+	match(weight_class):
+		WEIGHT_CLASS.LIGHT:
+			return "LIGHT"
+		WEIGHT_CLASS.STANDARD:
+			return "REGULAR"
+		WEIGHT_CLASS.HEAVY:
+			return "HEAVY"
+		_:
+			return "NA"
+
+func get_weapon_focus() -> String:
+	match component_type:
+		COMPONENT_TYPE.NA:
+			return "N/A"
+		COMPONENT_TYPE.RANGED:
+			return "Ranged"
+		COMPONENT_TYPE.MELEE:
+			return "Melee"
+		_:
+			return "N/A"
+
 func is_ranged_type() -> bool:
 	return component_type == COMPONENT_TYPE.RANGED
 

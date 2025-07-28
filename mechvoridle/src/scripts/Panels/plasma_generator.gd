@@ -18,6 +18,7 @@ func _ready() -> void:
 	progress_bar.show()
 	fuel_cost.hide()
 	output.hide()
+	speed.hide()
 	label.text = "Cost: " + str(GameManager.plasma_generator_cost)
 
 

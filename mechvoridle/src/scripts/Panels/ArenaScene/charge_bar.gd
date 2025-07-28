@@ -25,7 +25,7 @@ var true_crit_chance
 
 
 func _ready() -> void:
-	weapon_name.text = weapon.component_name
+	
 	if belongs_to_player():
 		selected_torso = GameManager.get_owned_mech_torso()
 		selected_head = GameManager.get_owned_mech_head()
@@ -36,7 +36,7 @@ func _ready() -> void:
 			weapon = GameManager.get_left_weapon()
 		else:
 			weapon = GameManager.get_right_weapon()
-		
+
 	else:
 		selected_arms = GameManager.chosen_opponent.get_arms_component()
 		selected_torso = GameManager.chosen_opponent.get_torso_component()
@@ -47,7 +47,7 @@ func _ready() -> void:
 			weapon = GameManager.chosen_opponent.get_left_weapon()
 		else:
 			weapon = GameManager.chosen_opponent.get_right_weapon()
-		
+	weapon_name.text = weapon.component_name
 	true_charge_speed = weight_class_modifier_final_value(selected_torso, selected_torso.charge_speed_modifier, weapon.charge_speed)
 	true_accuracy = weapon.accuracy + component_type_final_value(selected_head, selected_head.accuracy_bonus)
 	true_target_dodge_chance = weight_class_modifier_final_value(target_legs, target_legs.dodge_chance_modifier, GameManager.BASE_DODGE_CHANCE)
@@ -62,6 +62,7 @@ func _process(delta : float) -> void:
 				damage_target(GameManager.chosen_opponent.current_health)
 			else:
 				damage_target(GameManager.current_health)
+				SignalBus.shake_camera.emit()
 			weapon_charge_bar.value = 0
 
 func belongs_to_player() -> bool:
@@ -114,6 +115,7 @@ func damage_target(target_health : int) -> void:
 			else:
 				GameManager.current_health -= int(weapon.damage * 2)
 				SignalBus.update_player_health_bar.emit()
+				SignalBus.shake_camera.emit()
 			return
 		
 		if belongs_to_player():	
@@ -122,6 +124,7 @@ func damage_target(target_health : int) -> void:
 		else:
 			GameManager.current_health -= weapon.damage
 			SignalBus.update_player_health_bar.emit()
+			SignalBus.shake_camera.emit()
 			
 	#need to add labelto show how much damage was applied to enemy
 

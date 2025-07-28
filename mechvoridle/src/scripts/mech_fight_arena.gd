@@ -19,7 +19,8 @@ func _ready() -> void:
 	animation_player.play("start_fight_sequnce")
 	#setup player and boss gear and weapons etc.
 	#start game -- we'll change to a sequence later
-	
+	SignalBus.win_game.connect(win_game)
+	SignalBus.lose_game.connect(lose_game)
 
 func _process(delta : float) -> void:
 	pass
@@ -33,17 +34,21 @@ func stop_fight() -> void:
 
 func win_game() -> void:
 	stop_fight()
+	animation_player.play("fade_to_white")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://src/scenes/WinPanel.tscn")
 	#play win sequence and go to win screen results
 
 func lose_game() -> void:
 	stop_fight()
-
+	animation_player.play("fade_to_white")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://src/scenes/LosePanel.tscn")
 
 func _on_boss_stand_in_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			print("working?")
-
 
 func fill_all_bars() -> void:
 	GameManager.fill_bars = true

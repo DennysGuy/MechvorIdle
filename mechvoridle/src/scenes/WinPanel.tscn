@@ -1,0 +1,199 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl0iu3a7d1v1x"]
+
+[ext_resource type="Script" uid="uid://dx0rd5nlc4tlo" path="res://src/scripts/win_panel.gd" id="1_v34tx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b37tf"]
+bg_color = Color(0.136771, 0.464389, 0.411784, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_v34tx"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xr1xk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b5sgr"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5sgr"]
+_data = {
+&"RESET": SubResource("Animation_xr1xk"),
+&"fade_in": SubResource("Animation_v34tx"),
+&"fade_to_black": SubResource("Animation_b5sgr")
+}
+
+[node name="WinPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v34tx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="YouWIn" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.5
+offset_top = 47.0
+offset_right = 117.5
+offset_bottom = 116.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "YOU WIN!"
+
+[node name="Motivation" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -61.0
+offset_right = 197.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+text = "Perhaps you have what it takes to escape
+Prison Planet (TM). Only the pass of time can tell."
+
+[node name="Results" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 172.0
+offset_right = 179.0
+offset_bottom = 195.0
+text = "Results:"
+
+[node name="FighTime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 197.0
+offset_right = 200.0
+offset_bottom = 220.0
+text = "Fight Time: 00:05:23"
+
+[node name="MineTime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 218.0
+offset_right = 292.0
+offset_bottom = 241.0
+text = "Gathering Time: 00:12:46"
+
+[node name="TotalFerrite" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 239.0
+offset_right = 331.0
+offset_bottom = 262.0
+text = "Total Ferrite Mined : 23,836"
+
+[node name="FerriteBars" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 260.0
+offset_right = 350.0
+offset_bottom = 283.0
+text = "Ferrite Bars : 3,567"
+
+[node name="Plasma" type="Label" parent="."]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 193.0
+offset_right = 583.0
+offset_bottom = 216.0
+text = "Plasma: 2,341"
+
+[node name="Platinum" type="Label" parent="."]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 213.0
+offset_right = 583.0
+offset_bottom = 236.0
+text = "Platinum:17,231"
+
+[node name="Replay" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -51.0
+offset_right = 49.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
+text = "Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Replay")
+libraries = {
+&"": SubResource("AnimationLibrary_b5sgr")
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="button_down" from="Replay" to="." method="_on_replay_button_down"]

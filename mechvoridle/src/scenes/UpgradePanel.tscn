@@ -3,18 +3,10 @@
 [ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
 
 [node name="UpgradePanel" type="ColorRect"]
-offset_right = 124.0
+offset_right = 253.0
 offset_bottom = 339.0
 color = Color(0.601223, 0.601223, 0.601223, 1)
 script = ExtResource("1_ffqcc")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 124.0
-offset_top = 128.0
-offset_right = 262.0
-offset_bottom = 339.0
-color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="UpgradesAccess" type="Button" parent="."]
 layout_mode = 0
