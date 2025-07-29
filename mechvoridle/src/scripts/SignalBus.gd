@@ -23,6 +23,7 @@ signal update_drone_cost
 signal update_drone_count
 signal update_platinum_drone_cost
 signal update_platinum_drone_count
+signal check_to_start_ufo_spawn
 
 signal sound_ship_alarm
 signal silence_ship_alarm

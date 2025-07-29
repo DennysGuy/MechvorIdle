@@ -64,9 +64,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		
 func kill_mining_drone():
 	GameManager.drones_count -= 1
+	GameManager.total_drones_count -= 1
 	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, GameManager.drones_count)
 	SignalBus.update_drone_count.emit()
 	SignalBus.update_drone_cost.emit()
+	SignalBus.check_to_start_ufo_spawn.emit()
+	print(GameManager.total_drones_count)
 	#play animation
 	print("drone count after death"+str(GameManager.drone_count))
 	queue_free()

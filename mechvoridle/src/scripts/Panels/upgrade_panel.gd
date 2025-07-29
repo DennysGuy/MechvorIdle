@@ -242,8 +242,10 @@ func upgrade_mining_critical_chance() -> void:
 func purchased_drone() -> void:
 	GameManager.platinum_count -= GameManager.drones_cost
 	GameManager.drones_count += 1
+	GameManager.total_drones_count += 1
 	update_drone_count()
 	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, GameManager.drones_count)
+	SignalBus.check_to_start_ufo_spawn.emit()
 	
 	print("Drone Count after purchase: " + str(GameManager.drone_count))
 
@@ -266,10 +268,12 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 func _on_purchase_platinum_drone_button_down() -> void:
 	GameManager.platinum_count -= GameManager.platinum_drone_cost
 	GameManager.platinum_drone_count += 1
+	GameManager.total_drones_count += 1
 	GameManager.platinum_drone_cost = GameManager.platinum_drone_cost * pow(2, GameManager.platinum_drone_count)
 	platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
 	SignalBus.add_platinum_drone.emit()
+	SignalBus.check_to_start_ufo_spawn.emit()
 
 func _on_upgrade_plat_drone_damage_button_down() -> void:
 	GameManager.platinum_count -= GameManager.platinum_drone_damage_cost

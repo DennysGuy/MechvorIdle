@@ -42,6 +42,10 @@ var platinum_gain_max : int = 10
 
 var platinum_gain_chance : float = 0.6
 
+var total_drones_count : int = 0
+
+const DRONES_TO_ACTIVATE_UFO : int = 3
+
 var drones_count : int = 0
 var drones_cost : int = 100
 var drone_level : int = 0

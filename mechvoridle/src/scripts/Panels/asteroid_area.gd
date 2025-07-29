@@ -14,19 +14,26 @@ var asteroid_spawn_timer_length : float = 10.0
 @onready var ufo_spawn_timer : Timer = $UFOSpawnTimer
 @onready var ufo_list : Node = $UFOList
 
+var start_ufo_spawn : bool = false
 
 var _offset : int = 50
 func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
+	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
 	animation_player.play("hover")
 	asteroid_spawn_timer.wait_time = asteroid_spawn_timer_length
 	asteroid_spawn_timer.start()
-	ufo_spawn_timer.wait_time = randi_range(5,10)
-	ufo_spawn_timer.start()
+	
 
 func _process(delta : float) -> void:
 	mining_asteroid.rotation += 0.0005
+	print(ufo_spawn_timer.time_left)
+	
+	if start_ufo_spawn:
+		ufo_spawn_timer.wait_time = randi_range(10,25)
+		ufo_spawn_timer.start()
+		start_ufo_spawn = false
 
 
 func _on_texture_rect_gui_input(event : InputEvent) -> void:
@@ -129,3 +136,12 @@ func spawn_ufo() -> void:
 
 func _on_ufo_spawn_timer_timeout():
 		spawn_ufo()
+
+func toggle_ufo_spawn() -> void:
+	if GameManager.total_drones_count >= GameManager.DRONES_TO_ACTIVATE_UFO:
+		start_ufo_spawn = true
+	else:
+		start_ufo_spawn = false
+		ufo_spawn_timer.stop()
+		if ufo_spawn_timer.is_stopped():
+			print("WE STOPPED!")

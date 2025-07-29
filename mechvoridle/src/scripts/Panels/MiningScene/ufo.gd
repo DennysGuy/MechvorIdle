@@ -69,14 +69,12 @@ func _physics_process(delta : float) -> void:
 		
 		states.REMOVE:
 			print("sheeee")
-			ufo_spawn_timer.wait_time = randi_range(10,20)
-			ufo_spawn_timer.start()
+			SignalBus.check_to_start_ufo_spawn.emit()
 			SignalBus.silence_ship_alarm.emit()
 			queue_free()
 func destroy_ufo() -> void:
 	deliver_resources.emit()
-	ufo_spawn_timer.wait_time = randi_range(5,15)
-	ufo_spawn_timer.start()
+	SignalBus.check_to_start_ufo_spawn.emit()
 	SignalBus.silence_ship_alarm.emit()
 	queue_free()
 	#called in dead sate

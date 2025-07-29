@@ -6,23 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujr7o"]
 
-[sub_resource type="Animation" id="Animation_w3bvv"]
-resource_name = "hover"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(0, 2.98795), Vector2(0, 0.0203524)]
-}
-
 [sub_resource type="Animation" id="Animation_ujr7o"]
 length = 0.001
 tracks/0/type = "value"
@@ -48,6 +31,23 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w3bvv"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 2.98795), Vector2(0, 0.0203524)]
 }
 
 [sub_resource type="Animation" id="Animation_v8qkd"]
