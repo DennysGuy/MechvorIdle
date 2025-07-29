@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n3yo7bmy3a6t"]
+
+[ext_resource type="Script" uid="uid://uku6goktkj8f" path="res://src/scripts/Panels/MiningScene/resource_container.gd" id="1_schn5"]
+
+[node name="ResourceContainer" type="Node"]
+script = ExtResource("1_schn5")

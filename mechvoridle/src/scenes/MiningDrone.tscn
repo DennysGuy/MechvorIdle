@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c25is1a0rfa8d" path="res://src/scripts/mining_drone.gd" id="1_qsfdw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsfdw"]
-size = Vector2(12, 11)
+size = Vector2(14, 12)
 
 [node name="MiningDrone" type="Node2D"]
 script = ExtResource("1_qsfdw")
@@ -20,6 +20,10 @@ offset_bottom = -6.0
 show_percentage = false
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_qsfdw")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

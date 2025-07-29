@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhq842smuy36g"]
+
+[ext_resource type="Script" uid="uid://cr7ys3qi5kqax" path="res://src/scripts/Panels/MiningScene/asteroid_1.gd" id="1_7gn1o"]
+[ext_resource type="Texture2D" uid="uid://cvid53liovgbw" path="res://assets/graphics/small_asteroid_stand_in.png" id="1_hory5"]
+[ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="1_xcndo"]
+[ext_resource type="PackedScene" uid="uid://n3yo7bmy3a6t" path="res://src/scenes/MiningScene/ResourceContainer.tscn" id="3_67g2f"]
+[ext_resource type="PackedScene" uid="uid://dnuap0h1mymkl" path="res://src/scenes/MiningScene/AsteroidAnimationPlayer.tscn" id="5_x0aoh"]
+[ext_resource type="PackedScene" uid="uid://caifkek63qji4" path="res://src/scenes/MiningScene/AsteroidClickControl.tscn" id="6_1qpv8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gn1o"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67g2f"]
+size = Vector2(8, 8)
+
+[node name="Asteroid1" type="CharacterBody2D"]
+material = ExtResource("1_xcndo")
+script = ExtResource("1_7gn1o")
+speed = 60.0
+health = 1
+damage = 2
+
+[node name="Graphic" type="Sprite2D" parent="."]
+material = ExtResource("1_xcndo")
+texture = ExtResource("1_hory5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7gn1o")
+
+[node name="ResourceContainer" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_67g2f")]
+parent = NodePath("..")
+ferrite_min_value = 5
+ferrite_max_value = 10
+platinum_min_value = 2
+platinum_max_value = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_67g2f")
+
+[node name="DeleteAsteroidTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AsteroidAnimationPlayer" parent="." instance=ExtResource("5_x0aoh")]
+
+[node name="AsteroidClickControl" parent="." instance=ExtResource("6_1qpv8")]
+offset_left = -14.0
+offset_top = -13.0
+offset_right = 14.0
+offset_bottom = 13.0
+mouse_default_cursor_shape = 3
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="DeleteAsteroidTimer" to="." method="_on_delete_asteroid_timer_timeout"]
+[connection signal="gui_input" from="AsteroidClickControl" to="." method="_on_asteroid_click_control_gui_input"]

@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2noc1tywsrt8"]
+
+[ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="1_eygot"]
+[ext_resource type="Script" uid="uid://ci674qv4cabch" path="res://src/scripts/Panels/MiningScene/asteroid_2.gd" id="1_hvnvx"]
+[ext_resource type="Texture2D" uid="uid://cwlaw7ohf26y4" path="res://assets/graphics/medium_astroid_stand_in.png" id="2_hvnvx"]
+[ext_resource type="PackedScene" uid="uid://n3yo7bmy3a6t" path="res://src/scenes/MiningScene/ResourceContainer.tscn" id="3_eygot"]
+[ext_resource type="PackedScene" uid="uid://dnuap0h1mymkl" path="res://src/scenes/MiningScene/AsteroidAnimationPlayer.tscn" id="4_6cff2"]
+[ext_resource type="PackedScene" uid="uid://caifkek63qji4" path="res://src/scenes/MiningScene/AsteroidClickControl.tscn" id="6_oc5ll"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gn1o"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67g2f"]
+size = Vector2(12, 12)
+
+[node name="Asteroid2" type="CharacterBody2D"]
+material = ExtResource("1_eygot")
+script = ExtResource("1_hvnvx")
+speed = 60.0
+health = 3
+damage = 3
+
+[node name="Graphic" type="Sprite2D" parent="."]
+material = ExtResource("1_eygot")
+texture = ExtResource("2_hvnvx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7gn1o")
+
+[node name="ResourceContainer" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_eygot")]
+parent = NodePath("..")
+ferrite_min_value = 10
+ferrite_max_value = 12
+platinum_min_value = 4
+platinum_max_value = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_67g2f")
+
+[node name="DeleteAsteroidTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AsteroidAnimationPlayer" parent="." instance=ExtResource("4_6cff2")]
+
+[node name="AsteroidClickControl" parent="." instance=ExtResource("6_oc5ll")]
+offset_left = -14.0
+offset_top = -13.0
+offset_right = 14.0
+offset_bottom = 11.0
+
+[connection signal="timeout" from="DeleteAsteroidTimer" to="." method="_on_delete_asteroid_timer_timeout"]
+[connection signal="gui_input" from="AsteroidClickControl" to="." method="_on_asteroid_click_control_gui_input"]

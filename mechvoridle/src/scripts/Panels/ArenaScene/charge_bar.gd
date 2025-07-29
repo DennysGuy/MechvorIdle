@@ -4,6 +4,9 @@ class_name ChargeBar extends ColorRect
 @export_enum("Player", "Enemy") var target
 @export_enum("Left Weapon", "Right Weapon") var weapon_position : int
 
+@export var boss_label_marker : Marker2D
+@export var player_label_marker : Marker2D
+
 enum WEAPON_POSITION {LEFT_WEAPON, RIGHT_WEAPON}
 enum TARGET{PLAYER, ENEMY}
 
@@ -56,7 +59,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	
 	if GameManager.fight_on:
-		weapon_charge_bar.value += true_charge_speed
+		weapon_charge_bar.value += true_charge_speed * delta
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
 				damage_target(GameManager.chosen_opponent.current_health)
@@ -104,27 +107,46 @@ func component_type_final_value(component : MechComponent, component_modifier_va
 			return 0.0
 			
 func damage_target(target_health : int) -> void:
-
+	var damage_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 	#calculate hit
 	if attempt_attack_landed(true_accuracy, true_target_dodge_chance):
 		#calculate crit_chance
 		if crit_landed(true_crit_chance):
+			var true_damage : int = weapon.damage * 2
+			damage_label.output = "-"+str(true_damage)
 			if belongs_to_player():
-				GameManager.chosen_opponent.current_health -= int(weapon.damage * 2)
+				GameManager.chosen_opponent.current_health -= int(true_damage)
 				SignalBus.update_opponent_health_bar.emit()
+				damage_label.position = boss_label_marker.position
 			else:
-				GameManager.current_health -= int(weapon.damage * 2)
+				GameManager.current_health -= int(true_damage)
 				SignalBus.update_player_health_bar.emit()
 				SignalBus.shake_camera.emit()
+				damage_label.position = boss_label_marker.position
+			
+			get_parent().add_child(damage_label)
 			return
 		
+		damage_label.output = "-"+str(weapon.damage)
 		if belongs_to_player():	
 			GameManager.chosen_opponent.current_health -= weapon.damage
 			SignalBus.update_opponent_health_bar.emit()
+			damage_label.position = boss_label_marker.position
+			
 		else:
 			GameManager.current_health -= weapon.damage
 			SignalBus.update_player_health_bar.emit()
 			SignalBus.shake_camera.emit()
+			damage_label.position = player_label_marker.position
+		
+	else:
+		if belongs_to_enemy():
+			damage_label.position = player_label_marker.position
+		else:
+			damage_label.position = boss_label_marker.position
+		damage_label.output = "Missed!"
+	
+	get_parent().add_child(damage_label)
 			
 	#need to add labelto show how much damage was applied to enemy
 

@@ -8,7 +8,8 @@ func _ready() -> void:
 	SignalBus.move_to_shop_pane.connect(move_to_shop_pane)
 	SignalBus.move_to_central_hub_from_mining_page.connect(move_from_mining_pane_to_central_pane)
 	SignalBus.move_to_central_hub_from_shop_pane.connect(move_from_shop_pane_to_central_pane)
-
+	SignalBus.sound_ship_alarm.connect(insert_ship_alarm)
+	SignalBus.silence_ship_alarm.connect(remove_ship_alarm)
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		if GameManager.on_shop_panel:
@@ -49,3 +50,11 @@ func move_from_shop_pane_to_central_pane() -> void:
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
 	animation_player.play("NavigateFromShopToCentralHub")
+
+func insert_ship_alarm() -> void:
+	var ship_alarm : AlertPane = preload("res://src/scenes/AlertPane.tscn").instantiate()
+	add_child(ship_alarm)
+
+func remove_ship_alarm() -> void:
+	print("we made it")
+	get_tree().get_first_node_in_group("ship alarm")

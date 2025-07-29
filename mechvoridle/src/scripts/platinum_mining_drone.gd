@@ -37,3 +37,23 @@ func platinum_gained() -> bool:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf() < GameManager.platinum_gain_chance
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+
+	var area_parent  = area.get_parent()
+	
+	if area.get_parent() is Asteroid or area.get_parent() is UFOLaser:
+		health -= area_parent.damage
+		if health <= 0:
+			kill_mining_drone()
+	
+	area_parent.queue_free() #we'll change to animation explode sequence
+		
+func kill_mining_drone():
+	GameManager.platinum_drone_count -= 1
+	GameManager.platinum_drone_cost = GameManager.platinum_drone_base_cost * pow(2, GameManager.platinum_drone_count)
+	SignalBus.update_platinum_drone_count.emit()
+	SignalBus.update_platinum_drone_cost.emit()
+	#play animation
+	queue_free()

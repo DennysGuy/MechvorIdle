@@ -157,6 +157,15 @@ func get_left_weapon() -> MechWeapon:
 func get_right_weapon() -> MechWeapon:
 	return owned_mech_components["RightWeapon"]
 
+func deduct_drone_count() -> void:
+	drone_count -= 1
+	drones_cost = drone_base_cost * pow(2, drones_count)
+
+func increment_drone_count() -> void:
+	drone_count += 1
+
+	SignalBus.update_drone_count.emit()
+	
 func calculate_health() -> void:
 	total_health = get_owned_mech_arms().health + get_owned_mech_head().health + get_owned_mech_legs().health + get_owned_mech_torso().health
 	current_health = total_health
@@ -293,5 +302,4 @@ func reset():
 		"RightWeapon": null
 	}
 
-	
 	
