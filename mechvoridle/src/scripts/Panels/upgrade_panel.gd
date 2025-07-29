@@ -109,6 +109,9 @@ func _process(delta: float) -> void:
 	purchase_drone.disabled = GameManager.platinum_count < GameManager.drones_cost
 	purchase_platinum_drone.disabled = GameManager.platinum_count < GameManager.platinum_drone_cost
 	
+
+	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
+	
 	if GameManager.drone_count > 0:
 		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
 		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
@@ -216,8 +219,9 @@ func _on_hide_upgrades_panel_button_down():
 func _on_purchase_drone_button_down():
 	purchased_drone()
 	SignalBus.add_drone.emit()
+	print(GameManager.drone_count)
 	#GameManager.drone_count +=1
-	drones_count_tracker_label.text = str(GameManager.drone_count)
+	#drones_count_tracker_label.text = str(GameManager.drone_count)
 	drones_cost.text = str(GameManager.drones_cost)
 	SignalBus.update_platinum_count.emit()
 
@@ -237,8 +241,11 @@ func upgrade_mining_critical_chance() -> void:
 
 func purchased_drone() -> void:
 	GameManager.platinum_count -= GameManager.drones_cost
-	GameManager.drone_count += 1
-	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, GameManager.drone_count)
+	GameManager.drones_count += 1
+	update_drone_count()
+	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, GameManager.drones_count)
+	
+	print("Drone Count after purchase: " + str(GameManager.drone_count))
 
 func upgrade_drones_damage() -> void:
 	GameManager.platinum_count -= GameManager.drone_damage_cost
@@ -290,6 +297,7 @@ func _on_upgrade_refinery_speed_button_down() -> void:
 
 func update_drone_count() -> void:
 	drones_count_tracker_label.text = str(GameManager.drones_count)
+	#print("AfterDeath: " + str(GameManager.drones_count))
 	
 func update_drone_cost() -> void:
 	drones_cost.text = str(GameManager.drones_cost)

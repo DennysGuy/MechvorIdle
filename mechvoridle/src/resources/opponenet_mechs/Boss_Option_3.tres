@@ -7,6 +7,7 @@
 script = ExtResource("2_qj4ni")
 mech_name = "Colossal Tanker"
 total_health = 0
+current_health = 0
 total_crit_chance = 0
 total_stun_chance = 0
 total_plasma_resistance = 0.0

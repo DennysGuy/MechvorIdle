@@ -24,6 +24,9 @@ signal update_drone_count
 signal update_platinum_drone_cost
 signal update_platinum_drone_count
 
+signal sound_ship_alarm
+signal silence_ship_alarm
+
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
 

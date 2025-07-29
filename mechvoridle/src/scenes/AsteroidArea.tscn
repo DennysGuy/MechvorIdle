@@ -48,6 +48,11 @@ size = Vector2(123.75, 121)
 script = ExtResource("1_6ww1j")
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="UFOSpawnTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -73,6 +78,7 @@ offset_top = 28.0
 offset_right = 399.0
 offset_bottom = 215.0
 pivot_offset = Vector2(95, 96)
+mouse_default_cursor_shape = 3
 texture = ExtResource("1_80q61")
 
 [node name="AsteroidSpawnPoints" type="Node" parent="."]
@@ -107,5 +113,16 @@ position = Vector2(306, 124)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AsteroidArea2D"]
 shape = SubResource("RectangleShape2D_6ww1j")
 
+[node name="DroneList" type="Node" parent="."]
+
+[node name="UFOList" type="Node" parent="."]
+
+[node name="UFOOutPosition" type="Marker2D" parent="."]
+position = Vector2(417, 291)
+
+[node name="UFOInPosition" type="Marker2D" parent="."]
+position = Vector2(185, -15)
+
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
+[connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
 [connection signal="gui_input" from="MiningAsteroid" to="." method="_on_texture_rect_gui_input"]

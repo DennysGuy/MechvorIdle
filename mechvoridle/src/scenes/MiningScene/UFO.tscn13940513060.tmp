@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://ym3nha8862tm"]
+
+[ext_resource type="Script" uid="uid://cxfrencx3yeyi" path="res://src/scripts/Panels/MiningScene/ufo.gd" id="1_16gh5"]
+[ext_resource type="Texture2D" uid="uid://ch38i5jpvnply" path="res://assets/graphics/UFO-Place-Holder.png" id="1_ypchh"]
+[ext_resource type="PackedScene" uid="uid://n3yo7bmy3a6t" path="res://src/scenes/MiningScene/ResourceContainer.tscn" id="3_w3bvv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujr7o"]
+
+[sub_resource type="Animation" id="Animation_w3bvv"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 2.98795), Vector2(0, 0.0203524)]
+}
+
+[sub_resource type="Animation" id="Animation_ujr7o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v8qkd"]
+resource_name = "ufo_hit_flash"
+length = 0.1
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0499, 0.0973485),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujr7o"]
+_data = {
+&"RESET": SubResource("Animation_ujr7o"),
+&"hover": SubResource("Animation_w3bvv"),
+&"ufo_hit_flash": SubResource("Animation_v8qkd")
+}
+
+[node name="Ufo" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_16gh5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = ExtResource("1_ypchh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ujr7o")
+
+[node name="LaserReleaseTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="ResourceContainer" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_w3bvv")]
+parent = NodePath("..")
+ferrite_bars_min_value = 25
+ferrite_bars_max_value = 35
+platinum_min_value = 150
+platinum_max_value = 250
+plasma_min_value = 25
+plasma_max_value = 50
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ujr7o")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -13.0
+offset_top = -8.0
+offset_right = 13.0
+offset_bottom = 12.0
+color = Color(1, 1, 1, 0)
+
+[node name="HoverOutTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 10.0
+one_shot = true
+
+[node name="UfoClickControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 22.0
+mouse_default_cursor_shape = 3
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -18.0
+offset_right = 25.0
+offset_bottom = -11.0
+show_percentage = false
+
+[connection signal="timeout" from="LaserReleaseTimer" to="." method="_on_laser_release_timer_timeout"]
+[connection signal="timeout" from="HoverOutTimer" to="." method="_on_hover_out_timer_timeout"]
+[connection signal="gui_input" from="UfoClickControl" to="." method="_on_ufo_click_control_gui_input"]

@@ -9,6 +9,9 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="Animation" id="Animation_oll1y"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_1bg10"]
 resource_name = "fade_in"
 tracks/0/type = "value"
@@ -38,9 +41,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_oll1y"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oll1y"]
 _data = {

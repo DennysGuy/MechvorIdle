@@ -1,6 +1,6 @@
 class_name ResourceContainer extends Node
 
-@export var parent : Asteroid
+@export var parent : Node
 
 @export_group("Ferrite")
 @export var ferrite_min_value : int

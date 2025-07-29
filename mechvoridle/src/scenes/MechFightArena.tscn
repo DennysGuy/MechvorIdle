@@ -207,6 +207,7 @@ offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.63672, 2.05962)
+mouse_default_cursor_shape = 3
 texture = ExtResource("2_aoeri")
 script = ExtResource("4_naye7")
 

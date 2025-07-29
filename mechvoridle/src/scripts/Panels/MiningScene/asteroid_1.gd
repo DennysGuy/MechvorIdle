@@ -18,6 +18,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	graphic.rotation += 0.02
 	
+	
 
 func _physics_process(delta: float) -> void:
 	
@@ -43,5 +44,5 @@ func damage_asteroid() -> void:
 
 func _on_asteroid_click_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		print("HIT!")
+		#print("HIT!")
 		damage_asteroid()

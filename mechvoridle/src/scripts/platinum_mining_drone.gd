@@ -40,10 +40,10 @@ func platinum_gained() -> bool:
 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	pass
-	var area_parent : Asteroid = area.get_parent()
+
+	var area_parent  = area.get_parent()
 	
-	if area.get_parent() is Asteroid:
+	if area.get_parent() is Asteroid or area.get_parent() is UFOLaser:
 		health -= area_parent.damage
 		if health <= 0:
 			kill_mining_drone()
