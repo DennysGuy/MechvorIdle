@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MechHead" load_steps=2 format=3 uid="uid://cgq1e7t6btvc3"]
+
+[ext_resource type="Script" uid="uid://byj1i2hfctw2l" path="res://src/scripts/mechcomponents/mech_head.gd" id="1_rdnss"]
+
+[resource]
+script = ExtResource("1_rdnss")
+accuracy_bonus = 0.0
+component_name = ""
+description = ""
+health = 3125
+plasma_resistance = 0.1
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 0
+component_type = 0
+weight_class = 0
+metadata/_custom_type_script = "uid://byj1i2hfctw2l"

@@ -111,15 +111,16 @@ func damage_target(target_health : int) -> void:
 	#calculate hit
 	if attempt_attack_landed(true_accuracy, true_target_dodge_chance):
 		#calculate crit_chance
+		var random_damage : int = randi_range(weapon.damage - 40, weapon.damage)
 		if crit_landed(true_crit_chance):
-			var true_damage : int = weapon.damage * 2
-			damage_label.output = "-"+str(true_damage)
+			var true_damage : int = random_damage * 2
+			damage_label.output = "-"+str(true_damage)+"HP"
 			if belongs_to_player():
 				GameManager.chosen_opponent.current_health -= int(true_damage)
 				SignalBus.update_opponent_health_bar.emit()
 				damage_label.position = boss_label_marker.position
 			else:
-				GameManager.current_health -= int(true_damage)
+				GameManager.current_health -= random_damage
 				SignalBus.update_player_health_bar.emit()
 				SignalBus.shake_camera.emit()
 				damage_label.position = boss_label_marker.position
@@ -129,12 +130,12 @@ func damage_target(target_health : int) -> void:
 		
 		damage_label.output = "-"+str(weapon.damage)
 		if belongs_to_player():	
-			GameManager.chosen_opponent.current_health -= weapon.damage
+			GameManager.chosen_opponent.current_health -= random_damage
 			SignalBus.update_opponent_health_bar.emit()
 			damage_label.position = boss_label_marker.position
 			
 		else:
-			GameManager.current_health -= weapon.damage
+			GameManager.current_health -= random_damage
 			SignalBus.update_player_health_bar.emit()
 			SignalBus.shake_camera.emit()
 			damage_label.position = player_label_marker.position

@@ -266,6 +266,7 @@ offset_left = 400.0
 offset_top = 46.0
 offset_right = 592.0
 offset_bottom = 243.0
+mouse_filter = 2
 
 [node name="NameEntryBox" type="ColorRect" parent="."]
 visible = false

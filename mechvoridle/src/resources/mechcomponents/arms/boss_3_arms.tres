@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MechArms" load_steps=2 format=3 uid="uid://cctmq7palah20"]
+
+[ext_resource type="Script" uid="uid://marmnfdtywpd" path="res://src/scripts/mechcomponents/mech_arms.gd" id="1_q1286"]
+
+[resource]
+script = ExtResource("1_q1286")
+crit_chance_modifier = 0.0
+charge_time_modifier = 0.0
+component_name = ""
+description = ""
+health = 3125
+plasma_resistance = 0.1
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 3
+component_type = 1
+weight_class = 0
+metadata/_custom_type_script = "uid://marmnfdtywpd"

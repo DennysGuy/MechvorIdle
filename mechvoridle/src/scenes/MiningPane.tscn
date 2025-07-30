@@ -72,7 +72,7 @@ shader_parameter/resolution = Vector2(640, 360)
 shader_parameter/pixelate = false
 shader_parameter/roll = true
 shader_parameter/roll_speed = 3.0
-shader_parameter/roll_size = 22.621
+shader_parameter/roll_size = 96.848
 shader_parameter/roll_variation = 4.444
 shader_parameter/distort_intensity = 0.1
 shader_parameter/noise_opacity = 0.482
@@ -129,7 +129,7 @@ size = Vector2i(480, 210)
 render_target_update_mode = 4
 
 [node name="AsteroidArea" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("2_1hqb7")]
-position = Vector2(-48, -16)
+position = Vector2(-53, -16)
 
 [node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
 layout_mode = 0
