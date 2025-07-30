@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_6boxp")
-accuracy_bonus = 0.2
+accuracy_bonus = 0.35
 component_name = ""
 description = ""
-health = 700
+health = 1500
 plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0

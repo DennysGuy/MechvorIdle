@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hjbnj2tod3ol"]
 
 [ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/plasma_generator.gd" id="1_2eac4"]
-[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_x74x1"]
+[ext_resource type="Texture2D" uid="uid://cgmy7s1s1tb1u" path="res://assets/graphics/generator.png" id="2_2eac4"]
 
 [node name="PlasmaGenerator" type="Control"]
 layout_mode = 3
@@ -20,17 +20,17 @@ script = ExtResource("1_2eac4")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 189.0
-offset_bottom = 96.0
+offset_right = 149.0
+offset_bottom = 79.0
 
 [node name="Graphic" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 20.0
-offset_right = 78.0
-offset_bottom = 80.0
-texture = ExtResource("1_x74x1")
-expand_mode = 1
+offset_top = 10.0
+offset_right = 79.0
+offset_bottom = 70.0
+texture = ExtResource("2_2eac4")
+stretch_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -50,16 +50,16 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -33.5
-offset_top = 83.0
+offset_top = 70.0
 offset_right = 27.5
-offset_bottom = 89.0
+offset_bottom = 76.0
 grow_horizontal = 2
 show_percentage = false
 
 [node name="PurchasePanel" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 111.0
-offset_bottom = 96.0
+offset_bottom = 79.0
 
 [node name="Label" type="Label" parent="PurchasePanel"]
 layout_mode = 0
@@ -79,28 +79,28 @@ text = "Purchase"
 
 [node name="Speed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 24.0
-offset_right = 171.0
-offset_bottom = 37.0
+offset_left = 96.0
+offset_top = 17.0
+offset_right = 146.0
+offset_bottom = 30.0
 theme_override_font_sizes/font_size = 9
 text = "Speed: 30%"
 
 [node name="Output" type="Label" parent="."]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 40.0
-offset_right = 167.0
-offset_bottom = 53.0
+offset_left = 96.0
+offset_top = 33.0
+offset_right = 143.0
+offset_bottom = 46.0
 theme_override_font_sizes/font_size = 9
 text = "Output: 44"
 
 [node name="FuelCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 57.0
-offset_right = 160.0
-offset_bottom = 70.0
+offset_left = 97.0
+offset_top = 50.0
+offset_right = 136.0
+offset_bottom = 63.0
 theme_override_font_sizes/font_size = 9
 text = "Fuel: 255"
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=12 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
+[ext_resource type="Texture2D" uid="uid://dhx3oow401s4x" path="res://assets/graphics/MiningPanel_underlay.png" id="2_ooyll"]
 [ext_resource type="PackedScene" uid="uid://cc7liqf41bqti" path="res://src/scenes/ResourceTracker.tscn" id="3_d2ayj"]
 [ext_resource type="PackedScene" uid="uid://cg8jxc7r6vcat" path="res://src/scenes/RefineryStationPanel.tscn" id="4_l11te"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
+[ext_resource type="Texture2D" uid="uid://bp4mre5vn47ji" path="res://assets/graphics/MiningPanel_overlay.png" id="7_t7rsg"]
 
 [sub_resource type="Animation" id="Animation_t7rsg"]
 resource_name = "HideAnimationPanel"
@@ -72,7 +74,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_t7rsg")
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,23 +87,57 @@ offset_right = 320.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.273207, 0.52756, 0.790258, 1)
+texture = ExtResource("2_ooyll")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 18.0
-offset_right = 610.0
-offset_bottom = 245.0
+offset_left = 98.0
+offset_top = 26.0
+offset_right = 609.0
+offset_bottom = 239.0
 
 [node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(580, 220)
+size = Vector2i(480, 210)
 render_target_update_mode = 4
 
 [node name="AsteroidArea" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("2_1hqb7")]
-position = Vector2(-11, -10)
+position = Vector2(-48, -16)
+
+[node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 262.0
+offset_right = 617.0
+offset_bottom = 359.0
+
+[node name="ResourceTracker" parent="ColorRect" instance=ExtResource("3_d2ayj")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -359.0
+offset_top = -94.0
+offset_right = -208.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Overlay" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 639.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("7_t7rsg")
+
+[node name="UpgradePanel" parent="ColorRect" instance=ExtResource("5_l11te")]
+layout_mode = 0
+offset_top = -339.0
+offset_bottom = 0.0
 
 [node name="CentralHubNavigation" type="Button" parent="ColorRect"]
 layout_mode = 1
@@ -114,31 +150,5 @@ offset_right = -39.0
 offset_bottom = 55.0
 grow_horizontal = 0
 text = "Central Hub"
-
-[node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
-layout_mode = 0
-offset_left = 29.0
-offset_top = 248.0
-offset_right = 613.0
-offset_bottom = 353.0
-
-[node name="UpgradePanel" parent="ColorRect" instance=ExtResource("5_l11te")]
-layout_mode = 0
-offset_top = -339.0
-offset_bottom = 0.0
-
-[node name="ResourceTracker" parent="ColorRect" instance=ExtResource("3_d2ayj")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -405.0
-offset_top = -111.0
-offset_right = -262.0
-offset_bottom = -7.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]

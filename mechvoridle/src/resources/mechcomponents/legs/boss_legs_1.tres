@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_a66eq")
-dodge_chance_modifier = 0.15
+dodge_chance_modifier = 0.25
 component_name = "MEEP234X"
 description = ""
-health = 900
+health = 1500
 plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0

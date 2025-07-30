@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://q2lvrrcqcirf"]
 
 [ext_resource type="Script" uid="uid://bmdl7trph1eue" path="res://src/scripts/Panels/ferrite_refinery_station.gd" id="1_ai323"]
-[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="1_ph523"]
+[ext_resource type="Texture2D" uid="uid://crcd7gukxb3ng" path="res://assets/graphics/refineryused.png" id="2_7nq2t"]
 
 [node name="FerriteRefinery" type="Control"]
 layout_mode = 3
@@ -26,13 +26,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -66.5
-offset_top = -10.0
+offset_top = -30.0
 offset_right = 71.5
-offset_bottom = 48.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ph523")
-expand_mode = 1
+texture = ExtResource("2_7nq2t")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0
@@ -44,41 +43,42 @@ show_percentage = false
 
 [node name="PurchasePanel" type="Panel" parent="."]
 layout_mode = 0
+offset_top = 9.0
 offset_right = 150.0
-offset_bottom = 102.0
+offset_bottom = 86.0
 
 [node name="PurchaseRefineryStation" type="Button" parent="PurchasePanel"]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 48.0
+offset_top = 26.0
 offset_right = 123.0
-offset_bottom = 90.0
+offset_bottom = 68.0
 text = "PURCHASE"
 
 [node name="RefineryCostLabel" type="Label" parent="PurchasePanel"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 9.0
-offset_right = 132.0
-offset_bottom = 32.0
+offset_left = 16.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 24.0
 theme_override_font_sizes/font_size = 15
 text = "Platinum: 13434"
 
 [node name="OutputLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 3.0
+offset_top = 33.0
 offset_right = 54.0
-offset_bottom = 15.0
+offset_bottom = 45.0
 theme_override_font_sizes/font_size = 8
 text = "Output: 23"
 
 [node name="CostLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 94.0
-offset_top = 3.0
-offset_right = 125.0
-offset_bottom = 15.0
+offset_left = 95.0
+offset_top = 33.0
+offset_right = 126.0
+offset_bottom = 45.0
 theme_override_font_sizes/font_size = 8
 text = "Cost: 65"
 
