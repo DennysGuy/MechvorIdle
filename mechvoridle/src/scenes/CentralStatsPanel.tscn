@@ -1,8 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dio1yrjtiu67"]
+[gd_scene load_steps=6 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
+[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_ve6vp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
+shader = ExtResource("4_ve6vp")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.194
+shader_parameter/scanlines_width = 0.162
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 10.247
+shader_parameter/roll_variation = 3.77
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.2
+shader_parameter/vignette_opacity = 0.263
 
 [node name="CentralHubPanel" type="Control"]
 layout_mode = 3
@@ -233,6 +258,14 @@ offset_top = 39.0
 offset_right = 163.0
 offset_bottom = 167.0
 texture = ExtResource("2_liohg")
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_lvy6k")
+layout_mode = 0
+offset_left = 400.0
+offset_top = 46.0
+offset_right = 592.0
+offset_bottom = 243.0
 
 [node name="NameEntryBox" type="ColorRect" parent="."]
 visible = false

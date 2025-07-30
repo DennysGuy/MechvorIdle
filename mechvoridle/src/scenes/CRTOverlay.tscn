@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cirgs6mk7lbc3"]
+
+[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="1_7keks"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fde8e"]
+resource_local_to_scene = true
+shader = ExtResource("1_7keks")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.426
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.086
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 5.0
+shader_parameter/roll_size = 12.0
+shader_parameter/roll_variation = 1.901
+shader_parameter/distort_intensity = 0.01
+shader_parameter/noise_opacity = 0.183
+shader_parameter/noise_speed = 3.0
+shader_parameter/static_noise_intensity = 0.09
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 2.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = true
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.49
+
+[node name="CRTOverlay" type="ColorRect"]
+material = SubResource("ShaderMaterial_fde8e")
+offset_right = 640.0
+offset_bottom = 240.0
+mouse_filter = 2

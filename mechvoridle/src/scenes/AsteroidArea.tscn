@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=10 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://ghoq3njhb4ly" path="res://assets/graphics/AsteroidPlaceHolder.png" id="1_80q61"]
+[ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
+[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
 
 [sub_resource type="Animation" id="Animation_6ww1j"]
 length = 0.001
@@ -43,6 +45,31 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ww1j"]
 size = Vector2(123.75, 121)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sd8y"]
+resource_local_to_scene = true
+shader = ExtResource("4_fde8e")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.392
+shader_parameter/grille_opacity = 0.086
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 5.0
+shader_parameter/roll_size = 54.268
+shader_parameter/roll_variation = 1.901
+shader_parameter/distort_intensity = 0.01
+shader_parameter/noise_opacity = 0.183
+shader_parameter/noise_speed = 3.0
+shader_parameter/static_noise_intensity = 0.09
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.1
+shader_parameter/clip_warp = true
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.583
 
 [node name="AsteroidArea" type="Node2D"]
 script = ExtResource("1_6ww1j")
@@ -123,6 +150,13 @@ position = Vector2(419, 287)
 [node name="UFOInPosition" type="Marker2D" parent="."]
 position = Vector2(185, -21)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CRTOverlay" parent="CanvasLayer" instance=ExtResource("3_2fxli")]
+material = SubResource("ShaderMaterial_0sd8y")
+
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
 [connection signal="gui_input" from="MiningAsteroid" to="." method="_on_texture_rect_gui_input"]
+
+[editable path="CanvasLayer/CRTOverlay"]
