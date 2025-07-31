@@ -7,9 +7,10 @@ class_name Asteroid extends CharacterBody2D
 @export var health : int 
 @export var damage : int
 @onready var graphic: Sprite2D = $Graphic
+@onready var sfx_player  : AudioStreamPlayer = $SfxPlayer
 
 @onready var asteroid_animation_player: AnimationPlayer = $AsteroidAnimationPlayer
-
+@onready var asteroid_hit_list : Array[AudioStream] = [SfxManager.MIN_CLICK_SPACE_01, SfxManager.MIN_CLICK_SPACE_02, SfxManager.MIN_CLICK_SPACE_03, SfxManager.MIN_CLICK_SPACE_04, SfxManager.MIN_CLICK_SPACE_05]
 signal deliver_resources 
 
 func _ready() -> void:
@@ -34,6 +35,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	pass
 
 func damage_asteroid() -> void:
+	play_asteroid_hit_sfx()
 	asteroid_animation_player.play("hit_flash")
 	health -= 1
 	if health <= 0:
@@ -46,3 +48,7 @@ func _on_asteroid_click_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		#print("HIT!")
 		damage_asteroid()
+
+func play_asteroid_hit_sfx() -> void:
+	sfx_player.stream = asteroid_hit_list.pick_random()
+	sfx_player.play()

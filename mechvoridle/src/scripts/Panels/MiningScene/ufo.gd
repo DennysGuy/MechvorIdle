@@ -9,18 +9,27 @@ var dir : Vector2
 @onready var hover_out_timer : Timer = $HoverOutTimer
 @onready var laser_release_timer : Timer = $LaserReleaseTimer
 @onready var health_bar : ProgressBar = $HealthBar
+@onready var hit_ufo_sfx_player : AudioStreamPlayer = $HitUFOSfxPlayer
+@onready var ufo_hit_sfx_list : Array[AudioStream] = [SfxManager.MIN_UNIT_UFO_DAMAGE_01, SfxManager.MIN_UNIT_UFO_DAMAGE_02, SfxManager.MIN_UNIT_UFO_DAMAGE_03, SfxManager.MIN_UNIT_UFO_DAMAGE_04, SfxManager.MIN_UNIT_UFO_DAMAGE_05]
+@onready var ufo_hover_sfx_player : AudioStreamPlayer2D = $UfoHoverSfxPlayer
 
 var mining_asteroid_area : Area2D
 var out_location : Marker2D
 var laser_timer_started : bool = false
 var hover_time_started : bool = false
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
 @export var drones_list : Node
 @export var ufo_spawn_timer : Timer
+
 enum states {HOVER_IN, SHOOT, HOVER_OUT, REMOVE, DEAD}
 signal deliver_resources 
+
 var current_state : int
 var can_shoot : bool = false
+
 func _ready() -> void:
+	animated_sprite_2d.play("default")
 	max_health = randi_range(8,15)
 	health = max_health
 	current_state = states.HOVER_IN
@@ -33,7 +42,13 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	match(current_state):
+		
 		states.HOVER_IN:
+			
+			if !ufo_hover_sfx_player.playing:
+				ufo_hover_sfx_player.stream = SfxManager.MIN_UNIT_UFO_HOVER_01
+				ufo_hover_sfx_player.play()
+				
 			can_shoot = false
 			if not laser_timer_started:
 				laser_release_timer.start()
@@ -46,6 +61,7 @@ func _physics_process(delta : float) -> void:
 				move_and_slide()
 				
 		states.SHOOT:
+
 			can_shoot = true
 			velocity = Vector2.ZERO
 			if not hover_time_started:
@@ -68,7 +84,6 @@ func _physics_process(delta : float) -> void:
 			destroy_ufo()
 		
 		states.REMOVE:
-			print("sheeee")
 			SignalBus.check_to_start_ufo_spawn.emit()
 			SignalBus.silence_ship_alarm.emit()
 			queue_free()
@@ -80,6 +95,7 @@ func destroy_ufo() -> void:
 	#called in dead sate
 
 func damage_ufo() -> void:
+	play_ufo_damage_sfx()
 	animation_player.play("ufo_hit_flash")
 	health -= 1
 	health_bar.value = health
@@ -111,3 +127,7 @@ func _on_ufo_click_control_gui_input(event) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		health_bar.show()
 		damage_ufo()
+
+func play_ufo_damage_sfx() -> void:
+	hit_ufo_sfx_player.stream = ufo_hit_sfx_list.pick_random()
+	hit_ufo_sfx_player.play()

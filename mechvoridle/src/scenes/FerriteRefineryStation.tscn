@@ -11,9 +11,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -77.0
-offset_top = -71.0
+offset_top = -58.0
 offset_right = 72.0
-offset_bottom = 39.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ai323")
@@ -33,19 +33,37 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_7nq2t")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="OutputLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 11.0
-offset_top = 18.0
-offset_right = 146.0
-offset_bottom = 32.0
+offset_left = 12.0
+offset_top = -4.0
+offset_right = 54.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 8
+text = "Output: 23"
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 101.0
+offset_top = -4.0
+offset_right = 132.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 8
+text = "Cost: 65"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 64.0
+offset_right = 141.0
+offset_bottom = 70.0
 show_percentage = false
 
 [node name="PurchasePanel" type="Panel" parent="."]
 layout_mode = 0
-offset_top = 9.0
+offset_top = -5.0
 offset_right = 150.0
-offset_bottom = 86.0
+offset_bottom = 72.0
 
 [node name="PurchaseRefineryStation" type="Button" parent="PurchasePanel"]
 layout_mode = 0
@@ -63,23 +81,5 @@ offset_right = 133.0
 offset_bottom = 24.0
 theme_override_font_sizes/font_size = 15
 text = "Platinum: 13434"
-
-[node name="OutputLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 33.0
-offset_right = 54.0
-offset_bottom = 45.0
-theme_override_font_sizes/font_size = 8
-text = "Output: 23"
-
-[node name="CostLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 95.0
-offset_top = 33.0
-offset_right = 126.0
-offset_bottom = 45.0
-theme_override_font_sizes/font_size = 8
-text = "Cost: 65"
 
 [connection signal="button_down" from="PurchasePanel/PurchaseRefineryStation" to="." method="_on_purchase_refinery_station_button_down"]

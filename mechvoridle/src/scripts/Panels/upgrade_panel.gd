@@ -63,6 +63,15 @@ class_name UpgradePanel extends ColorRect
 
 var upgrade_panel_showing : bool = false
 
+#sfx
+@onready var sfx_player : AudioStreamPlayer = $SfxPlayer
+
+
+var open_upgrades_panel_sfx : AudioStream = SfxManager.UI_MINING_UPGRADE_MENU_OPEN_01
+var close_upgrades_panel_sfx : AudioStream = SfxManager.UI_MINING_UPGRADE_MENU_CLOSE_01
+
+var purchase_upgrade_sfx : Array[AudioStream] = [SfxManager.UI_SHOP_BUY_COMPLETE_01, SfxManager.UI_SHOP_BUY_COMPLETE_02, SfxManager.UI_SHOP_BUY_COMPLETE_03]
+
 func _ready() -> void:
 	SignalBus.update_drone_cost.connect(update_drone_cost)
 	SignalBus.update_drone_count.connect(update_drone_count)
@@ -149,23 +158,28 @@ func _on_upgrades_access_button_down():
 	upgrade_panel_showing = !upgrade_panel_showing
 	
 	if upgrade_panel_showing:
+		open_upgrades_panel()
 		SignalBus.show_upgrade_panel.emit()
 	else:
+		close_upgrades_panel()
 		SignalBus.hide_upgrade_panel.emit()
 
 func _on_upgrade_damage_button_down():
+	play_purchase_upgrade_sfx()
 	upgrade_mining_laser()
 	current_damage_tracker.text = str(GameManager.mining_laser_damage)
 	current_damage_cost.text = str(GameManager.mining_laser_damage_upgrade_cost)
 	SignalBus.update_platinum_count.emit()
 
 func _on_upgrade_crit_chance_button_down():
+	play_purchase_upgrade_sfx()
 	upgrade_mining_critical_chance()
 	current_crit_chance_tracker.text = str(GameManager.mining_laser_crit_chance * 100)+"%"
 	current_crit_chance_cost.text = str(GameManager.mining_laser_crit_chance_cost)
 	SignalBus.update_platinum_count.emit()
 
 func _on_upgrade_drone_damage_button_down():
+	play_purchase_upgrade_sfx()
 	upgrade_drones_damage()
 	drone_damage.text = str(GameManager.drone_damage)
 	drone_damage_cost.text = str(GameManager.drone_damage_cost)
@@ -173,6 +187,7 @@ func _on_upgrade_drone_damage_button_down():
 
 
 func _on_upgrade_efficiency_button_down():
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.output_upgrade_cost
 	GameManager.ferrite_refinery_output_level += 1
 	GameManager.output_amount *= 2
@@ -184,6 +199,7 @@ func _on_upgrade_efficiency_button_down():
 	
 
 func _on_generator_output_upgrade_button_down():
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.plasma_generator_output_cost
 	GameManager.plasma_generator_output *= GameManager.plasma_generator_output_upgrade_interval
 	GameManager.plasma_generator_output_level += 1
@@ -193,6 +209,7 @@ func _on_generator_output_upgrade_button_down():
 	SignalBus.update_plasma_generator_output.emit()
 
 func _on_upgrade_fuel_cost_button_down():
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.plasma_generator_fuel_cost
 	GameManager.plasma_generator_fuel_consumption -= GameManager.plasma_generator_fuel_consumption_upgrade_interval
 	GameManager.plasma_generator_fuel_level += 1
@@ -202,6 +219,7 @@ func _on_upgrade_fuel_cost_button_down():
 	SignalBus.update_fuel_consumption.emit()
 	
 func _on_plasma_generator_speed_upgrade_button_down():
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.plasma_generator_speed_cost
 	GameManager.plasma_generator_speed += GameManager.plasma_generator_speed_upgrade_interval
 	GameManager.plasma_generator_speed_level += 1
@@ -212,11 +230,13 @@ func _on_plasma_generator_speed_upgrade_button_down():
 	
 	
 func _on_hide_upgrades_panel_button_down():
+	close_upgrades_panel()
 	upgrade_panel_showing = false
 	SignalBus.hide_upgrade_panel.emit()
 
 
 func _on_purchase_drone_button_down():
+	play_purchase_upgrade_sfx()
 	purchased_drone()
 	SignalBus.add_drone.emit()
 	print(GameManager.drone_count)
@@ -226,6 +246,7 @@ func _on_purchase_drone_button_down():
 	SignalBus.update_platinum_count.emit()
 
 func upgrade_mining_laser() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.mining_laser_damage_upgrade_cost
 	GameManager.mining_laser_level += 1
 	GameManager.mining_laser_damage = GameManager.mining_laser_damage + GameManager.mining_laser_level * 2
@@ -234,12 +255,14 @@ func upgrade_mining_laser() -> void:
 	GameManager.platinum_gain_max += 3
 	
 func upgrade_mining_critical_chance() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.mining_laser_crit_chance_cost
 	GameManager.mining_laser_crit_chance_level += 1
 	GameManager.mining_laser_crit_chance += GameManager.mining_laser_crit_chance_interval
 	GameManager.mining_laser_crit_chance_cost = GameManager.mining_laser_crit_chance_base_cost * pow(2, GameManager.mining_laser_crit_chance_level)
 
 func purchased_drone() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drones_cost
 	GameManager.drones_count += 1
 	GameManager.total_drones_count += 1
@@ -250,6 +273,7 @@ func purchased_drone() -> void:
 	print("Drone Count after purchase: " + str(GameManager.drone_count))
 
 func upgrade_drones_damage() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
 	GameManager.drone_damage = GameManager.drone_damage + GameManager.drone_level * 2
@@ -257,6 +281,7 @@ func upgrade_drones_damage() -> void:
 
 
 func _on_upgrade_drone_mining_speed_button_down() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drone_mining_speed_cost
 	GameManager.drone_mining_speed_level += 1
 	GameManager.drone_mining_speed += GameManager.drone_mining_speed_upgrade_interval
@@ -266,6 +291,7 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 
 
 func _on_purchase_platinum_drone_button_down() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_cost
 	GameManager.platinum_drone_count += 1
 	GameManager.total_drones_count += 1
@@ -276,6 +302,7 @@ func _on_purchase_platinum_drone_button_down() -> void:
 	SignalBus.check_to_start_ufo_spawn.emit()
 
 func _on_upgrade_plat_drone_damage_button_down() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_damage_cost
 	GameManager.platinum_drone_damage_level += 1
 	GameManager.platinum_drone_damage = GameManager.platinum_drone_damage + GameManager.platinum_drone_damage_level * 2
@@ -284,6 +311,7 @@ func _on_upgrade_plat_drone_damage_button_down() -> void:
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 
 func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_mining_speed_cost
 	GameManager.platinum_drone_mining_speed_level += 1
 	GameManager.platinum_drone_mining_speed += GameManager.platinum_drone_mining_speed_interval
@@ -292,6 +320,7 @@ func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
 
 func _on_upgrade_refinery_speed_button_down() -> void:
+	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.ferrite_refinery_speed_cost
 	GameManager.ferrite_refinery_speed_level += 1
 	GameManager.ferrite_refinery_speed += GameManager.ferrite_refinery_speed_upgrade_interval
@@ -311,3 +340,19 @@ func update_platinum_drone_count() -> void:
 
 func update_platinum_drone_cost() -> void:
 	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
+
+
+func open_upgrades_panel() -> void:
+	sfx_player.volume_db = -5.0
+	sfx_player.stream = open_upgrades_panel_sfx
+	sfx_player.play()
+
+func close_upgrades_panel() -> void:
+	sfx_player.volume_db = -5.0
+	sfx_player.stream = close_upgrades_panel_sfx
+	sfx_player.play()
+
+func play_purchase_upgrade_sfx() -> void:
+	sfx_player.volume_db = 0
+	sfx_player.stream = purchase_upgrade_sfx.pick_random()
+	sfx_player.play()

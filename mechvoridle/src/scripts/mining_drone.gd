@@ -1,6 +1,9 @@
 class_name MiningDrone extends Node2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
+@onready var sfx_player : AudioStreamPlayer2D = $SfxPlayer
+
+var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
 
 var health : int = 12
 
@@ -23,7 +26,7 @@ func erase() -> void:
 
 func obtain_resources() -> void:
 	var drone_damage : int = GameManager.drone_damage
-
+	play_mining_sfx()
 	GameManager.raw_ferrite_count += drone_damage
 			
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
@@ -73,3 +76,7 @@ func kill_mining_drone():
 	#play animation
 	print("drone count after death"+str(GameManager.drone_count))
 	queue_free()
+
+func play_mining_sfx() -> void:
+	sfx_player.stream = mining_sfx_list.pick_random()
+	sfx_player.play()

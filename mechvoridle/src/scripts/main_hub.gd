@@ -1,8 +1,19 @@
 class_name MainHub extends Control
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var music_player : AudioStreamPlayer = $MusicPlayer
+@onready var sfx_player_layer_1 : AudioStreamPlayer = $SFXPlayerLayer1
+@onready var sfx_player_layer_2 : AudioStreamPlayer = $SFXPlayerLayer2
 
+@onready var ship_ambiance_player : AudioStreamPlayer = $ShipAmbiancePlayer
+
+@onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
+@onready var enter_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_ENTER_HUB_01
+@onready var mining_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_MINING_01, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_02, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_04]
+@onready var shop_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_01, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_02, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_03, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_04, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_05]
 func _ready() -> void:
+	music_player.play()
+	ship_ambiance_player.play()
 	animation_player.play("fade_in")
 	SignalBus.move_to_mining_pane.connect(move_to_mining_pane)
 	SignalBus.move_to_shop_pane.connect(move_to_shop_pane)
@@ -28,24 +39,28 @@ func _process(delta : float) ->void:
 
 
 func move_to_mining_pane() -> void:
+	play_nav_from_hub_to_mining_sfx()
 	GameManager.on_mining_panel = true
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = false
 	animation_player.play("NavigateToMiningPage")
 
 func move_to_shop_pane() -> void:
+	player_enter_shop_from_hub_sfx()
 	GameManager.on_central_panel = false
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = true
 	animation_player.play("NavigateToShopPane")
 
 func move_from_mining_pane_to_central_pane() -> void:
+	play_enter_hub_from_mining_sfx()
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
 	animation_player.play("NavigateFromMiningPageToCentralHub")
 
 func move_from_shop_pane_to_central_pane() -> void:
+	play_enter_hub_from_shop_sfx()
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
@@ -58,3 +73,28 @@ func insert_ship_alarm() -> void:
 func remove_ship_alarm() -> void:
 	print("we made it")
 	get_tree().get_first_node_in_group("ship alarm")
+
+func play_nav_from_hub_to_mining_sfx():
+	sfx_player_layer_1.stream = exit_hub 
+	sfx_player_layer_2.stream = mining_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+func play_enter_hub_from_mining_sfx():
+	sfx_player_layer_1.stream = enter_hub
+	sfx_player_layer_2.stream = mining_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+func play_enter_hub_from_shop_sfx():
+	sfx_player_layer_1.stream = enter_hub
+	sfx_player_layer_2.stream = shop_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+
+func player_enter_shop_from_hub_sfx():
+	sfx_player_layer_1.stream = exit_hub
+	sfx_player_layer_2.stream = shop_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()

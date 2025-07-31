@@ -14,10 +14,16 @@ var asteroid_spawn_timer_length : float = 10.0
 @onready var ufo_spawn_timer : Timer = $UFOSpawnTimer
 @onready var ufo_list : Node = $UFOList
 
+@onready var click_asteroid_sfx : AudioStreamPlayer = $ClickAsteroidSfx
+
+
 var start_ufo_spawn : bool = false
+
+var mining_asteroid_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01, SfxManager.MIN_CLICK_ASTEROID_02, SfxManager.MIN_CLICK_ASTEROID_03, SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07, SfxManager.MIN_CLICK_ASTEROID_08]
 
 var _offset : int = 50
 func _ready() -> void:
+	
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
@@ -39,6 +45,8 @@ func _process(delta : float) -> void:
 func _on_texture_rect_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			play_mining_sfx()
+			print("hi")
 			var mining_laser_damage : int = GameManager.mining_laser_damage
 			var true_damage : int
 			var can_crit : bool = is_crit_damage()
@@ -145,3 +153,7 @@ func toggle_ufo_spawn() -> void:
 		ufo_spawn_timer.stop()
 		if ufo_spawn_timer.is_stopped():
 			print("WE STOPPED!")
+
+func play_mining_sfx():
+	click_asteroid_sfx.stream = mining_asteroid_sfx_list.pick_random()
+	click_asteroid_sfx.play()

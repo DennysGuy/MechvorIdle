@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=15 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
 [ext_resource type="Texture2D" uid="uid://dhx3oow401s4x" path="res://assets/graphics/MiningPanel_underlay.png" id="2_ooyll"]
 [ext_resource type="PackedScene" uid="uid://cc7liqf41bqti" path="res://src/scenes/ResourceTracker.tscn" id="3_d2ayj"]
-[ext_resource type="PackedScene" uid="uid://cg8jxc7r6vcat" path="res://src/scenes/RefineryStationPanel.tscn" id="4_l11te"]
+[ext_resource type="PackedScene" uid="uid://q2lvrrcqcirf" path="res://src/scenes/FerriteRefineryStation.tscn" id="5_78b4q"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="6_78b4q"]
+[ext_resource type="PackedScene" uid="uid://hjbnj2tod3ol" path="res://src/scenes/PlasmaGenerator.tscn" id="6_tow8p"]
 [ext_resource type="Texture2D" uid="uid://bp4mre5vn47ji" path="res://assets/graphics/MiningPanel_overlay.png" id="7_t7rsg"]
 
 [sub_resource type="Animation" id="Animation_t7rsg"]
@@ -72,14 +73,14 @@ shader_parameter/resolution = Vector2(640, 360)
 shader_parameter/pixelate = false
 shader_parameter/roll = true
 shader_parameter/roll_speed = 3.0
-shader_parameter/roll_size = 96.848
-shader_parameter/roll_variation = 4.444
-shader_parameter/distort_intensity = 0.1
+shader_parameter/roll_size = 23.92
+shader_parameter/roll_variation = 2.928
+shader_parameter/distort_intensity = 0.027
 shader_parameter/noise_opacity = 0.482
 shader_parameter/noise_speed = 1.0
 shader_parameter/static_noise_intensity = 0.06
 shader_parameter/aberration = 4.75e-08
-shader_parameter/brightness = 1.4
+shader_parameter/brightness = 1.0
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.0
 shader_parameter/clip_warp = false
@@ -125,18 +126,12 @@ offset_bottom = 239.0
 [node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(480, 210)
 render_target_update_mode = 4
 
 [node name="AsteroidArea" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("2_1hqb7")]
 position = Vector2(-53, -16)
-
-[node name="RefineryStationPanel" parent="ColorRect" instance=ExtResource("4_l11te")]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 262.0
-offset_right = 617.0
-offset_bottom = 359.0
 
 [node name="ResourceTracker" parent="ColorRect" instance=ExtResource("3_d2ayj")]
 layout_mode = 1
@@ -151,6 +146,20 @@ offset_right = -208.0
 offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="PlasmaGenerator" parent="ColorRect" instance=ExtResource("6_tow8p")]
+layout_mode = 1
+offset_left = 143.0
+offset_top = 86.0
+offset_right = 288.0
+offset_bottom = 163.0
+
+[node name="FerriteRefinery" parent="ColorRect" instance=ExtResource("5_78b4q")]
+layout_mode = 1
+offset_left = -224.0
+offset_top = 90.0
+offset_right = -80.0
+offset_bottom = 162.0
 
 [node name="CRTOverlayForMonitor" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_tow8p")

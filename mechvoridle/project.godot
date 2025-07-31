@@ -21,6 +21,7 @@ SignalBus="*res://src/scripts/SignalBus.gd"
 AudioHandler="*res://src/scripts/AudioHandler.gd"
 GameManager="*res://src/scripts/GameManager.gd"
 ShopList="*res://src/scripts/ShopList.gd"
+SfxManager="*res://src/scripts/SFXManager.gd"
 
 [display]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=11 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://ghoq3njhb4ly" path="res://assets/graphics/AsteroidPlaceHolder.png" id="1_80q61"]
 [ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
+[ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
 
 [sub_resource type="Animation" id="Animation_6ww1j"]
 length = 0.001
@@ -62,8 +63,8 @@ shader_parameter/roll_variation = 1.901
 shader_parameter/distort_intensity = 0.01
 shader_parameter/noise_opacity = 0.183
 shader_parameter/noise_speed = 3.0
-shader_parameter/static_noise_intensity = 0.09
-shader_parameter/aberration = 0.02
+shader_parameter/static_noise_intensity = 0.058
+shader_parameter/aberration = 0.01
 shader_parameter/brightness = 1.0
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.1
@@ -154,6 +155,13 @@ position = Vector2(185, -21)
 
 [node name="CRTOverlay" parent="CanvasLayer" instance=ExtResource("3_2fxli")]
 material = SubResource("ShaderMaterial_0sd8y")
+
+[node name="ClickAsteroidSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0sd8y")
+bus = &"SFX"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(305, 125)
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]

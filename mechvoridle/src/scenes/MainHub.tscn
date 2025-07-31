@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3gd8inykd321"]
+[gd_scene load_steps=15 format=3 uid="uid://d3gd8inykd321"]
 
 [ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
 [ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
 [ext_resource type="PackedScene" uid="uid://cu5ql32vaxyid" path="res://src/scenes/MiningPane.tscn" id="2_kflli"]
 [ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/ShopPane.tscn" id="4_0av82"]
+[ext_resource type="AudioStream" uid="uid://jhdoby58q15s" path="res://assets/audio/music/162.ogg" id="5_7cw1w"]
+[ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_k282t"]
 
 [sub_resource type="Animation" id="Animation_k282t"]
 resource_name = "NavigateFromMiningPageToCentralHub"
@@ -160,3 +162,20 @@ offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="SFXPlayerLayer1" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="SFXPlayerLayer2" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7cw1w")
+volume_db = -4.0
+bus = &"Music"
+parameters/looping = true
+
+[node name="ShipAmbiancePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_k282t")
+bus = &"Ambiance"

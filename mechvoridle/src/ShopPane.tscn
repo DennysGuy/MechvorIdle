@@ -1,8 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=5 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
-[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_mi2d3"]
-[ext_resource type="PackedScene" uid="uid://gtctbxlpobla" path="res://src/scenes/ShopMenuItemPanel.tscn" id="3_6crgc"]
+[ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
+[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="3_pkk0g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mi2d3"]
+resource_local_to_scene = true
+shader = ExtResource("3_pkk0g")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.288
+shader_parameter/scanlines_width = 0.169
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.174
 
 [node name="ShopPane" type="Control"]
 layout_mode = 3
@@ -13,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pkk0g")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,237 +51,198 @@ offset_right = 320.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.757123, 0.374746, 0.457367, 1)
+texture = ExtResource("2_pkk0g")
 
 [node name="CentralHubNavigation" type="Button" parent="ColorRect"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 19.0
-offset_right = 121.0
-offset_bottom = 50.0
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 110.0
+offset_bottom = 32.0
 text = "Central Hub"
 
-[node name="ArmsDealerArt" type="TextureRect" parent="ColorRect"]
+[node name="DescriptionTextBox" type="RichTextLabel" parent="ColorRect"]
 layout_mode = 0
-offset_left = 328.0
-offset_top = 14.0
-offset_right = 625.0
-offset_bottom = 233.0
-texture = ExtResource("2_mi2d3")
-
-[node name="DetailsPanel" type="Panel" parent="ColorRect"]
-layout_mode = 0
-offset_left = 329.0
-offset_top = 240.0
-offset_right = 618.0
-offset_bottom = 351.0
-
-[node name="DescriptionTextBox" type="RichTextLabel" parent="ColorRect/DetailsPanel"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 57.0
-offset_right = 282.0
-offset_bottom = 108.0
-theme_override_font_sizes/normal_font_size = 12
+offset_left = 16.0
+offset_top = 297.0
+offset_right = 222.0
+offset_bottom = 332.0
+theme_override_font_sizes/normal_font_size = 7
 text = "Select a component to unveil details."
 
-[node name="Label" type="Label" parent="ColorRect/DetailsPanel"]
-layout_mode = 1
-offset_left = 7.0
-offset_top = 4.0
-offset_right = 41.0
-offset_bottom = 18.0
-theme_override_font_sizes/font_size = 10
-text = "Details"
-
-[node name="PartName" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="PartName" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 20.0
-offset_right = 91.0
-offset_bottom = 34.0
-theme_override_font_sizes/font_size = 10
+offset_left = 16.0
+offset_top = 259.0
+offset_right = 58.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 8
 text = "Part Name"
 
-[node name="PartClass" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="PartClass" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 37.0
-offset_right = 45.0
-offset_bottom = 51.0
+offset_left = 16.0
+offset_top = 270.0
+offset_right = 54.0
+offset_bottom = 284.0
 theme_override_font_sizes/font_size = 8
 text = "Part Class"
 
-[node name="WeightClass" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="WeightClass" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 162.0
-offset_top = 30.0
-offset_right = 268.0
-offset_bottom = 44.0
-theme_override_font_sizes/font_size = 8
+offset_left = 16.0
+offset_top = 281.0
+offset_right = 87.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 7
 text = "Weight Class: Light"
 
-[node name="WeaponTypeFocus" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="WeaponTypeFocus" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 162.0
-offset_top = 41.0
-offset_right = 266.0
-offset_bottom = 55.0
-theme_override_font_sizes/font_size = 8
+offset_left = 113.0
+offset_top = 281.0
+offset_right = 193.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 7
 text = "Weapon Focus: Melee"
 
-[node name="FerriteCost" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="FerriteCost" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 162.0
-offset_top = 16.0
-offset_right = 286.0
-offset_bottom = 30.0
-theme_override_font_sizes/font_size = 10
+offset_left = 113.0
+offset_top = 270.0
+offset_right = 223.0
+offset_bottom = 282.0
+theme_override_font_sizes/font_size = 8
 text = "Ferrite Bars: 12345678"
 
-[node name="PlasmaCost" type="Label" parent="ColorRect/DetailsPanel"]
+[node name="PlasmaCost" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 162.0
-offset_top = 4.0
-offset_right = 286.0
-offset_bottom = 18.0
-theme_override_font_sizes/font_size = 10
+offset_left = 113.0
+offset_top = 259.0
+offset_right = 225.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 8
 text = "Plasma : 12230943094"
 
-[node name="Shop" type="ColorRect" parent="ColorRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 62.0
-offset_right = 309.0
-offset_bottom = 348.0
-color = Color(0.681205, 0.221813, 0.239773, 1)
+offset_left = 68.0
+offset_top = 50.0
+offset_right = 243.0
+offset_bottom = 70.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/Shop"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 4.0
-offset_right = 274.0
-offset_bottom = 24.0
-
-[node name="HeadsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="HeadsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Heads"
 
-[node name="TorsosButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="TorsosButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Torso"
 
-[node name="ArmsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="ArmsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Arms"
 
-[node name="LegsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="LegsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Legs"
 
-[node name="RiflesButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="RiflesButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Rifles"
 
-[node name="SwordsButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="SwordsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Swords"
 
-[node name="RocketLaunchersButton" type="Button" parent="ColorRect/Shop/HBoxContainer"]
+[node name="RocketLaunchersButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 4
 text = "Launchers"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Shop"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
 layout_mode = 2
-offset_left = 38.0
-offset_top = 34.0
-offset_right = 248.0
-offset_bottom = 205.0
+offset_left = 74.0
+offset_top = 75.0
+offset_right = 236.0
+offset_bottom = 202.0
 
-[node name="ItemMenu" type="VBoxContainer" parent="ColorRect/Shop/ScrollContainer"]
-custom_minimum_size = Vector2(200, 150)
+[node name="ItemMenu" type="VBoxContainer" parent="ColorRect/ScrollContainer"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Control" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
-layout_mode = 2
-
-[node name="Control2" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Control3" parent="ColorRect/Shop/ScrollContainer/ItemMenu" instance=ExtResource("3_6crgc")]
-layout_mode = 2
-
-[node name="FerriteBars" type="Label" parent="ColorRect/Shop"]
+[node name="FerriteBars" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 211.0
-offset_right = 76.0
-offset_bottom = 227.0
-theme_override_font_sizes/font_size = 11
+offset_left = 278.0
+offset_top = 43.0
+offset_right = 320.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 7
 text = "Ferrite Bars:"
 
-[node name="FerriteBarsCount" type="Label" parent="ColorRect/Shop"]
+[node name="FerriteBarsCount" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 226.0
-offset_right = 117.0
-offset_bottom = 242.0
-theme_override_font_sizes/font_size = 11
+offset_left = 277.0
+offset_top = 52.0
+offset_right = 345.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 7
 text = "15000000000000000"
 
-[node name="Plasma" type="Label" parent="ColorRect/Shop"]
+[node name="Plasma" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 246.0
-offset_right = 52.0
-offset_bottom = 262.0
-theme_override_font_sizes/font_size = 11
+offset_left = 277.0
+offset_top = 74.0
+offset_right = 319.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 7
 text = "Plasma:"
 
-[node name="PlasmaCount" type="Label" parent="ColorRect/Shop"]
+[node name="PlasmaCount" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 261.0
-offset_right = 117.0
-offset_bottom = 277.0
-theme_override_font_sizes/font_size = 11
+offset_left = 277.0
+offset_top = 84.0
+offset_right = 345.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 7
 text = "15000000000000000"
 
-[node name="PurchaseButton" type="Button" parent="ColorRect/Shop"]
+[node name="PurchaseButton" type="Button" parent="ColorRect"]
 layout_mode = 2
-offset_left = 192.0
-offset_top = 248.0
-offset_right = 272.0
-offset_bottom = 276.0
+offset_left = 287.0
+offset_top = 316.0
+offset_right = 322.0
+offset_bottom = 333.0
+theme_override_font_sizes/font_size = 6
 text = "Purchase"
 
-[node name="Label" type="Label" parent="ColorRect/Shop"]
+[node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 187.0
-offset_top = -45.0
-offset_right = 289.0
-offset_bottom = -22.0
+offset_left = 276.0
+offset_top = 9.0
+offset_right = 346.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 11
 text = "Black Market"
 
-[node name="SlotIsFilledLabel" type="Label" parent="ColorRect/Shop"]
+[node name="SlotIsFilledLabel" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 334.0
-offset_top = 139.0
-offset_right = 580.0
-offset_bottom = 162.0
-theme_override_font_sizes/font_size = 15
+offset_left = 370.0
+offset_top = 207.0
+offset_right = 583.0
+offset_bottom = 230.0
+theme_override_font_sizes/font_size = 13
 text = "Arms Component Already Owned."
 
 [node name="ConfirmationBox" type="ColorRect" parent="ColorRect"]
+visible = false
 layout_mode = 0
 offset_left = 197.0
 offset_top = 128.0
@@ -297,14 +283,32 @@ offset_right = 170.0
 offset_bottom = 96.0
 text = "Cancel"
 
+[node name="CRTOverlay" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_mi2d3")
+layout_mode = 0
+offset_left = 63.0
+offset_top = 46.0
+offset_right = 247.0
+offset_bottom = 213.0
+mouse_filter = 2
+
+[node name="CRTOverlay2" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_mi2d3")
+layout_mode = 0
+offset_left = 235.0
+offset_top = 262.0
+offset_right = 323.0
+offset_bottom = 333.0
+mouse_filter = 2
+
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
-[connection signal="button_down" from="ColorRect/Shop/PurchaseButton" to="." method="_on_purchase_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
+[connection signal="button_down" from="ColorRect/PurchaseButton" to="." method="_on_purchase_button_button_down"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_button_down"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_button_down"]

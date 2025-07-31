@@ -64,6 +64,7 @@ func _on_button_button_down() -> void:
 	progress_bar.show()
 	fuel_bar.show()
 	output.show()
+	speed.show()
 	fuel_cost.show()
 	update_fuel_cost()
 	update_output()

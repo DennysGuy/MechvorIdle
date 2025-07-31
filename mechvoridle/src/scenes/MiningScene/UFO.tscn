@@ -1,32 +1,84 @@
-[gd_scene load_steps=9 format=3 uid="uid://ym3nha8862tm"]
+[gd_scene load_steps=18 format=3 uid="uid://ym3nha8862tm"]
 
 [ext_resource type="Script" uid="uid://cxfrencx3yeyi" path="res://src/scripts/Panels/MiningScene/ufo.gd" id="1_16gh5"]
-[ext_resource type="Texture2D" uid="uid://ch38i5jpvnply" path="res://assets/graphics/UFO-Place-Holder.png" id="1_ypchh"]
+[ext_resource type="Texture2D" uid="uid://bjujhc6a0ipko" path="res://assets/graphics/UFO.png" id="2_w3bvv"]
 [ext_resource type="PackedScene" uid="uid://n3yo7bmy3a6t" path="res://src/scenes/MiningScene/ResourceContainer.tscn" id="3_w3bvv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujr7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujr7o"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8qkd"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t254h"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vgqf"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uev2d"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip44m"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lurp"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyiyd"]
+atlas = ExtResource("2_w3bvv")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5ec2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujr7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8qkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t254h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vgqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uev2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip44m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lurp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyiyd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [sub_resource type="Animation" id="Animation_ujr7o"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -37,18 +89,6 @@ tracks/1/keys = {
 resource_name = "hover"
 length = 2.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(0, 2.98795), Vector2(0, 0.0203524)]
-}
 
 [sub_resource type="Animation" id="Animation_v8qkd"]
 resource_name = "ufo_hit_flash"
@@ -79,12 +119,12 @@ collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_16gh5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 2)
-texture = ExtResource("1_ypchh")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ujr7o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m5ec2")
+frame_progress = 0.953923
 
 [node name="LaserReleaseTimer" type="Timer" parent="."]
 process_callback = 0
@@ -126,10 +166,14 @@ mouse_default_cursor_shape = 3
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -25.0
-offset_top = -18.0
+offset_top = -19.0
 offset_right = 25.0
-offset_bottom = -11.0
+offset_bottom = -14.0
 show_percentage = false
+
+[node name="UfoHoverSfxPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitUFOSfxPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="LaserReleaseTimer" to="." method="_on_laser_release_timer_timeout"]
 [connection signal="timeout" from="HoverOutTimer" to="." method="_on_hover_out_timer_timeout"]

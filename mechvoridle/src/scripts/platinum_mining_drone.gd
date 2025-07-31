@@ -1,8 +1,11 @@
 class_name PlatinumMiningDrone extends Node2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
+@onready var audio_stream_player_2d : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var health : int = 15
+
+var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
 func _ready() -> void:
 	pass
@@ -22,6 +25,7 @@ func erase() -> void:
 
 
 func obtain_resources() -> void:
+	play_mining_sfx()
 	var drone_damage : int = GameManager.platinum_drone_damage
 
 	GameManager.platinum_count += drone_damage
@@ -60,3 +64,7 @@ func kill_mining_drone():
 	print(GameManager.total_drones_count)
 	#play animation
 	queue_free()
+
+func play_mining_sfx() -> void:
+	audio_stream_player_2d.stream = mining_sfx.pick_random()
+	audio_stream_player_2d.play()

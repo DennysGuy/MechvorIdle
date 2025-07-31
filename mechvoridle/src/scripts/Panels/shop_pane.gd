@@ -1,26 +1,26 @@
 class_name ShopPane extends Control
-@onready var ferrite_bars_count : Label= $ColorRect/Shop/FerriteBarsCount
-@onready var platinum_count : Label = $ColorRect/Shop/PlatinumCount
-@onready var plasma_count: Label = $ColorRect/Shop/PlasmaCount
-@onready var description_text_box: RichTextLabel = $ColorRect/DetailsPanel/DescriptionTextBox
-@onready var item_menu: VBoxContainer = $ColorRect/Shop/ScrollContainer/ItemMenu
-@onready var slot_is_filled_label: Label = $ColorRect/Shop/SlotIsFilledLabel
-@onready var part_class: Label = $ColorRect/DetailsPanel/PartClass
+@onready var ferrite_bars_count : Label= $ColorRect/FerriteBarsCount
+@onready var platinum_count : Label = $ColorRect/PlatinumCount
+@onready var plasma_count: Label = $ColorRect/PlasmaCount
+@onready var description_text_box: RichTextLabel = $ColorRect/DescriptionTextBox
+@onready var item_menu: VBoxContainer = $ColorRect/ScrollContainer/ItemMenu
+@onready var slot_is_filled_label: Label = $ColorRect/SlotIsFilledLabel
+@onready var part_class: Label = $ColorRect/PartClass
 
-@onready var purchase_button: Button = $ColorRect/Shop/PurchaseButton
+@onready var purchase_button: Button = $ColorRect/PurchaseButton
 
 @onready var item_name: Label = $ItemName
 
-@onready var part_name: Label = $ColorRect/DetailsPanel/PartName
-@onready var ferrite_cost: Label = $ColorRect/DetailsPanel/FerriteCost
-@onready var plasma_cost: Label = $ColorRect/DetailsPanel/PlasmaCost
-@onready var platinum_cost: Label = $ColorRect/DetailsPanel/PlatinumCost
+@onready var part_name: Label = $ColorRect/PartName
+@onready var ferrite_cost: Label = $ColorRect/FerriteCost
+@onready var plasma_cost: Label = $ColorRect/PlasmaCost
+@onready var platinum_cost: Label = $ColorRect/PlatinumCost
 
 @onready var confirmation_box: ColorRect = $ColorRect/ConfirmationBox
 @onready var confirmation_button: Button = $ColorRect/ConfirmationBox/ConfirmationButton
 @onready var cancellation_button: Button = $ColorRect/ConfirmationBox/CancellationButton
-@onready var weight_class : Label = $ColorRect/DetailsPanel/WeightClass
-@onready var weapon_type_focus : Label = $ColorRect/DetailsPanel/WeaponTypeFocus
+@onready var weight_class : Label = $ColorRect/WeightClass
+@onready var weapon_type_focus : Label = $ColorRect/WeaponTypeFocus
 
 
 var selected_component : MechComponent

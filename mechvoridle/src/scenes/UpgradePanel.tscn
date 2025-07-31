@@ -659,6 +659,9 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 6
 text = "Hide"
 
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
 [connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
 [connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]
 [connection signal="button_down" from="UpgradeCritChance" to="." method="_on_upgrade_crit_chance_button_down"]

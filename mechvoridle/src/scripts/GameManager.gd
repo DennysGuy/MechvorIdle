@@ -132,7 +132,7 @@ var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_me
 var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres")
 var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres")
 
-var opponents_list : Array[OpponentMech] = [opponent_option_1]
+var opponents_list : Array[OpponentMech] = [opponent_option_1, opponent_option_2, opponent_option_3]
 
 var owned_mech_components : Dictionary[String, MechComponent] = {
 	"Head" : null,
