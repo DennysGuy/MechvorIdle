@@ -301,6 +301,33 @@ offset_right = 323.0
 offset_bottom = 333.0
 mouse_filter = 2
 
+[node name="CRTOverlay3" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_mi2d3")
+layout_mode = 0
+offset_left = 364.0
+offset_top = 40.0
+offset_right = 586.0
+offset_bottom = 227.0
+mouse_filter = 2
+
+[node name="CRTOverlay4" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_mi2d3")
+layout_mode = 0
+offset_left = 275.0
+offset_top = 41.0
+offset_right = 348.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="PartsOwnedLabel" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 199.0
+offset_right = 236.0
+offset_bottom = 211.0
+theme_override_font_sizes/font_size = 8
+text = "Parts Owned 6/6"
+
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]

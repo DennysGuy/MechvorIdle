@@ -17,6 +17,18 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+
+#tutorial bools
+var player_has_switched_to_mining_panel = false #if this isn't true, we'll show indicator to swap to mining panel
+var player_has_enough_platinum_to_buy_a_part = false #once this is true we'll show indicator to swap to shop panel
+var player_has_switch_to_shop_panel_with_enough_plat = false #once this is true we'll delete indicator to go to shop panel
+var player_has_clicked_mining_asteroid = false #show indicator as long as this is false
+var player_has_clicked_hazard_asteroid = false #show indicator as long as this is false
+var player_has_enough_platinum_to_upgrade = false #once this is true, we'll show indicator to open upgrade panel
+var player_has_clicked_upgrade_panel_with_enough_plat = false #once true, we delete indicator
+var player_has_purchased_upgrade = false #will delete indicator to purchase and show close upgrades panel
+var upgrade_panel_closed_first_time = false #once true, we'll delete upgrade
+
 #mining panel
 var ufo_attacking : bool = false
 

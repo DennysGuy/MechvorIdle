@@ -92,7 +92,7 @@ func _ready() -> void:
 	
 	platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
-	plat_drone_damage.text = str(GameManager.platinum_drone_damage_cost)
+	plat_drone_damage.text = str(GameManager.platinum_drone_damage)
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
@@ -121,7 +121,7 @@ func _process(delta: float) -> void:
 
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	
-	if GameManager.drone_count > 0:
+	if GameManager.drones_count > 0:
 		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
 		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
@@ -129,7 +129,7 @@ func _process(delta: float) -> void:
 		upgrade_drone_mining_speed.disabled = true
 		
 	if GameManager.platinum_drone_count > 0:
-		upgrade_plat_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
+		upgrade_plat_drone_damage.disabled = GameManager.platinum_count < GameManager.platinum_drone_damage_cost
 		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
 		upgrade_plat_drone_damage.disabled = true

@@ -22,6 +22,8 @@ class_name ShopPane extends Control
 @onready var weight_class : Label = $ColorRect/WeightClass
 @onready var weapon_type_focus : Label = $ColorRect/WeaponTypeFocus
 
+@onready var parts_owned_label: Label = $ColorRect/PartsOwnedLabel
+
 
 var selected_component : MechComponent
 var confirmation_box_is_showing : bool = false
@@ -34,6 +36,7 @@ func _ready() -> void:
 	display_component_list("Heads")
 	update_ferrite_bars_count()
 	update_plasma_count()
+	update_parts_owned_label()
 	hide_confirmation_panel()
 	
 	
@@ -130,7 +133,9 @@ func _on_confirmation_button_button_down() -> void:
 	GameManager.plasma_count -= selected_component.plasma_cost
 	GameManager.add_mech_component(selected_component)
 	update_description_box(selected_component)
+	update_parts_owned_label()
 	hide_confirmation_panel()
+	
 
 func show_confirmation_panel() -> void:
 	confirmation_box_is_showing = true
@@ -158,3 +163,5 @@ func show_already_purchased_label(component_name : String):
 	else:
 		slot_is_filled_label.hide()
 	
+func update_parts_owned_label() -> void:
+	parts_owned_label.text = "Parts Owned: " + str(GameManager.owned_components_count) + "/" + str(GameManager.MECH_PARTS_NEEDED)
