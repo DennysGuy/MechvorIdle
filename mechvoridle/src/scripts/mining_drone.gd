@@ -63,7 +63,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if health <= 0:
 			kill_mining_drone()
 	
-	area_parent.queue_free() #we'll change to animation explode sequence
+		area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
 	GameManager.drones_count -= 1
@@ -73,6 +73,7 @@ func kill_mining_drone():
 	SignalBus.update_drone_cost.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
 	print(GameManager.total_drones_count)
+	print("HELL FUCK Im DEAD!")
 	#play animation
 	print("drone count after death"+str(GameManager.drone_count))
 	queue_free()

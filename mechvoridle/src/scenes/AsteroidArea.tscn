@@ -143,6 +143,8 @@ shape = SubResource("RectangleShape2D_6ww1j")
 
 [node name="DroneList" type="Node" parent="."]
 
+[node name="PlatinumDroneList" type="Node" parent="."]
+
 [node name="UFOList" type="Node" parent="."]
 
 [node name="UFOOutPosition" type="Marker2D" parent="."]

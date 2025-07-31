@@ -7,6 +7,7 @@ class_name AsteroidArea extends Node2D
 @onready var asteroid_spawn_timer: Timer = $AsteroidSpawnTimer
 var asteroid_spawn_timer_length : float = 10.0
 @onready var asteroid_spawn_points: Node = $AsteroidSpawnPoints
+@onready var platinum_drone_list: Node = $PlatinumDroneList
 
 @onready var drone_list : Node = $DroneList
 @onready var ufo_in_position : Marker2D = $UFOInPosition
@@ -34,7 +35,6 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	mining_asteroid.rotation += 0.0005
-	print(ufo_spawn_timer.time_left)
 	
 	if start_ufo_spawn:
 		ufo_spawn_timer.wait_time = randi_range(10,25)
@@ -46,7 +46,6 @@ func _on_texture_rect_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			play_mining_sfx()
-			print("hi")
 			var mining_laser_damage : int = GameManager.mining_laser_damage
 			var true_damage : int
 			var can_crit : bool = is_crit_damage()
@@ -102,7 +101,10 @@ func add_drone_to_scene() -> void:
 	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+	drone.name = "Drone_%s" % str(Time.get_ticks_msec())
 	drone_list.add_child(drone)
+	print(drone.name)
+	print("This is drone list count: " + str(drone_list.get_children().size()))
 
 func add_platinum_drone_to_scene() -> void:
 	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
@@ -110,7 +112,9 @@ func add_platinum_drone_to_scene() -> void:
 	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+	platinum_drone.name = "PlatinumDrone_%s" % str(Time.get_ticks_msec()) 
 	drone_list.add_child(platinum_drone)
+	print("This is drone list count: " + str(drone_list.get_children().size()))
 
 
 func _on_asteroid_spawn_timer_timeout() -> void:

@@ -52,7 +52,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if health <= 0:
 			kill_mining_drone()
 	
-	area_parent.queue_free() #we'll change to animation explode sequence
+		area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
 	GameManager.platinum_drone_count -= 1
