@@ -17,6 +17,7 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+var audio_settings_Showing : bool = false
 
 #tutorial bools
 var player_has_switched_to_mining_panel = false #if this isn't true, we'll show indicator to swap to mining panel

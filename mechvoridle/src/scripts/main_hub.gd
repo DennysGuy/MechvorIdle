@@ -6,6 +6,7 @@ class_name MainHub extends Control
 @onready var sfx_player_layer_2 : AudioStreamPlayer = $SFXPlayerLayer2
 
 @onready var ship_ambiance_player : AudioStreamPlayer = $ShipAmbiancePlayer
+@onready var audio_settings_animation_player: AnimationPlayer = $AudioSettingsAnimationPlayer
 
 @onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
 @onready var enter_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_ENTER_HUB_01
@@ -21,6 +22,8 @@ func _ready() -> void:
 	SignalBus.move_to_central_hub_from_shop_pane.connect(move_from_shop_pane_to_central_pane)
 	SignalBus.sound_ship_alarm.connect(insert_ship_alarm)
 	SignalBus.silence_ship_alarm.connect(remove_ship_alarm)
+	SignalBus.show_audio_settings.connect(show_audio_settings)
+	SignalBus.hide_audio_settings.connect(hide_audio_settings)
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		if GameManager.on_shop_panel:
@@ -98,3 +101,9 @@ func player_enter_shop_from_hub_sfx():
 	sfx_player_layer_2.stream = shop_panel_nav_sfx.pick_random()
 	sfx_player_layer_1.play()
 	sfx_player_layer_2.play()
+
+func show_audio_settings() -> void:
+	audio_settings_animation_player.play("show")
+
+func hide_audio_settings() -> void:
+	audio_settings_animation_player.play("hide")

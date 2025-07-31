@@ -7,6 +7,10 @@ signal move_to_central_hub_from_mining_page
 signal move_to_central_hub_from_shop_pane
 signal start_fight
 
+#settings panel
+signal show_audio_settings
+signal hide_audio_settings
+
 #mining panel signals
 signal update_ferrite_count
 signal update_ferrite_bars_count
