@@ -10,24 +10,29 @@ var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, Sf
 var health : int = 12
 
 func _ready() -> void:
-	pass
+	DroneManager.register_mining_drone(self)
 
 func _process(delta : float) -> void:
 	progress_bar.value += GameManager.drone_mining_speed
+
 	
 	if progress_bar.value >= progress_bar.max_value:
 		obtain_resources()
 		progress_bar.value = 0
 	
-
+func _exit_tree():
+	DroneManager.unregister_mining_drone(self)
+	
 func erase() -> void:
+	progress_bar.hide()
 	sprite_2d.hide()
 	hurt_box.get_child(0).disabled = true
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 3
 	add_child(explosion)
 	
-	
+
+
 func obtain_resources() -> void:
 	var drone_damage : int = GameManager.drone_damage
 	play_mining_sfx()
@@ -74,11 +79,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
-	SignalBus.decrement_mining_drones_count.emit()
-	SignalBus.check_to_start_ufo_spawn.emit()
-	print(GameManager.total_drones_count)
-	#play animation
-	print("drone count after death"+str(GameManager.drone_count))
 	erase()
 
 func play_mining_sfx() -> void:

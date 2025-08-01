@@ -2,6 +2,7 @@ class_name UpgradePanel extends ColorRect
 
 
 
+@export var asteroid_area : AsteroidArea
 #mining laser stuff
 @onready var current_damage_tracker : Label = $CurrentDamageTracker
 @onready var current_damage_cost : Label = $CurrentDamageCost
@@ -23,6 +24,8 @@ class_name UpgradePanel extends ColorRect
 @onready var drone_mining_speed_cost: Label = $DroneMiningSpeedCost
 @onready var upgrade_drone_mining_speed: Button = $UpgradeDroneMiningSpeed
 
+var mining_drones_cost : int = 100
+
 #plat drones stuff
 
 @onready var platinum_drones_cost: Label = $PlatinumDronesCost
@@ -37,7 +40,7 @@ class_name UpgradePanel extends ColorRect
 @onready var plat_drone_speed_cost: Label = $PlatDroneSpeedCost
 @onready var upgrade_platinum_drone_mining_speed: Button = $UpgradePlatinumDroneMiningSpeed
 
-
+var plat_drones_cost : int = 180
 
 #refinery stuff
 @onready var ferrite_refinery_speed = $FerriteRefinerySpeed
@@ -65,7 +68,7 @@ var upgrade_panel_showing : bool = false
 
 var mining_drones_count : int = 0
 var plat_drones_count : int = 0
-
+var total_dronse_count : int = 0
 #sfx
 @onready var sfx_player : AudioStreamPlayer = $SfxPlayer
 
@@ -77,12 +80,9 @@ var purchase_upgrade_sfx : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DEPLO
 
 
 func _ready() -> void:
-	SignalBus.update_drone_cost.connect(update_drone_cost)
-	SignalBus.update_drone_count.connect(update_drone_count)
-	SignalBus.update_platinum_drone_cost.connect(update_platinum_drone_cost)
-	SignalBus.update_platinum_drone_count.connect(update_platinum_drone_count)
-	SignalBus.decrement_mining_drones_count.connect(decrement_mining_drones_count)
-	SignalBus.decrement_platinum_drones_count.connect(decrement_platinum_drones_count)
+
+	DroneManager.mining_drone_cost_changed.connect(update_drone_cost)
+	DroneManager.platinum_drone_cost_changed.connect(update_platinum_drone_cost)
 	
 	current_damage_tracker.text = str(GameManager.mining_laser_damage)
 	current_damage_cost.text = str(GameManager.mining_laser_damage_upgrade_cost)
@@ -90,14 +90,14 @@ func _ready() -> void:
 	current_crit_chance_cost.text = str(GameManager.mining_laser_crit_chance_cost)
 
 	drones_count_tracker_label.text = str(mining_drones_count)
-	drones_cost.text = str(GameManager.drones_cost)
+	drones_cost.text = str(mining_drones_cost)
 	drone_damage.text = str(GameManager.drone_damage)
 	drone_damage_cost.text = str(GameManager.drone_damage_cost)
 	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
 	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
 	
 	platinum_drones_count.text = str(plat_drones_count)
-	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
+	platinum_drones_cost.text = str(plat_drones_cost)
 	plat_drone_damage.text = str(GameManager.platinum_drone_damage)
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 	plat_drone_speed.text = str(GameManager.platinum_drone_mining_speed * 100) + "%"
@@ -121,10 +121,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
 	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
-	purchase_drone.disabled = GameManager.platinum_count < GameManager.drones_cost
-	purchase_platinum_drone.disabled = GameManager.platinum_count < GameManager.platinum_drone_cost
+	purchase_drone.disabled = GameManager.platinum_count < mining_drones_cost
+	purchase_platinum_drone.disabled = GameManager.platinum_count < plat_drones_cost
 	
-
+	
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	
 	if GameManager.drones_count > 0:
@@ -245,11 +245,6 @@ func _on_purchase_drone_button_down():
 	play_purchase_upgrade_sfx()
 	purchased_drone()
 	SignalBus.add_drone.emit()
-	print(GameManager.drone_count)
-	#GameManager.drone_count +=1
-	#drones_count_tracker_label.text = str(GameManager.drone_count)
-	drones_cost.text = str(GameManager.drones_cost)
-	SignalBus.update_platinum_count.emit()
 
 func upgrade_mining_laser() -> void:
 	play_purchase_upgrade_sfx()
@@ -270,13 +265,7 @@ func upgrade_mining_critical_chance() -> void:
 func purchased_drone() -> void:
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drones_cost
-	mining_drones_count += 1
-	GameManager.total_drones_count += 1
-	update_drone_count()
-	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, mining_drones_count)
-	SignalBus.check_to_start_ufo_spawn.emit()
 	
-	print("Drone Count after purchase: " + str(GameManager.drone_count))
 
 func upgrade_drones_damage() -> void:
 	play_purchase_upgrade_sfx()
@@ -295,17 +284,10 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 	drone_speed.text = str(GameManager.drone_mining_speed * 100) + "%"
 	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
 
-
 func _on_purchase_platinum_drone_button_down() -> void:
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_cost
-	plat_drones_count += 1
-	GameManager.total_drones_count += 1
-	GameManager.platinum_drone_cost = GameManager.platinum_drone_cost * pow(2, plat_drones_count)
-	update_platinum_drone_count()
-	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
 	SignalBus.add_platinum_drone.emit()
-	SignalBus.check_to_start_ufo_spawn.emit()
 
 func _on_upgrade_plat_drone_damage_button_down() -> void:
 	play_purchase_upgrade_sfx()
@@ -334,18 +316,22 @@ func _on_upgrade_refinery_speed_button_down() -> void:
 	ferrite_refinery_speed.text = str(GameManager.ferrite_refinery_speed * 100) +"%"
 	ferrite_refinery_speed_cost.text = str(GameManager.ferrite_refinery_speed_cost)
 
-func update_drone_count() -> void:
-	drones_count_tracker_label.text = str(mining_drones_count)
-	#print("AfterDeath: " + str(GameManager.drones_count))
 	
-func update_drone_cost() -> void:
-	drones_cost.text = str(GameManager.drones_cost)
+func update_drone_cost(new_cost : int, new_count : int) -> void:
+	mining_drones_cost = new_cost
+	mining_drones_count = new_count
+	drones_cost.text = str(new_cost)
+	drones_count_tracker_label.text = str(new_count)
+	SignalBus.check_to_start_ufo_spawn.emit()
+	print("true mining drone cost: " + str(mining_drones_cost))
 
-func update_platinum_drone_count() -> void:
+
+func update_platinum_drone_cost(new_cost : int, new_count : int) -> void:
+	plat_drones_cost = new_cost
+	plat_drones_count = new_count
+	platinum_drones_cost.text = str(plat_drones_cost)
 	platinum_drones_count.text = str(plat_drones_count)
-
-func update_platinum_drone_cost() -> void:
-	platinum_drones_cost.text = str(GameManager.platinum_drone_cost)
+	SignalBus.check_to_start_ufo_spawn.emit()
 
 
 func open_upgrades_panel() -> void:
@@ -363,15 +349,21 @@ func play_purchase_upgrade_sfx() -> void:
 	sfx_player.stream = purchase_upgrade_sfx.pick_random()
 	sfx_player.play()
 
-func decrement_mining_drones_count() -> void:
-	mining_drones_count -= 1
-	GameManager.total_drones_count -= 1
-	update_drone_count()
-	GameManager.drones_cost = GameManager.drone_base_cost * pow(2, mining_drones_count)
+func get_mining_drones_count() -> void:
+	var count : int = 0
+	var drone_list : Node = asteroid_area.drone_list
+	for drone in drone_list.get_children():
+		if drone is MiningDrone:
+			mining_drones_count += 1
+
+
+func get_platinum_drones_count() -> void:
+	var count : int = 0
+	var drone_list : Node = asteroid_area.drone_list
+	for drone in drone_list.get_children():
+		if drone is PlatinumMiningDrone:
+			plat_drones_count += 1
 	
 
-func decrement_platinum_drones_count() -> void:
-	plat_drones_count -= 1
-	GameManager.total_drones_count -= 1
-	update_platinum_drone_count()
-	GameManager.platinum_drone_cost = GameManager.platinum_drone_base_cost * pow(2, plat_drones_count)
+func get_total_drones_count() -> void:
+	GameManager.total_drones_count = asteroid_area.drone_list.get_children().size()

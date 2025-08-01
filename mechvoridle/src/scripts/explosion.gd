@@ -46,4 +46,5 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func _on_sfx_player_finished():
+
 	get_parent().queue_free()

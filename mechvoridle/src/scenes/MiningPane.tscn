@@ -195,10 +195,11 @@ offset_bottom = 360.0
 mouse_filter = 2
 texture = ExtResource("7_t7rsg")
 
-[node name="UpgradePanel" parent="ColorRect" instance=ExtResource("5_l11te")]
+[node name="UpgradePanel" parent="ColorRect" node_paths=PackedStringArray("asteroid_area") instance=ExtResource("5_l11te")]
 layout_mode = 0
 offset_top = -339.0
 offset_bottom = 0.0
+asteroid_area = NodePath("../SubViewportContainer/SubViewport/AsteroidArea")
 
 [node name="CentralHubNavigation" type="Button" parent="ColorRect"]
 layout_mode = 1
