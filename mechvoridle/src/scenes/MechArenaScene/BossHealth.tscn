@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxymnlcu4rltp"]
+[gd_scene load_steps=5 format=3 uid="uid://dxymnlcu4rltp"]
 
 [ext_resource type="Script" uid="uid://x3jisfmrlsev" path="res://src/scripts/Panels/ArenaScene/boss_health.gd" id="1_bngwp"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_i3nwc"]
 [ext_resource type="Texture2D" uid="uid://drygbvh1eyvg3" path="res://assets/graphics/EnemyHealthBar_Border.png" id="2_nmqoh"]
 [ext_resource type="Texture2D" uid="uid://cicy6dkof33yh" path="res://assets/graphics/EnemyHealthBar_Fill.png" id="3_i3nwc"]
 
@@ -11,10 +12,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -152.0
-offset_top = -28.5
-offset_right = 152.0
-offset_bottom = 28.5
+offset_left = -31.0
+offset_top = -28.0
+offset_right = 185.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -22,10 +23,19 @@ script = ExtResource("1_bngwp")
 
 [node name="BossTitle" type="Label" parent="."]
 layout_mode = 1
-offset_left = 23.0
-offset_right = 55.0
-offset_bottom = 20.0
-theme_override_font_sizes/font_size = 14
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -13.0
+offset_right = -6.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_i3nwc")
+theme_override_font_sizes/font_size = 8
 text = "Boss"
 
 [node name="BossHealthBar" type="TextureProgressBar" parent="."]
@@ -35,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -10.5
-offset_right = 128.0
-offset_bottom = 10.5
+offset_left = -75.0
+offset_top = -4.5
+offset_right = 75.0
+offset_bottom = 4.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -47,31 +57,42 @@ texture_progress = ExtResource("3_i3nwc")
 
 [node name="MaxHealth" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -56.0
-offset_top = 5.0
-offset_right = -24.0
-offset_bottom = 21.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 11
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 46.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_i3nwc")
+theme_override_font_sizes/font_size = 6
 text = "15000"
 
 [node name="Slash" type="Label" parent="."]
-layout_mode = 0
-offset_left = 243.0
-offset_top = 5.0
-offset_right = 248.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 11
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 47.0
+offset_top = 13.0
+offset_right = 52.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_i3nwc")
+theme_override_font_sizes/font_size = 8
 text = "/"
 
 [node name="CurrentHealth" type="Label" parent="."]
-layout_mode = 0
-offset_left = 209.0
-offset_top = 5.0
-offset_right = 241.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 11
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 53.0
+offset_top = 14.0
+offset_right = 75.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_i3nwc")
+theme_override_font_sizes/font_size = 6
 text = "15000"
