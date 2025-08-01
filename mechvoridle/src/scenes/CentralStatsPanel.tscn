@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dio1yrjtiu67"]
+[gd_scene load_steps=8 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lvy6k"]
+[ext_resource type="PackedScene" uid="uid://1i717e5dbjge" path="res://src/scenes/ElapsedTimer.tscn" id="3_s5wfh"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_ve6vp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
@@ -54,24 +55,28 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_m6dgc")
 
-[node name="ElapsedTime" type="Label" parent="ColorRect"]
+[node name="ElapsedTime" parent="ColorRect" instance=ExtResource("3_s5wfh")]
 layout_mode = 0
-offset_left = 464.0
-offset_top = 18.0
-offset_right = 514.0
-offset_bottom = 35.0
-theme_override_fonts/font = ExtResource("3_lvy6k")
-theme_override_font_sizes/font_size = 9
-text = "00:00:00"
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 65.0
+offset_top = 156.0
+offset_right = 120.0
+offset_bottom = 168.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="ElapsedTimeLabel" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 373.0
-offset_top = 18.0
-offset_right = 453.0
-offset_bottom = 35.0
+offset_left = 28.0
+offset_top = 142.0
+offset_right = 106.0
+offset_bottom = 152.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 8
 text = "Elapsed Time:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
