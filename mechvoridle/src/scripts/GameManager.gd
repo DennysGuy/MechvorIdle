@@ -39,6 +39,8 @@ var plasma_generator_cost : int = 50 #test values
 var drone_count : int
 var refinery_stations_count : int
 
+var can_traverse_panes : bool = true
+
 var mining_laser_level : int = 1
 var mining_laser_damage : int  = 1
 var mining_laser_damage_upgrade_cost : int = 100
@@ -199,9 +201,7 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	owned_components_count += 1
 	
-	if owned_components_count >= MECH_PARTS_NEEDED:
-		can_fight_boss = true
-		
+
 	print(owned_mech_components)
 	print(owned_components_count)
 
@@ -306,7 +306,9 @@ func reset():
 	player_stunned = false
 	opponent_stunned = false
 	fill_bars = false
-
+	
+	can_fight_boss = false
+	can_traverse_panes = true
 	# Mech Component Slots
 	owned_mech_components = {
 		"Head": null,

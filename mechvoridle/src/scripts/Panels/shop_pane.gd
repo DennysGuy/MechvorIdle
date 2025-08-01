@@ -24,6 +24,7 @@ class_name ShopPane extends Control
 
 @onready var parts_owned_label: Label = $ColorRect/PartsOwnedLabel
 
+@export var main_hub : MainHub
 
 var selected_component : MechComponent
 var confirmation_box_is_showing : bool = false
@@ -112,7 +113,6 @@ func _on_rocket_launchers_button_button_down() -> void:
 
 func display_component_list(component_name : String):
 	clear_container()
-	
 
 	var list : Dictionary = ShopList.shop_list[component_name]
 	for key in list.keys():
@@ -135,6 +135,9 @@ func _on_confirmation_button_button_down() -> void:
 	update_description_box(selected_component)
 	update_parts_owned_label()
 	hide_confirmation_panel()
+	if GameManager.owned_components_count >= GameManager.MECH_PARTS_NEEDED:
+		main_hub.animation_player.play("AllPartsBoughtStartFight")
+		GameManager.can_traverse_panes = false
 	
 
 func show_confirmation_panel() -> void:

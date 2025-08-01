@@ -7,6 +7,7 @@ class_name MainHub extends Control
 
 @onready var ship_ambiance_player : AudioStreamPlayer = $ShipAmbiancePlayer
 @onready var audio_settings_animation_player: AnimationPlayer = $AudioSettingsAnimationPlayer
+@onready var vox_player: AudioStreamPlayer = $VoxPlayer
 
 @onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
 @onready var enter_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_ENTER_HUB_01
@@ -25,13 +26,13 @@ func _ready() -> void:
 	SignalBus.show_audio_settings.connect(show_audio_settings)
 	SignalBus.hide_audio_settings.connect(hide_audio_settings)
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("move_left"):
+	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
 			move_from_shop_pane_to_central_pane()
 		elif GameManager.on_central_panel:
 			move_to_mining_pane()
 
-	if Input.is_action_just_pressed("move_right"):
+	if Input.is_action_just_pressed("move_right") and GameManager.can_traverse_panes:
 		if GameManager.on_mining_panel:
 			move_from_mining_pane_to_central_pane()
 		elif GameManager.on_central_panel:
@@ -107,3 +108,9 @@ func show_audio_settings() -> void:
 
 func hide_audio_settings() -> void:
 	audio_settings_animation_player.play("hide")
+
+func play_ready_fight_vox_sfx() -> void:
+	vox_player.stream = SfxManager.VOX_NOT_ARENA_ACCESS_01
+	vox_player.play()
+	await vox_player.finished
+	GameManager.can_fight_boss = true
