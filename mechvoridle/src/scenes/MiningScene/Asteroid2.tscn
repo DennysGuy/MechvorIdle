@@ -19,6 +19,7 @@ script = ExtResource("1_hvnvx")
 speed = 60.0
 health = 3
 damage = 3
+asteroid_size = 1
 
 [node name="Graphic" type="Sprite2D" parent="."]
 material = ExtResource("1_eygot")

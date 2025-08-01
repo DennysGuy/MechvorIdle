@@ -22,11 +22,13 @@ var hover_time_started : bool = false
 @export var drones_list : Node
 @export var ufo_spawn_timer : Timer
 
-enum states {HOVER_IN, SHOOT, HOVER_OUT, REMOVE, DEAD}
+enum states {HOVER_IN, SHOOT, HOVER_OUT, REMOVE, DEAD, NON_STATE}
 signal deliver_resources 
 
 var current_state : int
 var can_shoot : bool = false
+var destroy_ufo_start : bool = false
+var can_be_hit : bool = true
 
 func _ready() -> void:
 	animated_sprite_2d.play("default")
@@ -39,6 +41,10 @@ func _ready() -> void:
 	health_bar.value = health
 	health_bar.hide()
 
+func _process(delta : float) -> void:
+	if destroy_ufo_start:
+		destroy_ufo()
+		destroy_ufo_start = false
 
 func _physics_process(delta : float) -> void:
 	match(current_state):
@@ -70,7 +76,7 @@ func _physics_process(delta : float) -> void:
 				
 			if not animation_player.is_playing():
 				animation_player.play("hover")
-			
+		
 		states.HOVER_OUT:
 			can_shoot = false
 			dir = out_location.global_position - global_position
@@ -81,17 +87,26 @@ func _physics_process(delta : float) -> void:
 				current_state = states.REMOVE
 				
 		states.DEAD:
-			destroy_ufo()
+			can_be_hit = false
+			destroy_ufo_start = true
+			current_state = states.NON_STATE
+		states.NON_STATE:
+			pass
 		
 		states.REMOVE:
 			SignalBus.check_to_start_ufo_spawn.emit()
-			SignalBus.silence_ship_alarm.emit()
+			SignalBus.play_ufo_escaped.emit()
 			queue_free()
 func destroy_ufo() -> void:
 	deliver_resources.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
 	SignalBus.silence_ship_alarm.emit()
-	queue_free()
+	animated_sprite_2d.hide()
+	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
+	explosion.size_set = 5
+	add_child(explosion)
+	if not explosion.animated_sprite_2d.is_playing():
+		queue_free()
 	#called in dead sate
 
 func damage_ufo() -> void:
@@ -124,7 +139,7 @@ func choose_random_target():
 	return drones_list.get_children().pick_random()
 
 func _on_ufo_click_control_gui_input(event) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_be_hit:
 		health_bar.show()
 		damage_ufo()
 

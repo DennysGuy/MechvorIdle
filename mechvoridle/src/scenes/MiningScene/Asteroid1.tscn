@@ -61,3 +61,5 @@ bus = &"SFX"
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="timeout" from="DeleteAsteroidTimer" to="." method="_on_delete_asteroid_timer_timeout"]
 [connection signal="gui_input" from="AsteroidClickControl" to="." method="_on_asteroid_click_control_gui_input"]
+
+[editable path="AsteroidAnimationPlayer"]

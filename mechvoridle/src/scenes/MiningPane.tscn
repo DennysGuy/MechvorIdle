@@ -190,8 +190,7 @@ mouse_filter = 2
 
 [node name="Overlay" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
-offset_left = -1.0
-offset_right = 639.0
+offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 texture = ExtResource("7_t7rsg")

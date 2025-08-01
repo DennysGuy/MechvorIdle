@@ -74,7 +74,7 @@ func insert_ship_alarm() -> void:
 	add_child(ship_alarm)
 
 func remove_ship_alarm() -> void:
-	print("we made it")
+
 	get_tree().get_first_node_in_group("ship alarm")
 
 func play_nav_from_hub_to_mining_sfx():

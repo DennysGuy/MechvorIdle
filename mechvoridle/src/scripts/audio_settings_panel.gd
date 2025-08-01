@@ -14,12 +14,12 @@ var max_ambience_value : float = 12.0
 func _ready() -> void:
 	music_slider.max_value = max_music_value
 	music_slider.min_value = min_music_value
-	music_slider.value = -3.0
+	music_slider.value = -14.0
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_slider.value)
 	
 	sfx_slider.max_value = max_sfx_value
 	sfx_slider.min_value = min_sfx_value
-	sfx_slider.value = -14.0
+	sfx_slider.value = -3.0
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), sfx_slider.value)
 	
 	ambience_slider.max_value = max_ambience_value

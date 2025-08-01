@@ -32,6 +32,15 @@ const UI_SHOP_BUY_COMPLETE_03 : AudioStream  = preload("res://assets/audio/SFX/U
 const UI_SHOP_BUY_NO_CASH_01 : AudioStream  = preload("res://assets/audio/SFX/UI/Shop/UI_Shop_Buy_NoCash_01.ogg")
 const UI_SHOP_BUY_NO_CASH_02 : AudioStream   = preload("res://assets/audio/SFX/UI/Shop/UI_Shop_Buy_NoCash_02.ogg")
 const UI_SHOP_BUY_NO_CASH_03 : AudioStream  = preload("res://assets/audio/SFX/UI/Shop/UI_Shop_Buy_NoCash_03.ogg")
+
+const MIN_UNIT_DRONE_DEPLOY_01 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Deploy_01.ogg")
+const MIN_UNIT_DRONE_DEPLOY_02 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Deploy_02.ogg")
+const MIN_UNIT_DRONE_DEPLOY_03 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Deploy_03.ogg")
+const MIN_UNIT_DRONE_DEPLOY_04 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Deploy_04.ogg")
+const MIN_UNIT_DRONE_DESTROY_01 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Destroy_01.ogg")
+const MIN_UNIT_DRONE_DESTROY_02 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Destroy_02.ogg")
+const MIN_UNIT_DRONE_DESTROY_03 = preload("res://assets/audio/SFX/MINING/MIN_Unit_Drone_Destroy_03.ogg")
+
 #mining
 const MIN_CLICK_ASTEROID_01 : AudioStream = preload("res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_01.ogg")
 const MIN_CLICK_ASTEROID_02 : AudioStream = preload("res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg")
@@ -70,6 +79,10 @@ const MIN_UNIT_UFO_LASER_01 : AudioStream = preload("res://assets/audio/SFX/MINI
 const MIN_UNIT_UFO_LASER_02 : AudioStream = preload("res://assets/audio/SFX/MINING/Unit/MIN_Unit_UFO_Laser_02.ogg")
 const MIN_UNIT_UFO_LASER_03 : AudioStream = preload("res://assets/audio/SFX/MINING/Unit/MIN_Unit_UFO_Laser_03.ogg")
 const MIN_UNIT_UFO_LASER_04 : AudioStream= preload("res://assets/audio/SFX/MINING/Unit/MIN_Unit_UFO_Laser_04.ogg")
+
+
+
+const VOX_NOT_UFO_ESCAPED_01 : AudioStream = preload("res://assets/audio/SFX/VOX/VOX_Not_UFO_Escaped_01.ogg")
 
 const UI_MINING_UPGRADE_MENU_CLOSE_01 : AudioStream = preload("res://assets/audio/SFX/UI/Mining/UI_Mining_Upgrade_MenuClose_01.ogg")
 const UI_MINING_UPGRADE_MENU_OPEN_01 : AudioStream = preload("res://assets/audio/SFX/UI/Mining/UI_Mining_Upgrade_MenuOpen_01.ogg")

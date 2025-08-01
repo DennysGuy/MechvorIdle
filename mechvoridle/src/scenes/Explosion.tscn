@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfqqpyxr1mxtp"]
+
+[ext_resource type="Script" uid="uid://bnfqq18fwgvqf" path="res://src/scripts/explosion.gd" id="1_us1ck"]
+[ext_resource type="Texture2D" uid="uid://bxf85anjupgva" path="res://assets/graphics/explosion.png" id="1_ypqb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us1ck"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unw1r"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ty4v"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjxtw"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dbnp"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_laymc"]
+atlas = ExtResource("1_ypqb3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3t1nn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us1ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unw1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ty4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjxtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dbnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_laymc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 13.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_us1ck")
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3t1nn")
+frame = 5
+frame_progress = 1.0
+
+[connection signal="finished" from="SfxPlayer" to="." method="_on_sfx_player_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

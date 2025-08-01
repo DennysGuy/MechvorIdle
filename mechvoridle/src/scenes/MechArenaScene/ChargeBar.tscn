@@ -1,41 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://2mw5axtfuca0"]
+[gd_scene load_steps=4 format=3 uid="uid://2mw5axtfuca0"]
 
 [ext_resource type="Script" uid="uid://dvvkco7x3c4vg" path="res://src/scripts/Panels/ArenaScene/charge_bar.gd" id="1_eicfr"]
+[ext_resource type="Texture2D" uid="uid://sw5cprdx8whm" path="res://assets/graphics/ChargeBar_Frame.png" id="2_qsfhn"]
+[ext_resource type="Texture2D" uid="uid://wbrqhywsy131" path="res://assets/graphics/ChargeBar_Fill.png" id="3_nwhtq"]
 
-[node name="ChargeBar" type="ColorRect"]
+[node name="ChargeBar" type="Control"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -99.0
+offset_left = -33.5
 offset_top = -29.0
-offset_right = 99.0
+offset_right = 33.5
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.716947, 0.36982, 0.444095, 1)
 script = ExtResource("1_eicfr")
 
 [node name="WeaponName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 85.0
-offset_bottom = 27.0
+layout_mode = 1
+offset_top = 11.0
+offset_right = 32.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 8
 text = "Weapon"
 
-[node name="WeaponChargeBar" type="ProgressBar" parent="."]
+[node name="WeaponChargeBar" type="TextureProgressBar" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -93.0
-offset_top = -28.0
-offset_right = 91.0
-offset_bottom = -8.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -5.5
+offset_right = 33.0
+offset_bottom = 5.5
 grow_horizontal = 2
-grow_vertical = 0
-show_percentage = false
+grow_vertical = 2
+texture_under = ExtResource("2_qsfhn")
+texture_progress = ExtResource("3_nwhtq")

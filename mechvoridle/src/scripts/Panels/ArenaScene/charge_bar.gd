@@ -1,4 +1,4 @@
-class_name ChargeBar extends ColorRect
+class_name ChargeBar extends Control
 
 @export_group("details")
 @export_enum("Player", "Enemy") var target
@@ -10,7 +10,8 @@ class_name ChargeBar extends ColorRect
 enum WEAPON_POSITION {LEFT_WEAPON, RIGHT_WEAPON}
 enum TARGET{PLAYER, ENEMY}
 
-@onready var weapon_charge_bar : ProgressBar = $WeaponChargeBar
+@onready var weapon_charge_bar : TextureProgressBar = $WeaponChargeBar
+
 @onready var weapon_name : Label = $WeaponName
 
 @export var weapon : MechWeapon 
@@ -39,7 +40,7 @@ func _ready() -> void:
 			weapon = GameManager.get_left_weapon()
 		else:
 			weapon = GameManager.get_right_weapon()
-
+		print(weapon.component_name)
 	else:
 		selected_arms = GameManager.chosen_opponent.get_arms_component()
 		selected_torso = GameManager.chosen_opponent.get_torso_component()
@@ -50,6 +51,7 @@ func _ready() -> void:
 			weapon = GameManager.chosen_opponent.get_left_weapon()
 		else:
 			weapon = GameManager.chosen_opponent.get_right_weapon()
+	print(weapon_charge_bar.max_value)
 	weapon_name.text = weapon.component_name
 	true_charge_speed = weight_class_modifier_final_value(selected_torso, selected_torso.charge_speed_modifier, weapon.charge_speed)
 	true_accuracy = weapon.accuracy + component_type_final_value(selected_head, selected_head.accuracy_bonus)
@@ -59,9 +61,11 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	
 	if GameManager.fight_on:
+		
 		weapon_charge_bar.value += true_charge_speed * delta
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
+				#print(weapon_charge_bar.value)
 				damage_target(GameManager.chosen_opponent.current_health)
 			else:
 				damage_target(GameManager.current_health)

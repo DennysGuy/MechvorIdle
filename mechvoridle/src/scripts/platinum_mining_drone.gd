@@ -17,11 +17,11 @@ func _process(delta : float) -> void:
 		obtain_resources()
 		progress_bar.value = 0
 	
-	if health <= 0:
-		erase() #replace with animation
 
 func erase() -> void:
-	queue_free()
+	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
+	explosion.size_set = 4
+	add_child(explosion)
 
 
 func obtain_resources() -> void:
@@ -55,15 +55,11 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
-	GameManager.platinum_drone_count -= 1
-	GameManager.total_drones_count -= 1
-	GameManager.platinum_drone_cost = GameManager.platinum_drone_base_cost * pow(2, GameManager.platinum_drone_count)
-	SignalBus.update_platinum_drone_count.emit()
-	SignalBus.update_platinum_drone_cost.emit()
+	SignalBus.decrement_platinum_drones_count.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
 	print(GameManager.total_drones_count)
 	#play animation
-	queue_free()
+	erase()
 
 func play_mining_sfx() -> void:
 	audio_stream_player_2d.stream = mining_sfx.pick_random()

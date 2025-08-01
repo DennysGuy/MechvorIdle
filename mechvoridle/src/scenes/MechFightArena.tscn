@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c68p1ei57ngk7"]
+[gd_scene load_steps=18 format=3 uid="uid://c68p1ei57ngk7"]
 
 [ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_aoeri"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://bab3vn7oeytv8" path="res://src/scripts/boss_stand_in.gd" id="4_naye7"]
 [ext_resource type="PackedScene" uid="uid://dxymnlcu4rltp" path="res://src/scenes/MechArenaScene/BossHealth.tscn" id="4_vd1uu"]
 [ext_resource type="Script" uid="uid://bw1t8ugmc22kd" path="res://src/scripts/cockpit_camera.gd" id="7_naye7"]
+[ext_resource type="Texture2D" uid="uid://b83om6thsphyf" path="res://assets/graphics/CockPitView_Underlay.png" id="8_78ps0"]
+[ext_resource type="Texture2D" uid="uid://4qr58n3rme2c" path="res://assets/graphics/CockPitView_Overlay.png" id="9_jj0iv"]
 
 [sub_resource type="Animation" id="Animation_naye7"]
 length = 0.001
@@ -211,22 +213,29 @@ mouse_default_cursor_shape = 3
 texture = ExtResource("2_aoeri")
 script = ExtResource("4_naye7")
 
-[node name="PlayerWeapon1" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+[node name="CockpitViewUnderlay" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = -0.797119
+offset_top = 0.813065
+offset_right = 639.203
+offset_bottom = 360.813
+mouse_filter = 2
+texture = ExtResource("8_78ps0")
+stretch_mode = 2
+
+[node name="PlayerHealth" parent="Background" instance=ExtResource("3_8olsk")]
 layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = -63.0
-offset_right = 217.0
-offset_bottom = -5.0
-grow_horizontal = 1
+offset_left = -371.0
+offset_top = -114.0
+offset_right = -271.0
+offset_bottom = -55.0
+grow_horizontal = 0
 grow_vertical = 0
-target = 1
-boss_label_marker = NodePath("../../BossLabelMarker")
-player_label_marker = NodePath("../../PlayerLabelMarker")
 
 [node name="PlayerWeapon2" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
 layout_mode = 1
@@ -235,16 +244,43 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 226.0
-offset_top = -63.0
-offset_right = 424.0
-offset_bottom = -5.0
+offset_left = 397.0
+offset_top = -101.0
+offset_right = 463.0
+offset_bottom = -42.0
 grow_horizontal = 1
 grow_vertical = 0
 target = 1
 weapon_position = 1
 boss_label_marker = NodePath("../../BossLabelMarker")
 player_label_marker = NodePath("../../PlayerLabelMarker")
+
+[node name="PlayerWeapon1" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -101.0
+offset_right = 243.0
+offset_bottom = -43.0
+grow_horizontal = 1
+grow_vertical = 0
+target = 1
+boss_label_marker = NodePath("../../BossLabelMarker")
+player_label_marker = NodePath("../../PlayerLabelMarker")
+
+[node name="CockpitViewOverlay" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = -0.797119
+offset_top = 0.813065
+offset_right = 639.203
+offset_bottom = 360.813
+mouse_filter = 2
+texture = ExtResource("9_jj0iv")
+stretch_mode = 2
 
 [node name="EnemyWeapon1" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
 layout_mode = 1
@@ -253,12 +289,13 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 52.0
-offset_top = 67.0
-offset_right = 250.0
-offset_bottom = 125.0
+offset_left = 193.0
+offset_top = 52.0
+offset_right = 260.0
+offset_bottom = 110.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 target = 0
 boss_label_marker = NodePath("../../BossLabelMarker")
 player_label_marker = NodePath("../../PlayerLabelMarker")
@@ -270,30 +307,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 376.0
-offset_top = 68.0
-offset_right = 574.0
-offset_bottom = 126.0
+offset_left = 383.0
+offset_top = 52.0
+offset_right = 449.0
+offset_bottom = 110.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 target = 0
 weapon_position = 1
 boss_label_marker = NodePath("../../BossLabelMarker")
 player_label_marker = NodePath("../../PlayerLabelMarker")
-
-[node name="PlayerHealth" parent="Background" instance=ExtResource("3_8olsk")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -207.0
-offset_top = -62.0
-offset_right = -11.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="BossHealth" parent="Background" instance=ExtResource("4_vd1uu")]
 layout_mode = 0
@@ -302,12 +326,13 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 51.0
-offset_top = 6.0
-offset_right = 575.0
-offset_bottom = 63.0
+offset_left = 169.0
+offset_top = 20.0
+offset_right = 473.0
+offset_bottom = 78.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -319,17 +344,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
-
-[node name="CockpitCamera" type="Camera2D" parent="."]
-position = Vector2(320, 180)
-scale = Vector2(1.63672, 2.05962)
-script = ExtResource("7_naye7")
-
-[node name="Timer" type="Timer" parent="CockpitCamera"]
 
 [node name="StartFightLabel" type="Label" parent="."]
 layout_mode = 1
@@ -352,6 +372,13 @@ text = "FIGHT!"
 position = Vector2(315, 61)
 
 [node name="PlayerLabelMarker" type="Marker2D" parent="."]
-position = Vector2(575, 326)
+position = Vector2(345, 269)
+
+[node name="CockpitCamera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+scale = Vector2(1.63672, 2.05962)
+script = ExtResource("7_naye7")
+
+[node name="Timer" type="Timer" parent="CockpitCamera"]
 
 [connection signal="gui_input" from="Background/BossStandIn" to="." method="_on_boss_stand_in_gui_input"]
