@@ -11,6 +11,7 @@ enum ASTEROID_SIZE{SMALL, MEDIUM, LARGE}
 @onready var graphic: Sprite2D = $Graphic
 @onready var sfx_player  : AudioStreamPlayer = $SfxPlayer
 @onready var area_2d = $Area2D
+@onready var asteroid_click_control  : Control = $AsteroidClickControl
 
 var can_hit = true
 
@@ -51,6 +52,8 @@ func damage_asteroid() -> void:
 func spawn_explosion_and_destroy():
 	can_hit = false
 	graphic.hide()
+	area_2d.get_child(0).disabled = true
+	asteroid_click_control.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	match asteroid_size:
 		ASTEROID_SIZE.SMALL:

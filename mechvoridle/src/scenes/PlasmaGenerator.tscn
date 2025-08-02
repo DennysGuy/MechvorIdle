@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://hjbnj2tod3ol"]
+[gd_scene load_steps=9 format=3 uid="uid://hjbnj2tod3ol"]
 
 [ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/plasma_generator.gd" id="1_2eac4"]
 [ext_resource type="Texture2D" uid="uid://cgmy7s1s1tb1u" path="res://assets/graphics/generator.png" id="2_2eac4"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_2c8cf"]
+[ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="3_mtsxs"]
+[ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="4_jq14y"]
+[ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="5_2c8cf"]
+[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="7_r6g4s"]
+[ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_r6g4s"]
 
 [node name="PlasmaGenerator" type="Control"]
 layout_mode = 3
@@ -20,9 +26,9 @@ script = ExtResource("1_2eac4")
 
 [node name="Graphic" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 7.0
 offset_top = 10.0
-offset_right = 70.0
+offset_right = 61.0
 offset_bottom = 70.0
 texture = ExtResource("2_2eac4")
 stretch_mode = 2
@@ -51,52 +57,96 @@ offset_bottom = 75.0
 grow_horizontal = 2
 show_percentage = false
 
-[node name="PurchasePanel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 111.0
-offset_bottom = 79.0
-
-[node name="Label" type="Label" parent="PurchasePanel"]
-layout_mode = 0
-offset_left = 10.5
-offset_top = 2.5
-offset_right = 99.5
-offset_bottom = 25.5
-text = "Cost: 12345"
-
-[node name="Button" type="Button" parent="PurchasePanel"]
-layout_mode = 0
-offset_left = 15.5
-offset_top = 32.5
-offset_right = 96.5
-offset_bottom = 69.5
-text = "Purchase"
-
 [node name="Speed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 76.0
+offset_left = 64.0
 offset_top = 17.0
-offset_right = 126.0
+offset_right = 121.0
 offset_bottom = 30.0
-theme_override_font_sizes/font_size = 9
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 8
 text = "Speed: 30%"
 
 [node name="Output" type="Label" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 33.0
-offset_right = 123.0
+offset_left = 64.0
+offset_top = 36.0
+offset_right = 121.0
 offset_bottom = 46.0
-theme_override_font_sizes/font_size = 9
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 8
 text = "Output: 44"
 
 [node name="FuelCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 50.0
-offset_right = 115.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 9
+offset_left = 64.0
+offset_top = 55.0
+offset_right = 116.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 8
 text = "Fuel: 255"
+
+[node name="PurchasePanel" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.85098)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 77.0
+color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[node name="Label" type="Label" parent="PurchasePanel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 118.0
+offset_bottom = 22.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 9
+text = "Cost: 12345"
+
+[node name="Button" type="TextureButton" parent="PurchasePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -15.0
+offset_right = 45.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_mtsxs")
+texture_hover = ExtResource("5_2c8cf")
+texture_disabled = ExtResource("4_jq14y")
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="PurchasePanel"]
+position = Vector2(41, 15)
+texture = ExtResource("7_r6g4s")
+
+[node name="Label2" type="Label" parent="PurchasePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 8
+text = "Plasma Generator"
+
+[node name="PlasmaUiIcon" type="Sprite2D" parent="PurchasePanel"]
+position = Vector2(20, 64)
+texture = ExtResource("8_r6g4s")
 
 [connection signal="button_down" from="PurchasePanel/Button" to="." method="_on_button_button_down"]

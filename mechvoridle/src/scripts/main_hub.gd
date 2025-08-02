@@ -71,11 +71,12 @@ func move_from_shop_pane_to_central_pane() -> void:
 	animation_player.play("NavigateFromShopToCentralHub")
 
 func insert_ship_alarm() -> void:
-	var ship_alarm : AlertPane = preload("res://src/scenes/AlertPane.tscn").instantiate()
-	add_child(ship_alarm)
+	var nodes_in_alarm_group = get_tree().get_nodes_in_group("ship alarm")
+	if nodes_in_alarm_group.is_empty():
+		var ship_alarm : AlertPane = preload("res://src/scenes/AlertPane.tscn").instantiate()
+		add_child(ship_alarm)
 
 func remove_ship_alarm() -> void:
-
 	get_tree().get_first_node_in_group("ship alarm")
 
 func play_nav_from_hub_to_mining_sfx():

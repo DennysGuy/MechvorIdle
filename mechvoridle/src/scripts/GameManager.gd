@@ -33,18 +33,24 @@ var upgrade_panel_closed_first_time = false #once true, we'll delete upgrade
 #mining panel
 var ufo_attacking : bool = false
 
-var ferrite_refinery_cost : int = 50 #test values
-var plasma_generator_cost : int = 50 #test values
+var ferrite_refinery_cost : int = 600 #test values
+var plasma_generator_cost : int = 750 #test values
 
 var drone_count : int
 var refinery_stations_count : int
 
 var can_traverse_panes : bool = true
 
-var mining_laser_level : int = 1
+var mining_laser_level : int = 0
 var mining_laser_damage : int  = 1
 var mining_laser_damage_upgrade_cost : int = 100
 var mining_laser_damage_base_cost : int = 100
+
+var mining_laser_speed : float = 1.0
+var mining_laser_speed_level : int = 0
+var mining_laser_speed_upgrade_interval : float = 0.3
+var mining_laser_speed_base_cost : int = 100
+var mining_laser_speed_cost : int = 100
 
 var mining_laser_crit_chance_level : int = 0
 var mining_laser_crit_chance : float = 0.0
@@ -79,7 +85,7 @@ var platinum_drone_cost : int = 180
 var platinum_drone_count : int = 0
 var platinum_drone_base_cost : int = 180
 
-var platinum_drone_damage_level : int = 1
+var platinum_drone_damage_level : int = 0
 var platinum_drone_damage : int = 10
 var platinum_drone_damage_cost : int = 150
 var platinum_drone_damage_base_cost : int = 150

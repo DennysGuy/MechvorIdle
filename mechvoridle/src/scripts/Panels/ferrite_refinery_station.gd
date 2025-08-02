@@ -2,8 +2,8 @@ class_name FerriteRefineryStation extends Control
 
 
 @onready var refinery_cost_label: Label = $PurchasePanel/RefineryCostLabel
-@onready var purchase_refinery_station: Button = $PurchasePanel/PurchaseRefineryStation
-@onready var purchase_panel: Panel = $PurchasePanel
+@onready var purchase_refinery_station: TextureButton = $PurchasePanel/PurchaseRefineryStation
+@onready var purchase_panel: ColorRect = $PurchasePanel
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var output_label: Label = $OutputLabel
 @onready var cost_label: Label = $CostLabel
@@ -13,7 +13,7 @@ var refinery_stock : int
 func _ready() -> void:
 	output_label.hide()
 	cost_label.hide()
-	refinery_cost_label.text = "Platinum: " + str(GameManager.ferrite_refinery_cost)
+	refinery_cost_label.text = "Cost: " + str(GameManager.ferrite_refinery_cost)
 	progress_bar.hide()
 
 func _process(delta: float) -> void:
@@ -31,7 +31,8 @@ func _process(delta: float) -> void:
 		if GameManager.raw_ferrite_count >= GameManager.ferrite_cost and refinery_stock == 0:
 			GameManager.raw_ferrite_count -= GameManager.ferrite_cost
 			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-			resource_acquired_label.output = "-"+str(GameManager.ferrite_cost)+" Ferrite"
+			resource_acquired_label.output = "-"+str(GameManager.ferrite_cost)
+			resource_acquired_label.set_resource_as_ferrite()
 			resource_acquired_label.position = Vector2(130,0)
 			add_child(resource_acquired_label)
 			refinery_stock = GameManager.ferrite_cost
@@ -58,6 +59,7 @@ func obtain_resources() -> void:
 	GameManager.ferrite_bars_count += GameManager.output_amount
 	SignalBus.update_ferrite_bars_count.emit()
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-	resource_acquired_label.output = "+"+str(GameManager.output_amount)+" Ferrite Bars"
+	resource_acquired_label.output = "+"+str(GameManager.output_amount)
+	resource_acquired_label.set_resource_as_ferrite_bar()
 	resource_acquired_label.position = Vector2.ZERO
 	add_child(resource_acquired_label)

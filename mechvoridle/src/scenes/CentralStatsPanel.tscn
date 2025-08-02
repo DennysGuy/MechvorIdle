@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dio1yrjtiu67"]
+[gd_scene load_steps=12 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
@@ -6,6 +6,10 @@
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lvy6k"]
 [ext_resource type="PackedScene" uid="uid://1i717e5dbjge" path="res://src/scenes/ElapsedTimer.tscn" id="3_s5wfh"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_ve6vp"]
+[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="7_isv1m"]
+[ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="7_rppuw"]
+[ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="8_il7rn"]
+[ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_xrjyp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
 shader = ExtResource("4_ve6vp")
@@ -62,18 +66,18 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 65.0
+offset_left = 58.0
 offset_top = 156.0
-offset_right = 120.0
+offset_right = 113.0
 offset_bottom = 168.0
 grow_horizontal = 1
 grow_vertical = 1
 
 [node name="ElapsedTimeLabel" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 28.0
+offset_left = 20.0
 offset_top = 142.0
-offset_right = 106.0
+offset_right = 98.0
 offset_bottom = 152.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 8
@@ -120,9 +124,9 @@ offset_bottom = 79.0
 
 [node name="RawFerriteLabel" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 17.0
 offset_top = 5.0
-offset_right = 75.0
+offset_right = 96.0
 offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -130,9 +134,9 @@ text = "Raw Ferrite:"
 
 [node name="RawFerriteCount" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 88.0
+offset_left = 100.0
 offset_top = 4.0
-offset_right = 316.0
+offset_right = 328.0
 offset_bottom = 21.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -140,9 +144,9 @@ text = "100"
 
 [node name="FerriteBarsLabel" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 17.0
 offset_top = 18.0
-offset_right = 86.0
+offset_right = 98.0
 offset_bottom = 35.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -150,9 +154,9 @@ text = "Ferrite Bars:"
 
 [node name="FerriteBarsCount" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 101.0
 offset_top = 18.0
-offset_right = 317.0
+offset_right = 329.0
 offset_bottom = 35.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -160,9 +164,9 @@ text = "100"
 
 [node name="PlatinumBarsLabel" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 17.0
 offset_top = 32.0
-offset_right = 76.0
+offset_right = 88.0
 offset_bottom = 49.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -170,9 +174,9 @@ text = "Platinum:"
 
 [node name="PlatinumBarsCount" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 101.0
 offset_top = 32.0
-offset_right = 317.0
+offset_right = 329.0
 offset_bottom = 49.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -180,9 +184,9 @@ text = "100"
 
 [node name="PlasmaLabel" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 17.0
 offset_top = 47.0
-offset_right = 76.0
+offset_right = 88.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
@@ -190,13 +194,29 @@ text = "Plasma:"
 
 [node name="PlasmaCount" type="Label" parent="ColorRect/ResourcesPanel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 101.0
 offset_top = 47.0
-offset_right = 144.0
+offset_right = 156.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 9
 text = "100"
+
+[node name="FerriteUiIcon" type="Sprite2D" parent="ColorRect/ResourcesPanel"]
+position = Vector2(8, 10)
+texture = ExtResource("7_rppuw")
+
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="ColorRect/ResourcesPanel"]
+position = Vector2(8, 23)
+texture = ExtResource("8_il7rn")
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="ColorRect/ResourcesPanel"]
+position = Vector2(8, 37)
+texture = ExtResource("7_isv1m")
+
+[node name="PlasmaUiIcon" type="Sprite2D" parent="ColorRect/ResourcesPanel"]
+position = Vector2(8, 53)
+texture = ExtResource("8_xrjyp")
 
 [node name="TipsPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
@@ -303,10 +323,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -71.5
-offset_top = -44.5
-offset_right = 71.5
-offset_bottom = 44.5
+offset_left = -71.0
+offset_top = -44.0
+offset_right = 77.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.422314, 0.504722, 0.704522, 1)
@@ -319,9 +339,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -66.0
-offset_top = -12.5
+offset_top = -17.5
 offset_right = 66.0
-offset_bottom = 12.5
+offset_bottom = 7.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12

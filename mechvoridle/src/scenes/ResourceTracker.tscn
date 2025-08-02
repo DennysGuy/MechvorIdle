@@ -23,10 +23,10 @@ script = ExtResource("1_qyq3t")
 
 [node name="ResourcesLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 1.0
-offset_right = 131.0
-offset_bottom = 14.0
+offset_left = 94.0
+offset_top = 4.0
+offset_right = 139.0
+offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("2_ao0h8")
 theme_override_font_sizes/font_size = 6
 text = "Resources"
@@ -36,43 +36,43 @@ layout_mode = 0
 offset_left = 23.0
 offset_top = 12.0
 offset_right = 117.0
-offset_bottom = 20.0
+offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("2_ao0h8")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="FerriteBarsCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 27.0
+offset_top = 28.0
 offset_right = 130.0
-offset_bottom = 35.0
+offset_bottom = 38.0
 theme_override_fonts/font = ExtResource("2_ao0h8")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="PlatinumCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 42.0
-offset_right = 111.0
-offset_bottom = 50.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 54.0
 theme_override_fonts/font = ExtResource("2_ao0h8")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="PlasmaCount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 57.0
+offset_top = 61.0
 offset_right = 116.0
-offset_bottom = 68.0
+offset_bottom = 72.0
 theme_override_fonts/font = ExtResource("2_ao0h8")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="PlatinumUiIcon" type="Sprite2D" parent="."]
-position = Vector2(11, 45)
+position = Vector2(11, 48)
 texture = ExtResource("3_fc0qm")
 
 [node name="FerriteUiIcon" type="Sprite2D" parent="."]
@@ -80,9 +80,9 @@ position = Vector2(12, 16)
 texture = ExtResource("4_s11qr")
 
 [node name="RefinedFerriteUiIcon" type="Sprite2D" parent="."]
-position = Vector2(12, 31)
+position = Vector2(12, 33)
 texture = ExtResource("5_xxbr5")
 
 [node name="PlasmaUiIcon" type="Sprite2D" parent="."]
-position = Vector2(11, 61)
+position = Vector2(11, 66)
 texture = ExtResource("6_3gj0c")

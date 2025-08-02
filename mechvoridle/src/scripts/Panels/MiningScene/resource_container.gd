@@ -53,7 +53,10 @@ func generate_label(amount : int, resource_icon : int):
 	ran_ferrite_label.resource = set_resource(ran_ferrite_label, resource_icon)
 	ran_ferrite_label.position = parent.position + Vector2(_offset, _offset)
 	parent.get_parent().add_child(ran_ferrite_label)
-
+	SignalBus.update_ferrite_bars_count.emit()
+	SignalBus.update_ferrite_count.emit()
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_plasma_count.emit()
 
 func set_resource(resource_label : ResourceAcquiredLabel, resource : int) -> int:
 	match (resource):

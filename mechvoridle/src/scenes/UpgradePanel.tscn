@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccmj71mwg532g"]
+[gd_scene load_steps=12 format=3 uid="uid://ccmj71mwg532g"]
 
 [ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
 [ext_resource type="Texture2D" uid="uid://b45m2dfvnfkjy" path="res://assets/graphics/UpgradePanelTexture.png" id="1_roafv"]
+[ext_resource type="Texture2D" uid="uid://dxoon7s3thtuq" path="res://assets/graphics/UI/upgrades_panel_show_button.png" id="3_atmsq"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lmpdo"]
 [ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="4_nnvdg"]
 [ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="5_lgang"]
 [ext_resource type="Texture2D" uid="uid://cd1kbs2eu1b4o" path="res://assets/graphics/platinum_drone.png" id="6_atmsq"]
+[ext_resource type="Texture2D" uid="uid://0ehb425m0cid" path="res://assets/graphics/UI/hide_upgrades_button.png" id="6_xqeeo"]
+[ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="9_1b2tq"]
+[ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="10_165cb"]
+[ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="11_165cb"]
 
 [node name="UpgradePanel" type="TextureRect"]
 offset_top = -2.0
@@ -15,31 +20,80 @@ texture = ExtResource("1_roafv")
 stretch_mode = 2
 script = ExtResource("1_ffqcc")
 
-[node name="UpgradesAccess" type="Button" parent="."]
+[node name="UpgradesAccess" type="TextureButton" parent="."]
 layout_mode = 0
 offset_top = 215.0
 offset_right = 45.0
 offset_bottom = 235.0
-theme_override_font_sizes/font_size = 8
-text = "upgrades"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_atmsq")
 
 [node name="UpgradeDamage" type="Button" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 59.0
+offset_top = 94.0
 offset_right = 56.0
-offset_bottom = 79.0
-theme_override_font_sizes/font_size = 5
-text = "+damage"
+offset_bottom = 114.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+Damage"
 
 [node name="UpgradeCritChance" type="Button" parent="."]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 97.0
-offset_right = 63.0
-offset_bottom = 117.0
-theme_override_font_sizes/font_size = 5
+offset_top = 132.0
+offset_right = 68.0
+offset_bottom = 152.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+Crit Chance"
+
+[node name="UpgradeMiningLaserSpeed" type="Button" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 54.0
+offset_right = 56.0
+offset_bottom = 74.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+Speed"
+
+[node name="MiningLaserSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 40.0
+offset_right = 66.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Speed"
+
+[node name="CurrentMiningLaserSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 40.0
+offset_right = 125.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="CurrentMiningLaserCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 65.0
+offset_right = 129.0
+offset_bottom = 74.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PlatinumUiIcon14" type="Sprite2D" parent="."]
+position = Vector2(68, 58)
+texture = ExtResource("4_nnvdg")
 
 [node name="UpgradesLabel" type="Label" parent="."]
 layout_mode = 0
@@ -64,29 +118,29 @@ text = "Mining Laser"
 [node name="CurrentDamageLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 45.0
+offset_top = 80.0
 offset_right = 66.0
-offset_bottom = 56.0
+offset_bottom = 91.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Damage:"
 
 [node name="CurrentDamageTracker" type="Label" parent="."]
 layout_mode = 0
-offset_left = 63.0
-offset_top = 45.0
-offset_right = 119.0
-offset_bottom = 56.0
+offset_left = 69.0
+offset_top = 80.0
+offset_right = 125.0
+offset_bottom = 91.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
 [node name="CurrentDamageCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 68.0
-offset_right = 129.0
-offset_bottom = 77.0
+offset_left = 63.0
+offset_top = 105.0
+offset_right = 117.0
+offset_bottom = 114.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -94,9 +148,9 @@ text = "100"
 [node name="CurrentCritChanceLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 84.0
-offset_right = 65.0
-offset_bottom = 95.0
+offset_top = 119.0
+offset_right = 83.0
+offset_bottom = 130.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Crit Chance:"
@@ -104,19 +158,19 @@ text = "Crit Chance:"
 [node name="CurrentCritChanceTracker" type="Label" parent="."]
 layout_mode = 0
 offset_left = 86.0
-offset_top = 84.0
+offset_top = 119.0
 offset_right = 129.0
-offset_bottom = 95.0
+offset_bottom = 130.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0.0%"
 
 [node name="CurrentCritChanceCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 107.0
-offset_right = 133.0
-offset_bottom = 116.0
+offset_left = 71.0
+offset_top = 144.0
+offset_right = 117.0
+offset_bottom = 153.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -139,13 +193,13 @@ offset_right = 206.0
 offset_bottom = 59.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
-text = "Drones:"
+text = "Basic Drones:"
 
 [node name="DronesCountTrackerLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 204.0
+offset_left = 225.0
 offset_top = 48.0
-offset_right = 233.0
+offset_right = 254.0
 offset_bottom = 57.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
@@ -167,7 +221,9 @@ offset_left = 156.0
 offset_top = 62.0
 offset_right = 186.0
 offset_bottom = 78.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+1 Drone"
 
 [node name="DroneDamageLabel" type="Label" parent="."]
@@ -178,14 +234,14 @@ offset_right = 229.0
 offset_bottom = 97.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
-text = "Drone Damage:"
+text = "Damage:"
 
 [node name="DroneDamage" type="Label" parent="."]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 86.0
-offset_right = 281.0
-offset_bottom = 97.0
+offset_left = 196.0
+offset_top = 85.0
+offset_right = 256.0
+offset_bottom = 96.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -206,7 +262,9 @@ offset_left = 156.0
 offset_top = 98.0
 offset_right = 189.0
 offset_bottom = 114.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Damage"
 
 [node name="DroneMiningSpeed" type="Label" parent="."]
@@ -245,7 +303,9 @@ offset_left = 254.0
 offset_top = 83.0
 offset_right = 287.0
 offset_bottom = 99.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Speed"
 
 [node name="PlatinumDrones" type="Label" parent="."]
@@ -256,13 +316,13 @@ offset_right = 230.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
-text = "Drones"
+text = "Platinum Drones:"
 
 [node name="PlatinumDronesCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 211.0
+offset_left = 244.0
 offset_top = 129.0
-offset_right = 267.0
+offset_right = 300.0
 offset_bottom = 138.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
@@ -284,7 +344,9 @@ offset_left = 152.0
 offset_top = 142.0
 offset_right = 182.0
 offset_bottom = 158.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+1 Drone"
 
 [node name="PlatinumDroneDamage" type="Label" parent="."]
@@ -323,7 +385,9 @@ offset_left = 150.0
 offset_top = 174.0
 offset_right = 183.0
 offset_bottom = 190.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Damage"
 
 [node name="PlatinumDroneSpeed" type="Label" parent="."]
@@ -362,7 +426,9 @@ offset_left = 260.0
 offset_top = 159.0
 offset_right = 293.0
 offset_bottom = 175.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Speed"
 
 [node name="FerriteRefinery" type="Label" parent="."]
@@ -411,7 +477,9 @@ offset_left = 379.0
 offset_top = 59.0
 offset_right = 415.0
 offset_bottom = 75.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Speed"
 
 [node name="RefineryEfficiency" type="Label" parent="."]
@@ -436,9 +504,9 @@ text = "1"
 
 [node name="EfficiencyBonusCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 420.0
+offset_left = 423.0
 offset_top = 102.0
-offset_right = 468.0
+offset_right = 471.0
 offset_bottom = 113.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
@@ -450,7 +518,9 @@ offset_left = 379.0
 offset_top = 94.0
 offset_right = 415.0
 offset_bottom = 110.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Efficiency"
 
 [node name="PlasmaGenerator" type="Label" parent="."]
@@ -499,7 +569,9 @@ offset_left = 499.0
 offset_top = 55.0
 offset_right = 535.0
 offset_bottom = 71.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+ Speed"
 
 [node name="PlasmaGeneratorOutput" type="Label" parent="."]
@@ -538,7 +610,9 @@ offset_left = 499.0
 offset_top = 84.0
 offset_right = 535.0
 offset_bottom = 100.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "+1 Output"
 
 [node name="GeneratorFuelCost" type="Label" parent="."]
@@ -577,10 +651,12 @@ offset_left = 499.0
 offset_top = 115.0
 offset_right = 538.0
 offset_bottom = 131.0
-theme_override_font_sizes/font_size = 5
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
 text = "Lower Cost"
 
-[node name="HideUpgradesPanel" type="Button" parent="."]
+[node name="HideUpgradesPanel" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -590,8 +666,8 @@ offset_top = 175.0
 offset_right = -23.0
 offset_bottom = 192.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 6
-text = "Hide"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_xqeeo")
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
@@ -601,11 +677,11 @@ position = Vector2(198, 64)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon5" type="Sprite2D" parent="."]
-position = Vector2(66, 61)
+position = Vector2(69, 98)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon6" type="Sprite2D" parent="."]
-position = Vector2(71, 101)
+position = Vector2(77, 137)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon3" type="Sprite2D" parent="."]
@@ -641,7 +717,7 @@ position = Vector2(425, 62)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon10" type="Sprite2D" parent="."]
-position = Vector2(426, 97)
+position = Vector2(429, 97)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon11" type="Sprite2D" parent="."]
@@ -656,9 +732,31 @@ texture = ExtResource("4_nnvdg")
 position = Vector2(548, 118)
 texture = ExtResource("4_nnvdg")
 
+[node name="PlasmaUiIcon" type="Sprite2D" parent="."]
+position = Vector2(599, 33)
+scale = Vector2(0.749999, 0.749999)
+texture = ExtResource("9_1b2tq")
+
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(470, 32)
+texture = ExtResource("10_165cb")
+
+[node name="FerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(250, 51)
+texture = ExtResource("11_165cb")
+
+[node name="PlatinumUiIcon15" type="Sprite2D" parent="."]
+position = Vector2(265, 51)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon16" type="Sprite2D" parent="."]
+position = Vector2(265, 132)
+texture = ExtResource("4_nnvdg")
+
 [connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
 [connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]
 [connection signal="button_down" from="UpgradeCritChance" to="." method="_on_upgrade_crit_chance_button_down"]
+[connection signal="button_down" from="UpgradeMiningLaserSpeed" to="." method="_on_upgrade_mining_laser_speed_button_down"]
 [connection signal="button_down" from="PurchaseDrone" to="." method="_on_purchase_drone_button_down"]
 [connection signal="button_down" from="UpgradeDroneDamage" to="." method="_on_upgrade_drone_damage_button_down"]
 [connection signal="button_down" from="UpgradeDroneMiningSpeed" to="." method="_on_upgrade_drone_mining_speed_button_down"]

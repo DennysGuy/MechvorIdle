@@ -18,3 +18,11 @@ func show_upgrade_panel() -> void:
 
 func hide_upgrade_panel() -> void:
 	animation_player.play("HideAnimationPanel")
+
+
+func _on_area_2d_mouse_entered():
+	print("bafangulo")
+
+
+func _on_area_2d_mouse_shape_entered(shape_idx):
+	print("blingo")

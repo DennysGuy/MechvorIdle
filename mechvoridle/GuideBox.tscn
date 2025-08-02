@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3siueyr5myjd"]
+
+[ext_resource type="Texture2D" uid="uid://nuh7pb5psp43" path="res://assets/graphics/UI/rect_outline.png" id="1_dupiy"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_3bej5"]
+[ext_resource type="Script" uid="uid://dibkfn5t1qgec" path="res://src/scripts/guide_box.gd" id="2_wybhb"]
+
+[sub_resource type="Animation" id="Animation_wybhb"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_3bej5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ooujy"]
+_data = {
+&"RESET": SubResource("Animation_3bej5"),
+&"flash": SubResource("Animation_wybhb")
+}
+
+[node name="TextureRect" type="NinePatchRect"]
+modulate = Color(1, 1, 1, 0.6)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -89.0
+offset_right = 97.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dupiy")
+region_rect = Rect2(0.886727, 0.860454, 6.20736, 6.25221)
+script = ExtResource("2_wybhb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ooujy")
+}
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -13.0
+offset_right = 103.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_3bej5")
+theme_override_font_sizes/font_size = 10
+text = "Click and Hold"

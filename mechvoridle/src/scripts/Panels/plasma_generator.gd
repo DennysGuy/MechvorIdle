@@ -2,8 +2,8 @@ class_name PlasmaGenerator extends Control
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var fuel_bar: ProgressBar = $FuelBar
 @onready var label: Label = $PurchasePanel/Label
-@onready var button: Button = $PurchasePanel/Button
-@onready var purchase_panel: Panel = $PurchasePanel
+@onready var button: TextureButton = $PurchasePanel/Button
+@onready var purchase_panel: ColorRect = $PurchasePanel
 @onready var output: Label = $Output
 @onready var fuel_cost: Label = $FuelCost
 @onready var speed: Label = $Speed
