@@ -111,6 +111,7 @@ func hide_audio_settings() -> void:
 
 func play_ready_fight_vox_sfx() -> void:
 	vox_player.stream = SfxManager.VOX_NOT_ARENA_ACCESS_01
+	vox_player.volume_db = -6.0
 	vox_player.play()
 	await vox_player.finished
 	GameManager.can_fight_boss = true

@@ -87,6 +87,9 @@ func _physics_process(delta : float) -> void:
 				current_state = states.REMOVE
 				
 		states.DEAD:
+			health_bar.hide()
+			laser_release_timer.stop()
+			can_shoot = false
 			can_be_hit = false
 			destroy_ufo_start = true
 			current_state = states.NON_STATE

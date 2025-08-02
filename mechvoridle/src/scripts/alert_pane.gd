@@ -14,7 +14,6 @@ func _ready() -> void:
 func silence_alarm() -> void:
 	queue_free()
 
-
 func stop_vox_player() -> void:
 	vox_player.stop()
 
@@ -27,7 +26,7 @@ func play_vox_ufo_destroyed() -> void:
 	vox_player.play()
 
 func play_vox_ufo_escaped() -> void:
-	vox_player.volume_db = -4.0
+	vox_player.volume_db = -8.0
 	vox_player.stream = SfxManager.VOX_NOT_UFO_ESCAPED_01
 	vox_player.play()
 

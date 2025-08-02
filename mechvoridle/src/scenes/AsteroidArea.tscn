@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=12 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
-[ext_resource type="Texture2D" uid="uid://ghoq3njhb4ly" path="res://assets/graphics/AsteroidPlaceHolder.png" id="1_80q61"]
+[ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_b11ub"]
 [ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
+[ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="3_ocvap"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
 [ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
 
@@ -51,26 +52,26 @@ size = Vector2(123.75, 121)
 resource_local_to_scene = true
 shader = ExtResource("4_fde8e")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.0
-shader_parameter/scanlines_width = 0.392
-shader_parameter/grille_opacity = 0.086
+shader_parameter/scanlines_opacity = 0.176
+shader_parameter/scanlines_width = 0.032
+shader_parameter/grille_opacity = 0.0
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
 shader_parameter/roll = true
-shader_parameter/roll_speed = 5.0
-shader_parameter/roll_size = 54.268
-shader_parameter/roll_variation = 1.901
-shader_parameter/distort_intensity = 0.01
-shader_parameter/noise_opacity = 0.183
-shader_parameter/noise_speed = 3.0
-shader_parameter/static_noise_intensity = 0.058
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 41.6
+shader_parameter/roll_variation = 1.433
+shader_parameter/distort_intensity = 0.023
+shader_parameter/noise_opacity = 0.24
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.0
 shader_parameter/aberration = 0.01
 shader_parameter/brightness = 1.0
 shader_parameter/discolor = false
-shader_parameter/warp_amount = 0.1
-shader_parameter/clip_warp = true
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.583
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_opacity = 0.742
 
 [node name="AsteroidArea" type="Node2D"]
 script = ExtResource("1_6ww1j")
@@ -82,18 +83,19 @@ process_callback = 0
 process_callback = 0
 one_shot = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1.0
-offset_right = 641.0
-offset_bottom = 240.0
+offset_left = -12.0
+offset_top = -52.0
+offset_right = 628.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("2_b11ub")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -107,7 +109,20 @@ offset_right = 399.0
 offset_bottom = 215.0
 pivot_offset = Vector2(95, 96)
 mouse_default_cursor_shape = 3
-texture = ExtResource("1_80q61")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 30.0
+offset_top = -139.0
+offset_right = 542.0
+offset_bottom = 373.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ocvap")]
 
 [node name="AsteroidSpawnPoints" type="Node" parent="."]
 
@@ -157,6 +172,10 @@ position = Vector2(185, -21)
 
 [node name="CRTOverlay" parent="CanvasLayer" instance=ExtResource("3_2fxli")]
 material = SubResource("ShaderMaterial_0sd8y")
+offset_left = -12.0
+offset_top = -51.0
+offset_right = 628.0
+offset_bottom = 317.0
 
 [node name="ClickAsteroidSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0sd8y")

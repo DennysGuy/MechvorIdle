@@ -1,0 +1,150 @@
+[gd_scene load_steps=16 format=3 uid="uid://e2nsnjl2tg5q"]
+
+[ext_resource type="PackedScene" uid="uid://cbyth4liu0w7f" path="res://assets/graphics/Models/Dealer/BlackMarketDealer.gltf" id="1_crllg"]
+[ext_resource type="Script" uid="uid://bhcwkquoyd8v7" path="res://src/scripts/bm.gd" id="1_p35re"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crllg"]
+
+[sub_resource type="Sky" id="Sky_p35re"]
+sky_material = SubResource("ShaderMaterial_crllg")
+
+[sub_resource type="Environment" id="Environment_2vnym"]
+background_mode = 2
+sky = SubResource("Sky_p35re")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.25
+reflected_light_source = 1
+
+[sub_resource type="Animation" id="Animation_crllg"]
+resource_name = "Bob"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../blockbench_export:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.964615, 1.99354),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.161919, 0, 0.412842), Vector3(0.162, 0.1, 0.413), Vector3(0.162, -0.1, 0.413)]
+}
+
+[sub_resource type="Animation" id="Animation_p35re"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../blockbench_export:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.161919, 0, 0.412842)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../blockbench_export:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2vnym"]
+resource_name = "Nod"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../blockbench_export:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.161919, 0, 0.412842)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../blockbench_export:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.964615, 1.06667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.220802, 0, 0), Vector3(-0.121649, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vnym"]
+_data = {
+&"Bob": SubResource("Animation_crllg"),
+&"Nod": SubResource("Animation_2vnym"),
+&"RESET": SubResource("Animation_p35re")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p35re"]
+animation = &"Bob"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2vnym"]
+animation = &"Nod"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vfvks"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gq17m"]
+xfade_time = 2.0
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Bob"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2jpll"]
+xfade_time = 2.7
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Nod"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_71l3e"]
+states/Bob/node = SubResource("AnimationNodeAnimation_p35re")
+states/Bob/position = Vector2(414, 100)
+states/Nod/node = SubResource("AnimationNodeAnimation_2vnym")
+states/Nod/position = Vector2(561, 100)
+states/Start/position = Vector2(154, 100)
+transitions = ["Start", "Bob", SubResource("AnimationNodeStateMachineTransition_vfvks"), "Nod", "Bob", SubResource("AnimationNodeStateMachineTransition_gq17m"), "Bob", "Nod", SubResource("AnimationNodeStateMachineTransition_2jpll")]
+
+[node name="BM" type="Node3D"]
+script = ExtResource("1_p35re")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_crllg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161919, 0, 0.412842)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.183482, 0.407239, -0.508748)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2vnym")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera3D")
+libraries = {
+&"": SubResource("AnimationLibrary_2vnym")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Camera3D")
+tree_root = SubResource("AnimationNodeStateMachine_71l3e")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/Bob = false
+parameters/conditions/Nod = false

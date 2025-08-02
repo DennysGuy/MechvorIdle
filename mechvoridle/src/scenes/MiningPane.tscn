@@ -12,6 +12,7 @@
 
 [sub_resource type="Animation" id="Animation_t7rsg"]
 resource_name = "HideAnimationPanel"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,10 +20,10 @@ tracks/0/path = NodePath("ColorRect/UpgradePanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22),
+"times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -339)]
+"values": [Vector2(0, 0), Vector2(0, -215)]
 }
 
 [sub_resource type="Animation" id="Animation_ooyll"]
@@ -37,7 +38,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -339)]
+"values": [Vector2(0, -214)]
 }
 
 [sub_resource type="Animation" id="Animation_l11te"]
@@ -52,7 +53,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -339), Vector2(0, 0)]
+"values": [Vector2(0, -215), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7rsg"]
@@ -118,10 +119,11 @@ texture = ExtResource("2_ooyll")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect"]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 26.0
-offset_right = 609.0
-offset_bottom = 239.0
+offset_left = 122.0
+offset_top = 29.0
+offset_right = 602.0
+offset_bottom = 242.0
+mouse_filter = 0
 
 [node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
 transparent_bg = true
@@ -197,8 +199,8 @@ texture = ExtResource("7_t7rsg")
 
 [node name="UpgradePanel" parent="ColorRect" node_paths=PackedStringArray("asteroid_area") instance=ExtResource("5_l11te")]
 layout_mode = 0
-offset_top = -339.0
-offset_bottom = 0.0
+offset_top = -214.0
+offset_bottom = 22.0
 asteroid_area = NodePath("../SubViewportContainer/SubViewport/AsteroidArea")
 
 [node name="CentralHubNavigation" type="Button" parent="ColorRect"]

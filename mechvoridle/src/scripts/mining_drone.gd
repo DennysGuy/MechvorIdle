@@ -6,10 +6,12 @@ class_name MiningDrone extends Node2D
 @onready var hurt_box = $HurtBox
 
 var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 12
 
 func _ready() -> void:
+	animation_player.play("idle")
 	DroneManager.register_mining_drone(self)
 
 func _process(delta : float) -> void:
@@ -39,7 +41,8 @@ func obtain_resources() -> void:
 	GameManager.raw_ferrite_count += drone_damage
 			
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-	resource_acquired_label.output = "+"+str(drone_damage)+ " Ferrite"
+	resource_acquired_label.output = "+"+str(drone_damage)
+	resource_acquired_label.set_resource_as_ferrite()
 	resource_acquired_label.global_position = global_position
 	get_parent().add_child(resource_acquired_label)
 	SignalBus.update_ferrite_count.emit()
@@ -50,8 +53,8 @@ func obtain_resources() -> void:
 		var platinum_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 
 		GameManager.platinum_count += value
-		platinum_acquired_label.output = "+"+str(value)+ " Platinum"
-				
+		platinum_acquired_label.output = "+"+str(value)
+		platinum_acquired_label.set_resource_as_platinum()
 		platinum_acquired_label.global_position = global_position
 		await get_tree().create_timer(0.2).timeout
 		get_parent().add_child(platinum_acquired_label)

@@ -56,7 +56,9 @@ func _on_texture_rect_gui_input(event : InputEvent) -> void:
 				GameManager.raw_ferrite_count += true_damage
 			
 			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-			resource_acquired_label.output = "+"+str(true_damage)+ " Ferrite"
+			resource_acquired_label.output = "+"+str(true_damage)
+			resource_acquired_label.set_resource_as_ferrite()
+			
 			resource_acquired_label.global_position = get_viewport().get_mouse_position()
 			get_parent().add_child(resource_acquired_label)
 			SignalBus.update_ferrite_count.emit()
@@ -65,12 +67,13 @@ func _on_texture_rect_gui_input(event : InputEvent) -> void:
 				var value : int = randi_range(GameManager.platinum_gain_min,GameManager.platinum_gain_max)
 				var crit_value = value * 2
 				var platinum_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
+				platinum_acquired_label.set_resource_as_platinum()
 				if can_crit:
 					GameManager.platinum_count += crit_value
-					platinum_acquired_label.output = "+"+str(crit_value)+ " Platinum"
+					platinum_acquired_label.output = "+"+str(crit_value)
 				else:
 					GameManager.platinum_count += value
-					platinum_acquired_label.output = "+"+str(value)+ " Platinum"
+					platinum_acquired_label.output = "+"+str(value)
 				
 				platinum_acquired_label.global_position = get_viewport().get_mouse_position()
 				await get_tree().create_timer(0.2).timeout

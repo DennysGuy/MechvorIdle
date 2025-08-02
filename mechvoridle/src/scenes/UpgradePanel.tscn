@@ -1,648 +1,582 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccmj71mwg532g"]
+[gd_scene load_steps=7 format=3 uid="uid://ccmj71mwg532g"]
 
 [ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
+[ext_resource type="Texture2D" uid="uid://b45m2dfvnfkjy" path="res://assets/graphics/UpgradePanelTexture.png" id="1_roafv"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lmpdo"]
+[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="4_nnvdg"]
+[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="5_lgang"]
+[ext_resource type="Texture2D" uid="uid://cd1kbs2eu1b4o" path="res://assets/graphics/platinum_drone.png" id="6_atmsq"]
 
-[node name="UpgradePanel" type="ColorRect"]
-offset_right = 253.0
-offset_bottom = 339.0
-color = Color(0.601223, 0.601223, 0.601223, 1)
+[node name="UpgradePanel" type="TextureRect"]
+offset_top = -2.0
+offset_right = 640.0
+offset_bottom = 213.0
+texture = ExtResource("1_roafv")
+stretch_mode = 2
 script = ExtResource("1_ffqcc")
 
 [node name="UpgradesAccess" type="Button" parent="."]
 layout_mode = 0
-offset_top = 340.0
+offset_top = 215.0
 offset_right = 45.0
-offset_bottom = 360.0
+offset_bottom = 235.0
 theme_override_font_sizes/font_size = 8
 text = "upgrades"
 
 [node name="UpgradeDamage" type="Button" parent="."]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 25.0
 offset_top = 59.0
-offset_right = 48.0
+offset_right = 56.0
 offset_bottom = 79.0
 theme_override_font_sizes/font_size = 5
 text = "+damage"
 
 [node name="UpgradeCritChance" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
+offset_left = 24.0
 offset_top = 97.0
-offset_right = 48.0
+offset_right = 63.0
 offset_bottom = 117.0
 theme_override_font_sizes/font_size = 5
 text = "+Crit Chance"
 
 [node name="UpgradesLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 53.0
-offset_bottom = 18.0
+offset_left = 30.0
+offset_top = 178.0
+offset_right = 103.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 11
 text = "Upgrades"
 
 [node name="MiningLaserlabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
+offset_left = 24.0
 offset_top = 24.0
-offset_right = 72.0
+offset_right = 93.0
 offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 9
 text = "Mining Laser"
 
 [node name="CurrentDamageLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 5.0
+offset_left = 25.0
 offset_top = 45.0
-offset_right = 35.0
+offset_right = 66.0
 offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Damage:"
 
 [node name="CurrentDamageTracker" type="Label" parent="."]
 layout_mode = 0
-offset_left = 49.0
+offset_left = 63.0
 offset_top = 45.0
-offset_right = 105.0
+offset_right = 119.0
 offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
-[node name="DamagePlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 51.0
-offset_top = 58.0
-offset_right = 107.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="CurrentDamageCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 51.0
+offset_left = 60.0
 offset_top = 68.0
-offset_right = 120.0
-offset_bottom = 79.0
+offset_right = 129.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="CurrentCritChanceLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 24.0
 offset_top = 84.0
-offset_right = 43.0
+offset_right = 65.0
 offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Crit Chance:"
 
 [node name="CurrentCritChanceTracker" type="Label" parent="."]
 layout_mode = 0
-offset_left = 50.0
+offset_left = 86.0
 offset_top = 84.0
-offset_right = 106.0
+offset_right = 129.0
 offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0.0%"
 
-[node name="CritChancePlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 51.0
-offset_top = 96.0
-offset_right = 99.0
-offset_bottom = 107.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="CurrentCritChanceCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 106.0
-offset_right = 119.0
-offset_bottom = 117.0
+offset_left = 64.0
+offset_top = 107.0
+offset_right = 133.0
+offset_bottom = 116.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="DronesLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 123.0
-offset_right = 42.0
-offset_bottom = 139.0
+offset_left = 138.0
+offset_top = 25.0
+offset_right = 177.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 9
 text = "Drones"
 
 [node name="DronesCountLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 140.0
-offset_right = 43.0
-offset_bottom = 151.0
-theme_override_font_sizes/font_size = 7
+offset_left = 167.0
+offset_top = 48.0
+offset_right = 206.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "Drones:"
 
 [node name="DronesCountTrackerLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 140.0
-offset_right = 112.0
-offset_bottom = 151.0
-theme_override_font_sizes/font_size = 7
+offset_left = 204.0
+offset_top = 48.0
+offset_right = 233.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "12"
-
-[node name="DronesPlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 150.0
-offset_right = 105.0
-offset_bottom = 161.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="DronesCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 161.0
-offset_right = 119.0
-offset_bottom = 172.0
+offset_left = 191.0
+offset_top = 71.0
+offset_right = 253.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="PurchaseDrone" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 153.0
-offset_right = 33.0
-offset_bottom = 169.0
+offset_left = 156.0
+offset_top = 62.0
+offset_right = 186.0
+offset_bottom = 78.0
 theme_override_font_sizes/font_size = 5
 text = "+1 Drone"
 
 [node name="DroneDamageLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 174.0
-offset_right = 56.0
-offset_bottom = 185.0
-theme_override_font_sizes/font_size = 7
+offset_left = 156.0
+offset_top = 86.0
+offset_right = 229.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "Drone Damage:"
 
 [node name="DroneDamage" type="Label" parent="."]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 175.0
-offset_right = 118.0
-offset_bottom = 186.0
-theme_override_font_sizes/font_size = 7
+offset_left = 221.0
+offset_top = 86.0
+offset_right = 281.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "5"
-
-[node name="DroneDamagePlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 185.0
-offset_right = 105.0
-offset_bottom = 196.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="DroneDamageCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 194.0
-offset_right = 104.0
-offset_bottom = 205.0
-theme_override_font_sizes/font_size = 7
+offset_left = 193.0
+offset_top = 107.0
+offset_right = 241.0
+offset_bottom = 115.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "100"
 
 [node name="UpgradeDroneDamage" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 186.0
-offset_right = 36.0
-offset_bottom = 202.0
+offset_left = 156.0
+offset_top = 98.0
+offset_right = 189.0
+offset_bottom = 114.0
 theme_override_font_sizes/font_size = 5
 text = "+ Damage"
 
 [node name="DroneMiningSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 207.0
-offset_right = 56.0
-offset_bottom = 218.0
-theme_override_font_sizes/font_size = 7
-text = "Drone Speed:"
+offset_left = 256.0
+offset_top = 70.0
+offset_right = 319.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Speed:"
 
 [node name="DroneSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 207.0
-offset_right = 118.0
-offset_bottom = 218.0
-theme_override_font_sizes/font_size = 7
+offset_left = 294.0
+offset_top = 70.0
+offset_right = 341.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "5"
-
-[node name="DroneMiningSpeedPlatinum" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 218.0
-offset_right = 105.0
-offset_bottom = 229.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="DroneMiningSpeedCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 227.0
-offset_right = 104.0
-offset_bottom = 238.0
-theme_override_font_sizes/font_size = 7
+offset_left = 291.0
+offset_top = 91.0
+offset_right = 352.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "100"
 
 [node name="UpgradeDroneMiningSpeed" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 219.0
-offset_right = 36.0
-offset_bottom = 235.0
+offset_left = 254.0
+offset_top = 83.0
+offset_right = 287.0
+offset_bottom = 99.0
 theme_override_font_sizes/font_size = 5
 text = "+ Speed"
 
 [node name="PlatinumDrones" type="Label" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 134.0
-offset_right = 165.0
-offset_bottom = 145.0
-theme_override_font_sizes/font_size = 7
-text = "Plat. Drones"
+offset_left = 167.0
+offset_top = 129.0
+offset_right = 230.0
+offset_bottom = 140.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drones"
 
 [node name="PlatinumDronesCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 178.0
-offset_top = 134.0
-offset_right = 234.0
-offset_bottom = 145.0
-theme_override_font_sizes/font_size = 7
+offset_left = 211.0
+offset_top = 129.0
+offset_right = 267.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "12"
-
-[node name="PlatinumDronesPlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 179.0
-offset_top = 144.0
-offset_right = 227.0
-offset_bottom = 155.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="PlatinumDronesCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 155.0
-offset_right = 241.0
-offset_bottom = 166.0
+offset_left = 203.0
+offset_top = 144.0
+offset_right = 247.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="PurchasePlatinumDrone" type="Button" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 147.0
-offset_right = 155.0
-offset_bottom = 163.0
+offset_left = 152.0
+offset_top = 142.0
+offset_right = 182.0
+offset_bottom = 158.0
 theme_override_font_sizes/font_size = 5
 text = "+1 Drone"
 
 [node name="PlatinumDroneDamage" type="Label" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 168.0
-offset_right = 178.0
-offset_bottom = 179.0
-theme_override_font_sizes/font_size = 7
-text = "Plat. Drone Damage:"
+offset_left = 151.0
+offset_top = 163.0
+offset_right = 186.0
+offset_bottom = 174.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Damage:"
 
 [node name="PlatDroneDamage" type="Label" parent="."]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 168.0
-offset_right = 259.0
-offset_bottom = 179.0
-theme_override_font_sizes/font_size = 7
+offset_left = 189.0
+offset_top = 163.0
+offset_right = 218.0
+offset_bottom = 174.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "5"
-
-[node name="PlatDroneDamagePlatCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 199.0
-offset_top = 179.0
-offset_right = 247.0
-offset_bottom = 190.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="PlatDroneDamageCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 188.0
-offset_right = 246.0
-offset_bottom = 199.0
-theme_override_font_sizes/font_size = 7
+offset_left = 202.0
+offset_top = 179.0
+offset_right = 250.0
+offset_bottom = 187.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "100"
 
 [node name="UpgradePlatDroneDamage" type="Button" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 180.0
-offset_right = 158.0
-offset_bottom = 196.0
+offset_left = 150.0
+offset_top = 174.0
+offset_right = 183.0
+offset_bottom = 190.0
 theme_override_font_sizes/font_size = 5
 text = "+ Damage"
 
 [node name="PlatinumDroneSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 201.0
-offset_right = 178.0
-offset_bottom = 212.0
-theme_override_font_sizes/font_size = 7
-text = "Plat Drone Speed:"
+offset_left = 260.0
+offset_top = 147.0
+offset_right = 287.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Speed:"
 
 [node name="PlatDroneSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 201.0
-offset_right = 258.0
-offset_bottom = 212.0
-theme_override_font_sizes/font_size = 7
+offset_left = 299.0
+offset_top = 148.0
+offset_right = 321.0
+offset_bottom = 157.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
 text = "5"
-
-[node name="PlatDroneSpeedPlatCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 198.0
-offset_top = 212.0
-offset_right = 246.0
-offset_bottom = 223.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
 
 [node name="PlatDroneSpeedCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 197.0
-offset_top = 221.0
-offset_right = 245.0
-offset_bottom = 232.0
+offset_left = 310.0
+offset_top = 161.0
+offset_right = 359.0
+offset_bottom = 170.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="UpgradePlatinumDroneMiningSpeed" type="Button" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 213.0
-offset_right = 158.0
-offset_bottom = 229.0
+offset_left = 260.0
+offset_top = 159.0
+offset_right = 293.0
+offset_bottom = 175.0
 theme_override_font_sizes/font_size = 5
 text = "+ Speed"
 
 [node name="FerriteRefinery" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 248.0
-offset_right = 71.0
-offset_bottom = 264.0
-theme_override_font_sizes/font_size = 9
+offset_left = 380.0
+offset_top = 28.0
+offset_right = 460.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
 text = "Ferrite Refinery"
 
 [node name="FerriteAutoSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 267.0
-offset_right = 43.0
-offset_bottom = 278.0
+offset_left = 380.0
+offset_top = 46.0
+offset_right = 419.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Auto Speed"
 
 [node name="FerriteRefinerySpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 267.0
-offset_right = 112.0
-offset_bottom = 278.0
+offset_left = 441.0
+offset_top = 46.0
+offset_right = 497.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0"
 
-[node name="FerritePlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 277.0
-offset_right = 105.0
-offset_bottom = 288.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="FerriteRefinerySpeedCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 288.0
-offset_right = 127.0
-offset_bottom = 299.0
+offset_left = 419.0
+offset_top = 68.0
+offset_right = 489.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "200"
 
 [node name="UpgradeRefinerySpeed" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 280.0
-offset_right = 39.0
-offset_bottom = 296.0
+offset_left = 379.0
+offset_top = 59.0
+offset_right = 415.0
+offset_bottom = 75.0
 theme_override_font_sizes/font_size = 5
 text = "+ Speed"
 
 [node name="RefineryEfficiency" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 301.0
-offset_right = 56.0
-offset_bottom = 312.0
+offset_left = 379.0
+offset_top = 80.0
+offset_right = 432.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Output:"
 
 [node name="EfficiencyBonus" type="Label" parent="."]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 302.0
-offset_right = 118.0
-offset_bottom = 313.0
+offset_left = 421.0
+offset_top = 79.0
+offset_right = 459.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
-[node name="RefineryEfficiencyBonusCount" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 312.0
-offset_right = 105.0
-offset_bottom = 323.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="EfficiencyBonusCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 321.0
-offset_right = 104.0
-offset_bottom = 332.0
+offset_left = 420.0
+offset_top = 102.0
+offset_right = 468.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="UpgradeEfficiency" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 313.0
-offset_right = 39.0
-offset_bottom = 329.0
+offset_left = 379.0
+offset_top = 94.0
+offset_right = 415.0
+offset_bottom = 110.0
 theme_override_font_sizes/font_size = 5
 text = "+ Efficiency"
 
 [node name="PlasmaGenerator" type="Label" parent="."]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 230.0
-offset_right = 204.0
-offset_bottom = 246.0
-theme_override_font_sizes/font_size = 9
+offset_left = 497.0
+offset_top = 28.0
+offset_right = 591.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
 text = "Plasma Generator"
 
 [node name="PlasmaGeneratorAutoSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 127.0
-offset_top = 245.0
-offset_right = 168.0
-offset_bottom = 256.0
+offset_left = 498.0
+offset_top = 42.0
+offset_right = 555.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Auto Speed:"
 
 [node name="GeneratorAutoSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 245.0
-offset_right = 235.0
-offset_bottom = 256.0
+offset_left = 556.0
+offset_top = 42.0
+offset_right = 612.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0"
 
-[node name="GeneratorAutoSpeedPlatCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 255.0
-offset_right = 228.0
-offset_bottom = 266.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="AutoSpeedPlatCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 266.0
-offset_right = 250.0
-offset_bottom = 277.0
+offset_left = 543.0
+offset_top = 63.0
+offset_right = 613.0
+offset_bottom = 74.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "200"
 
 [node name="PlasmaGeneratorSpeedUpgrade" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 258.0
-offset_right = 162.0
-offset_bottom = 274.0
+offset_left = 499.0
+offset_top = 55.0
+offset_right = 535.0
+offset_bottom = 71.0
 theme_override_font_sizes/font_size = 5
 text = "+ Speed"
 
 [node name="PlasmaGeneratorOutput" type="Label" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 275.0
-offset_right = 179.0
-offset_bottom = 286.0
+offset_left = 499.0
+offset_top = 72.0
+offset_right = 552.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Output:"
 
 [node name="GeneratorOutput" type="Label" parent="."]
 layout_mode = 0
-offset_left = 181.0
-offset_top = 276.0
-offset_right = 241.0
-offset_bottom = 287.0
+offset_left = 554.0
+offset_top = 73.0
+offset_right = 614.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
-[node name="OutputPlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 286.0
-offset_right = 228.0
-offset_bottom = 297.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="OutputCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 295.0
-offset_right = 253.0
-offset_bottom = 306.0
+offset_left = 542.0
+offset_top = 92.0
+offset_right = 616.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="GeneratorOutputUpgrade" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 287.0
-offset_right = 162.0
-offset_bottom = 303.0
+offset_left = 499.0
+offset_top = 84.0
+offset_right = 535.0
+offset_bottom = 100.0
 theme_override_font_sizes/font_size = 5
 text = "+1 Output"
 
 [node name="GeneratorFuelCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 305.0
-offset_right = 179.0
-offset_bottom = 316.0
+offset_left = 499.0
+offset_top = 102.0
+offset_right = 552.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Fuel Cost:"
 
 [node name="FuelCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 305.0
-offset_right = 239.0
-offset_bottom = 316.0
+offset_left = 552.0
+offset_top = 102.0
+offset_right = 612.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "8"
 
-[node name="GeneratorFuelPlatinumCost" type="Label" parent="."]
-layout_mode = 0
-offset_left = 179.0
-offset_top = 316.0
-offset_right = 227.0
-offset_bottom = 327.0
-theme_override_font_sizes/font_size = 7
-text = "Platinum Cost"
-
 [node name="FuelPlatinumCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 325.0
-offset_right = 244.0
-offset_bottom = 336.0
+offset_left = 543.0
+offset_top = 123.0
+offset_right = 608.0
+offset_bottom = 134.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "500"
 
 [node name="UpgradeFuelCost" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 318.0
-offset_right = 165.0
-offset_bottom = 334.0
+offset_left = 499.0
+offset_top = 115.0
+offset_right = 538.0
+offset_bottom = 131.0
 theme_override_font_sizes/font_size = 5
 text = "Lower Cost"
 
@@ -651,16 +585,76 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -36.0
-offset_top = 2.0
-offset_right = -1.0
-offset_bottom = 19.0
+offset_left = -64.0
+offset_top = 175.0
+offset_right = -23.0
+offset_bottom = 192.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 6
 text = "Hide"
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="PlatinumUiIcon2" type="Sprite2D" parent="."]
+position = Vector2(198, 64)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon5" type="Sprite2D" parent="."]
+position = Vector2(66, 61)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon6" type="Sprite2D" parent="."]
+position = Vector2(71, 101)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon3" type="Sprite2D" parent="."]
+position = Vector2(297, 85)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon4" type="Sprite2D" parent="."]
+position = Vector2(303, 166)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon7" type="Sprite2D" parent="."]
+position = Vector2(194, 149)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon8" type="Sprite2D" parent="."]
+position = Vector2(192, 182)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="."]
+position = Vector2(199, 101)
+texture = ExtResource("4_nnvdg")
+
+[node name="MiningDrone" type="Sprite2D" parent="."]
+position = Vector2(160, 52)
+texture = ExtResource("5_lgang")
+
+[node name="PlatinumDrone" type="Sprite2D" parent="."]
+position = Vector2(159, 133)
+texture = ExtResource("6_atmsq")
+
+[node name="PlatinumUiIcon9" type="Sprite2D" parent="."]
+position = Vector2(425, 62)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon10" type="Sprite2D" parent="."]
+position = Vector2(426, 97)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon11" type="Sprite2D" parent="."]
+position = Vector2(549, 58)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon12" type="Sprite2D" parent="."]
+position = Vector2(548, 87)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon13" type="Sprite2D" parent="."]
+position = Vector2(548, 118)
+texture = ExtResource("4_nnvdg")
 
 [connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
 [connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]

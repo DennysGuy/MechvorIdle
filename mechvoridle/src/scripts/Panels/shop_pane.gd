@@ -21,6 +21,7 @@ class_name ShopPane extends Control
 @onready var cancellation_button: Button = $ColorRect/ConfirmationBox/CancellationButton
 @onready var weight_class : Label = $ColorRect/WeightClass
 @onready var weapon_type_focus : Label = $ColorRect/WeaponTypeFocus
+@onready var sub_viewport : SubViewport = $ColorRect/SubViewportContainer/SubViewport
 
 @onready var parts_owned_label: Label = $ColorRect/PartsOwnedLabel
 
@@ -33,6 +34,7 @@ func _ready() -> void:
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_plasma_count.connect(update_plasma_count)
 	SignalBus.transfer_item_to_shop_panel.connect(update_description_box)
+	sub_viewport.own_world_3d = true
 	slot_is_filled_label.hide()
 	display_component_list("Heads")
 	update_ferrite_bars_count()

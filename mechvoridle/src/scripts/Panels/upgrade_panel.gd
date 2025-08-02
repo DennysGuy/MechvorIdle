@@ -1,4 +1,4 @@
-class_name UpgradePanel extends ColorRect
+class_name UpgradePanel extends TextureRect
 
 
 
@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 	
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	
-	if GameManager.drones_count > 0:
+	if mining_drones_count > 0:
 		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
 		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:

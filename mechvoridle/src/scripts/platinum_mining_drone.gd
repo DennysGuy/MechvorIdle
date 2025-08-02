@@ -2,12 +2,14 @@ class_name PlatinumMiningDrone extends Node2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
 @onready var audio_stream_player_2d : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 15
 
 var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
 func _ready() -> void:
+	animation_player.play("idle")
 	DroneManager.register_platinum_drone(self)
 
 func _process(delta : float) -> void:

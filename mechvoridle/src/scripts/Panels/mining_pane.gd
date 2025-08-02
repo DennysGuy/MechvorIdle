@@ -1,11 +1,12 @@
 class_name MiningPane extends Control
 
 @onready var animation_player = $AnimationPlayer
+@onready var sub_viewport : SubViewport = $ColorRect/SubViewportContainer/SubViewport
 
 func _ready() -> void:
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)
 	SignalBus.hide_upgrade_panel.connect(hide_upgrade_panel)
-
+	#sub_viewport.own_world_3d = false
 func _process(_delta : float) -> void:
 	pass
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=6 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
+[ext_resource type="PackedScene" uid="uid://e2nsnjl2tg5q" path="res://src/scenes/bm.tscn" id="3_mi2d3"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="3_pkk0g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi2d3"]
@@ -282,6 +283,28 @@ offset_top = 65.0
 offset_right = 170.0
 offset_bottom = 96.0
 text = "Cancel"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -299.0
+offset_top = -176.0
+offset_right = 213.0
+offset_bottom = 336.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="BM" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("3_mi2d3")]
 
 [node name="CRTOverlay" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_mi2d3")
