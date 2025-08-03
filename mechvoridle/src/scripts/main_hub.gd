@@ -14,6 +14,7 @@ class_name MainHub extends Control
 @onready var mining_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_MINING_01, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_02, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_04]
 @onready var shop_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_01, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_02, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_03, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_04, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_05]
 func _ready() -> void:
+	GameManager.can_traverse_panes = false
 	music_player.play()
 	ship_ambiance_player.play()
 	animation_player.play("fade_in")
@@ -25,6 +26,8 @@ func _ready() -> void:
 	SignalBus.silence_ship_alarm.connect(remove_ship_alarm)
 	SignalBus.show_audio_settings.connect(show_audio_settings)
 	SignalBus.hide_audio_settings.connect(hide_audio_settings)
+	SignalBus.start_fight.connect(start_fight)
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
@@ -41,6 +44,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta : float) ->void:
 	pass
 
+func start_fight() -> void:
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
 
 func move_to_mining_pane() -> void:
 	play_nav_from_hub_to_mining_sfx()
@@ -116,3 +123,6 @@ func play_ready_fight_vox_sfx() -> void:
 	vox_player.play()
 	await vox_player.finished
 	GameManager.can_fight_boss = true
+
+func can_move() -> void:
+	GameManager.can_traverse_panes = true

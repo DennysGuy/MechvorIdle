@@ -1,6 +1,7 @@
 class_name ShopMenuItemPanel extends Control
 
 @onready var item_name: Label = $ItemName
+@onready var audio_stream_player :AudioStreamPlayer = $AudioStreamPlayer
 
 var component : MechComponent
 
@@ -13,6 +14,14 @@ func _ready() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			SignalBus.transfer_item_to_shop_panel.emit(component)
+	pass
+			
+
+
+func _on_mouse_entered():
+	SfxManager.play_button_hover(audio_stream_player)
+
+
+func _on_pressed():
+	SfxManager.play_button_click(audio_stream_player)
+	SignalBus.transfer_item_to_shop_panel.emit(component)

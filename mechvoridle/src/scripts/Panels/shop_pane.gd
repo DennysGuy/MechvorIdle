@@ -6,8 +6,10 @@ class_name ShopPane extends Control
 @onready var item_menu: VBoxContainer = $ColorRect/ScrollContainer/ItemMenu
 @onready var slot_is_filled_label: Label = $ColorRect/SlotIsFilledLabel
 @onready var part_class: Label = $ColorRect/PartClass
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var sfx_player  : AudioStreamPlayer = $SfxPlayer
 
-@onready var purchase_button: Button = $ColorRect/PurchaseButton
+@onready var purchase_button: TextureButton = $ColorRect/PurchaseButton
 
 @onready var item_name: Label = $ItemName
 
@@ -16,9 +18,9 @@ class_name ShopPane extends Control
 @onready var plasma_cost: Label = $ColorRect/PlasmaCost
 @onready var platinum_cost: Label = $ColorRect/PlatinumCost
 
-@onready var confirmation_box: ColorRect = $ColorRect/ConfirmationBox
+@onready var confirmation_box: TextureRect = $ColorRect/ConfirmationBox
 @onready var confirmation_button: Button = $ColorRect/ConfirmationBox/ConfirmationButton
-@onready var cancellation_button: Button = $ColorRect/ConfirmationBox/CancellationButton
+@onready var cancellation_button: TextureButton = $ColorRect/ConfirmationBox/CancellationButton
 @onready var weight_class : Label = $ColorRect/WeightClass
 @onready var weapon_type_focus : Label = $ColorRect/WeaponTypeFocus
 @onready var sub_viewport : SubViewport = $ColorRect/SubViewportContainer/SubViewport
@@ -114,6 +116,7 @@ func _on_rocket_launchers_button_button_down() -> void:
 	show_already_purchased_label("Weapon")
 
 func display_component_list(component_name : String):
+	SfxManager.play_button_click(sfx_player)
 	clear_container()
 
 	var list : Dictionary = ShopList.shop_list[component_name]
@@ -127,10 +130,14 @@ func clear_container() -> void:
 		item.queue_free()
 
 func _on_purchase_button_button_down() -> void:
+	SfxManager.play_button_click(sfx_player)
 	show_confirmation_panel()
 
 
 func _on_confirmation_button_button_down() -> void:
+	SfxManager.play_button_click(sfx_player)
+	sfx_player.stream = [SfxManager.UI_SHOP_BUY_COMPLETE_01,SfxManager.UI_SHOP_BUY_COMPLETE_02,SfxManager.UI_SHOP_BUY_COMPLETE_03].pick_random()
+	sfx_player.play()
 	GameManager.ferrite_bars_count -= selected_component.refined_ferrite_cost
 	GameManager.plasma_count -= selected_component.plasma_cost
 	GameManager.add_mech_component(selected_component)
@@ -144,15 +151,18 @@ func _on_confirmation_button_button_down() -> void:
 
 func show_confirmation_panel() -> void:
 	confirmation_box_is_showing = true
-	confirmation_box.show()
+	animation_player.play("PanelSwoopIn")
 	disable_confirmation_button(false)
 
 func hide_confirmation_panel() -> void:
 	confirmation_box_is_showing = false
-	confirmation_box.hide()
+	animation_player.play("PanelSwoopOut")
 	disable_confirmation_button(true)
 
 func _on_cancellation_button_button_down() -> void:
+	SfxManager.play_button_click(sfx_player)
+	sfx_player.stream = [SfxManager.UI_SHOP_BUY_NO_CASH_01,SfxManager.UI_SHOP_BUY_NO_CASH_02, SfxManager.UI_SHOP_BUY_NO_CASH_03].pick_random()
+	sfx_player.play()
 	hide_confirmation_panel()
 	
 func disable_confirmation_button(value : bool) -> void:
@@ -170,3 +180,43 @@ func show_already_purchased_label(component_name : String):
 	
 func update_parts_owned_label() -> void:
 	parts_owned_label.text = "Parts Owned: " + str(GameManager.owned_components_count) + "/" + str(GameManager.MECH_PARTS_NEEDED)
+
+
+func _on_purchase_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_cancellation_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_confirmation_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_heads_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_torsos_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_arms_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_legs_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_rifles_button_mouse_entered():
+	SfxManager.play_button_hover(sfx_player)
+
+
+func _on_swords_button_mouse_entered():
+	pass # Replace with function body.
+
+
+func _on_rocket_launchers_button_mouse_entered():
+	pass # Replace with function body.

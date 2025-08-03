@@ -96,3 +96,14 @@ const UI_MISC_TEXT_CRAWL_03 : AudioStream = preload("res://assets/audio/SFX/UI/M
 const VOX_ALARM_UFO_ALERT_01 : AudioStream = preload("res://assets/audio/SFX/VOX/VOX_Alarm_UFO_Alert_01.ogg")
 const VOX_NOT_ARENA_ACCESS_01 : AudioStream = preload("res://assets/audio/SFX/VOX/VOX_Not_Arena_Access_01.ogg")
 const VOX_NOT_UFO_DOWN_01 : AudioStream = preload("res://assets/audio/SFX/VOX/VOX_Not_UFO_Down_01.ogg")
+
+
+func play_button_hover(audio_stream_player : AudioStreamPlayer) -> void:
+	var hover_sfx_list = [UI_NAV_BUTTON_HOVER_01, UI_NAV_BUTTON_HOVER_02, UI_NAV_BUTTON_HOVER_03]
+	audio_stream_player.stream = hover_sfx_list.pick_random()
+	audio_stream_player.play()
+
+func play_button_click(audio_stream_player : AudioStreamPlayer) -> void:
+	var click_sfx_list = [UI_NAV_BUTTON_PRESS_01, UI_NAV_BUTTON_PRESS_02, UI_NAV_BUTTON_PRESS_03]		
+	audio_stream_player.stream = click_sfx_list.pick_random()
+	audio_stream_player.play()

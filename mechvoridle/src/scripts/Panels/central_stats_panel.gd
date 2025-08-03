@@ -1,19 +1,22 @@
 class_name CentralHubPanel extends Control
 
 @onready var elapsed_time = $ColorRect/ResourcesPanel/ElapsedTime
+@onready var line_edit = $ColorRect/NameEntryBox/LineEdit
 
-@onready var line_edit : LineEdit = $NameEntryBox/LineEdit
 
 @onready var raw_ferrite_count = $ColorRect/ResourcesPanel/RawFerriteCount
 @onready var ferrite_bars_count = $ColorRect/ResourcesPanel/FerriteBarsCount
 @onready var platinum_bars_count = $ColorRect/ResourcesPanel/PlatinumBarsCount
 @onready var plasma_count: Label = $ColorRect/ResourcesPanel/PlasmaCount
-@onready var start_fight_button: Button = $ColorRect/HBoxContainer/StartFight
+@onready var start_fight_button: TextureButton = $ColorRect/HBoxContainer/StartFight
 @onready var recon_text : RichTextLabel = $ColorRect/TipsPanel/ReconText
 @onready var platinum_cost : Label = $ColorRect/TipsPanel/PlatinumCost
 @onready var purchase_recon_scout : Button = $ColorRect/TipsPanel/PurchaseReconScout
-@onready var name_entry_box = $NameEntryBox
-@onready var confirm_start_fight = $NameEntryBox/ConfirmStartFight
+@onready var name_entry_box = $ColorRect/NameEntryBox
+@onready var confirm_start_fight = $ColorRect/NameEntryBox/ConfirmStartFight
+
+@onready var animation_player = $AnimationPlayer
+
 
 @onready var recon_tips_list : Array[String] = [GameManager.chosen_opponent.tip_1, GameManager.chosen_opponent.tip_2, GameManager.chosen_opponent.tip_3]
 var recon_scouts_left : int = 3
@@ -51,7 +54,7 @@ func _on_shop_pane_navigation_button_up() -> void:
 
 
 func start_fight() -> void:
-	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
+	SignalBus.start_fight.emit()
 
 func _on_purchase_recon_scout_button_down():
 	if recon_scouts_left > 0:
@@ -78,12 +81,11 @@ func update_plasma_count() -> void:
 
 func hide_entry_box() -> void:
 	name_entry_box.hide()
-	line_edit.hide()
 	confirm_start_fight.disabled = true
 
 func show_entry_box() -> void:
 	name_entry_box.show()
-	line_edit.show()
+	animation_player.play("EntryBoxSwoopIn")
 	confirm_start_fight.disabled = false
 
 func _on_confirm_start_fight_button_down():

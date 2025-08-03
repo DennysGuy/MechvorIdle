@@ -13,7 +13,7 @@ background_mode = 2
 sky = SubResource("Sky_p35re")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 1.25
+ambient_light_energy = 1.08
 reflected_light_source = 1
 
 [sub_resource type="Animation" id="Animation_crllg"]

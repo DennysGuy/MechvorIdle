@@ -1,12 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=20 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_8ov7t"]
 [ext_resource type="PackedScene" uid="uid://e2nsnjl2tg5q" path="res://src/scenes/bm.tscn" id="3_mi2d3"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="3_pkk0g"]
+[ext_resource type="Texture2D" uid="uid://d11jf5fjl4wl8" path="res://assets/graphics/UI/FromShopPaneToCentralPaneButton_Normal.png" id="3_qucr2"]
+[ext_resource type="Texture2D" uid="uid://dp81n4y3gu6xy" path="res://assets/graphics/UI/FromShopPaneToCentralPaneButton_Hoverl.png" id="4_gvnck"]
+[ext_resource type="Texture2D" uid="uid://cugvltahnibtq" path="res://assets/graphics/UI/PurchaseButton_normal.png" id="4_p8hdl"]
+[ext_resource type="Texture2D" uid="uid://c1pwumyqi7sqt" path="res://assets/graphics/UI/PurchaseButton_hover.png" id="5_nqj3v"]
+[ext_resource type="Texture2D" uid="uid://ygwtask7dhhn" path="res://assets/graphics/UI/PurchaseButton_disabled.png" id="6_qucr2"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="6_wcomc"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="7_4k2ii"]
+[ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="8_wcomc"]
+[ext_resource type="Texture2D" uid="uid://ce1elo3nxwhn2" path="res://assets/graphics/UI/ClosePanelButton.png" id="9_4k2ii"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi2d3"]
 resource_local_to_scene = true
@@ -33,6 +40,58 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.174
 
+[sub_resource type="Animation" id="Animation_4k2ii"]
+resource_name = "PanelSwoopIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/ConfirmationBox:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(232, -140), Vector2(232, 128)]
+}
+
+[sub_resource type="Animation" id="Animation_ei8pv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/ConfirmationBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(232, -140)]
+}
+
+[sub_resource type="Animation" id="Animation_j2pgo"]
+resource_name = "PanelSwoopOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/ConfirmationBox:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(232, 128), Vector2(232, -140)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2pgo"]
+_data = {
+&"PanelSwoopIn": SubResource("Animation_4k2ii"),
+&"PanelSwoopOut": SubResource("Animation_j2pgo"),
+&"RESET": SubResource("Animation_ei8pv")
+}
+
 [node name="ShopPane" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -57,13 +116,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_pkk0g")
 
-[node name="CentralHubNavigation" type="Button" parent="ColorRect"]
+[node name="CentralHubNavigation" type="TextureButton" parent="ColorRect"]
+modulate = Color(1, 1, 1, 0.74902)
 layout_mode = 0
-offset_left = 9.0
+offset_left = 3.0
 offset_top = 1.0
-offset_right = 110.0
-offset_bottom = 32.0
-text = "Central Hub"
+offset_right = 104.0
+offset_bottom = 36.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qucr2")
+texture_hover = ExtResource("4_gvnck")
 
 [node name="DescriptionTextBox" type="RichTextLabel" parent="ColorRect"]
 layout_mode = 0
@@ -144,48 +206,6 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 6
 text = "Cost: N/A"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-layout_mode = 0
-offset_left = 68.0
-offset_top = 50.0
-offset_right = 243.0
-offset_bottom = 70.0
-
-[node name="HeadsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Heads"
-
-[node name="TorsosButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Torso"
-
-[node name="ArmsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Arms"
-
-[node name="LegsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Legs"
-
-[node name="RiflesButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Rifles"
-
-[node name="SwordsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Swords"
-
-[node name="RocketLaunchersButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 4
-text = "Launchers"
-
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
 layout_mode = 2
 offset_left = 74.0
@@ -238,15 +258,6 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 7
 text = "150000000000"
 
-[node name="PurchaseButton" type="Button" parent="ColorRect"]
-layout_mode = 2
-offset_left = 330.0
-offset_top = 257.0
-offset_right = 365.0
-offset_bottom = 274.0
-theme_override_font_sizes/font_size = 6
-text = "Purchase"
-
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 3
@@ -264,48 +275,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 15
 text = "Black Market"
-
-[node name="ConfirmationBox" type="ColorRect" parent="ColorRect"]
-visible = false
-layout_mode = 0
-offset_left = 197.0
-offset_top = 128.0
-offset_right = 373.0
-offset_bottom = 230.0
-color = Color(0.43869, 0.273024, 0.28259, 1)
-
-[node name="Label" type="Label" parent="ColorRect/ConfirmationBox"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 18.0
-offset_right = 138.0
-offset_bottom = 41.0
-text = "Are you sure?"
-
-[node name="Label2" type="Label" parent="ColorRect/ConfirmationBox"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 43.0
-offset_right = 166.0
-offset_bottom = 59.0
-theme_override_font_sizes/font_size = 10
-text = "(Cannot go back after purchase)"
-
-[node name="ConfirmationButton" type="Button" parent="ColorRect/ConfirmationBox"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 65.0
-offset_right = 82.0
-offset_bottom = 96.0
-text = "Confirm"
-
-[node name="CancellationButton" type="Button" parent="ColorRect/ConfirmationBox"]
-layout_mode = 0
-offset_left = 99.0
-offset_top = 65.0
-offset_right = 170.0
-offset_bottom = 96.0
-text = "Cancel"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect"]
 layout_mode = 1
@@ -328,6 +297,17 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="BM" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("3_mi2d3")]
+
+[node name="Instructions" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 14.0
+offset_right = 617.0
+offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 9
+text = "Collect all Mech Components To  Start Fight!"
 
 [node name="SlotIsFilledLabel" type="Label" parent="ColorRect"]
 layout_mode = 0
@@ -367,6 +347,64 @@ offset_right = 247.0
 offset_bottom = 213.0
 mouse_filter = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 38.0
+offset_right = 253.0
+offset_bottom = 58.0
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 2
+
+[node name="HeadsButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Heads"
+
+[node name="TorsosButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Torso"
+
+[node name="ArmsButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Arms"
+
+[node name="LegsButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Legs"
+
+[node name="RiflesButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Rifles"
+
+[node name="SwordsButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Swords"
+
+[node name="RocketLaunchersButton" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Launchers"
+
 [node name="CRTOverlay2" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_mi2d3")
 layout_mode = 0
@@ -403,14 +441,97 @@ texture = ExtResource("7_4k2ii")
 position = Vector2(284, 57)
 texture = ExtResource("7_4k2ii")
 
+[node name="PurchaseButton" type="TextureButton" parent="ColorRect"]
+layout_mode = 2
+offset_left = 358.0
+offset_top = 237.0
+offset_right = 422.0
+offset_bottom = 262.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_p8hdl")
+texture_hover = ExtResource("5_nqj3v")
+texture_disabled = ExtResource("6_qucr2")
+
+[node name="ConfirmationBox" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -52.0
+offset_right = 88.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_wcomc")
+
+[node name="Label" type="Label" parent="ColorRect/ConfirmationBox"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 36.0
+offset_right = 156.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 13
+text = "Are you sure?"
+
+[node name="Label2" type="Label" parent="ColorRect/ConfirmationBox"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 58.0
+offset_right = 159.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 6
+text = "(Cannot go back after purchase)"
+
+[node name="ConfirmationButton" type="Button" parent="ColorRect/ConfirmationBox"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 75.0
+offset_right = 123.0
+offset_bottom = 95.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 10
+text = "Confirm"
+
+[node name="CancellationButton" type="TextureButton" parent="ColorRect/ConfirmationBox"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 32.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_4k2ii")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j2pgo")
+}
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/PurchaseButton" to="." method="_on_purchase_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/PurchaseButton" to="." method="_on_purchase_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_mouse_entered"]

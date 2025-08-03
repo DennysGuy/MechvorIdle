@@ -235,7 +235,7 @@ func reset():
 	owned_weapons_count = 0
 	owned_components_count = 0
 	chosen_opponent = null
-
+	can_traverse_panes = false
 	# Mining panel
 	ufo_attacking = false
 	ferrite_refinery_cost = ferrite_cost_platinum_base_cost
@@ -314,7 +314,7 @@ func reset():
 	fill_bars = false
 	
 	can_fight_boss = false
-	can_traverse_panes = true
+	can_traverse_panes = false
 	# Mech Component Slots
 	owned_mech_components = {
 		"Head": null,
