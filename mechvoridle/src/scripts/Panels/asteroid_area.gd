@@ -108,8 +108,12 @@ func _on_ufo_spawn_timer_timeout():
 		spawn_ufo()
 
 func toggle_ufo_spawn() -> void:
+	if GameManager.can_fight_boss:
+		ufo_spawn_timer.stop()
+		return
+		
 	var total_drone_count : int = DroneManager.get_total_drone_count()
-	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO and not GameManager.can_fight_boss:
+	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO:
 		start_ufo_spawn = true
 	else:
 		start_ufo_spawn = false
