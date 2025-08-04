@@ -156,7 +156,7 @@ func _process(delta: float) -> void:
 	drone_speed_indicator.visible = show_upgrade_indicator(GameManager.drone_mining_speed_cost) and mining_drones_count > 0
 	platinum_drone_available_indicator.visible = show_upgrade_indicator(plat_drones_cost)
 	platinum_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_damage_cost) and mining_drones_count > 0
-	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_mining_speed_cost) and mining_drones_count > 0
+	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_mining_speed_cost) and plat_drones_count > 0
 	ferrite_refinery_output_indicator.visible = show_upgrade_indicator(GameManager.output_upgrade_cost) and GameManager.ferrite_refinery_station_purchased
 	ferrite_refinery_speed_indicator.visible = show_upgrade_indicator(GameManager.ferrite_refinery_speed_cost) and GameManager.ferrite_refinery_station_purchased
 	plasma_generator_output_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_output_cost) and GameManager.plasma_generator_station_purchased
@@ -179,7 +179,7 @@ func _process(delta: float) -> void:
 		
 	if plat_drones_count > 0:
 		upgrade_plat_drone_damage.disabled = GameManager.platinum_count <= GameManager.platinum_drone_damage_cost
-		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.drone_mining_speed_cost
+		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.platinum_drone_mining_speed_cost
 	else:
 		upgrade_plat_drone_damage.disabled = true
 		upgrade_platinum_drone_mining_speed.disabled = true
@@ -260,7 +260,7 @@ func _on_upgrade_efficiency_button_down():
 	GameManager.ferrite_refinery_output_level += 1
 	GameManager.output_amount *= 2
 	GameManager.ferrite_cost  *= 2
-	GameManager.output_upgrade_cost = GameManager.output_upgrade_base_cost * pow(2, GameManager.ferrite_refinery_output_level)
+	GameManager.output_upgrade_cost = GameManager.output_upgrade_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.ferrite_refinery_output_level)
 	
 	efficiency_bonus_cost.text = str(GameManager.output_upgrade_cost)
 	efficiency_bonus.text = str(GameManager.output_amount)
@@ -271,7 +271,7 @@ func _on_generator_output_upgrade_button_down():
 	GameManager.platinum_count -= GameManager.plasma_generator_output_cost
 	GameManager.plasma_generator_output *= GameManager.plasma_generator_output_upgrade_interval
 	GameManager.plasma_generator_output_level += 1
-	GameManager.plasma_generator_output_cost = GameManager.plasma_generator_output_base_const * pow(2, GameManager.plasma_generator_output_level)
+	GameManager.plasma_generator_output_cost = GameManager.plasma_generator_output_base_const * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_output_level)
 	GameManager.plasma_generator_fuel_consumption *= 2
 	fuel_cost.text = str(GameManager.plasma_generator_fuel_consumption)
 	generator_output.text = str(GameManager.plasma_generator_output)
@@ -283,7 +283,7 @@ func _on_upgrade_fuel_cost_button_down():
 	GameManager.platinum_count -= GameManager.plasma_generator_fuel_cost
 	GameManager.plasma_generator_fuel_consumption -= GameManager.plasma_generator_fuel_consumption_upgrade_interval
 	GameManager.plasma_generator_fuel_level += 1
-	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_fuel_base_cost * pow(2, GameManager.plasma_generator_fuel_level)
+	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_fuel_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_fuel_level)
 	fuel_cost.text = str(GameManager.plasma_generator_fuel_consumption)
 	fuel_platinum_cost.text = str(GameManager.plasma_generator_fuel_cost)
 	SignalBus.update_fuel_consumption.emit()
@@ -293,7 +293,7 @@ func _on_plasma_generator_speed_upgrade_button_down():
 	GameManager.platinum_count -= GameManager.plasma_generator_speed_cost
 	GameManager.plasma_generator_speed += GameManager.plasma_generator_speed_upgrade_interval
 	GameManager.plasma_generator_speed_level += 1
-	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_speed_base_cost * pow(2, GameManager.plasma_generator_speed_level)
+	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_speed_level)
 	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
 	SignalBus.update_plasma_generator_speed.emit()
@@ -321,7 +321,7 @@ func upgrade_mining_laser() -> void:
 	GameManager.platinum_count -= GameManager.mining_laser_damage_upgrade_cost
 	GameManager.mining_laser_level += 1
 	GameManager.mining_laser_damage = GameManager.mining_laser_damage + GameManager.mining_laser_level * 2
-	GameManager.mining_laser_damage_upgrade_cost = GameManager.mining_laser_damage_base_cost * pow(2, GameManager.mining_laser_level)
+	GameManager.mining_laser_damage_upgrade_cost = GameManager.mining_laser_damage_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.mining_laser_level)
 	GameManager.platinum_gain_min += 3
 	GameManager.platinum_gain_max += 3
 	SignalBus.update_platinum_count.emit()
@@ -332,7 +332,7 @@ func upgrade_mining_critical_chance() -> void:
 	GameManager.platinum_count -= GameManager.mining_laser_crit_chance_cost
 	GameManager.mining_laser_crit_chance_level += 1
 	GameManager.mining_laser_crit_chance += GameManager.mining_laser_crit_chance_interval
-	GameManager.mining_laser_crit_chance_cost = GameManager.mining_laser_crit_chance_base_cost * pow(2, GameManager.mining_laser_crit_chance_level)
+	GameManager.mining_laser_crit_chance_cost = GameManager.mining_laser_crit_chance_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.mining_laser_crit_chance_level)
 	SignalBus.update_platinum_count.emit()
 func purchased_drone() -> void:
 	if !GameManager.mining_drone_purchased:
@@ -349,7 +349,7 @@ func upgrade_drones_damage() -> void:
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
 	GameManager.drone_damage = GameManager.drone_damage + GameManager.drone_level * 2
-	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(2, GameManager.drone_level)
+	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_level)
 
 
 func _on_upgrade_drone_mining_speed_button_down() -> void:
@@ -358,7 +358,7 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 	GameManager.platinum_count -= GameManager.drone_mining_speed_cost
 	GameManager.drone_mining_speed_level += 1
 	GameManager.drone_mining_speed += GameManager.drone_mining_speed_upgrade_interval
-	GameManager.drone_mining_speed_cost = GameManager.drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
+	GameManager.drone_mining_speed_cost = GameManager.drone_mining_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_mining_speed_level)
 	drone_speed.text = str(int(GameManager.drone_mining_speed * 100)) + "%"
 	drone_mining_speed_cost.text = str(GameManager.drone_mining_speed_cost)
 
@@ -377,7 +377,7 @@ func _on_upgrade_plat_drone_damage_button_down() -> void:
 	GameManager.platinum_count -= GameManager.platinum_drone_damage_cost
 	GameManager.platinum_drone_damage_level += 1
 	GameManager.platinum_drone_damage = GameManager.platinum_drone_damage + GameManager.platinum_drone_damage_level * 2
-	GameManager.platinum_drone_damage_cost = GameManager.platinum_drone_damage_base_cost * pow(2, GameManager.platinum_drone_damage_level)
+	GameManager.platinum_drone_damage_cost = GameManager.platinum_drone_damage_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.platinum_drone_damage_level)
 	plat_drone_damage.text = str(GameManager.platinum_drone_damage)
 	plat_drone_damage_cost.text = str(GameManager.platinum_drone_damage_cost)
 	SignalBus.update_platinum_count.emit()
@@ -388,7 +388,7 @@ func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
 	GameManager.platinum_count -= GameManager.platinum_drone_mining_speed_cost
 	GameManager.platinum_drone_mining_speed_level += 1
 	GameManager.platinum_drone_mining_speed += GameManager.platinum_drone_mining_speed_interval
-	GameManager.platinum_drone_mining_speed_cost = GameManager.platinum_drone_mining_speed_base_cost * pow(2, GameManager.drone_mining_speed_level)
+	GameManager.platinum_drone_mining_speed_cost = GameManager.platinum_drone_mining_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_mining_speed_level)
 	plat_drone_speed.text = str(int(GameManager.platinum_drone_mining_speed * 100)) + "%"
 	plat_drone_speed_cost.text = str(GameManager.platinum_drone_mining_speed_cost)
 	SignalBus.update_platinum_count.emit()
@@ -399,7 +399,7 @@ func _on_upgrade_refinery_speed_button_down() -> void:
 	GameManager.platinum_count -= GameManager.ferrite_refinery_speed_cost
 	GameManager.ferrite_refinery_speed_level += 1
 	GameManager.ferrite_refinery_speed += GameManager.ferrite_refinery_speed_upgrade_interval
-	GameManager.ferrite_refinery_speed_cost = GameManager.ferrite_refinery_speed_base_cost * pow(2, GameManager.ferrite_refinery_speed_level)
+	GameManager.ferrite_refinery_speed_cost = GameManager.ferrite_refinery_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.ferrite_refinery_speed_level)
 	ferrite_refinery_speed.text = str(int(GameManager.ferrite_refinery_speed * 100)) +"%"
 	ferrite_refinery_speed_cost.text = str(GameManager.ferrite_refinery_speed_cost)
 	SignalBus.update_platinum_count.emit()
@@ -410,7 +410,7 @@ func _on_upgrade_mining_laser_speed_button_down():
 	GameManager.platinum_count -= GameManager.mining_laser_speed_cost
 	GameManager.mining_laser_speed_level += 1
 	GameManager.mining_laser_speed += GameManager.mining_laser_speed_upgrade_interval
-	GameManager.mining_laser_speed_cost = GameManager.mining_laser_speed_base_cost * pow(2, GameManager.mining_laser_speed_level)
+	GameManager.mining_laser_speed_cost = GameManager.mining_laser_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.mining_laser_speed_level)
 	current_mining_laser_cost.text = str(GameManager.mining_laser_speed_cost)
 	current_mining_laser_speed.text = str(int(GameManager.mining_laser_speed * 100))+"%"
 	SignalBus.update_mining_laser_speed.emit()

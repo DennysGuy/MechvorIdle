@@ -171,7 +171,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -260,22 +260,6 @@ _data = {
 &"show": SubResource("Animation_8stgo")
 }
 
-[sub_resource type="Animation" id="Animation_nd5gx"]
-resource_name = "show check list"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TutorialCheckList:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(226, 361), Vector2(226, 70)]
-}
-
 [sub_resource type="Animation" id="Animation_y0q8j"]
 length = 0.001
 tracks/0/type = "value"
@@ -305,6 +289,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(226, 70), Vector2(226, 361)]
+}
+
+[sub_resource type="Animation" id="Animation_nd5gx"]
+resource_name = "show check list"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TutorialCheckList:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(226, 361), Vector2(226, 70)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8r2gy"]

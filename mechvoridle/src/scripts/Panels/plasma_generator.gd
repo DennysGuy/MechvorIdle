@@ -31,7 +31,7 @@ func _process(delta : float) -> void:
 		button.disabled = GameManager.platinum_count < GameManager.plasma_generator_cost
 	
 	if GameManager.plasma_generator_station_purchased:
-		if GameManager.raw_ferrite_count >= GameManager.plasma_generator_fuel_consumption and fuel_tank == 0:
+		if GameManager.ferrite_bars_count >= GameManager.plasma_generator_fuel_consumption and fuel_tank == 0:
 			GameManager.ferrite_bars_count -= GameManager.plasma_generator_fuel_consumption
 			fuel_tank = GameManager.plasma_generator_fuel_consumption
 			fuel_bar.value = fuel_bar.max_value
@@ -43,13 +43,13 @@ func _process(delta : float) -> void:
 			
 		if fuel_tank > 0:
 			fuel_bar.value -= GameManager.plasma_generator_fuel_consumption_speed
-			if fuel_bar.value == 0:
+			if fuel_bar.value <= 0:
 				fuel_tank = 0
 		
 		
 		if fuel_bar.value > 0 and fuel_tank > 0 : # we'll pause production if we have no fuel in the take
 			progress_bar.value += GameManager.plasma_generator_speed
-			if progress_bar.value == progress_bar.max_value:
+			if progress_bar.value >= progress_bar.max_value:
 				obtain_resources()
 				progress_bar.value = 0
 	

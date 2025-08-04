@@ -147,75 +147,121 @@ offset_bottom = 81.0
 texture = ExtResource("2_ghbdi")
 
 [node name="MiningDroneIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 183.0
-offset_top = 89.0
-offset_right = 198.0
-offset_bottom = 104.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 85.0
+offset_right = -54.0
+offset_bottom = 100.0
+grow_horizontal = 0
 texture = ExtResource("2_ghbdi")
 
 [node name="PlatDroneIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 204.0
-offset_top = 111.0
-offset_right = 219.0
-offset_bottom = 126.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -42.5
+offset_right = -35.0
+offset_bottom = -27.5
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("2_ghbdi")
 
 [node name="UpgradeIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 175.0
-offset_top = 133.0
-offset_right = 190.0
-offset_bottom = 148.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -20.5
+offset_right = -65.0
+offset_bottom = -5.5
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("2_ghbdi")
 
 [node name="ReconScoutIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 182.0
-offset_top = 156.0
-offset_right = 197.0
-offset_bottom = 171.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 2.5
+offset_right = -61.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("2_ghbdi")
 
 [node name="FerriteRefineryIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 209.0
-offset_top = 177.0
-offset_right = 224.0
-offset_bottom = 192.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 24.5
+offset_right = -32.0
+offset_bottom = 39.5
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("2_ghbdi")
 
 [node name="PlasmaGenIndicator" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 226.0
-offset_top = 197.0
+offset_top = 196.0
 offset_right = 241.0
-offset_bottom = 212.0
+offset_bottom = 211.0
 texture = ExtResource("2_ghbdi")
 
 [node name="MechComponentIndicator" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 213.0
+offset_left = 211.0
 offset_top = 221.0
-offset_right = 228.0
+offset_right = 226.0
 offset_bottom = 236.0
 texture = ExtResource("2_ghbdi")
 
 [node name="FlyByAsteroidIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 190.0
-offset_top = 242.0
-offset_right = 205.0
-offset_bottom = 257.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -56.0
+offset_right = -50.0
+offset_bottom = -41.0
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource("2_ghbdi")
 
 [node name="UFOIndicator" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 107.0
-offset_top = 262.0
-offset_right = 122.0
-offset_bottom = 277.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -35.0
+offset_right = -3.5
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("2_ghbdi")
 
 [node name="OpenTutorialChecklist" type="Button" parent="."]

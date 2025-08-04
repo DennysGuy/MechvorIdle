@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2noc1tywsrt8"]
+[gd_scene load_steps=14 format=3 uid="uid://c2noc1tywsrt8"]
 
 [ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="1_eygot"]
 [ext_resource type="Script" uid="uid://ci674qv4cabch" path="res://src/scripts/Panels/MiningScene/asteroid_2.gd" id="1_hvnvx"]
@@ -6,12 +6,51 @@
 [ext_resource type="Texture2D" uid="uid://d3fcfaccalvhl" path="res://assets/graphics/Asteroid2.png" id="3_oc5ll"]
 [ext_resource type="PackedScene" uid="uid://dnuap0h1mymkl" path="res://src/scenes/MiningScene/AsteroidAnimationPlayer.tscn" id="4_6cff2"]
 [ext_resource type="PackedScene" uid="uid://caifkek63qji4" path="res://src/scenes/MiningScene/AsteroidClickControl.tscn" id="6_oc5ll"]
+[ext_resource type="Texture2D" uid="uid://dhkaanm0hvv0t" path="res://assets/graphics/UI/guide_grid.png" id="7_07tpq"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="8_w8uiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gn1o"]
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67g2f"]
 size = Vector2(12, 12)
+
+[sub_resource type="Animation" id="Animation_w8uiv"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_jvkcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlf10"]
+_data = {
+&"RESET": SubResource("Animation_jvkcn"),
+&"blink": SubResource("Animation_w8uiv")
+}
 
 [node name="Asteroid2" type="CharacterBody2D"]
 material = ExtResource("1_eygot")
@@ -58,6 +97,29 @@ mouse_default_cursor_shape = 3
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="GuideBoxAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../NinePatchRect/Label")
+libraries = {
+&"": SubResource("AnimationLibrary_wlf10")
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = 21.0
+texture = ExtResource("7_07tpq")
+region_rect = Rect2(0.528069, 0.587934, 6.91096, 6.91096)
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+offset_left = -14.0
+offset_top = -7.0
+offset_right = 34.0
+offset_bottom = 1.0
+theme_override_fonts/font = ExtResource("8_w8uiv")
+theme_override_font_sizes/font_size = 5
+text = "Spam Click"
 
 [connection signal="timeout" from="DeleteAsteroidTimer" to="." method="_on_delete_asteroid_timer_timeout"]
 [connection signal="gui_input" from="AsteroidClickControl" to="." method="_on_asteroid_click_control_gui_input"]

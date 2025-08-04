@@ -14,12 +14,15 @@ enum ASTEROID_SIZE{SMALL, MEDIUM, LARGE}
 @onready var asteroid_click_control  : Control = $AsteroidClickControl
 
 var can_hit = true
+@onready var guide_box_animation_player : AnimationPlayer = $GuideBoxAnimationPlayer
 
 @onready var asteroid_animation_player: AnimationPlayer = $AsteroidAnimationPlayer
 @onready var asteroid_hit_list : Array[AudioStream] = [SfxManager.MIN_CLICK_SPACE_01, SfxManager.MIN_CLICK_SPACE_02, SfxManager.MIN_CLICK_SPACE_03, SfxManager.MIN_CLICK_SPACE_04, SfxManager.MIN_CLICK_SPACE_05]
 signal deliver_resources 
+@onready var nine_patch_rect : NinePatchRect = $NinePatchRect
 
 func _ready() -> void:
+	guide_box_animation_player.play("blink")
 	dir = mining_asteroid.position - position
 
 func _process(delta : float) -> void:
@@ -57,6 +60,8 @@ func spawn_explosion_and_destroy():
 		
 	can_hit = false
 	graphic.hide()
+	nine_patch_rect.queue_free()
+	guide_box_animation_player.play("RESET")
 	area_2d.get_child(0).disabled = true
 	asteroid_click_control.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()

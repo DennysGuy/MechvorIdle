@@ -23,10 +23,10 @@ func get_total_drone_count() -> int:
 	return drones.size()
 
 func get_mining_drone_cost() -> int:
-	return mining_drone_base_cost * pow(2, get_mining_drone_count())
+	return mining_drone_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, get_mining_drone_count())
 
 func get_platinum_drone_cost() -> int:
-	return platinum_drone_base_cost * pow(2, get_platinum_drone_count())
+	return platinum_drone_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, get_platinum_drone_count())
 
 # === REGISTRATION ===
 
