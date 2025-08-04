@@ -9,18 +9,29 @@ var dir : Vector2
 @onready var hover_out_timer : Timer = $HoverOutTimer
 @onready var laser_release_timer : Timer = $LaserReleaseTimer
 @onready var health_bar : ProgressBar = $HealthBar
+@onready var hit_ufo_sfx_player : AudioStreamPlayer = $HitUFOSfxPlayer
+@onready var ufo_hit_sfx_list : Array[AudioStream] = [SfxManager.MIN_UNIT_UFO_DAMAGE_01, SfxManager.MIN_UNIT_UFO_DAMAGE_02, SfxManager.MIN_UNIT_UFO_DAMAGE_03, SfxManager.MIN_UNIT_UFO_DAMAGE_04, SfxManager.MIN_UNIT_UFO_DAMAGE_05]
+@onready var ufo_hover_sfx_player : AudioStreamPlayer2D = $UfoHoverSfxPlayer
 
 var mining_asteroid_area : Area2D
 var out_location : Marker2D
 var laser_timer_started : bool = false
 var hover_time_started : bool = false
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
 @export var drones_list : Node
 @export var ufo_spawn_timer : Timer
-enum states {HOVER_IN, SHOOT, HOVER_OUT, REMOVE, DEAD}
+
+enum states {HOVER_IN, SHOOT, HOVER_OUT, REMOVE, DEAD, NON_STATE}
 signal deliver_resources 
+
 var current_state : int
 var can_shoot : bool = false
+var destroy_ufo_start : bool = false
+var can_be_hit : bool = true
+
 func _ready() -> void:
+	animated_sprite_2d.play("default")
 	max_health = randi_range(8,15)
 	health = max_health
 	current_state = states.HOVER_IN
@@ -30,10 +41,20 @@ func _ready() -> void:
 	health_bar.value = health
 	health_bar.hide()
 
+func _process(delta : float) -> void:
+	if destroy_ufo_start:
+		destroy_ufo()
+		destroy_ufo_start = false
 
 func _physics_process(delta : float) -> void:
 	match(current_state):
+		
 		states.HOVER_IN:
+			
+			if !ufo_hover_sfx_player.playing:
+				ufo_hover_sfx_player.stream = SfxManager.MIN_UNIT_UFO_HOVER_01
+				ufo_hover_sfx_player.play()
+				
 			can_shoot = false
 			if not laser_timer_started:
 				laser_release_timer.start()
@@ -54,7 +75,7 @@ func _physics_process(delta : float) -> void:
 				
 			if not animation_player.is_playing():
 				animation_player.play("hover")
-			
+		
 		states.HOVER_OUT:
 			can_shoot = false
 			dir = out_location.global_position - global_position
@@ -65,23 +86,35 @@ func _physics_process(delta : float) -> void:
 				current_state = states.REMOVE
 				
 		states.DEAD:
-			destroy_ufo()
+			health_bar.hide()
+			laser_release_timer.stop()
+			can_shoot = false
+			can_be_hit = false
+			destroy_ufo_start = true
+			current_state = states.NON_STATE
+		states.NON_STATE:
+			pass
 		
 		states.REMOVE:
-			print("sheeee")
-			ufo_spawn_timer.wait_time = randi_range(10,20)
-			ufo_spawn_timer.start()
-			SignalBus.silence_ship_alarm.emit()
+			SignalBus.check_to_start_ufo_spawn.emit()
+			SignalBus.play_ufo_escaped.emit()
 			queue_free()
 func destroy_ufo() -> void:
 	deliver_resources.emit()
-	ufo_spawn_timer.wait_time = randi_range(5,15)
-	ufo_spawn_timer.start()
+	SignalBus.check_to_start_ufo_spawn.emit()
 	SignalBus.silence_ship_alarm.emit()
-	queue_free()
+	if !GameManager.ufo_destroyed:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UFO_DESTROYED)
+	animated_sprite_2d.hide()
+	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
+	explosion.size_set = 5
+	add_child(explosion)
+	if not explosion.animated_sprite_2d.is_playing():
+		queue_free()
 	#called in dead sate
 
 func damage_ufo() -> void:
+	play_ufo_damage_sfx()
 	animation_player.play("ufo_hit_flash")
 	health -= 1
 	health_bar.value = health
@@ -110,6 +143,10 @@ func choose_random_target():
 	return drones_list.get_children().pick_random()
 
 func _on_ufo_click_control_gui_input(event) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_be_hit:
 		health_bar.show()
 		damage_ufo()
+
+func play_ufo_damage_sfx() -> void:
+	hit_ufo_sfx_player.stream = ufo_hit_sfx_list.pick_random()
+	hit_ufo_sfx_player.play()

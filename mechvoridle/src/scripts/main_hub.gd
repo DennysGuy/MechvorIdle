@@ -1,8 +1,25 @@
 class_name MainHub extends Control
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var music_player : AudioStreamPlayer = $MusicPlayer
+@onready var sfx_player_layer_1 : AudioStreamPlayer = $SFXPlayerLayer1
+@onready var sfx_player_layer_2 : AudioStreamPlayer = $SFXPlayerLayer2
 
+@onready var ship_ambiance_player : AudioStreamPlayer = $ShipAmbiancePlayer
+@onready var audio_settings_animation_player: AnimationPlayer = $AudioSettingsAnimationPlayer
+@onready var vox_player: AudioStreamPlayer = $VoxPlayer
+
+@onready var check_list_animation_player: AnimationPlayer = $CheckListAnimationPlayer
+
+
+@onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
+@onready var enter_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_ENTER_HUB_01
+@onready var mining_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_MINING_01, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_02, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_04]
+@onready var shop_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_01, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_02, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_03, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_04, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_05]
 func _ready() -> void:
+	GameManager.can_traverse_panes = false
+	music_player.play()
+	ship_ambiance_player.play()
 	animation_player.play("fade_in")
 	SignalBus.move_to_mining_pane.connect(move_to_mining_pane)
 	SignalBus.move_to_shop_pane.connect(move_to_shop_pane)
@@ -10,14 +27,21 @@ func _ready() -> void:
 	SignalBus.move_to_central_hub_from_shop_pane.connect(move_from_shop_pane_to_central_pane)
 	SignalBus.sound_ship_alarm.connect(insert_ship_alarm)
 	SignalBus.silence_ship_alarm.connect(remove_ship_alarm)
+	SignalBus.show_audio_settings.connect(show_audio_settings)
+	SignalBus.hide_audio_settings.connect(hide_audio_settings)
+	SignalBus.start_fight.connect(start_fight)
+	SignalBus.show_check_list.connect(show_check_list)
+	SignalBus.hide_check_list.connect(hide_check_list)
+	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("move_left"):
+	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
+			
 			move_from_shop_pane_to_central_pane()
 		elif GameManager.on_central_panel:
 			move_to_mining_pane()
 
-	if Input.is_action_just_pressed("move_right"):
+	if Input.is_action_just_pressed("move_right") and GameManager.can_traverse_panes:
 		if GameManager.on_mining_panel:
 			move_from_mining_pane_to_central_pane()
 		elif GameManager.on_central_panel:
@@ -26,35 +50,98 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta : float) ->void:
 	pass
 
+func start_fight() -> void:
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
 
 func move_to_mining_pane() -> void:
+	if !GameManager.mining_facility_visited:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY)
+		GameManager.mining_facility_visited = true	
+	play_nav_from_hub_to_mining_sfx()
 	GameManager.on_mining_panel = true
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = false
 	animation_player.play("NavigateToMiningPage")
 
 func move_to_shop_pane() -> void:
+	if !GameManager.visited_black_market:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET)
+		GameManager.visited_black_market = true	
+	player_enter_shop_from_hub_sfx()
 	GameManager.on_central_panel = false
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = true
 	animation_player.play("NavigateToShopPane")
 
 func move_from_mining_pane_to_central_pane() -> void:
+	play_enter_hub_from_mining_sfx()
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
 	animation_player.play("NavigateFromMiningPageToCentralHub")
 
 func move_from_shop_pane_to_central_pane() -> void:
+	
+	play_enter_hub_from_shop_sfx()
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
 	animation_player.play("NavigateFromShopToCentralHub")
 
 func insert_ship_alarm() -> void:
-	var ship_alarm : AlertPane = preload("res://src/scenes/AlertPane.tscn").instantiate()
-	add_child(ship_alarm)
+	var nodes_in_alarm_group = get_tree().get_nodes_in_group("ship alarm")
+	if nodes_in_alarm_group.is_empty():
+		var ship_alarm : AlertPane = preload("res://src/scenes/AlertPane.tscn").instantiate()
+		add_child(ship_alarm)
 
 func remove_ship_alarm() -> void:
-	print("we made it")
 	get_tree().get_first_node_in_group("ship alarm")
+
+func show_check_list() -> void:
+	check_list_animation_player.play("show check list")
+
+func hide_check_list() -> void:
+	check_list_animation_player.play("hide check list")
+
+func play_nav_from_hub_to_mining_sfx():
+	sfx_player_layer_1.stream = exit_hub 
+	sfx_player_layer_2.stream = mining_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+func play_enter_hub_from_mining_sfx():
+	sfx_player_layer_1.stream = enter_hub
+	sfx_player_layer_2.stream = mining_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+func play_enter_hub_from_shop_sfx():
+	sfx_player_layer_1.stream = enter_hub
+	sfx_player_layer_2.stream = shop_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+
+func player_enter_shop_from_hub_sfx():
+	sfx_player_layer_1.stream = exit_hub
+	sfx_player_layer_2.stream = shop_panel_nav_sfx.pick_random()
+	sfx_player_layer_1.play()
+	sfx_player_layer_2.play()
+
+func show_audio_settings() -> void:
+	audio_settings_animation_player.play("show")
+
+func hide_audio_settings() -> void:
+	audio_settings_animation_player.play("hide")
+
+func play_ready_fight_vox_sfx() -> void:
+	vox_player.stream = SfxManager.VOX_NOT_ARENA_ACCESS_01
+	vox_player.volume_db = -6.0
+	vox_player.play()
+	await vox_player.finished
+	GameManager.can_fight_boss = true
+
+func can_move() -> void:
+	GameManager.can_traverse_panes = true

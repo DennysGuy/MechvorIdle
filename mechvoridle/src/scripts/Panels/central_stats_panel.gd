@@ -1,19 +1,23 @@
 class_name CentralHubPanel extends Control
 
 @onready var elapsed_time = $ColorRect/ResourcesPanel/ElapsedTime
+@onready var line_edit = $ColorRect/NameEntryBox/LineEdit
 
-@onready var line_edit : LineEdit = $NameEntryBox/LineEdit
 
 @onready var raw_ferrite_count = $ColorRect/ResourcesPanel/RawFerriteCount
 @onready var ferrite_bars_count = $ColorRect/ResourcesPanel/FerriteBarsCount
 @onready var platinum_bars_count = $ColorRect/ResourcesPanel/PlatinumBarsCount
 @onready var plasma_count: Label = $ColorRect/ResourcesPanel/PlasmaCount
-@onready var start_fight_button: Button = $ColorRect/HBoxContainer/StartFight
+@onready var start_fight_button: TextureButton = $ColorRect/HBoxContainer/StartFight
 @onready var recon_text : RichTextLabel = $ColorRect/TipsPanel/ReconText
 @onready var platinum_cost : Label = $ColorRect/TipsPanel/PlatinumCost
 @onready var purchase_recon_scout : Button = $ColorRect/TipsPanel/PurchaseReconScout
-@onready var name_entry_box = $NameEntryBox
-@onready var confirm_start_fight = $NameEntryBox/ConfirmStartFight
+@onready var name_entry_box = $ColorRect/NameEntryBox
+@onready var confirm_start_fight = $ColorRect/NameEntryBox/ConfirmStartFight
+@onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
+
+@onready var animation_player = $AnimationPlayer
+
 
 @onready var recon_tips_list : Array[String] = [GameManager.chosen_opponent.tip_1, GameManager.chosen_opponent.tip_2, GameManager.chosen_opponent.tip_3]
 var recon_scouts_left : int = 3
@@ -32,12 +36,15 @@ func _ready() -> void:
 	update_plasma_count()
 
 func _process(delta) -> void:
+	
+	recon_scout_indicator.visible = GameManager.platinum_count <= GameManager.recon_scout_platinum_cost and recon_scouts_left > 0
+	
 	if not GameManager.can_fight_boss:
 		start_fight_button.disabled = true
 	else:
 		start_fight_button.disabled = false
 		
-	purchase_recon_scout.disabled = GameManager.platinum_count <= GameManager.recon_scout_platinum_base_cost
+	purchase_recon_scout.disabled = GameManager.platinum_count <= GameManager.recon_scout_platinum_base_cost and recon_scouts_left > 0
 
 func _on_start_fight_button_up():
 	if GameManager.can_fight_boss:
@@ -51,14 +58,17 @@ func _on_shop_pane_navigation_button_up() -> void:
 
 
 func start_fight() -> void:
-	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
+	SignalBus.start_fight.emit()
 
 func _on_purchase_recon_scout_button_down():
 	if recon_scouts_left > 0:
+		if !GameManager.recon_scout_purchased:
+			SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+			GameManager.recon_scout_purchased = true
 		GameManager.platinum_count -= GameManager.recon_scout_platinum_cost
 		recon_text.text = recon_tips_list[recon_index]
 		recon_index += 1
-		GameManager.recon_scout_platinum_cost = GameManager.recon_scout_platinum_base_cost * pow(2, recon_index+1)
+		GameManager.recon_scout_platinum_cost = GameManager.recon_scout_platinum_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, recon_index+1)
 		recon_scouts_left -= 1
 		purchase_recon_scout.text = "Buy Scout " + "("+str(recon_scouts_left)+")"
 		platinum_cost.text = str(GameManager.recon_scout_platinum_cost)
@@ -78,12 +88,11 @@ func update_plasma_count() -> void:
 
 func hide_entry_box() -> void:
 	name_entry_box.hide()
-	line_edit.hide()
 	confirm_start_fight.disabled = true
 
 func show_entry_box() -> void:
 	name_entry_box.show()
-	line_edit.show()
+	animation_player.play("EntryBoxSwoopIn")
 	confirm_start_fight.disabled = false
 
 func _on_confirm_start_fight_button_down():

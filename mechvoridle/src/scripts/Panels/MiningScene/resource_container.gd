@@ -30,25 +30,43 @@ func deliver_resource() -> void:
 	
 	if random_ferrite_amount > 0:
 		GameManager.raw_ferrite_count += random_ferrite_amount
-		generate_label(random_ferrite_amount, "Ferrite")
+		generate_label(random_ferrite_amount, 0)
 		SignalBus.update_ferrite_count.emit()
 	if random_ferrite_bars_amount > 0:
 		GameManager.ferrite_bars_count += random_ferrite_bars_amount
-		generate_label(random_ferrite_bars_amount, "Ferrite Bars")
+		generate_label(random_ferrite_bars_amount, 1)
 		SignalBus.update_ferrite_bars_count.emit()
 	if random_platinum_amount > 0:
 		GameManager.platinum_count += random_platinum_amount
-		generate_label(random_platinum_amount, "Platinum")
+		generate_label(random_platinum_amount, 2)
 		SignalBus.update_plasma_count.emit()
 	if random_plasma_amount > 0:
 		GameManager.plasma_count += random_plasma_amount
-		generate_label(random_plasma_amount, "Plasma")
+		generate_label(random_plasma_amount, 3)
 		SignalBus.update_plasma_count.emit()
 
 
-func generate_label(amount : int, resource_name : String):
+func generate_label(amount : int, resource_icon : int):
 	var _offset : int = randi_range(-10,10)
 	var ran_ferrite_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-	ran_ferrite_label.output = "+"+str(amount)+resource_name
-	ran_ferrite_label.global_position = parent.global_position + Vector2(_offset, _offset)
+	ran_ferrite_label.output = "+"+str(amount)
+	ran_ferrite_label.resource = set_resource(ran_ferrite_label, resource_icon)
+	ran_ferrite_label.position = parent.position + Vector2(_offset, _offset)
 	parent.get_parent().add_child(ran_ferrite_label)
+	SignalBus.update_ferrite_bars_count.emit()
+	SignalBus.update_ferrite_count.emit()
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_plasma_count.emit()
+
+func set_resource(resource_label : ResourceAcquiredLabel, resource : int) -> int:
+	match (resource):
+		0:
+			return resource_label.RESOURCE.FERRITE
+		1:
+			return resource_label.RESOURCE.FERRITE_BAR
+		2: 
+			return resource_label.RESOURCE.PLATINUM
+		3: 
+			return resource_label.RESOURCE.PLASMA
+		_:
+			return 0

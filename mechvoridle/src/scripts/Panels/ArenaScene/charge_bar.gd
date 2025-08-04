@@ -1,4 +1,4 @@
-class_name ChargeBar extends ColorRect
+class_name ChargeBar extends Control
 
 @export_group("details")
 @export_enum("Player", "Enemy") var target
@@ -10,7 +10,8 @@ class_name ChargeBar extends ColorRect
 enum WEAPON_POSITION {LEFT_WEAPON, RIGHT_WEAPON}
 enum TARGET{PLAYER, ENEMY}
 
-@onready var weapon_charge_bar : ProgressBar = $WeaponChargeBar
+@onready var weapon_charge_bar : TextureProgressBar = $WeaponChargeBar
+
 @onready var weapon_name : Label = $WeaponName
 
 @export var weapon : MechWeapon 
@@ -18,7 +19,10 @@ enum TARGET{PLAYER, ENEMY}
 var selected_torso : MechTorso
 var selected_head : MechHead
 var selected_arms : MechArms
+var selected_legs : MechLegs
+
 var target_legs : MechLegs
+
 
 var true_charge_speed : float
 var true_accuracy : float
@@ -39,7 +43,7 @@ func _ready() -> void:
 			weapon = GameManager.get_left_weapon()
 		else:
 			weapon = GameManager.get_right_weapon()
-
+		print(weapon.component_name)
 	else:
 		selected_arms = GameManager.chosen_opponent.get_arms_component()
 		selected_torso = GameManager.chosen_opponent.get_torso_component()
@@ -50,6 +54,7 @@ func _ready() -> void:
 			weapon = GameManager.chosen_opponent.get_left_weapon()
 		else:
 			weapon = GameManager.chosen_opponent.get_right_weapon()
+	print(weapon_charge_bar.max_value)
 	weapon_name.text = weapon.component_name
 	true_charge_speed = weight_class_modifier_final_value(selected_torso, selected_torso.charge_speed_modifier, weapon.charge_speed)
 	true_accuracy = weapon.accuracy + component_type_final_value(selected_head, selected_head.accuracy_bonus)
@@ -59,12 +64,14 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	
 	if GameManager.fight_on:
+		
 		weapon_charge_bar.value += true_charge_speed * delta
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
-				damage_target(GameManager.chosen_opponent.current_health)
+				#print(weapon_charge_bar.value)
+				damage_target(GameManager.chosen_opponent.current_health, true_target_dodge_chance)
 			else:
-				damage_target(GameManager.current_health)
+				damage_target(GameManager.current_health, true_target_dodge_chance)
 				SignalBus.shake_camera.emit()
 			weapon_charge_bar.value = 0
 
@@ -106,20 +113,21 @@ func component_type_final_value(component : MechComponent, component_modifier_va
 		_:
 			return 0.0
 			
-func damage_target(target_health : int) -> void:
+func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 	var damage_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 	#calculate hit
-	if attempt_attack_landed(true_accuracy, true_target_dodge_chance):
+	if attempt_attack_landed(true_accuracy, opponent_dodge_chance):
 		#calculate crit_chance
+		var random_damage : int = randi_range(weapon.damage - 40, weapon.damage)
 		if crit_landed(true_crit_chance):
-			var true_damage : int = weapon.damage * 2
-			damage_label.output = "-"+str(true_damage)
+			var true_damage : int = random_damage * 2
+			damage_label.output = "-"+str(true_damage)+"HP"
 			if belongs_to_player():
 				GameManager.chosen_opponent.current_health -= int(true_damage)
 				SignalBus.update_opponent_health_bar.emit()
 				damage_label.position = boss_label_marker.position
 			else:
-				GameManager.current_health -= int(true_damage)
+				GameManager.current_health -= random_damage
 				SignalBus.update_player_health_bar.emit()
 				SignalBus.shake_camera.emit()
 				damage_label.position = boss_label_marker.position
@@ -129,12 +137,12 @@ func damage_target(target_health : int) -> void:
 		
 		damage_label.output = "-"+str(weapon.damage)
 		if belongs_to_player():	
-			GameManager.chosen_opponent.current_health -= weapon.damage
+			GameManager.chosen_opponent.current_health -= random_damage
 			SignalBus.update_opponent_health_bar.emit()
 			damage_label.position = boss_label_marker.position
 			
 		else:
-			GameManager.current_health -= weapon.damage
+			GameManager.current_health -= random_damage
 			SignalBus.update_player_health_bar.emit()
 			SignalBus.shake_camera.emit()
 			damage_label.position = player_label_marker.position

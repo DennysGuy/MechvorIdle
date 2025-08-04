@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MechTorso" load_steps=2 format=3 uid="uid://dddtl1j5ympsy"]
+
+[ext_resource type="Script" uid="uid://d35b44mou7bkr" path="res://src/scripts/mechcomponents/mech_torso.gd" id="1_dcdrq"]
+
+[resource]
+script = ExtResource("1_dcdrq")
+charge_speed_modifier = 0.0
+component_name = "Boss 2 torso"
+description = ""
+health = 2500
+plasma_resistance = 0.1
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 1
+component_type = 1
+weight_class = 1
+metadata/_custom_type_script = "uid://d35b44mou7bkr"

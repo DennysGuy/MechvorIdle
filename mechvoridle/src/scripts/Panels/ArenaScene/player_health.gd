@@ -1,6 +1,6 @@
-class_name PlayerHealth extends ColorRect
+class_name PlayerHealth extends Control
 
-@onready var health_bar : ProgressBar = $HealthBar
+@onready var health_bar : TextureProgressBar = $HealthBar
 @onready var player_name : Label = $PlayerName
 @onready var max_health : Label = $MaxHealth
 @onready var current_health : Label = $CurrentHealth

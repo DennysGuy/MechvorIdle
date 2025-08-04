@@ -7,6 +7,14 @@ signal move_to_central_hub_from_mining_page
 signal move_to_central_hub_from_shop_pane
 signal start_fight
 
+signal show_task_completed_indicator(index : int)
+signal show_check_list
+signal hide_check_list
+
+#settings panel
+signal show_audio_settings
+signal hide_audio_settings
+
 #mining panel signals
 signal update_ferrite_count
 signal update_ferrite_bars_count
@@ -23,9 +31,12 @@ signal update_drone_cost
 signal update_drone_count
 signal update_platinum_drone_cost
 signal update_platinum_drone_count
-
+signal check_to_start_ufo_spawn
+signal play_ufo_escaped
 signal sound_ship_alarm
 signal silence_ship_alarm
+
+signal update_mining_laser_speed
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)

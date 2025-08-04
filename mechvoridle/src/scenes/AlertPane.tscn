@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsdbsgp2ca6we"]
+[gd_scene load_steps=9 format=3 uid="uid://bsdbsgp2ca6we"]
 
 [ext_resource type="Script" uid="uid://s4bgkhxiimmi" path="res://src/scripts/alert_pane.gd" id="1_u0heh"]
+[ext_resource type="AudioStream" uid="uid://clj4tymrg47g4" path="res://assets/audio/SFX/MINING/ShipAlarm1.wav" id="2_g45uy"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_sbu58"]
 
 [sub_resource type="Animation" id="Animation_lid4q"]
 resource_name = "Alert"
@@ -18,6 +20,160 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.690196, 0.341176, 0.168627, 0.309804), Color(0.690196, 0.341176, 0.168627, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AlertLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.533333, 1.0061, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_g45uy"]
+resource_name = "FadeOutAlert"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.7, 2.66667, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.690196, 0.341176, 0.168627, 0.309804), Color(0.690196, 0.341176, 0.168627, 0), Color(0.690196, 0.341176, 0.168627, 0.188235), Color(0.690196, 0.341176, 0.168627, 0), Color(0.690196, 0.341176, 0.168627, 0.101961), Color(0.690196, 0.341176, 0.168627, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AlertLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.49),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666667, 4.96667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"stop_vox_player"
+}, {
+"args": [],
+"method": &"silence_alarm"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AlarmPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.96),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_vox_ufo_destroyed"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sbu58"]
+resource_name = "FadeOutAlert_Escaped"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.7, 2.66667, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.690196, 0.341176, 0.168627, 0.309804), Color(0.690196, 0.341176, 0.168627, 0), Color(0.690196, 0.341176, 0.168627, 0.188235), Color(0.690196, 0.341176, 0.168627, 0), Color(0.690196, 0.341176, 0.168627, 0.101961), Color(0.690196, 0.341176, 0.168627, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AlertLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.49),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666667, 4.96667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"stop_vox_player"
+}, {
+"args": [],
+"method": &"silence_alarm"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AlarmPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.96),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_vox_ufo_escaped"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_u0heh"]
 length = 0.001
@@ -33,14 +189,52 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.690196, 0.341176, 0.168627, 0.329412)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AlertLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AlarmPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AlertLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u0heh"]
 _data = {
 &"Alert": SubResource("Animation_lid4q"),
+&"FadeOutAlert": SubResource("Animation_g45uy"),
+&"FadeOutAlert_Escaped": SubResource("Animation_sbu58"),
 &"RESET": SubResource("Animation_u0heh")
 }
 
-[node name="AlertPane" type="Control"]
+[node name="AlertPane" type="Control" groups=["ship alarm"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 641.0
@@ -68,9 +262,19 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -174.5
-offset_right = 174.5
-offset_bottom = 42.0
+offset_left = -215.0
+offset_top = 3.0
+offset_right = 215.0
+offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_sbu58")
 theme_override_font_sizes/font_size = 30
 text = "ALERT! UFO ATTACKING!"
+
+[node name="VOXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g45uy")
+bus = &"SFX"

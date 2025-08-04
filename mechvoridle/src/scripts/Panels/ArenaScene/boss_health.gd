@@ -1,7 +1,7 @@
-class_name BossHealthBar extends ColorRect
+class_name BossHealthBar extends Control
 
 @onready var boss_title : Label = $BossTitle
-@onready var boss_health_bar : ProgressBar = $BossHealthBar
+@onready var boss_health_bar : TextureProgressBar = $BossHealthBar
 @onready var max_health : Label = $MaxHealth
 @onready var current_health : Label = $CurrentHealth
 

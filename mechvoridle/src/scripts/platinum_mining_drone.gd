@@ -1,11 +1,16 @@
 class_name PlatinumMiningDrone extends Node2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
+@onready var audio_stream_player_2d : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 15
 
+var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
+
 func _ready() -> void:
-	pass
+	animation_player.play("idle")
+	DroneManager.register_platinum_drone(self)
 
 func _process(delta : float) -> void:
 	progress_bar.value += GameManager.drone_mining_speed
@@ -13,21 +18,30 @@ func _process(delta : float) -> void:
 	if progress_bar.value >= progress_bar.max_value:
 		obtain_resources()
 		progress_bar.value = 0
-	
-	if health <= 0:
-		erase() #replace with animation
+
+
+func _exit_tree():
+	DroneManager.unregister_platinum_drone(self)
+
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 func erase() -> void:
-	queue_free()
+	sprite_2d.hide()
+	progress_bar.hide()
+	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
+	explosion.size_set = 4
+	add_child(explosion)
 
 
 func obtain_resources() -> void:
+	play_mining_sfx()
 	var drone_damage : int = GameManager.platinum_drone_damage
 
 	GameManager.platinum_count += drone_damage
 			
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-	resource_acquired_label.output = "+"+str(drone_damage)+ " Platinum"
+	resource_acquired_label.output = "+"+str(drone_damage)
+	resource_acquired_label.set_resource_as_platinum()
 	resource_acquired_label.global_position = global_position
 	get_parent().add_child(resource_acquired_label)
 	SignalBus.update_platinum_count.emit()
@@ -48,12 +62,11 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if health <= 0:
 			kill_mining_drone()
 	
-	area_parent.queue_free() #we'll change to animation explode sequence
+		area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
-	GameManager.platinum_drone_count -= 1
-	GameManager.platinum_drone_cost = GameManager.platinum_drone_base_cost * pow(2, GameManager.platinum_drone_count)
-	SignalBus.update_platinum_drone_count.emit()
-	SignalBus.update_platinum_drone_cost.emit()
-	#play animation
-	queue_free()
+	erase()
+
+func play_mining_sfx() -> void:
+	audio_stream_player_2d.stream = mining_sfx.pick_random()
+	audio_stream_player_2d.play()

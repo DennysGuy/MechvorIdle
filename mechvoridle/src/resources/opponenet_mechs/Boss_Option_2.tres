@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="OpponentMech" load_steps=3 format=3 uid="uid://x8vwp1b6cnak"]
+[gd_resource type="Resource" script_class="OpponentMech" load_steps=9 format=3 uid="uid://x8vwp1b6cnak"]
 
 [ext_resource type="Script" uid="uid://dxhtcmsjot0co" path="res://src/scripts/mechcomponents/mech_component.gd" id="1_7cg7b"]
 [ext_resource type="Script" uid="uid://cwtn70nmowsro" path="res://src/scripts/opponent_mech.gd" id="2_onsy5"]
+[ext_resource type="Resource" uid="uid://ddcx6rx4i5t33" path="res://src/resources/mechcomponents/heads/boss_2_head.tres" id="2_xmvit"]
+[ext_resource type="Resource" uid="uid://dddtl1j5ympsy" path="res://src/resources/mechcomponents/torsos/boss_2_torso.tres" id="3_d8lpm"]
+[ext_resource type="Resource" uid="uid://b8q48w8bkb15b" path="res://src/resources/mechcomponents/legs/boss_2_legs.tres" id="4_byubk"]
+[ext_resource type="Resource" uid="uid://dh8dt5ds0d7dw" path="res://src/resources/mechcomponents/arms/boss_2_arms.tres" id="5_qccm6"]
+[ext_resource type="Resource" uid="uid://sovjye8b14ll" path="res://src/resources/mechcomponents/weapons/swords/boss_2_sword.tres" id="6_7p81g"]
+[ext_resource type="Resource" uid="uid://cbgioclpnxt2j" path="res://src/resources/mechcomponents/weapons/rifles/boss_2_rifle.tres" id="7_jww8d"]
 
 [resource]
 script = ExtResource("2_onsy5")
@@ -12,14 +18,15 @@ total_crit_chance = 0
 total_stun_chance = 0
 total_plasma_resistance = 0.0
 opponent_mech_components = Dictionary[String, ExtResource("1_7cg7b")]({
-"Arms": null,
-"Head": null,
-"LeftWeapon": null,
-"Legs": null,
-"RightWeapon": null,
-"Torso": null
+"Arms": ExtResource("5_qccm6"),
+"Head": ExtResource("2_xmvit"),
+"LeftWeapon": ExtResource("6_7p81g"),
+"Legs": ExtResource("4_byubk"),
+"RightWeapon": ExtResource("7_jww8d"),
+"Torso": ExtResource("3_d8lpm")
 })
-tip_1 = ""
-tip_2 = ""
-tip_3 = ""
+tip_1 = "Your opponent is well balanced - seemingly at zen. 
+Your opponent has minimal plasma resistance - but may project plasma as well."
+tip_2 = "Your opponent is fond of both rifles and swords - a jack of all trades."
+tip_3 = "Your opponent has a moderate amount of health, even though they are versatile, they have drawbacks. "
 metadata/_custom_type_script = "uid://cwtn70nmowsro"

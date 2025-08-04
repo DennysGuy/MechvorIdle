@@ -4,16 +4,16 @@
 
 [resource]
 script = ExtResource("1_ydm1k")
-crit_chance_modifier = 0.3
+crit_chance_modifier = 0.15
 charge_time_modifier = 0.0
 component_name = "Wizzy2232"
 description = ""
-health = 800
+health = 1500
 plasma_resistance = 0.0
 refined_ferrite_cost = 0
 plasma_cost = 0
 platinum_cost = 0
 category = 0
-component_type = 1
+component_type = 2
 weight_class = 2
 metadata/_custom_type_script = "uid://marmnfdtywpd"

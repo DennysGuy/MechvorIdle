@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc7liqf41bqti"]
+[gd_scene load_steps=7 format=3 uid="uid://cc7liqf41bqti"]
 
 [ext_resource type="Script" uid="uid://b02iljlmno0xg" path="res://src/scripts/Panels/resource_tracker.gd" id="1_qyq3t"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_ao0h8"]
+[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="3_fc0qm"]
+[ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="4_s11qr"]
+[ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="5_xxbr5"]
+[ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="6_3gj0c"]
 
 [node name="ResourceTracker" type="Panel"]
 anchors_preset = 8
@@ -8,91 +13,76 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -71.5
+offset_left = -71.0
 offset_top = -52.0
-offset_right = 71.5
-offset_bottom = 52.0
+offset_right = 63.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qyq3t")
 
 [node name="ResourcesLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 95.0
-offset_top = 1.0
-offset_right = 140.0
-offset_bottom = 14.0
-theme_override_font_sizes/font_size = 9
+offset_left = 94.0
+offset_top = 4.0
+offset_right = 139.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("2_ao0h8")
+theme_override_font_sizes/font_size = 6
 text = "Resources"
-
-[node name="FerriteLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 35.0
-offset_bottom = 14.0
-theme_override_font_sizes/font_size = 8
-text = "Ferrite"
-
-[node name="FerriteBarsLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 26.0
-offset_right = 52.0
-offset_bottom = 38.0
-theme_override_font_sizes/font_size = 8
-text = "Ferrite Bars"
 
 [node name="FerriteCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.0
+offset_left = 23.0
 offset_top = 12.0
-offset_right = 94.0
-offset_bottom = 28.0
+offset_right = 117.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("2_ao0h8")
 theme_override_font_sizes/font_size = 8
 text = "10000000000000"
 
 [node name="FerriteBarsCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 38.0
-offset_right = 94.0
-offset_bottom = 54.0
+offset_left = 23.0
+offset_top = 28.0
+offset_right = 130.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("2_ao0h8")
 theme_override_font_sizes/font_size = 8
 text = "10000000000000"
-
-[node name="PlatinumLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 50.0
-offset_right = 47.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 8
-text = "Platinum"
 
 [node name="PlatinumCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 63.0
-offset_right = 94.0
-offset_bottom = 79.0
+offset_left = 23.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("2_ao0h8")
 theme_override_font_sizes/font_size = 8
 text = "10000000000000"
-
-[node name="PlasmaLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 7.5
-offset_top = 74.0
-offset_right = 47.5
-offset_bottom = 87.0
-theme_override_font_sizes/font_size = 8
-text = "Plasma"
 
 [node name="PlasmaCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.5
-offset_top = 87.0
-offset_right = 94.5
-offset_bottom = 103.0
+offset_left = 23.0
+offset_top = 61.0
+offset_right = 116.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("2_ao0h8")
 theme_override_font_sizes/font_size = 8
 text = "10000000000000"
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="."]
+position = Vector2(11, 48)
+texture = ExtResource("3_fc0qm")
+
+[node name="FerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(12, 16)
+texture = ExtResource("4_s11qr")
+
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(12, 33)
+texture = ExtResource("5_xxbr5")
+
+[node name="PlasmaUiIcon" type="Sprite2D" parent="."]
+position = Vector2(11, 66)
+texture = ExtResource("6_3gj0c")

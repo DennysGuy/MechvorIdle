@@ -1,9 +1,55 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3gd8inykd321"]
+[gd_scene load_steps=26 format=3 uid="uid://d3gd8inykd321"]
 
 [ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
 [ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
 [ext_resource type="PackedScene" uid="uid://cu5ql32vaxyid" path="res://src/scenes/MiningPane.tscn" id="2_kflli"]
 [ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/ShopPane.tscn" id="4_0av82"]
+[ext_resource type="AudioStream" uid="uid://xab70hsnd6j2" path="res://assets/audio/music/Mining.ogg" id="5_0c4kj"]
+[ext_resource type="PackedScene" uid="uid://d17eekq70qc8k" path="res://TutorialCheckList.tscn" id="5_id2nt"]
+[ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_k282t"]
+[ext_resource type="PackedScene" uid="uid://cjcihcy5w5pon" path="res://src/scenes/AudioSettingsPanel.tscn" id="7_0c4kj"]
+
+[sub_resource type="Animation" id="Animation_qh3w7"]
+resource_name = "AllPartsBoughtStartFight"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.53333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1280, 0), Vector2(-639, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.34),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.0, -35.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_ready_fight_vox_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_k282t"]
 resource_name = "NavigateFromMiningPageToCentralHub"
@@ -79,6 +125,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-639, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-4.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TransitionRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_j0uol"]
 resource_name = "fade_in"
@@ -94,6 +164,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"can_move"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_6h1r7"]
 resource_name = "fade_out"
@@ -107,11 +191,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k282t"]
 _data = {
+&"AllPartsBoughtStartFight": SubResource("Animation_qh3w7"),
 &"NavigateFromMiningPageToCentralHub": SubResource("Animation_k282t"),
 &"NavigateFromShopToCentralHub": SubResource("Animation_id2nt"),
 &"NavigateToMiningPage": SubResource("Animation_0av82"),
@@ -119,6 +204,114 @@ _data = {
 &"RESET": SubResource("Animation_7cw1w"),
 &"fade_in": SubResource("Animation_j0uol"),
 &"fade_out": SubResource("Animation_6h1r7")
+}
+
+[sub_resource type="Animation" id="Animation_fueoq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioSettings:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(512, 361)]
+}
+
+[sub_resource type="Animation" id="Animation_bs5hu"]
+resource_name = "hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioSettings:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.251961),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(512, 275), Vector2(512, 361)]
+}
+
+[sub_resource type="Animation" id="Animation_8stgo"]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioSettings:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(512, 361), Vector2(512, 275)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bs5hu"]
+_data = {
+&"RESET": SubResource("Animation_fueoq"),
+&"hide": SubResource("Animation_bs5hu"),
+&"show": SubResource("Animation_8stgo")
+}
+
+[sub_resource type="Animation" id="Animation_y0q8j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TutorialCheckList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(226, 361)]
+}
+
+[sub_resource type="Animation" id="Animation_0kcak"]
+resource_name = "hide check list"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TutorialCheckList:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(226, 70), Vector2(226, 361)]
+}
+
+[sub_resource type="Animation" id="Animation_nd5gx"]
+resource_name = "show check list"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TutorialCheckList:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(226, 361), Vector2(226, 70)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8r2gy"]
+_data = {
+&"RESET": SubResource("Animation_y0q8j"),
+&"hide check list": SubResource("Animation_0kcak"),
+&"show check list": SubResource("Animation_nd5gx")
 }
 
 [node name="MainHub" type="Control"]
@@ -137,7 +330,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1920.0
+offset_left = -639.0
+offset_right = 1281.0
 offset_bottom = 361.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -150,12 +344,72 @@ layout_mode = 2
 [node name="CentralHubPanel" parent="HBoxContainer" instance=ExtResource("1_4kaqy")]
 layout_mode = 2
 
-[node name="ShopPane" parent="HBoxContainer" instance=ExtResource("4_0av82")]
+[node name="ShopPane" parent="HBoxContainer" node_paths=PackedStringArray("main_hub") instance=ExtResource("4_0av82")]
 layout_mode = 2
+main_hub = NodePath("../..")
+
+[node name="TutorialCheckList" parent="." instance=ExtResource("5_id2nt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 226.0
+offset_top = 361.0
+offset_right = 480.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="TransitionRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="SFXPlayerLayer1" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="SFXPlayerLayer2" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0c4kj")
+volume_db = -4.0
+bus = &"Music"
+parameters/looping = true
+
+[node name="ShipAmbiancePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_k282t")
+bus = &"Ambiance"
+
+[node name="VoxPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioSettingsAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_bs5hu")
+}
+
+[node name="CheckListAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8r2gy")
+}
+
+[node name="AudioSettings" parent="." instance=ExtResource("7_0c4kj")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 512.0
+offset_top = 361.0
+offset_right = 633.0
+offset_bottom = 443.0
+grow_horizontal = 0
+grow_vertical = 0

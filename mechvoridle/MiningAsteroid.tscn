@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cei2jhilkfgc7"]
+
+[ext_resource type="PackedScene" uid="uid://c7ufvbwdkcvsq" path="res://assets/graphics/Models/MiningAsteroid/Asteroid2.gltf" id="1_46aam"]
+[ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="1_aoa6s"]
+[ext_resource type="Script" uid="uid://c2os1e1xn82kc" path="res://src/scripts/asteroid_2.gd" id="2_ppgga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppgga"]
+
+[sub_resource type="Sky" id="Sky_ppgga"]
+sky_material = SubResource("ShaderMaterial_ppgga")
+
+[sub_resource type="Environment" id="Environment_aoa6s"]
+background_mode = 2
+sky = SubResource("Sky_ppgga")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.25
+reflected_light_source = 1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 4.2305, 2.66512, 0, -2.66512, 4.2305, -0.122154, -2.20918, -4.561)
+billboard = 2
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("1_aoa6s")
+region_enabled = true
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_46aam")]
+script = ExtResource("2_ppgga")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8461, 0.533024, 0, -0.533024, 0.8461, -0.122154, 2.0211, 2.25224)
+near = 0.061
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aoa6s")

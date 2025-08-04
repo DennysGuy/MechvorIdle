@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MechLegs" load_steps=2 format=3 uid="uid://ddmgaa4vrep3s"]
+
+[ext_resource type="Script" uid="uid://cqa88tl10c011" path="res://src/scripts/mechcomponents/mech_legs.gd" id="1_rqahb"]
+
+[resource]
+script = ExtResource("1_rqahb")
+dodge_chance_modifier = 0.25
+component_name = ""
+description = ""
+health = 3125
+plasma_resistance = 0.0
+refined_ferrite_cost = 0
+plasma_cost = 0
+platinum_cost = 0
+category = 2
+component_type = 0
+weight_class = 0
+metadata/_custom_type_script = "uid://cqa88tl10c011"

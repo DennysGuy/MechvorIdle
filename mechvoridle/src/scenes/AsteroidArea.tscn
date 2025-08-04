@@ -1,39 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=13 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
-[ext_resource type="Texture2D" uid="uid://ghoq3njhb4ly" path="res://assets/graphics/AsteroidPlaceHolder.png" id="1_80q61"]
+[ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_b11ub"]
+[ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
+[ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="3_ocvap"]
+[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
+[ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
+[ext_resource type="PackedScene" uid="uid://d3siueyr5myjd" path="res://GuideBox.tscn" id="7_b11ub"]
 
 [sub_resource type="Animation" id="Animation_6ww1j"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MiningAsteroid:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(211, 28)]
-}
 
 [sub_resource type="Animation" id="Animation_80q61"]
 resource_name = "hover"
 length = 3.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MiningAsteroid:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.03333, 1.56667, 2.23333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(211, 28), Vector2(211, 26), Vector2(211, 28.6667), Vector2(211, 28), Vector2(211, 26)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2fxli"]
 _data = {
@@ -43,6 +24,31 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ww1j"]
 size = Vector2(123.75, 121)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sd8y"]
+resource_local_to_scene = true
+shader = ExtResource("4_fde8e")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.176
+shader_parameter/scanlines_width = 0.032
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 41.6
+shader_parameter/roll_variation = 1.433
+shader_parameter/distort_intensity = 0.023
+shader_parameter/noise_opacity = 0.24
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_opacity = 0.742
 
 [node name="AsteroidArea" type="Node2D"]
 script = ExtResource("1_6ww1j")
@@ -54,58 +60,48 @@ process_callback = 0
 process_callback = 0
 one_shot = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1.0
-offset_right = 641.0
-offset_bottom = 240.0
+offset_left = -12.0
+offset_top = -52.0
+offset_right = 628.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("2_b11ub")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2fxli")
 }
 
-[node name="MiningAsteroid" type="TextureRect" parent="."]
-offset_left = 211.0
-offset_top = 28.0
-offset_right = 399.0
-offset_bottom = 215.0
-pivot_offset = Vector2(95, 96)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 30.0
+offset_top = -139.0
+offset_right = 542.0
+offset_bottom = 373.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ocvap")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 239.0
+offset_top = 61.0
+offset_right = 372.0
+offset_bottom = 201.0
+mouse_filter = 1
 mouse_default_cursor_shape = 3
-texture = ExtResource("1_80q61")
-
-[node name="AsteroidSpawnPoints" type="Node" parent="."]
-
-[node name="AstroidSpawnPoint" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(68, 119)
-
-[node name="AstroidSpawnPoint2" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(149, 246)
-
-[node name="AstroidSpawnPoint3" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(151, -9)
-
-[node name="AstroidSpawnPoint4" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(304, -28)
-
-[node name="AstroidSpawnPoint5" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(448, -7)
-
-[node name="AstroidSpawnPoint6" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(543, 115)
-
-[node name="AstroidSpawnPoint7" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(489, 218)
-
-[node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(299, 290)
 
 [node name="AsteroidArea2D" type="Area2D" parent="."]
 position = Vector2(306, 124)
@@ -115,14 +111,68 @@ shape = SubResource("RectangleShape2D_6ww1j")
 
 [node name="DroneList" type="Node" parent="."]
 
+[node name="PlatinumDroneList" type="Node" parent="."]
+
 [node name="UFOList" type="Node" parent="."]
 
 [node name="UFOOutPosition" type="Marker2D" parent="."]
-position = Vector2(417, 291)
+position = Vector2(419, 287)
 
 [node name="UFOInPosition" type="Marker2D" parent="."]
-position = Vector2(185, -15)
+position = Vector2(185, -21)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CRTOverlay" parent="CanvasLayer" instance=ExtResource("3_2fxli")]
+material = SubResource("ShaderMaterial_0sd8y")
+offset_left = -12.0
+offset_top = -51.0
+offset_right = 628.0
+offset_bottom = 317.0
+
+[node name="ClickAsteroidSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0sd8y")
+bus = &"SFX"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(305, 125)
+
+[node name="GuideBox" parent="." instance=ExtResource("7_b11ub")]
+offset_left = 205.0
+offset_top = 41.0
+offset_right = 399.0
+offset_bottom = 219.0
+guide_label = "Click and Hold"
+
+[node name="AsteroidSpawnPoints" type="Node" parent="."]
+
+[node name="AstroidSpawnPoint" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(14, 118)
+
+[node name="AstroidSpawnPoint2" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(18, 203)
+
+[node name="AstroidSpawnPoint3" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(41, 26)
+
+[node name="AstroidSpawnPoint4" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(26, 285)
+
+[node name="AstroidSpawnPoint5" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(594, 192)
+
+[node name="AstroidSpawnPoint6" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(602, 117)
+
+[node name="AstroidSpawnPoint7" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(549, 30)
+
+[node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(571, 270)
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
-[connection signal="gui_input" from="MiningAsteroid" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_exited"]
+
+[editable path="CanvasLayer/CRTOverlay"]

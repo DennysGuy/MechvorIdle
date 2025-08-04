@@ -1,58 +1,70 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkv7ay3ce6vyg"]
+[gd_scene load_steps=5 format=3 uid="uid://bkv7ay3ce6vyg"]
 
 [ext_resource type="Script" uid="uid://dx3nhc7adqctq" path="res://src/scripts/Panels/ArenaScene/player_health.gd" id="1_vnn6w"]
+[ext_resource type="Texture2D" uid="uid://dd5uuabbchlmi" path="res://assets/graphics/PlayerHealthBar_Border.png" id="2_iqa3v"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_y4pix"]
+[ext_resource type="Texture2D" uid="uid://bq7psx0k568ld" path="res://assets/graphics/PlayerHealthBar_Fill.png" id="3_y4pix"]
 
-[node name="PlayerHealth" type="ColorRect"]
+[node name="PlayerHealth" type="Control"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.0
+offset_left = -51.0
 offset_top = -29.5
-offset_right = 98.0
+offset_right = 51.0
 offset_bottom = 29.5
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.297266, 0.473593, 0.371917, 1)
 script = ExtResource("1_vnn6w")
 
 [node name="PlayerName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 1.0
-offset_right = 108.0
-offset_bottom = 24.0
+offset_left = 6.0
+offset_top = 23.0
+offset_right = 47.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("2_y4pix")
+theme_override_font_sizes/font_size = 4
 text = "Player Health"
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 32.0
-offset_right = 193.0
-offset_bottom = 52.0
-show_percentage = false
+offset_right = 96.0
+offset_bottom = 44.0
+texture_under = ExtResource("2_iqa3v")
+texture_progress = ExtResource("3_y4pix")
 
 [node name="MaxHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 30.0
-offset_right = 190.0
-offset_bottom = 53.0
+offset_left = 80.0
+offset_top = 27.0
+offset_right = 98.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("2_y4pix")
+theme_override_font_sizes/font_size = 4
 text = "15000"
 
 [node name="Slash" type="Label" parent="."]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 29.5
-offset_right = 184.0
-offset_bottom = 52.5
+offset_left = 77.0
+offset_top = 27.0
+offset_right = 80.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("2_y4pix")
+theme_override_font_sizes/font_size = 4
 text = "/"
 
 [node name="CurrentHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 29.5
-offset_right = 138.0
-offset_bottom = 52.5
+offset_left = 61.0
+offset_top = 27.0
+offset_right = 76.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("2_y4pix")
+theme_override_font_sizes/font_size = 4
 text = "15000"

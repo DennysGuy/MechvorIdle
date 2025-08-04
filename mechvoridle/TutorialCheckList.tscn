@@ -1,0 +1,293 @@
+[gd_scene load_steps=4 format=3 uid="uid://d17eekq70qc8k"]
+
+[ext_resource type="Script" uid="uid://o534fyl2fj" path="res://src/scripts/tutorial_check_list.gd" id="1_h7hrr"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="1_wo0f1"]
+[ext_resource type="Texture2D" uid="uid://cahujlocleo7b" path="res://assets/graphics/TempCheckBox.png" id="2_ghbdi"]
+
+[node name="TutorialCheckList" type="ColorRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = -143.0
+offset_right = 127.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.462745, 0.564706, 0.623529)
+script = ExtResource("1_h7hrr")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "Tutorial Checklist"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 163.0
+offset_bottom = 162.0
+theme_override_constants/separation = 10
+
+[node name="ListItem2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Visit The Black Market"
+
+[node name="ListItem13" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Visit The Mining Facility"
+
+[node name="ListItem12" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Mine Asteroid"
+
+[node name="ListItem" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Mining Drone"
+
+[node name="ListItem3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Platinum Drone"
+
+[node name="ListItem4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase an Upgrade"
+
+[node name="ListItem7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Recon SCout"
+
+[node name="ListItem9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Ferrite Refinery"
+
+[node name="ListItem10" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Plasma Generator"
+
+[node name="ListItem8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Purchase Mech Component"
+
+[node name="ListItem5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Destroy Fly By Asteroid"
+
+[node name="ListItem6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "- Destroy UFO"
+
+[node name="BlackMarketIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 22.0
+offset_right = 198.0
+offset_bottom = 37.0
+texture = ExtResource("2_ghbdi")
+
+[node name="MiningFacilityIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 45.0
+offset_right = 200.0
+offset_bottom = 60.0
+texture = ExtResource("2_ghbdi")
+
+[node name="MinAsteroidIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 66.0
+offset_right = 133.0
+offset_bottom = 81.0
+texture = ExtResource("2_ghbdi")
+
+[node name="MiningDroneIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 85.0
+offset_right = -54.0
+offset_bottom = 100.0
+grow_horizontal = 0
+texture = ExtResource("2_ghbdi")
+
+[node name="PlatDroneIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -42.5
+offset_right = -35.0
+offset_bottom = -27.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_ghbdi")
+
+[node name="UpgradeIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -20.5
+offset_right = -65.0
+offset_bottom = -5.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_ghbdi")
+
+[node name="ReconScoutIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 2.5
+offset_right = -61.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_ghbdi")
+
+[node name="FerriteRefineryIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 24.5
+offset_right = -32.0
+offset_bottom = 39.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_ghbdi")
+
+[node name="PlasmaGenIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 196.0
+offset_right = 241.0
+offset_bottom = 211.0
+texture = ExtResource("2_ghbdi")
+
+[node name="MechComponentIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 221.0
+offset_right = 226.0
+offset_bottom = 236.0
+texture = ExtResource("2_ghbdi")
+
+[node name="FlyByAsteroidIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -56.0
+offset_right = -50.0
+offset_bottom = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_ghbdi")
+
+[node name="UFOIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -35.0
+offset_right = -3.5
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_ghbdi")
+
+[node name="OpenTutorialChecklist" type="Button" parent="."]
+layout_mode = 0
+offset_top = -22.0
+offset_right = 176.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_wo0f1")
+theme_override_font_sizes/font_size = 10
+text = "Open Tutorial Checklist"
+
+[node name="CloseTutorialChecklist" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -31.0
+offset_right = -14.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_wo0f1")
+text = "Close"
+
+[connection signal="button_down" from="OpenTutorialChecklist" to="." method="_on_open_tutorial_checklist_button_down"]
+[connection signal="button_down" from="CloseTutorialChecklist" to="." method="_on_close_tutorial_checklist_button_down"]
