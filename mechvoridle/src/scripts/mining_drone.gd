@@ -15,12 +15,17 @@ func _ready() -> void:
 	DroneManager.register_mining_drone(self)
 
 func _process(delta : float) -> void:
-	progress_bar.value += GameManager.drone_mining_speed
-
 	
-	if progress_bar.value >= progress_bar.max_value:
-		obtain_resources()
+	if not GameManager.can_fight_boss:
+		progress_bar.value += GameManager.drone_mining_speed
+		
+		if progress_bar.value >= progress_bar.max_value:
+			obtain_resources()
+			progress_bar.value = 0
+
+	else:
 		progress_bar.value = 0
+	
 	
 func _exit_tree():
 	DroneManager.unregister_mining_drone(self)

@@ -72,9 +72,9 @@ var drones_count : int = 0
 var drones_cost : int = 100
 var drone_level : int = 0
 var drone_base_cost : int = 100
-var drone_damage : int =5
+var drone_damage : int = 7
 
-const UPGRADE_MULTIPLIER : float = 2.6
+const UPGRADE_MULTIPLIER : float = 2.3
 
 var drone_mining_speed_level : int = 0
 var drone_mining_speed : float = 0.30

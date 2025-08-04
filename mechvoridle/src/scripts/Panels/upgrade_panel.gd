@@ -348,7 +348,7 @@ func upgrade_drones_damage() -> void:
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
-	GameManager.drone_damage = GameManager.drone_damage + GameManager.drone_level * 2
+	GameManager.drone_damage = int(GameManager.drone_damage + GameManager.drone_level * 2.7)
 	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_level)
 
 
