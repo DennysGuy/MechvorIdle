@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if component and component.category == component.CATEGORY.WEAPON:
-		component_available_indicator.visible = GameManager.ferrite_bars_count >=  component.refined_ferrite_cost and GameManager.plasma_count >= component.plasma_cost
+		component_available_indicator.visible = GameManager.ferrite_bars_count >=  component.refined_ferrite_cost and GameManager.plasma_count >= component.plasma_cost and GameManager.owned_weapons_count >= 2
 	else:
 		component_available_indicator.visible = GameManager.ferrite_bars_count >=  component.refined_ferrite_cost
 

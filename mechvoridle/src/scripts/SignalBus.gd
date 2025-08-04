@@ -6,6 +6,9 @@ signal move_to_shop_pane
 signal move_to_central_hub_from_mining_page
 signal move_to_central_hub_from_shop_pane
 signal start_fight
+signal stop_ufo_spawn
+signal fade_out_alert
+signal remove_ufo_during_start_fight
 
 signal show_task_completed_indicator(index : int)
 signal show_check_list

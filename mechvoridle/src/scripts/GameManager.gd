@@ -74,7 +74,7 @@ var drone_level : int = 0
 var drone_base_cost : int = 100
 var drone_damage : int =5
 
-const UPGRADE_MULTIPLIER : float = 3
+const UPGRADE_MULTIPLIER : float = 2.6
 
 var drone_mining_speed_level : int = 0
 var drone_mining_speed : float = 0.30
@@ -289,7 +289,7 @@ func reset():
 	drone_count = 0
 	refinery_stations_count = 0
 	drone_level = 0
-	drone_damage = 1
+	drone_damage = 5
 	drone_damage_cost = drone_damage_base_cost
 	drone_mining_speed_level = 0
 	drone_mining_speed = 0.6

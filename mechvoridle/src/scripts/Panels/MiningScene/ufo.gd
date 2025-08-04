@@ -31,6 +31,7 @@ var destroy_ufo_start : bool = false
 var can_be_hit : bool = true
 
 func _ready() -> void:
+	SignalBus.remove_ufo_during_start_fight.connect(remove_ufo)
 	animated_sprite_2d.play("default")
 	max_health = randi_range(8,15)
 	health = max_health
@@ -146,6 +147,9 @@ func _on_ufo_click_control_gui_input(event) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_be_hit:
 		health_bar.show()
 		damage_ufo()
+
+func remove_ufo() -> void:
+	queue_free()
 
 func play_ufo_damage_sfx() -> void:
 	hit_ufo_sfx_player.stream = ufo_hit_sfx_list.pick_random()

@@ -27,6 +27,7 @@ func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
+	SignalBus.stop_ufo_spawn.connect(stop_ufo_spawn)
 	animation_player.play("hover")
 	asteroid_spawn_timer.wait_time = asteroid_spawn_timer_length
 	asteroid_spawn_timer.start()
@@ -36,7 +37,7 @@ func _process(delta : float) -> void:
 	
 	
 	if start_ufo_spawn:
-		ufo_spawn_timer.wait_time = randi_range(25,30)
+		ufo_spawn_timer.wait_time = randi_range(45,60)
 		ufo_spawn_timer.start()
 		start_ufo_spawn = false
 
@@ -108,7 +109,7 @@ func _on_ufo_spawn_timer_timeout():
 
 func toggle_ufo_spawn() -> void:
 	var total_drone_count : int = DroneManager.get_total_drone_count()
-	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO:
+	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO and not GameManager.can_fight_boss:
 		start_ufo_spawn = true
 	else:
 		start_ufo_spawn = false
@@ -135,3 +136,7 @@ func is_inside_mining_area() -> bool:
 	var rect := Rect2(top_left, size)
 
 	return rect.has_point(mouse_pos)
+
+func stop_ufo_spawn() -> void:
+	start_ufo_spawn = false
+	ufo_spawn_timer.stop()

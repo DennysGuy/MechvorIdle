@@ -37,14 +37,14 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	
-	recon_scout_indicator.visible = GameManager.platinum_count <= GameManager.recon_scout_platinum_cost and recon_scouts_left > 0
+	recon_scout_indicator.visible = GameManager.platinum_count >= GameManager.recon_scout_platinum_cost and recon_scouts_left >= 0
 	
 	if not GameManager.can_fight_boss:
 		start_fight_button.disabled = true
 	else:
 		start_fight_button.disabled = false
 		
-	purchase_recon_scout.disabled = GameManager.platinum_count <= GameManager.recon_scout_platinum_base_cost and recon_scouts_left > 0
+	purchase_recon_scout.disabled = GameManager.platinum_count <= GameManager.recon_scout_platinum_base_cost and recon_scouts_left >= 0
 
 func _on_start_fight_button_up():
 	if GameManager.can_fight_boss:

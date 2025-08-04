@@ -56,10 +56,10 @@ func _ready() -> void:
 	
 func _process(delta : float) -> void:
 	
-	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST)
-	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST)
-	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST)
-	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST)
+	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST, "Head") 
+	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST, "Torso")
+	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST, "Arms")
+	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST, "Legs")
 	rifles_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_RIFLE_FERRITE_BAR_COST, GameManager.MIN_RIFLE_PLASMA_COST)
 	swords_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_SWORD_FERRITE_BAR_COST, GameManager.MIN_SWORD_PLASMA_COST)
 	launchers_indicator.visible_characters = show_weapon_component_available_indicator(GameManager.MIN_LAUNCHER_FERRITE_BAR_COST, GameManager.MIN_LAUNCHER_PLASMA_COST)
@@ -104,11 +104,11 @@ func update_description_box(component: MechComponent) -> void:
 	weight_class.text = "Weight Class: " + selected_component.get_weight_class()
 	weapon_type_focus.text = "Focus: " + selected_component.get_weapon_focus()
 
-func show_armor_component_available_indicator(value : int) -> bool:
-	return GameManager.ferrite_bars_count >= value
+func show_armor_component_available_indicator(value : int, component_name : String) -> bool:
+	return GameManager.ferrite_bars_count >= value and GameManager.mech_component_slot_is_empty(component_name)
 	
 func show_weapon_component_available_indicator(ferrite_bars_value : int, plasma_value) -> bool:
-	return GameManager.ferrite_bars_count >= ferrite_bars_value and GameManager.plasma_count >= plasma_value
+	return GameManager.ferrite_bars_count >= ferrite_bars_value and GameManager.plasma_count >= plasma_value and GameManager.owned_weapons_count >= 2
 
 
 func _on_heads_button_button_down() -> void:
@@ -174,6 +174,8 @@ func _on_confirmation_button_button_down() -> void:
 	hide_confirmation_panel()
 	if GameManager.owned_components_count >= GameManager.MECH_PARTS_NEEDED:
 		main_hub.animation_player.play("AllPartsBoughtStartFight")
+		SignalBus.stop_ufo_spawn.emit()
+		SignalBus.fade_out_alert.emit()
 		GameManager.can_traverse_panes = false
 	
 
