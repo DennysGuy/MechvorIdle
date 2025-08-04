@@ -67,7 +67,6 @@ func _physics_process(delta : float) -> void:
 				move_and_slide()
 				
 		states.SHOOT:
-
 			can_shoot = true
 			velocity = Vector2.ZERO
 			if not hover_time_started:
@@ -104,6 +103,8 @@ func destroy_ufo() -> void:
 	deliver_resources.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
 	SignalBus.silence_ship_alarm.emit()
+	if !GameManager.ufo_destroyed:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UFO_DESTROYED)
 	animated_sprite_2d.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 5

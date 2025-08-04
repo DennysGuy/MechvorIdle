@@ -50,6 +50,11 @@ func damage_asteroid() -> void:
 		spawn_explosion_and_destroy()
 
 func spawn_explosion_and_destroy():
+	
+	if !GameManager.flyby_asteroid_destroyed:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.FLYBY_ASTEROID_DESTROY)
+		GameManager.flyby_asteroid_destroyed = true
+		
 	can_hit = false
 	graphic.hide()
 	area_2d.get_child(0).disabled = true

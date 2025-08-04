@@ -9,7 +9,7 @@ var mining_drones: Array[MiningDrone] = []
 var platinum_drones: Array[PlatinumMiningDrone] = []
 
 var mining_drone_base_cost: int = 100
-var platinum_drone_base_cost: int = 180
+var platinum_drone_base_cost: int = 100
 
 # === GETTERS ===
 

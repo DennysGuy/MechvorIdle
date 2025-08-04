@@ -7,10 +7,14 @@ class_name FerriteRefineryStation extends Control
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var output_label: Label = $OutputLabel
 @onready var cost_label: Label = $CostLabel
+@onready var refined_ferrite_ui_icon: Sprite2D = $RefinedFerriteUiIcon
+@onready var ferrite_ui_icon: Sprite2D = $FerriteUiIcon
 
 var refinery_stock : int
 
 func _ready() -> void:
+	refined_ferrite_ui_icon.hide()
+	ferrite_ui_icon.hide()
 	output_label.hide()
 	cost_label.hide()
 	refinery_cost_label.text = "Cost: " + str(GameManager.ferrite_refinery_cost)
@@ -18,10 +22,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if  is_instance_valid(purchase_refinery_station):
-		purchase_refinery_station.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_cost
+		purchase_refinery_station.disabled = GameManager.raw_ferrite_count < GameManager.ferrite_refinery_cost
 	
 	if GameManager.ferrite_refinery_station_purchased:
 		#grab resources -- if enough
+		refined_ferrite_ui_icon.show()
+		ferrite_ui_icon.show()
 		output_label.show()
 		cost_label.show()
 		output_label.text = "Output: " + str(GameManager.output_amount)
@@ -47,8 +53,11 @@ func _process(delta: float) -> void:
 
 
 func _on_purchase_refinery_station_button_down() -> void:
-	GameManager.platinum_count -= GameManager.ferrite_refinery_cost
+
+	SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.FERRITE_REFINERY_PURCHASED)
 	GameManager.ferrite_refinery_station_purchased = true
+	GameManager.raw_ferrite_count -= GameManager.ferrite_refinery_cost
+	
 	progress_bar.show()
 	purchase_panel.queue_free()
 	SignalBus.update_platinum_count.emit()

@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://crcd7gukxb3ng" path="res://assets/graphics/refineryused.png" id="2_7nq2t"]
 [ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="3_dx13i"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_qxr35"]
-[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="4_dx13i"]
 [ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="4_fvpmm"]
 [ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="5_3e61l"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="8_3e61l"]
+[ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="9_6wyc8"]
 
 [node name="FerriteRefinery" type="Control"]
 layout_mode = 3
@@ -39,24 +39,32 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_7nq2t")
 
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(15, 3)
+texture = ExtResource("8_3e61l")
+
 [node name="OutputLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 24.0
 offset_top = -1.0
-offset_right = 66.0
+offset_right = 74.0
 offset_bottom = 11.0
 theme_override_fonts/font = ExtResource("3_qxr35")
 theme_override_font_sizes/font_size = 7
 text = "Output: 23"
+
+[node name="FerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(101, 2)
+texture = ExtResource("9_6wyc8")
 
 [node name="CostLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -45.0
+offset_left = -41.0
 offset_top = -1.0
-offset_right = -6.0
+offset_right = -2.0
 offset_bottom = 8.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("3_qxr35")
@@ -112,10 +120,6 @@ theme_override_fonts/font = ExtResource("3_qxr35")
 theme_override_font_sizes/font_size = 9
 text = "cost: 13434"
 
-[node name="PlatinumUiIcon" type="Sprite2D" parent="PurchasePanel"]
-position = Vector2(45, 15)
-texture = ExtResource("4_dx13i")
-
 [node name="Label" type="Label" parent="PurchasePanel"]
 layout_mode = 1
 anchors_preset = 7
@@ -137,5 +141,9 @@ text = "Ferrite Refinery"
 [node name="RefinedFerriteUiIcon" type="Sprite2D" parent="PurchasePanel"]
 position = Vector2(30, 66)
 texture = ExtResource("8_3e61l")
+
+[node name="FerriteUiIcon2" type="Sprite2D" parent="PurchasePanel"]
+position = Vector2(46, 14)
+texture = ExtResource("9_6wyc8")
 
 [connection signal="button_down" from="PurchasePanel/PurchaseRefineryStation" to="." method="_on_purchase_refinery_station_button_down"]

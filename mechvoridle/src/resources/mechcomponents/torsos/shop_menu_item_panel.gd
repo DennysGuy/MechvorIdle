@@ -2,6 +2,8 @@ class_name ShopMenuItemPanel extends Control
 
 @onready var item_name: Label = $ItemName
 @onready var audio_stream_player :AudioStreamPlayer = $AudioStreamPlayer
+@onready var component_available_indicator: Label = $ComponentAvailableIndicator
+
 
 var component : MechComponent
 
@@ -11,7 +13,11 @@ func _ready() -> void:
 	else:
 		item_name.text = "No Component Found"
 	
-
+func _process(delta: float) -> void:
+	if component and component.category == component.CATEGORY.WEAPON:
+		component_available_indicator.visible = GameManager.ferrite_bars_count >=  component.refined_ferrite_cost and GameManager.plasma_count >= component.plasma_cost
+	else:
+		component_available_indicator.visible = GameManager.ferrite_bars_count >=  component.refined_ferrite_cost
 
 func _on_gui_input(event: InputEvent) -> void:
 	pass

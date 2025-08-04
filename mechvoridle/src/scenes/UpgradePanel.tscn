@@ -635,6 +635,18 @@ theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "8"
 
+[node name="UpgradesAvailableLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 218.0
+offset_right = 247.0
+offset_bottom = 232.0
+theme_override_colors/font_color = Color(1, 0.864342, 0.243178, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 11
+text = "Upgrades Available!"
+
 [node name="FuelPlatinumCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 543.0
@@ -752,6 +764,174 @@ texture = ExtResource("4_nnvdg")
 [node name="PlatinumUiIcon16" type="Sprite2D" parent="."]
 position = Vector2(265, 132)
 texture = ExtResource("4_nnvdg")
+
+[node name="mining_laser_speed_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 49.0
+offset_right = 88.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="mining_laser_damage_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 84.0
+offset_right = 88.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="mining_laser_crit_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 127.0
+offset_right = 97.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="drone_available_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 57.0
+offset_right = 219.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="drone_damage_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 88.0
+offset_right = 219.0
+offset_bottom = 111.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="drone_speed_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 74.0
+offset_right = 314.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_available_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 137.0
+offset_right = 230.0
+offset_bottom = 160.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_damage_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 163.0
+offset_right = 230.0
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_speed_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 152.0
+offset_right = 334.0
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Ferrite_Refinery_speed_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 54.0
+offset_right = 452.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Ferrite_Refinery_output_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 85.0
+offset_right = 452.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_speed_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 46.0
+offset_right = 576.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_output_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 74.0
+offset_right = 576.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_fuel_indicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 105.0
+offset_right = 576.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
 
 [connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
 [connection signal="button_down" from="UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]

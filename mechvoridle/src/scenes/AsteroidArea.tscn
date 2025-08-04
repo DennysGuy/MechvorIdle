@@ -93,32 +93,6 @@ render_target_update_mode = 4
 
 [node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ocvap")]
 
-[node name="AsteroidSpawnPoints" type="Node" parent="."]
-
-[node name="AstroidSpawnPoint" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(14, 118)
-
-[node name="AstroidSpawnPoint2" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(149, 246)
-
-[node name="AstroidSpawnPoint3" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(151, -9)
-
-[node name="AstroidSpawnPoint4" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(304, -28)
-
-[node name="AstroidSpawnPoint5" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(448, -7)
-
-[node name="AstroidSpawnPoint6" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(602, 117)
-
-[node name="AstroidSpawnPoint7" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(491, 247)
-
-[node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
-position = Vector2(304, 300)
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -169,6 +143,32 @@ offset_top = 41.0
 offset_right = 399.0
 offset_bottom = 219.0
 guide_label = "Click and Hold"
+
+[node name="AsteroidSpawnPoints" type="Node" parent="."]
+
+[node name="AstroidSpawnPoint" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(14, 118)
+
+[node name="AstroidSpawnPoint2" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(18, 203)
+
+[node name="AstroidSpawnPoint3" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(41, 26)
+
+[node name="AstroidSpawnPoint4" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(26, 285)
+
+[node name="AstroidSpawnPoint5" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(594, 192)
+
+[node name="AstroidSpawnPoint6" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(602, 117)
+
+[node name="AstroidSpawnPoint7" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(549, 30)
+
+[node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
+position = Vector2(571, 270)
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]

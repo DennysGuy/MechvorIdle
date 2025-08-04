@@ -29,6 +29,15 @@ class_name ShopPane extends Control
 
 @export var main_hub : MainHub
 
+@onready var head_indicator: Label = $ColorRect/HeadIndicator
+@onready var torso_indicator: Label = $ColorRect/TorsoIndicator
+@onready var arms_indicator: Label = $ColorRect/ArmsIndicator
+@onready var legs_indicator: Label = $ColorRect/LegsIndicator
+@onready var rifles_indicator: Label = $ColorRect/RiflesIndicator
+@onready var swords_indicator: Label = $ColorRect/SwordsIndicator
+@onready var launchers_indicator: Label = $ColorRect/LaunchersIndicator
+
+
 var selected_component : MechComponent
 var confirmation_box_is_showing : bool = false
 
@@ -46,6 +55,14 @@ func _ready() -> void:
 	
 	
 func _process(delta : float) -> void:
+	
+	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST)
+	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST)
+	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST)
+	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST)
+	rifles_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_RIFLE_FERRITE_BAR_COST, GameManager.MIN_RIFLE_PLASMA_COST)
+	swords_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_SWORD_FERRITE_BAR_COST, GameManager.MIN_SWORD_PLASMA_COST)
+	launchers_indicator.visible_characters = show_weapon_component_available_indicator(GameManager.MIN_LAUNCHER_FERRITE_BAR_COST, GameManager.MIN_LAUNCHER_PLASMA_COST)
 	
 	if selected_component:
 		if selected_component.get_category_type() == "Weapon" and GameManager.owned_weapons_count == 2 or confirmation_box_is_showing:
@@ -86,6 +103,13 @@ func update_description_box(component: MechComponent) -> void:
 	part_class.text = "Class: " + selected_component.get_category_type()
 	weight_class.text = "Weight Class: " + selected_component.get_weight_class()
 	weapon_type_focus.text = "Focus: " + selected_component.get_weapon_focus()
+
+func show_armor_component_available_indicator(value : int) -> bool:
+	return GameManager.ferrite_bars_count >= value
+	
+func show_weapon_component_available_indicator(ferrite_bars_value : int, plasma_value) -> bool:
+	return GameManager.ferrite_bars_count >= ferrite_bars_value and GameManager.plasma_count >= plasma_value
+
 
 func _on_heads_button_button_down() -> void:
 	display_component_list("Heads")
@@ -135,6 +159,10 @@ func _on_purchase_button_button_down() -> void:
 
 
 func _on_confirmation_button_button_down() -> void:
+	if !GameManager.mech_component_purchased:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED)
+		GameManager.mech_component_purchased = true
+		
 	SfxManager.play_button_click(sfx_player)
 	sfx_player.stream = [SfxManager.UI_SHOP_BUY_COMPLETE_01,SfxManager.UI_SHOP_BUY_COMPLETE_02,SfxManager.UI_SHOP_BUY_COMPLETE_03].pick_random()
 	sfx_player.play()

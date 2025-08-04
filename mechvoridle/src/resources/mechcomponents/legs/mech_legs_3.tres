@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="MechLegs" load_steps=2 format=3 uid="uid://k1p5grxnndv3"]
+[gd_resource type="Resource" script_class="MechLegs" load_steps=2 format=3 uid="uid://kkoht6ubl33m"]
 
-[ext_resource type="Script" uid="uid://cqa88tl10c011" path="res://src/scripts/mechcomponents/mech_legs.gd" id="1_vd6vd"]
+[ext_resource type="Script" uid="uid://cqa88tl10c011" path="res://src/scripts/mechcomponents/mech_legs.gd" id="1_bqij4"]
 
 [resource]
-script = ExtResource("1_vd6vd")
+script = ExtResource("1_bqij4")
 dodge_chance_modifier = 0.3
 component_name = "HOP113456"
 description = "Mecha are large robotic machines used in various types of entertainment and media. "
 health = 750
 plasma_resistance = 0.0
-refined_ferrite_cost = 3000
+refined_ferrite_cost = 3200
 plasma_cost = 0
 platinum_cost = 0
 category = 2
 component_type = 0
-weight_class = 2
+weight_class = 1
 metadata/_custom_type_script = "uid://cqa88tl10c011"

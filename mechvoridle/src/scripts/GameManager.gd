@@ -17,6 +17,17 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+const MIN_ARMS_FERRITE_BAR_COST = 2500
+const MIN_LEGS_FERRITE_BAR_COST = 3000
+const MIN_TORSO_FERRITE_BAR_COST = 4600
+const MIN_HEAD_FERRITE_BAR_COST = 1800
+const MIN_RIFLE_FERRITE_BAR_COST = 1200
+const MIN_RIFLE_PLASMA_COST = 200
+const MIN_SWORD_FERRITE_BAR_COST = 1000
+const MIN_SWORD_PLASMA_COST = 600
+const MIN_LAUNCHER_FERRITE_BAR_COST = 2200
+const MIN_LAUNCHER_PLASMA_COST = 300
+
 var audio_settings_Showing : bool = false
 
 #tutorial bools
@@ -42,7 +53,7 @@ var refinery_stations_count : int
 var can_traverse_panes : bool = true
 
 var mining_laser_level : int = 0
-var mining_laser_damage : int  = 1
+var mining_laser_damage : int  = 3
 var mining_laser_damage_upgrade_cost : int = 100
 var mining_laser_damage_base_cost : int = 100
 
@@ -70,51 +81,49 @@ const DRONES_TO_ACTIVATE_UFO : int = 3
 var drones_count : int = 0
 var drones_cost : int = 100
 var drone_level : int = 0
-var drone_base_cost : int = 200
-var drone_damage : int = 1
+var drone_base_cost : int = 100
+var drone_damage : int =5
 
 var drone_mining_speed_level : int = 0
-var drone_mining_speed : float = 0.3
-var drone_mining_speed_base_cost : int = 200
-var drone_mining_speed_cost : int = 200
+var drone_mining_speed : float = 0.8
+var drone_mining_speed_base_cost : int = 120
+var drone_mining_speed_cost : int = 120
 var drone_mining_speed_upgrade_interval : float = 0.1
 var drone_damage_cost : int = 100
 var drone_damage_base_cost : int = 150
 
-var platinum_drone_cost : int = 180
+var platinum_drone_cost : int = 100
 var platinum_drone_count : int = 0
-var platinum_drone_base_cost : int = 180
+var platinum_drone_base_cost : int = 100
 
 var platinum_drone_damage_level : int = 0
-var platinum_drone_damage : int = 10
+var platinum_drone_damage : int = 12
 var platinum_drone_damage_cost : int = 150
 var platinum_drone_damage_base_cost : int = 150
 
-var platinum_drone_mining_speed : float = 0.2
-var platinum_drone_mining_speed_cost : float = 250
-var platinum_drone_mining_speed_base_cost : float = 250
+var platinum_drone_mining_speed : float = 0.7
+var platinum_drone_mining_speed_cost : float = 150
+var platinum_drone_mining_speed_base_cost : float = 150
 var platinum_drone_mining_speed_level : int = 0
 var platinum_drone_mining_speed_interval : float = 0.2
 
 
-var ferrite_refinery_station_purchased = false
 
-var ferrite_refinery_speed : float = 0.08
+
+var ferrite_refinery_speed : float = 0.5
 var ferrite_refinery_speed_cost : int = 100
 var ferrite_refinery_speed_base_cost : int = 100
 var ferrite_refinery_speed_level : int = 0
 var ferrite_refinery_speed_upgrade_interval : float = 0.05
 
 var ferrite_refinery_output_level : int = 0
-var output_amount : int = 4
+var output_amount : int = 15
 var output_upgrade_cost : int = 300
 var output_upgrade_base_cost : int = 300
 
-var ferrite_cost : int = 8
+var ferrite_cost : int = 30
 var ferrite_cost_platinum_cost : int = 500
 var ferrite_cost_platinum_base_cost : int = 500
-
-var plasma_generator_station_purchased = false
 
 var plasma_generator_speed_level : int = 0
 var plasma_generator_speed : float = 0.1
@@ -135,10 +144,42 @@ var plasma_generator_fuel_consumption_speed : float = 0.05
 var plasma_generator_fuel_cost : int = 3000
 var plasma_generator_fuel_base_cost : int = 3000
 
+#tutorial checklist
+
+var visited_black_market : bool = false
+var mining_facility_visited : bool = false
+var asteroid_mined : bool = false
+var plat_drone_purchased : bool = false
+var mining_drone_purchased : bool = false
+var recon_scout_purchased : bool = false
+var upgrade_purchased : bool = false
+var plasma_generator_station_purchased : bool = false
+var ferrite_refinery_station_purchased : bool = false
+var mech_component_purchased : bool = false
+var flyby_asteroid_destroyed : bool = false
+var ufo_destroyed : bool = false
+
+enum CHECK_LIST_INDICATOR_TOGGLES
+{
+	VISITED_BLACK_MARKET, 
+	VISITED_MINING_FACILITY,
+	ASTEROID_MINED, 
+	MINING_DRONE_PURCHASED, 
+	PLAT_DRONE_PURCHASED, 
+	RECON_SCOUT_PURCHASED,
+	UPGRADE_PURCHASED,
+	FERRITE_REFINERY_PURCHASED,
+	PLASMA_GENERATOR_PURCHASED,
+	MECH_COMPONENT_PURCHASED,
+	FLYBY_ASTEROID_DESTROY,
+	UFO_DESTROYED 
+
+}
+
 #stats page
-var recon_scout_platinum_cost : int = 20
-var recon_scout_platinum_base_cost : int = 20
-var recon_scout_ferrite_bars_cost : int = 100
+var recon_scout_platinum_cost : int = 300
+var recon_scout_platinum_base_cost : int = 300
+var recon_scout_ferrite_bars_cost : int = 300
 var total_health : int = 0
 var current_health : int = 0
 #combat
@@ -261,7 +302,7 @@ func reset():
 	drone_damage = 1
 	drone_damage_cost = drone_damage_base_cost
 	drone_mining_speed_level = 0
-	drone_mining_speed = 0.3
+	drone_mining_speed = 0.6
 	drone_mining_speed_cost = drone_mining_speed_base_cost
 
 	platinum_drone_count = 0
@@ -270,13 +311,13 @@ func reset():
 	platinum_drone_damage = 10
 	platinum_drone_damage_cost = platinum_drone_damage_base_cost
 	platinum_drone_mining_speed_level = 0
-	platinum_drone_mining_speed = 0.2
+	platinum_drone_mining_speed = 0.5
 	platinum_drone_mining_speed_cost = platinum_drone_mining_speed_base_cost
 
 	# Refinery Station
 	ferrite_refinery_station_purchased = false
 	ferrite_refinery_speed_level = 0
-	ferrite_refinery_speed = 0.08
+	ferrite_refinery_speed = 0.3
 	ferrite_refinery_speed_cost = ferrite_refinery_speed_base_cost
 
 	ferrite_refinery_output_level = 0

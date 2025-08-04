@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://hjbnj2tod3ol"]
+[gd_scene load_steps=10 format=3 uid="uid://hjbnj2tod3ol"]
 
 [ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/plasma_generator.gd" id="1_2eac4"]
 [ext_resource type="Texture2D" uid="uid://cgmy7s1s1tb1u" path="res://assets/graphics/generator.png" id="2_2eac4"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_2c8cf"]
 [ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="3_mtsxs"]
 [ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="4_jq14y"]
+[ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="4_ua82w"]
 [ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="5_2c8cf"]
 [ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="7_r6g4s"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_r6g4s"]
@@ -69,23 +70,31 @@ text = "Speed: 30%"
 
 [node name="Output" type="Label" parent="."]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 36.0
-offset_right = 121.0
-offset_bottom = 46.0
+offset_left = 77.0
+offset_top = 34.0
+offset_right = 120.0
+offset_bottom = 44.0
 theme_override_fonts/font = ExtResource("3_2c8cf")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "Output: 44"
 
 [node name="FuelCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 55.0
-offset_right = 116.0
-offset_bottom = 65.0
+offset_left = 81.0
+offset_top = 51.0
+offset_right = 120.0
+offset_bottom = 59.0
 theme_override_fonts/font = ExtResource("3_2c8cf")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "Fuel: 255"
+
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="."]
+position = Vector2(69, 54)
+texture = ExtResource("4_ua82w")
+
+[node name="PlasmaUiIcon" type="Sprite2D" parent="."]
+position = Vector2(69, 38)
+texture = ExtResource("8_r6g4s")
 
 [node name="PurchasePanel" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.85098)

@@ -14,6 +14,7 @@ class_name CentralHubPanel extends Control
 @onready var purchase_recon_scout : Button = $ColorRect/TipsPanel/PurchaseReconScout
 @onready var name_entry_box = $ColorRect/NameEntryBox
 @onready var confirm_start_fight = $ColorRect/NameEntryBox/ConfirmStartFight
+@onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
 
 @onready var animation_player = $AnimationPlayer
 
@@ -35,6 +36,9 @@ func _ready() -> void:
 	update_plasma_count()
 
 func _process(delta) -> void:
+	
+	recon_scout_indicator.visible = GameManager.platinum_count <= GameManager.recon_scout_platinum_cost
+	
 	if not GameManager.can_fight_boss:
 		start_fight_button.disabled = true
 	else:
@@ -58,6 +62,9 @@ func start_fight() -> void:
 
 func _on_purchase_recon_scout_button_down():
 	if recon_scouts_left > 0:
+		if !GameManager.recon_scout_purchased:
+			SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+			
 		GameManager.platinum_count -= GameManager.recon_scout_platinum_cost
 		recon_text.text = recon_tips_list[recon_index]
 		recon_index += 1

@@ -285,29 +285,30 @@ offset_left = 197.0
 offset_top = -25.0
 offset_right = 275.0
 offset_bottom = -9.0
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 6
 text = "Buy Recon Scout"
 
-[node name="Platinum" type="Label" parent="ColorRect/TipsPanel"]
-layout_mode = 0
-offset_left = 142.0
-offset_top = -26.0
-offset_right = 180.0
-offset_bottom = -14.0
-theme_override_fonts/font = ExtResource("3_lvy6k")
-theme_override_font_sizes/font_size = 8
-text = "Platinum"
-
 [node name="PlatinumCost" type="Label" parent="ColorRect/TipsPanel"]
 layout_mode = 0
 offset_left = 141.0
-offset_top = -16.0
-offset_right = 160.0
-offset_bottom = -4.0
+offset_top = -15.0
+offset_right = 168.0
+offset_bottom = -3.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 8
 text = "8000"
+
+[node name="Cost" type="Label" parent="ColorRect/TipsPanel"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = -27.0
+offset_right = 183.0
+offset_bottom = -15.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+theme_override_font_sizes/font_size = 8
+text = "Cost"
 
 [node name="ReconText" type="RichTextLabel" parent="ColorRect/TipsPanel"]
 layout_mode = 1
@@ -325,6 +326,10 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("3_lvy6k")
 theme_override_font_sizes/normal_font_size = 9
 text = "Hire a Recon Scout to attain insight on your opponent"
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="ColorRect/TipsPanel"]
+position = Vector2(148, -22)
+texture = ExtResource("7_isv1m")
 
 [node name="MechComponentsTrackerPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
@@ -425,6 +430,16 @@ mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 11
 text = "START"
+
+[node name="ReconScoutIndicator" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 199.0
+offset_right = 302.0
+offset_bottom = 222.0
+theme_override_colors/font_color = Color(0.934761, 0.806525, 0, 1)
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "!"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

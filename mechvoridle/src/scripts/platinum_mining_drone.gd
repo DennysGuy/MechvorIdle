@@ -41,6 +41,7 @@ func obtain_resources() -> void:
 			
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 	resource_acquired_label.output = "+"+str(drone_damage)
+	resource_acquired_label.set_resource_as_platinum()
 	resource_acquired_label.global_position = global_position
 	get_parent().add_child(resource_acquired_label)
 	SignalBus.update_platinum_count.emit()

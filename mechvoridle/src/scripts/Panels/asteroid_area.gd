@@ -36,7 +36,7 @@ func _process(delta : float) -> void:
 	
 	
 	if start_ufo_spawn:
-		ufo_spawn_timer.wait_time = randi_range(10,25)
+		ufo_spawn_timer.wait_time = randi_range(25,30)
 		ufo_spawn_timer.start()
 		start_ufo_spawn = false
 
@@ -92,6 +92,7 @@ func spawn_asteroid() -> void:
 
 func spawn_ufo() -> void:
 	if ufo_list.get_children().size() <= 0:
+
 		var ufo : UFO = preload("res://src/scenes/MiningScene/UFO.tscn").instantiate()
 		ufo.mining_asteroid_area = asteroid_area_2d
 		ufo.global_position = ufo_in_position.global_position
@@ -109,13 +110,9 @@ func toggle_ufo_spawn() -> void:
 	var total_drone_count : int = DroneManager.get_total_drone_count()
 	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO:
 		start_ufo_spawn = true
-		print("hey we going")
 	else:
 		start_ufo_spawn = false
 		ufo_spawn_timer.stop()
-		if ufo_spawn_timer.is_stopped():
-			print("WE STOPPED!")
-
 
 func _on_asteroid_area_2d_mouse_entered():
 	mouse_in_asteroid_range = true

@@ -7,7 +7,8 @@ var shop_list : Dictionary = {
 	},
 	"Torsos": {
 		0 : preload("res://src/resources/mechcomponents/torsos/mech_torso_1.tres"),
-		1 : preload("res://src/resources/mechcomponents/torsos/mech_torso_2.tres")
+		1 : preload("res://src/resources/mechcomponents/torsos/mech_torso_2.tres"),
+		2 : preload("res://src/resources/mechcomponents/torsos/mech_torso_3.tres")
 	},
 	"Arms": {
 		0: preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres"),
@@ -15,11 +16,12 @@ var shop_list : Dictionary = {
 	},
 	"Legs": {
 		0: preload("res://src/resources/mechcomponents/legs/mech_legs_1.tres"),
-		1: preload("res://src/resources/mechcomponents/legs/mech_legs_2.tres")
+		1: preload("res://src/resources/mechcomponents/legs/mech_legs_2.tres"),
+		2: preload("res://src/resources/mechcomponents/legs/mech_legs_3.tres"),
 	},
 	"Rifles": {
 		0: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_1.tres"),
-		1: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_2.tres")
+		1: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_2.tres"),
 	},
 	"Swords": {
 		0: preload("res://src/resources/mechcomponents/weapons/swords/Sword-1.tres"),

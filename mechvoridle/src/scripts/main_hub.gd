@@ -9,6 +9,9 @@ class_name MainHub extends Control
 @onready var audio_settings_animation_player: AnimationPlayer = $AudioSettingsAnimationPlayer
 @onready var vox_player: AudioStreamPlayer = $VoxPlayer
 
+@onready var check_list_animation_player: AnimationPlayer = $CheckListAnimationPlayer
+
+
 @onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
 @onready var enter_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_ENTER_HUB_01
 @onready var mining_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_MINING_01, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_02, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_03, SfxManager.UI_NAV_SWITCH_TAB_B_MINING_04]
@@ -27,10 +30,13 @@ func _ready() -> void:
 	SignalBus.show_audio_settings.connect(show_audio_settings)
 	SignalBus.hide_audio_settings.connect(hide_audio_settings)
 	SignalBus.start_fight.connect(start_fight)
+	SignalBus.show_check_list.connect(show_check_list)
+	SignalBus.hide_check_list.connect(hide_check_list)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
+			
 			move_from_shop_pane_to_central_pane()
 		elif GameManager.on_central_panel:
 			move_to_mining_pane()
@@ -50,6 +56,9 @@ func start_fight() -> void:
 	get_tree().change_scene_to_file("res://src/scenes/MechFightArena.tscn")
 
 func move_to_mining_pane() -> void:
+	if !GameManager.mining_facility_visited:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY)
+		GameManager.mining_facility_visited = true	
 	play_nav_from_hub_to_mining_sfx()
 	GameManager.on_mining_panel = true
 	GameManager.on_shop_panel = false
@@ -57,6 +66,9 @@ func move_to_mining_pane() -> void:
 	animation_player.play("NavigateToMiningPage")
 
 func move_to_shop_pane() -> void:
+	if !GameManager.visited_black_market:
+		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET)
+		GameManager.visited_black_market = true	
 	player_enter_shop_from_hub_sfx()
 	GameManager.on_central_panel = false
 	GameManager.on_mining_panel = false
@@ -71,6 +83,7 @@ func move_from_mining_pane_to_central_pane() -> void:
 	animation_player.play("NavigateFromMiningPageToCentralHub")
 
 func move_from_shop_pane_to_central_pane() -> void:
+	
 	play_enter_hub_from_shop_sfx()
 	GameManager.on_mining_panel = false
 	GameManager.on_shop_panel = false
@@ -85,6 +98,12 @@ func insert_ship_alarm() -> void:
 
 func remove_ship_alarm() -> void:
 	get_tree().get_first_node_in_group("ship alarm")
+
+func show_check_list() -> void:
+	check_list_animation_player.play("show check list")
+
+func hide_check_list() -> void:
+	check_list_animation_player.play("hide check list")
 
 func play_nav_from_hub_to_mining_sfx():
 	sfx_player_layer_1.stream = exit_hub 

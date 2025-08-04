@@ -1,6 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cacjpcdeurq7f"]
+[gd_scene load_steps=12 format=3 uid="uid://cacjpcdeurq7f"]
 
 [ext_resource type="Script" uid="uid://dwec0olorx8de" path="res://src/scripts/Panels/main_menu.gd" id="1_1bg10"]
+[ext_resource type="FontFile" uid="uid://ch1g7vawmp68w" path="res://assets/graphics/Fonts/ProcyonShadow-8Mo6A.ttf" id="2_a00hu"]
+[ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_cbw1n"]
+[ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="2_g3tly"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_oll1y"]
+[ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_6ekv6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3228i"]
 bg_color = Color(0.303286, 0.574834, 0.640218, 1)
@@ -11,6 +16,18 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="Animation" id="Animation_oll1y"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_1bg10"]
 resource_name = "fade_in"
@@ -32,7 +49,7 @@ resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../TransitionRect:color")
+tracks/0/path = NodePath("TransitionRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,63 +75,66 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1bg10")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.123244, 0.1744, 0.279652, 1)
+texture = ExtResource("2_cbw1n")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 226.0
+offset_top = -63.0
+offset_right = 866.0
+offset_bottom = 449.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_g3tly")]
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -153.5
+offset_left = -153.0
 offset_top = 69.0
-offset_right = 153.5
-offset_bottom = 127.0
+offset_right = 154.0
+offset_bottom = 124.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_a00hu")
 theme_override_font_sizes/font_size = 42
 text = "MECHVOR IDLE"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -78.0
-offset_top = -191.0
-offset_right = 64.0
-offset_bottom = -135.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Play" type="Button" parent="."]
 layout_mode = 2
+offset_left = 227.0
+offset_top = 185.0
+offset_right = 369.0
+offset_bottom = 208.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_oll1y")
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_3228i")
 text = "Play"
-
-[node name="Settings" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_3228i")
-text = "Settings"
 
 [node name="Authors" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -21.0
-offset_right = 345.0
-offset_bottom = -4.0
+offset_left = 6.0
+offset_top = -20.0
+offset_right = 494.0
+offset_bottom = -3.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_oll1y")
 theme_override_font_sizes/font_size = 12
 text = "Created By: Dan Galleti, PMYA, ProtoPixel, and Denny'sGuy"
 
@@ -129,10 +149,15 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../VBoxContainer/Settings")
 libraries = {
 &"": SubResource("AnimationLibrary_oll1y")
 }
 
-[connection signal="button_down" from="VBoxContainer/Play" to="." method="_on_play_button_down"]
-[connection signal="button_down" from="VBoxContainer/Settings" to="." method="_on_settings_button_down"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6ekv6")
+bus = &"Ambiance"
+
+[node name="sfxplayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="Play" to="." method="_on_play_mouse_entered"]

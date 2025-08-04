@@ -19,7 +19,10 @@ enum TARGET{PLAYER, ENEMY}
 var selected_torso : MechTorso
 var selected_head : MechHead
 var selected_arms : MechArms
+var selected_legs : MechLegs
+
 var target_legs : MechLegs
+
 
 var true_charge_speed : float
 var true_accuracy : float
@@ -66,9 +69,9 @@ func _process(delta : float) -> void:
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
 				#print(weapon_charge_bar.value)
-				damage_target(GameManager.chosen_opponent.current_health)
+				damage_target(GameManager.chosen_opponent.current_health, true_target_dodge_chance)
 			else:
-				damage_target(GameManager.current_health)
+				damage_target(GameManager.current_health, true_target_dodge_chance)
 				SignalBus.shake_camera.emit()
 			weapon_charge_bar.value = 0
 
@@ -110,10 +113,10 @@ func component_type_final_value(component : MechComponent, component_modifier_va
 		_:
 			return 0.0
 			
-func damage_target(target_health : int) -> void:
+func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 	var damage_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 	#calculate hit
-	if attempt_attack_landed(true_accuracy, true_target_dodge_chance):
+	if attempt_attack_landed(true_accuracy, opponent_dodge_chance):
 		#calculate crit_chance
 		var random_damage : int = randi_range(weapon.damage - 40, weapon.damage)
 		if crit_landed(true_crit_chance):
