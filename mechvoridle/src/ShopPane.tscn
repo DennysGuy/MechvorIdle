@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=21 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ygwtask7dhhn" path="res://assets/graphics/UI/PurchaseButton_disabled.png" id="6_qucr2"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="6_wcomc"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="7_4k2ii"]
+[ext_resource type="PackedScene" uid="uid://bthwbil816n1x" path="res://src/scenes/part_previewer.tscn" id="7_gvnck"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="8_wcomc"]
 [ext_resource type="Texture2D" uid="uid://ce1elo3nxwhn2" path="res://assets/graphics/UI/ClosePanelButton.png" id="9_4k2ii"]
 
@@ -297,6 +298,18 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="BM" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("3_mi2d3")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 262.0
+offset_right = 323.0
+offset_bottom = 332.0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer2"]
+size = Vector2i(88, 70)
+
+[node name="PartPreview" parent="ColorRect/SubViewportContainer2/SubViewport" instance=ExtResource("7_gvnck")]
 
 [node name="Instructions" type="Label" parent="ColorRect"]
 layout_mode = 0

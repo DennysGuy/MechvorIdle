@@ -226,13 +226,27 @@ func calculate_health() -> void:
 
 #shop panel
 func add_mech_component(component : MechComponent) -> void: 
+	
 	var component_category : String = component.get_category_type()
+	var component_weight_class : String = component.get_weight_class()
+	var component_focus : String = component.get_weapon_focus()
+	
+	if component_category == "Torso" or component_category == "Legs":
+		SignalBus.show_part.emit(component_category, component_weight_class)
+	
+	if component_category == "Arms" or component_category == "Head":
+		SignalBus.show_part.emit(component_category, component_focus)
 	
 	if component_category == "Weapon":
+		var weapon_component = component as MechWeapon
+		var weapon_class = weapon_component.get_weapon_class()
+		var weapon_type = weapon_component.get_weapon_type()
 		if owned_mech_components["LeftWeapon"] == null:
 			owned_mech_components["LeftWeapon"] = component
+			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Left")
 		else:
 			owned_mech_components["RightWeapon"] = component
+			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Right")
 	else:	
 		owned_mech_components[component_category] = component
 	

@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cacjpcdeurq7f"]
+[gd_scene load_steps=13 format=3 uid="uid://cacjpcdeurq7f"]
 
 [ext_resource type="Script" uid="uid://dwec0olorx8de" path="res://src/scripts/Panels/main_menu.gd" id="1_1bg10"]
 [ext_resource type="FontFile" uid="uid://ch1g7vawmp68w" path="res://assets/graphics/Fonts/ProcyonShadow-8Mo6A.ttf" id="2_a00hu"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_cbw1n"]
 [ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="2_g3tly"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_oll1y"]
-[ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_6ekv6"]
+[ext_resource type="AudioStream" uid="uid://ctpguj8ocbrsl" path="res://assets/audio/music/ambient.ogg" id="6_6ekv6"]
+[ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="7_b83k2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3228i"]
 bg_color = Color(0.303286, 0.574834, 0.640218, 1)
@@ -28,6 +29,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ambience:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.0]
+}
 
 [sub_resource type="Animation" id="Animation_1bg10"]
 resource_name = "fade_in"
@@ -46,6 +71,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_a00hu"]
 resource_name = "fade_out"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,10 +79,34 @@ tracks/0/path = NodePath("TransitionRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ambience:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-5.0, -30.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oll1y"]
@@ -155,6 +205,11 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6ekv6")
+volume_db = -5.0
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_b83k2")
 bus = &"Ambiance"
 
 [node name="sfxplayer" type="AudioStreamPlayer" parent="."]

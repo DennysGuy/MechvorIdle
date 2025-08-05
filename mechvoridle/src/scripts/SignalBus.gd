@@ -10,6 +10,10 @@ signal stop_ufo_spawn
 signal fade_out_alert
 signal remove_ufo_during_start_fight
 
+signal show_part(body_part : String, category : String)
+signal show_weapon(weapon_type : String, category : String, side : String)
+signal show_part_preview(component : MechComponent)
+
 signal show_task_completed_indicator(index : int)
 signal show_check_list
 signal hide_check_list

@@ -31,3 +31,4 @@ func _on_mouse_entered():
 func _on_pressed():
 	SfxManager.play_button_click(audio_stream_player)
 	SignalBus.transfer_item_to_shop_panel.emit(component)
+	SignalBus.show_part_preview.emit(component)

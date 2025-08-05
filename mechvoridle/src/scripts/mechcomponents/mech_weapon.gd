@@ -1,6 +1,6 @@
 class_name MechWeapon extends MechComponent
 
-@export_enum("Normal", "Plasma") var weapon_type : int
+@export_enum("Standard", "Plasma") var weapon_type : int
 @export_enum("Sword", "Rifle", "RocketLauncher") var weapon_class : int
 enum WEAPON_TYPE {NORMAL, PLASMA}
 enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
@@ -16,7 +16,7 @@ enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
 func get_weapon_type() -> String:
 	match(weapon_type):
 		WEAPON_TYPE.NORMAL:
-			return "Normal"
+			return "Standard"
 		WEAPON_TYPE.PLASMA:
 			return "Plasma"
 		_:

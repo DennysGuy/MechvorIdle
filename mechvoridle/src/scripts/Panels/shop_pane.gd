@@ -40,12 +40,15 @@ class_name ShopPane extends Control
 
 var selected_component : MechComponent
 var confirmation_box_is_showing : bool = false
+@onready var sub_viewport_2: SubViewport = $ColorRect/SubViewportContainer2/SubViewport
+
 
 func _ready() -> void:
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_plasma_count.connect(update_plasma_count)
 	SignalBus.transfer_item_to_shop_panel.connect(update_description_box)
 	sub_viewport.own_world_3d = true
+	sub_viewport_2.own_world_3d = true
 	slot_is_filled_label.hide()
 	display_component_list("Heads")
 	update_ferrite_bars_count()
