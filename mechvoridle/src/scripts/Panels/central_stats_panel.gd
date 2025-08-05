@@ -17,12 +17,14 @@ class_name CentralHubPanel extends Control
 @onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
 
 @onready var animation_player = $AnimationPlayer
+@onready var sub_viewport = $ColorRect/MechComponentsTrackerPanel/PlayerPreviewSubviewportContainer/SubViewport
 
 
 @onready var recon_tips_list : Array[String] = [GameManager.chosen_opponent.tip_1, GameManager.chosen_opponent.tip_2, GameManager.chosen_opponent.tip_3]
 var recon_scouts_left : int = 3
 var recon_index : int = 0
 func _ready() -> void:
+	sub_viewport.own_world_3d = true
 	SignalBus.update_ferrite_count.connect(update_raw_ferrite_count)
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_platinum_count.connect(update_platinum_count)

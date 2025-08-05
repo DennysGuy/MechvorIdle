@@ -15,6 +15,21 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67g2f"]
 size = Vector2(12, 12)
 
+[sub_resource type="Animation" id="Animation_jvkcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_w8uiv"]
 resource_name = "blink"
 loop_mode = 1
@@ -29,21 +44,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_jvkcn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wlf10"]
@@ -113,6 +113,7 @@ texture = ExtResource("7_07tpq")
 region_rect = Rect2(0.528069, 0.587934, 6.91096, 6.91096)
 
 [node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
 offset_left = -14.0
 offset_top = -7.0
 offset_right = 34.0
