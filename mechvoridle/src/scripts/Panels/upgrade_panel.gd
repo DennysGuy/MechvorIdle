@@ -142,12 +142,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	if upgrades_available():
-		upgrades_available_label.show()
-	else:
-		upgrades_available_label.hide()
-	
-	
+	upgrades_available_label.visible = upgrades_available()
+	print(upgrades_available())
 	mining_laser_speed_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_speed_cost)
 	mining_laser_damage_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_damage_upgrade_cost)
 	mining_laser_crit_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_crit_chance_cost)
@@ -193,9 +189,9 @@ func _process(delta: float) -> void:
 
 	
 	if GameManager.plasma_generator_station_purchased:
-		upgrade_fuel_cost.disabled = GameManager.platinum_count < GameManager.plasma_generator_fuel_cost
-		plasma_generator_speed_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_speed_cost
-		generator_output_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_output_cost
+		upgrade_fuel_cost.disabled = GameManager.platinum_count <= GameManager.plasma_generator_fuel_cost
+		plasma_generator_speed_upgrade.disabled = GameManager.platinum_count <= GameManager.plasma_generator_speed_cost
+		generator_output_upgrade.disabled = GameManager.platinum_count <= GameManager.plasma_generator_output_cost
 	else:
 		upgrade_fuel_cost.disabled = true
 		plasma_generator_speed_upgrade.disabled = true
@@ -203,21 +199,28 @@ func _process(delta: float) -> void:
 
 
 func upgrades_available() -> bool:
-	return (GameManager.platinum_count >= GameManager.drones_cost 
-	or GameManager.platinum_count >= GameManager.mining_laser_damage_upgrade_cost 
-	or GameManager.platinum_count >= GameManager.mining_laser_crit_chance_cost
-	or GameManager.platinum_count >= GameManager.mining_laser_speed_cost 
-	or GameManager.platinum_count >= mining_drones_cost
-	or GameManager.platinum_count >= GameManager.drone_damage_cost 
-	or GameManager.platinum_count >= GameManager.drone_mining_speed_cost 
-	or GameManager.platinum_count >= plat_drones_cost
-	or GameManager.platinum_count >= GameManager.platinum_drone_damage_cost 
-	or GameManager.platinum_count >= GameManager.platinum_drone_mining_speed_cost 
-	or GameManager.platinum_count >= GameManager.ferrite_refinery_speed_cost 
-	or GameManager.platinum_count >= GameManager.output_upgrade_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_fuel_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_output_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_speed_cost)
+	var costs : Array[int]= [
+		mining_drones_cost,
+		GameManager.mining_laser_damage_upgrade_cost,
+		GameManager.mining_laser_crit_chance_cost,
+		GameManager.mining_laser_speed_cost,
+		GameManager.drone_damage_cost,
+		GameManager.drone_mining_speed_cost,
+		plat_drones_cost,
+		GameManager.platinum_drone_damage_cost,
+		GameManager.platinum_drone_mining_speed_cost,
+		GameManager.ferrite_refinery_speed_cost,
+		GameManager.output_upgrade_cost,
+		GameManager.plasma_generator_fuel_cost,
+		GameManager.plasma_generator_output_cost,
+		GameManager.plasma_generator_speed_cost
+	]
+
+	for cost in costs:
+		if GameManager.platinum_count >= cost:
+			return true
+
+	return false
 
 func show_upgrade_indicator(cost : int) -> bool:
 	return GameManager.platinum_count >= cost
@@ -293,7 +296,7 @@ func _on_plasma_generator_speed_upgrade_button_down():
 	GameManager.platinum_count -= GameManager.plasma_generator_speed_cost
 	GameManager.plasma_generator_speed += GameManager.plasma_generator_speed_upgrade_interval
 	GameManager.plasma_generator_speed_level += 1
-	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_speed_level)
+	GameManager.plasma_generator_speed_cost = GameManager.plasma_generator_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_speed_level)
 	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
 	SignalBus.update_plasma_generator_speed.emit()

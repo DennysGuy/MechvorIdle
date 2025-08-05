@@ -14,8 +14,30 @@ class_name MechFightArena extends Control
 @onready var boss_health_bar : BossHealthBar = $Background/BossHealthBar
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
+#testing
+@export_enum("Test Mode", "Production Mode") var set_mode : int
+enum SET_MODE{TEST_MODE, PRODUCTION_MODE}
+
+@export_enum("scene 1", "scene 2", "scene 3", "scene 4", "scene 5") var selected_scene : int
+enum SELECTED_SCENE {SCENE_1, SCENE_2, SCENE_3, SCENE_4, SCENE_5}
+
 
 func _ready() -> void:
+	
+	###NEED TO SET BACK TO PROD BEFORE PUSHING!####
+	if set_mode == SET_MODE.TEST_MODE:
+		match(selected_scene):
+			SELECTED_SCENE.SCENE_1:
+				GameManager.fight_scenario_test_fixture_1()
+			SELECTED_SCENE.SCENE_2:
+				GameManager.fight_scenario_2_test_fixture()
+			SELECTED_SCENE.SCENE_3:
+				GameManager.fight_scenario_3_test_fixture()
+			SELECTED_SCENE.SCENE_4:
+				GameManager.fight_scenario_4_test_fixture()
+			SELECTED_SCENE.SCENE_5:
+				GameManager.fight_scenario_5_test_fixture()
+		
 	animation_player.play("start_fight_sequnce")
 	#setup player and boss gear and weapons etc.
 	#start game -- we'll change to a sequence later

@@ -178,8 +178,11 @@ var opponent_stunned  : bool = false
 var fill_bars : bool = false
 const BASE_DODGE_CHANCE : float = 0.25
 
+#light
 var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_1.tres")
+#standard
 var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres")
+#heavy
 var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres")
 
 var opponents_list : Array[OpponentMech] = [opponent_option_1, opponent_option_2, opponent_option_3]
@@ -370,4 +373,88 @@ func reset():
 		"RightWeapon": null
 	}
 
+#Test Variables
+
+
+
+func light_build() -> void:
+	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/heads/mech_head_2.tres")
+	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_1.tres")
+	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_2.tres")
+	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_2.tres")
+	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-1.tres")
+	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-2.tres")
+
+
+func standard_build() -> void:
+	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/heads/mech_head_1.tres")
+	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_3.tres")
+	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
+	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_3.tres")
+	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-2.tres")
+	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_2.tres")
 	
+
+func heavy_build() -> void:
+	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
+	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_2.tres")
+	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
+	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_1.tres")
+	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-1.tres")
+	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-2.tres")
+
+#light - proper melee build vs heavy boss
+
+'''
+	We should see that the light build counters 
+	the heavy boss with fast output damage, 
+	high accuracy rate, high dodge rate
+'''
+
+
+func fight_scenario_test_fixture_1() -> void:
+	light_build()
+	chosen_opponent = opponent_option_3
+
+#standard - proper ranged build vs melee boss
+'''
+	The standard player build boasts a sword and rifle
+	beat light melee build as light melee build has less armor and has difficult 
+	with decent accuracy from standard build 
+'''
+
+func fight_scenario_2_test_fixture() -> void:
+	standard_build()
+	chosen_opponent = opponent_option_1
+
+#heavy - proper ranged build vs light boss
+'''
+	This scenerio tests a player build that is weak against the boss
+	The player should struggle a bit more to beat this boss
+'''
+func fight_scenario_3_test_fixture() -> void:
+	heavy_build()
+	
+	chosen_opponent = opponent_option_1
+
+
+#light mech - vs - standard 
+'''
+	The light build should struggle a bit against the standard build boss as 
+	the standard build does well with both guns and swords with decent accuracy, 
+	decent charge speed, and decent damage
+'''
+
+func fight_scenario_4_test_fixture() -> void:
+	light_build()
+	chosen_opponent = opponent_option_2
+#Heavy Mech - proper build vs standard build
+'''
+	The heavy mech build vs the standard build - should be able to take down 
+	standard build as even though they have decent all around speeds, 
+	they will be hit more often than light builds - hence they get taken down easier
+'''
+
+func fight_scenario_5_test_fixture() -> void:
+	heavy_build()
+	chosen_opponent = opponent_option_2

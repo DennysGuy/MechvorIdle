@@ -14,5 +14,5 @@ plasma_cost = 0
 platinum_cost = 0
 category = 0
 component_type = 1
-weight_class = 0
+weight_class = 2
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"
