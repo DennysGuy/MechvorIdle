@@ -49,6 +49,7 @@ func _ready() -> void:
 	SignalBus.transfer_item_to_shop_panel.connect(update_description_box)
 	sub_viewport.own_world_3d = true
 	sub_viewport_2.own_world_3d = true
+	
 	slot_is_filled_label.hide()
 	display_component_list("Heads")
 	update_ferrite_bars_count()
@@ -59,12 +60,12 @@ func _ready() -> void:
 	
 func _process(delta : float) -> void:
 	
-	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST, "Head") 
-	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST, "Torso")
-	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST, "Arms")
-	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST, "Legs")
-	rifles_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_RIFLE_FERRITE_BAR_COST, GameManager.MIN_RIFLE_PLASMA_COST)
-	swords_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_SWORD_FERRITE_BAR_COST, GameManager.MIN_SWORD_PLASMA_COST)
+	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST, "Head") and GameManager.mech_component_slot_is_empty("Head")
+	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST, "Torso") and GameManager.mech_component_slot_is_empty("Torso")
+	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST, "Arms") and GameManager.mech_component_slot_is_empty("Arms")
+	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST, "Legs") and GameManager.mech_component_slot_is_empty("Legs")
+	rifles_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_RIFLE_FERRITE_BAR_COST, GameManager.MIN_RIFLE_PLASMA_COST) 
+	swords_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_SWORD_FERRITE_BAR_COST, GameManager.MIN_SWORD_PLASMA_COST) 
 	launchers_indicator.visible_characters = show_weapon_component_available_indicator(GameManager.MIN_LAUNCHER_FERRITE_BAR_COST, GameManager.MIN_LAUNCHER_PLASMA_COST)
 	
 	if selected_component:
@@ -175,6 +176,7 @@ func _on_confirmation_button_button_down() -> void:
 	update_description_box(selected_component)
 	update_parts_owned_label()
 	hide_confirmation_panel()
+	SignalBus.update_parts_owned_on_previewer.emit()
 	if GameManager.owned_components_count >= GameManager.MECH_PARTS_NEEDED:
 		main_hub.animation_player.play("AllPartsBoughtStartFight")
 		SignalBus.stop_ufo_spawn.emit()
@@ -248,8 +250,8 @@ func _on_rifles_button_mouse_entered():
 
 
 func _on_swords_button_mouse_entered():
-	pass # Replace with function body.
+	SfxManager.play_button_hover(sfx_player)
 
 
 func _on_rocket_launchers_button_mouse_entered():
-	pass # Replace with function body.
+	SfxManager.play_button_hover(sfx_player)

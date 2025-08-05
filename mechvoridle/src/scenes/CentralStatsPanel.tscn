@@ -361,10 +361,37 @@ theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 12
 text = "Components Tracker"
 
+[node name="TotalMechComponents" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 222.0
+offset_right = 586.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "6"
+
+[node name="Slash" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 564.0
+offset_top = 222.0
+offset_right = 577.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "/"
+
+[node name="CurrentOwnedComponents" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 222.0
+offset_right = 564.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "0"
+
 [node name="ColorRect2" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_lvy6k")
 layout_mode = 0
-offset_left = 400.0
+offset_left = 399.0
 offset_top = 46.0
 offset_right = 592.0
 offset_bottom = 243.0

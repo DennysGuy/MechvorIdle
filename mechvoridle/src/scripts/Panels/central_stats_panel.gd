@@ -2,6 +2,7 @@ class_name CentralHubPanel extends Control
 
 @onready var elapsed_time = $ColorRect/ResourcesPanel/ElapsedTime
 @onready var line_edit = $ColorRect/NameEntryBox/LineEdit
+@onready var current_owned_components: Label = $ColorRect/CurrentOwnedComponents
 
 
 @onready var raw_ferrite_count = $ColorRect/ResourcesPanel/RawFerriteCount
@@ -29,6 +30,7 @@ func _ready() -> void:
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)
 	SignalBus.update_platinum_count.connect(update_platinum_count)
 	SignalBus.update_plasma_count.connect(update_plasma_count)
+	SignalBus.update_parts_owned_on_previewer.connect(update_currently_owned_components_count)
 	purchase_recon_scout.text = "Buy Scout "+ "("+str(recon_scouts_left)+")"
 	platinum_cost.text = str(GameManager.recon_scout_platinum_cost)
 	hide_entry_box()
@@ -103,3 +105,6 @@ func _on_confirm_start_fight_button_down():
 	else:
 		GameManager.player_name = line_edit.text
 		start_fight()
+
+func update_currently_owned_components_count() -> void:
+	current_owned_components.text = str(GameManager.owned_components_count)
