@@ -8,6 +8,7 @@ class_name MechFightArena extends Control
 @onready var weapon_1_charge_bar_2 : ProgressBar = $Weapon1ChargeBar2
 @onready var health_bar : ProgressBar = $HealthBar
 @onready var cockpit_camera : Camera2D = $CockpitCamera
+@onready var music_player : AudioStreamPlayer = $MusicPlayer
 
 #boss gui visuals
 @export var boss_health_bar : BossHealthBar
@@ -20,24 +21,15 @@ enum SET_MODE{TEST_MODE, PRODUCTION_MODE}
 
 @export_enum("scene 1", "scene 2", "scene 3", "scene 4", "scene 5") var selected_scene : int
 enum SELECTED_SCENE {SCENE_1, SCENE_2, SCENE_3, SCENE_4, SCENE_5}
+@onready var nameof_player : Label = $NameofPlayer
+@onready var nameof_enemy : Label = $NameofEnemy
 
 
 func _ready() -> void:
-	
-	###NEED TO SET BACK TO PROD BEFORE PUSHING!####
-	if set_mode == SET_MODE.TEST_MODE:
-		match(selected_scene):
-			SELECTED_SCENE.SCENE_1:
-				GameManager.fight_scenario_test_fixture_1()
-			SELECTED_SCENE.SCENE_2:
-				GameManager.fight_scenario_2_test_fixture()
-			SELECTED_SCENE.SCENE_3:
-				GameManager.fight_scenario_3_test_fixture()
-			SELECTED_SCENE.SCENE_4:
-				GameManager.fight_scenario_4_test_fixture()
-			SELECTED_SCENE.SCENE_5:
-				GameManager.fight_scenario_5_test_fixture()
-		
+	nameof_player.text = GameManager.player_name
+	nameof_enemy.text = GameManager.chosen_opponent.mech_name
+	music_player.stream = preload("res://assets/audio/music/boss1.ogg")
+	music_player.play()
 	animation_player.play("start_fight_sequnce")
 	#setup player and boss gear and weapons etc.
 	#start game -- we'll change to a sequence later
@@ -50,10 +42,11 @@ func _process(delta : float) -> void:
 
 func start_fight() -> void:
 	GameManager.fight_on = true
+	SignalBus.begin_round.emit()
 
 func stop_fight() -> void:
 	GameManager.fight_on = false
-
+	SignalBus.stop_fight.emit()
 func win_game() -> void:
 	stop_fight()
 	animation_player.play("fade_to_white")
@@ -91,3 +84,8 @@ func _on_control_gui_input(event):
 			get_parent().add_child(resource_acquired_label)
 			boss_health_bar.update_health_bar()
 			animation_player.play("hit_flash")
+
+
+func _on_music_player_finished():
+	music_player.stream = preload("res://assets/audio/music/boss2.ogg")
+	music_player.play()

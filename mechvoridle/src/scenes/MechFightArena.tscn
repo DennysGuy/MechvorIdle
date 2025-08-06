@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c68p1ei57ngk7"]
+[gd_scene load_steps=22 format=3 uid="uid://c68p1ei57ngk7"]
 
 [ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
 [ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="2_s2l3r"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://4qr58n3rme2c" path="res://assets/graphics/CockPitView_Overlay.png" id="9_jj0iv"]
 [ext_resource type="Texture2D" uid="uid://wbrqhywsy131" path="res://assets/graphics/ChargeBar_Fill.png" id="10_2lqcn"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="10_j1o1p"]
+[ext_resource type="PackedScene" uid="uid://1i717e5dbjge" path="res://src/scenes/ElapsedTimer.tscn" id="14_blg81"]
 
 [sub_resource type="Animation" id="Animation_naye7"]
 length = 0.001
@@ -40,10 +41,70 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MusicPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NameofPlayer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-190, 168)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("vs:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-133, 168)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NameofEnemy:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-332, 168)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BossContainer:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(79, 40)]
+}
 
 [sub_resource type="Animation" id="Animation_78ps0"]
 resource_name = "fade_to_white"
-length = 3.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -51,10 +112,22 @@ tracks/0/path = NodePath("TransitionRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.602962, 3),
+"times": PackedFloat32Array(0.602962, 2.56667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
 }
 
 [sub_resource type="Animation" id="Animation_s2l3r"]
@@ -78,7 +151,7 @@ resource_name = "lose_fight_sequnce"
 
 [sub_resource type="Animation" id="Animation_vd1uu"]
 resource_name = "start_fight_sequnce"
-length = 8.0
+length = 13.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -110,7 +183,7 @@ tracks/2/path = NodePath("StartFightLabel:text")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.6, 4.6051, 6.07218),
+"times": PackedFloat32Array(6.01001, 7.6, 9.24936),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": ["READY!", "SET!", "FIGHT!"]
@@ -122,7 +195,7 @@ tracks/3/path = NodePath("StartFightLabel:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(2.6, 2.89208, 3.62623, 3.85516, 4.6051, 4.8735, 5.56667, 5.81928, 6.07218, 6.272, 7.2, 7.36667),
+"times": PackedFloat32Array(6.01001, 6.30209, 7.03624, 7.26517, 7.6, 7.8684, 8.56157, 8.81418, 9.24936, 9.44918, 10.2823, 10.4489),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(254.5, 378), Vector2(254.5, 156), Vector2(254.5, 131), Vector2(254.5, -67), Vector2(254.5, 386), Vector2(254.5, 182), Vector2(254.5, 141), Vector2(254.5, -85), Vector2(254.5, 378), Vector2(254.5, 180), Vector2(254.5, 107), Vector2(254.5, -87)]
@@ -134,7 +207,7 @@ tracks/4/path = NodePath("StartFightLabel:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 3.85666, 4.6051, 5.82556, 6.08949),
+"times": PackedFloat32Array(4.03333, 7.26667, 7.6, 8.82046, 9.26667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -146,14 +219,87 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(2.56667, 7.96667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(12.4667),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"fill_all_bars"
-}, {
-"args": [],
 "method": &"start_fight"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NameofPlayer:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0333333, 1.43333, 1.68374, 2.92913, 3.1481),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-292, 168), Vector2(-292, 168), Vector2(140, 168), Vector2(299, 168), Vector2(662, 168)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("vs:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.96667, 3.22669, 4.23944, 4.48578),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-133, 168), Vector2(-133, 168), Vector2(231, 168), Vector2(373, 168), Vector2(661, 168)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NameofEnemy:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.56667, 4.85407, 5.68889, 5.93806),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-332, 168), Vector2(100, 168), Vector2(280, 168), Vector2(657, 168)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BossContainer:position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(79, 359), Vector2(79, 40)]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PlayerHealth")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(8.53333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_filling_health_bars"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BossHealth")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(8.43333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_filling_health_bars"
 }]
 }
 
@@ -482,9 +628,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.5
+offset_left = -65.5
 offset_top = -267.0
-offset_right = 70.5
+offset_right = 101.5
 offset_bottom = -214.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -506,6 +652,50 @@ script = ExtResource("7_naye7")
 
 [node name="Timer" type="Timer" parent="CockpitCamera"]
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="NameofPlayer" type="Label" parent="."]
+layout_mode = 0
+offset_left = -190.0
+offset_top = 168.0
+offset_right = 84.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "Name of Player"
+
+[node name="vs" type="Label" parent="."]
+layout_mode = 0
+offset_left = -133.0
+offset_top = 168.0
+offset_right = -93.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "VS"
+
+[node name="NameofEnemy" type="Label" parent="."]
+layout_mode = 0
+offset_left = -332.0
+offset_top = 168.0
+offset_right = -58.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "Name of ENemy"
+
+[node name="ElapsedTime" parent="." instance=ExtResource("14_blg81")]
+layout_mode = 1
+offset_left = -29.0
+offset_top = -124.0
+offset_right = 26.0
+offset_bottom = -112.0
+
 [connection signal="gui_input" from="BossStandIn" to="." method="_on_boss_stand_in_gui_input"]
 [connection signal="gui_input" from="BossContainer" to="." method="_on_boss_container_gui_input"]
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

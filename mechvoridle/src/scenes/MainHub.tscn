@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://d3gd8inykd321"]
+[gd_scene load_steps=25 format=3 uid="uid://d3gd8inykd321"]
 
 [ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
 [ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
 [ext_resource type="PackedScene" uid="uid://cu5ql32vaxyid" path="res://src/scenes/MiningPane.tscn" id="2_kflli"]
 [ext_resource type="PackedScene" uid="uid://1oy74758gv62" path="res://src/ShopPane.tscn" id="4_0av82"]
-[ext_resource type="AudioStream" uid="uid://xab70hsnd6j2" path="res://assets/audio/music/Mining.ogg" id="5_0c4kj"]
 [ext_resource type="PackedScene" uid="uid://d17eekq70qc8k" path="res://TutorialCheckList.tscn" id="5_id2nt"]
 [ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_k282t"]
 [ext_resource type="PackedScene" uid="uid://cjcihcy5w5pon" path="res://src/scenes/AudioSettingsPanel.tscn" id="7_0c4kj"]
@@ -24,25 +23,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-1280, 0), Vector2(-639, 0)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-4.0, -35.0]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(2.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -128,22 +115,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/path = NodePath("TransitionRect:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-4.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TransitionRect:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -218,7 +193,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(512, 361)]
+"values": [Vector2(438, 363)]
 }
 
 [sub_resource type="Animation" id="Animation_bs5hu"]
@@ -228,13 +203,13 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("../AudioSettings:position")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.251961),
+"times": PackedFloat32Array(0, 0.150611),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(512, 275), Vector2(512, 361)]
+"values": [Vector2(438, 237), Vector2(438, 362)]
 }
 
 [sub_resource type="Animation" id="Animation_8stgo"]
@@ -247,10 +222,10 @@ tracks/0/path = NodePath("../AudioSettings:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.26),
+"times": PackedFloat32Array(0, 0.151782),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(512, 361), Vector2(512, 275)]
+"values": [Vector2(438, 363), Vector2(438, 237)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bs5hu"]
@@ -363,7 +338,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="TransitionRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
@@ -376,12 +350,6 @@ bus = &"SFX"
 [node name="SFXPlayerLayer2" type="AudioStreamPlayer" parent="."]
 volume_db = -4.0
 bus = &"SFX"
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_0c4kj")
-volume_db = -4.0
-bus = &"Music"
-parameters/looping = true
 
 [node name="ShipAmbiancePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_k282t")
@@ -402,14 +370,7 @@ libraries = {
 
 [node name="AudioSettings" parent="." instance=ExtResource("7_0c4kj")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 512.0
-offset_top = 361.0
-offset_right = 633.0
-offset_bottom = 443.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 438.0
+offset_top = 362.0
+offset_right = 640.0
+offset_bottom = 482.0

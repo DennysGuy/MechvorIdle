@@ -25,6 +25,7 @@ class_name CentralHubPanel extends Control
 var recon_scouts_left : int = 3
 var recon_index : int = 0
 func _ready() -> void:
+	SignalBus.begin_round.emit()
 	sub_viewport.own_world_3d = true
 	SignalBus.update_ferrite_count.connect(update_raw_ferrite_count)
 	SignalBus.update_ferrite_bars_count.connect(update_ferrite_bars_count)

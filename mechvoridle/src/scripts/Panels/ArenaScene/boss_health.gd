@@ -5,6 +5,8 @@ class_name BossHealthBar extends Control
 @onready var max_health : Label = $MaxHealth
 @onready var current_health : Label = $CurrentHealth
 
+var fill_health_bar : bool = false
+
 var max_health_tracker : int = 0
 var current_health_tracker : int = 0
 func _ready() -> void:
@@ -18,10 +20,10 @@ func _ready() -> void:
 	#boss_health_bar.value = boss_health_bar.max_value
 
 func _process(delta : float) -> void:
-	if GameManager.fill_bars:
-		boss_health_bar.value += 200
+	if fill_health_bar:
+		boss_health_bar.value += 50
 		if boss_health_bar.value >= boss_health_bar.max_value:
-			GameManager.fill_bars = false
+			fill_health_bar = false
 			
 func update_health_bar() -> void:
 	
@@ -29,3 +31,6 @@ func update_health_bar() -> void:
 	current_health.text = str(int(boss_health_bar.value))
 	if boss_health_bar.value <= 0:
 		SignalBus.win_game.emit()
+
+func start_filling_health_bars() -> void:
+	fill_health_bar = true

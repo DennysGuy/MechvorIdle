@@ -17,6 +17,9 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+var mining_time_elapsed : String
+var fight_time_elapsed : String
+
 const MIN_ARMS_FERRITE_BAR_COST = 2500
 const MIN_LEGS_FERRITE_BAR_COST = 3000
 const MIN_TORSO_FERRITE_BAR_COST = 4600

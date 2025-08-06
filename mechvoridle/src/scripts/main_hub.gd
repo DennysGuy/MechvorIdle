@@ -1,7 +1,6 @@
 class_name MainHub extends Control
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var music_player : AudioStreamPlayer = $MusicPlayer
 @onready var sfx_player_layer_1 : AudioStreamPlayer = $SFXPlayerLayer1
 @onready var sfx_player_layer_2 : AudioStreamPlayer = $SFXPlayerLayer2
 
@@ -18,7 +17,6 @@ class_name MainHub extends Control
 @onready var shop_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_01, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_02, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_03, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_04, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_05]
 func _ready() -> void:
 	GameManager.can_traverse_panes = false
-	music_player.play()
 	ship_ambiance_player.play()
 	animation_player.play("fade_in")
 	SignalBus.move_to_mining_pane.connect(move_to_mining_pane)
