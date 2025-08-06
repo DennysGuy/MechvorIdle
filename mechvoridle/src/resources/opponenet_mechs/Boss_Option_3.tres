@@ -25,7 +25,7 @@ opponent_mech_components = Dictionary[String, ExtResource("1_d4lqe")]({
 "RightWeapon": ExtResource("7_diath"),
 "Torso": ExtResource("3_xmomi")
 })
-tip_1 = ""
-tip_2 = ""
-tip_3 = ""
+tip_1 = "Enemy unit identified as heavy-class. Expect high armor and limited mobility."
+tip_2 = "Weapon scan reveals a rocket launcher and standard rifle. Offensive focus is on ranged firepower with strong defenses.\""
+tip_3 = "Confirmed loadout: Heavy rocket launcher with slow recharge, high impact, and poor accuracy. Backed by a reliable rifle for sustained fire. Armor is reinforced; mobility and evasion are minimal. Engage at speed or exploit reload windows."
 metadata/_custom_type_script = "uid://cwtn70nmowsro"

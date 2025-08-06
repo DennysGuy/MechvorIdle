@@ -25,7 +25,7 @@ opponent_mech_components = Dictionary[String, ExtResource("1_a4lru")]({
 "RightWeapon": ExtResource("7_owllt"),
 "Torso": ExtResource("3_vkpbj")
 })
-tip_1 = "Word says that your opponent pilot is one of the quickest in his weight class. Be careful, these guys are more slippery than a snake."
-tip_2 = "Word says that they preference swords.. you might want to keep your distance here."
-tip_3 = "Plasma. They have plasma weapons! I knew it! Those mother fuckers!"
+tip_1 = "Enemy class identified: Lightweight Frame. Estimated armor levels are low. Expect agility-based design."
+tip_2 = "Scouts report dual-blade weaponry. High melee frequency likely. Opponent trades defense for offensive speed."
+tip_3 = "Confirmed: Dual high-frequency swords. Rapid close-range attacks with above-average accuracy. Dodge-reliant. Recommend rifles to counter lower armor with moderate damage and moderate accuracy."
 metadata/_custom_type_script = "uid://cwtn70nmowsro"

@@ -25,8 +25,7 @@ opponent_mech_components = Dictionary[String, ExtResource("1_7cg7b")]({
 "RightWeapon": ExtResource("7_jww8d"),
 "Torso": ExtResource("3_d8lpm")
 })
-tip_1 = "Your opponent is well balanced - seemingly at zen. 
-Your opponent has minimal plasma resistance - but may project plasma as well."
-tip_2 = "Your opponent is fond of both rifles and swords - a jack of all trades."
-tip_3 = "Your opponent has a moderate amount of health, even though they are versatile, they have drawbacks. "
+tip_1 = "Enemy frame appears balanced. No clear weaknesses or standout traits identified."
+tip_2 = "Equipped with mid-range rifle and close-combat blade. Performance metrics suggest consistent accuracy and durability."
+tip_3 = "Confirmed loadout: Standard rifle and plasma-infused sword. Moderate armor and reaction speed. Balanced threat—expect adaptability in both ranged and melee engagements."
 metadata/_custom_type_script = "uid://cwtn70nmowsro"
