@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hjbnj2tod3ol"]
+[gd_scene load_steps=9 format=3 uid="uid://hjbnj2tod3ol"]
 
 [ext_resource type="Script" uid="uid://bsxoe37ed64m2" path="res://src/scripts/Panels/plasma_generator.gd" id="1_2eac4"]
 [ext_resource type="Texture2D" uid="uid://cgmy7s1s1tb1u" path="res://assets/graphics/generator.png" id="2_2eac4"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="4_jq14y"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="4_ua82w"]
 [ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="5_2c8cf"]
-[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="7_r6g4s"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_r6g4s"]
 
 [node name="PlasmaGenerator" type="Control"]
@@ -134,7 +133,7 @@ texture_disabled = ExtResource("4_jq14y")
 
 [node name="PlatinumUiIcon" type="Sprite2D" parent="PurchasePanel"]
 position = Vector2(41, 15)
-texture = ExtResource("7_r6g4s")
+texture = ExtResource("4_ua82w")
 
 [node name="Label2" type="Label" parent="PurchasePanel"]
 layout_mode = 1
@@ -157,5 +156,24 @@ text = "Plasma Generator"
 [node name="PlasmaUiIcon" type="Sprite2D" parent="PurchasePanel"]
 position = Vector2(20, 64)
 texture = ExtResource("8_r6g4s")
+
+[node name="AvailableIndicator" type="Label" parent="PurchasePanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -17.5
+offset_right = -16.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.926677, 0.731066, 7.70092e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_2c8cf")
+theme_override_font_sizes/font_size = 30
+text = "!"
 
 [connection signal="button_down" from="PurchasePanel/Button" to="." method="_on_button_button_down"]

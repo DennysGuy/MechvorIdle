@@ -146,4 +146,16 @@ texture = ExtResource("8_3e61l")
 position = Vector2(46, 14)
 texture = ExtResource("9_6wyc8")
 
+[node name="AvailableIndicator" type="Label" parent="PurchasePanel"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 22.0
+offset_right = 135.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.996146, 0.796334, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_qxr35")
+theme_override_font_sizes/font_size = 30
+text = "!"
+
 [connection signal="button_down" from="PurchasePanel/PurchaseRefineryStation" to="." method="_on_purchase_refinery_station_button_down"]

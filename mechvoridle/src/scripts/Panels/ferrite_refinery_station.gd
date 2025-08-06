@@ -9,6 +9,7 @@ class_name FerriteRefineryStation extends Control
 @onready var cost_label: Label = $CostLabel
 @onready var refined_ferrite_ui_icon: Sprite2D = $RefinedFerriteUiIcon
 @onready var ferrite_ui_icon: Sprite2D = $FerriteUiIcon
+@onready var available_indicator: Label = $PurchasePanel/AvailableIndicator
 
 var refinery_stock : int
 
@@ -21,7 +22,11 @@ func _ready() -> void:
 	progress_bar.hide()
 
 func _physics_process(delta: float) -> void:
+	
+	
+	
 	if  is_instance_valid(purchase_refinery_station):
+		available_indicator.visible = GameManager.raw_ferrite_count >= GameManager.ferrite_refinery_cost
 		purchase_refinery_station.disabled = GameManager.raw_ferrite_count < GameManager.ferrite_refinery_cost
 	
 	if GameManager.ferrite_refinery_station_purchased:

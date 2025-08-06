@@ -9,6 +9,7 @@ class_name PlasmaGenerator extends Control
 @onready var speed: Label = $Speed
 @onready var plasma_ui_icon: Sprite2D = $PlasmaUiIcon
 @onready var ferrite_ui_icon: Sprite2D = $RefinedFerriteUiIcon
+@onready var available_indicator: Label = $PurchasePanel/AvailableIndicator
 
 var fuel_tank : int 
 
@@ -27,8 +28,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta : float) -> void:
+	
+	
+	
 	if is_instance_valid(button):
-		button.disabled = GameManager.platinum_count < GameManager.plasma_generator_cost
+		available_indicator.visible = GameManager.ferrite_bars_count >= GameManager.plasma_generator_cost
+		button.disabled = GameManager.ferrite_bars_count < GameManager.plasma_generator_cost
 	
 	if GameManager.plasma_generator_station_purchased:
 		if GameManager.ferrite_bars_count >= GameManager.plasma_generator_fuel_consumption and fuel_tank == 0:
@@ -65,7 +70,7 @@ func obtain_resources():
 func _on_button_button_down() -> void:
 	SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED)
 	GameManager.plasma_generator_station_purchased = true
-	GameManager.platinum_count -= GameManager.plasma_generator_cost
+	GameManager.ferrite_bars_count -= GameManager.plasma_generator_cost
 	
 	SignalBus.update_platinum_count.emit()
 	progress_bar.show()
