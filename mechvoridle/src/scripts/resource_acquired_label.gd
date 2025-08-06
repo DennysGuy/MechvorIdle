@@ -7,8 +7,8 @@ class_name ResourceAcquiredLabel extends Node2D
 @onready var label : Label = $Bus/HBoxContainer/Label
 @onready var icon : TextureRect = $Bus/HBoxContainer/Icon
 
-@export_enum("Ferrite", "Ferrite Bar", "Platinum", "Plasma", "NA") var resource : int
-enum RESOURCE {FERRITE, FERRITE_BAR, PLATINUM, PLASMA, NA}
+@export_enum("Ferrite", "Ferrite Bar", "Platinum", "Plasma", "Rifle", "RifleCrit", "Sword", "SwordCrit", "RocketLauncher", "RocketLauncherCrit", "Missed", "Vulcan","NA") var resource : int
+enum RESOURCE {FERRITE, FERRITE_BAR, PLATINUM, PLASMA, RIFLE, RIFLECRIT, SWORD, SWORDCRIT, ROCKETLAUNCHER, ROCKETLAUNCHERCRIT, MISSED, VULCAN, NA}
 
 func _ready() -> void:
 	label.text = output
@@ -30,7 +30,23 @@ func set_icon_texture() -> void:
 			icon_texture = preload("res://assets/graphics/platinum_ui_icon.png")
 		RESOURCE.PLASMA:
 			icon_texture = preload("res://assets/graphics/plasma_ui_icon.png")
-	
+		RESOURCE.RIFLE:
+			icon_texture = preload("res://assets/graphics/UI/Combat/RifleDamage.png")
+		RESOURCE.RIFLECRIT:
+			icon_texture = preload("res://assets/graphics/UI/Combat/RifleDamageCrit.png")
+		RESOURCE.SWORD:
+			icon_texture = preload("res://assets/graphics/UI/Combat/SwordDamage.png")
+		RESOURCE.SWORDCRIT:
+			icon_texture = preload("res://assets/graphics/UI/Combat/SwordDamageCrit.png")
+		RESOURCE.ROCKETLAUNCHER:
+			icon_texture = preload("res://assets/graphics/UI/Combat/RocketLauncherDamage.png")
+		RESOURCE.ROCKETLAUNCHERCRIT:
+			icon_texture = preload("res://assets/graphics/UI/Combat/RocketLauncherDamageCrit.png")
+		RESOURCE.MISSED:
+			icon_texture = preload("res://assets/graphics/UI/Combat/MissedIcon.png")
+		RESOURCE.VULCAN:
+			icon_texture = preload("res://assets/graphics/UI/Combat/VulcanDamageIcon.png")
+		
 	icon.texture = icon_texture
 
 

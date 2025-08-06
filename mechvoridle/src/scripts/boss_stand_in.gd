@@ -14,7 +14,7 @@ func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		
 		if GameManager.fight_on:
-			animation_player.play("hit_flash")
+			#animation_player.play("hit_flash")
 			GameManager.chosen_opponent.current_health -= 10
 			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 			resource_acquired_label.output = "-10"

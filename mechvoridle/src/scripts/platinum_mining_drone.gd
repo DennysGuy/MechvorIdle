@@ -12,7 +12,7 @@ func _ready() -> void:
 	animation_player.play("idle")
 	DroneManager.register_platinum_drone(self)
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	if not GameManager.can_fight_boss:
 		progress_bar.value += GameManager.drone_mining_speed
 	

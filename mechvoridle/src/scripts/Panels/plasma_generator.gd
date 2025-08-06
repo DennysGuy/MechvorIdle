@@ -26,7 +26,7 @@ func _ready() -> void:
 	label.text = "Cost: " + str(GameManager.plasma_generator_cost)
 
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	if is_instance_valid(button):
 		button.disabled = GameManager.platinum_count < GameManager.plasma_generator_cost
 	

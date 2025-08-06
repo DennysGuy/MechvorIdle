@@ -6,12 +6,12 @@
 script = ExtResource("1_upxg4")
 weapon_type = 1
 weapon_class = 2
-damage = 250
+damage = 600
 number_of_hits = 1
-charge_time = 180.0
-charge_speed = 12.0
+charge_time = 0.0
+charge_speed = 0.3
 crit_chance = 0.0
-accuracy = 0.6
+accuracy = 0.48
 stun_chance = 0.0
 component_name = "BIGK1X33ZOMG"
 description = "A power plasma based rocket launcher. "

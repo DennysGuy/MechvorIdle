@@ -20,7 +20,7 @@ func _ready() -> void:
 	refinery_cost_label.text = "Cost: " + str(GameManager.ferrite_refinery_cost)
 	progress_bar.hide()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if  is_instance_valid(purchase_refinery_station):
 		purchase_refinery_station.disabled = GameManager.raw_ferrite_count < GameManager.ferrite_refinery_cost
 	

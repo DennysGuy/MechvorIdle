@@ -4,6 +4,9 @@ class_name ChargeBar extends Control
 @export_enum("Player", "Enemy") var target
 @export_enum("Left Weapon", "Right Weapon") var weapon_position : int
 
+@export var boss_health_bar : BossHealthBar
+@export var player_health_bar : PlayerHealth
+
 @export var boss_label_marker : Marker2D
 @export var player_label_marker : Marker2D
 
@@ -32,7 +35,8 @@ var true_crit_chance
 
 
 func _ready() -> void:
-	
+	weapon_charge_bar.min_value = 0
+	weapon_charge_bar.max_value = 100
 	if belongs_to_player():
 		selected_torso = GameManager.get_owned_mech_torso()
 		selected_head = GameManager.get_owned_mech_head()
@@ -43,7 +47,7 @@ func _ready() -> void:
 			weapon = GameManager.get_left_weapon()
 		else:
 			weapon = GameManager.get_right_weapon()
-		print(weapon.component_name)
+
 	else:
 		selected_arms = GameManager.chosen_opponent.get_arms_component()
 		selected_torso = GameManager.chosen_opponent.get_torso_component()
@@ -54,25 +58,25 @@ func _ready() -> void:
 			weapon = GameManager.chosen_opponent.get_left_weapon()
 		else:
 			weapon = GameManager.chosen_opponent.get_right_weapon()
-	print(weapon_charge_bar.max_value)
 	weapon_name.text = weapon.component_name
 	true_charge_speed = weight_class_modifier_final_value(selected_torso, selected_torso.charge_speed_modifier, weapon.charge_speed)
 	true_accuracy = weapon.accuracy + component_type_final_value(selected_head, selected_head.accuracy_bonus)
+
 	true_target_dodge_chance = weight_class_modifier_final_value(target_legs, target_legs.dodge_chance_modifier, GameManager.BASE_DODGE_CHANCE)
 	true_crit_chance = weapon.crit_chance + component_type_final_value(selected_arms, selected_arms.crit_chance_modifier)
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	
 	if GameManager.fight_on:
-		
-		weapon_charge_bar.value += true_charge_speed * delta
+		weapon_charge_bar.value += true_charge_speed
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
-				#print(weapon_charge_bar.value)
+	
 				damage_target(GameManager.chosen_opponent.current_health, true_target_dodge_chance)
 			else:
 				damage_target(GameManager.current_health, true_target_dodge_chance)
-				SignalBus.shake_camera.emit()
+				
+				
 			weapon_charge_bar.value = 0
 
 func belongs_to_player() -> bool:
@@ -90,11 +94,20 @@ func weapon_is_right_side() -> bool:
 func weight_class_modifier_final_value(component : MechComponent, component_modifier_value : float, weapon_base_value : float) -> float:
 	match component.weight_class:
 		component.WEIGHT_CLASS.LIGHT:
-			return weapon_base_value  + component_modifier_value
+			if component.category == component.CATEGORY.LEGS:
+				return weapon_base_value  + component_modifier_value
+			else:
+				return weapon_base_value - component_modifier_value
 		component.WEIGHT_CLASS.STANDARD:
-			return weapon_base_value + (component_modifier_value * 0.5)
+			if component.category == component.CATEGORY.LEGS:
+				return weapon_base_value + (component_modifier_value * 0.5)
+			else:
+				return weapon_base_value - (component_modifier_value * 0.5)
 		component.WEIGHT_CLASS.HEAVY:
-			return weapon_base_value  - component_modifier_value
+			if component.category == component.CATEGORY.LEGS:
+				return weapon_base_value  - component_modifier_value
+			else:
+				return weapon_base_value + component_modifier_value
 		_:
 			return 0.0
 
@@ -121,38 +134,42 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 		var random_damage : int = randi_range(weapon.damage - 40, weapon.damage)
 		if crit_landed(true_crit_chance):
 			var true_damage : int = random_damage * 2
-			damage_label.output = "-"+str(true_damage)+"HP"
+			damage_label.output = "-"+str(true_damage)
 			if belongs_to_player():
-				GameManager.chosen_opponent.current_health -= int(true_damage)
-				SignalBus.update_opponent_health_bar.emit()
+				boss_health_bar.current_health_tracker -= int(true_damage)
+				boss_health_bar.update_health_bar()
 				damage_label.position = boss_label_marker.position
 			else:
 				GameManager.current_health -= random_damage
 				SignalBus.update_player_health_bar.emit()
 				SignalBus.shake_camera.emit()
 				damage_label.position = boss_label_marker.position
-			
+			damage_label.resource = set_icon_for_crit_damage(weapon.get_weapon_class())
 			get_parent().add_child(damage_label)
 			return
 		
 		damage_label.output = "-"+str(weapon.damage)
 		if belongs_to_player():	
-			GameManager.chosen_opponent.current_health -= random_damage
-			SignalBus.update_opponent_health_bar.emit()
+			boss_health_bar.current_health_tracker -= random_damage
+			boss_health_bar.update_health_bar()
 			damage_label.position = boss_label_marker.position
-			
-		else:
+		elif belongs_to_enemy():
 			GameManager.current_health -= random_damage
 			SignalBus.update_player_health_bar.emit()
 			SignalBus.shake_camera.emit()
 			damage_label.position = player_label_marker.position
-		
+			SignalBus.shake_camera.emit(3)
+			
+		damage_label.resource = set_icon_for_standard_damage(weapon.get_weapon_class())
 	else:
 		if belongs_to_enemy():
 			damage_label.position = player_label_marker.position
-		else:
+		elif belongs_to_player():
 			damage_label.position = boss_label_marker.position
+		
+		damage_label.resource = set_icon_for_standard_damage("Missed")
 		damage_label.output = "Missed!"
+	
 	
 	get_parent().add_child(damage_label)
 			
@@ -167,3 +184,27 @@ func attempt_attack_landed(attacker_accuracy : float, target_dodge_chance : floa
 func crit_landed(crit_chance : float) -> bool:
 	var roll = randf()
 	return roll <= crit_chance
+
+func set_icon_for_standard_damage(weapon_type : String) ->  int:
+	match(weapon_type):
+		"Rifle":
+			return ResourceAcquiredLabel.RESOURCE.RIFLE
+		"Sword":
+			return ResourceAcquiredLabel.RESOURCE.SWORD
+		"Rocket Launcher":
+			return ResourceAcquiredLabel.RESOURCE.ROCKETLAUNCHER
+		"Missed":
+			return ResourceAcquiredLabel.RESOURCE.MISSED
+		_:
+			return 0
+
+func set_icon_for_crit_damage(weapon_type : String) ->  int:
+	match(weapon_type):
+		"Rifle":
+			return ResourceAcquiredLabel.RESOURCE.RIFLECRIT
+		"Sword":
+			return ResourceAcquiredLabel.RESOURCE.SWORDCRIT
+		"Rocket Launcher":
+			return ResourceAcquiredLabel.RESOURCE.ROCKETLAUNCHERCRIT
+		_:
+			return 0

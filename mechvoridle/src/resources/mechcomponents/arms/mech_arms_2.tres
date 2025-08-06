@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_e578v")
 crit_chance_modifier = 0.35
-charge_time_modifier = 0.0
+charge_time_modifier = 25.0
 component_name = "ARM2YSAB343"
 description = "The kids selected random colors for their art project, creating a vibrant masterpiece. "
 health = 1000

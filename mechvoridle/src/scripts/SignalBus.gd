@@ -58,4 +58,4 @@ signal lose_game #execute loss procedure and go to lose panel
 signal update_player_health_bar
 signal update_opponent_health_bar
 signal fill_bar_on_start_up
-signal shake_camera
+signal shake_camera(value : int)

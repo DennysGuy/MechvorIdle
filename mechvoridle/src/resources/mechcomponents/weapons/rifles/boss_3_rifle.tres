@@ -6,12 +6,12 @@
 script = ExtResource("1_prk5q")
 weapon_type = 0
 weapon_class = 1
-damage = 92
+damage = 180
 number_of_hits = 2
 charge_time = 0.0
-charge_speed = 22.0
+charge_speed = 0.4
 crit_chance = 0.15
-accuracy = 0.75
+accuracy = 0.7
 stun_chance = 0.15
 component_name = "RFL-23XX"
 description = ""

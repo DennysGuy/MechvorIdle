@@ -33,7 +33,7 @@ func _ready() -> void:
 	asteroid_spawn_timer.start()
 	asteroid_area_2d.input_pickable = true
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	
 	if not GameManager.can_fight_boss:
 		if start_ufo_spawn:

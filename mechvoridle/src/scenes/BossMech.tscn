@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8qjsxerrs20s"]
+
+[ext_resource type="PackedScene" uid="uid://c83tp677rra88" path="res://assets/graphics/Models/HeavyBoss/HeavyBossMech.gltf" id="1_ksmgt"]
+[ext_resource type="Script" uid="uid://dq8ewh7ybbbx7" path="res://src/scenes/boss_mech.gd" id="1_s5a1e"]
+
+[node name="BossMech" type="Node3D"]
+script = ExtResource("1_s5a1e")
+
+[node name="HeavyBoss" parent="." instance=ExtResource("1_ksmgt")]
+
+[node name="UpperLeg2" parent="HeavyBoss/Node/LowerBody/Leg/UpperLeg22" index="1"]
+transform = Transform3D(0.984808, 0.165611, 0.0522171, -0.142677, 0.600312, 0.786936, 0.0989789, -0.782431, 0.614821, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161357, 1.09913, 1.61816)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.920252, 0.391325, 0, -0.391325, 0.920252, 0, 3.96347, 4.39939)
+
+[editable path="HeavyBoss"]

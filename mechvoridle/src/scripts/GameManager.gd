@@ -30,6 +30,8 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 
 var audio_settings_Showing : bool = false
 
+func _ready() -> void:
+	fight_scenario_5_test_fixture()
 
 #mining panel
 var ufo_attacking : bool = false
@@ -179,11 +181,11 @@ var fill_bars : bool = false
 const BASE_DODGE_CHANCE : float = 0.25
 
 #light
-var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_1.tres")
+var opponent_option_1 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_1.tres").duplicate()
 #standard
-var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres")
+var opponent_option_2 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_2.tres").duplicate()
 #heavy
-var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres")
+var opponent_option_3 : OpponentMech = preload("res://src/resources/opponenet_mechs/Boss_Option_3.tres").duplicate()
 
 var opponents_list : Array[OpponentMech] = [opponent_option_1, opponent_option_2, opponent_option_3]
 
@@ -391,12 +393,12 @@ func standard_build() -> void:
 	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_3.tres")
 	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
 	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_3.tres")
-	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-2.tres")
-	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_2.tres")
+	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-1.tres")
+	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_1.tres")
 	
 
 func heavy_build() -> void:
-	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
+	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/heads/mech_head_1.tres")
 	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_2.tres")
 	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
 	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_1.tres")
@@ -413,8 +415,8 @@ func heavy_build() -> void:
 
 
 func fight_scenario_test_fixture_1() -> void:
-	light_build()
-	chosen_opponent = opponent_option_3
+	heavy_build()
+	chosen_opponent = opponent_option_2
 
 #standard - proper ranged build vs melee boss
 '''
@@ -425,7 +427,7 @@ func fight_scenario_test_fixture_1() -> void:
 
 func fight_scenario_2_test_fixture() -> void:
 	standard_build()
-	chosen_opponent = opponent_option_1
+	chosen_opponent = opponent_option_1.duplicate(true)
 
 #heavy - proper ranged build vs light boss
 '''
@@ -435,7 +437,7 @@ func fight_scenario_2_test_fixture() -> void:
 func fight_scenario_3_test_fixture() -> void:
 	heavy_build()
 	
-	chosen_opponent = opponent_option_1
+	chosen_opponent = opponent_option_1.duplicate(true)
 
 
 #light mech - vs - standard 
@@ -447,7 +449,7 @@ func fight_scenario_3_test_fixture() -> void:
 
 func fight_scenario_4_test_fixture() -> void:
 	light_build()
-	chosen_opponent = opponent_option_2
+	chosen_opponent = opponent_option_2.duplicate(true)
 #Heavy Mech - proper build vs standard build
 '''
 	The heavy mech build vs the standard build - should be able to take down 
@@ -457,4 +459,4 @@ func fight_scenario_4_test_fixture() -> void:
 
 func fight_scenario_5_test_fixture() -> void:
 	heavy_build()
-	chosen_opponent = opponent_option_2
+	chosen_opponent = opponent_option_3.duplicate(true)

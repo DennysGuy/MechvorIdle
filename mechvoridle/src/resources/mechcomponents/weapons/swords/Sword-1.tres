@@ -6,10 +6,10 @@
 script = ExtResource("1_wp7av")
 weapon_type = 0
 weapon_class = 0
-damage = 100
+damage = 98
 number_of_hits = 2
-charge_time = 80.0
-charge_speed = 25.0
+charge_time = 0.6
+charge_speed = 0.6
 crit_chance = 0.0
 accuracy = 0.9
 stun_chance = 0.0

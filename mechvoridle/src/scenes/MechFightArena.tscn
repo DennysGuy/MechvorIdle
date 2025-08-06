@@ -1,41 +1,44 @@
-[gd_scene load_steps=18 format=3 uid="uid://c68p1ei57ngk7"]
+[gd_scene load_steps=21 format=3 uid="uid://c68p1ei57ngk7"]
 
 [ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
-[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_aoeri"]
-[ext_resource type="PackedScene" uid="uid://2mw5axtfuca0" path="res://src/scenes/MechArenaScene/ChargeBar.tscn" id="2_hlut8"]
 [ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="2_s2l3r"]
 [ext_resource type="PackedScene" uid="uid://bkv7ay3ce6vyg" path="res://src/scenes/MechArenaScene/PlayerHealth.tscn" id="3_8olsk"]
 [ext_resource type="Script" uid="uid://bab3vn7oeytv8" path="res://src/scripts/boss_stand_in.gd" id="4_naye7"]
 [ext_resource type="PackedScene" uid="uid://dxymnlcu4rltp" path="res://src/scenes/MechArenaScene/BossHealth.tscn" id="4_vd1uu"]
+[ext_resource type="PackedScene" uid="uid://c8qjsxerrs20s" path="res://src/scenes/BossMech.tscn" id="5_vg7qx"]
+[ext_resource type="Script" uid="uid://dvvkco7x3c4vg" path="res://src/scripts/Panels/ArenaScene/charge_bar.gd" id="7_227ho"]
 [ext_resource type="Script" uid="uid://bw1t8ugmc22kd" path="res://src/scripts/cockpit_camera.gd" id="7_naye7"]
 [ext_resource type="Texture2D" uid="uid://b83om6thsphyf" path="res://assets/graphics/CockPitView_Underlay.png" id="8_78ps0"]
+[ext_resource type="Texture2D" uid="uid://sw5cprdx8whm" path="res://assets/graphics/ChargeBar_Frame.png" id="9_blg81"]
 [ext_resource type="Texture2D" uid="uid://4qr58n3rme2c" path="res://assets/graphics/CockPitView_Overlay.png" id="9_jj0iv"]
+[ext_resource type="Texture2D" uid="uid://wbrqhywsy131" path="res://assets/graphics/ChargeBar_Fill.png" id="10_2lqcn"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="10_j1o1p"]
 
 [sub_resource type="Animation" id="Animation_naye7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/BossStandIn:material:shader_parameter/flash_amount")
+tracks/0/path = NodePath("TransitionRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TransitionRect:color")
+tracks/1/path = NodePath("BossContainer:material:shader_parameter/flash_amount")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_78ps0"]
@@ -56,27 +59,15 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_s2l3r"]
 resource_name = "hit_flash"
-length = 0.15
+length = 0.08
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/BossStandIn:material")
+tracks/0/path = NodePath("BossContainer:material:shader_parameter/flash_amount")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background/BossStandIn:material:shader_parameter/flash_amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"times": PackedFloat32Array(0, 0.0349724, 0.079068),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
@@ -103,7 +94,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Background/BossStandIn:position")
+tracks/1/path = NodePath("BossStandIn:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -179,7 +170,7 @@ _data = {
 &"win_fight_sequence": SubResource("Animation_aoeri")
 }
 
-[node name="MechFightArena" type="Control"]
+[node name="MechFightArena" type="Control" node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "animation_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,14 +178,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mj4vx")
+boss_health_bar = NodePath("BossHealth")
+player_health_bar = NodePath("PlayerHealth")
+animation_player = NodePath("AnimationPlayer")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0.450648, 0.450648, 0.450648, 1)
-
-[node name="BossStandIn" type="TextureRect" parent="Background"]
+[node name="BossStandIn" type="TextureRect" parent="."]
 material = ExtResource("2_s2l3r")
 layout_mode = 1
 anchors_preset = 8
@@ -210,10 +198,45 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.63672, 2.05962)
 mouse_default_cursor_shape = 3
-texture = ExtResource("2_aoeri")
 script = ExtResource("4_naye7")
 
-[node name="CockpitViewUnderlay" type="TextureRect" parent="Background"]
+[node name="BossContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = ExtResource("2_s2l3r")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -140.0
+offset_right = 242.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="BossContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(483, 262)
+render_target_update_mode = 4
+
+[node name="BossMech" parent="BossContainer/SubViewport" instance=ExtResource("5_vg7qx")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 244.0
+offset_top = 85.0
+offset_right = 374.0
+offset_bottom = 242.0
+mouse_default_cursor_shape = 3
+
+[node name="CockpitViewUnderlay" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -0.797119
 offset_top = 0.813065
@@ -223,7 +246,7 @@ mouse_filter = 2
 texture = ExtResource("8_78ps0")
 stretch_mode = 2
 
-[node name="PlayerHealth" parent="Background" instance=ExtResource("3_8olsk")]
+[node name="PlayerHealth" parent="." instance=ExtResource("3_8olsk")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -237,42 +260,96 @@ offset_bottom = -55.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="PlayerWeapon2" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+[node name="PlayerWeapon2" type="Control" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker")]
 layout_mode = 1
 anchors_preset = 2
-anchor_left = 0.0
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 397.0
 offset_top = -101.0
 offset_right = 463.0
 offset_bottom = -42.0
-grow_horizontal = 1
 grow_vertical = 0
+script = ExtResource("7_227ho")
 target = 1
 weapon_position = 1
-boss_label_marker = NodePath("../../BossLabelMarker")
-player_label_marker = NodePath("../../PlayerLabelMarker")
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
 
-[node name="PlayerWeapon1" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+[node name="WeaponName" type="Label" parent="PlayerWeapon2"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 18.0
+offset_right = 29.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 5
+text = "Weapon"
+
+[node name="WeaponChargeBar" type="TextureProgressBar" parent="PlayerWeapon2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -5.5
+offset_right = 33.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+texture_under = ExtResource("9_blg81")
+texture_progress = ExtResource("10_2lqcn")
+
+[node name="PlayerWeapon1" type="Control" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker")]
 layout_mode = 1
 anchors_preset = 2
-anchor_left = 0.0
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 176.0
 offset_top = -101.0
 offset_right = 243.0
 offset_bottom = -43.0
-grow_horizontal = 1
 grow_vertical = 0
+script = ExtResource("7_227ho")
 target = 1
-boss_label_marker = NodePath("../../BossLabelMarker")
-player_label_marker = NodePath("../../PlayerLabelMarker")
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
 
-[node name="CockpitViewOverlay" type="TextureRect" parent="Background"]
+[node name="WeaponName" type="Label" parent="PlayerWeapon1"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 18.0
+offset_right = 29.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 5
+text = "Weapon"
+
+[node name="WeaponChargeBar" type="TextureProgressBar" parent="PlayerWeapon1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -5.5
+offset_right = 33.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.2
+texture_under = ExtResource("9_blg81")
+texture_progress = ExtResource("10_2lqcn")
+
+[node name="CockpitViewOverlay" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -0.797119
 offset_top = 0.813065
@@ -282,44 +359,92 @@ mouse_filter = 2
 texture = ExtResource("9_jj0iv")
 stretch_mode = 2
 
-[node name="EnemyWeapon1" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+[node name="EnemyWeapon1" type="Control" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker")]
 layout_mode = 1
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 228.0
 offset_top = 10.0
 offset_right = 295.0
 offset_bottom = 68.0
-grow_horizontal = 1
-grow_vertical = 1
 mouse_filter = 2
+script = ExtResource("7_227ho")
 target = 0
-boss_label_marker = NodePath("../../BossLabelMarker")
-player_label_marker = NodePath("../../PlayerLabelMarker")
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
 
-[node name="EnemyWeapon2" parent="Background" node_paths=PackedStringArray("boss_label_marker", "player_label_marker") instance=ExtResource("2_hlut8")]
+[node name="WeaponName" type="Label" parent="EnemyWeapon1"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 18.0
+offset_right = 29.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 5
+text = "Weapon"
+
+[node name="WeaponChargeBar" type="TextureProgressBar" parent="EnemyWeapon1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -5.5
+offset_right = 33.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+texture_under = ExtResource("9_blg81")
+texture_progress = ExtResource("10_2lqcn")
+
+[node name="EnemyWeapon2" type="Control" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker")]
 layout_mode = 1
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 343.0
 offset_top = 11.0
 offset_right = 409.0
 offset_bottom = 69.0
-grow_horizontal = 1
-grow_vertical = 1
 mouse_filter = 2
+script = ExtResource("7_227ho")
 target = 0
 weapon_position = 1
-boss_label_marker = NodePath("../../BossLabelMarker")
-player_label_marker = NodePath("../../PlayerLabelMarker")
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
 
-[node name="BossHealth" parent="Background" instance=ExtResource("4_vd1uu")]
+[node name="WeaponName" type="Label" parent="EnemyWeapon2"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 18.0
+offset_right = 29.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 5
+text = "Weapon"
+
+[node name="WeaponChargeBar" type="TextureProgressBar" parent="EnemyWeapon2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -5.5
+offset_right = 33.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+texture_under = ExtResource("9_blg81")
+texture_progress = ExtResource("10_2lqcn")
+
+[node name="BossHealth" parent="." instance=ExtResource("4_vd1uu")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -357,13 +482,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -65.5
+offset_left = -70.5
 offset_top = -267.0
-offset_right = 65.5
+offset_right = 70.5
 offset_bottom = -214.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
 theme_override_font_sizes/font_size = 38
 text = "FIGHT!"
 
@@ -380,4 +506,6 @@ script = ExtResource("7_naye7")
 
 [node name="Timer" type="Timer" parent="CockpitCamera"]
 
-[connection signal="gui_input" from="Background/BossStandIn" to="." method="_on_boss_stand_in_gui_input"]
+[connection signal="gui_input" from="BossStandIn" to="." method="_on_boss_stand_in_gui_input"]
+[connection signal="gui_input" from="BossContainer" to="." method="_on_boss_container_gui_input"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

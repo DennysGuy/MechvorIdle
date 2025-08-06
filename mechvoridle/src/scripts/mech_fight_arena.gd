@@ -2,17 +2,17 @@ class_name MechFightArena extends Control
 
 
 #player visuals
-@onready var weapon_1 = $Background/Weapon1
-@onready var weapon_2 = $Background/Weapon2
+@onready var weapon_1 = $Weapon1
+@onready var weapon_2 = $Weapon2
 @onready var weapon_1_charge_bar : ProgressBar= $Weapon1ChargeBar
 @onready var weapon_1_charge_bar_2 : ProgressBar = $Weapon1ChargeBar2
 @onready var health_bar : ProgressBar = $HealthBar
 @onready var cockpit_camera : Camera2D = $CockpitCamera
 
 #boss gui visuals
-
-@onready var boss_health_bar : BossHealthBar = $Background/BossHealthBar
-@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@export var boss_health_bar : BossHealthBar
+@export var player_health_bar : PlayerHealth
+@export var animation_player : AnimationPlayer
 
 #testing
 @export_enum("Test Mode", "Production Mode") var set_mode : int
@@ -74,3 +74,20 @@ func _on_boss_stand_in_gui_input(event : InputEvent) -> void:
 
 func fill_all_bars() -> void:
 	GameManager.fill_bars = true
+
+
+func _on_boss_container_gui_input(event):
+	pass
+
+
+func _on_control_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and GameManager.fight_on:
+			boss_health_bar.current_health_tracker -= 10
+			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
+			resource_acquired_label.output = "-10"
+			resource_acquired_label.global_position = get_viewport().get_mouse_position()
+			resource_acquired_label.resource = ResourceAcquiredLabel.RESOURCE.VULCAN
+			get_parent().add_child(resource_acquired_label)
+			boss_health_bar.update_health_bar()
+			animation_player.play("hit_flash")
