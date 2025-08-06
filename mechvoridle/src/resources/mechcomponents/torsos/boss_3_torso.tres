@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_072s6")
-charge_speed_modifier = 0.0
+charge_speed_modifier = 0.05
 component_name = "Boss 3  torso"
 description = ""
 health = 3125

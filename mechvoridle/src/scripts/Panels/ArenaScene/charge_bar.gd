@@ -48,7 +48,7 @@ func _ready() -> void:
 		else:
 			weapon = GameManager.get_right_weapon()
 
-	else:
+	elif belongs_to_enemy():
 		selected_arms = GameManager.chosen_opponent.get_arms_component()
 		selected_torso = GameManager.chosen_opponent.get_torso_component()
 		selected_head = GameManager.chosen_opponent.get_head_component()
@@ -71,9 +71,8 @@ func _physics_process(delta : float) -> void:
 		weapon_charge_bar.value += true_charge_speed
 		if weapon_charge_bar.value >= weapon_charge_bar.max_value:
 			if belongs_to_player():
-	
 				damage_target(GameManager.chosen_opponent.current_health, true_target_dodge_chance)
-			else:
+			elif belongs_to_enemy():
 				damage_target(GameManager.current_health, true_target_dodge_chance)
 				
 				
@@ -139,11 +138,11 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 				boss_health_bar.current_health_tracker -= int(true_damage)
 				boss_health_bar.update_health_bar()
 				damage_label.position = boss_label_marker.position
-			else:
-				GameManager.current_health -= random_damage
-				SignalBus.update_player_health_bar.emit()
+			elif belongs_to_enemy():
+				player_health_bar.current_health_tracker -= random_damage
+				player_health_bar.update_health_bar()
 				SignalBus.shake_camera.emit()
-				damage_label.position = boss_label_marker.position
+				damage_label.position = player_label_marker.position
 			damage_label.resource = set_icon_for_crit_damage(weapon.get_weapon_class())
 			get_parent().add_child(damage_label)
 			return
@@ -154,9 +153,8 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 			boss_health_bar.update_health_bar()
 			damage_label.position = boss_label_marker.position
 		elif belongs_to_enemy():
-			GameManager.current_health -= random_damage
-			SignalBus.update_player_health_bar.emit()
-			SignalBus.shake_camera.emit()
+			player_health_bar.current_health_tracker -= random_damage
+			player_health_bar.update_health_bar()
 			damage_label.position = player_label_marker.position
 			SignalBus.shake_camera.emit(3)
 			

@@ -6,7 +6,7 @@
 script = ExtResource("1_oih5d")
 weapon_type = 0
 weapon_class = 1
-damage = 180
+damage = 200
 number_of_hits = 1
 charge_time = 0.0
 charge_speed = 0.32

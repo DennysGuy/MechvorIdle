@@ -6,11 +6,11 @@
 script = ExtResource("1_upxg4")
 weapon_type = 1
 weapon_class = 2
-damage = 600
+damage = 550
 number_of_hits = 1
-charge_time = 0.0
-charge_speed = 0.3
-crit_chance = 0.0
+charge_time = 0.15
+charge_speed = 0.1
+crit_chance = 0.25
 accuracy = 0.48
 stun_chance = 0.0
 component_name = "BIGK1X33ZOMG"

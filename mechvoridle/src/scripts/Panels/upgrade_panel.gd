@@ -159,39 +159,39 @@ func _process(delta: float) -> void:
 	plasma_generator_fuel_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_fuel_cost) and GameManager.plasma_generator_station_purchased
 	plasma_generator_speed_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_speed_cost) and GameManager.plasma_generator_station_purchased
 	
-	upgrade_damage.disabled = GameManager.platinum_count <= GameManager.mining_laser_damage_upgrade_cost
-	upgrade_crit_chance.disabled = GameManager.platinum_count <= GameManager.mining_laser_crit_chance_cost
-	purchase_drone.disabled = GameManager.platinum_count <= mining_drones_cost
-	purchase_platinum_drone.disabled = GameManager.platinum_count <= plat_drones_cost
-	upgrade_mining_laser_speed.disabled = GameManager.platinum_count <= GameManager.mining_laser_speed_cost
+	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
+	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
+	purchase_drone.disabled = GameManager.platinum_count < mining_drones_cost
+	purchase_platinum_drone.disabled = GameManager.platinum_count < plat_drones_cost
+	upgrade_mining_laser_speed.disabled = GameManager.platinum_count < GameManager.mining_laser_speed_cost
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	
 	if mining_drones_count > 0:
-		upgrade_drone_damage.disabled = GameManager.platinum_count <= GameManager.drone_damage_cost
-		upgrade_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.drone_mining_speed_cost
+		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
+		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
 		upgrade_drone_damage.disabled = true
 		upgrade_drone_mining_speed.disabled = true
 		
 	if plat_drones_count > 0:
-		upgrade_plat_drone_damage.disabled = GameManager.platinum_count <= GameManager.platinum_drone_damage_cost
-		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.platinum_drone_mining_speed_cost
+		upgrade_plat_drone_damage.disabled = GameManager.platinum_count < GameManager.platinum_drone_damage_cost
+		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.platinum_drone_mining_speed_cost
 	else:
 		upgrade_plat_drone_damage.disabled = true
 		upgrade_platinum_drone_mining_speed.disabled = true
 	
 	if GameManager.ferrite_refinery_station_purchased:
-		upgrade_refinery_speed.disabled = GameManager.platinum_count <= GameManager.ferrite_refinery_speed_cost
-		upgrade_efficiency.disabled = GameManager.platinum_count <= GameManager.output_upgrade_cost
+		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
+		upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
 	else:
 		upgrade_refinery_speed.disabled = true
 		upgrade_efficiency.disabled = true
 
 	
 	if GameManager.plasma_generator_station_purchased:
-		upgrade_fuel_cost.disabled = GameManager.platinum_count <= GameManager.plasma_generator_fuel_cost
-		plasma_generator_speed_upgrade.disabled = GameManager.platinum_count <= GameManager.plasma_generator_speed_cost
-		generator_output_upgrade.disabled = GameManager.platinum_count <= GameManager.plasma_generator_output_cost
+		upgrade_fuel_cost.disabled = GameManager.platinum_count < GameManager.plasma_generator_fuel_cost
+		plasma_generator_speed_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_speed_cost
+		generator_output_upgrade.disabled = GameManager.platinum_count < GameManager.plasma_generator_output_cost
 	else:
 		upgrade_fuel_cost.disabled = true
 		plasma_generator_speed_upgrade.disabled = true

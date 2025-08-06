@@ -34,7 +34,7 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 var audio_settings_Showing : bool = false
 
 func _ready() -> void:
-	fight_scenario_5_test_fixture()
+	fight_scenario_8_test_fixture()
 
 #mining panel
 var ufo_attacking : bool = false
@@ -228,9 +228,9 @@ func increment_drone_count() -> void:
 
 	SignalBus.update_drone_count.emit()
 	
-func calculate_health() -> void:
-	total_health = get_owned_mech_arms().health + get_owned_mech_head().health + get_owned_mech_legs().health + get_owned_mech_torso().health
-	current_health = total_health
+func calculate_health() -> int:
+	return get_owned_mech_arms().health + get_owned_mech_head().health + get_owned_mech_legs().health + get_owned_mech_torso().health
+	
 
 #shop panel
 func add_mech_component(component : MechComponent) -> void: 
@@ -417,7 +417,7 @@ func heavy_build() -> void:
 '''
 
 
-func fight_scenario_test_fixture_1() -> void:
+func fight_scenario_1_test_fixture() -> void:
 	heavy_build()
 	chosen_opponent = opponent_option_2
 
@@ -461,5 +461,37 @@ func fight_scenario_4_test_fixture() -> void:
 '''
 
 func fight_scenario_5_test_fixture() -> void:
+	heavy_build()
+	chosen_opponent = opponent_option_2.duplicate(true)
+
+
+#Light build vs Light build
+
+'''
+	testing light vs light - should be an even match
+
+'''
+
+func fight_scenario_6_test_fixture() -> void:
+	light_build()
+	chosen_opponent = opponent_option_1.duplicate(true)
+
+#Standard vs Standard
+
+'''
+	testing standard vs standard - should be an even match
+'''
+
+func fight_scenario_7_test_fixture() -> void:
+	standard_build()
+	chosen_opponent = opponent_option_2.duplicate(true)
+
+#Heavy vs Heavy
+'''
+	testing heavy vs heavy - should be an even match
+
+'''
+
+func fight_scenario_8_test_fixture() -> void:
 	heavy_build()
 	chosen_opponent = opponent_option_3.duplicate(true)

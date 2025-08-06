@@ -75,7 +75,7 @@ func _on_button_button_down() -> void:
 
 
 func _on_juke_box_finished():
-	var timer := get_tree().create_timer(3)
+	var timer := get_tree().create_timer(2)
 	await timer.timeout
 	increment_and_play_track()
 	

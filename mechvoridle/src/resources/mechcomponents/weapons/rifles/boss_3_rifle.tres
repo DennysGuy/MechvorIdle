@@ -6,10 +6,10 @@
 script = ExtResource("1_prk5q")
 weapon_type = 0
 weapon_class = 1
-damage = 180
+damage = 250
 number_of_hits = 2
 charge_time = 0.0
-charge_speed = 0.4
+charge_speed = 0.45
 crit_chance = 0.15
 accuracy = 0.7
 stun_chance = 0.15
