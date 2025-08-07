@@ -68,8 +68,8 @@ func start_fight() -> void:
 func _on_purchase_recon_scout_button_down():
 	if recon_scouts_left > 0:
 		if !GameManager.recon_scout_purchased:
-			SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
-			GameManager.recon_scout_purchased = true
+			SignalBus.add_to_mission_counter.emit(1,GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+
 		GameManager.platinum_count -= GameManager.recon_scout_platinum_cost
 		recon_text.text = recon_tips_list[recon_index]
 		recon_index += 1

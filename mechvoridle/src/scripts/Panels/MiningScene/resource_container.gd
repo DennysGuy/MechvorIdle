@@ -30,13 +30,37 @@ func deliver_resource() -> void:
 	
 	if random_ferrite_amount > 0:
 		GameManager.raw_ferrite_count += random_ferrite_amount
+		
+		if !GameManager.ferrite_refinery_station_purchased:
+			SignalBus.add_to_submission_counter.emit(random_ferrite_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.FERRITE_REFINERY_PURCHASED)
 		generate_label(random_ferrite_amount, 0)
 		SignalBus.update_ferrite_count.emit()
 	if random_ferrite_bars_amount > 0:
+		
+		if !GameManager.plasma_generator_station_purchased:
+			SignalBus.add_to_submission_counter.emit(random_ferrite_bars_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED)
+		
 		GameManager.ferrite_bars_count += random_ferrite_bars_amount
 		generate_label(random_ferrite_bars_amount, 1)
 		SignalBus.update_ferrite_bars_count.emit()
 	if random_platinum_amount > 0:
+		
+		if !GameManager.upgrade_mining_drone_damage:
+			SignalBus.add_to_submission_counter.emit(random_platinum_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
+		
+		if !GameManager.plat_drone_purchased:
+			SignalBus.add_to_submission_counter.emit(random_platinum_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
+		
+		if !GameManager.purchase_1_more_drone:
+			SignalBus.add_to_submission_counter.emit(random_platinum_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
+			
+		if !GameManager.recon_scout_purchased:
+			SignalBus.add_to_submission_counter.emit(random_platinum_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+		
+		if !GameManager.upgrade_platinum_drone_speed:
+			SignalBus.add_to_submission_counter.emit(random_platinum_amount, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
+			
+		
 		GameManager.platinum_count += random_platinum_amount
 		generate_label(random_platinum_amount, 2)
 		SignalBus.update_plasma_count.emit()
@@ -56,7 +80,9 @@ func generate_label(amount : int, resource_icon : int):
 	SignalBus.update_ferrite_bars_count.emit()
 	SignalBus.update_ferrite_count.emit()
 	SignalBus.update_platinum_count.emit()
-	SignalBus.update_plasma_count.emit()
+	SignalBus.update_plasma_count.emit(
+		
+	)
 
 func set_resource(resource_label : ResourceAcquiredLabel, resource : int) -> int:
 	match (resource):

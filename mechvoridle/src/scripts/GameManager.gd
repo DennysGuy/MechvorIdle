@@ -143,33 +143,121 @@ var plasma_generator_fuel_base_cost : int = 3000
 
 var visited_black_market : bool = false
 var mining_facility_visited : bool = false
-var asteroid_mined : bool = false
-var plat_drone_purchased : bool = false
+var mine_100_platinum : bool = false
 var mining_drone_purchased : bool = false
+var three_fly_by_drones_destroyed : bool = false
+var plat_drone_purchased : bool = false
+var upgrade_mining_drone_damage : bool = false
+var upgrade_platinum_drone_speed : bool = false
 var recon_scout_purchased : bool = false
-var upgrade_purchased : bool = false
-var plasma_generator_station_purchased : bool = false
-var ferrite_refinery_station_purchased : bool = false
-var mech_component_purchased : bool = false
-var flyby_asteroid_destroyed : bool = false
+var purchase_1_more_drone : bool = false
 var ufo_destroyed : bool = false
+var ferrite_refinery_station_purchased : bool = false
+var plasma_generator_station_purchased : bool = false
+var mech_component_purchased : bool = false
+var mech_completed : bool = false
+
+
+'''
+	MISSION LIST (15/15)
+	
+	1. visit the shop (1/1)
+	2. visit the mining facility (1/1)
+	3. mine 100 patinum (100/100)
+	4. purchase mining drone (1/1)
+	5. destroy 3 fly by asteroids (3/3)
+	6. purchase platinum drone (1/1)
+	7. upgrade mining drone damage (1/1)
+	8. upgrade platinum drone speed (1/1)
+	9. purchase recon scout (1/1)
+	10. purchase 1 more drone (1/1)
+	11. destroy ufo (1/1)
+	12. purchase ferrite ferinery (1/1)
+	13. purchase plasma generator (1/1)
+	14. purchase a mech component (1/1)
+	15. complete mech! (5/5)
+	-- if the player happens to be on complete mech - the completed all missions animation will appear during to fight transition animation
+'''
 
 enum CHECK_LIST_INDICATOR_TOGGLES
 {
 	VISITED_BLACK_MARKET, 
 	VISITED_MINING_FACILITY,
-	ASTEROID_MINED, 
-	MINING_DRONE_PURCHASED, 
+	HUNDRED_PLATINUM_GAIN, 
+	MINING_DRONE_PURCHASED,
+	THREE_FLYBY_ASTEROIDS_DESTROYED, 
 	PLAT_DRONE_PURCHASED, 
+	UPGRADE_MINING_DRONE_DAMAGE,
+	UPGRADE_PLATINUM_DRONE_SPEED,
+	PURCHASE_1_MORE_DRONE,
 	RECON_SCOUT_PURCHASED,
-	UPGRADE_PURCHASED,
+	UFO_DESTROYED,
 	FERRITE_REFINERY_PURCHASED,
 	PLASMA_GENERATOR_PURCHASED,
 	MECH_COMPONENT_PURCHASED,
-	FLYBY_ASTEROID_DESTROY,
-	UFO_DESTROYED 
-
+	COMPLETE_MECH
 }
+
+func get_mission_status(index : int) -> bool:
+	
+	match(index):
+		CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET:
+			return visited_black_market
+		CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY:
+			return mining_facility_visited
+		CHECK_LIST_INDICATOR_TOGGLES.HUNDRED_PLATINUM_GAIN:
+			return mine_100_platinum
+		CHECK_LIST_INDICATOR_TOGGLES.THREE_FLYBY_ASTEROIDS_DESTROYED:
+			return three_fly_by_drones_destroyed
+		CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED:
+			return plat_drone_purchased
+		CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE:
+			return upgrade_mining_drone_damage
+		CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED:
+			return upgrade_platinum_drone_speed
+		CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE:
+			return purchase_1_more_drone
+		CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED:
+			return recon_scout_purchased
+		CHECK_LIST_INDICATOR_TOGGLES.FERRITE_REFINERY_PURCHASED:
+			return ferrite_refinery_station_purchased
+		CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED:
+			return plasma_generator_station_purchased
+		CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED:
+			return mech_component_purchased
+		CHECK_LIST_INDICATOR_TOGGLES.COMPLETE_MECH:
+			return mech_completed
+		_:
+			return false
+
+func set_mission_status(index : int, value: bool) -> void:
+	match(index):
+		CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET:
+			visited_black_market = value
+		CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY:
+			mining_facility_visited = value
+		CHECK_LIST_INDICATOR_TOGGLES.HUNDRED_PLATINUM_GAIN:
+			mine_100_platinum = value
+		CHECK_LIST_INDICATOR_TOGGLES.THREE_FLYBY_ASTEROIDS_DESTROYED:
+			three_fly_by_drones_destroyed = value
+		CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED:
+			plat_drone_purchased = value
+		CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE:
+			upgrade_mining_drone_damage = value
+		CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED:
+			upgrade_platinum_drone_speed = value
+		CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE:
+			purchase_1_more_drone = value
+		CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED:
+			recon_scout_purchased = value
+		CHECK_LIST_INDICATOR_TOGGLES.FERRITE_REFINERY_PURCHASED:
+			ferrite_refinery_station_purchased = value
+		CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED:
+			plasma_generator_station_purchased = value
+		CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED:
+			mech_component_purchased = value
+		CHECK_LIST_INDICATOR_TOGGLES.COMPLETE_MECH:
+			mech_completed = value
 
 #stats page
 var recon_scout_platinum_cost : int = 300

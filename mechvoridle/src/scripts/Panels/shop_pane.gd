@@ -164,8 +164,11 @@ func _on_purchase_button_button_down() -> void:
 
 func _on_confirmation_button_button_down() -> void:
 	if !GameManager.mech_component_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED)
-		GameManager.mech_component_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED)
+	
+	if !GameManager.mech_completed:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.COMPLETE_MECH)
+	
 		
 	SfxManager.play_button_click(sfx_player)
 	sfx_player.stream = [SfxManager.UI_SHOP_BUY_COMPLETE_01,SfxManager.UI_SHOP_BUY_COMPLETE_02,SfxManager.UI_SHOP_BUY_COMPLETE_03].pick_random()

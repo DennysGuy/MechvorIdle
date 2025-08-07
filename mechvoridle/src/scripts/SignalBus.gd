@@ -21,7 +21,7 @@ signal update_parts_owned_on_previewer
 signal show_task_completed_indicator(index : int)
 signal show_check_list
 signal hide_check_list
-
+signal increment_phase_mission_completed_count
 #settings panel
 signal show_audio_settings
 signal hide_audio_settings
@@ -62,3 +62,13 @@ signal update_player_health_bar
 signal update_opponent_health_bar
 signal fill_bar_on_start_up
 signal shake_camera(value : int)
+
+#mission
+
+signal add_to_mission_counter(amount : int, unique_mission_identifier : int)
+signal add_to_submission_counter(amount : int, unique_mission_identifier : int)
+signal increment_mission_completed_counted
+signal show_mission_tracker_panel
+signal hide_mission_tracker_panel
+signal issue_mission_complete_notification
+signal issue_phase_compolete_notification

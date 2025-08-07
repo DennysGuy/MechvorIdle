@@ -310,8 +310,9 @@ func _on_hide_upgrades_panel_button_down():
 
 func _on_purchase_drone_button_down():
 	if !GameManager.mining_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
-		GameManager.mining_drone_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
+	if !GameManager.purchase_1_more_drone:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
 		
 	play_purchase_upgrade_sfx()
 	purchased_drone()
@@ -338,9 +339,9 @@ func upgrade_mining_critical_chance() -> void:
 	GameManager.mining_laser_crit_chance_cost = GameManager.mining_laser_crit_chance_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.mining_laser_crit_chance_level)
 	SignalBus.update_platinum_count.emit()
 func purchased_drone() -> void:
-	if !GameManager.mining_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
-		GameManager.mining_drone_purchased = true
+	#if !GameManager.mining_drone_purchased:
+		#SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
+		#GameManager.mining_drone_purchased = true
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drones_cost
 	SignalBus.update_platinum_count.emit()
@@ -349,6 +350,8 @@ func purchased_drone() -> void:
 func upgrade_drones_damage() -> void:
 	toggle_upgrade_check_list_item()
 	play_purchase_upgrade_sfx()
+	if !GameManager.upgrade_mining_drone_damage:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
 	GameManager.drone_damage = int(GameManager.drone_damage + GameManager.drone_level * 2.7)
@@ -367,8 +370,7 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 
 func _on_purchase_platinum_drone_button_down() -> void:
 	if !GameManager.plat_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
-		GameManager.plat_drone_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_cost
 	SignalBus.add_platinum_drone.emit()
@@ -388,6 +390,8 @@ func _on_upgrade_plat_drone_damage_button_down() -> void:
 func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
 	toggle_upgrade_check_list_item()
 	play_purchase_upgrade_sfx()
+	if !GameManager.upgrade_platinum_drone_speed:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
 	GameManager.platinum_count -= GameManager.platinum_drone_mining_speed_cost
 	GameManager.platinum_drone_mining_speed_level += 1
 	GameManager.platinum_drone_mining_speed += GameManager.platinum_drone_mining_speed_interval
@@ -440,9 +444,10 @@ func update_platinum_drone_cost(new_cost : int, new_count : int) -> void:
 	
 
 func toggle_upgrade_check_list_item() -> void:
-	if !GameManager.upgrade_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PURCHASED)
-		GameManager.upgrade_purchased = true	
+	#if !GameManager.upgrade_purchased:
+		#SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PURCHASED)
+		#GameManager.upgrade_purchased = true	
+	pass
 
 func open_upgrades_panel() -> void:
 	sfx_player.volume_db = -5.0
