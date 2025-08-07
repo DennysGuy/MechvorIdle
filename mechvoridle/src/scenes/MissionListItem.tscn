@@ -24,21 +24,22 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -89.5
-offset_top = 21.0
+offset_left = -90.5
+offset_top = 26.0
 offset_right = 92.5
-offset_bottom = 30.0
+offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_5r6i8")
 theme_override_font_sizes/font_size = 7
 text = "Get Platinum with Mine Laser"
+horizontal_alignment = 1
 
 [node name="CheckBox" type="TextureRect" parent="."]
 layout_mode = 1
-offset_left = 6.0
+offset_left = 3.0
 offset_top = 4.0
-offset_right = 18.0
+offset_right = 15.0
 offset_bottom = 16.0
 mouse_filter = 2
 texture = ExtResource("2_my71a")
@@ -49,21 +50,22 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -17.0
-offset_top = 1.0
-offset_right = -2.0
-offset_bottom = 16.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 17.0
 grow_horizontal = 0
 mouse_filter = 2
 texture = ExtResource("3_fxf1l")
+expand_mode = 1
 
 [node name="Counter" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -39.0
+offset_left = -40.0
 offset_top = 4.0
-offset_right = -21.0
+offset_right = -22.0
 offset_bottom = 14.0
 grow_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -73,6 +75,7 @@ text = "6/6"
 horizontal_alignment = 2
 
 [node name="SubmissionCounter" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -91,6 +94,7 @@ theme_override_font_sizes/font_size = 7
 text = "N/A"
 
 [node name="SubMissionLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

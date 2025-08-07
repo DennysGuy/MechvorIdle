@@ -207,33 +207,6 @@ tracks/1/keys = {
 "values": ["Mission Completed!"]
 }
 
-[sub_resource type="Animation" id="Animation_8juoo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../MissionCompletedNotifier:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../MissionCompletedNotifier:text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Mission Completed!"]
-}
-
 [sub_resource type="Animation" id="Animation_xgpkg"]
 resource_name = "MissionPhaseCompleted"
 length = 3.0
@@ -260,6 +233,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Phase Completed!"]
+}
+
+[sub_resource type="Animation" id="Animation_8juoo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MissionCompletedNotifier:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MissionCompletedNotifier:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Mission Completed!"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xgpkg"]
@@ -338,6 +338,21 @@ tracks/0/keys = {
 "values": [Vector2(417, 75)]
 }
 
+[sub_resource type="Animation" id="Animation_8r2gy"]
+resource_name = "hide_missions_panel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TutorialCheckList:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(417, 75), Vector2(645, 75)]
+}
+
 [sub_resource type="Animation" id="Animation_nd5gx"]
 resource_name = "mission completed notification"
 length = 5.0
@@ -369,21 +384,6 @@ tracks/0/keys = {
 "values": [Vector2(645, 75), Vector2(417, 75)]
 }
 
-[sub_resource type="Animation" id="Animation_8r2gy"]
-resource_name = "hide_missions_panel"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TutorialCheckList:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(417, 75), Vector2(645, 75)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8r2gy"]
 _data = {
 &"RESET": SubResource("Animation_y0q8j"),
@@ -408,7 +408,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -639.005
+offset_left = -639.0
 offset_right = 1280.99
 offset_bottom = 361.0
 grow_horizontal = 2

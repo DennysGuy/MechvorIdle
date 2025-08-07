@@ -166,6 +166,8 @@ func _on_confirmation_button_button_down() -> void:
 	if !GameManager.mech_component_purchased:
 		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MECH_COMPONENT_PURCHASED)
 	
+	GameManager.mech_component_purchased = true
+	
 	if !GameManager.mech_completed:
 		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.COMPLETE_MECH)
 	

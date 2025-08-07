@@ -4,9 +4,10 @@ class_name TutorialCheckList extends Control
 
 var current_phase_mission_completed_count : int = 0
 var mission_phase : int = 0
+const MAX_PHASE := 5
 var current_total_mission_count : int = 0
 const TOTAL_MISSION_COUNT : int = 16
-const MISSION_PHASE_TOTAL_COUNT : int = 3
+var mission_phase_total_count : int =0 
 @onready var sfx_player : AudioStreamPlayer = $SfxPlayer
 
 @onready var beep_sfx : Array[AudioStream] = [SfxManager.UI_MISC_TEXT_CRAWL_01, SfxManager.UI_MISC_TEXT_CRAWL_02, SfxManager.UI_MISC_TEXT_CRAWL_03]
@@ -36,8 +37,8 @@ const MISSION_PHASE_TOTAL_COUNT : int = 3
 			"mission index": GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY
 		},
 		2: {
-			"task": "Get 100 Platinum with Mine Laser.",
-			"count": 100,
+			"task": "Get 50 Platinum with Mine Laser.",
+			"count": 50,
 			"icon": preload("res://assets/graphics/platinum_ui_icon.png"),
 			"submission" : false,
 			"submission max count": 0, 
@@ -183,12 +184,16 @@ func load_mission_phase_list() -> void:
 	current_phase_mission_completed_count = 0
 	var mission_phase_list : Dictionary = missions_list[mission_phase]
 	var sfx_index : int = 0
+	mission_phase_total_count = 0
 	for mission in mission_phase_list.keys():
 		var wait_timer := get_tree().create_timer(1)
 		await wait_timer.timeout
 		sfx_player.stream = beep_sfx[sfx_index]
 		sfx_player.play()
 		sfx_index += 1
+		#get the max amount of missions to complete phase
+		mission_phase_total_count += 1
+		
 		var mission_list_item : MissionListItem = preload("res://src/scenes/MissionListItem.tscn").instantiate()
 		var current_mission : Dictionary = mission_phase_list[mission]
 		mission_list_item.mission_description.text = current_mission["task"]
@@ -220,9 +225,14 @@ func increment_mission_completed_count() -> void:
 	mission_completed_counter.text = str(current_total_mission_count)+"/"+str(TOTAL_MISSION_COUNT)
 
 func increment_phase_mission_completed_count() -> void:
-	current_phase_mission_completed_count += 1
 	
-	if current_phase_mission_completed_count == MISSION_PHASE_TOTAL_COUNT:
+	if mission_phase >= MAX_PHASE:
+		return
+	
+	current_phase_mission_completed_count += 1
+	print("Current phase mission completed count" + str(current_phase_mission_completed_count))
+	print("Mission phase total count: " + str(mission_phase_total_count))
+	if current_phase_mission_completed_count >= mission_phase_total_count:
 		SignalBus.issue_phase_compolete_notification.emit()
 		sfx_player.stream = preload("res://assets/audio/SFX/UI/Misc/PhaseComplete.wav")
 		sfx_player.play()

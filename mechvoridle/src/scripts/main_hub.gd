@@ -49,6 +49,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif GameManager.on_central_panel:
 			move_to_shop_pane()
 
+	
+	if Input.is_action_just_pressed("give_ferrite_bars"):
+		GameManager.ferrite_bars_count += 800
+		print(GameManager.ferrite_bars_count)
+
 func _process(delta : float) ->void:
 	pass
 

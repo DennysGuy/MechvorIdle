@@ -34,8 +34,8 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 var audio_settings_Showing : bool = false
 
 func _ready() -> void:
-	fight_scenario_8_test_fixture()
-
+	#fight_scenario_8_test_fixture()
+	pass
 #mining panel
 var ufo_attacking : bool = false
 

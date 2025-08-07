@@ -69,6 +69,10 @@ func obtain_resources():
 
 func _on_button_button_down() -> void:
 	#SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED)
+	
+	if !GameManager.plasma_generator_station_purchased:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLASMA_GENERATOR_PURCHASED)
+	
 	GameManager.plasma_generator_station_purchased = true
 	GameManager.ferrite_bars_count -= GameManager.plasma_generator_cost
 	

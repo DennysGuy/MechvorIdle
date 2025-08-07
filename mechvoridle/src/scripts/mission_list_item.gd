@@ -24,13 +24,9 @@ func _ready() -> void:
 	if GameManager.get_mission_status(mission_index) == true:
 		complete_mission()
 		sub_mission_current_count = sub_mission_max_count
-		init_sub_mission_values()
 		check_box.show()
-		
-	if has_submission:
-		init_sub_mission_values()
 
-		
+
 	counter.text = str(current_count)+"/"+str(max_count)
 	check_box.hide()
 	SignalBus.add_to_mission_counter.connect(increment_counter)
@@ -55,7 +51,7 @@ func complete_mission() -> void:
 	counter.text = str(current_count)+"/"+str(max_count)
 	SignalBus.increment_mission_completed_counted.emit()
 	SignalBus.increment_phase_mission_completed_count.emit()
-	SignalBus.issue_mission_complete_notification.emit()
+	#SignalBus.issue_mission_complete_notification.emit()
 	GameManager.set_mission_status(mission_index, true)
 	check_box.show()
 
