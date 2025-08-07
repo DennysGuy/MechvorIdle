@@ -142,7 +142,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	upgrades_available_label.visible = upgrades_available()
+	upgrades_available_label.visible = upgrades_available() 
 	mining_laser_speed_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_speed_cost)
 	mining_laser_damage_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_damage_upgrade_cost)
 	mining_laser_crit_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_crit_chance_cost)

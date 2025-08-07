@@ -52,6 +52,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("give_ferrite_bars"):
 		GameManager.ferrite_bars_count += 800
+		GameManager.raw_ferrite_count += 800
+		GameManager.platinum_count += 800 
+		GameManager.plasma_count += 800
 		print(GameManager.ferrite_bars_count)
 
 func _process(delta : float) ->void:

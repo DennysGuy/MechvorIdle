@@ -7,14 +7,14 @@
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="3_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://d11jf5fjl4wl8" path="res://assets/graphics/UI/FromShopPaneToCentralPaneButton_Normal.png" id="3_qucr2"]
 [ext_resource type="Texture2D" uid="uid://dp81n4y3gu6xy" path="res://assets/graphics/UI/FromShopPaneToCentralPaneButton_Hoverl.png" id="4_gvnck"]
-[ext_resource type="Texture2D" uid="uid://cugvltahnibtq" path="res://assets/graphics/UI/PurchaseButton_normal.png" id="4_p8hdl"]
-[ext_resource type="Texture2D" uid="uid://c1pwumyqi7sqt" path="res://assets/graphics/UI/PurchaseButton_hover.png" id="5_nqj3v"]
-[ext_resource type="Texture2D" uid="uid://ygwtask7dhhn" path="res://assets/graphics/UI/PurchaseButton_disabled.png" id="6_qucr2"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="6_wcomc"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="7_4k2ii"]
 [ext_resource type="PackedScene" uid="uid://bthwbil816n1x" path="res://src/scenes/part_previewer.tscn" id="7_gvnck"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="8_wcomc"]
 [ext_resource type="Texture2D" uid="uid://ce1elo3nxwhn2" path="res://assets/graphics/UI/ClosePanelButton.png" id="9_4k2ii"]
+[ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="11_gvnck"]
+[ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="12_tovwb"]
+[ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="13_gcoiw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi2d3"]
 resource_local_to_scene = true
@@ -458,14 +458,14 @@ texture = ExtResource("7_4k2ii")
 
 [node name="PurchaseButton" type="TextureButton" parent="ColorRect"]
 layout_mode = 2
-offset_left = 358.0
-offset_top = 237.0
-offset_right = 422.0
-offset_bottom = 262.0
+offset_left = 334.0
+offset_top = 257.0
+offset_right = 398.0
+offset_bottom = 282.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_p8hdl")
-texture_hover = ExtResource("5_nqj3v")
-texture_disabled = ExtResource("6_qucr2")
+texture_normal = ExtResource("11_gvnck")
+texture_hover = ExtResource("12_tovwb")
+texture_disabled = ExtResource("13_gcoiw")
 
 [node name="ConfirmationBox" type="TextureRect" parent="ColorRect"]
 layout_mode = 1
