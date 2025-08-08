@@ -29,7 +29,7 @@ class_name PlayerPreview extends Node3D
 @onready var parts_dictionary : Dictionary = {
 	"Torso": {
 		"LIGHT" : light_torso,
-		"STANDARD": standard_torso, 
+		"REGULAR": standard_torso, 
 		"HEAVY": heavy_torso
 	},
 	"Arms": {
@@ -38,7 +38,7 @@ class_name PlayerPreview extends Node3D
 	},
 	"Legs": {
 		"LIGHT": light_legs, 
-		"STANDARD": standard_legs, 
+		"REGULAR": standard_legs, 
 		"HEAVY": heavy_legs 
 	},
 	"Head": {

@@ -6,18 +6,25 @@ class_name ChargeBar extends Control
 
 @export var boss_health_bar : BossHealthBar
 @export var player_health_bar : PlayerHealth
+@onready var damage_layer : AudioStreamPlayer = $DamageLayer
 
 @export var boss_label_marker : Marker2D
 @export var player_label_marker : Marker2D
 
 enum WEAPON_POSITION {LEFT_WEAPON, RIGHT_WEAPON}
 enum TARGET{PLAYER, ENEMY}
+@onready var sfx_player : AudioStreamPlayer = $SFXPlayer
 
 @onready var weapon_charge_bar : TextureProgressBar = $WeaponChargeBar
 
 @onready var weapon_name : Label = $WeaponName
 
 @export var weapon : MechWeapon 
+
+const NEAR_MISS_SWING_WHOOSH_3_233426 = preload("res://assets/audio/SFX/COMBAT/near-miss-swing-whoosh-3-233426.mp3")
+const NEAR_MISS_SWING_WHOOSH_5_233428 = preload("res://assets/audio/SFX/COMBAT/near-miss-swing-whoosh-5-233428.mp3")
+
+@onready var missed_sfx : Array[AudioStream] = [NEAR_MISS_SWING_WHOOSH_3_233426, NEAR_MISS_SWING_WHOOSH_5_233428]
 
 var selected_torso : MechTorso
 var selected_head : MechHead
@@ -26,12 +33,26 @@ var selected_legs : MechLegs
 
 var target_legs : MechLegs
 
+var selected_sfx : AudioStream
 
 var true_charge_speed : float
 var true_accuracy : float
 var true_stun_chance : float
 var true_target_dodge_chance : float
 var true_crit_chance
+
+@onready var sword_sfx : AudioStream = SfxManager.COM_PLY_ATK_SWORD_01
+@onready var rifle_sfx : AudioStream = SfxManager.COM_PLY_ATK_RIFLE_01
+@onready var launcher_sfx : AudioStream = SfxManager.COM_PLY_ATK_ROCKET_01
+
+@onready var sword_hits_vox : Array[AudioStream] = [SfxManager.VOX_COM_ENE_DAMAGE_13, SfxManager.COM_PLY_DAMAGE_02, SfxManager.COM_PLY_DAMAGE_04]
+@onready var rifle_hits_vox : Array[AudioStream] = [SfxManager.VOX_COM_ENE_DAMAGE_06, SfxManager.VOX_COM_ENE_DAMAGE_07, SfxManager.VOX_COM_ENE_DAMAGE_08 ]
+@onready var launcher_hits_vox : Array[AudioStream] = [SfxManager.VOX_COM_ENE_DAMAGE_05, SfxManager.VOX_COM_ENE_DAMAGE_09, SfxManager.VOX_COM_ENE_DAMAGE_10]
+
+@onready var hull_damage_hits : Array[AudioStream] = [SfxManager.COM_PLY_DAMAGE_01, SfxManager.COM_PLY_DAMAGE_02, SfxManager.COM_PLY_DAMAGE_03, SfxManager.COM_PLY_DAMAGE_04, SfxManager.COM_PLY_DAMAGE_05, SfxManager.COM_PLY_DAMAGE_06, SfxManager.COM_PLY_DAMAGE_07, SfxManager.COM_PLY_DAMAGE_08]
+
+
+@onready var cockpit_damage : AudioStreamPlayer = $CockpitDamage
 
 
 func _ready() -> void:
@@ -64,6 +85,17 @@ func _ready() -> void:
 
 	true_target_dodge_chance = weight_class_modifier_final_value(target_legs, target_legs.dodge_chance_modifier, GameManager.BASE_DODGE_CHANCE)
 	true_crit_chance = weapon.crit_chance + component_type_final_value(selected_arms, selected_arms.crit_chance_modifier)
+
+	match weapon.get_weapon_class():
+			"Sword":
+				selected_sfx = sword_sfx.duplicate()
+				sfx_player.stream = sword_sfx
+			"Rifle":
+				selected_sfx = rifle_sfx.duplicate()
+				sfx_player.stream = rifle_sfx
+			"Rocket Launcher":
+				selected_sfx = launcher_sfx.duplicate()
+				sfx_player.stream = launcher_sfx
 
 func _physics_process(delta : float) -> void:
 	
@@ -138,13 +170,17 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 				boss_health_bar.current_health_tracker -= int(true_damage)
 				boss_health_bar.update_health_bar()
 				damage_label.position = boss_label_marker.position
+				play_random_vox()
 			elif belongs_to_enemy():
 				player_health_bar.current_health_tracker -= random_damage
 				player_health_bar.update_health_bar()
 				SignalBus.shake_camera.emit()
 				damage_label.position = player_label_marker.position
+				play_random_hull_damage()
 			damage_label.resource = set_icon_for_crit_damage(weapon.get_weapon_class())
 			get_parent().add_child(damage_label)
+			
+			sfx_player.play()
 			return
 		
 		damage_label.output = "-"+str(weapon.damage)
@@ -152,23 +188,28 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 			boss_health_bar.current_health_tracker -= random_damage
 			boss_health_bar.update_health_bar()
 			damage_label.position = boss_label_marker.position
+			play_random_vox()
 		elif belongs_to_enemy():
 			player_health_bar.current_health_tracker -= random_damage
 			player_health_bar.update_health_bar()
 			damage_label.position = player_label_marker.position
 			SignalBus.shake_camera.emit(3)
-			
+			play_random_hull_damage()
 		damage_label.resource = set_icon_for_standard_damage(weapon.get_weapon_class())
+		
 	else:
 		if belongs_to_enemy():
 			damage_label.position = player_label_marker.position
 		elif belongs_to_player():
 			damage_label.position = boss_label_marker.position
-		
+			
+		#sfx_player.stream = missed_sfx.pick_random()
 		damage_label.resource = set_icon_for_standard_damage("Missed")
 		damage_label.output = "Missed!"
-	
-	
+		
+
+	sfx_player.play()
+	#sfx_player.stream = selected_sfx
 	get_parent().add_child(damage_label)
 			
 	#need to add labelto show how much damage was applied to enemy
@@ -206,3 +247,18 @@ func set_icon_for_crit_damage(weapon_type : String) ->  int:
 			return ResourceAcquiredLabel.RESOURCE.ROCKETLAUNCHERCRIT
 		_:
 			return 0
+
+func play_random_vox() -> void:
+	match weapon.get_weapon_class():
+		"Sword":
+			damage_layer.stream = sword_hits_vox.pick_random()
+		"Rifle":
+			damage_layer.stream = rifle_hits_vox.pick_random()
+		"Rocket Launcher":
+			damage_layer.stream = launcher_hits_vox.pick_random()
+	
+	damage_layer.play()
+
+func play_random_hull_damage() -> void:
+	cockpit_damage.stream = hull_damage_hits.pick_random()
+	cockpit_damage.play()

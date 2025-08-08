@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_fyltt")
-charge_speed_modifier = 0.6
+charge_speed_modifier = 0.3
 component_name = "TORS456XY23"
 description = "These torsos often house important systems such as power sources and control interfaces, making them vital for operation. "
 health = 4600

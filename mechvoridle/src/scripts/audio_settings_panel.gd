@@ -6,15 +6,15 @@ class_name AudioSettingsPanel extends Panel
 
 var music_tracks : Dictionary = {
 	0 : {
-		"title": "Worm Whole Break - PMYA",
+		"title": "Red Comet Perspective- PMYA",
 		"song": preload("res://assets/audio/music/Mining.ogg")
 	},
 	1 : {
-		"title": "Crail Step - PMYA",
-		"song": preload("res://assets/audio/music/mh3.ogg")
+		"title": "Scope Dog Slumber- PMYA",
+		"song": preload("res://assets/audio/music/mh32.ogg")
 	},
 	2 : {
-		"title": "Funky Fresh - PMYA",
+		"title": "Miner's Eve - PMYA",
 		"song": preload("res://assets/audio/music/162.ogg")
 	}
 }
