@@ -3,6 +3,8 @@ class_name OpponentMech extends Resource
 @export_group("Details")
 @export var mech_name : String
 
+@export var index : int
+
 @export_group("Total Stats")
 @export var total_health : int
 @export var current_health : int

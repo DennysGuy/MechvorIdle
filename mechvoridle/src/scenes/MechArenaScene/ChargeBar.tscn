@@ -50,16 +50,19 @@ texture_under = ExtResource("2_qsfhn")
 texture_progress = ExtResource("3_nwhtq")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="HurtSFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="CockpitDamage" type="AudioStreamPlayer" parent="."]
-volume_db = -4.0
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="DamageLayer" type="AudioStreamPlayer" parent="."]
+volume_db = 4.0
 bus = &"SFX"
 
 [node name="EnemyDeathVox" type="AudioStreamPlayer" parent="."]

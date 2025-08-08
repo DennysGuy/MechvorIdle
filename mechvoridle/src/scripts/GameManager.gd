@@ -34,8 +34,8 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 var audio_settings_Showing : bool = false
 
 func _ready() -> void:
-	fight_scenario_1_test_fixture()
-
+	#fight_scenario_7_test_fixture()
+	pass
 #mining panel
 var ufo_attacking : bool = false
 
@@ -116,7 +116,7 @@ var output_amount : int = 15
 var output_upgrade_cost : int = 300
 var output_upgrade_base_cost : int = 300
 
-var ferrite_cost : int = 30
+var ferrite_cost : int = 15
 var ferrite_cost_platinum_cost : int = 500
 var ferrite_cost_platinum_base_cost : int = 500
 
@@ -449,6 +449,21 @@ func reset():
 	total_health = 0
 	current_health = 0
 
+	visited_black_market  = false
+	mining_facility_visited  = false
+	mine_100_platinum = false
+	mining_drone_purchased = false
+	plat_drone_purchased  = false
+	upgrade_mining_drone_damage = false
+	upgrade_platinum_drone_speed  = false
+	recon_scout_purchased  = false
+	purchase_1_more_drone= false
+	ufo_destroyed  = false
+	ferrite_refinery_station_purchased = false
+	plasma_generator_station_purchased = false
+	mech_component_purchased = false
+	mech_completed = false
+
 	# Combat
 	player_stunned = false
 	opponent_stunned = false
@@ -506,8 +521,8 @@ func heavy_build() -> void:
 
 
 func fight_scenario_1_test_fixture() -> void:
-	heavy_build()
-	chosen_opponent = opponent_option_2
+	light_build()
+	chosen_opponent = opponent_option_3
 
 #standard - proper ranged build vs melee boss
 '''

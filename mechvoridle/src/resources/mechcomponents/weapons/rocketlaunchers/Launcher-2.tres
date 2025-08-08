@@ -6,15 +6,16 @@
 script = ExtResource("1_upxg4")
 weapon_type = 1
 weapon_class = 2
-damage = 550
+damage = 560
 number_of_hits = 1
 charge_time = 0.15
 charge_speed = 0.1
 crit_chance = 0.25
-accuracy = 0.48
+accuracy = 0.4
 stun_chance = 0.0
 component_name = "BIGK1X33ZOMG"
-description = "A power plasma based rocket launcher. "
+description = "A power plasma based rocket launcher that packs a powerful bunch, but may suffer from a slower charge up time and heavy weight. Once landed, the effects are devastating.
+"
 health = 0
 plasma_resistance = 0.0
 refined_ferrite_cost = 2500

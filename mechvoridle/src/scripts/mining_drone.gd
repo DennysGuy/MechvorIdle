@@ -4,6 +4,7 @@ class_name MiningDrone extends Node2D
 @onready var sfx_player : AudioStreamPlayer2D = $SfxPlayer
 @onready var sprite_2d = $Sprite2D
 @onready var hurt_box = $HurtBox
+@onready var audio_stream_player = $AudioStreamPlayer
 
 var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
@@ -36,7 +37,10 @@ func erase() -> void:
 	hurt_box.get_child(0).disabled = true
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 3
+	SignalBus.issue_drone_down_alert.emit()
+	
 	add_child(explosion)
+	
 	
 
 

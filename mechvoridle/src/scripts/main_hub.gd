@@ -35,6 +35,8 @@ func _ready() -> void:
 	SignalBus.hide_mission_tracker_panel.connect(hide_mission_list_panel)
 	SignalBus.issue_mission_complete_notification.connect(show_mission_complete_notification)
 	SignalBus.issue_phase_compolete_notification.connect(show_phase_complete_notification)
+	SignalBus.issue_drone_down_alert.connect(play_drone_down_vox)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
@@ -49,13 +51,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif GameManager.on_central_panel:
 			move_to_shop_pane()
 
-	
-	if Input.is_action_just_pressed("give_ferrite_bars"):
-		GameManager.ferrite_bars_count += 800
-		GameManager.raw_ferrite_count += 800
-		GameManager.platinum_count += 800 
-		GameManager.plasma_count += 800
-		print(GameManager.ferrite_bars_count)
+	#if Input.is_action_just_pressed("give_ferrite_bars"):
+		#GameManager.ferrite_bars_count += 800
+		#GameManager.raw_ferrite_count += 800
+		#GameManager.platinum_count += 800 
+		#GameManager.plasma_count += 800
+		#print(GameManager.ferrite_bars_count)
 
 func _process(delta : float) ->void:
 	pass
@@ -168,3 +169,9 @@ func play_ready_fight_vox_sfx() -> void:
 
 func can_move() -> void:
 	GameManager.can_traverse_panes = true
+	
+@onready var vox_player_2 = $VoxPlayer2
+
+func play_drone_down_vox() -> void:
+	vox_player_2.play()
+	

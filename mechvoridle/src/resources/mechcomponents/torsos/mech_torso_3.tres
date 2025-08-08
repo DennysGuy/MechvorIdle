@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_6x0bj")
-charge_speed_modifier = 0.25
+charge_speed_modifier = 0.0
 component_name = "TOROXTS12"
 description = "The TOROXTS12 is a torso component with factory settings - it is run of the mill, but reliable. The TOROXTS12 aims to be a jack of all trades, it's reliable - not to heavy or light giving the pilot the needs to complete most tasks."
 health = 4000

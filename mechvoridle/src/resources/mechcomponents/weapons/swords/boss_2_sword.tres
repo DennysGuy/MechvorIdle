@@ -6,7 +6,7 @@
 script = ExtResource("1_xhoc0")
 weapon_type = 1
 weapon_class = 0
-damage = 95
+damage = 165
 number_of_hits = 2
 charge_time = 0.0
 charge_speed = 0.75

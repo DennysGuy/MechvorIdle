@@ -6,7 +6,7 @@
 script = ExtResource("1_vd6vd")
 dodge_chance_modifier = 0.3
 component_name = "HOP113456"
-description = "Mecha are large robotic machines used in various types of entertainment and media. "
+description = "Light yet sturdy and efficient. Great for getting up close or avoiding your opponent."
 health = 750
 plasma_resistance = 0.0
 refined_ferrite_cost = 3000

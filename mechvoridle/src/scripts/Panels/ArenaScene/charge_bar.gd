@@ -80,7 +80,7 @@ func _ready() -> void:
 		else:
 			weapon = GameManager.chosen_opponent.get_right_weapon()
 	weapon_name.text = weapon.component_name
-	true_charge_speed = weight_class_modifier_final_value(selected_torso, selected_torso.charge_speed_modifier, weapon.charge_speed)
+	true_charge_speed = weapon.charge_speed
 	true_accuracy = weapon.accuracy + component_type_final_value(selected_head, selected_head.accuracy_bonus)
 
 	true_target_dodge_chance = weight_class_modifier_final_value(target_legs, target_legs.dodge_chance_modifier, GameManager.BASE_DODGE_CHANCE)
@@ -169,46 +169,55 @@ func damage_target(target_health : int, opponent_dodge_chance : float) -> void:
 			if belongs_to_player():
 				boss_health_bar.current_health_tracker -= int(true_damage)
 				boss_health_bar.update_health_bar()
-				damage_label.position = boss_label_marker.position
+				var randome_range = randi_range(-15,15)
+				damage_label.position = boss_label_marker.position + Vector2(randome_range, 0)
 				play_random_vox()
 			elif belongs_to_enemy():
 				player_health_bar.current_health_tracker -= random_damage
 				player_health_bar.update_health_bar()
 				SignalBus.shake_camera.emit()
-				damage_label.position = player_label_marker.position
-				play_random_hull_damage()
+				var randome_range = randi_range(-20, +20)
+				damage_label.position = player_label_marker.position + Vector2(randome_range, 0)
+				#play_random_hull_damage()
+				
 			damage_label.resource = set_icon_for_crit_damage(weapon.get_weapon_class())
 			get_parent().add_child(damage_label)
 			
-			sfx_player.play()
+			SFXQueueManager.queue_sound(sfx_player.stream)
 			return
 		
 		damage_label.output = "-"+str(weapon.damage)
 		if belongs_to_player():	
 			boss_health_bar.current_health_tracker -= random_damage
 			boss_health_bar.update_health_bar()
-			damage_label.position = boss_label_marker.position
+			var randome_range = randi_range(-20, 20)
+			damage_label.position = boss_label_marker.position + Vector2(randome_range, 0)
 			play_random_vox()
 		elif belongs_to_enemy():
 			player_health_bar.current_health_tracker -= random_damage
 			player_health_bar.update_health_bar()
-			damage_label.position = player_label_marker.position
+			var randome_range = randi_range(-20, 20)
+			damage_label.position = player_label_marker.position + Vector2(randome_range, 0)
 			SignalBus.shake_camera.emit(3)
-			play_random_hull_damage()
+			#play_random_hull_damage()
 		damage_label.resource = set_icon_for_standard_damage(weapon.get_weapon_class())
 		
 	else:
+		
 		if belongs_to_enemy():
-			damage_label.position = player_label_marker.position
+			var randome_range = randi_range(player_label_marker.position.x-15, player_label_marker.position.x+15)
+			damage_label.position = player_label_marker.position + Vector2(randome_range, 0)
 		elif belongs_to_player():
-			damage_label.position = boss_label_marker.position
+			var randome_range = randi_range(boss_label_marker.position.x-15, boss_label_marker.position.x+15)
+			damage_label.position = boss_label_marker.position + Vector2(randome_range, 0)
 			
 		#sfx_player.stream = missed_sfx.pick_random()
 		damage_label.resource = set_icon_for_standard_damage("Missed")
 		damage_label.output = "Missed!"
+		SFXQueueManager.queue_sound(missed_sfx.pick_random())
 		
 
-	sfx_player.play()
+	SFXQueueManager.queue_sound(sfx_player.stream)
 	#sfx_player.stream = selected_sfx
 	get_parent().add_child(damage_label)
 			
@@ -256,9 +265,9 @@ func play_random_vox() -> void:
 			damage_layer.stream = rifle_hits_vox.pick_random()
 		"Rocket Launcher":
 			damage_layer.stream = launcher_hits_vox.pick_random()
-	
-	damage_layer.play()
+
+	SFXQueueManager.queue_sound(damage_layer.stream)
 
 func play_random_hull_damage() -> void:
 	cockpit_damage.stream = hull_damage_hits.pick_random()
-	cockpit_damage.play()
+	SFXQueueManager.queue_sound(cockpit_damage.stream)

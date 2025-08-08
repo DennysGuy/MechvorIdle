@@ -23,6 +23,7 @@ GameManager="*res://src/scripts/GameManager.gd"
 ShopList="*res://src/scripts/ShopList.gd"
 SfxManager="*res://src/scripts/SFXManager.gd"
 DroneManager="*res://src/scripts/DroneManager.gd"
+SFXQueueManager="*res://src/scripts/SFXQueueManager.gd"
 
 [display]
 
@@ -31,7 +32,6 @@ window/size/viewport_height=360
 window/size/window_width_override=1024
 window/size/window_height_override=576
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [global_group]
 

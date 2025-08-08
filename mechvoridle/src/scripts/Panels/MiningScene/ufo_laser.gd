@@ -11,6 +11,7 @@ var laser_sfx : Array[AudioStream] = [SfxManager.MIN_UNIT_UFO_LASER_01, SfxManag
 
 func _ready() -> void:
 	sfx_player.stream = laser_sfx.pick_random()
+	sfx_player.volume_db = 5.0
 	sfx_player.play()
 	
 	damage = randi_range(1,3)

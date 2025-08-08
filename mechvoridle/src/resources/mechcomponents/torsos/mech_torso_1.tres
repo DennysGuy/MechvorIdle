@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_fyltt")
-charge_speed_modifier = 0.3
+charge_speed_modifier = 0.05
 component_name = "TORS456XY23"
-description = "These torsos often house important systems such as power sources and control interfaces, making them vital for operation. "
+description = "Light and nimble, great for melee weapons."
 health = 4600
 plasma_resistance = 0.0
-refined_ferrite_cost = 0
+refined_ferrite_cost = 4600
 plasma_cost = 0
 platinum_cost = 0
 category = 1

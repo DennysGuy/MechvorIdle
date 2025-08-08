@@ -10,6 +10,8 @@ signal stop_fight
 signal begin_round
 signal stop_ufo_spawn
 signal fade_out_alert
+signal issue_drone_down_alert
+signal show_specified_boss(index : int)
 
 signal remove_ufo_during_start_fight
 

@@ -41,6 +41,7 @@ func _ready() -> void:
 	#start game -- we'll change to a sequence later
 	SignalBus.win_game.connect(win_game)
 	SignalBus.lose_game.connect(lose_game)
+	SignalBus.show_specified_boss.emit(GameManager.chosen_opponent.index)
 	cockpit_ambience.play()
 	
 func _process(delta : float) -> void:
@@ -69,9 +70,11 @@ func win_game() -> void:
 	get_tree().change_scene_to_file("res://src/scenes/WinPanel.tscn")
 	#play win sequence and go to win screen results
 
+@onready var player_death_explosions : AudioStreamPlayer = $PlayerDeathExplosions
 
 func lose_game() -> void:
 	stop_fight()
+	player_death_explosions.play()
 	animation_player.play("fade_to_white")
 	await animation_player.animation_finished
 	get_tree().change_scene_to_file("res://src/scenes/LosePanel.tscn")

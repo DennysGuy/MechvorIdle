@@ -1,12 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://cacjpcdeurq7f"]
+[gd_scene load_steps=15 format=3 uid="uid://cacjpcdeurq7f"]
 
 [ext_resource type="Script" uid="uid://dwec0olorx8de" path="res://src/scripts/Panels/main_menu.gd" id="1_1bg10"]
 [ext_resource type="FontFile" uid="uid://ch1g7vawmp68w" path="res://assets/graphics/Fonts/ProcyonShadow-8Mo6A.ttf" id="2_a00hu"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_cbw1n"]
 [ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="2_g3tly"]
+[ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="2_rh4h2"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_oll1y"]
 [ext_resource type="AudioStream" uid="uid://ctpguj8ocbrsl" path="res://assets/audio/music/ambient.ogg" id="6_6ekv6"]
 [ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="7_b83k2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2mgd"]
+shader = ExtResource("2_rh4h2")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3228i"]
 bg_color = Color(0.303286, 0.574834, 0.640218, 1)
@@ -126,6 +132,7 @@ grow_vertical = 2
 script = ExtResource("1_1bg10")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_s2mgd")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,6 +140,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_cbw1n")
+stretch_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0

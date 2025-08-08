@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c68p1ei57ngk7"]
+[gd_scene load_steps=31 format=3 uid="uid://c68p1ei57ngk7"]
 
 [ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
 [ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="2_s2l3r"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dfyosda6m26b7" path="res://assets/audio/SFX/UI/Misc/EnemyEntersScreen.wav" id="17_xadlb"]
 [ext_resource type="AudioStream" uid="uid://bficyqfbklyba" path="res://assets/audio/SFX/COMBAT/EnemyDefeatExplosions.wav" id="18_1m6d2"]
 [ext_resource type="AudioStream" uid="uid://bghgb472txumw" path="res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Death_01.ogg" id="19_evcc1"]
+[ext_resource type="AudioStream" uid="uid://dsmnsm604ayt5" path="res://assets/audio/SFX/COMBAT/PlayerLoseExplosions.wav" id="20_jsiet"]
 
 [sub_resource type="Animation" id="Animation_ob6fq"]
 resource_name = "hit_flash"
@@ -437,9 +438,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -241.0
-offset_top = -140.0
+offset_top = 179.0
 offset_right = 242.0
-offset_bottom = 122.0
+offset_bottom = 441.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
@@ -620,9 +621,9 @@ bus = &"Music"
 
 [node name="NameofPlayer" type="Label" parent="."]
 layout_mode = 0
-offset_left = -190.0
+offset_left = 662.0
 offset_top = 168.0
-offset_right = 84.0
+offset_right = 936.0
 offset_bottom = 195.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_j1o1p")
@@ -631,9 +632,9 @@ text = "Name of Player"
 
 [node name="vs" type="Label" parent="."]
 layout_mode = 0
-offset_left = -133.0
+offset_left = 259.92
 offset_top = 168.0
-offset_right = -93.0
+offset_right = 299.92
 offset_bottom = 195.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_j1o1p")
@@ -688,11 +689,16 @@ bus = &"SFX"
 
 [node name="EnemyDeathExplosions" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_1m6d2")
-volume_db = 12.0
+volume_db = 6.0
 bus = &"SFX"
 
 [node name="EnemyDeathVox" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_evcc1")
+bus = &"SFX"
+
+[node name="PlayerDeathExplosions" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_jsiet")
+volume_db = 6.0
 bus = &"SFX"
 
 [connection signal="gui_input" from="BossStandIn" to="." method="_on_boss_stand_in_gui_input"]

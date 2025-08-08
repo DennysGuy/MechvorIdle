@@ -6,7 +6,7 @@
 script = ExtResource("1_tbmo3")
 dodge_chance_modifier = 0.2
 component_name = "STX237HI453"
-description = "The teacher asked her students to randomly share their favorite books this week. "
+description = "Heavy duty. Intended to provide a lot of protection, yet not the fastest legs on the market."
 health = 3700
 plasma_resistance = 0.0
 refined_ferrite_cost = 3500

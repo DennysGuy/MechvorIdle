@@ -32,8 +32,8 @@ func erase() -> void:
 	progress_bar.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 4
+	SignalBus.issue_drone_down_alert.emit()
 	add_child(explosion)
-
 
 func obtain_resources() -> void:
 	play_mining_sfx()

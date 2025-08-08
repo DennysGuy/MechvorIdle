@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://lrhtvn2njd2c"]
+[gd_scene load_steps=10 format=3 uid="uid://lrhtvn2njd2c"]
 
 [ext_resource type="Script" uid="uid://7tpb3a8uq0w8" path="res://src/scripts/lose_panel.gd" id="1_jvq76"]
+[ext_resource type="FontFile" uid="uid://cu3flnhfbiwql" path="res://assets/graphics/Fonts/BladeLogicDemoRegular-ALnVD.otf" id="2_18tug"]
+[ext_resource type="AudioStream" uid="uid://cnrkjtdn7pmhc" path="res://assets/audio/music/gameover.ogg" id="2_81yop"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_5i0qs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b37tf"]
 bg_color = Color(0.136771, 0.464389, 0.411784, 1)
@@ -23,6 +26,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_v34tx"]
 resource_name = "fade_in"
@@ -41,6 +56,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_b5sgr"]
 resource_name = "fade_to_black"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,10 +64,22 @@ tracks/0/path = NodePath("../ColorRect2:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.59922),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -38.475]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5sgr"]
@@ -70,25 +98,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jvq76")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.125911, 0.125911, 0.125911, 1)
 
-[node name="YouWIn" type="Label" parent="."]
+[node name="YouLose" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -127.5
+offset_left = -127.0
 offset_top = 101.0
-offset_right = 127.5
-offset_bottom = 170.0
+offset_right = 125.0
+offset_bottom = 151.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_18tug")
 theme_override_font_sizes/font_size = 50
 text = "YOU LOSE."
 
@@ -105,6 +133,7 @@ offset_right = 197.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_5i0qs")
 theme_override_font_sizes/font_size = 14
 text = "It's understandable. The chances of getting out of
 Prison Planet (TM) is slim to none - good luck next time."
@@ -122,6 +151,7 @@ offset_right = 49.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_5i0qs")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
 text = "Retry"
 
@@ -139,5 +169,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_81yop")
+autoplay = true
+bus = &"Music"
 
 [connection signal="button_down" from="Replay" to="." method="_on_replay_button_down"]

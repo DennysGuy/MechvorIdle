@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d3gd8inykd321"]
+[gd_scene load_steps=32 format=3 uid="uid://d3gd8inykd321"]
 
 [ext_resource type="PackedScene" uid="uid://dio1yrjtiu67" path="res://src/scenes/CentralStatsPanel.tscn" id="1_4kaqy"]
 [ext_resource type="Script" uid="uid://c88u3hktsnbjb" path="res://src/scripts/main_hub.gd" id="1_ekml7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d17eekq70qc8k" path="res://TutorialCheckList.tscn" id="5_id2nt"]
 [ext_resource type="AudioStream" uid="uid://c4aq2cmmtbncf" path="res://assets/audio/SFX/MINING/ShipAmbiance.wav" id="6_k282t"]
 [ext_resource type="PackedScene" uid="uid://cjcihcy5w5pon" path="res://src/scenes/AudioSettingsPanel.tscn" id="7_0c4kj"]
+[ext_resource type="AudioStream" uid="uid://ckijsdk2lshr2" path="res://assets/audio/SFX/VOX/VOX_Not_Drone_Destroyed_01.ogg" id="7_j0uol"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="8_id2nt"]
 
 [sub_resource type="Animation" id="Animation_qh3w7"]
@@ -458,6 +459,10 @@ stream = ExtResource("6_k282t")
 bus = &"Ambiance"
 
 [node name="VoxPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="VoxPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_j0uol")
+bus = &"SFX"
 
 [node name="MissionCompletedAnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationPlayer")
