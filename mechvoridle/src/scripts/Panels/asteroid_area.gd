@@ -27,24 +27,25 @@ func _ready() -> void:
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
+	SignalBus.stop_ufo_spawn.connect(stop_ufo_spawn)
 	animation_player.play("hover")
 	asteroid_spawn_timer.wait_time = asteroid_spawn_timer_length
 	asteroid_spawn_timer.start()
 	asteroid_area_2d.input_pickable = true
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	
-	
-	if start_ufo_spawn:
-		ufo_spawn_timer.wait_time = randi_range(25,30)
-		ufo_spawn_timer.start()
-		start_ufo_spawn = false
+	if not GameManager.can_fight_boss:
+		if start_ufo_spawn:
+			ufo_spawn_timer.wait_time = randi_range(45,60)
+			ufo_spawn_timer.start()
+			start_ufo_spawn = false
 
-	if Input.is_action_just_pressed("mine_asteroid") and not mining_timer and is_inside_mining_area():
-		mining_timer = get_tree().create_timer(0.4)
-		await mining_timer.timeout
-		spawn_mining_progress_bar()
-		mining_timer = null
+		if Input.is_action_just_pressed("mine_asteroid") and not mining_timer and is_inside_mining_area():
+			mining_timer = get_tree().create_timer(0.4)
+			await mining_timer.timeout
+			spawn_mining_progress_bar()
+			mining_timer = null
 	
 
 
@@ -72,7 +73,6 @@ func add_platinum_drone_to_scene() -> void:
 	drone_list.add_child(platinum_drone)
 	
 
-
 func _on_asteroid_spawn_timer_timeout() -> void:
 	var random_spawn_time : int = randi_range(asteroid_spawn_timer_length-5, asteroid_spawn_timer_length+5)
 	asteroid_spawn_timer.wait_time = random_spawn_time
@@ -80,15 +80,16 @@ func _on_asteroid_spawn_timer_timeout() -> void:
 
 
 func spawn_asteroid() -> void:
-	var selected_spawn_point : Marker2D = asteroid_spawn_points.get_children().pick_random()
-	var asteroid_1 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid1.tscn").instantiate()
-	var asteroid_2 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid2.tscn").instantiate()
-	var asteroid_3 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid3.tscn").instantiate()
-	var asteroid_list : Array[Asteroid] = [asteroid_1, asteroid_2, asteroid_3]
-	var asteroid : Asteroid = asteroid_list.pick_random()
-	asteroid.position = selected_spawn_point.position
-	asteroid.mining_asteroid = asteroid_area_2d
-	add_child(asteroid)
+	if not GameManager.can_fight_boss:
+		var selected_spawn_point : Marker2D = asteroid_spawn_points.get_children().pick_random()
+		var asteroid_1 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid1.tscn").instantiate()
+		var asteroid_2 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid2.tscn").instantiate()
+		var asteroid_3 : Asteroid = preload("res://src/scenes/MiningScene/Asteroid3.tscn").instantiate()
+		var asteroid_list : Array[Asteroid] = [asteroid_1, asteroid_2, asteroid_3]
+		var asteroid : Asteroid = asteroid_list.pick_random()
+		asteroid.position = selected_spawn_point.position
+		asteroid.mining_asteroid = asteroid_area_2d
+		add_child(asteroid)
 
 func spawn_ufo() -> void:
 	if ufo_list.get_children().size() <= 0:
@@ -107,6 +108,10 @@ func _on_ufo_spawn_timer_timeout():
 		spawn_ufo()
 
 func toggle_ufo_spawn() -> void:
+	if GameManager.can_fight_boss:
+		ufo_spawn_timer.stop()
+		return
+		
 	var total_drone_count : int = DroneManager.get_total_drone_count()
 	if  total_drone_count >= GameManager.DRONES_TO_ACTIVATE_UFO:
 		start_ufo_spawn = true
@@ -116,12 +121,10 @@ func toggle_ufo_spawn() -> void:
 
 func _on_asteroid_area_2d_mouse_entered():
 	mouse_in_asteroid_range = true
-	print(mouse_in_asteroid_range)
 
 
 func _on_asteroid_area_2d_mouse_exited():
 	mouse_in_asteroid_range = false
-	print(mouse_in_asteroid_range)
 
 
 func is_inside_mining_area() -> bool:
@@ -135,3 +138,7 @@ func is_inside_mining_area() -> bool:
 	var rect := Rect2(top_left, size)
 
 	return rect.has_point(mouse_pos)
+
+func stop_ufo_spawn() -> void:
+	start_ufo_spawn = false
+	ufo_spawn_timer.stop()

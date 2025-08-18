@@ -1,0 +1,684 @@
+[gd_scene load_steps=27 format=3 uid="uid://c68p1ei57ngk7"]
+
+[ext_resource type="Script" uid="uid://bgji8ccdudu1g" path="res://src/scripts/mech_fight_arena.gd" id="1_mj4vx"]
+[ext_resource type="Material" uid="uid://r6278eksd1t8" path="res://src/scripts/Panels/MiningScene/HitFlashMaterial.tres" id="2_s2l3r"]
+[ext_resource type="PackedScene" uid="uid://bkv7ay3ce6vyg" path="res://src/scenes/MechArenaScene/PlayerHealth.tscn" id="3_8olsk"]
+[ext_resource type="Script" uid="uid://bab3vn7oeytv8" path="res://src/scripts/boss_stand_in.gd" id="4_naye7"]
+[ext_resource type="PackedScene" uid="uid://dxymnlcu4rltp" path="res://src/scenes/MechArenaScene/BossHealth.tscn" id="4_vd1uu"]
+[ext_resource type="PackedScene" uid="uid://c8qjsxerrs20s" path="res://src/scenes/BossMech.tscn" id="5_vg7qx"]
+[ext_resource type="PackedScene" uid="uid://2mw5axtfuca0" path="res://src/scenes/MechArenaScene/ChargeBar.tscn" id="6_227ho"]
+[ext_resource type="Script" uid="uid://bw1t8ugmc22kd" path="res://src/scripts/cockpit_camera.gd" id="7_naye7"]
+[ext_resource type="Texture2D" uid="uid://b83om6thsphyf" path="res://assets/graphics/CockPitView_Underlay.png" id="8_78ps0"]
+[ext_resource type="Texture2D" uid="uid://4qr58n3rme2c" path="res://assets/graphics/CockPitView_Overlay.png" id="9_jj0iv"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="10_j1o1p"]
+[ext_resource type="AudioStream" uid="uid://brkjvofui2mc5" path="res://assets/audio/SFX/VOX/Set.ogg" id="14_2lqcn"]
+[ext_resource type="PackedScene" uid="uid://1i717e5dbjge" path="res://src/scenes/ElapsedTimer.tscn" id="14_blg81"]
+[ext_resource type="AudioStream" uid="uid://e4sdjykcay64" path="res://assets/audio/SFX/VOX/AMB_Cockpit.ogg" id="15_2lqcn"]
+[ext_resource type="AudioStream" uid="uid://dv3qyudcoyjtp" path="res://assets/audio/SFX/VOX/Ready.ogg" id="15_ob6fq"]
+[ext_resource type="AudioStream" uid="uid://ljcggcf53d8r" path="res://assets/audio/SFX/VOX/Fight.ogg" id="16_xadlb"]
+
+[sub_resource type="Animation" id="Animation_ob6fq"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BossStandIn:material:shader_parameter/flash_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xadlb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BossStandIn:material:shader_parameter/flash_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1m6d2"]
+_data = {
+&"RESET": SubResource("Animation_xadlb"),
+&"hit_flash": SubResource("Animation_ob6fq")
+}
+
+[sub_resource type="Animation" id="Animation_naye7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossContainer:material:shader_parameter/flash_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MusicPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NameofPlayer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-190, 168)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("vs:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-133, 168)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NameofEnemy:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-332, 168)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BossContainer:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(79, 40)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CockpitAmbience:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [10.0]
+}
+
+[sub_resource type="Animation" id="Animation_78ps0"]
+resource_name = "fade_to_white"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.602962, 2.56667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CockpitAmbience:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -38.0]
+}
+
+[sub_resource type="Animation" id="Animation_s2l3r"]
+resource_name = "hit_flash"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossContainer:material:shader_parameter/flash_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0349724, 0.079068),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qmqxp"]
+resource_name = "lose_fight_sequnce"
+
+[sub_resource type="Animation" id="Animation_vd1uu"]
+resource_name = "start_fight_sequnce"
+length = 13.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossStandIn:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.86667, 2.24959, 2.42533),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(167, 362), Vector2(167, 11), Vector2(167, 26)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StartFightLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6.01001, 7.6, 9.24936),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["READY!", "SET!", "FIGHT!"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StartFightLabel:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6.01001, 6.30209, 7.03624, 7.26517, 7.6, 7.8684, 8.56157, 8.81418, 9.24936, 9.44918, 10.2823, 10.4489),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(254.5, 378), Vector2(254.5, 156), Vector2(254.5, 131), Vector2(254.5, -67), Vector2(254.5, 386), Vector2(254.5, 182), Vector2(254.5, 141), Vector2(254.5, -85), Vector2(254.5, 378), Vector2(254.5, 180), Vector2(254.5, 107), Vector2(254.5, -87)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StartFightLabel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.03333, 7.26667, 7.6, 8.82046, 9.26667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.8, 6.43333, 8.1, 9.56667, 12.4667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_play_random_taunt"
+}, {
+"args": [],
+"method": &"_play_ready"
+}, {
+"args": [],
+"method": &"_play_set"
+}, {
+"args": [],
+"method": &"_play_fight"
+}, {
+"args": [],
+"method": &"start_fight"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NameofPlayer:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0333333, 1.43333, 1.68374, 2.92913, 3.1481),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-292, 168), Vector2(-292, 168), Vector2(140, 168), Vector2(299, 168), Vector2(662, 168)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("vs:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.96667, 3.22669, 4.23944, 4.48578),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-133, 168), Vector2(-133, 168), Vector2(231, 168), Vector2(373, 168), Vector2(661, 168)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NameofEnemy:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.56667, 4.85407, 5.68889, 5.93806),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-332, 168), Vector2(100, 168), Vector2(280, 168), Vector2(657, 168)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BossContainer:position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(79, 359), Vector2(79, 40)]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PlayerHealth")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(8.53333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_filling_health_bars"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BossHealth")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(8.43333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_filling_health_bars"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_aoeri"]
+resource_name = "win_fight_sequence"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_naye7"]
+_data = {
+&"RESET": SubResource("Animation_naye7"),
+&"fade_to_white": SubResource("Animation_78ps0"),
+&"hit_flash": SubResource("Animation_s2l3r"),
+&"lose_fight_sequnce": SubResource("Animation_qmqxp"),
+&"start_fight_sequnce": SubResource("Animation_vd1uu"),
+&"win_fight_sequence": SubResource("Animation_aoeri")
+}
+
+[node name="MechFightArena" type="Control" node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "animation_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mj4vx")
+boss_health_bar = NodePath("BossHealth")
+player_health_bar = NodePath("PlayerHealth")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="BossStandIn" type="TextureRect" parent="."]
+material = ExtResource("2_s2l3r")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -154.0
+offset_right = 23.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.63672, 2.05962)
+mouse_default_cursor_shape = 3
+script = ExtResource("4_naye7")
+
+[node name="BossContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = ExtResource("2_s2l3r")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -140.0
+offset_right = 242.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="BossContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(483, 262)
+render_target_update_mode = 4
+
+[node name="BossMech" parent="BossContainer/SubViewport" instance=ExtResource("5_vg7qx")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 244.0
+offset_top = 85.0
+offset_right = 374.0
+offset_bottom = 242.0
+mouse_default_cursor_shape = 3
+
+[node name="CockpitViewUnderlay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -0.797119
+offset_top = 0.813065
+offset_right = 639.203
+offset_bottom = 360.813
+mouse_filter = 2
+texture = ExtResource("8_78ps0")
+stretch_mode = 2
+
+[node name="PlayerWeapon1" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker") instance=ExtResource("6_227ho")]
+layout_mode = 1
+offset_left = -145.5
+offset_top = 79.0
+offset_right = -78.5
+offset_bottom = 137.0
+target = 1
+weapon_position = 0
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
+
+[node name="PlayerWeapon2" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker") instance=ExtResource("6_227ho")]
+layout_mode = 1
+offset_left = 75.0
+offset_top = 79.0
+offset_right = 142.0
+offset_bottom = 137.0
+target = 1
+weapon_position = 1
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
+
+[node name="PlayerHealth" parent="." instance=ExtResource("3_8olsk")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -372.0
+offset_top = -114.0
+offset_right = -272.0
+offset_bottom = -55.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CockpitViewOverlay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -0.797119
+offset_top = 0.813065
+offset_right = 639.203
+offset_bottom = 360.813
+mouse_filter = 2
+texture = ExtResource("9_jj0iv")
+stretch_mode = 2
+
+[node name="BossHealth" parent="." instance=ExtResource("4_vd1uu")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 244.0
+offset_top = -8.0
+offset_right = 395.0
+offset_bottom = 42.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="EnemyWeapon1" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker") instance=ExtResource("6_227ho")]
+layout_mode = 1
+offset_left = -95.5
+offset_top = -169.0
+offset_right = -28.5
+offset_bottom = -111.0
+target = 0
+weapon_position = 0
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
+
+[node name="EnemyWeapon2" parent="." node_paths=PackedStringArray("boss_health_bar", "player_health_bar", "boss_label_marker", "player_label_marker") instance=ExtResource("6_227ho")]
+layout_mode = 1
+offset_left = 25.0
+offset_top = -169.0
+offset_right = 92.0
+offset_bottom = -111.0
+target = 0
+weapon_position = 1
+boss_health_bar = NodePath("../BossHealth")
+player_health_bar = NodePath("../PlayerHealth")
+boss_label_marker = NodePath("../BossLabelMarker")
+player_label_marker = NodePath("../PlayerLabelMarker")
+
+[node name="FXAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_1m6d2")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_naye7")
+}
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="StartFightLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = 198.0
+offset_right = 101.5
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 38
+text = "READY!"
+
+[node name="BossLabelMarker" type="Marker2D" parent="."]
+position = Vector2(315, 61)
+
+[node name="PlayerLabelMarker" type="Marker2D" parent="."]
+position = Vector2(345, 269)
+
+[node name="CockpitCamera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+scale = Vector2(1.63672, 2.05962)
+script = ExtResource("7_naye7")
+
+[node name="Timer" type="Timer" parent="CockpitCamera"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="NameofPlayer" type="Label" parent="."]
+layout_mode = 0
+offset_left = -190.0
+offset_top = 168.0
+offset_right = 84.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "Name of Player"
+
+[node name="vs" type="Label" parent="."]
+layout_mode = 0
+offset_left = -133.0
+offset_top = 168.0
+offset_right = -93.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "VS"
+
+[node name="NameofEnemy" type="Label" parent="."]
+layout_mode = 0
+offset_left = -332.0
+offset_top = 168.0
+offset_right = -58.0
+offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_j1o1p")
+theme_override_font_sizes/font_size = 24
+text = "Name of ENemy"
+
+[node name="ElapsedTime" parent="." instance=ExtResource("14_blg81")]
+layout_mode = 1
+offset_left = -29.0
+offset_top = -124.0
+offset_right = 26.0
+offset_bottom = -112.0
+
+[node name="CockpitAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_2lqcn")
+volume_db = 10.0
+bus = &"Ambiance"
+
+[node name="VulcanSFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Ready" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ob6fq")
+bus = &"SFX"
+
+[node name="Set" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_2lqcn")
+bus = &"SFX"
+
+[node name="Fight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_xadlb")
+bus = &"SFX"
+
+[node name="Taunt" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[connection signal="gui_input" from="BossStandIn" to="." method="_on_boss_stand_in_gui_input"]
+[connection signal="gui_input" from="BossContainer" to="." method="_on_boss_container_gui_input"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

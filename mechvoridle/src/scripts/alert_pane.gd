@@ -10,7 +10,8 @@ func _ready() -> void:
 	animation_player.play("Alert")
 	SignalBus.silence_ship_alarm.connect(play_fade_out_animation)
 	SignalBus.play_ufo_escaped.connect(play_escaped_animation)
-
+	SignalBus.fade_out_alert.connect(fade_out_alert)
+	
 func silence_alarm() -> void:
 	queue_free()
 
@@ -29,6 +30,9 @@ func play_vox_ufo_escaped() -> void:
 	vox_player.volume_db = -3.0
 	vox_player.stream = SfxManager.VOX_NOT_UFO_ESCAPED_01
 	vox_player.play()
+
+func fade_out_alert() -> void:
+	animation_player.play("FadeOutAlert_NoVoice")
 
 func play_escaped_animation() -> void:
 

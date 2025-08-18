@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_mr1i3")
-charge_speed_modifier = 15.0
+charge_speed_modifier = 0.2
 component_name = ""
 description = ""
 health = 3000

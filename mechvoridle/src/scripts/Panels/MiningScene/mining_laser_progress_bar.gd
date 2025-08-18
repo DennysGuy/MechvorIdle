@@ -51,12 +51,50 @@ func obtain_resources() -> void:
 		var crit_value = value * 2
 		var platinum_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 		platinum_acquired_label.set_resource_as_platinum()
+		
 		if can_crit:
 			GameManager.platinum_count += crit_value
-			platinum_acquired_label.output = "+"+str(crit_value)
+			if !GameManager.mine_100_platinum:
+					SignalBus.add_to_mission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.HUNDRED_PLATINUM_GAIN)
+				
+			if !GameManager.plat_drone_purchased:
+				SignalBus.add_to_submission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
+			
+			if !GameManager.upgrade_mining_drone_damage:
+				SignalBus.add_to_submission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
+			
+			if !GameManager.purchase_1_more_drone:
+				SignalBus.add_to_submission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
+				
+			if !GameManager.recon_scout_purchased:
+				SignalBus.add_to_submission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+			
+			if !GameManager.upgrade_platinum_drone_speed:
+				SignalBus.add_to_submission_counter.emit(crit_value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
+				
+				platinum_acquired_label.output = "+"+str(crit_value)
 		else:
 			GameManager.platinum_count += value
-			platinum_acquired_label.output = "+"+str(value)
+		
+			if !GameManager.mine_100_platinum:
+					SignalBus.add_to_mission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.HUNDRED_PLATINUM_GAIN)
+				
+			if !GameManager.plat_drone_purchased:
+				SignalBus.add_to_submission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
+			
+			if !GameManager.upgrade_mining_drone_damage:
+				SignalBus.add_to_submission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
+			
+			if !GameManager.purchase_1_more_drone:
+				SignalBus.add_to_submission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
+				
+			if !GameManager.recon_scout_purchased:
+				SignalBus.add_to_submission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.RECON_SCOUT_PURCHASED)
+			
+			if !GameManager.upgrade_platinum_drone_speed:
+				SignalBus.add_to_submission_counter.emit(value, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
+			
+		platinum_acquired_label.output = "+"+str(value)
 		
 		platinum_acquired_label.global_position = get_viewport().get_mouse_position() + Vector2(60,-5)
 		await get_tree().create_timer(0.2).timeout

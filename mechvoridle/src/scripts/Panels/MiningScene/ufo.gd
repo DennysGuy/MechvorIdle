@@ -31,6 +31,7 @@ var destroy_ufo_start : bool = false
 var can_be_hit : bool = true
 
 func _ready() -> void:
+	SignalBus.remove_ufo_during_start_fight.connect(remove_ufo)
 	animated_sprite_2d.play("default")
 	max_health = randi_range(8,15)
 	health = max_health
@@ -103,8 +104,9 @@ func destroy_ufo() -> void:
 	deliver_resources.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
 	SignalBus.silence_ship_alarm.emit()
+	
 	if !GameManager.ufo_destroyed:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UFO_DESTROYED)
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UFO_DESTROYED)
 	animated_sprite_2d.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 5
@@ -146,6 +148,9 @@ func _on_ufo_click_control_gui_input(event) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_be_hit:
 		health_bar.show()
 		damage_ufo()
+
+func remove_ufo() -> void:
+	queue_free()
 
 func play_ufo_damage_sfx() -> void:
 	hit_ufo_sfx_player.stream = ufo_hit_sfx_list.pick_random()

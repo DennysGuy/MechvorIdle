@@ -142,12 +142,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	if upgrades_available():
-		upgrades_available_label.show()
-	else:
-		upgrades_available_label.hide()
-	
-	
+	upgrades_available_label.visible = upgrades_available() 
 	mining_laser_speed_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_speed_cost)
 	mining_laser_damage_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_damage_upgrade_cost)
 	mining_laser_crit_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_crit_chance_cost)
@@ -163,30 +158,30 @@ func _process(delta: float) -> void:
 	plasma_generator_fuel_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_fuel_cost) and GameManager.plasma_generator_station_purchased
 	plasma_generator_speed_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_speed_cost) and GameManager.plasma_generator_station_purchased
 	
-	upgrade_damage.disabled = GameManager.platinum_count <= GameManager.mining_laser_damage_upgrade_cost
-	upgrade_crit_chance.disabled = GameManager.platinum_count <= GameManager.mining_laser_crit_chance_cost
-	purchase_drone.disabled = GameManager.platinum_count <= mining_drones_cost
-	purchase_platinum_drone.disabled = GameManager.platinum_count <= plat_drones_cost
-	upgrade_mining_laser_speed.disabled = GameManager.platinum_count <= GameManager.mining_laser_speed_cost
+	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
+	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
+	purchase_drone.disabled = GameManager.platinum_count < mining_drones_cost
+	purchase_platinum_drone.disabled = GameManager.platinum_count < plat_drones_cost
+	upgrade_mining_laser_speed.disabled = GameManager.platinum_count < GameManager.mining_laser_speed_cost
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	
 	if mining_drones_count > 0:
-		upgrade_drone_damage.disabled = GameManager.platinum_count <= GameManager.drone_damage_cost
-		upgrade_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.drone_mining_speed_cost
+		upgrade_drone_damage.disabled = GameManager.platinum_count < GameManager.drone_damage_cost
+		upgrade_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.drone_mining_speed_cost
 	else:
 		upgrade_drone_damage.disabled = true
 		upgrade_drone_mining_speed.disabled = true
 		
 	if plat_drones_count > 0:
-		upgrade_plat_drone_damage.disabled = GameManager.platinum_count <= GameManager.platinum_drone_damage_cost
-		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count <= GameManager.platinum_drone_mining_speed_cost
+		upgrade_plat_drone_damage.disabled = GameManager.platinum_count < GameManager.platinum_drone_damage_cost
+		upgrade_platinum_drone_mining_speed.disabled = GameManager.platinum_count < GameManager.platinum_drone_mining_speed_cost
 	else:
 		upgrade_plat_drone_damage.disabled = true
 		upgrade_platinum_drone_mining_speed.disabled = true
 	
 	if GameManager.ferrite_refinery_station_purchased:
-		upgrade_refinery_speed.disabled = GameManager.platinum_count <= GameManager.ferrite_refinery_speed_cost
-		upgrade_efficiency.disabled = GameManager.platinum_count <= GameManager.output_upgrade_cost
+		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
+		upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
 	else:
 		upgrade_refinery_speed.disabled = true
 		upgrade_efficiency.disabled = true
@@ -203,21 +198,28 @@ func _process(delta: float) -> void:
 
 
 func upgrades_available() -> bool:
-	return (GameManager.platinum_count >= GameManager.drones_cost 
-	or GameManager.platinum_count >= GameManager.mining_laser_damage_upgrade_cost 
-	or GameManager.platinum_count >= GameManager.mining_laser_crit_chance_cost
-	or GameManager.platinum_count >= GameManager.mining_laser_speed_cost 
-	or GameManager.platinum_count >= mining_drones_cost
-	or GameManager.platinum_count >= GameManager.drone_damage_cost 
-	or GameManager.platinum_count >= GameManager.drone_mining_speed_cost 
-	or GameManager.platinum_count >= plat_drones_cost
-	or GameManager.platinum_count >= GameManager.platinum_drone_damage_cost 
-	or GameManager.platinum_count >= GameManager.platinum_drone_mining_speed_cost 
-	or GameManager.platinum_count >= GameManager.ferrite_refinery_speed_cost 
-	or GameManager.platinum_count >= GameManager.output_upgrade_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_fuel_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_output_cost
-	or GameManager.platinum_count >= GameManager.plasma_generator_speed_cost)
+	var costs : Array[int]= [
+		mining_drones_cost,
+		GameManager.mining_laser_damage_upgrade_cost,
+		GameManager.mining_laser_crit_chance_cost,
+		GameManager.mining_laser_speed_cost,
+		GameManager.drone_damage_cost,
+		GameManager.drone_mining_speed_cost,
+		plat_drones_cost,
+		GameManager.platinum_drone_damage_cost,
+		GameManager.platinum_drone_mining_speed_cost,
+		GameManager.ferrite_refinery_speed_cost,
+		GameManager.output_upgrade_cost,
+		GameManager.plasma_generator_fuel_cost,
+		GameManager.plasma_generator_output_cost,
+		GameManager.plasma_generator_speed_cost
+	]
+
+	for cost in costs:
+		if GameManager.platinum_count >= cost:
+			return true
+
+	return false
 
 func show_upgrade_indicator(cost : int) -> bool:
 	return GameManager.platinum_count >= cost
@@ -249,6 +251,12 @@ func _on_upgrade_crit_chance_button_down():
 func _on_upgrade_drone_damage_button_down():
 	play_purchase_upgrade_sfx()
 	upgrade_drones_damage()
+	
+	if not GameManager.upgrade_mining_drone_damage:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
+	
+	GameManager.upgrade_mining_drone_damage = true
+	
 	drone_damage.text = str(GameManager.drone_damage)
 	drone_damage_cost.text = str(GameManager.drone_damage_cost)
 	SignalBus.update_platinum_count.emit()
@@ -293,7 +301,7 @@ func _on_plasma_generator_speed_upgrade_button_down():
 	GameManager.platinum_count -= GameManager.plasma_generator_speed_cost
 	GameManager.plasma_generator_speed += GameManager.plasma_generator_speed_upgrade_interval
 	GameManager.plasma_generator_speed_level += 1
-	GameManager.plasma_generator_fuel_cost = GameManager.plasma_generator_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_speed_level)
+	GameManager.plasma_generator_speed_cost = GameManager.plasma_generator_speed_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.plasma_generator_speed_level)
 	auto_speed_plat_cost.text = str(GameManager.plasma_generator_speed_cost)
 	generator_auto_speed.text = str(GameManager.plasma_generator_speed * 100) + "%"
 	SignalBus.update_plasma_generator_speed.emit()
@@ -307,8 +315,12 @@ func _on_hide_upgrades_panel_button_down():
 
 func _on_purchase_drone_button_down():
 	if !GameManager.mining_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
-		GameManager.mining_drone_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
+	
+	GameManager.mining_drone_purchased = true
+	
+	if !GameManager.purchase_1_more_drone:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
 		
 	play_purchase_upgrade_sfx()
 	purchased_drone()
@@ -336,8 +348,9 @@ func upgrade_mining_critical_chance() -> void:
 	SignalBus.update_platinum_count.emit()
 func purchased_drone() -> void:
 	if !GameManager.mining_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
-		GameManager.mining_drone_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
+	
+	GameManager.mining_drone_purchased = true
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.drones_cost
 	SignalBus.update_platinum_count.emit()
@@ -346,9 +359,14 @@ func purchased_drone() -> void:
 func upgrade_drones_damage() -> void:
 	toggle_upgrade_check_list_item()
 	play_purchase_upgrade_sfx()
+	if !GameManager.upgrade_mining_drone_damage:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_MINING_DRONE_DAMAGE)
+	
+	GameManager.upgrade_mining_drone_damage = true
+	
 	GameManager.platinum_count -= GameManager.drone_damage_cost
 	GameManager.drone_level += 1
-	GameManager.drone_damage = GameManager.drone_damage + GameManager.drone_level * 2
+	GameManager.drone_damage = int(GameManager.drone_damage + GameManager.drone_level * 2.7)
 	GameManager.drone_damage_cost = GameManager.drone_damage_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_level)
 
 
@@ -364,8 +382,11 @@ func _on_upgrade_drone_mining_speed_button_down() -> void:
 
 func _on_purchase_platinum_drone_button_down() -> void:
 	if !GameManager.plat_drone_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
-		GameManager.plat_drone_purchased = true
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
+	
+	if !GameManager.purchase_1_more_drone:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
+	
 	play_purchase_upgrade_sfx()
 	GameManager.platinum_count -= GameManager.platinum_drone_cost
 	SignalBus.add_platinum_drone.emit()
@@ -385,6 +406,11 @@ func _on_upgrade_plat_drone_damage_button_down() -> void:
 func _on_upgrade_platinum_drone_mining_speed_button_down() -> void:
 	toggle_upgrade_check_list_item()
 	play_purchase_upgrade_sfx()
+	if !GameManager.upgrade_platinum_drone_speed:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
+	
+	GameManager.upgrade_platinum_drone_speed = true
+	
 	GameManager.platinum_count -= GameManager.platinum_drone_mining_speed_cost
 	GameManager.platinum_drone_mining_speed_level += 1
 	GameManager.platinum_drone_mining_speed += GameManager.platinum_drone_mining_speed_interval
@@ -437,9 +463,10 @@ func update_platinum_drone_cost(new_cost : int, new_count : int) -> void:
 	
 
 func toggle_upgrade_check_list_item() -> void:
-	if !GameManager.upgrade_purchased:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PURCHASED)
-		GameManager.upgrade_purchased = true	
+	#if !GameManager.upgrade_purchased:
+		#SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PURCHASED)
+		#GameManager.upgrade_purchased = true	
+	pass
 
 func open_upgrades_panel() -> void:
 	sfx_player.volume_db = -5.0

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://2mw5axtfuca0"]
+[gd_scene load_steps=7 format=3 uid="uid://2mw5axtfuca0"]
 
 [ext_resource type="Script" uid="uid://dvvkco7x3c4vg" path="res://src/scripts/Panels/ArenaScene/charge_bar.gd" id="1_eicfr"]
 [ext_resource type="Texture2D" uid="uid://sw5cprdx8whm" path="res://assets/graphics/ChargeBar_Frame.png" id="2_qsfhn"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_xbb1n"]
 [ext_resource type="Texture2D" uid="uid://wbrqhywsy131" path="res://assets/graphics/ChargeBar_Fill.png" id="3_nwhtq"]
+[ext_resource type="AudioStream" uid="uid://bghgb472txumw" path="res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Death_01.ogg" id="5_6wn3a"]
+[ext_resource type="AudioStream" uid="uid://bficyqfbklyba" path="res://assets/audio/SFX/COMBAT/EnemyDefeatExplosions.wav" id="6_ac7e0"]
 
 [node name="ChargeBar" type="Control"]
 layout_mode = 3
@@ -43,5 +45,33 @@ offset_right = 33.0
 offset_bottom = 5.5
 grow_horizontal = 2
 grow_vertical = 2
+step = 0.25
 texture_under = ExtResource("2_qsfhn")
 texture_progress = ExtResource("3_nwhtq")
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="HurtSFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="CockpitDamage" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="DamageLayer" type="AudioStreamPlayer" parent="."]
+volume_db = 4.0
+bus = &"SFX"
+
+[node name="EnemyDeathVox" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6wn3a")
+bus = &"SFX"
+
+[node name="EnemyDeathExplosions" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ac7e0")
+bus = &"SFX"
+
+[node name="PlayerExplosions" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

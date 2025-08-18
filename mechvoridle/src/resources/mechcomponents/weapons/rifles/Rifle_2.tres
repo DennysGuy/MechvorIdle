@@ -6,10 +6,10 @@
 script = ExtResource("1_fd1e0")
 weapon_type = 0
 weapon_class = 1
-damage = 40
+damage = 120
 number_of_hits = 3
-charge_time = 95.0
-charge_speed = 90.0
+charge_time = 0.0
+charge_speed = 0.55
 crit_chance = 0.0
 accuracy = 0.7
 stun_chance = 0.0

@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8qjsxerrs20s"]
+
+[ext_resource type="PackedScene" uid="uid://c83tp677rra88" path="res://assets/graphics/Models/HeavyBoss/HeavyBossMech.gltf" id="1_ksmgt"]
+[ext_resource type="Script" uid="uid://dq8ewh7ybbbx7" path="res://src/scenes/boss_mech.gd" id="1_s5a1e"]
+[ext_resource type="PackedScene" uid="uid://c0ca8kxgsjoex" path="res://assets/graphics/Models/HeavyBoss/StandardBossMech.gltf" id="3_76x4q"]
+[ext_resource type="PackedScene" uid="uid://b28detq6e268x" path="res://assets/graphics/Models/HeavyBoss/LightBossMech.gltf" id="4_8lk18"]
+
+[node name="BossMech" type="Node3D"]
+script = ExtResource("1_s5a1e")
+
+[node name="HeavyBoss" parent="." instance=ExtResource("1_ksmgt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.167274, 0)
+visible = false
+
+[node name="Arm2" parent="HeavyBoss/Node/UpperBody" index="4"]
+transform = Transform3D(0.977991, -0.199145, -0.0622494, 0.156396, 0.89717, -0.413071, 0.138109, 0.394244, 0.908569, 0.478744, -0.0437319, -0.111751)
+
+[node name="UpperArm22" parent="HeavyBoss/Node/UpperBody/Arm2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.0871557, 0.996195, 0, -0.996195, 0.0871557, -0.00299813, -0.273102, 0.104988)
+
+[node name="LowerArm22" parent="HeavyBoss/Node/UpperBody/Arm2/UpperArm22" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0.0078125, -0.339063, 0.15)
+
+[node name="UpperLeg2" parent="HeavyBoss/Node/LowerBody/Leg/UpperLeg22" index="1"]
+transform = Transform3D(0.984808, 0.165611, 0.052217, -0.142678, 0.600312, 0.786936, 0.0989789, -0.782431, 0.614821, 0, 0, 0)
+
+[node name="StandardBoss" parent="." instance=ExtResource("3_76x4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0422424, -0.0435591, -0.0150634)
+visible = false
+
+[node name="Arm2" parent="StandardBoss/Node/UpperBody" index="4"]
+transform = Transform3D(0.977991, -0.0803222, -0.192567, 0.156396, 0.89312, 0.421755, 0.138109, -0.442589, 0.886025, 0.400619, -0.0437319, -0.111751)
+
+[node name="LowerArm22" parent="StandardBoss/Node/UpperBody/Arm2/UpperArm22" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, -0.422618, 0, 0.422618, 0.906308, 0.0078125, -0.339063, 0.15)
+
+[node name="Sword" parent="StandardBoss/Node/UpperBody/Arm2/UpperArm22/LowerArm22" index="6"]
+transform = Transform3D(0.0482905, -0.125086, 0.99097, 0.585818, 0.807118, 0.0733316, -0.809003, 0.576987, 0.112254, 0.0320662, -0.208166, 0.0130138)
+
+[node name="UpperLeg2" parent="StandardBoss/Node/LowerBody/Leg/UpperLeg22" index="1"]
+transform = Transform3D(0.984808, 0.165611, 0.0522171, -0.142677, 0.600312, 0.786936, 0.0989789, -0.782431, 0.614821, 0, 0, 0)
+
+[node name="LightBoss" parent="." instance=ExtResource("4_8lk18")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161357, 1.18024, 2.77112)
+fov = 34.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.920252, 0.391325, 0, -0.391325, 0.920252, 0, 3.96347, 4.39939)
+
+[editable path="HeavyBoss"]
+[editable path="StandardBoss"]
+[editable path="LightBoss"]

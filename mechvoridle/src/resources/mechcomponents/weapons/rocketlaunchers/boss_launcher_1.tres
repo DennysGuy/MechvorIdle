@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource("1_d1s6s")
 weapon_type = 0
-weapon_class = 0
-damage = 385
+weapon_class = 2
+damage = 450
 number_of_hits = 1
 charge_time = 0.0
-charge_speed = 20.0
+charge_speed = 0.45
 crit_chance = 0.34
-accuracy = 0.6
+accuracy = 0.55
 stun_chance = 0.0
 component_name = "RKL-125X"
 description = ""

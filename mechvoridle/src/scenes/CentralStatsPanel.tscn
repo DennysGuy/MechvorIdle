@@ -1,7 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
-[ext_resource type="Texture2D" uid="uid://dlfbvdcwk6dr2" path="res://icon.svg" id="2_liohg"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lvy6k"]
 [ext_resource type="PackedScene" uid="uid://1i717e5dbjge" path="res://src/scenes/ElapsedTimer.tscn" id="3_s5wfh"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cfori06k6hqfr" path="res://assets/graphics/UI/StartFightButton_Hover.png" id="8_jc6kg"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_xrjyp"]
 [ext_resource type="Texture2D" uid="uid://c46ke31j4g7i6" path="res://assets/graphics/UI/StartFightButton_Disabled.png" id="9_o5f0c"]
+[ext_resource type="PackedScene" uid="uid://cdv41op8l3500" path="res://PlayerPreview.tscn" id="16_jc6kg"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="18_jc6kg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
@@ -36,7 +36,7 @@ shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
 shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.4
+shader_parameter/brightness = 0.8
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.0
 shader_parameter/clip_warp = false
@@ -334,32 +334,64 @@ texture = ExtResource("7_isv1m")
 [node name="MechComponentsTrackerPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
 offset_left = 399.0
-offset_top = 48.0
+offset_top = 44.0
 offset_right = 592.0
 offset_bottom = 242.0
+
+[node name="PlayerPreviewSubviewportContainer" type="SubViewportContainer" parent="ColorRect/MechComponentsTrackerPanel"]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 192.0
+offset_bottom = 195.0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MechComponentsTrackerPanel/PlayerPreviewSubviewportContainer"]
+handle_input_locally = false
+size = Vector2i(190, 190)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="ColorRect/MechComponentsTrackerPanel/PlayerPreviewSubviewportContainer/SubViewport" instance=ExtResource("16_jc6kg")]
 
 [node name="Label" type="Label" parent="ColorRect/MechComponentsTrackerPanel"]
 layout_mode = 0
 offset_left = 7.0
 offset_top = 5.0
-offset_right = 128.0
+offset_right = 183.0
 offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 12
 text = "Components Tracker"
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/MechComponentsTrackerPanel"]
+[node name="TotalMechComponents" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 39.0
-offset_right = 163.0
-offset_bottom = 167.0
-texture = ExtResource("2_liohg")
+offset_left = 573.0
+offset_top = 222.0
+offset_right = 586.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "6"
+
+[node name="Slash" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 564.0
+offset_top = 222.0
+offset_right = 577.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "/"
+
+[node name="CurrentOwnedComponents" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 222.0
+offset_right = 564.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "0"
 
 [node name="ColorRect2" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_lvy6k")
 layout_mode = 0
-offset_left = 400.0
+offset_left = 399.0
 offset_top = 46.0
 offset_right = 592.0
 offset_bottom = 243.0

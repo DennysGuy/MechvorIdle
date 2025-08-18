@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjcihcy5w5pon"]
+[gd_scene load_steps=3 format=3 uid="uid://cjcihcy5w5pon"]
 
 [ext_resource type="Script" uid="uid://bh6sgrurocqrf" path="res://src/scripts/audio_settings_panel.gd" id="1_y0cla"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_urkah"]
 
 [node name="AudioSettings" type="Panel"]
 anchors_preset = 8
@@ -8,10 +9,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.5
+offset_left = -150.0
 offset_top = -41.0
-offset_right = 60.5
-offset_bottom = 41.0
+offset_right = 61.0
+offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y0cla")
@@ -20,24 +21,24 @@ script = ExtResource("1_y0cla")
 layout_mode = 0
 offset_left = 7.0
 offset_top = 21.0
-offset_right = 107.0
+offset_right = 196.0
 offset_bottom = 37.0
 step = 5.0
 
 [node name="SFXSlider" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 7.0
-offset_top = 41.0
-offset_right = 107.0
-offset_bottom = 57.0
+offset_top = 42.0
+offset_right = 200.0
+offset_bottom = 58.0
 step = 5.0
 
 [node name="AmbienceSlider" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 7.0
-offset_top = 61.0
-offset_right = 107.0
-offset_bottom = 77.0
+offset_top = 64.0
+offset_right = 199.0
+offset_bottom = 84.0
 step = 5.0
 
 [node name="Label" type="Label" parent="."]
@@ -46,46 +47,110 @@ offset_left = 7.0
 offset_top = 2.0
 offset_right = 63.0
 offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
 text = "Audio Settings"
 
 [node name="Music" type="Label" parent="."]
-layout_mode = 0
-offset_left = 81.0
-offset_top = 12.0
-offset_right = 104.0
-offset_bottom = 24.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -50.0
+offset_right = -3.0
+offset_bottom = -38.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
 text = "Music"
 
 [node name="SFX" type="Label" parent="."]
-layout_mode = 0
-offset_left = 91.0
-offset_top = 34.0
-offset_right = 114.0
-offset_bottom = 46.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -25.0
+offset_right = -4.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
 text = "SFX"
 
 [node name="Ambience" type="Label" parent="."]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 53.0
-offset_right = 106.0
-offset_bottom = 65.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -4.0
+offset_right = -4.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
-text = "Ambeince"
+text = "Ambience"
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 70.0
-offset_top = -27.0
-offset_right = 121.0
-offset_bottom = -3.0
-theme_override_font_sizes/font_size = 11
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = -26.0
+offset_bottom = -2.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_urkah")
+theme_override_font_sizes/font_size = 9
 text = "Settings"
+
+[node name="TrackTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.5
+offset_top = -22.0
+offset_right = 21.5
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_urkah")
+theme_override_font_sizes/font_size = 6
+text = "Red Comet Perspective - PMYA"
+
+[node name="NextTrack" type="Button" parent="."]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 92.0
+offset_right = 209.0
+offset_bottom = 110.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_urkah")
+theme_override_font_sizes/font_size = 8
+text = "Next Track"
+
+[node name="JukeBox" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="AmbienceSlider" to="." method="_on_ambience_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="NextTrack" to="." method="_on_next_track_button_up"]
+[connection signal="finished" from="JukeBox" to="." method="_on_juke_box_finished"]

@@ -1,6 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl0iu3a7d1v1x"]
+[gd_scene load_steps=13 format=3 uid="uid://bl0iu3a7d1v1x"]
 
 [ext_resource type="Script" uid="uid://dx0rd5nlc4tlo" path="res://src/scripts/win_panel.gd" id="1_v34tx"]
+[ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_5tmw8"]
+[ext_resource type="FontFile" uid="uid://cu3flnhfbiwql" path="res://assets/graphics/Fonts/BladeLogicDemoRegular-ALnVD.otf" id="2_b5sgr"]
+[ext_resource type="AudioStream" uid="uid://d1g8v0q4pdv0c" path="res://assets/audio/music/victory.ogg" id="2_xr1xk"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_wnke8"]
+[ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="5_fe6es"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fe6es"]
+shader = ExtResource("5_fe6es")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.02
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b37tf"]
 bg_color = Color(0.136771, 0.464389, 0.411784, 1)
@@ -23,6 +33,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-4.0]
+}
 
 [sub_resource type="Animation" id="Animation_v34tx"]
 resource_name = "fade_in"
@@ -41,6 +63,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_b5sgr"]
 resource_name = "fade_to_black"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,10 +71,22 @@ tracks/0/path = NodePath("../ColorRect2:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.79449),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.0, -36.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5sgr"]
@@ -70,25 +105,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v34tx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_fe6es")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.125911, 0.125911, 0.125911, 1)
+texture = ExtResource("2_5tmw8")
+stretch_mode = 1
 
 [node name="YouWIn" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -117.5
+offset_left = -117.0
 offset_top = 47.0
-offset_right = 117.5
-offset_bottom = 116.0
+offset_right = 96.0
+offset_bottom = 97.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_b5sgr")
 theme_override_font_sizes/font_size = 50
 text = "YOU WIN!"
 
@@ -105,65 +143,40 @@ offset_right = 197.0
 offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_wnke8")
 theme_override_font_sizes/font_size = 14
-text = "Perhaps you have what it takes to escape
-Prison Planet (TM). Only the pass of time can tell."
+text = "Perhaps a glimpse of a true warrior is in you. This can
+only surface if you press on. Good luck. You need it."
 
 [node name="Results" type="Label" parent="."]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 172.0
-offset_right = 179.0
-offset_bottom = 195.0
-text = "Results:"
+offset_left = 53.0
+offset_top = 174.0
+offset_right = 121.0
+offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("2_b5sgr")
+text = "RESULTS:"
 
-[node name="FighTime" type="Label" parent="."]
+[node name="FightTime" type="Label" parent="."]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 197.0
-offset_right = 200.0
-offset_bottom = 220.0
+offset_left = 57.0
+offset_top = 253.0
+offset_right = 270.0
+offset_bottom = 276.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_wnke8")
 text = "Fight Time: 00:05:23"
 
 [node name="MineTime" type="Label" parent="."]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 218.0
-offset_right = 292.0
-offset_bottom = 241.0
-text = "Gathering Time: 00:12:46"
-
-[node name="TotalFerrite" type="Label" parent="."]
-layout_mode = 0
-offset_left = 139.0
-offset_top = 239.0
-offset_right = 331.0
-offset_bottom = 262.0
-text = "Total Ferrite Mined : 23,836"
-
-[node name="FerriteBars" type="Label" parent="."]
-layout_mode = 0
-offset_left = 139.0
-offset_top = 260.0
-offset_right = 350.0
-offset_bottom = 283.0
-text = "Ferrite Bars : 3,567"
-
-[node name="Plasma" type="Label" parent="."]
-layout_mode = 0
-offset_left = 372.0
-offset_top = 193.0
-offset_right = 583.0
-offset_bottom = 216.0
-text = "Plasma: 2,341"
-
-[node name="Platinum" type="Label" parent="."]
-layout_mode = 0
-offset_left = 372.0
+offset_left = 56.0
 offset_top = 213.0
-offset_right = 583.0
+offset_right = 316.0
 offset_bottom = 236.0
-text = "Platinum:17,231"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_wnke8")
+text = "Gathering Time: 00:12:46"
 
 [node name="Replay" type="Button" parent="."]
 layout_mode = 1
@@ -172,12 +185,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -47.0
+offset_left = -63.0
 offset_top = -51.0
-offset_right = 49.0
+offset_right = 71.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_wnke8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
 text = "Main Menu"
 
@@ -195,5 +209,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xr1xk")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="button_down" from="Replay" to="." method="_on_replay_button_down"]

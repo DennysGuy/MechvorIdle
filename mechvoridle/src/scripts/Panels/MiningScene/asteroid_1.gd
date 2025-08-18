@@ -54,10 +54,11 @@ func damage_asteroid() -> void:
 
 func spawn_explosion_and_destroy():
 	
-	if !GameManager.flyby_asteroid_destroyed:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.FLYBY_ASTEROID_DESTROY)
-		GameManager.flyby_asteroid_destroyed = true
-		
+	if !GameManager.three_fly_by_drones_destroyed:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.THREE_FLYBY_ASTEROIDS_DESTROYED)
+	
+	
+	
 	can_hit = false
 	graphic.hide()
 	nine_patch_rect.queue_free()

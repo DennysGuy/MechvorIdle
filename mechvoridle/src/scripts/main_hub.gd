@@ -1,7 +1,6 @@
 class_name MainHub extends Control
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var music_player : AudioStreamPlayer = $MusicPlayer
 @onready var sfx_player_layer_1 : AudioStreamPlayer = $SFXPlayerLayer1
 @onready var sfx_player_layer_2 : AudioStreamPlayer = $SFXPlayerLayer2
 
@@ -10,6 +9,7 @@ class_name MainHub extends Control
 @onready var vox_player: AudioStreamPlayer = $VoxPlayer
 
 @onready var check_list_animation_player: AnimationPlayer = $CheckListAnimationPlayer
+@onready var mission_completed_animation_player : AnimationPlayer = $MissionCompletedAnimationPlayer
 
 
 @onready var exit_hub : AudioStream = SfxManager.UI_NAV_SWITCH_TAB_A_EXIT_HUB_01
@@ -18,7 +18,6 @@ class_name MainHub extends Control
 @onready var shop_panel_nav_sfx : Array[AudioStream] = [SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_01, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_02, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_03, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_04, SfxManager.UI_NAV_SWITCH_TAB_B_SHOP_05]
 func _ready() -> void:
 	GameManager.can_traverse_panes = false
-	music_player.play()
 	ship_ambiance_player.play()
 	animation_player.play("fade_in")
 	SignalBus.move_to_mining_pane.connect(move_to_mining_pane)
@@ -32,7 +31,12 @@ func _ready() -> void:
 	SignalBus.start_fight.connect(start_fight)
 	SignalBus.show_check_list.connect(show_check_list)
 	SignalBus.hide_check_list.connect(hide_check_list)
-	
+	SignalBus.show_mission_tracker_panel.connect(show_missions_list_panel)
+	SignalBus.hide_mission_tracker_panel.connect(hide_mission_list_panel)
+	SignalBus.issue_mission_complete_notification.connect(show_mission_complete_notification)
+	SignalBus.issue_phase_compolete_notification.connect(show_phase_complete_notification)
+	SignalBus.issue_drone_down_alert.connect(play_drone_down_vox)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left") and GameManager.can_traverse_panes:
 		if GameManager.on_shop_panel:
@@ -47,8 +51,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif GameManager.on_central_panel:
 			move_to_shop_pane()
 
+	#if Input.is_action_just_pressed("give_ferrite_bars"):
+		#GameManager.ferrite_bars_count += 800
+		#GameManager.raw_ferrite_count += 800
+		#GameManager.platinum_count += 800 
+		#GameManager.plasma_count += 800
+		#print(GameManager.ferrite_bars_count)
+
 func _process(delta : float) ->void:
 	pass
+
+func show_missions_list_panel() -> void:
+	check_list_animation_player.play("show_missions_panel")
+
+func hide_mission_list_panel() -> void:
+	check_list_animation_player.play("hide_missions_panel")
 
 func start_fight() -> void:
 	animation_player.play("fade_out")
@@ -57,7 +74,7 @@ func start_fight() -> void:
 
 func move_to_mining_pane() -> void:
 	if !GameManager.mining_facility_visited:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY)
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_MINING_FACILITY)
 		GameManager.mining_facility_visited = true	
 	play_nav_from_hub_to_mining_sfx()
 	GameManager.on_mining_panel = true
@@ -67,8 +84,9 @@ func move_to_mining_pane() -> void:
 
 func move_to_shop_pane() -> void:
 	if !GameManager.visited_black_market:
-		SignalBus.show_task_completed_indicator.emit(GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET)
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.VISITED_BLACK_MARKET )
 		GameManager.visited_black_market = true	
+		
 	player_enter_shop_from_hub_sfx()
 	GameManager.on_central_panel = false
 	GameManager.on_mining_panel = false
@@ -89,6 +107,12 @@ func move_from_shop_pane_to_central_pane() -> void:
 	GameManager.on_shop_panel = false
 	GameManager.on_central_panel = true
 	animation_player.play("NavigateFromShopToCentralHub")
+
+func show_mission_complete_notification() -> void:
+	mission_completed_animation_player.play("MissionCompleted")
+
+func show_phase_complete_notification() -> void:
+	mission_completed_animation_player.play("MissionPhaseCompleted")
 
 func insert_ship_alarm() -> void:
 	var nodes_in_alarm_group = get_tree().get_nodes_in_group("ship alarm")
@@ -145,3 +169,9 @@ func play_ready_fight_vox_sfx() -> void:
 
 func can_move() -> void:
 	GameManager.can_traverse_panes = true
+	
+@onready var vox_player_2 = $VoxPlayer2
+
+func play_drone_down_vox() -> void:
+	vox_player_2.play()
+	

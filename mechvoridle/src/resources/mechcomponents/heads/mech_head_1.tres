@@ -6,7 +6,7 @@
 script = ExtResource("1_ct6rc")
 accuracy_bonus = 0.25
 component_name = "HELM18XQC4"
-description = "She randomly picked a novel from the shelf and began reading immediately. "
+description = "Fixed with some of the best overhead scopes on the market. This mech head provides accuracy with ranged weapons."
 health = 2400
 plasma_resistance = 0.0
 refined_ferrite_cost = 2000
@@ -14,5 +14,5 @@ plasma_cost = 0
 platinum_cost = 0
 category = 0
 component_type = 1
-weight_class = 0
+weight_class = 2
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"

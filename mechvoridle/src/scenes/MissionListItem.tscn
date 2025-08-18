@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyb0c08gbx8sc"]
+
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="1_5r6i8"]
+[ext_resource type="Script" uid="uid://bpmftackeajqo" path="res://src/scripts/mission_list_item.gd" id="1_my71a"]
+[ext_resource type="Texture2D" uid="uid://cahujlocleo7b" path="res://assets/graphics/TempCheckBox.png" id="2_my71a"]
+[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="3_fxf1l"]
+[ext_resource type="AudioStream" uid="uid://lrym3l15vjb1" path="res://assets/audio/SFX/UI/Misc/MissionComplete.wav" id="5_fxf1l"]
+
+[node name="MissionListItem" type="ColorRect" node_paths=PackedStringArray("mission_description", "check_box", "icon", "counter")]
+custom_minimum_size = Vector2(90, 45)
+offset_top = -1.0
+offset_right = 189.0
+offset_bottom = 44.0
+mouse_filter = 2
+color = Color(0.564706, 0.564706, 0.564706, 0.439216)
+script = ExtResource("1_my71a")
+mission_description = NodePath("ListItemLabel")
+check_box = NodePath("CheckBox")
+icon = NodePath("Icon")
+counter = NodePath("Counter")
+
+[node name="ListItemLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 26.0
+offset_right = 92.5
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_5r6i8")
+theme_override_font_sizes/font_size = 7
+text = "Get Platinum with Mine Laser"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 15.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("2_my71a")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 17.0
+grow_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("3_fxf1l")
+expand_mode = 1
+
+[node name="Counter" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 4.0
+offset_right = -22.0
+offset_bottom = 14.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_5r6i8")
+theme_override_font_sizes/font_size = 8
+text = "6/6"
+horizontal_alignment = 2
+
+[node name="SubmissionCounter" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 36.5
+offset_top = -12.0
+offset_right = 87.5
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_5r6i8")
+theme_override_font_sizes/font_size = 7
+text = "N/A"
+
+[node name="SubMissionLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -12.0
+offset_right = -17.5
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_5r6i8")
+theme_override_font_sizes/font_size = 6
+text = "Sub-mission:"
+
+[node name="MissionCompletePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fxf1l")
+bus = &"SFX"

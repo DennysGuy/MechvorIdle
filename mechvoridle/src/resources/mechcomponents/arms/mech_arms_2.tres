@@ -5,15 +5,15 @@
 [resource]
 script = ExtResource("1_e578v")
 crit_chance_modifier = 0.35
-charge_time_modifier = 0.0
+charge_time_modifier = 25.0
 component_name = "ARM2YSAB343"
-description = "The kids selected random colors for their art project, creating a vibrant masterpiece. "
+description = "These arms were developed with efficient yet sturdy frame. Designed to handle melee weapons with ease."
 health = 1000
 plasma_resistance = 0.0
 refined_ferrite_cost = 2500
 plasma_cost = 0
 platinum_cost = 0
 category = 3
-component_type = 0
+component_type = 2
 weight_class = 2
 metadata/_custom_type_script = "uid://marmnfdtywpd"

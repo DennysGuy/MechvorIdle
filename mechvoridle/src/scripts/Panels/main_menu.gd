@@ -2,11 +2,14 @@ class_name MainMenu extends Control
 @onready var animation_player = $AnimationPlayer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var sfxplayer: AudioStreamPlayer = $sfxplayer
+@onready var ambience: AudioStreamPlayer = $Ambience
 
 func _ready() -> void:
 	animation_player.play("fade_in")
 	audio_stream_player.play()
-	
+	ambience.play(
+		
+	)
 func _process(delta : float) -> void:
 	pass
 

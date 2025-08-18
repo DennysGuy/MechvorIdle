@@ -6,11 +6,24 @@ signal move_to_shop_pane
 signal move_to_central_hub_from_mining_page
 signal move_to_central_hub_from_shop_pane
 signal start_fight
+signal stop_fight
+signal begin_round
+signal stop_ufo_spawn
+signal fade_out_alert
+signal issue_drone_down_alert
+signal show_specified_boss(index : int)
+
+signal remove_ufo_during_start_fight
+
+signal show_part(body_part : String, category : String)
+signal show_weapon(weapon_type : String, category : String, side : String)
+signal show_part_preview(component : MechComponent)
+signal update_parts_owned_on_previewer
 
 signal show_task_completed_indicator(index : int)
 signal show_check_list
 signal hide_check_list
-
+signal increment_phase_mission_completed_count
 #settings panel
 signal show_audio_settings
 signal hide_audio_settings
@@ -50,4 +63,14 @@ signal lose_game #execute loss procedure and go to lose panel
 signal update_player_health_bar
 signal update_opponent_health_bar
 signal fill_bar_on_start_up
-signal shake_camera
+signal shake_camera(value : int)
+
+#mission
+
+signal add_to_mission_counter(amount : int, unique_mission_identifier : int)
+signal add_to_submission_counter(amount : int, unique_mission_identifier : int)
+signal increment_mission_completed_counted
+signal show_mission_tracker_panel
+signal hide_mission_tracker_panel
+signal issue_mission_complete_notification
+signal issue_phase_compolete_notification
