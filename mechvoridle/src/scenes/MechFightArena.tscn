@@ -21,6 +21,21 @@
 [ext_resource type="AudioStream" uid="uid://bghgb472txumw" path="res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Death_01.ogg" id="19_evcc1"]
 [ext_resource type="AudioStream" uid="uid://dsmnsm604ayt5" path="res://assets/audio/SFX/COMBAT/PlayerLoseExplosions.wav" id="20_jsiet"]
 
+[sub_resource type="Animation" id="Animation_xadlb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BossStandIn:material:shader_parameter/flash_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_ob6fq"]
 resource_name = "hit_flash"
 length = 0.1
@@ -35,21 +50,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.5, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_xadlb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../BossStandIn:material:shader_parameter/flash_amount")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1m6d2"]

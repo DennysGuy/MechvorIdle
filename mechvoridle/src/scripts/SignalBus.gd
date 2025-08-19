@@ -24,6 +24,7 @@ signal show_task_completed_indicator(index : int)
 signal show_check_list
 signal hide_check_list
 signal increment_phase_mission_completed_count
+
 #settings panel
 signal show_audio_settings
 signal hide_audio_settings
@@ -53,6 +54,8 @@ signal update_mining_laser_speed
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
+signal update_stats_panel(component : MechComponent)
+
 
 #main panel
 signal unlock_fight_button
@@ -74,3 +77,15 @@ signal show_mission_tracker_panel
 signal hide_mission_tracker_panel
 signal issue_mission_complete_notification
 signal issue_phase_compolete_notification
+
+
+#mech stats panel
+signal update_mech_head_name(mech_head : MechHead)
+signal update_mech_torso_name(mech_torso : MechTorso)
+signal update_mech_arms_name(mech_arms : MechArms)
+signal update_mech_legs_name(mech_legs : MechLegs)
+signal update_mech_weapon_one_name(mech_weapon : MechWeapon)
+signal update_mech_weapon_two_name(mech_weapon : MechWeapon)
+
+signal toggle_mech_stats_panels()
+signal hide_mech_stats_panels()

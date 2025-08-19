@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=23 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="11_gvnck"]
 [ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="12_tovwb"]
 [ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="13_gcoiw"]
+[ext_resource type="Script" uid="uid://n66i10mwgu1i" path="res://src/scripts/stats_v_box.gd" id="16_gcoiw"]
+[ext_resource type="PackedScene" uid="uid://cu5pva60xy6h4" path="res://src/scenes/StatLabel.tscn" id="16_tovwb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi2d3"]
 resource_local_to_scene = true
@@ -266,10 +268,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -210.0
-offset_top = -32.0
-offset_right = -60.0
-offset_bottom = -15.0
+offset_left = -533.0
+offset_top = -350.0
+offset_right = -383.0
+offset_bottom = -333.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -458,10 +460,10 @@ texture = ExtResource("7_4k2ii")
 
 [node name="PurchaseButton" type="TextureButton" parent="ColorRect"]
 layout_mode = 2
-offset_left = 334.0
-offset_top = 257.0
-offset_right = 398.0
-offset_bottom = 282.0
+offset_left = 234.0
+offset_top = 223.0
+offset_right = 324.0
+offset_bottom = 253.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("11_gvnck")
 texture_hover = ExtResource("12_tovwb")
@@ -591,6 +593,17 @@ offset_bottom = 55.0
 theme_override_colors/font_color = Color(0.929942, 0.742799, 0, 1)
 theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
+
+[node name="StatsVBox" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 260.0
+offset_right = 459.0
+offset_bottom = 333.0
+script = ExtResource("16_gcoiw")
+
+[node name="StatLabel" parent="ColorRect/StatsVBox" instance=ExtResource("16_tovwb")]
+layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
