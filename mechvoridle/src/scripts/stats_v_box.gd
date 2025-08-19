@@ -21,6 +21,8 @@ func update_stats_panel(mech_component : MechComponent) -> void:
 			
 		"Torso":
 			var torso_comp = mech_component as MechTorso
+			if torso_comp.get_weight_class() == "Heavy":
+				text = "Armor Bonus: " + "[color=green]+"+str(torso_comp.health)+"[/color]\nCharge Speed Bonus: "+"[color=red]-"+str(torso_comp.accuracy_bonus*100)+"%[/color]\nRanged Accuracy Bonus: "+"[color=green]+"+str(torso_comp.accuracy_bonus*100)+"%[/color]"
 			
 		"Arms":
 			var arms_comp = mech_component as MechArms
