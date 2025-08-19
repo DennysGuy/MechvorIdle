@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource("2_7sy3x")
 mech_name = "Zypher Slide"
+index = 0
 total_health = 0
 current_health = 0
 total_crit_chance = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=16 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_b11ub"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="3_ocvap"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
 [ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
+[ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="5_wl6gh"]
 [ext_resource type="PackedScene" uid="uid://d3siueyr5myjd" path="res://GuideBox.tscn" id="7_b11ub"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wl6gh"]
@@ -131,8 +132,17 @@ position = Vector2(185, -21)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CRTOverlay" parent="CanvasLayer" instance=ExtResource("3_2fxli")]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 637.0
+offset_bottom = 322.0
+mouse_filter = 2
+script = ExtResource("5_wl6gh")
+
+[node name="CRTOverlay" parent="CanvasLayer/Control" instance=ExtResource("3_2fxli")]
 material = SubResource("ShaderMaterial_0sd8y")
+layout_mode = 0
 offset_left = -12.0
 offset_top = -51.0
 offset_right = 628.0
@@ -183,4 +193,4 @@ position = Vector2(571, 270)
 [connection signal="mouse_entered" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_exited"]
 
-[editable path="CanvasLayer/CRTOverlay"]
+[editable path="CanvasLayer/Control/CRTOverlay"]

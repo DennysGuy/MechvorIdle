@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dio1yrjtiu67"]
+[gd_scene load_steps=24 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_xrjyp"]
 [ext_resource type="Texture2D" uid="uid://c46ke31j4g7i6" path="res://assets/graphics/UI/StartFightButton_Disabled.png" id="9_o5f0c"]
 [ext_resource type="PackedScene" uid="uid://cdv41op8l3500" path="res://PlayerPreview.tscn" id="16_jc6kg"]
+[ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="17_o5f0c"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="18_jc6kg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
@@ -388,7 +389,14 @@ offset_bottom = 241.0
 theme_override_fonts/font = ExtResource("3_lvy6k")
 text = "0"
 
-[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+[node name="Control" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_force_pass_scroll_events = false
+script = ExtResource("17_o5f0c")
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/Control"]
 material = SubResource("ShaderMaterial_lvy6k")
 layout_mode = 0
 offset_left = 399.0

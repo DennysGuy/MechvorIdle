@@ -74,3 +74,5 @@ signal show_mission_tracker_panel
 signal hide_mission_tracker_panel
 signal issue_mission_complete_notification
 signal issue_phase_compolete_notification
+
+signal toggle_filter(value : bool)

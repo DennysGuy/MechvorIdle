@@ -34,7 +34,7 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 var audio_settings_Showing : bool = false
 
 func _ready() -> void:
-	#fight_scenario_7_test_fixture()
+	#fight_scenario_4_test_fixture()
 	pass
 #mining panel
 var ufo_attacking : bool = false
@@ -532,8 +532,8 @@ func fight_scenario_1_test_fixture() -> void:
 '''
 
 func fight_scenario_2_test_fixture() -> void:
-	standard_build()
-	chosen_opponent = opponent_option_1.duplicate(true)
+	light_build()
+	chosen_opponent = opponent_option_3.duplicate(true)
 
 #heavy - proper ranged build vs light boss
 '''

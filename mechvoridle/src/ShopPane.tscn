@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=22 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bthwbil816n1x" path="res://src/scenes/part_previewer.tscn" id="7_gvnck"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="8_wcomc"]
 [ext_resource type="Texture2D" uid="uid://ce1elo3nxwhn2" path="res://assets/graphics/UI/ClosePanelButton.png" id="9_4k2ii"]
+[ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="9_tovwb"]
 [ext_resource type="Texture2D" uid="uid://c3db7jk5m1nx5" path="res://assets/graphics/UI/purchase_refinery_button.png" id="11_gvnck"]
 [ext_resource type="Texture2D" uid="uid://cpjfvjd0dtkc2" path="res://assets/graphics/UI/purchase_refinery_button_hover.png" id="12_tovwb"]
 [ext_resource type="Texture2D" uid="uid://ccvgyp58gsqdf" path="res://assets/graphics/UI/purchase_refinery_button_disablled.png" id="13_gcoiw"]
@@ -353,15 +354,6 @@ position = Vector2(122.5, 266.5)
 scale = Vector2(0.916667, 0.916667)
 texture = ExtResource("6_wcomc")
 
-[node name="CRTOverlay" type="ColorRect" parent="ColorRect"]
-material = SubResource("ShaderMaterial_mi2d3")
-layout_mode = 0
-offset_left = 63.0
-offset_top = 46.0
-offset_right = 247.0
-offset_bottom = 213.0
-mouse_filter = 2
-
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
 layout_mode = 0
 offset_left = 52.0
@@ -420,7 +412,23 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Launchers"
 
-[node name="CRTOverlay2" type="ColorRect" parent="ColorRect"]
+[node name="Control" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("9_tovwb")
+
+[node name="CRTOverlay" type="ColorRect" parent="ColorRect/Control"]
+material = SubResource("ShaderMaterial_mi2d3")
+layout_mode = 0
+offset_left = 63.0
+offset_top = 46.0
+offset_right = 247.0
+offset_bottom = 213.0
+mouse_filter = 2
+
+[node name="CRTOverlay2" type="ColorRect" parent="ColorRect/Control"]
 material = SubResource("ShaderMaterial_mi2d3")
 layout_mode = 0
 offset_left = 235.0
@@ -429,7 +437,7 @@ offset_right = 323.0
 offset_bottom = 333.0
 mouse_filter = 2
 
-[node name="CRTOverlay3" type="ColorRect" parent="ColorRect"]
+[node name="CRTOverlay3" type="ColorRect" parent="ColorRect/Control"]
 material = SubResource("ShaderMaterial_mi2d3")
 layout_mode = 0
 offset_left = 364.0
@@ -438,7 +446,7 @@ offset_right = 586.0
 offset_bottom = 227.0
 mouse_filter = 2
 
-[node name="CRTOverlay4" type="ColorRect" parent="ColorRect"]
+[node name="CRTOverlay4" type="ColorRect" parent="ColorRect/Control"]
 material = SubResource("ShaderMaterial_mi2d3")
 layout_mode = 0
 offset_left = 275.0
