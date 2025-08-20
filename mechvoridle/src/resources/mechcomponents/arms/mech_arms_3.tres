@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MechArms" load_steps=2 format=3 uid="uid://4vf13bdn8i41"]
+
+[ext_resource type="Script" uid="uid://marmnfdtywpd" path="res://src/scripts/mechcomponents/mech_arms.gd" id="1_3xvj0"]
+
+[resource]
+script = ExtResource("1_3xvj0")
+crit_damage_modifier = 0.05
+max_hits_chance = 0.95
+component_name = "Arms of Faith"
+manufacture_name = 2
+description = "These arms were developed with efficient yet sturdy frame. Designed to handle melee weapons with ease."
+health = 2200
+plasma_resistance = 0.0
+refined_ferrite_cost = 2500
+plasma_cost = 0
+platinum_cost = 0
+category = 3
+component_type = 0
+weight_class = 0
+metadata/_custom_type_script = "uid://marmnfdtywpd"

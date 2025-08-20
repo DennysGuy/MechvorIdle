@@ -4,15 +4,16 @@
 
 [resource]
 script = ExtResource("1_6x0bj")
-charge_speed_modifier = 0.0
-component_name = "TOROXTS12"
-description = "The TOROXTS12 is a torso component with factory settings - it is run of the mill, but reliable. The TOROXTS12 aims to be a jack of all trades, it's reliable - not to heavy or light giving the pilot the needs to complete most tasks."
-health = 4000
+charge_speed_modifier = -0.1
+component_name = "Chest of Righteousness"
+manufacture_name = 2
+description = "The Chest of Righteousness is heavy duty - high protection, but a little bit on the slow side."
+health = 5200
 plasma_resistance = 0.0
 refined_ferrite_cost = 4800
 plasma_cost = 0
 platinum_cost = 0
 category = 1
 component_type = 0
-weight_class = 1
+weight_class = 0
 metadata/_custom_type_script = "uid://d35b44mou7bkr"

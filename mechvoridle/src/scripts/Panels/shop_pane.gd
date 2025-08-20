@@ -17,12 +17,14 @@ class_name ShopPane extends Control
 @onready var ferrite_cost: Label = $ColorRect/FerriteCost
 @onready var plasma_cost: Label = $ColorRect/PlasmaCost
 @onready var platinum_cost: Label = $ColorRect/PlatinumCost
+@onready var manufacture_logo : TextureRect = $ColorRect/ManufactureLogo
+@onready var manufacturer = $ColorRect/Manufacturer
+
 
 @onready var confirmation_box: TextureRect = $ColorRect/ConfirmationBox
 @onready var confirmation_button: Button = $ColorRect/ConfirmationBox/ConfirmationButton
 @onready var cancellation_button: TextureButton = $ColorRect/ConfirmationBox/CancellationButton
-@onready var weight_class : Label = $ColorRect/WeightClass
-@onready var weapon_type_focus : Label = $ColorRect/WeaponTypeFocus
+
 @onready var sub_viewport : SubViewport = $ColorRect/SubViewportContainer/SubViewport
 
 @onready var parts_owned_label: Label = $ColorRect/PartsOwnedLabel
@@ -49,7 +51,8 @@ func _ready() -> void:
 	SignalBus.transfer_item_to_shop_panel.connect(update_description_box)
 	sub_viewport.own_world_3d = true
 	sub_viewport_2.own_world_3d = true
-	
+	manufacturer.text = "N/A"
+	manufacture_logo.texture = null
 	slot_is_filled_label.hide()
 	display_component_list("Heads")
 	update_ferrite_bars_count()
@@ -105,8 +108,8 @@ func update_description_box(component: MechComponent) -> void:
 	ferrite_cost.text = "Ferrite Bars: " + str(selected_component.refined_ferrite_cost)
 	plasma_cost.text = "Plasma: " + str(selected_component.plasma_cost)
 	part_class.text = "Class: " + selected_component.get_category_type()
-	weight_class.text = "Weight Class: " + selected_component.get_weight_class()
-	weapon_type_focus.text = "Focus: " + selected_component.get_weapon_focus()
+	manufacturer.text = component.get_manufacturer_name()
+	manufacture_logo.texture = component.get_manufacturer_icon()
 
 func show_armor_component_available_indicator(value : int, component_name : String) -> bool:
 	return GameManager.ferrite_bars_count >= value and GameManager.mech_component_slot_is_empty(component_name)
