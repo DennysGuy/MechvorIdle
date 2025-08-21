@@ -82,7 +82,13 @@ func update_stats_panel(mech_component : MechComponent) -> void:
 				"Mobility (Dodge Chance): +"+ str(floorf(legs_comp.dodge_chance_modifier*100))+"%\n"+\
 				"Stun Chance: +"+ str(floorf(legs_comp.stun_chance*100)) + "%"
 		"Weapon":
-			pass
+			var weapon : MechWeapon = mech_component as MechWeapon
+			text = "Weapon Class: " + str(weapon.get_weapon_class())+"\n"+\
+			"DPC (Damage Per Cycle): " + str(weapon.damage)+"\n"+\
+			"Charge Up Base Speed: " + str(weapon.charge_speed * 100) +"\n"+\
+			"Base Crit Chance: " + str(weapon.crit_chance * 100) + "%\n"+\
+			"Hit Rate (Accuracy): " + str(weapon.accuracy * 100) + "%\n"+\
+			"Stun Chance: " + str(weapon.stun_chance) + "%"
 
 func clear_container() -> void:
 	for child in get_children():

@@ -13,6 +13,7 @@ charge_speed = 0.45
 crit_chance = 0.34
 accuracy = 0.55
 stun_chance = 0.0
+plasma_damage_bonus = 0.0
 component_name = "RKL-125X"
 manufacture_name = 0
 description = ""

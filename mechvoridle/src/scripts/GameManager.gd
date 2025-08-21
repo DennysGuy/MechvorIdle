@@ -320,6 +320,16 @@ func calculate_health() -> int:
 	return get_owned_mech_arms().health + get_owned_mech_head().health + get_owned_mech_legs().health + get_owned_mech_torso().health
 	
 
+func calculate_current_total_health() -> int:
+	
+	var total_health : int = 0
+	
+	for key in owned_mech_components.keys():
+		if owned_mech_components[key]:
+			total_health += owned_mech_components[key].health
+	
+	return total_health
+
 #shop panel
 func add_mech_component(component : MechComponent) -> void: 
 	
@@ -327,19 +337,9 @@ func add_mech_component(component : MechComponent) -> void:
 	var component_weight_class : String = component.get_weight_class()
 	var component_focus : String = component.get_weapon_focus()
 	
-	if component_category == "Torso" or component_category == "Legs":
-		SignalBus.show_part.emit(component_category, component_weight_class)
-		if component_category == "Torso":
-			SignalBus.update_mech_torso_name.emit(component)
-		else:
-			SignalBus.update_mech_legs_name.emit(component)
-		
-	if component_category == "Arms" or component_category == "Head":
-		SignalBus.show_part.emit(component_category, component_focus)
-		if component_category == "Arms":
-			SignalBus.update_mech_arms_name.emit(component)
-		else:
-			SignalBus.update_mech_head_name.emit(component)
+	
+
+
 		
 	if component_category == "Weapon":
 		var weapon_component = component as MechWeapon
@@ -353,7 +353,17 @@ func add_mech_component(component : MechComponent) -> void:
 			owned_mech_components["RightWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Right")
 			SignalBus.update_mech_weapon_two_name.emit(component)
-	else:	
+	else:
+		SignalBus.show_part.emit(component_category, component_weight_class)
+		if component_category == "Torso":
+			SignalBus.update_mech_torso_name.emit(component)
+		elif component_category == "Legs":
+			SignalBus.update_mech_legs_name.emit(component)
+		elif component_category == "Arms":
+			SignalBus.update_mech_arms_name.emit(component)
+		elif component_category == "Head":
+			SignalBus.update_mech_head_name.emit(component)
+		
 		owned_mech_components[component_category] = component
 	
 	owned_components_count += 1

@@ -13,6 +13,7 @@ charge_speed = 1.2
 crit_chance = 0.3
 accuracy = 0.8
 stun_chance = 0.2
+plasma_damage_bonus = 0.0
 component_name = "Test Boss 1 Sword 2"
 manufacture_name = 0
 description = ""

@@ -107,7 +107,7 @@ theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "Charge Speed"
 
-[node name="Label" type="Label" parent="."]
+[node name="ChargeSpeedAmount" type="Label" parent="."]
 layout_mode = 0
 offset_left = 111.0
 offset_top = 95.0
@@ -206,7 +206,7 @@ theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "Charge Speed"
 
-[node name="Label2" type="Label" parent="."]
+[node name="ChargeSpeedAmount2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 160.0
