@@ -329,10 +329,18 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	if component_category == "Torso" or component_category == "Legs":
 		SignalBus.show_part.emit(component_category, component_weight_class)
-	
+		if component_category == "Torso":
+			SignalBus.update_mech_torso_name.emit(component)
+		else:
+			SignalBus.update_mech_legs_name.emit(component)
+		
 	if component_category == "Arms" or component_category == "Head":
 		SignalBus.show_part.emit(component_category, component_focus)
-	
+		if component_category == "Arms":
+			SignalBus.update_mech_arms_name.emit(component)
+		else:
+			SignalBus.update_mech_head_name.emit(component)
+		
 	if component_category == "Weapon":
 		var weapon_component = component as MechWeapon
 		var weapon_class = weapon_component.get_weapon_class()
@@ -340,9 +348,11 @@ func add_mech_component(component : MechComponent) -> void:
 		if owned_mech_components["LeftWeapon"] == null:
 			owned_mech_components["LeftWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Left")
+			SignalBus.update_mech_weapon_one_name.emit(component)
 		else:
 			owned_mech_components["RightWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Right")
+			SignalBus.update_mech_weapon_two_name.emit(component)
 	else:	
 		owned_mech_components[component_category] = component
 	

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://c7b3ymw1niayi"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_rvlep"]
+
+[resource]
+script = ExtResource("1_rvlep")
+weapon_type = 0
+weapon_class = 2
+damage = 900
+number_of_hits = 1
+charge_time = 0.15
+charge_speed = 0.12
+crit_chance = 0.4
+accuracy = 0.25
+stun_chance = 0.65
+plasma_damage_bonus = 0.0
+component_name = "Thy-Kingdom-Come"
+manufacture_name = 2
+description = "Thy-Kingdom-Come is one of the most powerful rocket launchers Crosshair Enterprises has developed - although, it is highly experimental leading to usage difficulty.
+
+This launcher typically requires a heavier mech frame to utilize effectively and a trained mech pilot for volatile conditions. 
+
+Great for those who prefer high-risk high reward, and when we say high-risk/reward - the effects are devastating."
+health = 0
+plasma_resistance = 0.0
+refined_ferrite_cost = 2500
+plasma_cost = 600
+platinum_cost = 0
+category = 4
+component_type = 0
+weight_class = 0
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

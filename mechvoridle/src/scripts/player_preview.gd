@@ -90,6 +90,7 @@ func _physics_process(delta) -> void:
 
 
 func show_part(body_part : String, category : String) -> void:
+	
 	var mech_component = parts_dictionary[body_part][category]
 	mech_component.show()
 

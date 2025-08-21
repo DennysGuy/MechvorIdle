@@ -4,18 +4,19 @@
 
 [resource]
 script = ExtResource("1_yfro8")
-weapon_type = 1
+weapon_type = 0
 weapon_class = 1
-damage = 165
-number_of_hits = 1
+damage = 235
+number_of_hits = 3
 charge_time = 0.5
-charge_speed = 0.59
+charge_speed = 0.65
 crit_chance = 0.0
 accuracy = 0.8
 stun_chance = 0.0
-component_name = "PSAM8443X"
-manufacture_name = 0
-description = "A plasma based rifle - designed to penatrate the toughest of armor"
+plasma_damage_bonus = 0.0
+component_name = "ARG-15-X"
+manufacture_name = 1
+description = "A reliable all-rounder, military graded rifle. the ARG-15-X is a slightly modified version of the famous Palo Dynamics standard issue rifle - famously used during the Corpo-Faction Wars."
 health = 0
 plasma_resistance = 0.0
 refined_ferrite_cost = 1200

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://bs55jm2j143et"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_axnmh"]
+
+[resource]
+script = ExtResource("1_axnmh")
+weapon_type = 0
+weapon_class = 1
+damage = 400
+number_of_hits = 1
+charge_time = 0.0
+charge_speed = 0.45
+crit_chance = 0.25
+accuracy = 0.8
+stun_chance = 0.35
+plasma_damage_bonus = 0.0
+component_name = "Soul Plucker"
+manufacture_name = 2
+description = "Soul Plucker is a deadly high powered precision rifle. Aimed to be used at long distances as it is armed with a special scope with an interchangable lens. 
+
+During the Corpo-Faction wars, Crosshair Enterprises earned their name with the high usage of these high powered rifles."
+health = 0
+plasma_resistance = 0.0
+refined_ferrite_cost = 2200
+plasma_cost = 300
+platinum_cost = 0
+category = 4
+component_type = 0
+weight_class = 1
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

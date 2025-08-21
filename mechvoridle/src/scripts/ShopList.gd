@@ -24,14 +24,17 @@ var shop_list : Dictionary = {
 	"Rifles": {
 		0: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_1.tres"),
 		1: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_2.tres"),
+		2: preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_3.tres")
 	},
 	"Swords": {
 		0: preload("res://src/resources/mechcomponents/weapons/swords/Sword-1.tres"),
-		1: preload("res://src/resources/mechcomponents/weapons/swords/Sword-2.tres")
+		1: preload("res://src/resources/mechcomponents/weapons/swords/Sword-2.tres"),
+		2: preload("res://src/resources/mechcomponents/weapons/swords/Sword-3.tres")
 	},
 	"Rocket Launchers":{
 		0: preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-1.tres"),
-		1: preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-2.tres")
+		1: preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-2.tres"),
+		2: preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-3.tres")
 	}
 		
 		

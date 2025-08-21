@@ -4,23 +4,25 @@
 
 [resource]
 script = ExtResource("1_upxg4")
-weapon_type = 1
+weapon_type = 0
 weapon_class = 2
-damage = 560
-number_of_hits = 1
+damage = 650
+number_of_hits = 2
 charge_time = 0.15
 charge_speed = 0.1
-crit_chance = 0.25
-accuracy = 0.4
-stun_chance = 0.0
-component_name = "BIGK1X33ZOMG"
-manufacture_name = 0
-description = "A power plasma based rocket launcher that packs a powerful bunch, but may suffer from a slower charge up time and heavy weight. Once landed, the effects are devastating.
-"
+crit_chance = 0.18
+accuracy = 0.45
+stun_chance = 0.4
+plasma_damage_bonus = 0.0
+component_name = "DUAL-ARM-TT68D"
+manufacture_name = 1
+description = "A powerful dual chamber rocket launcher, strapped to the arm to allow for further utility. Great for mid to close range combat. 
+
+Palo Dynamics intended this rocket launcher to be modifications to the arms rather than a launcher to be gripped - that way, more weapon options can be added."
 health = 0
 plasma_resistance = 0.0
-refined_ferrite_cost = 2500
-plasma_cost = 600
+refined_ferrite_cost = 3200
+plasma_cost = 400
 platinum_cost = 0
 category = 4
 component_type = 0

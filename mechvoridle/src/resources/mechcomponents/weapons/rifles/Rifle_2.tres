@@ -6,15 +6,19 @@
 script = ExtResource("1_fd1e0")
 weapon_type = 0
 weapon_class = 1
-damage = 120
-number_of_hits = 3
+damage = 135
+number_of_hits = 10
 charge_time = 0.0
-charge_speed = 0.55
-crit_chance = 0.0
+charge_speed = 0.8
+crit_chance = 0.03
 accuracy = 0.7
-stun_chance = 0.0
-component_name = "AUTO1X4FFZ"
-description = "Semi-long range rifle - great for barraging the enemy - though the bullets aren't the highest caliber"
+stun_chance = 0.03
+plasma_damage_bonus = 0.0
+component_name = "Sub Ultima Machinegun"
+manufacture_name = 0
+description = "This sub machine gun is known best for CQC, as in typical use it is known to be the \"Sprayer and Prayer\". 
+
+During the Corpo-Faction wars, Steel Fang Technologies issued these to their secret aquatic mech units. They were a deadly force to be reckon with. "
 health = 0
 plasma_resistance = 0.0
 refined_ferrite_cost = 1600

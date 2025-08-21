@@ -77,12 +77,13 @@ func show_part(component : MechComponent) -> void:
 	var component_weight_class : String = component.get_weight_class()
 	var component_focus : String = component.get_weapon_focus()
 	
-	component_preview = mech_parts[category][component_weight_class]
+	
 	
 	if category == "Weapon":
 		var weapon_component = component as MechWeapon
 		component_preview = mech_parts[weapon_component.get_weapon_class()][weapon_component.get_weapon_type()]
-	
+	else:
+		component_preview = mech_parts[category][component_weight_class]
 
 	if previously_viewed == null:
 		previously_viewed = component_preview

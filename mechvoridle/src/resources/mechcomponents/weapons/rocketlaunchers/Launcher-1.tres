@@ -6,19 +6,24 @@
 script = ExtResource("1_bp2tl")
 weapon_type = 0
 weapon_class = 2
-damage = 450
-number_of_hits = 4
+damage = 380
+number_of_hits = 8
 charge_time = 0.18
-charge_speed = 0.15
+charge_speed = 0.3
 crit_chance = 0.25
-accuracy = 0.5
-stun_chance = 0.0
-component_name = "RL99X346"
+accuracy = 0.6
+stun_chance = 0.3
+plasma_damage_bonus = 0.0
+component_name = "Berzerker Barrage X"
 manufacture_name = 0
-description = "This here is one reliable rocket launcher. Not the strongest, but improves on accuracy and charge time from other models. Good for an all around build."
+description = "This rocket launcher issues a barrage of mini lock-on rockets. Extremely useful for bursting down the enemy. 
+
+Steel Fang Technologies saw this piece of weaponry fit for close range support.
+
+This launcher doesn't have the longest range, but they issue another element in combat to overwhelm the opponent."
 health = 0
 plasma_resistance = 0.0
-refined_ferrite_cost = 2200
+refined_ferrite_cost = 2600
 plasma_cost = 300
 platinum_cost = 0
 category = 4
