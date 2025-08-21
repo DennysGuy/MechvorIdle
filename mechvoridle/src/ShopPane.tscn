@@ -165,30 +165,6 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 6
 text = "Part Class"
 
-[node name="Manufacturer" type="Label" parent="ColorRect"]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 285.0
-offset_right = 159.0
-offset_bottom = 293.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 6
-text = "Steel Fang Technologies"
-
-[node name="ManufactureLogo" type="TextureRect" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = -78.0
-offset_right = 31.0
-offset_bottom = -66.0
-grow_vertical = 0
-texture = ExtResource("6_gcoiw")
-expand_mode = 1
-
 [node name="FerriteCost" type="Label" parent="ColorRect"]
 layout_mode = 0
 offset_left = 143.0
@@ -356,6 +332,32 @@ texture = ExtResource("6_wcomc")
 position = Vector2(135.5, 266.5)
 scale = Vector2(0.916667, 0.916667)
 texture = ExtResource("6_wcomc")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 0
+offset_left = 445.0
+offset_top = 247.0
+offset_right = 584.0
+offset_bottom = 259.0
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="ManufactureLogo" type="TextureRect" parent="ColorRect/HBoxContainer2"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+texture = ExtResource("6_gcoiw")
+expand_mode = 1
+
+[node name="Manufacturer" type="Label" parent="ColorRect/HBoxContainer2"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 7
+text = "Steel Fang Technologies"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="CRTOverlay" type="ColorRect" parent="ColorRect"]
 material = SubResource("ShaderMaterial_mi2d3")
@@ -599,13 +601,13 @@ text = "!"
 [node name="EffectsDescriptor" type="RichTextLabel" parent="ColorRect"]
 layout_mode = 0
 offset_left = 370.0
-offset_top = 260.0
+offset_top = 266.0
 offset_right = 582.0
 offset_bottom = 334.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = 8
 theme_override_fonts/normal_font = ExtResource("3_8ov7t")
-theme_override_font_sizes/normal_font_size = 9
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 script = ExtResource("16_gcoiw")
 
@@ -615,6 +617,7 @@ libraries = {
 }
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
 [connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]

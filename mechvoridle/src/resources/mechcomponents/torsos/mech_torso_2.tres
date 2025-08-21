@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ebm0g")
-charge_speed_modifier = 0.0
+charge_speed_modifier = 0.1
 component_name = "TORSO44XCIRLY"
 manufacture_name = 1
 description = "Providing great protection yet, slower charge speeds. Great against faster melee based builds as they can tank lots of hits."

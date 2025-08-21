@@ -14,6 +14,7 @@ crit_chance = 0.15
 accuracy = 0.7
 stun_chance = 0.15
 component_name = "RFL-23XX"
+manufacture_name = 0
 description = ""
 health = 0
 plasma_resistance = 0.0

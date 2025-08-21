@@ -17,8 +17,8 @@ class_name ShopPane extends Control
 @onready var ferrite_cost: Label = $ColorRect/FerriteCost
 @onready var plasma_cost: Label = $ColorRect/PlasmaCost
 @onready var platinum_cost: Label = $ColorRect/PlatinumCost
-@onready var manufacture_logo : TextureRect = $ColorRect/ManufactureLogo
-@onready var manufacturer = $ColorRect/Manufacturer
+@onready var manufacture_logo : TextureRect = $ColorRect/HBoxContainer2/ManufactureLogo
+@onready var manufacturer = $ColorRect/HBoxContainer2/Manufacturer
 
 
 @onready var confirmation_box: TextureRect = $ColorRect/ConfirmationBox
@@ -38,7 +38,6 @@ class_name ShopPane extends Control
 @onready var rifles_indicator: Label = $ColorRect/RiflesIndicator
 @onready var swords_indicator: Label = $ColorRect/SwordsIndicator
 @onready var launchers_indicator: Label = $ColorRect/LaunchersIndicator
-
 
 var selected_component : MechComponent
 var confirmation_box_is_showing : bool = false

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_3xvj0")
-crit_damage_modifier = 0.05
+crit_damage_modifier = 0.2
 max_hits_chance = 0.95
 component_name = "Arms of Faith"
 manufacture_name = 2

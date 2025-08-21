@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_6x0bj")
-charge_speed_modifier = -0.1
+charge_speed_modifier = 0.2
 component_name = "Chest of Righteousness"
 manufacture_name = 2
 description = "The Chest of Righteousness is heavy duty - high protection, but a little bit on the slow side."

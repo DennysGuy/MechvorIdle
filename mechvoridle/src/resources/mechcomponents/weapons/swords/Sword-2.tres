@@ -14,6 +14,7 @@ crit_chance = 0.0
 accuracy = 0.9
 stun_chance = 0.0
 component_name = "SAMJ-PSAM-MKII"
+manufacture_name = 0
 description = "Designed for precision - forged with a plasma sealant. It is for the perfectionist who intends to land powerful strikes on their foe."
 health = 0
 plasma_resistance = 0.0

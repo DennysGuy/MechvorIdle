@@ -14,6 +14,7 @@ crit_chance = 0.3
 accuracy = 0.8
 stun_chance = 0.2
 component_name = "Test Boss 1 Sword 2"
+manufacture_name = 0
 description = ""
 health = 0
 plasma_resistance = 0.0

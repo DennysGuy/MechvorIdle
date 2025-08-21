@@ -14,6 +14,7 @@ crit_chance = 0.0
 accuracy = 0.8
 stun_chance = 0.0
 component_name = "PSAM8443X"
+manufacture_name = 0
 description = "A plasma based rifle - designed to penatrate the toughest of armor"
 health = 0
 plasma_resistance = 0.0

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_e578v")
-crit_damage_modifier = 0.0
+crit_damage_modifier = 0.05
 max_hits_chance = 0.8
 component_name = "ARM2YSAB343"
 manufacture_name = 1

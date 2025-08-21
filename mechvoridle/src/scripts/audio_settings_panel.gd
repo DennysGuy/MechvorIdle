@@ -26,7 +26,7 @@ const TRACK_LIST_SIZE = 3
 
 @onready var juke_box : AudioStreamPlayer= $JukeBox
 
-var min_music_value : float = -30.0
+var min_music_value : float = -40.0
 var max_music_value : float = 10.0
 var min_sfx_value : float = -30.0
 var max_sfx_value : float = 15.0

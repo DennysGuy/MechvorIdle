@@ -14,6 +14,7 @@ crit_chance = 0.25
 accuracy = 0.4
 stun_chance = 0.0
 component_name = "BIGK1X33ZOMG"
+manufacture_name = 0
 description = "A power plasma based rocket launcher that packs a powerful bunch, but may suffer from a slower charge up time and heavy weight. Once landed, the effects are devastating.
 "
 health = 0

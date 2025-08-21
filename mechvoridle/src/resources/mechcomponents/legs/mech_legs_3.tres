@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_bqij4")
-dodge_chance_modifier = -0.1
+dodge_chance_modifier = -0.05
 stun_chance = 0.15
 component_name = "Legs of Peace"
 manufacture_name = 2

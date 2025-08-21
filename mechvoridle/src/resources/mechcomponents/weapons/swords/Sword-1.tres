@@ -14,6 +14,7 @@ crit_chance = 0.2
 accuracy = 0.95
 stun_chance = 0.0
 component_name = "ZZ19223X"
+manufacture_name = 0
 description = "A nimble sword developed to slice through the thickest of steel. Faster and reliable accuracy, may not be the strongest - but you can ensure that a hit will land."
 health = 0
 plasma_resistance = 0.0

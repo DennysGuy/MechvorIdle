@@ -14,6 +14,7 @@ crit_chance = 0.25
 accuracy = 0.5
 stun_chance = 0.0
 component_name = "RL99X346"
+manufacture_name = 0
 description = "This here is one reliable rocket launcher. Not the strongest, but improves on accuracy and charge time from other models. Good for an all around build."
 health = 0
 plasma_resistance = 0.0
