@@ -337,9 +337,6 @@ func add_mech_component(component : MechComponent) -> void:
 	var component_weight_class : String = component.get_weight_class()
 	var component_focus : String = component.get_weapon_focus()
 	
-	
-
-
 		
 	if component_category == "Weapon":
 		var weapon_component = component as MechWeapon
@@ -348,21 +345,40 @@ func add_mech_component(component : MechComponent) -> void:
 		if owned_mech_components["LeftWeapon"] == null:
 			owned_mech_components["LeftWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Left")
-			SignalBus.update_mech_weapon_one_name.emit(component)
+			
+			SignalBus.update_weapon_1_name_on_purchased.emit(component)
+			SignalBus.update_weapon_1_accuracy_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_1_charge_speed_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_1_crit_chance_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_1_dpc_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_1_stun_stats_on_purchased.emit(component)
+		
 		else:
 			owned_mech_components["RightWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Right")
-			SignalBus.update_mech_weapon_two_name.emit(component)
+			SignalBus.update_weapon_2_name_on_purchased.emit(component)
+			SignalBus.update_weapon_2_accuracy_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_2_charge_speed_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_2_crit_chance_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_2_dpc_stats_on_purchased.emit(component)
+			SignalBus.update_weapon_2_stun_stats_on_purchased.emit(component)
 	else:
 		SignalBus.show_part.emit(component_category, component_weight_class)
 		if component_category == "Torso":
 			SignalBus.update_mech_torso_name.emit(component)
+			SignalBus.update_charge_speed_stats_on_mech_torso_purchased.emit(component)
 		elif component_category == "Legs":
 			SignalBus.update_mech_legs_name.emit(component)
+			SignalBus.update_dodge_stats_on_mech_legs_purchased.emit(component)
+			SignalBus.update_stun_stats_on_mech_legs_purchased.emit(component)
 		elif component_category == "Arms":
 			SignalBus.update_mech_arms_name.emit(component)
+			#SignalBus.update_crit_damage_stats_on_mech_arms_purchased.emit(component)
+			#SignalBus.update_max_hit_stats_on_mech_arms_purchased.emit(component)
 		elif component_category == "Head":
 			SignalBus.update_mech_head_name.emit(component)
+			SignalBus.update_accuracy_stats_on_mech_head_purchased.emit(component)
+			SignalBus.update_crit_stats_on_mech_head_purchased.emit(component)
 		
 		owned_mech_components[component_category] = component
 	

@@ -78,29 +78,73 @@ text = "Weapon 1 - Sword"
 layout_mode = 0
 offset_left = 6.0
 offset_top = 85.0
-offset_right = 94.0
+offset_right = 24.0
 offset_bottom = 93.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
-text = "DPC (Dmg per Cycle)"
+text = "DPC "
 
 [node name="DPCW1Amount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 9.0
+offset_left = 5.0
 offset_top = 95.0
-offset_right = 49.0
+offset_right = 45.0
 offset_bottom = 105.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 8
-text = "450"
+text = "1450"
+
+[node name="Accuracy" type="Label" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 85.0
+offset_right = 69.0
+offset_bottom = 93.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Hit Rate"
+
+[node name="AccuracyRate" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 96.0
+offset_right = 108.0
+offset_bottom = 106.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "30% (15% + 15%)"
+
+[node name="Accuracy2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 150.0
+offset_right = 74.0
+offset_bottom = 158.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Hit Rate"
+
+[node name="AccuracyRate2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 161.0
+offset_right = 110.0
+offset_bottom = 171.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "30% (15% + 15%)"
 
 [node name="ChargeSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 104.0
+offset_left = 111.0
 offset_top = 85.0
-offset_right = 162.0
+offset_right = 169.0
 offset_bottom = 93.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -109,9 +153,9 @@ text = "Charge Speed"
 
 [node name="ChargeSpeedAmount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 111.0
+offset_left = 114.0
 offset_top = 95.0
-offset_right = 186.0
+offset_right = 189.0
 offset_bottom = 105.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -121,9 +165,9 @@ text = "35% (45% - 10%)"
 [node name="CritChance" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 107.5
+offset_top = 110.5
 offset_right = 55.0
-offset_bottom = 115.5
+offset_bottom = 118.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
@@ -132,9 +176,9 @@ text = "Crit Chance"
 [node name="CritChancePerc" type="Label" parent="."]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 117.5
+offset_top = 119.5
 offset_right = 84.0
-offset_bottom = 127.5
+offset_bottom = 129.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 8
@@ -142,10 +186,10 @@ text = "15% (30% - 15%)"
 
 [node name="StunChance" type="Label" parent="."]
 layout_mode = 0
-offset_left = 104.0
-offset_top = 107.5
-offset_right = 156.0
-offset_bottom = 115.5
+offset_left = 111.0
+offset_top = 110.5
+offset_right = 163.0
+offset_bottom = 118.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
@@ -153,10 +197,10 @@ text = "Stun Chance"
 
 [node name="StunChanceW1Perc" type="Label" parent="."]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 117.5
-offset_right = 182.0
-offset_bottom = 127.5
+offset_left = 118.0
+offset_top = 120.5
+offset_right = 190.0
+offset_bottom = 130.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 8
@@ -193,13 +237,13 @@ offset_bottom = 170.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 8
-text = "450"
+text = "1450"
 
 [node name="ChargeSpeed2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 101.0
+offset_left = 111.0
 offset_top = 150.0
-offset_right = 159.0
+offset_right = 169.0
 offset_bottom = 158.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -208,9 +252,9 @@ text = "Charge Speed"
 
 [node name="ChargeSpeedAmount2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 108.0
+offset_left = 116.0
 offset_top = 160.0
-offset_right = 183.0
+offset_right = 191.0
 offset_bottom = 170.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -219,9 +263,9 @@ text = "35% (45% - 10%)"
 
 [node name="CritChance2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.0
+offset_left = 5.0
 offset_top = 172.5
-offset_right = 55.0
+offset_right = 54.0
 offset_bottom = 180.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -230,9 +274,9 @@ text = "Crit Chance"
 
 [node name="CritChancePerc2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 12.0
+offset_left = 10.0
 offset_top = 182.5
-offset_right = 84.0
+offset_right = 82.0
 offset_bottom = 192.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -241,9 +285,9 @@ text = "15% (30% - 15%)"
 
 [node name="StunChance2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 101.0
+offset_left = 111.0
 offset_top = 172.5
-offset_right = 153.0
+offset_right = 163.0
 offset_bottom = 180.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -252,9 +296,9 @@ text = "Stun Chance"
 
 [node name="StunChanceW1Perc2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 107.0
+offset_left = 119.0
 offset_top = 182.5
-offset_right = 179.0
+offset_right = 191.0
 offset_bottom = 192.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
