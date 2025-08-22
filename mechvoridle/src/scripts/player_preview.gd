@@ -93,7 +93,8 @@ func _physics_process(delta) -> void:
 
 func show_part(body_part : String, category : String) -> void:
 	var mech_component = parts_dictionary[body_part][category]
-	mech_component.show()
+	if mech_component:
+		mech_component.show()
 
 func show_weapon(weapon : String, category : String, hand :String) -> void:
 	var selected_weapon = parts_dictionary[weapon][category][hand]

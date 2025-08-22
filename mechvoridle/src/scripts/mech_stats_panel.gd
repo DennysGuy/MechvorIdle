@@ -1,7 +1,8 @@
 class_name MechStatsPanel extends ColorRect
 
 @onready var total_armor_amount: Label = $TotalArmorAmount
-@onready var mobility_amount: Label = $MobilityAmount
+@onready var mobility_amount: StatLabel = $MobilityAmount
+@onready var max_hit_chance: Label = $MaxHitChance
 
 
 #weapon 1 labels
@@ -71,7 +72,10 @@ func update_total_armor_amount() -> void:
 	total_armor_amount.text = str(GameManager.calculate_current_total_health())
 
 func update_total_mobility(component : MechLegs) -> void:
-	mobility_amount.text = str(GameManager.BASE_DODGE_CHANCE + component.dodge_chance_modifier) + "("+str(GameManager.BASE_DODGE_CHANCE)+" + "+str(component.stun_chance) 
+	mobility_amount.text = str(GameManager.BASE_DODGE_CHANCE * component.dodge_chance_modifier) +"%" 
+
+func update_max_hit_chance(component : MechArms) -> void:
+	max_hit_chance.text = str(component.max_hits_chance * 100) +"%"
 
 func update_weapon_1_name(component : MechWeapon) -> void:
 	weapon_1.text = "Weapon 1 - " + component.component_name + "("+component.get_weapon_class()+")"
@@ -84,91 +88,88 @@ func update_weapon_1_charge_speed_on_weapon_purcahse(component : MechWeapon) -> 
 	if !GameManager.owned_mech_components["Torso"]:
 		charge_speed_amount.text = str(roundf(charge_speed))
 	else:
-		var torso_charge_speed_bonus : float = roundf(GameManager.owned_mech_components["Torso"].charge_speed*100)
-		charge_speed_amount.text = str(charge_speed + torso_charge_speed_bonus) + " ("+str(charge_speed)+" + "+str(torso_charge_speed_bonus)+")"
+		var torso_charge_speed_bonus : float = roundf(GameManager.owned_mech_components["Torso"].charge_speed)
+		var added_charge_speed_bonus : float = charge_speed * torso_charge_speed_bonus * 100
+		charge_speed_amount.text = str((charge_speed + added_charge_speed_bonus))
 
 func update_weapon_charge_speed_on_torso_purchase(component : MechTorso) -> void:
 	var charge_speed : float = roundf(component.charge_speed_modifier * 100)
-	if !GameManager.owned_mech_components["LeftWeapon"]:
-		charge_speed_amount.text = str(charge_speed)
-	else:
-		var torso_charge_speed_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].charge_speed*100)
-		charge_speed_amount.text = str(charge_speed + torso_charge_speed_bonus) + " ("+str(charge_speed)+" + "+str(torso_charge_speed_bonus)+")"
+	if GameManager.owned_mech_components["LeftWeapon"]:
+		var torso_charge_speed_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].charge_speed)
+		var added_charge_speed_bonus : float = charge_speed * torso_charge_speed_bonus*100
+		charge_speed_amount.text = str(charge_speed + added_charge_speed_bonus)
 	
-	if !GameManager.owned_mech_components["RightWeapon"]:
-		charge_speed_amount_2.text = str(charge_speed)
-	else:
+	if GameManager.owned_mech_components["RightWeapon"]:
 		var torso_charge_speed_bonus : float = roundf(GameManager.owned_mech_components["RightWeapon"].charge_speed*100)
-		charge_speed_amount.text = str(charge_speed + torso_charge_speed_bonus) + " ("+str(charge_speed)+" + "+str(torso_charge_speed_bonus)+")"
+		var added_charge_speed_bonus : float = charge_speed * torso_charge_speed_bonus * 100
+		charge_speed_amount.text = str(charge_speed + added_charge_speed_bonus)
 
 func update_weapon_1_crit_chance_on_weapon_purchase(component : MechWeapon) -> void:
-	var crit_chance : float = roundf(component.crit_chance * 100)
-	if !GameManager.owned_mech_components["Head"]:
-		crit_chance_perc.text = str(roundf(crit_chance))+ "%"
+	var crit_chance : float = roundf(component.crit_chance * 100) 
+
+	if GameManager.owned_mech_components["Head"]:
+		var head_crit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].crit_chance)
+		var added_crit_chance_bonus : float = roundf(crit_chance * head_crit_chance_bonus * 100)
+		crit_chance_perc.text = str(roundf(crit_chance + added_crit_chance_bonus))+ "%"
 	else:
-		var head_crit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].crit_chance*100)
-		crit_chance_perc.text = str(floorf(crit_chance + head_crit_chance_bonus)) + "% ("+str(crit_chance)+"% + "+str(head_crit_chance_bonus)+"%)"
+		crit_chance_perc.text = str(roundf(crit_chance)*100) + "%"
 
 func update_weapon_crit_chance_on_head_purchase(component : MechHead) -> void:
-	var crit_chance : float = roundf(component.crit_chance * 100)
-	if !GameManager.owned_mech_components["LeftWeapon"]:
-		crit_chance_perc.text = str(roundf(crit_chance))+ "%"
-	else:
-		var head_crit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].crit_chance*100)
-		crit_chance_perc.text = str(floorf(crit_chance + head_crit_chance_bonus)) + "% ("+str(crit_chance)+"% + "+str(head_crit_chance_bonus)+"%)"
+	var crit_chance_bonus : float = roundf(component.crit_chance)
+	if GameManager.owned_mech_components["LeftWeapon"]:
+		var weapon_crit_chance : float = roundf(GameManager.owned_mech_components["LeftWeapon"].crit_chance * 100)
+		var added_crit_chance_bonus : float = roundf(weapon_crit_chance * crit_chance_bonus)
+		crit_chance_perc.text = str(roundf(weapon_crit_chance + added_crit_chance_bonus)) + "%"
 
-	if !GameManager.owned_mech_components["RightWeapon"]:
-		crit_chance_perc_2.text = str(roundf(crit_chance))+ "%"
-	else:
-		var head_crit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].crit_chance*100)
-		crit_chance_perc_2.text = str(floorf(crit_chance + head_crit_chance_bonus)) + "% ("+str(crit_chance)+"% + "+str(head_crit_chance_bonus)+"%)"
+	if GameManager.owned_mech_components["RightWeapon"]:
+		var weapon_crit_chance : float = roundf(GameManager.owned_mech_components["RightWeapon"].crit_chance)
+		var added_crit_chance_bonus : float = roundf(weapon_crit_chance * crit_chance_bonus)
+		crit_chance_perc_2.text = str(roundf(weapon_crit_chance + added_crit_chance_bonus)*100) + "%"
 
 func update_weapon_1_accuracy_on_weapon_purchase(component : MechWeapon) -> void:
 	var hit_chance : float = roundf(component.accuracy * 100)
 	if !GameManager.owned_mech_components["Head"]:
 		accuracy_rate.text = str(roundf(hit_chance))+ "%"
 	else:
-		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].accuracy_bonus*100)
-		accuracy_rate.text = str(floorf(hit_chance+ hit_chance_bonus)) + "% ("+str(hit_chance)+"% + "+str(hit_chance_bonus)+"%)"
+		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["Head"].accuracy_bonus)
+		var added_bonus : float = roundf(hit_chance * hit_chance_bonus * 100)
+		accuracy_rate.text = str(floorf(hit_chance + added_bonus)) +"%"
 
 
 func update_weapon_accuracy_on_head_purchase(component : MechHead) -> void:
-	var hit_chance : float = roundf(component.accuracy_bonus * 100)
-	if !GameManager.owned_mech_components["LeftWeapon"]:
-		accuracy_rate.text = str(roundf(hit_chance))+ "%"
-	else:
-		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].accuracy*100)
-		accuracy_rate.text = str(floorf(hit_chance+ hit_chance_bonus)) + "% ("+str(hit_chance)+"% + "+str(hit_chance_bonus)+"%)"
+	var hit_chance : float = roundf(component.accuracy_bonus)
+	if GameManager.owned_mech_components["LeftWeapon"]:
+		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].accuracy * 100)
+		var added_bonus : float = roundf(hit_chance * hit_chance_bonus)
+		accuracy_rate.text = str(roundf(hit_chance_bonus+added_bonus)) + "%"
 
-	if !GameManager.owned_mech_components["RightWeapon"]:
-		accuracy_rate_2.text = str(roundf(hit_chance))+ "%"
-	else:
-		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["RightWeapon"].accuracy*100)
-		accuracy_rate_2.text = str(floorf(hit_chance + hit_chance_bonus)) + "% ("+str(hit_chance)+"% + "+str(hit_chance_bonus)+"%)"
+	if GameManager.owned_mech_components["RightWeapon"]:
+		var hit_chance_bonus : float = roundf(GameManager.owned_mech_components["RightWeapon"].accuracy)
+		var added_bonus : float = roundf(hit_chance * hit_chance_bonus * 100)
+		accuracy_rate_2.text = str(floorf(hit_chance + added_bonus)) + "%"
 
 
 func update_weapon_1_stun_chance_on_weapon_purchase(component : MechWeapon) -> void:
-	var stun_chance : float = roundf(component.stun_chance * 100)
+	var stun_chance : float = roundf(component.stun_chance)
 	if !GameManager.owned_mech_components["Legs"]:
-		stun_chance_w_1_perc.text = str(roundf(stun_chance))+ "%"
+		stun_chance_w_1_perc.text = str(roundf(stun_chance)*100)+ "%"
 	else:
-		var stun_chance_bonus : float = roundf(GameManager.owned_mech_components["Legs"].stun_chance*100)
-		stun_chance_w_1_perc.text = str(floorf(stun_chance+ stun_chance_bonus)) + "% ("+str(stun_chance)+"% + "+str(stun_chance_bonus)+"%)"
+		var stun_chance_bonus : float = roundf(GameManager.owned_mech_components["Legs"].stun_chance)
+		var added_bonus : float = roundf(stun_chance * stun_chance_bonus)
+		stun_chance_w_1_perc.text = str(floorf(stun_chance+added_bonus)*100) + "%"
 
 
 func update_weapon_stun_chance_on_legs_purchase(component : MechLegs) -> void:
-	var stun_chance : float = roundf(component.stun_chance * 100)
-	if !GameManager.owned_mech_components["LeftWeapon"]:
-		stun_chance_w_1_perc.text = str(roundf(stun_chance))+ "%"
-	else:
-		var stun_chance_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].stun_chance*100)
-		stun_chance_w_1_perc.text = str(floorf(stun_chance+ stun_chance_bonus)) + "% ("+str(stun_chance)+"% + "+str(stun_chance_bonus)+"%)"
+	var stun_chance : float = roundf(component.stun_chance)
+	if GameManager.owned_mech_components["LeftWeapon"]:
+		var stun_chance_bonus : float = roundf(GameManager.owned_mech_components["LeftWeapon"].stun_chance)
+		var added_bonus : float = roundf(stun_chance * stun_chance_bonus)
+		stun_chance_w_1_perc.text = str(roundf(stun_chance + added_bonus)*100) + "%"
 
 	if !GameManager.owned_mech_components["RightWeapon"]:
-		stun_chance_w_1_perc_2.text = str(roundf(stun_chance))+ "%"
-	else:
 		var stun_chance_bonus : float = roundf(GameManager.owned_mech_components["RightWeapon"].stun_chance*100)
-		stun_chance_w_1_perc_2.text = str(floorf(stun_chance + stun_chance_bonus)) + "% ("+str(stun_chance)+"% + "+str(stun_chance_bonus)+"%)"
+		var added_bonus : float = roundf(stun_chance * stun_chance_bonus)
+		stun_chance_w_1_perc_2.text = str(roundf(stun_chance + added_bonus)) + "%"
 
 func update_weapon_2_name(component : MechWeapon) -> void:
 	weapon_1.text = "Weapon 2 - " + component.component_name + "("+component.get_weapon_class()+")"
