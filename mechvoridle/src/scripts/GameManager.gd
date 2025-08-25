@@ -345,7 +345,7 @@ func add_mech_component(component : MechComponent) -> void:
 		if owned_mech_components["LeftWeapon"] == null:
 			owned_mech_components["LeftWeapon"] = component
 			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Left")
-			
+		
 			SignalBus.update_weapon_1_name_on_purchased.emit(component)
 			SignalBus.update_weapon_1_accuracy_stats_on_purchased.emit(component)
 			SignalBus.update_weapon_1_charge_speed_stats_on_purchased.emit(component)
@@ -367,6 +367,7 @@ func add_mech_component(component : MechComponent) -> void:
 		if component_category == "Torso":
 			SignalBus.update_mech_torso_name.emit(component)
 			SignalBus.update_charge_speed_stats_on_mech_torso_purchased.emit(component)
+		
 		elif component_category == "Legs":
 			SignalBus.update_mech_legs_name.emit(component)
 			SignalBus.update_dodge_stats_on_mech_legs_purchased.emit(component)
@@ -381,7 +382,9 @@ func add_mech_component(component : MechComponent) -> void:
 			SignalBus.update_accuracy_stats_on_mech_head_purchased.emit(component)
 			SignalBus.update_crit_stats_on_mech_head_purchased.emit(component)
 		
+		
 		owned_mech_components[component_category] = component
+		SignalBus.update_total_armor_amount.emit()
 	
 	owned_components_count += 1
 	

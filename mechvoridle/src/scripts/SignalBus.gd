@@ -87,6 +87,8 @@ signal update_mech_legs_name(mech_legs : MechLegs)
 signal update_mech_weapon_one_name(mech_weapon : MechWeapon)
 signal update_mech_weapon_two_name(mech_weapon : MechWeapon)
 
+signal update_total_armor_amount
+
 signal update_crit_stats_on_mech_head_purchased(mech_head : MechHead)
 signal update_accuracy_stats_on_mech_head_purchased(mech_head : MechHead)
 signal update_charge_speed_stats_on_mech_torso_purchased(mech_torso : MechTorso)

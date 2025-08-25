@@ -11,6 +11,7 @@ number_of_hits = 2
 charge_time = 0.15
 charge_speed = 0.1
 crit_chance = 0.18
+crit_damage = 0.0
 accuracy = 0.45
 stun_chance = 0.4
 plasma_damage_bonus = 0.0

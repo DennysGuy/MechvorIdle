@@ -101,9 +101,9 @@ text = "1450"
 
 [node name="Accuracy" type="Label" parent="."]
 layout_mode = 0
-offset_left = 54.0
+offset_left = 40.0
 offset_top = 77.5
-offset_right = 87.0
+offset_right = 73.0
 offset_bottom = 85.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -112,20 +112,22 @@ text = "Hit Rate"
 
 [node name="AccuracyRate" type="Label" parent="."]
 layout_mode = 0
-offset_left = 53.0
+offset_left = 39.0
 offset_top = 87.5
-offset_right = 122.0
+offset_right = 108.0
 offset_bottom = 97.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "30% (15% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="Accuracy2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 54.0
+offset_left = 39.0
 offset_top = 150.0
-offset_right = 87.0
+offset_right = 72.0
 offset_bottom = 158.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -134,20 +136,22 @@ text = "Hit Rate"
 
 [node name="AccuracyRate2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 54.0
+offset_left = 39.0
 offset_top = 161.0
-offset_right = 123.0
+offset_right = 108.0
 offset_bottom = 171.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "30% (15% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="ChargeSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 134.0
+offset_left = 120.0
 offset_top = 77.0
-offset_right = 192.0
+offset_right = 178.0
 offset_bottom = 85.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -156,14 +160,16 @@ text = "Chrge Speed"
 
 [node name="ChargeSpeedAmount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 133.0
+offset_left = 119.0
 offset_top = 87.0
-offset_right = 208.0
+offset_right = 194.0
 offset_bottom = 97.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "35% (45% - 10%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="CritChance" type="Label" parent="."]
 layout_mode = 0
@@ -186,12 +192,14 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "15% (30% - 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="StunChance" type="Label" parent="."]
 layout_mode = 0
-offset_left = 134.0
+offset_left = 120.0
 offset_top = 101.5
-offset_right = 186.0
+offset_right = 172.0
 offset_bottom = 109.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -200,14 +208,16 @@ text = "Stun Chnce"
 
 [node name="StunChanceW1Perc" type="Label" parent="."]
 layout_mode = 0
-offset_left = 134.0
+offset_left = 120.0
 offset_top = 110.5
-offset_right = 206.0
+offset_right = 192.0
 offset_bottom = 120.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "15% (30% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="Weapon2" type="Label" parent="."]
 layout_mode = 0
@@ -244,9 +254,9 @@ text = "1450"
 
 [node name="ChargeSpeed2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 117.0
 offset_top = 150.0
-offset_right = 186.0
+offset_right = 175.0
 offset_bottom = 158.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -255,14 +265,16 @@ text = "Charge Speed"
 
 [node name="ChargeSpeedAmount2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 133.0
+offset_left = 117.0
 offset_top = 160.0
-offset_right = 208.0
+offset_right = 192.0
 offset_bottom = 170.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "35% (45% - 10%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="CritChance2" type="Label" parent="."]
 layout_mode = 0
@@ -285,12 +297,14 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "15% (30% - 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
 
 [node name="StunChance2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 117.0
 offset_top = 172.5
-offset_right = 180.0
+offset_right = 169.0
 offset_bottom = 180.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
@@ -299,11 +313,13 @@ text = "Stun Chance"
 
 [node name="StunChanceW1Perc2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 136.0
+offset_left = 117.0
 offset_top = 182.5
-offset_right = 208.0
+offset_right = 189.0
 offset_bottom = 192.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dbrwj")
 theme_override_font_sizes/font_size = 6
 text = "15% (30% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
