@@ -23,6 +23,6 @@ refined_ferrite_cost = 1500
 plasma_cost = 400
 platinum_cost = 0
 category = 4
-component_type = 0
+component_type = 2
 weight_class = 0
 metadata/_custom_type_script = "uid://cs720t7rvcl3x"

@@ -21,8 +21,9 @@ func _ready() -> void:
 	SignalBus.update_mech_torso_name.connect(update_torso_name)
 	SignalBus.update_mech_arms_name.connect(update_arms_name)
 	SignalBus.update_mech_legs_name.connect(update_legs_name)
-	SignalBus.update_mech_weapon_one_name.connect(update_weapon_one_name)
-	SignalBus.update_mech_weapon_two_name.connect(update_weapon_two_name)
+	SignalBus.update_weapon_1_name_on_purchased.connect(update_weapon_one_name)
+	SignalBus.update_weapon_2_name_on_purchased.connect(update_weapon_two_name)
+	
 
 func _process(delta : float) -> void:
 	pass

@@ -371,9 +371,10 @@ func add_mech_component(component : MechComponent) -> void:
 			SignalBus.update_mech_legs_name.emit(component)
 			SignalBus.update_dodge_stats_on_mech_legs_purchased.emit(component)
 			SignalBus.update_stun_stats_on_mech_legs_purchased.emit(component)
+	
 		elif component_category == "Arms":
 			SignalBus.update_mech_arms_name.emit(component)
-			#SignalBus.update_crit_damage_stats_on_mech_arms_purchased.emit(component)
+			SignalBus.update_crit_damage_stats_on_mech_arms_purchased.emit(component)
 			#SignalBus.update_max_hit_stats_on_mech_arms_purchased.emit(component)
 		elif component_category == "Head":
 			SignalBus.update_mech_head_name.emit(component)
