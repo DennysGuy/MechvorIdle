@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_ue517")
 accuracy_bonus = 0.0
+crit_chance = 0.0
 component_name = ""
+manufacture_name = 0
 description = ""
 health = 0
 plasma_resistance = 0.0

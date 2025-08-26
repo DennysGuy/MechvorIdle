@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_vap47")
 dodge_chance_modifier = 0.25
+stun_chance = 0.0
 component_name = ""
+manufacture_name = 0
 description = ""
 health = 2500
 plasma_resistance = 0.0

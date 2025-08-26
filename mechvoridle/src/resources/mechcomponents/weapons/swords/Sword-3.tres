@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://dyau5slcsx26u"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_2xu7x"]
+
+[resource]
+script = ExtResource("1_2xu7x")
+weapon_type = 0
+weapon_class = 0
+damage = 120
+number_of_hits = 3
+charge_time = 0.5
+charge_speed = 1.2
+crit_chance = 0.06
+crit_damage = 0.0
+accuracy = 0.88
+stun_chance = 0.15
+plasma_damage_bonus = 0.0
+component_name = "Morning Star of Spirit"
+manufacture_name = 2
+description = "The Morning Star of Spirit though slower in nature than other melee weapons, has a better chance to stagger. This weapon replicates the horrifying weaponry of the darker times of Humanity's past."
+health = 0
+plasma_resistance = 0.0
+refined_ferrite_cost = 1850
+plasma_cost = 350
+platinum_cost = 0
+category = 4
+component_type = 2
+weight_class = 0
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

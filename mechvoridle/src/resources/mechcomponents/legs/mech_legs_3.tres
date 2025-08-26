@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_bqij4")
-dodge_chance_modifier = 0.3
-component_name = "HOP113456"
-description = "A good all arounder. Extremely reliable providing decent armor and mobility."
-health = 750
+dodge_chance_modifier = -0.05
+stun_chance = 0.15
+component_name = "Legs of Peace"
+manufacture_name = 2
+description = "Heavy - great to plant your feet in the ground and take aim!"
+health = 3200
 plasma_resistance = 0.0
-refined_ferrite_cost = 3200
+refined_ferrite_cost = 3600
 plasma_cost = 0
 platinum_cost = 0
 category = 2
 component_type = 0
-weight_class = 1
+weight_class = 0
 metadata/_custom_type_script = "uid://cqa88tl10c011"

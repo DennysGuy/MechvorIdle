@@ -1,0 +1,185 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb3inbe2fo5hn"]
+
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="1_6ycvo"]
+[ext_resource type="Script" uid="uid://b8h0yo7e0afup" path="res://src/scripts/parts_owned_list_panel.gd" id="1_uysq4"]
+
+[node name="PartsOwnListPanel" type="ColorRect"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -97.0
+offset_right = 96.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.298039, 0.239216, 0.180392, 1)
+script = ExtResource("1_uysq4")
+
+[node name="ShowMechStats" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 21.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "Mech Stats"
+
+[node name="Head" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 66.0
+offset_bottom = 15.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Owned Head"
+
+[node name="OwnedHeadName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 16.0
+offset_right = 167.0
+offset_bottom = 28.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "XGHXZZS"
+
+[node name="Torso" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 37.0
+offset_right = 74.0
+offset_bottom = 47.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Owned Torso"
+
+[node name="OwnedTorsoName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 47.0
+offset_right = 166.0
+offset_bottom = 59.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "TORO232253x"
+
+[node name="Arms" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 66.0
+offset_right = 74.0
+offset_bottom = 76.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Owned Arms"
+
+[node name="OwnedArmsName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 76.0
+offset_right = 165.0
+offset_bottom = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "ARMA23xxdf"
+
+[node name="Legs" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 95.0
+offset_right = 74.0
+offset_bottom = 105.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Owned Legs"
+
+[node name="OwnedLegsName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 105.0
+offset_right = 165.0
+offset_bottom = 117.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "Hoppern132XX"
+
+[node name="Weapon1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 126.0
+offset_right = 74.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Weapon 1"
+
+[node name="OwnedWeapon1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 165.0
+offset_bottom = 148.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "XCalibur22XZ3"
+
+[node name="Weapon2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 158.0
+offset_right = 74.0
+offset_bottom = 168.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 7
+text = "Weapon 2"
+
+[node name="OwnedWeapon2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 168.0
+offset_right = 165.0
+offset_bottom = 180.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 10
+text = "NITrisilBrunt"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_6ycvo")
+theme_override_font_sizes/font_size = 9
+text = "Hide"
+
+[connection signal="button_down" from="ShowMechStats" to="." method="_on_show_mech_stats_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

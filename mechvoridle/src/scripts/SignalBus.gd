@@ -12,7 +12,7 @@ signal stop_ufo_spawn
 signal fade_out_alert
 signal issue_drone_down_alert
 signal show_specified_boss(index : int)
-
+signal fade_out_music
 signal remove_ufo_during_start_fight
 
 signal show_part(body_part : String, category : String)
@@ -24,6 +24,7 @@ signal show_task_completed_indicator(index : int)
 signal show_check_list
 signal hide_check_list
 signal increment_phase_mission_completed_count
+
 #settings panel
 signal show_audio_settings
 signal hide_audio_settings
@@ -53,6 +54,8 @@ signal update_mining_laser_speed
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
+signal update_stats_panel(component : MechComponent)
+signal update_list_item_text(component_name : String)
 
 #main panel
 signal unlock_fight_button
@@ -74,3 +77,44 @@ signal show_mission_tracker_panel
 signal hide_mission_tracker_panel
 signal issue_mission_complete_notification
 signal issue_phase_compolete_notification
+
+
+#mech stats panel
+signal update_mech_head_name(mech_head : MechHead)
+signal update_mech_torso_name(mech_torso : MechTorso)
+signal update_mech_arms_name(mech_arms : MechArms)
+signal update_mech_legs_name(mech_legs : MechLegs)
+signal update_mech_weapon_one_name(mech_weapon : MechWeapon)
+signal update_mech_weapon_two_name(mech_weapon : MechWeapon)
+
+signal update_total_armor_amount
+
+signal update_crit_stats_on_mech_head_purchased(mech_head : MechHead)
+signal update_accuracy_stats_on_mech_head_purchased(mech_head : MechHead)
+signal update_charge_speed_stats_on_mech_torso_purchased(mech_torso : MechTorso)
+signal update_crit_damage_stats_on_mech_arms_purchased(mech_arms : MechArms)
+signal update_max_hit_stats_on_mech_arms_purchased(mech_arms : MechArms)
+signal update_dodge_stats_on_mech_legs_purchased(mech_legs : MechLegs)
+signal update_stun_stats_on_mech_legs_purchased(mech_legs : MechLegs)
+
+
+signal update_weapon_1_name_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_crit_chance_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_charge_speed_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_accuracy_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_max_hit_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_stun_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_dpc_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_1_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
+
+signal update_weapon_2_name_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_crit_chance_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_charge_speed_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_accuracy_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_max_hit_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_stun_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_dpc_stats_on_purchased(mech_weapon : MechWeapon)
+signal update_weapon_2_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
+
+signal toggle_mech_stats_panels()
+signal hide_mech_stats_panels()
