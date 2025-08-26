@@ -194,7 +194,7 @@ offset_bottom = -3.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_oll1y")
 theme_override_font_sizes/font_size = 12
-text = "Created By: Dan Galleti, PMYA, ProtoPixel, and Denny'sGuy"
+text = "Created By: Dan Galletti, PMYA, ProtoPixel, and Denny'sGuy"
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 layout_mode = 1

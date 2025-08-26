@@ -89,6 +89,7 @@ offset_top = 102.0
 offset_right = 78.0
 offset_bottom = 122.0
 rotation = -1.5708
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_wo0f1")
 theme_override_font_sizes/font_size = 10
 text = "Missions List"

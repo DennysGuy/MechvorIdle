@@ -118,3 +118,5 @@ signal update_weapon_2_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
 
 signal toggle_mech_stats_panels()
 signal hide_mech_stats_panels()
+signal toggle_filter(value : bool)
+
