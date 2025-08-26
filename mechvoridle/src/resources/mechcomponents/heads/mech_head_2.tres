@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_dm8st")
-accuracy_bonus = 0.4
+accuracy_bonus = 0.05
+crit_chance = 0.05
 component_name = "HELM132QUADX"
+manufacture_name = 1
 description = "Light with lots of visuals. This mech head is designed with a high FOV in mind give the user an easy time in close combat scenarios."
-health = 1200
+health = 1500
 plasma_resistance = 0.0
 refined_ferrite_cost = 1800
 plasma_cost = 0
 platinum_cost = 0
 category = 0
-component_type = 2
-weight_class = 2
+component_type = 0
+weight_class = 1
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"

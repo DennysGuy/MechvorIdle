@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_vd6vd")
-dodge_chance_modifier = 0.3
+dodge_chance_modifier = 0.05
+stun_chance = 0.05
 component_name = "HOP113456"
-description = "Light yet sturdy and efficient. Great for getting up close or avoiding your opponent."
-health = 750
+manufacture_name = 1
+description = "Middle of the road - useful legs."
+health = 2900
 plasma_resistance = 0.0
 refined_ferrite_cost = 3000
 plasma_cost = 0
 platinum_cost = 0
 category = 2
 component_type = 0
-weight_class = 2
+weight_class = 1
 metadata/_custom_type_script = "uid://cqa88tl10c011"

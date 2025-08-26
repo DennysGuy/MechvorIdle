@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_rdnss")
 accuracy_bonus = 0.0
+crit_chance = 0.0
 component_name = ""
+manufacture_name = 0
 description = ""
 health = 3125
 plasma_resistance = 0.1

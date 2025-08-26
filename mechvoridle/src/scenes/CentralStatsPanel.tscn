@@ -1,4 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://dio1yrjtiu67"]
+
+[gd_scene load_steps=29 format=3 uid="uid://dio1yrjtiu67"]
+
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
@@ -17,8 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_xrjyp"]
 [ext_resource type="Texture2D" uid="uid://c46ke31j4g7i6" path="res://assets/graphics/UI/StartFightButton_Disabled.png" id="9_o5f0c"]
 [ext_resource type="PackedScene" uid="uid://cdv41op8l3500" path="res://PlayerPreview.tscn" id="16_jc6kg"]
+
+[ext_resource type="PackedScene" uid="uid://u3jbpu6c6onu" path="res://src/scenes/MechStatsPanel.tscn" id="16_m7knd"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="17_o5f0c"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="18_jc6kg"]
+[ext_resource type="PackedScene" uid="uid://bb3inbe2fo5hn" path="res://src/scenes/PartsOwnedListPaneltscn.tscn" id="18_o5f0c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvy6k"]
 shader = ExtResource("4_ve6vp")
@@ -43,6 +48,96 @@ shader_parameter/warp_amount = 0.0
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.2
 shader_parameter/vignette_opacity = 0.263
+
+[sub_resource type="Animation" id="Animation_6iree"]
+resource_name = "HideStatsPanel"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect/PartsOwnListPanel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.000108212, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(399, 48), Vector2(399, -193)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ColorRect/MechStatsPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(202, 44.5), Vector2(399, 44.5)]
+}
+
+[sub_resource type="Animation" id="Animation_lgrs1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect/PartsOwnListPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(399, -193)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ColorRect/MechStatsPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(399, 44.5)]
+}
+
+[sub_resource type="Animation" id="Animation_m7knd"]
+resource_name = "ShowStatsPanel"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect/PartsOwnListPanel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.177348),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(399, -193), Vector2(399, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ColorRect/MechStatsPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.17724),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(399, 44.5), Vector2(202, 44.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6iree"]
+_data = {
+&"HideStatsPanel": SubResource("Animation_6iree"),
+&"RESET": SubResource("Animation_lgrs1"),
+&"ShowStatsPanel": SubResource("Animation_m7knd")
+}
 
 [sub_resource type="Animation" id="Animation_jc6kg"]
 resource_name = "EntryBoxSwoopIn"
@@ -332,6 +427,27 @@ text = "Hire a Recon Scout to attain insight on your opponent"
 position = Vector2(148, -22)
 texture = ExtResource("7_isv1m")
 
+[node name="ReconScoutIndicator" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 199.0
+offset_right = 302.0
+offset_bottom = 222.0
+theme_override_colors/font_color = Color(0.934761, 0.806525, 0, 1)
+theme_override_fonts/font = ExtResource("3_lvy6k")
+text = "!"
+
+[node name="MechStatsPanel" parent="ColorRect" instance=ExtResource("16_m7knd")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -241.0
+offset_top = -135.5
+offset_right = -47.0
+offset_bottom = 61.5
+grow_horizontal = 0
+
 [node name="MechComponentsTrackerPanel" type="Panel" parent="ColorRect"]
 layout_mode = 0
 offset_left = 399.0
@@ -405,6 +521,20 @@ offset_right = 592.0
 offset_bottom = 243.0
 mouse_filter = 2
 
+[node name="PartsOwnListPanel" parent="ColorRect" instance=ExtResource("18_o5f0c")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -241.0
+offset_top = -193.0
+offset_right = -49.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 1
+
 [node name="NameEntryBox" type="TextureRect" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 8
@@ -471,15 +601,11 @@ theme_override_fonts/font = ExtResource("3_lvy6k")
 theme_override_font_sizes/font_size = 11
 text = "START"
 
-[node name="ReconScoutIndicator" type="Label" parent="ColorRect"]
-layout_mode = 0
-offset_left = 297.0
-offset_top = 199.0
-offset_right = 302.0
-offset_bottom = 222.0
-theme_override_colors/font_color = Color(0.934761, 0.806525, 0, 1)
-theme_override_fonts/font = ExtResource("3_lvy6k")
-text = "!"
+[node name="StatsPanelAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_6iree")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

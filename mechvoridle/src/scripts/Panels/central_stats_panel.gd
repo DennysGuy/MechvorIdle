@@ -24,6 +24,10 @@ class_name CentralHubPanel extends Control
 @onready var recon_tips_list : Array[String] = [GameManager.chosen_opponent.tip_1, GameManager.chosen_opponent.tip_2, GameManager.chosen_opponent.tip_3]
 var recon_scouts_left : int = 3
 var recon_index : int = 0
+
+var mech_stats_panel_showing : bool = false
+@onready var stats_panel_animation_player : AnimationPlayer = $StatsPanelAnimationPlayer
+
 func _ready() -> void:
 	SignalBus.begin_round.emit()
 	sub_viewport.own_world_3d = true
@@ -32,6 +36,9 @@ func _ready() -> void:
 	SignalBus.update_platinum_count.connect(update_platinum_count)
 	SignalBus.update_plasma_count.connect(update_plasma_count)
 	SignalBus.update_parts_owned_on_previewer.connect(update_currently_owned_components_count)
+	SignalBus.toggle_mech_stats_panels.connect(toggle_mech_stats_panel)
+	SignalBus.hide_mech_stats_panels.connect(hide_mech_stats_pane)
+	
 	purchase_recon_scout.text = "Buy Scout "+ "("+str(recon_scouts_left)+")"
 	platinum_cost.text = str(GameManager.recon_scout_platinum_cost)
 	hide_entry_box()
@@ -111,3 +118,16 @@ func _on_confirm_start_fight_button_down():
 
 func update_currently_owned_components_count() -> void:
 	current_owned_components.text = str(GameManager.owned_components_count)
+
+
+func hide_mech_stats_pane() -> void:
+	stats_panel_animation_player.play("HideStatsPanel")
+	mech_stats_panel_showing = false
+
+func toggle_mech_stats_panel() -> void:
+	if mech_stats_panel_showing:
+		stats_panel_animation_player.play("HideStatsPanel")
+	else:
+		stats_panel_animation_player.play("ShowStatsPanel")
+	
+	mech_stats_panel_showing = !mech_stats_panel_showing

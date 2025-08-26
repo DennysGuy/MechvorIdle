@@ -38,6 +38,7 @@ theme_override_font_sizes/font_size = 9
 text = "HEADXUT234098"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [node name="ComponentAvailableIndicator" type="Label" parent="."]
 layout_mode = 1

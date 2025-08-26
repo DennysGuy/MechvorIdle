@@ -3,7 +3,9 @@ class_name AudioSettingsPanel extends Panel
 @onready var music_slider: HSlider = $MusicSlider
 @onready var sfx_slider: HSlider = $SFXSlider
 @onready var ambience_slider: HSlider = $AmbienceSlider
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var check_button: CheckButton = $CheckButton
+
 
 var music_tracks : Dictionary = {
 	0 : {
@@ -27,7 +29,7 @@ const TRACK_LIST_SIZE = 3
 
 @onready var juke_box : AudioStreamPlayer= $JukeBox
 
-var min_music_value : float = -30.0
+var min_music_value : float = -45.0
 var max_music_value : float = 10.0
 var min_sfx_value : float = -30.0
 var max_sfx_value : float = 15.0
@@ -35,7 +37,7 @@ var min_ambience_value : float = -30.0
 var max_ambience_value : float = 12.0
 
 func _ready() -> void:
-	
+	SignalBus.fade_out_music.connect(fade_out_music)
 	set_and_play_next_song(0)
 	check_button.button_pressed = true
 	music_slider.max_value = max_music_value
@@ -96,7 +98,9 @@ func increment_and_play_track():
 func _on_next_track_button_up():
 	increment_and_play_track()
 
+func fade_out_music() -> void:
+	animation_player.play("fade_out_music")
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
-
 	SignalBus.toggle_filter.emit(toggled_on)
+
