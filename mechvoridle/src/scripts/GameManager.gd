@@ -362,25 +362,28 @@ func add_mech_component(component : MechComponent) -> void:
 			SignalBus.update_weapon_2_crit_chance_stats_on_purchased.emit(component)
 			SignalBus.update_weapon_2_dpc_stats_on_purchased.emit(component)
 			SignalBus.update_weapon_2_stun_stats_on_purchased.emit(component)
+			SignalBus.update_list_item_text.emit(component.get_category_type())
 	else:
 		SignalBus.show_part.emit(component_category, component_weight_class)
 		if component_category == "Torso":
 			SignalBus.update_mech_torso_name.emit(component)
 			SignalBus.update_charge_speed_stats_on_mech_torso_purchased.emit(component)
-		
+			SignalBus.update_list_item_text.emit(component.get_category_type())
 		elif component_category == "Legs":
 			SignalBus.update_mech_legs_name.emit(component)
 			SignalBus.update_dodge_stats_on_mech_legs_purchased.emit(component)
 			SignalBus.update_stun_stats_on_mech_legs_purchased.emit(component)
-	
+			SignalBus.update_list_item_text.emit(component.get_category_type())
 		elif component_category == "Arms":
 			SignalBus.update_mech_arms_name.emit(component)
 			SignalBus.update_crit_damage_stats_on_mech_arms_purchased.emit(component)
 			#SignalBus.update_max_hit_stats_on_mech_arms_purchased.emit(component)
+			SignalBus.update_list_item_text.emit(component.get_category_type())
 		elif component_category == "Head":
 			SignalBus.update_mech_head_name.emit(component)
 			SignalBus.update_accuracy_stats_on_mech_head_purchased.emit(component)
 			SignalBus.update_crit_stats_on_mech_head_purchased.emit(component)
+			SignalBus.update_list_item_text.emit(component.get_category_type())
 		
 		
 		owned_mech_components[component_category] = component

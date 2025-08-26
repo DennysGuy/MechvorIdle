@@ -616,6 +616,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_j2pgo")
 }
 
+[node name="ShopChimesPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 

@@ -7,9 +7,11 @@ class_name ShopPane extends Control
 @onready var slot_is_filled_label: Label = $ColorRect/SlotIsFilledLabel
 @onready var part_class: Label = $ColorRect/PartClass
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var sfx_player  : AudioStreamPlayer = $SfxPlayer
+@onready var sfx_player : AudioStreamPlayer = $SfxPlayer
+@onready var shop_chimes_player : AudioStreamPlayer = $ShopChimesPlayer
 
 @onready var purchase_button: TextureButton = $ColorRect/PurchaseButton
+
 
 @onready var item_name: Label = $ItemName
 
@@ -61,10 +63,11 @@ func _ready() -> void:
 	
 	
 func _process(delta : float) -> void:
-	
+
 	head_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_HEAD_FERRITE_BAR_COST, "Head") and GameManager.mech_component_slot_is_empty("Head")
 	torso_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_TORSO_FERRITE_BAR_COST, "Torso") and GameManager.mech_component_slot_is_empty("Torso")
 	arms_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_ARMS_FERRITE_BAR_COST, "Arms") and GameManager.mech_component_slot_is_empty("Arms")
+	
 	legs_indicator.visible = show_armor_component_available_indicator(GameManager.MIN_LEGS_FERRITE_BAR_COST, "Legs") and GameManager.mech_component_slot_is_empty("Legs")
 	rifles_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_RIFLE_FERRITE_BAR_COST, GameManager.MIN_RIFLE_PLASMA_COST) 
 	swords_indicator.visible = show_weapon_component_available_indicator(GameManager.MIN_SWORD_FERRITE_BAR_COST, GameManager.MIN_SWORD_PLASMA_COST) 
@@ -114,8 +117,10 @@ func show_armor_component_available_indicator(value : int, component_name : Stri
 	return GameManager.ferrite_bars_count >= value and GameManager.mech_component_slot_is_empty(component_name)
 	
 func show_weapon_component_available_indicator(ferrite_bars_value : int, plasma_value) -> bool:
-	return GameManager.ferrite_bars_count >= ferrite_bars_value and GameManager.plasma_count >= plasma_value and GameManager.owned_weapons_count >= 2
-
+	if !GameManager.owned_mech_components["LeftWeapon"] or !GameManager.owned_mech_components["RightWeapon"]:
+		return GameManager.ferrite_bars_count >= ferrite_bars_value and GameManager.plasma_count >= plasma_value and GameManager.owned_weapons_count < 2
+	else:
+		return false
 
 func _on_heads_button_button_down() -> void:
 	display_component_list("Heads")
@@ -175,8 +180,8 @@ func _on_confirmation_button_button_down() -> void:
 	
 		
 	SfxManager.play_button_click(sfx_player)
-	sfx_player.stream = [SfxManager.UI_SHOP_BUY_COMPLETE_01,SfxManager.UI_SHOP_BUY_COMPLETE_02,SfxManager.UI_SHOP_BUY_COMPLETE_03].pick_random()
-	sfx_player.play()
+	shop_chimes_player.stream = [SfxManager.UI_SHOP_BUY_COMPLETE_01,SfxManager.UI_SHOP_BUY_COMPLETE_02,SfxManager.UI_SHOP_BUY_COMPLETE_03].pick_random()
+	shop_chimes_player.play()
 	GameManager.ferrite_bars_count -= selected_component.refined_ferrite_cost
 	GameManager.plasma_count -= selected_component.plasma_cost
 	GameManager.add_mech_component(selected_component)
@@ -188,6 +193,7 @@ func _on_confirmation_button_button_down() -> void:
 		main_hub.animation_player.play("AllPartsBoughtStartFight")
 		SignalBus.stop_ufo_spawn.emit()
 		SignalBus.fade_out_alert.emit()
+		SignalBus.fade_out_music.emit()
 		GameManager.can_traverse_panes = false
 	
 
@@ -202,7 +208,7 @@ func hide_confirmation_panel() -> void:
 	disable_confirmation_button(true)
 
 func _on_cancellation_button_button_down() -> void:
-	SfxManager.play_button_click(sfx_player)
+	SfxManager.play_button_click(shop_chimes_player)
 	sfx_player.stream = [SfxManager.UI_SHOP_BUY_NO_CASH_01,SfxManager.UI_SHOP_BUY_NO_CASH_02, SfxManager.UI_SHOP_BUY_NO_CASH_03].pick_random()
 	sfx_player.play()
 	hide_confirmation_panel()

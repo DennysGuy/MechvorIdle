@@ -85,6 +85,8 @@ func get_manufacturer_name() -> String:
 		_:
 			return ""
 
+
+
 func get_manufacturer_icon() -> Texture2D:
 	match manufacture_name:
 		MANUFACTURER_NAME.STEEL_FANG_TECH:
