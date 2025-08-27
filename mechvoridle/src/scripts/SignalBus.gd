@@ -51,6 +51,12 @@ signal sound_ship_alarm
 signal silence_ship_alarm
 
 signal update_mining_laser_speed
+signal update_owned_drones_count
+
+#drone details panel
+signal hide_drone_details
+signal show_drone_details(selected_drone)
+signal update_drone_details_while_selected(drone)
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
@@ -119,4 +125,3 @@ signal update_weapon_2_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
 signal toggle_mech_stats_panels()
 signal hide_mech_stats_panels()
 signal toggle_filter(value : bool)
-

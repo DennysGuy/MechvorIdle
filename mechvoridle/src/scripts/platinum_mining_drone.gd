@@ -5,6 +5,7 @@ class_name PlatinumMiningDrone extends Node2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 15
+var max_health : int = 15
 
 var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
@@ -89,3 +90,9 @@ func kill_mining_drone():
 func play_mining_sfx() -> void:
 	audio_stream_player_2d.stream = mining_sfx.pick_random()
 	audio_stream_player_2d.play()
+
+
+func _on_drone_data_shower_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			SignalBus.show_drone_details.emit(self)

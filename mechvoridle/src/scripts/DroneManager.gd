@@ -35,24 +35,28 @@ func register_mining_drone(drone: Node) -> void:
 		drones.append(drone)
 		mining_drones.append(drone)
 		update_mining_drone_cost()
+		SignalBus.update_owned_drones_count.emit()
 
 func unregister_mining_drone(drone: Node) -> void:
 	if drone in drones:
 		drones.erase(drone)
 		mining_drones.erase(drone)
 		update_mining_drone_cost()
+		SignalBus.update_owned_drones_count.emit()
 
 func register_platinum_drone(drone: Node) -> void:
 	if drone not in drones:
 		drones.append(drone)
 		platinum_drones.append(drone)
 		update_platinum_drone_cost()
+		SignalBus.update_owned_drones_count.emit()
 
 func unregister_platinum_drone(drone: Node) -> void:
 	if drone in drones:
 		drones.erase(drone)
 		platinum_drones.erase(drone)
 		update_platinum_drone_cost()
+		SignalBus.update_owned_drones_count.emit()
 
 # === COST UPDATERS ===
 

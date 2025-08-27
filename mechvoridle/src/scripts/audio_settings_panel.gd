@@ -103,4 +103,3 @@ func fade_out_music() -> void:
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	SignalBus.toggle_filter.emit(toggled_on)
-

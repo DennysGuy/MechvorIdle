@@ -10,6 +10,7 @@ var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, Sf
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 12
+var max_health : int = 12
 
 func _ready() -> void:
 	animation_player.play("idle")
@@ -27,7 +28,6 @@ func _physics_process(delta : float) -> void:
 	else:
 		progress_bar.value = 0
 	
-	
 func _exit_tree():
 	DroneManager.unregister_mining_drone(self)
 	
@@ -42,8 +42,6 @@ func erase() -> void:
 	add_child(explosion)
 	
 	
-
-
 func obtain_resources() -> void:
 	var drone_damage : int = GameManager.drone_damage
 	play_mining_sfx()
@@ -111,3 +109,10 @@ func kill_mining_drone():
 func play_mining_sfx() -> void:
 	sfx_player.stream = mining_sfx_list.pick_random()
 	sfx_player.play()
+
+
+func _on_drone_data_shower_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			SignalBus.show_drone_details.emit(self)
+		   

@@ -5,9 +5,15 @@ class_name MiningPane extends Control
 @onready var buy_mech_part_label: Label = $ColorRect/BuyMechPartLabel
 @onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
 
+@onready var owned_drones_count : Label = $ColorRect/OwnedDronesCount
+
 func _ready() -> void:
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)
 	SignalBus.hide_upgrade_panel.connect(hide_upgrade_panel)
+	SignalBus.update_owned_drones_count.connect(update_drone_count)
+	update_drone_count()
+	
+	
 	#sub_viewport.own_world_3d = false
 func _process(_delta : float) -> void:
 	buy_mech_part_label.visible = show_buy_mech_part_indicator()
@@ -32,3 +38,9 @@ func show_buy_mech_part_indicator() -> bool:
 		or GameManager.ferrite_bars_count >= GameManager.MIN_SWORD_FERRITE_BAR_COST and GameManager.plasma_count >= GameManager.MIN_SWORD_PLASMA_COST
 		or GameManager.ferrite_bars_count >= GameManager.MIN_LAUNCHER_FERRITE_BAR_COST and GameManager.plasma_count >= GameManager.MIN_LAUNCHER_PLASMA_COST
 	)
+
+
+func update_drone_count() -> void:
+	var current_drone_count : int = DroneManager.drones.size()
+	var max_owned_drone_count : int = GameManager.max_owned_drones
+	owned_drones_count.text = "Owned Drones " + str(current_drone_count) + "/" + str(max_owned_drone_count)

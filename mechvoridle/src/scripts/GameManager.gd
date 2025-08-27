@@ -139,6 +139,11 @@ var plasma_generator_fuel_consumption_speed : float = 0.05
 var plasma_generator_fuel_cost : int = 3000
 var plasma_generator_fuel_base_cost : int = 3000
 
+
+var max_owned_drones : int = 4
+var increase_max_drones_price : int = 600
+var increase_max_drones_base_price : int = 600
+
 #tutorial checklist
 
 var visited_black_market : bool = false

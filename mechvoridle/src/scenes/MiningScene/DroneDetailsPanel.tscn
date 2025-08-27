@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlq5p5jgtqwdj"]
+
+[ext_resource type="Texture2D" uid="uid://ciogla4vy3j5x" path="res://assets/graphics/DroneDetailsPanel.png" id="1_v6a8s"]
+[ext_resource type="Script" uid="uid://gsoy1gbqsdp7" path="res://src/scripts/Panels/MiningScene/drone_details_panel.gd" id="2_df4ae"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_th7se"]
+[ext_resource type="Script" uid="uid://ffh620hgym14" path="res://src/scripts/stat_label.gd" id="4_afj2i"]
+[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="5_afj2i"]
+
+[node name="DroneDetailsPanel" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -36.5
+offset_right = 51.5
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_v6a8s")
+script = ExtResource("2_df4ae")
+
+[node name="DroneTypeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 25.5
+offset_top = 10.5
+offset_right = 92.5
+offset_bottom = 19.5
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 6
+text = "Platinum Drone"
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.5
+offset_top = 23.5
+offset_right = 41.5
+offset_bottom = 32.5
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 6
+text = "Health:"
+horizontal_alignment = 1
+
+[node name="HealthCountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 66.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 6
+text = "10/10"
+horizontal_alignment = 1
+script = ExtResource("4_afj2i")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="ResourceFocusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.5
+offset_top = 34.5
+offset_right = 80.5
+offset_bottom = 43.5
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 6
+text = "Resource Focus:"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 10.5
+offset_top = 8.5
+offset_right = 22.5
+offset_bottom = 20.5
+texture = ExtResource("5_afj2i")
+
+[node name="SellButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 56.0
+offset_right = 98.0
+offset_bottom = 69.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 4
+text = "Sell for 497 Plat"
+
+[connection signal="button_down" from="SellButton" to="." method="_on_sell_button_button_down"]

@@ -215,6 +215,26 @@ theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
+[node name="MiningDroneCapacityFull" type="Label" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 66.0
+offset_right = 345.0
+offset_bottom = 75.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Capacity Maxed Out!"
+
+[node name="PlatinumDroneCapacityFull" type="Label" parent="."]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 146.0
+offset_right = 351.0
+offset_bottom = 155.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Capacity Maxed Out!"
+
 [node name="PurchaseDrone" type="Button" parent="."]
 layout_mode = 0
 offset_left = 156.0
@@ -270,9 +290,9 @@ text = "+ Damage"
 [node name="DroneMiningSpeed" type="Label" parent="."]
 layout_mode = 0
 offset_left = 256.0
-offset_top = 70.0
+offset_top = 88.0
 offset_right = 319.0
-offset_bottom = 81.0
+offset_bottom = 99.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Speed:"
@@ -280,9 +300,9 @@ text = "Speed:"
 [node name="DroneSpeed" type="Label" parent="."]
 layout_mode = 0
 offset_left = 294.0
-offset_top = 70.0
+offset_top = 88.0
 offset_right = 341.0
-offset_bottom = 79.0
+offset_bottom = 97.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -290,9 +310,9 @@ text = "5"
 [node name="DroneMiningSpeedCost" type="Label" parent="."]
 layout_mode = 0
 offset_left = 291.0
-offset_top = 91.0
+offset_top = 109.0
 offset_right = 352.0
-offset_bottom = 99.0
+offset_bottom = 117.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "100"
@@ -300,9 +320,9 @@ text = "100"
 [node name="UpgradeDroneMiningSpeed" type="Button" parent="."]
 layout_mode = 0
 offset_left = 254.0
-offset_top = 83.0
+offset_top = 101.0
 offset_right = 287.0
-offset_bottom = 99.0
+offset_bottom = 117.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 4
@@ -392,40 +412,40 @@ text = "+ Damage"
 
 [node name="PlatinumDroneSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 147.0
-offset_right = 287.0
-offset_bottom = 158.0
+offset_left = 258.0
+offset_top = 164.0
+offset_right = 285.0
+offset_bottom = 175.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Speed:"
 
 [node name="PlatDroneSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 299.0
-offset_top = 148.0
-offset_right = 321.0
-offset_bottom = 157.0
+offset_left = 297.0
+offset_top = 165.0
+offset_right = 319.0
+offset_bottom = 174.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
 
 [node name="PlatDroneSpeedCost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 310.0
-offset_top = 161.0
-offset_right = 359.0
-offset_bottom = 170.0
+offset_left = 308.0
+offset_top = 178.0
+offset_right = 357.0
+offset_bottom = 187.0
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="UpgradePlatinumDroneMiningSpeed" type="Button" parent="."]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 159.0
-offset_right = 293.0
-offset_bottom = 175.0
+offset_left = 258.0
+offset_top = 176.0
+offset_right = 291.0
+offset_bottom = 192.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 4
@@ -697,11 +717,11 @@ position = Vector2(77, 137)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon3" type="Sprite2D" parent="."]
-position = Vector2(297, 85)
+position = Vector2(297, 103)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon4" type="Sprite2D" parent="."]
-position = Vector2(303, 166)
+position = Vector2(301, 183)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon7" type="Sprite2D" parent="."]
@@ -828,9 +848,9 @@ text = "!"
 [node name="drone_speed_indicator" type="Label" parent="."]
 layout_mode = 0
 offset_left = 308.0
-offset_top = 74.0
+offset_top = 92.0
 offset_right = 314.0
-offset_bottom = 97.0
+offset_bottom = 115.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -852,9 +872,9 @@ text = "!"
 [node name="Platinum_Drone_damage_indicator" type="Label" parent="."]
 layout_mode = 0
 offset_left = 224.0
-offset_top = 163.0
+offset_top = 167.0
 offset_right = 230.0
-offset_bottom = 186.0
+offset_bottom = 190.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -863,10 +883,10 @@ text = "!"
 
 [node name="Platinum_Drone_speed_indicator" type="Label" parent="."]
 layout_mode = 0
-offset_left = 328.0
-offset_top = 152.0
-offset_right = 334.0
-offset_bottom = 175.0
+offset_left = 327.0
+offset_top = 169.0
+offset_right = 333.0
+offset_bottom = 192.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")

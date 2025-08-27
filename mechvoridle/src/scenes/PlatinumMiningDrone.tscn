@@ -74,4 +74,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_qllqo")
 }
 
+[node name="DroneDataShower" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -13.0
+offset_top = -11.0
+offset_right = 13.0
+offset_bottom = 11.0
+mouse_default_cursor_shape = 2
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="gui_input" from="DroneDataShower" to="." method="_on_drone_data_shower_gui_input"]

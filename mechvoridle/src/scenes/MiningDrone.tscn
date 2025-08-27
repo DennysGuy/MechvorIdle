@@ -76,4 +76,14 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="DroneDataShower" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+mouse_default_cursor_shape = 2
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="gui_input" from="DroneDataShower" to="." method="_on_drone_data_shower_gui_input"]
