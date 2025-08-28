@@ -28,8 +28,6 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	graphic.rotation += 0.02
 	
-	
-
 func _physics_process(delta: float) -> void:
 	
 	if can_hit:
@@ -56,8 +54,6 @@ func spawn_explosion_and_destroy():
 	
 	if !GameManager.three_fly_by_drones_destroyed:
 		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.THREE_FLYBY_ASTEROIDS_DESTROYED)
-	
-	
 	
 	can_hit = false
 	graphic.hide()

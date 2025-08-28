@@ -113,7 +113,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 3
 
 [node name="AsteroidArea2D" type="Area2D" parent="."]
-position = Vector2(306, 124)
+position = Vector2(306, 132)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AsteroidArea2D"]
 shape = SubResource("RectangleShape2D_6ww1j")

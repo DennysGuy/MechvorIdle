@@ -13,6 +13,7 @@ func _ready() -> void:
 	SignalBus.hide_drone_details.connect(hide_data)
 	SignalBus.show_drone_details.connect(show_data)
 	SignalBus.update_drone_details_while_selected.connect(update_drone_data_while_selected)
+	SignalBus.deselect_drone.connect(hide_data)
 	
 	hide_data()
 
@@ -29,6 +30,10 @@ func set_icon(selected_drone) -> void:
 	#add one later for the turret drone
 
 func show_data(drone) -> void:
+	
+	if selected_drone:
+		selected_drone.hide_outline()
+	
 	selected_drone = drone
 	if drone is MiningDrone:
 		drone_type_label.text = "Mining Drone"
@@ -66,9 +71,9 @@ func show_data_labels() -> void:
 	resource_focus_label.show()
 
 func set_health_color(current_health : int, max_health : int, health_count_label : StatLabel):
-	if	current_health >= round(max_health *0.70):
+	if	current_health >= round(max_health *0.8):
 		health_count_label.set_text_color_green()
-	elif current_health < round(max_health * 0.70) and current_health > round(max_health * 0.5):
+	elif current_health < round(max_health * 0.8) and current_health > round(max_health * 0.5):
 		health_count_label.set_text_color_yellow()
 	else:
 		health_count_label.set_text_color_red()

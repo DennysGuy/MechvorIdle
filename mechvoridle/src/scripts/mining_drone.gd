@@ -1,32 +1,34 @@
-class_name MiningDrone extends Node2D
+class_name MiningDrone extends CharacterBody2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
 @onready var sfx_player : AudioStreamPlayer2D = $SfxPlayer
-@onready var sprite_2d = $Sprite2D
+@onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var hurt_box = $HurtBox
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var state_machine : Node= $StateMachine
 
 var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var health : int = 12
 var max_health : int = 12
+var navigation_coordinates : Vector2
 
 func _ready() -> void:
-	animation_player.play("idle")
+	SignalBus.deselect_drone.connect(hide_outline)
 	DroneManager.register_mining_drone(self)
+	hide_outline()
+	state_machine.init(self)
 
-func _physics_process(delta : float) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
+
+func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
 	
-	if not GameManager.can_fight_boss:
-		progress_bar.value += GameManager.drone_mining_speed
-		
-		if progress_bar.value >= progress_bar.max_value:
-			obtain_resources()
-			progress_bar.value = 0
-
-	else:
-		progress_bar.value = 0
+func _process(delta: float) -> void:
+	set_outline_color()
+	state_machine.process_frame(delta)
 	
 func _exit_tree():
 	DroneManager.unregister_mining_drone(self)
@@ -82,7 +84,6 @@ func obtain_resources() -> void:
 		get_parent().add_child(platinum_acquired_label)
 		SignalBus.update_platinum_count.emit()
 
-
 func platinum_gained() -> bool:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -114,5 +115,21 @@ func play_mining_sfx() -> void:
 func _on_drone_data_shower_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			show_outline()
+			GameManager.drone_selected = self
 			SignalBus.show_drone_details.emit(self)
 		   
+
+func hide_outline() -> void:
+	sprite_2d.material.set("shader_parameter/alpha_threshold", 1.0)
+
+func show_outline() -> void:
+	sprite_2d.material.set("shader_parameter/alpha_threshold", 0.0)
+
+func set_outline_color() -> void:
+	if	health >= round(max_health *0.8):
+		sprite_2d.material.set("shader_parameter/outline_color", Color.GREEN)
+	elif health < round(max_health * 0.8) and health > round(max_health * 0.5):
+		sprite_2d.material.set("shader_parameter/outline_color", Color.YELLOW)
+	else:
+		sprite_2d.material.set("shader_parameter/outline_color", Color.RED)

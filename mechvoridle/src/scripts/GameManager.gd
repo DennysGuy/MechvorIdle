@@ -17,6 +17,8 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+
+var drone_selected
 var mining_time_elapsed : String
 var fight_time_elapsed : String
 

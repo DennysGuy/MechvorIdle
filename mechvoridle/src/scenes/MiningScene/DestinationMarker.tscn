@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu3sqewdx0iby"]
+
+[ext_resource type="Script" uid="uid://byyrv7sxmotj3" path="res://src/scripts/Panels/MiningScene/destination_marker.gd" id="1_m3cgy"]
+[ext_resource type="Texture2D" uid="uid://84ohcg5onw7g" path="res://assets/graphics/DestinationMarker.png" id="1_ot5xk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3cgy"]
+size = Vector2(15, 14)
+
+[node name="DestinationMarker" type="Node2D" groups=["DestinationMarkers"]]
+script = ExtResource("1_m3cgy")
+
+[node name="DestinationMarker" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_ot5xk")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_m3cgy")

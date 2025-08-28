@@ -10,8 +10,13 @@ var max_health : int = 15
 var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
 func _ready() -> void:
+	SignalBus.deselect_drone.connect(hide_outline)
 	animation_player.play("idle")
+	hide_outline()
 	DroneManager.register_platinum_drone(self)
+
+func _process(delta) -> void:
+	set_outline_color()
 
 func _physics_process(delta : float) -> void:
 	if not GameManager.can_fight_boss:
@@ -95,4 +100,19 @@ func play_mining_sfx() -> void:
 func _on_drone_data_shower_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			show_outline()
 			SignalBus.show_drone_details.emit(self)
+
+func show_outline() -> void:
+	sprite_2d.material.set("shader_parameter/alpha_threshold", 0.0)
+
+func hide_outline() -> void:
+	sprite_2d.material.set("shader_parameter/alpha_threshold", 1.0)
+
+func set_outline_color() -> void:
+	if	health >= round(max_health *0.8):
+		sprite_2d.material.set("shader_parameter/outline_color", Color.GREEN)
+	elif health < round(max_health * 0.8) and health > round(max_health * 0.5):
+		sprite_2d.material.set("shader_parameter/outline_color", Color.YELLOW)
+	else:
+		sprite_2d.material.set("shader_parameter/outline_color", Color.RED)

@@ -38,6 +38,7 @@ window/stretch/mode="canvas_items"
 "ship alarm"=""
 AlertPanes=""
 "Mining Laser Progress Bar"=""
+DestinationMarkers=""
 
 [input]
 

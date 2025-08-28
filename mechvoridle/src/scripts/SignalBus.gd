@@ -49,6 +49,7 @@ signal check_to_start_ufo_spawn
 signal play_ufo_escaped
 signal sound_ship_alarm
 signal silence_ship_alarm
+signal deselect_drone
 
 signal update_mining_laser_speed
 signal update_owned_drones_count

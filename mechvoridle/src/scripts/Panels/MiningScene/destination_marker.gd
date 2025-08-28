@@ -1,0 +1,1 @@
+class_name DestinationMarker extends Node2D

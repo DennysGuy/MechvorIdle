@@ -41,14 +41,33 @@ func _physics_process(delta : float) -> void:
 			ufo_spawn_timer.start()
 			start_ufo_spawn = false
 
+
+		if Input.is_action_just_pressed("mine_asteroid") and not mouse_in_asteroid_range and not is_inside_mining_area():
+			SignalBus.deselect_drone.emit()
+			GameManager.drone_selected = false
+			
+		if Input.is_action_just_pressed("mine_asteroid") and GameManager.drone_selected and is_inside_mining_area():		
+			remove_all_children_in_marker_group()
+			var destination_marker : DestinationMarker = preload("res://src/scenes/MiningScene/DestinationMarker.tscn").instantiate()
+			destination_marker.position = get_local_mouse_position()
+			add_child(destination_marker)
+			SignalBus.move_drone.emit(GameManager.drone_selected)
+			
+			print(get_tree().get_nodes_in_group("DestinationMarkers"))
+				
 		if Input.is_action_just_pressed("mine_asteroid") and not mining_timer and is_inside_mining_area():
-			mining_timer = get_tree().create_timer(0.4)
-			await mining_timer.timeout
-			spawn_mining_progress_bar()
-			mining_timer = null
+				#we will add the destination marker here
+				
+				mining_timer = get_tree().create_timer(0.4)
+				await mining_timer.timeout
+				spawn_mining_progress_bar()
+				mining_timer = null
+		
+
+func remove_all_children_in_marker_group() -> void:
+	for child in get_tree().get_nodes_in_group("DestinationMarkers"):
+		child.queue_free()
 	
-
-
 func spawn_mining_progress_bar():
 	var mining_progress_bar : MiningLaserProgressBar = preload("res://src/scenes/MiningScene/MiningLaserProgressBar.tscn").instantiate()
 	add_child(mining_progress_bar)
