@@ -101,6 +101,7 @@ var drone_health_regen_upgrade_cost : int = 300
 var drone_health_regen_base_cost : int = 300
 var drone_health_regen_upgrade_interval : int = 1 #decrease cycle time by 1 second per upgrade
 var drone_health_regen_max_upgrade : int = 5 #we're maxed out at this time - can't go any faster
+
 var platinum_drone_cost : int = 100
 var platinum_drone_count : int = 0
 var platinum_drone_base_cost : int = 100
@@ -115,6 +116,10 @@ var platinum_drone_mining_speed_cost : float = 200
 var platinum_drone_mining_speed_base_cost : float = 150
 var platinum_drone_mining_speed_level : int = 0
 var platinum_drone_mining_speed_interval : float = 0.2
+
+var turret_drone_cost : int = 200
+var turret_drone_base_cost : int = 200
+
 
 
 var ferrite_refinery_speed : float = 0.5

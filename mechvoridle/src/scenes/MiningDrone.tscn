@@ -164,6 +164,9 @@ script = ExtResource("5_moh8t")
 idle_state = NodePath("../Idle")
 animation_name = "move"
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_moh8t")

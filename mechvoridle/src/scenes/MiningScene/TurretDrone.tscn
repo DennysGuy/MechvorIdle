@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsc6tp62u6w8m"]
+
+[ext_resource type="Script" uid="uid://bwlaek6wuk3ho" path="res://src/scripts/turret_drone.gd" id="1_seo0e"]
+[ext_resource type="Texture2D" uid="uid://d2qpavqc2yjec" path="res://assets/graphics/TurretDrone.png" id="2_t5fso"]
+
+[node name="TurretDrone" type="CharacterBody2D"]
+script = ExtResource("1_seo0e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_t5fso")
+offset = Vector2(-5, 0)
