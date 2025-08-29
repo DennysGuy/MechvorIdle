@@ -159,8 +159,9 @@ initial_state = NodePath("Idle")
 script = ExtResource("4_s6lhf")
 animation_name = "idle"
 
-[node name="Move" type="Node" parent="StateMachine"]
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_moh8t")
+idle_state = NodePath("../Idle")
 animation_name = "move"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -177,6 +178,7 @@ offset_left = -9.0
 offset_top = -9.0
 offset_right = 9.0
 offset_bottom = 9.0
+mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

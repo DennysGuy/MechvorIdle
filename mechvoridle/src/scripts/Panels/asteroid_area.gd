@@ -42,21 +42,21 @@ func _physics_process(delta : float) -> void:
 			start_ufo_spawn = false
 
 
-		if Input.is_action_just_pressed("mine_asteroid") and not mouse_in_asteroid_range and not is_inside_mining_area():
+		if Input.is_action_just_pressed("set_drone_destination") and not mouse_in_asteroid_range and not is_inside_mining_area():
+			remove_all_children_in_marker_group()
 			SignalBus.deselect_drone.emit()
 			GameManager.drone_selected = false
 			
-		if Input.is_action_just_pressed("mine_asteroid") and GameManager.drone_selected and is_inside_mining_area():		
+		if Input.is_action_just_pressed("set_drone_destination") and GameManager.drone_selected and is_inside_mining_area():		
 			remove_all_children_in_marker_group()
 			var destination_marker : DestinationMarker = preload("res://src/scenes/MiningScene/DestinationMarker.tscn").instantiate()
 			destination_marker.position = get_local_mouse_position()
 			add_child(destination_marker)
-			SignalBus.move_drone.emit(GameManager.drone_selected)
+			SignalBus.move_drone.emit(GameManager.drone_selected, destination_marker.global_position)
 			
 			print(get_tree().get_nodes_in_group("DestinationMarkers"))
 				
 		if Input.is_action_just_pressed("mine_asteroid") and not mining_timer and is_inside_mining_area():
-				#we will add the destination marker here
 				
 				mining_timer = get_tree().create_timer(0.4)
 				await mining_timer.timeout

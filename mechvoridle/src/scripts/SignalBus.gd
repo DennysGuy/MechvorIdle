@@ -50,6 +50,7 @@ signal play_ufo_escaped
 signal sound_ship_alarm
 signal silence_ship_alarm
 signal deselect_drone
+signal move_drone(selected_drone, drone_position : Vector2)
 
 signal update_mining_laser_speed
 signal update_owned_drones_count

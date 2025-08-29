@@ -1,32 +1,36 @@
-class_name PlatinumMiningDrone extends Node2D
+class_name PlatinumMiningDrone extends CharacterBody2D
 
 @onready var progress_bar : ProgressBar = $ProgressBar
 @onready var audio_stream_player_2d : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var state_machine : StateMachine = $StateMachine
+@onready var move : State = $StateMachine/Move
 
+var navigation_coordinates : Vector2
 var health : int = 15
 var max_health : int = 15
 
 var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
 func _ready() -> void:
+	SignalBus.move_drone.connect(change_to_move_state)
 	SignalBus.deselect_drone.connect(hide_outline)
 	animation_player.play("idle")
 	hide_outline()
 	DroneManager.register_platinum_drone(self)
+	state_machine.init(self)
 
 func _process(delta) -> void:
 	set_outline_color()
-
-func _physics_process(delta : float) -> void:
-	if not GameManager.can_fight_boss:
-		progress_bar.value += GameManager.drone_mining_speed
+	state_machine.process_frame(delta)
 	
-		if progress_bar.value >= progress_bar.max_value:
-			obtain_resources()
-			progress_bar.value = 0
-	else:
-		progress_bar.value = 0
+	
+func _physics_process(delta : float) -> void:
+	state_machine.process_physics(delta)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
+
 
 func _exit_tree():
 	DroneManager.unregister_platinum_drone(self)
@@ -101,6 +105,7 @@ func _on_drone_data_shower_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			show_outline()
+			GameManager.drone_selected = self
 			SignalBus.show_drone_details.emit(self)
 
 func show_outline() -> void:
@@ -116,3 +121,8 @@ func set_outline_color() -> void:
 		sprite_2d.material.set("shader_parameter/outline_color", Color.YELLOW)
 	else:
 		sprite_2d.material.set("shader_parameter/outline_color", Color.RED)
+
+func change_to_move_state(selected_drone, destination : Vector2):
+	if self == selected_drone:
+		navigation_coordinates = destination
+		state_machine.change_state(move)

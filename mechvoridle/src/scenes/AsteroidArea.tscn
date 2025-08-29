@@ -105,11 +105,10 @@ render_target_update_mode = 4
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 239.0
+offset_left = 234.0
 offset_top = 61.0
-offset_right = 372.0
+offset_right = 374.0
 offset_bottom = 201.0
-mouse_filter = 1
 mouse_default_cursor_shape = 3
 
 [node name="AsteroidArea2D" type="Area2D" parent="."]

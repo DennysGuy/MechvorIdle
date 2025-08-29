@@ -5,7 +5,8 @@ class_name MiningDrone extends CharacterBody2D
 @onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var hurt_box = $HurtBox
 @onready var audio_stream_player = $AudioStreamPlayer
-@onready var state_machine : Node= $StateMachine
+@onready var state_machine : StateMachine = $StateMachine
+@onready var move : State = $StateMachine/Move
 
 var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
@@ -16,6 +17,7 @@ var navigation_coordinates : Vector2
 
 func _ready() -> void:
 	SignalBus.deselect_drone.connect(hide_outline)
+	SignalBus.move_drone.connect(change_to_move_state)
 	DroneManager.register_mining_drone(self)
 	hide_outline()
 	state_machine.init(self)
@@ -133,3 +135,8 @@ func set_outline_color() -> void:
 		sprite_2d.material.set("shader_parameter/outline_color", Color.YELLOW)
 	else:
 		sprite_2d.material.set("shader_parameter/outline_color", Color.RED)
+
+func change_to_move_state(selected_drone, destination : Vector2):
+	if self == selected_drone:
+		navigation_coordinates = destination
+		state_machine.change_state(move)

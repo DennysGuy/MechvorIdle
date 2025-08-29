@@ -4,9 +4,10 @@ class_name DroneIdle extends State
 
 
 func enter() -> void:
-	pass
+	parent.animation_player.play("idle")
+	parent.progress_bar.show()
 
-func _physics_process(delta) -> void:
+func process_physics(delta : float) -> State:
 	if not GameManager.can_fight_boss:
 		parent.progress_bar.value += GameManager.drone_mining_speed
 		
@@ -16,3 +17,5 @@ func _physics_process(delta) -> void:
 
 	else:
 		parent.progress_bar.value = 0
+	
+	return null

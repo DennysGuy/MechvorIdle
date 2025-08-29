@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://belm0otejt0tl"]
+[gd_scene load_steps=13 format=3 uid="uid://belm0otejt0tl"]
 
 [ext_resource type="Script" uid="uid://nkwh55cyo1hx" path="res://src/scripts/platinum_mining_drone.gd" id="1_kkmdx"]
+[ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="2_n41l5"]
+[ext_resource type="Script" uid="uid://blec16gcmg1o1" path="res://src/scripts/DroneStates/drone_idle.gd" id="3_qllqo"]
+[ext_resource type="Script" uid="uid://bqjmkn40dm6dd" path="res://src/scenes/drone_move.gd" id="4_qllqo"]
 
 [sub_resource type="Shader" id="Shader_kkmdx"]
 resource_local_to_scene = true
@@ -112,13 +115,17 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 1.5), Vector2(0, -2)]
 }
 
+[sub_resource type="Animation" id="Animation_qllqo"]
+resource_name = "move"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qllqo"]
 _data = {
 &"RESET": SubResource("Animation_n41l5"),
-&"idle": SubResource("Animation_kkmdx")
+&"idle": SubResource("Animation_kkmdx"),
+&"move": SubResource("Animation_qllqo")
 }
 
-[node name="PlatinumMiningDrone" type="Node2D"]
+[node name="PlatinumMiningDrone" type="CharacterBody2D"]
 script = ExtResource("1_kkmdx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -140,9 +147,17 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_qsfdw")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_n41l5")
+initial_state = NodePath("Idle")
 
-[node name="Node" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_qllqo")
+animation_name = "idle"
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_qllqo")
+idle_state = NodePath("../Idle")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
