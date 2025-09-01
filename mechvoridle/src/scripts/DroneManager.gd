@@ -73,6 +73,13 @@ func register_turret_drone(drone : Node) -> void:
 		update_turret_drone_cost()
 		SignalBus.update_owned_drones_count.emit()
 
+func unregister_turret_drone(drone: Node) -> void:
+	if drone in drones:
+		drones.erase(drone)
+		turret_drones.erase(drone)
+		update_turret_drone_cost()
+		SignalBus.update_owned_drones_count.emit()
+
 # === COST UPDATERS ===
 
 func update_mining_drone_cost() -> void:

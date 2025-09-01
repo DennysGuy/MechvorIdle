@@ -1,11 +1,520 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsc6tp62u6w8m"]
+[gd_scene load_steps=19 format=3 uid="uid://dsc6tp62u6w8m"]
 
 [ext_resource type="Script" uid="uid://bwlaek6wuk3ho" path="res://src/scripts/turret_drone.gd" id="1_seo0e"]
 [ext_resource type="Texture2D" uid="uid://d2qpavqc2yjec" path="res://assets/graphics/TurretDrone.png" id="2_t5fso"]
+[ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="3_3nyvu"]
+[ext_resource type="Script" uid="uid://dtyombb8ivbb6" path="res://src/scripts/DroneStates/turret_idle.gd" id="4_cds7j"]
+[ext_resource type="Script" uid="uid://bqjmkn40dm6dd" path="res://src/scenes/drone_move.gd" id="5_8sxiw"]
+[ext_resource type="Script" uid="uid://becyg3pmggppa" path="res://src/scripts/DroneStates/drone_fire.gd" id="5_pggrq"]
+[ext_resource type="Script" uid="uid://cs5fp4lksv6sc" path="res://src/scripts/DroneStates/drone_charge.gd" id="7_0mlp6"]
+[ext_resource type="Texture2D" uid="uid://bv6e35cky5kfq" path="res://assets/graphics/TurretDroneIdle.png" id="7_hxm8i"]
+[ext_resource type="Texture2D" uid="uid://45m2cyocoqdv" path="res://assets/graphics/TurretDroneFire.png" id="7_oo1j0"]
+
+[sub_resource type="Shader" id="Shader_8sxiw"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+// === User Controls ===
+
+// Color of the outline
+uniform vec4 outline_color    : source_color = vec4(1.0);
+// How far to search around a pixel for solid neighbors (in texels)
+uniform float outline_size    : hint_range(0.0, 16.0, 0.1) = 1.0;
+// Minimum alpha for a pixel to be considered solid
+uniform float alpha_threshold : hint_range(0.0, 1.0, 0.01) = 0.0;
+// Number of directions to sample from (max 8)
+uniform int outline_samples   : hint_range(4, 8) = 4;
+// Color to blend with solid pixels (alpha is blend strength)
+uniform vec4 shade_color      : source_color = vec4(1.0, 1.0, 1.0, 0.5); 
+
+// === Outline Sampling Directions ===
+
+const vec2[8] DIRS = vec2[8]
+(vec2(1.0, 0.0), vec2(0.0, 1.0),  vec2(-1.0, 0.0),  vec2(0.0, -1.0),
+ vec2(1.0, 1.0), vec2(-1.0, 1.0), vec2(-1.0, -1.0), vec2(1.0, -1.0));
+
+// === Main Fragment ===
+
+void fragment() {
+	vec4 tex = texture(TEXTURE, UV);
+	float alpha = tex.a;
+	
+	 // Skip fully transparent pixel with no outline
+	if (alpha <= 0.0 && outline_size <= 0.0) discard;
+
+	bool solid = alpha > alpha_threshold;
+	bool semi  = (alpha > 0.0) && !solid;
+	vec4 out_color = tex;
+
+	// Blend solid pixels toward the shade_color based on its alpha
+	if (solid && shade_color.a > 0.0) {
+		out_color.rgb = mix(tex.rgb, shade_color.rgb, shade_color.a);
+		out_color.a   = alpha;
+	}
+
+	bool found = false;
+
+	// If not solid, check surrounding pixels for solid neighbors
+	if (!solid && outline_size > 0.0) {
+		vec2 offset = TEXTURE_PIXEL_SIZE * outline_size;
+		for (int i = 0; i < outline_samples; i++) {
+			if (texture(TEXTURE, UV + DIRS[i] * offset).a > alpha_threshold) {
+				found = true;
+				break;
+			}
+		}
+	}
+
+	// Set final pixel color
+	if      (solid) COLOR = out_color;
+	else if (found) COLOR = outline_color;
+	else if (semi)  COLOR = tex;
+	else            discard;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sxiw"]
+resource_local_to_scene = true
+shader = SubResource("Shader_8sxiw")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_size = 1.0
+shader_parameter/alpha_threshold = 0.0
+shader_parameter/outline_samples = 4
+shader_parameter/shade_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oo1j0"]
+resource_local_to_scene = true
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cds7j"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_t5fso"]
+resource_name = "fire_laser"
+length = 0.3
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(11, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtBox:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtBox:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_oo1j0")]
+}
+
+[sub_resource type="Animation" id="Animation_3nyvu"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_t5fso")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtBox:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HurtBox:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_cds7j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_t5fso")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 0)]
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:shape:size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtBox/CollisionShape2D:shape:size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HurtBox:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-11, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HurtBox:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_pggrq"]
+resource_name = "move"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_hxm8i")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 0)]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:shape:size:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:shape:size:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sxiw"]
+_data = {
+&"RESET": SubResource("Animation_cds7j"),
+&"fire_laser": SubResource("Animation_t5fso"),
+&"idle": SubResource("Animation_3nyvu"),
+&"move": SubResource("Animation_pggrq")
+}
 
 [node name="TurretDrone" type="CharacterBody2D"]
 script = ExtResource("1_seo0e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8sxiw")
 texture = ExtResource("2_t5fso")
 offset = Vector2(-5, 0)
+
+[node name="AnamolieDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnamolieDetector"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_oo1j0")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_3nyvu")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("charge_state")]
+script = ExtResource("4_cds7j")
+charge_state = NodePath("../Charge")
+
+[node name="Fire" type="Node" parent="StateMachine"]
+script = ExtResource("5_pggrq")
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("5_8sxiw")
+idle_state = NodePath("../Idle")
+
+[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_0mlp6")
+idle_state = NodePath("../Idle")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(-11, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_cds7j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8sxiw")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -13.0
+offset_right = 14.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = -15.0
+offset_right = 12.0
+offset_bottom = -11.0
+show_percentage = false
+
+[connection signal="area_entered" from="AnamolieDetector" to="." method="_on_anamolie_detector_area_entered"]
+[connection signal="area_exited" from="AnamolieDetector" to="." method="_on_anamolie_detector_area_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

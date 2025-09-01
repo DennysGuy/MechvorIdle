@@ -3,74 +3,91 @@ class_name UpgradePanel extends TextureRect
 
 
 @export var asteroid_area : AsteroidArea
-#mining laser stuff
-@onready var current_damage_tracker : Label = $CurrentDamageTracker
-@onready var current_damage_cost : Label = $CurrentDamageCost
-@onready var current_crit_chance_tracker : Label = $CurrentCritChanceTracker
-@onready var current_crit_chance_cost : Label = $CurrentCritChanceCost
 @onready var upgrades_access : TextureButton = $UpgradesAccess
-@onready var upgrade_damage : Button = $UpgradeDamage
-@onready var upgrade_crit_chance : Button = $UpgradeCritChance
-
-@onready var current_mining_laser_speed : Label = $CurrentMiningLaserSpeed
-@onready var current_mining_laser_cost : Label = $CurrentMiningLaserCost
 @onready var upgrades_available_label: Label = $UpgradesAvailableLabel
+#mining laser stuff
+@onready var current_damage_tracker : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentDamageTracker
+@onready var current_damage_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentDamageCost
+@onready var current_crit_chance_tracker : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentCritChanceTracker
+@onready var current_crit_chance_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentCritChanceCost
+
+@onready var upgrade_damage : Button = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeDamage
+@onready var upgrade_crit_chance : Button = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeCritChance
+
+@onready var current_mining_laser_speed : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentMiningLaserSpeed
+@onready var current_mining_laser_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/CurrentMiningLaserCost
+
 
 
 #drones stuff
-@onready var drones_count_tracker_label : Label = $DronesCountTrackerLabel
-@onready var drones_cost : Label = $DronesCost
-@onready var drone_damage : Label = $DroneDamage
-@onready var drone_damage_cost : Label = $DroneDamageCost
-@onready var purchase_drone : Button = $PurchaseDrone
-@onready var upgrade_drone_damage : Button = $UpgradeDroneDamage
-@onready var drone_speed: Label = $DroneSpeed
-@onready var drone_mining_speed_cost: Label = $DroneMiningSpeedCost
-@onready var upgrade_drone_mining_speed: Button = $UpgradeDroneMiningSpeed
-@onready var upgrade_mining_laser_speed: Button = $UpgradeMiningLaserSpeed
+@onready var drones_count_tracker_label : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DronesCountTrackerLabel
+@onready var drones_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DronesCost
+@onready var drone_damage : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DroneDamage
+@onready var drone_damage_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DroneDamageCost
+@onready var purchase_drone : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchaseDrone
+@onready var upgrade_drone_damage : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeDroneDamage
+@onready var drone_speed: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DroneSpeed
+@onready var drone_mining_speed_cost: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/DroneMiningSpeedCost
+@onready var upgrade_drone_mining_speed: Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeDroneMiningSpeed
+@onready var upgrade_mining_laser_speed: Button = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeMiningLaserSpeed
 
 var mining_drones_cost : int = 100
 
-@onready var mining_drone_capacity_full : Label = $MiningDroneCapacityFull
-@onready var platinum_drone_capacity_full : Label = $PlatinumDroneCapacityFull
+@onready var mining_drone_capacity_full : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/MiningDroneCapacityFull
+@onready var platinum_drone_capacity_full : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatinumDroneCapacityFull
 
 #plat drones stuff
 
-@onready var platinum_drones_cost: Label = $PlatinumDronesCost
-@onready var purchase_platinum_drone: Button = $PurchasePlatinumDrone
-@onready var platinum_drones_count: Label = $PlatinumDronesCount
+@onready var platinum_drones_cost: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatinumDronesCost
+@onready var purchase_platinum_drone: Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchasePlatinumDrone
+@onready var platinum_drones_count: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatinumDronesCount
 
-@onready var plat_drone_damage: Label = $PlatDroneDamage
-@onready var plat_drone_damage_cost: Label = $PlatDroneDamageCost
-@onready var upgrade_plat_drone_damage: Button = $UpgradePlatDroneDamage
+@onready var plat_drone_damage: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatinumDroneDamage
+@onready var plat_drone_damage_cost: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatDroneDamageCost
+@onready var upgrade_plat_drone_damage: Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradePlatDroneDamage
 
-@onready var plat_drone_speed: Label = $PlatDroneSpeed
-@onready var plat_drone_speed_cost: Label = $PlatDroneSpeedCost
-@onready var upgrade_platinum_drone_mining_speed: Button = $UpgradePlatinumDroneMiningSpeed
+@onready var plat_drone_speed: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatDroneSpeed
+@onready var plat_drone_speed_cost: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PlatDroneSpeedCost
+@onready var upgrade_platinum_drone_mining_speed: Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradePlatinumDroneMiningSpeed
 
 var plat_drones_cost : int = 100
 
+@onready var turret_drones_capacity_full : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDronesCapacityFull
+@onready var turret_drones_count :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDronesCount
+@onready var turret_drones_cost :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDronesCost
+@onready var turret_current_drone_damage :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretCurrentDroneDamage
+@onready var turret_drone_damage_cost :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDroneDamageCost
+@onready var current_turret_drone_speed :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/CurrentTurretDroneSpeed
+@onready var turret_drone_speed_cost :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDroneSpeedCost
+
+@onready var upgrade_turret_drone_fire_rate :Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneFireRate
+@onready var upgrade_turret_drone_damage :Button= $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneDamage
+@onready var purchase_turret_drone : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchaseTurretDrone
+
+
+
+
 #refinery stuff
-@onready var ferrite_refinery_speed = $FerriteRefinerySpeed
-@onready var ferrite_refinery_speed_cost = $FerriteRefinerySpeedCost
-@onready var efficiency_bonus :Label = $EfficiencyBonus
-@onready var efficiency_bonus_cost : Label = $EfficiencyBonusCost
+@onready var ferrite_refinery_speed = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FerriteRefinerySpeed
+@onready var ferrite_refinery_speed_cost = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FerriteRefinerySpeedCost
+@onready var efficiency_bonus :Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/EfficiencyBonus
+@onready var efficiency_bonus_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/EfficiencyBonusCost
 @onready var current_ferrite_cost : Label = $CurrentFerriteCost
-@onready var ferrite_cost_plat_cost : Label = $FerriteCostPlatCost
-@onready var upgrade_refinery_speed : Button = $UpgradeRefinerySpeed
-@onready var upgrade_efficiency : Button = $UpgradeEfficiency
+@onready var upgrade_efficiency : Button = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeEfficiency
 @onready var upgrade_ferrite_cost : Button = $UpgradeFerriteCost
+@onready var upgrade_refinery_speed : Button = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeRefinerySpeed
+
 
 #plasma generator stuff
-@onready var generator_output : Label = $GeneratorOutput
-@onready var output_cost : Label = $OutputCost
-@onready var fuel_cost : Label = $FuelCost
-@onready var fuel_platinum_cost : Label = $FuelPlatinumCost
-@onready var plasma_generator_speed_upgrade : Button = $PlasmaGeneratorSpeedUpgrade
-@onready var generator_output_upgrade : Button = $GeneratorOutputUpgrade
-@onready var upgrade_fuel_cost : Button = $UpgradeFuelCost
-@onready var auto_speed_plat_cost: Label = $AutoSpeedPlatCost
-@onready var generator_auto_speed: Label = $GeneratorAutoSpeed
+@onready var generator_output : Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/GeneratorOutput
+@onready var output_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/OutputCost
+@onready var fuel_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FuelCost
+@onready var fuel_platinum_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FuelPlatinumCost
+@onready var plasma_generator_speed_upgrade : Button = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/PlasmaGeneratorSpeedUpgrade
+@onready var generator_output_upgrade : Button = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/GeneratorOutputUpgrade
+@onready var upgrade_fuel_cost : Button = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeFuelCost
+@onready var auto_speed_plat_cost: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/AutoSpeedPlatCost
+@onready var generator_auto_speed: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/GeneratorAutoSpeed
 
 var upgrade_panel_showing : bool = false
 
@@ -86,20 +103,20 @@ var close_upgrades_panel_sfx : AudioStream = SfxManager.UI_MINING_UPGRADE_MENU_C
 
 var purchase_upgrade_sfx : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DEPLOY_01, SfxManager.MIN_UNIT_DRONE_DEPLOY_02, SfxManager.MIN_UNIT_DRONE_DEPLOY_03, SfxManager.MIN_UNIT_DRONE_DEPLOY_04]
 
-@onready var mining_laser_speed_indicator: Label = $mining_laser_speed_indicator
-@onready var mining_laser_damage_indicator: Label = $mining_laser_damage_indicator
-@onready var mining_laser_crit_indicator: Label = $mining_laser_crit_indicator
-@onready var drone_available_indicator: Label = $drone_available_indicator
-@onready var drone_damage_indicator: Label = $drone_damage_indicator
-@onready var drone_speed_indicator: Label = $drone_speed_indicator
-@onready var platinum_drone_available_indicator: Label = $Platinum_Drone_available_indicator
-@onready var platinum_drone_damage_indicator: Label = $Platinum_Drone_damage_indicator
-@onready var platinum_drone_speed_indicator: Label = $Platinum_Drone_speed_indicator
-@onready var ferrite_refinery_speed_indicator: Label = $Ferrite_Refinery_speed_indicator
-@onready var ferrite_refinery_output_indicator: Label = $Ferrite_Refinery_output_indicator
-@onready var plasma_generator_speed_indicator: Label = $Plasma_Generator_speed_indicator
-@onready var plasma_generator_output_indicator: Label = $Plasma_Generator_output_indicator
-@onready var plasma_generator_fuel_indicator: Label = $Plasma_Generator_fuel_indicator
+@onready var mining_laser_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_speed_indicator
+@onready var mining_laser_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_damage_indicator
+@onready var mining_laser_crit_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_crit_indicator
+@onready var drone_available_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_available_indicator
+@onready var drone_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_damage_indicator
+@onready var drone_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_speed_indicator
+@onready var platinum_drone_available_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_available_indicator
+@onready var platinum_drone_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_damage_indicator
+@onready var platinum_drone_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_speed_indicator
+@onready var ferrite_refinery_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Ferrite_Refinery_speed_indicator
+@onready var ferrite_refinery_output_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Ferrite_Refinery_output_indicator
+@onready var plasma_generator_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_speed_indicator
+@onready var plasma_generator_output_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_output_indicator
+@onready var plasma_generator_fuel_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_fuel_indicator
 
 
 func _ready() -> void:
@@ -505,3 +522,15 @@ func play_purchase_upgrade_sfx() -> void:
 
 func get_total_drones_count() -> void:
 	GameManager.total_drones_count = asteroid_area.drone_list.get_children().size()
+
+
+func _on_purchase_turret_drone_button_down():
+	pass # Replace with function body.
+
+
+func _on_upgrade_turret_drone_damage_button_down():
+	pass # Replace with function body.
+
+
+func _on_upgrade_turret_drone_fire_rate_button_down():
+	pass # Replace with function body.
