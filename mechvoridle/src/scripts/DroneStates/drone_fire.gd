@@ -8,7 +8,7 @@ func enter() -> void:
 	parent.animation_player.play("fire_laser")	
 	if is_instance_valid(parent.tracked_hostile):
 		if parent.tracked_hostile is Asteroid and parent.tracked_hostile.health > 0:
-			parent.tracked_hostile.damage_asteroid()
+			parent.tracked_hostile.damage_asteroid(parent.damage)
 
 	await parent.animation_player.animation_finished
 	

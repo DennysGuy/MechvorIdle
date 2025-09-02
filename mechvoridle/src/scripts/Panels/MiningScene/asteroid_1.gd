@@ -42,10 +42,10 @@ func _on_delete_asteroid_timer_timeout() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	pass
 
-func damage_asteroid() -> void:
+func damage_asteroid(damage : int = 1) -> void:
 	play_asteroid_hit_sfx()
 	asteroid_animation_player.play("hit_flash")
-	health -= 1
+	health -= damage
 	if health <= 0:
 		deliver_resources.emit()
 		spawn_explosion_and_destroy()

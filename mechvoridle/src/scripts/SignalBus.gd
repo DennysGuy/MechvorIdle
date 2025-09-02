@@ -57,6 +57,10 @@ signal clear_tracked_hostile(hostile)
 signal update_mining_laser_speed
 signal update_owned_drones_count
 
+signal update_turret_drone_damage
+signal update_turret_drone_speed
+signal update_turret_drone_range
+
 #drone details panel
 signal hide_drone_details
 signal show_drone_details(selected_drone)

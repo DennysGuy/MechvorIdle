@@ -20,14 +20,21 @@ var navigation_coordinates : Vector2
 
 var tracked_hostile : Node 
 var tracked_hostile_queue : Array = []
-
+var damage : int
+var speed : int
 
 func _ready() -> void:
-	radius = collision_shape_2d.radius
+	set_range_area_scale()
+	set_turret_damage()
+	set_turret_speed() 
+	radius = roundf(collision_shape_2d.radius * GameManager.turret_drone_range_scaler)
 	SignalBus.deselect_drone.connect(deselect_drone)
 	SignalBus.move_drone.connect(change_to_move_state)
 	SignalBus.clear_tracked_hostile.connect(clear_tracked_hostile)
 	DroneManager.register_turret_drone(self)
+	SignalBus.update_turret_drone_speed.connect(set_turret_speed)
+	SignalBus.update_turret_drone_range.connect(set_range_area_scale)
+	SignalBus.update_turret_drone_damage.connect(set_turret_damage)
 	hide_outline()
 	state_machine.init(self)
 	
@@ -136,11 +143,18 @@ func remove_from_queue(hostile : Node) -> void:
 func _on_anamolie_detector_area_entered(area : Area2D):
 	print("hey we have a visitor!")
 	var parent = area.get_parent()
-	if parent is not TurretDrone:
-		if !tracked_hostile:
-			tracked_hostile = parent
-		else:
-			add_hostile_to_queue(parent)
+	
+	if !tracked_hostile:
+		tracked_hostile = parent
+
+func set_range_area_scale() -> void:
+	radius = roundf(collision_shape_2d.radius * GameManager.turret_drone_range_scaler)
+	
+func set_turret_damage() -> void:
+	damage = GameManager.turret_drone_damage
+
+func set_turret_speed() -> void:
+	speed = GameManager.turret_drone_speed
 
 func _on_anamolie_detector_area_exited(area : Area2D):
 	var parent = area.get_parent()
