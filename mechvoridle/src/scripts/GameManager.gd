@@ -120,26 +120,26 @@ var platinum_drone_mining_speed_interval : float = 0.2
 var turret_drone_cost : int = 200
 var turret_drone_base_cost : int = 200
 
-var turret_drone_fire_rate_cost : float = 350
-var turret_drone_fire_rate_base_cost : float = 350
+var turret_drone_fire_rate_cost : int = 350
+var turret_drone_fire_rate_base_cost : int = 350
 var turret_drone_fire_rate_level : int = 0
 
 var turret_drone_damage : int = 1
 var turret_drone_damage_interval : int = 1
-var turret_drone_damage_cost : float = 250
-var turret_drone_damage_base_cost : float = 250
+var turret_drone_damage_cost : int = 250
+var turret_drone_damage_base_cost : int = 250
 var turret_drone_damage_level : int = 0
 
 var turret_drone_speed : int = 5
 var turrent_drone_speed_interval = 3
-var turret_drone_speed_cost : float = 200
-var turret_drone_speed_base_cost : float = 200
+var turret_drone_speed_cost : int = 200
+var turret_drone_speed_base_cost : int = 200
 var turret_drone_speed_level : int = 0
 
 var turret_drone_range_scaler : float = 1.0
 var turret_drone_range_size_interval : float = 0.2
-var turret_drone_range_cost : float = 300
-var turret_drone_range_base_cost : float = 300
+var turret_drone_range_cost : int = 300
+var turret_drone_range_base_cost : int = 300
 var turret_drone_range_level : int = 0
 
 var ferrite_refinery_speed : float = 0.5
