@@ -26,6 +26,7 @@ func _ready() -> void:
 	
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
+	SignalBus.add_turret_drone.connect(add_turret_drone_to_scene)
 	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
 	SignalBus.stop_ufo_spawn.connect(stop_ufo_spawn)
 	animation_player.play("hover")
@@ -90,7 +91,15 @@ func add_platinum_drone_to_scene() -> void:
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 	drone_list.add_child(platinum_drone)
-	
+
+func add_turret_drone_to_scene() -> void:
+	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+	var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
+	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+	turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+	drone_list.add_child(turret_drone)
+
 
 func _on_asteroid_spawn_timer_timeout() -> void:
 	var random_spawn_time : int = randi_range(asteroid_spawn_timer_length-5, asteroid_spawn_timer_length+5)

@@ -83,15 +83,18 @@ func platinum_gained() -> bool:
 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-
-	var area_parent  = area.get_parent()
+	var area_parent = area.get_parent()
 	
 	if area.get_parent() is Asteroid or area.get_parent() is UFOLaser:
 		health -= area_parent.damage
 		if health <= 0:
 			kill_mining_drone()
-	
-		area_parent.queue_free() #we'll change to animation explode sequence
+		
+		if area.get_parent() is Asteroid:
+			var asteroid : Asteroid = area.get_parent()
+			asteroid.spawn_explosion_and_destroy()
+		else:
+			area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
 	erase()

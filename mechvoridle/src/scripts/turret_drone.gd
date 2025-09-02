@@ -26,14 +26,17 @@ func _ready() -> void:
 	radius = collision_shape_2d.radius
 	SignalBus.deselect_drone.connect(deselect_drone)
 	SignalBus.move_drone.connect(change_to_move_state)
+	SignalBus.clear_tracked_hostile.connect(clear_tracked_hostile)
 	DroneManager.register_turret_drone(self)
 	hide_outline()
 	state_machine.init(self)
 	
 func _process(delta: float) -> void:
+	print(tracked_hostile)
 	queue_redraw()
 	set_outline_color()
 	state_machine.process_frame(delta)
+
 	
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -61,15 +64,18 @@ func _draw() -> void:
 
 func show_radius(value : bool) -> void:
 	show_aoe_radius = value
-
+	
 
 func deselect_drone() -> void:
 	hide_outline()
 	show_radius(false)
 	
+@onready var move : State = $StateMachine/Move
 
-func change_to_move_state() -> void:
-	pass
+func change_to_move_state(selected_drone, destination : Vector2) -> void:
+	if self == selected_drone:
+		navigation_coordinates = destination
+		state_machine.change_state(move)
 
 func hide_outline() -> void:
 	sprite_2d.material.set("shader_parameter/alpha_threshold", 1.0)
@@ -89,6 +95,9 @@ func _on_control_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			show_radius(true)
+			show_outline()
+			GameManager.drone_selected = self
+			SignalBus.show_drone_details.emit(self)
 
 func kill_mining_drone():
 	erase()
@@ -100,10 +109,12 @@ func _on_hurt_box_area_entered(area):
 		health -= area_parent.damage
 		if health <= 0:
 			kill_mining_drone()
-		
+			tracked_hostile = null
+			SignalBus.clear_tracked_hostile.emit(area_parent)
 		if area.get_parent() is Asteroid:
 			var asteroid : Asteroid = area.get_parent()
 			asteroid.spawn_explosion_and_destroy()
+			tracked_hostile = null
 		else:
 			area_parent.queue_free() #we'll change to animation explode sequence
 
@@ -123,18 +134,20 @@ func remove_from_queue(hostile : Node) -> void:
 		tracked_hostile_queue.erase(index)
 
 func _on_anamolie_detector_area_entered(area : Area2D):
+	print("hey we have a visitor!")
 	var parent = area.get_parent()
-	
-	if not tracked_hostile:
-		tracked_hostile = parent
-	else:
-		add_hostile_to_queue(parent)
+	if parent is not TurretDrone:
+		if !tracked_hostile:
+			tracked_hostile = parent
+		else:
+			add_hostile_to_queue(parent)
 
 func _on_anamolie_detector_area_exited(area : Area2D):
 	var parent = area.get_parent()
 	
 	if parent:
-		if parent == tracked_hostile:
-			tracked_hostile = null
-		else:
-			remove_from_queue(parent)
+		tracked_hostile = null
+
+func clear_tracked_hostile(hostile) -> void:
+	if tracked_hostile and tracked_hostile == hostile:
+		tracked_hostile = null

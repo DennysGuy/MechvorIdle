@@ -37,6 +37,7 @@ signal show_upgrade_panel
 signal hide_upgrade_panel
 signal add_drone
 signal add_platinum_drone
+signal add_turret_drone
 signal update_plasma_count
 signal update_plasma_generator_speed
 signal update_fuel_consumption
@@ -51,6 +52,7 @@ signal sound_ship_alarm
 signal silence_ship_alarm
 signal deselect_drone
 signal move_drone(selected_drone, drone_position : Vector2)
+signal clear_tracked_hostile(hostile)
 
 signal update_mining_laser_speed
 signal update_owned_drones_count

@@ -84,7 +84,7 @@ shader_parameter/shade_color = Color(1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oo1j0"]
 resource_local_to_scene = true
-radius = 50.0
+radius = 62.0081
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cds7j"]
 size = Vector2(14, 14)
@@ -92,7 +92,6 @@ size = Vector2(14, 14)
 [sub_resource type="Animation" id="Animation_t5fso"]
 resource_name = "fire_laser"
 length = 0.3
-loop_mode = 1
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -451,9 +450,11 @@ script = ExtResource("1_seo0e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8sxiw")
 texture = ExtResource("2_t5fso")
-offset = Vector2(-5, 0)
+offset = Vector2(6, 0)
 
 [node name="AnamolieDetector" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnamolieDetector"]
 position = Vector2(-1, 0)
@@ -467,16 +468,19 @@ initial_state = NodePath("Idle")
 script = ExtResource("4_cds7j")
 charge_state = NodePath("../Charge")
 
-[node name="Fire" type="Node" parent="StateMachine"]
+[node name="Fire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "charge_state")]
 script = ExtResource("5_pggrq")
+idle_state = NodePath("../Idle")
+charge_state = NodePath("../Charge")
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_8sxiw")
 idle_state = NodePath("../Idle")
 
-[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "fire_state")]
 script = ExtResource("7_0mlp6")
 idle_state = NodePath("../Idle")
+fire_state = NodePath("../Fire")
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(-11, 0)

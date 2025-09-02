@@ -60,11 +60,15 @@ var plat_drones_cost : int = 100
 @onready var current_turret_drone_speed :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/CurrentTurretDroneSpeed
 @onready var turret_drone_speed_cost :Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDroneSpeedCost
 
+var turret_drones_plat_cost : int = 250
+
 @onready var upgrade_turret_drone_fire_rate :Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneFireRate
 @onready var upgrade_turret_drone_damage :Button= $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneDamage
 @onready var purchase_turret_drone : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchaseTurretDrone
 
-
+@onready var current_turret_drone_range : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/CurrentTurretDroneRange
+@onready var turret_drone_range_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/TurretDroneRangeCost
+@onready var upgrade_turret_drone_range : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneRange
 
 
 #refinery stuff
@@ -93,6 +97,7 @@ var upgrade_panel_showing : bool = false
 
 var mining_drones_count : int = 0
 var plat_drones_count : int = 0
+var tur_drones_count : int = 0
 var total_dronse_count : int = 0
 #sfx
 @onready var sfx_player : AudioStreamPlayer = $SfxPlayer
@@ -106,23 +111,34 @@ var purchase_upgrade_sfx : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DEPLO
 @onready var mining_laser_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_speed_indicator
 @onready var mining_laser_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_damage_indicator
 @onready var mining_laser_crit_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/mining_laser_crit_indicator
+
 @onready var drone_available_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_available_indicator
 @onready var drone_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_damage_indicator
 @onready var drone_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/drone_speed_indicator
+
 @onready var platinum_drone_available_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_available_indicator
 @onready var platinum_drone_damage_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_damage_indicator
 @onready var platinum_drone_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Platinum_Drone_speed_indicator
+
 @onready var ferrite_refinery_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Ferrite_Refinery_speed_indicator
 @onready var ferrite_refinery_output_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Ferrite_Refinery_output_indicator
+
 @onready var plasma_generator_speed_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_speed_indicator
 @onready var plasma_generator_output_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_output_indicator
 @onready var plasma_generator_fuel_indicator: Label = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/Plasma_Generator_fuel_indicator
+
+@onready var turret_drone__available_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone__Available_Indicator
+@onready var turret_drone_damage_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone_damage_indicator
+@onready var turret_drone_speed_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone_speed_indicator
+@onready var turret_drone_range_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone_Range_Indicator
+
 
 
 func _ready() -> void:
 
 	DroneManager.mining_drone_cost_changed.connect(update_drone_cost)
 	DroneManager.platinum_drone_cost_changed.connect(update_platinum_drone_cost)
+	DroneManager.turret_drone_cost_change.connect(update_turret_drone_cost)
 	
 	current_damage_tracker.text = str(GameManager.mining_laser_damage)
 	current_damage_cost.text = str(GameManager.mining_laser_damage_upgrade_cost)
@@ -166,21 +182,29 @@ func _process(delta: float) -> void:
 	mining_laser_speed_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_speed_cost)
 	mining_laser_damage_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_damage_upgrade_cost)
 	mining_laser_crit_indicator.visible = show_upgrade_indicator(GameManager.mining_laser_crit_chance_cost)
+	
 	drone_available_indicator.visible = show_upgrade_indicator(mining_drones_cost)
 	drone_damage_indicator.visible = show_upgrade_indicator(GameManager.drone_damage_cost) and mining_drones_count > 0
 	drone_speed_indicator.visible = show_upgrade_indicator(GameManager.drone_mining_speed_cost) and mining_drones_count > 0
+	
 	platinum_drone_available_indicator.visible = show_upgrade_indicator(plat_drones_cost)
-	platinum_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_damage_cost) and mining_drones_count > 0
+	platinum_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_damage_cost) and plat_drones_count > 0
 	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_mining_speed_cost) and plat_drones_count > 0
+	
+	turret_drone__available_indicator.visible = show_upgrade_indicator(turret_drones_plat_cost)
+	platinum_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_damage_cost) and tur_drones_count > 0
+	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_speed_cost) and tur_drones_count > 0
+	
 	ferrite_refinery_output_indicator.visible = show_upgrade_indicator(GameManager.output_upgrade_cost) and GameManager.ferrite_refinery_station_purchased
 	ferrite_refinery_speed_indicator.visible = show_upgrade_indicator(GameManager.ferrite_refinery_speed_cost) and GameManager.ferrite_refinery_station_purchased
+	
 	plasma_generator_output_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_output_cost) and GameManager.plasma_generator_station_purchased
 	plasma_generator_fuel_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_fuel_cost) and GameManager.plasma_generator_station_purchased
 	plasma_generator_speed_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_speed_cost) and GameManager.plasma_generator_station_purchased
 	
-	
 	mining_drone_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
 	platinum_drone_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
+	turret_drones_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
 	
 	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
 	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
@@ -189,10 +213,11 @@ func _process(delta: float) -> void:
 	if DroneManager.drones.size() < GameManager.max_owned_drones:
 		purchase_drone.disabled = GameManager.platinum_count < mining_drones_cost
 		purchase_platinum_drone.disabled = GameManager.platinum_count < plat_drones_cost
+		purchase_turret_drone.disabled = GameManager.platinum_count < turret_drones_plat_cost
 	else:
 		purchase_drone.disabled = true
 		purchase_platinum_drone.disabled = true
-	
+		purchase_turret_drone.disabled = true
 	
 	if DroneManager.drones.size() < GameManager.max_owned_drones:
 		if mining_drones_count > 0:
@@ -209,17 +234,25 @@ func _process(delta: float) -> void:
 			upgrade_plat_drone_damage.disabled = true
 			upgrade_platinum_drone_mining_speed.disabled = true
 		
-		if GameManager.ferrite_refinery_station_purchased:
-			upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
-			upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
-		else:
-			upgrade_refinery_speed.disabled = true
-			upgrade_efficiency.disabled = true
+		if tur_drones_count > 0: 
+			upgrade_turret_drone_damage.disabled = GameManager.platinum_count < GameManager.turret_drone_damage_cost
+			upgrade_turret_drone_fire_rate.disabled = GameManager.platinum_count < GameManager.turret_drone_speed_cost
+			upgrade_turret_drone_range.disabled = GameManager.platinum_count < GameManager.turret_drone_range_cost
 	else:
 		upgrade_drone_damage.disabled = true
 		upgrade_drone_mining_speed.disabled = true
 		upgrade_plat_drone_damage.disabled = true
 		upgrade_platinum_drone_mining_speed.disabled = true
+		upgrade_refinery_speed.disabled = true
+		upgrade_efficiency.disabled = true
+		upgrade_turret_drone_damage.disabled = true
+		upgrade_turret_drone_fire_rate.disabled = true
+		upgrade_turret_drone_range.disabled = true
+	
+	if GameManager.ferrite_refinery_station_purchased:
+		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
+		upgrade_efficiency.disabled = GameManager.platinum_count < GameManager.output_upgrade_cost
+	else:
 		upgrade_refinery_speed.disabled = true
 		upgrade_efficiency.disabled = true
 	
@@ -248,7 +281,10 @@ func upgrades_available() -> bool:
 		GameManager.output_upgrade_cost,
 		GameManager.plasma_generator_fuel_cost,
 		GameManager.plasma_generator_output_cost,
-		GameManager.plasma_generator_speed_cost
+		GameManager.plasma_generator_speed_cost,
+		GameManager.turret_drone_cost, 
+		GameManager.turret_drone_damage_cost, 
+		GameManager.turret_drone_fire_rate_cost
 	]
 
 	for cost in costs:
@@ -382,6 +418,7 @@ func upgrade_mining_critical_chance() -> void:
 	GameManager.mining_laser_crit_chance += GameManager.mining_laser_crit_chance_interval
 	GameManager.mining_laser_crit_chance_cost = GameManager.mining_laser_crit_chance_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.mining_laser_crit_chance_level)
 	SignalBus.update_platinum_count.emit()
+	
 func purchased_drone() -> void:
 	if !GameManager.mining_drone_purchased:
 		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.MINING_DRONE_PURCHASED)
@@ -496,7 +533,15 @@ func update_platinum_drone_cost(new_cost : int, new_count : int) -> void:
 	platinum_drones_count.text = str(plat_drones_count)
 	SignalBus.update_platinum_count.emit()
 	SignalBus.check_to_start_ufo_spawn.emit()
-	
+
+func update_turret_drone_cost(new_cost : int, new_count : int) -> void:
+	toggle_upgrade_check_list_item()
+	turret_drones_plat_cost = new_cost
+	tur_drones_count = new_count
+	turret_drones_cost.text = str(turret_drones_plat_cost)
+	turret_drones_count.text = str(tur_drones_count)
+	SignalBus.update_platinum_count.emit()
+	SignalBus.check_to_start_ufo_spawn.emit()
 
 func toggle_upgrade_check_list_item() -> void:
 	#if !GameManager.upgrade_purchased:
@@ -525,7 +570,16 @@ func get_total_drones_count() -> void:
 
 
 func _on_purchase_turret_drone_button_down():
-	pass # Replace with function body.
+	#if !GameManager.plat_drone_purchased:
+		#SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PLAT_DRONE_PURCHASED)
+	
+	if !GameManager.purchase_1_more_drone:
+		SignalBus.add_to_mission_counter.emit(1, GameManager.CHECK_LIST_INDICATOR_TOGGLES.PURCHASE_1_MORE_DRONE)
+	
+	play_purchase_upgrade_sfx()
+	GameManager.platinum_count -= GameManager.turret_drone_cost
+	SignalBus.add_turret_drone.emit()
+	SignalBus.update_platinum_count.emit()
 
 
 func _on_upgrade_turret_drone_damage_button_down():
@@ -533,4 +587,8 @@ func _on_upgrade_turret_drone_damage_button_down():
 
 
 func _on_upgrade_turret_drone_fire_rate_button_down():
+	pass # Replace with function body.
+
+
+func _on_upgrade_turret_drone_range_button_down():
 	pass # Replace with function body.

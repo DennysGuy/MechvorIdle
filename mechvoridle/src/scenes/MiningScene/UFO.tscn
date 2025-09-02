@@ -115,8 +115,8 @@ _data = {
 }
 
 [node name="Ufo" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 12
+collision_mask = 12
 script = ExtResource("1_16gh5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

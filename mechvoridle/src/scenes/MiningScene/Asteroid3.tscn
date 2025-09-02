@@ -94,8 +94,8 @@ texture = SubResource("CompressedTexture2D_lpdtp")
 
 [node name="Area2D" type="Area2D" parent="."]
 material = ExtResource("1_mafmj")
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_7gn1o")
