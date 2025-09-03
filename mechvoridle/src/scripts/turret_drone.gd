@@ -10,16 +10,16 @@ var show_aoe_radius : bool = false
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var hurt_box : Area2D = $HurtBox
 @onready var progress_bar : ProgressBar = $ProgressBar
+@onready var health_regen_timer : Timer = $HealthRegenTimer
 
-var health : int = 12
-var max_health : int = 12
+var health : int = 18
+var max_health : int = 18
 var navigation_coordinates : Vector2
 
 @onready var anamolie_detector : Area2D = $AnamolieDetector
 
-
 var tracked_hostile : Node 
-var tracked_hostile_queue : Array = []
+
 var damage : int
 var speed : int
 
@@ -31,7 +31,13 @@ func _ready() -> void:
 	SignalBus.deselect_drone.connect(deselect_drone)
 	SignalBus.move_drone.connect(change_to_move_state)
 	SignalBus.clear_tracked_hostile.connect(clear_tracked_hostile)
+	
+	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
+	SignalBus.update_max_health.connect(increase_max_health)
+	
 	DroneManager.register_turret_drone(self)
+	health_regen_timer.wait_time = GameManager.drone_health_regen_time
+	health_regen_timer.start()
 	SignalBus.update_turret_drone_speed.connect(set_turret_speed)
 	SignalBus.update_turret_drone_range.connect(set_range_area_scale)
 	SignalBus.update_turret_drone_damage.connect(set_turret_damage)
@@ -39,7 +45,6 @@ func _ready() -> void:
 	state_machine.init(self)
 	
 func _process(delta: float) -> void:
-	print(tracked_hostile)
 	queue_redraw()
 	set_outline_color()
 	state_machine.process_frame(delta)
@@ -68,11 +73,9 @@ func _draw() -> void:
 	if show_aoe_radius:
 		draw_circle(Vector2.ZERO, radius, aoe_radius_color)
 
-
 func show_radius(value : bool) -> void:
 	show_aoe_radius = value
 	
-
 func deselect_drone() -> void:
 	hide_outline()
 	show_radius(false)
@@ -101,6 +104,9 @@ func set_outline_color() -> void:
 func _on_control_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if GameManager.drone_selected and GameManager.drone_selected == self:
+				return
+				
 			show_radius(true)
 			show_outline()
 			GameManager.drone_selected = self
@@ -125,30 +131,16 @@ func _on_hurt_box_area_entered(area):
 		else:
 			area_parent.queue_free() #we'll change to animation explode sequence
 
-func add_hostile_to_queue(hostile : Node) -> void:
-	#adds the newly seen hostile to the queue to be moved later
-	tracked_hostile_queue.append(hostile)
-
-func move_next_in_queue() -> void:
-	tracked_hostile = tracked_hostile_queue[0]
-	#remove hostile from queue
-	tracked_hostile_queue.erase(0)
-
-func remove_from_queue(hostile : Node) -> void:
-	#if the hostile leaves the area, we'll also need to remove from queue
-	var index = tracked_hostile_queue.find(hostile)
-	if index != -1:
-		tracked_hostile_queue.erase(index)
 
 func _on_anamolie_detector_area_entered(area : Area2D):
-	print("hey we have a visitor!")
 	var parent = area.get_parent()
 	
-	if !tracked_hostile:
+	if parent is not TurretDrone:
 		tracked_hostile = parent
 
 func set_range_area_scale() -> void:
 	radius = roundf(collision_shape_2d.radius * GameManager.turret_drone_range_scaler)
+	collision_shape_2d.radius = radius
 	
 func set_turret_damage() -> void:
 	damage = GameManager.turret_drone_damage
@@ -165,3 +157,15 @@ func _on_anamolie_detector_area_exited(area : Area2D):
 func clear_tracked_hostile(hostile) -> void:
 	if tracked_hostile and tracked_hostile == hostile:
 		tracked_hostile = null
+
+func increase_max_health() -> void:
+	max_health += GameManager.drone_max_health
+
+func decrease_health_regen_time() -> void:
+	health_regen_timer.wait_time = GameManager.drone_health_regen_amount
+
+func _on_health_regen_timer_timeout():
+	if health < max_health:
+		health += GameManager.drone_health_regen_amount
+		if health > max_health:
+			health = max_health

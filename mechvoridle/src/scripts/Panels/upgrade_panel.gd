@@ -71,6 +71,20 @@ var turret_drones_plat_cost : int = 250
 @onready var upgrade_turret_drone_range : Button = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneRange
 
 
+@onready var drone_max_health_amount : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneMaxHealthAmount
+@onready var drone_max_health_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneMaxHealthCost
+@onready var upgrade_drone_max_health : Button = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeDroneMaxHealth
+@onready var drone_max_health_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/Drone_Max_Health_Indicator
+@onready var drone_hp_regen_amount : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneHPRegenAmount
+@onready var drone_hp_regen_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneHPRegenCost
+@onready var upgrade_drone_hp_regen_amount : Button = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeDroneHPRegenAmount
+@onready var drone_hp_regen_amount_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/Drone_HP_Regen_Amount_Indicator
+@onready var drone_hp_regen_time_amount : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneHPRegenTimeAmount
+@onready var drone_hp_regen_time_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/DroneHPRegenTimeCost
+@onready var upgrade_hp_regen_time : Button = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeHPRegenTime
+
+
+
 #refinery stuff
 @onready var ferrite_refinery_speed = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FerriteRefinerySpeed
 @onready var ferrite_refinery_speed_cost = $ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/FerriteRefinerySpeedCost
@@ -132,7 +146,13 @@ var purchase_upgrade_sfx : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DEPLO
 @onready var turret_drone_speed_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone_speed_indicator
 @onready var turret_drone_range_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/Turret_Drone_Range_Indicator
 
+@onready var max_drones_slots_amount : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/MaxDronesSlotsAmount
+@onready var max_drones_slots_cost : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/MaxDronesSlotsCost
+@onready var upgrade_max_drones_slots : Button = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeMaxDronesSlots
+@onready var max_drones_slots_indicator : Label = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/Max_Drones_Slots_Indicator
+@onready var drone_hp_regen_time_indicator = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/Drone_HP_Regen_Time_Indicator
 
+@onready var upgrade_hp_regen_time_button : Button = $ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeHPRegenTime
 
 func _ready() -> void:
 
@@ -177,12 +197,22 @@ func _ready() -> void:
 	current_mining_laser_cost.text = str(GameManager.mining_laser_speed_cost)
 	
 	turret_drones_count.text = str(DroneManager.get_turret_drone_count())
-	turret_drones_cost.text = str(turret_drones_cost)
+	turret_drones_cost.text = str(DroneManager.get_turret_drone_cost())
 	turret_current_drone_damage.text = str(GameManager.turret_drone_damage)
 	turret_drone_damage_cost.text = str(GameManager.turret_drone_damage_cost)
 	current_turret_drone_speed.text = str(GameManager.turret_drone_speed * 100) + "%"
 	turret_drone_speed_cost.text = str(GameManager.turret_drone_speed_cost)
 	
+	drone_max_health_amount.text = str(GameManager.drone_max_health)
+	drone_max_health_cost.text = str(GameManager.drone_max_health_upgrade_cost)
+	drone_hp_regen_amount.text = str(GameManager.drone_health_regen_amount)
+	drone_hp_regen_cost.text = str(GameManager.drone_health_regen_upgrade_cost)
+	drone_hp_regen_time_amount.text = str(GameManager.drone_health_regen_time) + " sec. (max 4 sec.)"
+	drone_hp_regen_time_cost.text = str(GameManager.drone_health_regen_upgrade_cost)
+	
+	max_drones_slots_amount.text = str(GameManager.max_owned_drones)
+	max_drones_slots_cost.text = str(GameManager.max_owned_drones_cost)
+
 	
 func _process(delta: float) -> void:
 	
@@ -200,8 +230,9 @@ func _process(delta: float) -> void:
 	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.platinum_drone_mining_speed_cost) and plat_drones_count > 0
 	
 	turret_drone__available_indicator.visible = show_upgrade_indicator(turret_drones_plat_cost)
-	platinum_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_damage_cost) and tur_drones_count > 0
-	platinum_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_speed_cost) and tur_drones_count > 0
+	turret_drone_damage_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_damage_cost) and tur_drones_count > 0
+	turret_drone_speed_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_speed_cost) and tur_drones_count > 0
+	turret_drone_range_indicator.visible = show_upgrade_indicator(GameManager.turret_drone_range_cost) and tur_drones_count > 0
 	
 	ferrite_refinery_output_indicator.visible = show_upgrade_indicator(GameManager.output_upgrade_cost) and GameManager.ferrite_refinery_station_purchased
 	ferrite_refinery_speed_indicator.visible = show_upgrade_indicator(GameManager.ferrite_refinery_speed_cost) and GameManager.ferrite_refinery_station_purchased
@@ -210,6 +241,13 @@ func _process(delta: float) -> void:
 	plasma_generator_fuel_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_fuel_cost) and GameManager.plasma_generator_station_purchased
 	plasma_generator_speed_indicator.visible = show_upgrade_indicator(GameManager.plasma_generator_speed_cost) and GameManager.plasma_generator_station_purchased
 	
+	drone_max_health_indicator.visible = show_upgrade_indicator(GameManager.drone_max_health_upgrade_cost)
+	drone_hp_regen_amount_indicator.visible = show_upgrade_indicator(GameManager.drone_health_regen_upgrade_cost)
+	drone_hp_regen_time_indicator.visible = show_upgrade_indicator(GameManager.drone_health_regen_time_upgrade_cost)
+	
+	max_drones_slots_indicator.visible = show_upgrade_indicator(GameManager.max_owned_drones_cost)
+	
+	
 	mining_drone_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
 	platinum_drone_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
 	turret_drones_capacity_full.visible = DroneManager.drones.size() >= GameManager.max_owned_drones
@@ -217,6 +255,9 @@ func _process(delta: float) -> void:
 	upgrade_damage.disabled = GameManager.platinum_count < GameManager.mining_laser_damage_upgrade_cost
 	upgrade_crit_chance.disabled = GameManager.platinum_count < GameManager.mining_laser_crit_chance_cost
 	upgrade_mining_laser_speed.disabled = GameManager.platinum_count < GameManager.mining_laser_speed_cost
+	
+	
+	
 	#platinum_drones_count.text = str(GameManager.platinum_drone_count)
 	if DroneManager.drones.size() < GameManager.max_owned_drones:
 		purchase_drone.disabled = GameManager.platinum_count < mining_drones_cost
@@ -226,6 +267,11 @@ func _process(delta: float) -> void:
 		purchase_drone.disabled = true
 		purchase_platinum_drone.disabled = true
 		purchase_turret_drone.disabled = true
+	
+	upgrade_drone_max_health.disabled = GameManager.platinum_count < GameManager.drone_max_health_upgrade_cost
+	upgrade_drone_hp_regen_amount.disabled = GameManager.platinum_count < GameManager.drone_health_regen_upgrade_cost
+	upgrade_hp_regen_time_button.disabled = GameManager.platinum_count < GameManager.drone_health_regen_time_upgrade_cost and GameManager.drone_health_regen_time <= GameManager.drone_health_regen_time_max_upgrade
+	upgrade_max_drones_slots.disabled = GameManager.platinum_count < GameManager.max_owned_drones_cost
 	
 	
 	if mining_drones_count > 0:
@@ -246,7 +292,10 @@ func _process(delta: float) -> void:
 		upgrade_turret_drone_damage.disabled = GameManager.platinum_count < GameManager.turret_drone_damage_cost
 		upgrade_turret_drone_fire_rate.disabled = GameManager.platinum_count < GameManager.turret_drone_speed_cost
 		upgrade_turret_drone_range.disabled = GameManager.platinum_count < GameManager.turret_drone_range_cost
-
+	else:
+		upgrade_turret_drone_damage.disabled = true
+		upgrade_turret_drone_fire_rate.disabled = true
+		upgrade_turret_drone_range.disabled = true
 	
 	if GameManager.ferrite_refinery_station_purchased:
 		upgrade_refinery_speed.disabled = GameManager.platinum_count < GameManager.ferrite_refinery_speed_cost
@@ -617,3 +666,51 @@ func _on_upgrade_turret_drone_range_button_down():
 	current_turret_drone_range.text = str(int(GameManager.turret_drone_range_scaler * 100)) + "%"
 	SignalBus.update_platinum_count.emit()
 	SignalBus.update_turret_drone_range.emit()
+
+
+func _on_upgrade_drone_max_health_button_down():
+	play_purchase_upgrade_sfx()
+	GameManager.platinum_count -= GameManager.drone_max_health_upgrade_cost
+	GameManager.drone_max_health_level += 1
+	GameManager.drone_max_health += GameManager.drone_max_health_upgrade_interval
+	GameManager.drone_max_health_upgrade_cost = GameManager.drone_max_health_upgrade_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_max_health_level)
+	drone_max_health_cost.text = str(GameManager.drone_max_health_upgrade_cost)
+	drone_max_health_amount.text = str(GameManager.drone_max_health)
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_max_health.emit()
+
+
+func _on_upgrade_drone_hp_regen_amount_button_down():
+	play_purchase_upgrade_sfx()
+	GameManager.platinum_count -= GameManager.drone_health_regen_upgrade_cost
+	GameManager.drone_health_regen_level += 1
+	GameManager.drone_health_regen_amount += GameManager.drone_health_regen_upgrade_interval
+	GameManager.drone_health_regen_upgrade_cost = GameManager.drone_health_regen_upgrade_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_health_regen_level)
+	drone_hp_regen_amount.text = str(GameManager.drone_health_regen_amount)
+	drone_hp_regen_cost.text = str(GameManager.drone_health_regen_upgrade_cost)
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_drone_regen_amount.emit()
+
+
+func _on_upgrade_hp_regen_time_button_down():
+	play_purchase_upgrade_sfx()
+	GameManager.platinum_count -= GameManager.drone_health_regen_time_upgrade_cost
+	GameManager.drone_health_regen_time_level += 1
+	GameManager.drone_health_regen_time -= GameManager.drone_health_regen_time_upgrade_interval
+	GameManager.drone_health_regen_time_upgrade_cost = GameManager.drone_health_regen_time_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.drone_health_regen_time_level)
+	drone_hp_regen_time_amount.text = str(GameManager.drone_health_regen_time) + " sec. (max 4 sec.)"
+	drone_hp_regen_time_cost.text = str(GameManager.drone_health_regen_time_upgrade_cost)
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_health_regen_time.emit()
+
+
+func _on_upgrade_max_drones_slots_button_down():
+	play_purchase_upgrade_sfx()
+	GameManager.platinum_count -= GameManager.max_owned_drones_cost
+	GameManager.max_owned_drones_level += 1
+	GameManager.max_owned_drones += GameManager.max_owned_drones_upgrade_interal
+	GameManager.max_owned_drones_cost = GameManager.max_owned_drones_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, GameManager.max_owned_drones_level)
+	max_drones_slots_amount.text = str(GameManager.max_owned_drones) 
+	max_drones_slots_cost.text = str(GameManager.max_owned_drones_cost)
+	SignalBus.update_platinum_count.emit()
+	SignalBus.update_owned_drones_count.emit()

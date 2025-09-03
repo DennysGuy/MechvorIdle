@@ -39,7 +39,6 @@ func show_buy_mech_part_indicator() -> bool:
 		or GameManager.ferrite_bars_count >= GameManager.MIN_LAUNCHER_FERRITE_BAR_COST and GameManager.plasma_count >= GameManager.MIN_LAUNCHER_PLASMA_COST
 	)
 
-
 func update_drone_count() -> void:
 	var current_drone_count : int = DroneManager.drones.size()
 	var max_owned_drone_count : int = GameManager.max_owned_drones

@@ -7,6 +7,7 @@ class_name MiningDrone extends CharacterBody2D
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var state_machine : StateMachine = $StateMachine
 @onready var move : State = $StateMachine/Move
+@onready var health_regen_timer : Timer = $HealthRegenTimer
 
 var mining_sfx_list : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_04, SfxManager.MIN_CLICK_ASTEROID_05, SfxManager.MIN_CLICK_ASTEROID_06, SfxManager.MIN_CLICK_ASTEROID_07]
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
@@ -18,7 +19,12 @@ var navigation_coordinates : Vector2
 func _ready() -> void:
 	SignalBus.deselect_drone.connect(hide_outline)
 	SignalBus.move_drone.connect(change_to_move_state)
+	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
+	SignalBus.update_max_health.connect(increase_max_health)
+	
 	DroneManager.register_mining_drone(self)
+	health_regen_timer.wait_time = GameManager.drone_health_regen_time
+	health_regen_timer.start()
 	hide_outline()
 	state_machine.init(self)
 
@@ -117,6 +123,8 @@ func play_mining_sfx() -> void:
 func _on_drone_data_shower_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if GameManager.drone_selected and GameManager.drone_selected == self:
+				return
 			show_outline()
 			GameManager.drone_selected = self
 			SignalBus.show_drone_details.emit(self)
@@ -140,3 +148,15 @@ func change_to_move_state(selected_drone, destination : Vector2):
 	if self == selected_drone:
 		navigation_coordinates = destination
 		state_machine.change_state(move)
+
+func increase_max_health() -> void:
+	max_health += GameManager.drone_max_health
+
+func decrease_health_regen_time() -> void:
+	health_regen_timer.wait_time = GameManager.drone_health_regen_amount
+
+func _on_health_regen_timer_timeout():
+	if health < max_health:
+		health += GameManager.drone_health_regen_amount
+		if health > max_health:
+			health = max_health

@@ -184,5 +184,8 @@ offset_bottom = 9.0
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 
+[node name="HealthRegenTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="gui_input" from="DroneDataShower" to="." method="_on_drone_data_shower_gui_input"]
+[connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]

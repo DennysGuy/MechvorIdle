@@ -37,28 +37,28 @@ offset_right = 193.0
 offset_bottom = 317.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(157, 1000)
+custom_minimum_size = Vector2(157, 950)
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Upgrades" type="Control" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MiningLaserUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
-custom_minimum_size = Vector2(100, 200)
+[node name="MiningLaserUpgrades" type="ColorRect" parent="ScrollContainer/VBoxContainer/Upgrades"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-anchors_preset = 0
-offset_left = 16.0
+offset_left = 12.0
 offset_top = 9.0
-offset_right = 173.0
-offset_bottom = 209.0
+offset_right = 164.0
+offset_bottom = 144.0
+color = Color(0.0867543, 0.326345, 0.455772, 1)
 
 [node name="UpgradeDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 70.0
-offset_right = 34.0
-offset_bottom = 90.0
+offset_left = 6.0
+offset_top = 73.0
+offset_right = 39.0
+offset_bottom = 93.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 4
@@ -66,9 +66,10 @@ text = "+Damage"
 
 [node name="UpgradeCritChance" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_top = 108.0
-offset_right = 44.0
-offset_bottom = 128.0
+offset_left = 5.0
+offset_top = 111.0
+offset_right = 49.0
+offset_bottom = 131.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 4
@@ -76,10 +77,10 @@ text = "+Crit Chance"
 
 [node name="UpgradeMiningLaserSpeed" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 30.0
-offset_right = 32.0
-offset_bottom = 50.0
+offset_left = 6.0
+offset_top = 33.0
+offset_right = 37.0
+offset_bottom = 53.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 4
@@ -87,115 +88,128 @@ text = "+Speed"
 
 [node name="MiningLaserSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 16.0
-offset_right = 42.0
-offset_bottom = 27.0
+offset_left = 6.0
+offset_top = 19.0
+offset_right = 47.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Speed"
 
 [node name="CurrentMiningLaserSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 16.0
-offset_right = 101.0
-offset_bottom = 27.0
+offset_left = 50.0
+offset_top = 19.0
+offset_right = 106.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
 [node name="CurrentMiningLaserCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 41.0
-offset_right = 105.0
-offset_bottom = 50.0
+offset_left = 41.0
+offset_top = 44.0
+offset_right = 110.0
+offset_bottom = 53.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="MiningLaserlabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_right = 82.0
-offset_bottom = 16.0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 87.0
+offset_bottom = 19.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 9
 text = "Mining Laser"
 
 [node name="CurrentDamageLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 56.0
-offset_right = 42.0
-offset_bottom = 67.0
+offset_left = 6.0
+offset_top = 59.0
+offset_right = 47.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Damage:"
 
 [node name="CurrentDamageTracker" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 56.0
-offset_right = 101.0
-offset_bottom = 67.0
+offset_left = 50.0
+offset_top = 59.0
+offset_right = 106.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
 
 [node name="CurrentDamageCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 81.0
-offset_right = 93.0
-offset_bottom = 90.0
+offset_left = 44.0
+offset_top = 84.0
+offset_right = 98.0
+offset_bottom = 93.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="CurrentCritChanceLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_top = 95.0
-offset_right = 59.0
-offset_bottom = 106.0
+offset_left = 5.0
+offset_top = 98.0
+offset_right = 64.0
+offset_bottom = 109.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Crit Chance:"
 
 [node name="CurrentCritChanceTracker" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 62.0
-offset_top = 95.0
-offset_right = 105.0
-offset_bottom = 106.0
+offset_left = 67.0
+offset_top = 98.0
+offset_right = 110.0
+offset_bottom = 109.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0.0%"
 
 [node name="CurrentCritChanceCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 120.0
-offset_right = 93.0
-offset_bottom = 129.0
+offset_left = 52.0
+offset_top = 123.0
+offset_right = 98.0
+offset_bottom = 132.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="PlatinumUiIcon5" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
-position = Vector2(45, 74)
+position = Vector2(50, 77)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon6" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
-position = Vector2(53, 113)
+position = Vector2(58, 116)
 texture = ExtResource("4_nnvdg")
 
 [node name="mining_laser_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 25.0
-offset_right = 64.0
-offset_bottom = 48.0
+offset_left = 72.0
+offset_top = 28.0
+offset_right = 78.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -204,10 +218,10 @@ text = "!"
 
 [node name="mining_laser_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 60.0
-offset_right = 64.0
-offset_bottom = 83.0
+offset_left = 72.0
+offset_top = 63.0
+offset_right = 78.0
+offset_bottom = 86.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -216,10 +230,10 @@ text = "!"
 
 [node name="mining_laser_crit_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 103.0
-offset_right = 73.0
-offset_bottom = 126.0
+offset_left = 72.0
+offset_top = 106.0
+offset_right = 78.0
+offset_bottom = 129.0
 theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -227,16 +241,16 @@ theme_override_font_sizes/font_size = 20
 text = "!"
 
 [node name="PlatinumUiIcon14" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
-position = Vector2(44, 34)
+position = Vector2(49, 37)
 texture = ExtResource("4_nnvdg")
 
-[node name="DronesUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
+[node name="DronesUpgrades" type="ColorRect" parent="ScrollContainer/VBoxContainer/Upgrades"]
 layout_mode = 2
-anchors_preset = 0
 offset_left = 12.0
-offset_top = 144.0
-offset_right = 169.0
-offset_bottom = 512.0
+offset_top = 154.0
+offset_right = 164.0
+offset_bottom = 516.0
+color = Color(0.208846, 0.370073, 0.278607, 1)
 
 [node name="DronesLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 1
@@ -244,6 +258,7 @@ offset_left = 5.0
 offset_top = 3.0
 offset_right = 50.0
 offset_bottom = 19.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 9
 text = "Drones"
@@ -254,6 +269,7 @@ offset_left = 13.0
 offset_top = 17.0
 offset_right = 69.0
 offset_bottom = 28.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Basic Drones:"
@@ -264,6 +280,7 @@ offset_left = 71.0
 offset_top = 17.0
 offset_right = 89.0
 offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "12"
@@ -274,6 +291,7 @@ offset_left = 36.0
 offset_top = 39.0
 offset_right = 98.0
 offset_bottom = 48.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -284,6 +302,7 @@ offset_left = 78.0
 offset_top = 29.0
 offset_right = 145.0
 offset_bottom = 48.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Drone Capacity 
@@ -295,6 +314,7 @@ offset_left = 86.0
 offset_top = 135.0
 offset_right = 153.0
 offset_bottom = 154.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Drone Capacity 
@@ -317,6 +337,7 @@ offset_left = 6.0
 offset_top = 47.0
 offset_right = 79.0
 offset_bottom = 58.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Damage:"
@@ -327,6 +348,7 @@ offset_left = 46.0
 offset_top = 47.0
 offset_right = 106.0
 offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -337,6 +359,7 @@ offset_left = 43.0
 offset_top = 68.0
 offset_right = 91.0
 offset_bottom = 76.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "100"
@@ -358,6 +381,7 @@ offset_left = 6.0
 offset_top = 78.0
 offset_right = 33.0
 offset_bottom = 86.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Speed:"
@@ -368,6 +392,7 @@ offset_left = 44.0
 offset_top = 78.0
 offset_right = 91.0
 offset_bottom = 87.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -378,6 +403,7 @@ offset_left = 39.0
 offset_top = 98.0
 offset_right = 100.0
 offset_bottom = 106.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "100"
@@ -399,6 +425,7 @@ offset_left = 15.0
 offset_top = 117.0
 offset_right = 89.0
 offset_bottom = 128.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Platinum Drones:"
@@ -409,6 +436,7 @@ offset_left = 92.0
 offset_top = 117.0
 offset_right = 100.0
 offset_bottom = 126.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "12"
@@ -419,6 +447,7 @@ offset_left = 35.0
 offset_top = 144.0
 offset_right = 79.0
 offset_bottom = 153.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -440,6 +469,7 @@ offset_left = 8.0
 offset_top = 154.0
 offset_right = 43.0
 offset_bottom = 165.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Damage:"
@@ -450,6 +480,7 @@ offset_left = 50.0
 offset_top = 154.0
 offset_right = 79.0
 offset_bottom = 165.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -460,6 +491,7 @@ offset_left = 39.0
 offset_top = 175.0
 offset_right = 87.0
 offset_bottom = 183.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "100"
@@ -481,6 +513,7 @@ offset_left = 8.0
 offset_top = 184.0
 offset_right = 35.0
 offset_bottom = 195.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Speed:"
@@ -491,6 +524,7 @@ offset_left = 49.0
 offset_top = 185.0
 offset_right = 71.0
 offset_bottom = 194.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -501,6 +535,7 @@ offset_left = 44.0
 offset_top = 209.0
 offset_right = 93.0
 offset_bottom = 218.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -638,6 +673,7 @@ offset_left = 89.0
 offset_top = 240.0
 offset_right = 156.0
 offset_bottom = 259.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Drone Capacity 
@@ -649,6 +685,7 @@ offset_left = 15.0
 offset_top = 225.0
 offset_right = 89.0
 offset_bottom = 236.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Turret Drones:"
@@ -659,25 +696,27 @@ offset_left = 85.0
 offset_top = 225.0
 offset_right = 93.0
 offset_bottom = 234.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "12"
 
 [node name="TurretDronesCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 0
-offset_left = 35.0
+offset_left = 43.0
 offset_top = 252.0
-offset_right = 79.0
+offset_right = 87.0
 offset_bottom = 261.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
 
 [node name="PurchaseTurretDrone" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 0
-offset_left = 3.0
+offset_left = 8.0
 offset_top = 241.0
-offset_right = 34.0
+offset_right = 39.0
 offset_bottom = 257.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -690,6 +729,7 @@ offset_left = 8.0
 offset_top = 262.0
 offset_right = 43.0
 offset_bottom = 273.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Damage:"
@@ -700,6 +740,7 @@ offset_left = 50.0
 offset_top = 262.0
 offset_right = 79.0
 offset_bottom = 273.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -710,15 +751,16 @@ offset_left = 43.0
 offset_top = 283.0
 offset_right = 91.0
 offset_bottom = 291.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "100"
 
 [node name="UpgradeTurretDroneDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 273.0
-offset_right = 39.0
+offset_right = 41.0
 offset_bottom = 289.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_lmpdo")
@@ -731,6 +773,7 @@ offset_left = 8.0
 offset_top = 292.0
 offset_right = 35.0
 offset_bottom = 303.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "Speed:"
@@ -741,6 +784,7 @@ offset_left = 49.0
 offset_top = 293.0
 offset_right = 71.0
 offset_bottom = 302.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "5"
@@ -751,6 +795,7 @@ offset_left = 46.0
 offset_top = 317.0
 offset_right = 95.0
 offset_bottom = 326.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -771,7 +816,7 @@ position = Vector2(52, 309)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon9" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
-position = Vector2(43, 245)
+position = Vector2(51, 245)
 texture = ExtResource("4_nnvdg")
 
 [node name="PlatinumUiIcon10" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
@@ -829,6 +874,7 @@ offset_left = 10.0
 offset_top = 328.0
 offset_right = 29.0
 offset_bottom = 336.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "A.O.E.:"
@@ -839,6 +885,7 @@ offset_left = 49.0
 offset_top = 328.0
 offset_right = 71.0
 offset_bottom = 337.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 6
 text = "50"
@@ -849,6 +896,7 @@ offset_left = 46.0
 offset_top = 352.0
 offset_right = 95.0
 offset_bottom = 361.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -880,13 +928,275 @@ theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 20
 text = "!"
 
-[node name="RefineryUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
+[node name="DroneHealthUpgrades" type="ColorRect" parent="ScrollContainer/VBoxContainer/Upgrades"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 526.0
+offset_right = 164.0
+offset_bottom = 693.0
+grow_vertical = 2
+color = Color(0.547526, 0.301737, 0.288146, 1)
+
+[node name="DroneHealthUpgrades" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 147.0
+offset_bottom = 12.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Health and Other Upgrades"
+
+[node name="DroneMaxHealth" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 28.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "MAx HP:"
+
+[node name="DroneMaxHealthAmount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 20.0
+offset_right = 56.0
+offset_bottom = 29.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "50"
+
+[node name="DroneMaxHealthCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 44.0
+offset_right = 92.0
+offset_bottom = 53.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeDroneMaxHealth" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 38.0
+offset_bottom = 47.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Amount"
+
+[node name="PlatinumUiIcon11" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+position = Vector2(49, 36)
+texture = ExtResource("4_nnvdg")
+
+[node name="Drone_Max_Health_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 23.0
+offset_right = 77.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="DroneHPRegen" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 55.0
+offset_right = 42.0
+offset_bottom = 63.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "HP Regen"
+
+[node name="DroneHPRegenAmount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 55.0
+offset_right = 56.0
+offset_bottom = 64.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="DroneHPRegenCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 79.0
+offset_right = 92.0
+offset_bottom = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeDroneHPRegenAmount" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 66.0
+offset_right = 38.0
+offset_bottom = 82.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Amount"
+
+[node name="PlatinumUiIcon12" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+position = Vector2(49, 71)
+texture = ExtResource("4_nnvdg")
+
+[node name="Drone_HP_Regen_Amount_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 58.0
+offset_right = 77.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="DroneHPRegenTime" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 95.0
+offset_right = 41.0
+offset_bottom = 101.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 5
+text = "REgen Time"
+
+[node name="DroneHPRegenTimeAmount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 94.0
+offset_right = 56.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "20"
+
+[node name="DroneHPRegenTimeCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 118.0
+offset_right = 92.0
+offset_bottom = 127.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeHPRegenTime" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 105.0
+offset_right = 38.0
+offset_bottom = 121.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "- Time"
+
+[node name="PlatinumUiIcon13" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+position = Vector2(49, 110)
+texture = ExtResource("4_nnvdg")
+
+[node name="Drone_HP_Regen_Time_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 97.0
+offset_right = 77.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="MaxDroneSlots" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_top = 134.0
+offset_right = 43.0
+offset_bottom = 140.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 5
+text = "MAx Drones"
+
+[node name="MaxDronesSlotsAmount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 133.0
+offset_right = 56.0
+offset_bottom = 142.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "4"
+
+[node name="MaxDronesSlotsCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 157.0
+offset_right = 92.0
+offset_bottom = 166.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeMaxDronesSlots" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 144.0
+offset_right = 38.0
+offset_bottom = 160.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ 1 Slot"
+
+[node name="PlatinumUiIcon14" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+position = Vector2(49, 149)
+texture = ExtResource("4_nnvdg")
+
+[node name="Max_Drones_Slots_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 136.0
+offset_right = 77.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="RefineryUpgrades" type="ColorRect" parent="ScrollContainer/VBoxContainer/Upgrades"]
 layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 515.0
-offset_right = 174.0
-offset_bottom = 727.0
+offset_left = 12.0
+offset_top = 704.0
+offset_right = 165.0
+offset_bottom = 916.0
+color = Color(0.48483, 0.464385, 0.238173, 1)
 
 [node name="FerriteRefinery" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
 layout_mode = 0
@@ -894,6 +1204,7 @@ offset_left = 6.0
 offset_top = 2.0
 offset_right = 86.0
 offset_bottom = 11.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Ferrite Refinery"
@@ -904,6 +1215,7 @@ offset_left = 6.0
 offset_top = 20.0
 offset_right = 61.0
 offset_bottom = 31.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Auto Speed"
@@ -914,6 +1226,7 @@ offset_left = 67.0
 offset_top = 20.0
 offset_right = 123.0
 offset_bottom = 29.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0"
@@ -924,6 +1237,7 @@ offset_left = 45.0
 offset_top = 42.0
 offset_right = 115.0
 offset_bottom = 53.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "200"
@@ -945,6 +1259,7 @@ offset_left = 5.0
 offset_top = 54.0
 offset_right = 58.0
 offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Output:"
@@ -955,6 +1270,7 @@ offset_left = 47.0
 offset_top = 53.0
 offset_right = 85.0
 offset_bottom = 62.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
@@ -965,6 +1281,7 @@ offset_left = 49.0
 offset_top = 76.0
 offset_right = 97.0
 offset_bottom = 87.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -986,6 +1303,7 @@ offset_left = 3.0
 offset_top = 96.0
 offset_right = 97.0
 offset_bottom = 105.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Plasma Generator"
@@ -996,6 +1314,7 @@ offset_left = 4.0
 offset_top = 110.0
 offset_right = 61.0
 offset_bottom = 121.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Auto Speed:"
@@ -1006,6 +1325,7 @@ offset_left = 62.0
 offset_top = 110.0
 offset_right = 118.0
 offset_bottom = 121.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "0"
@@ -1016,6 +1336,7 @@ offset_left = 49.0
 offset_top = 131.0
 offset_right = 119.0
 offset_bottom = 142.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "200"
@@ -1037,6 +1358,7 @@ offset_left = 5.0
 offset_top = 140.0
 offset_right = 58.0
 offset_bottom = 151.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Output:"
@@ -1047,6 +1369,7 @@ offset_left = 60.0
 offset_top = 141.0
 offset_right = 120.0
 offset_bottom = 152.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "1"
@@ -1057,6 +1380,7 @@ offset_left = 48.0
 offset_top = 160.0
 offset_right = 122.0
 offset_bottom = 171.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "100"
@@ -1078,6 +1402,7 @@ offset_left = 5.0
 offset_top = 170.0
 offset_right = 58.0
 offset_bottom = 181.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "Fuel Cost:"
@@ -1088,6 +1413,7 @@ offset_left = 58.0
 offset_top = 170.0
 offset_right = 118.0
 offset_bottom = 181.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "8"
@@ -1098,6 +1424,7 @@ offset_left = 49.0
 offset_top = 191.0
 offset_right = 114.0
 offset_bottom = 202.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 7
 text = "500"
@@ -1202,16 +1529,6 @@ theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 20
 text = "!"
 
-[node name="UpgradesLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 302.0
-offset_right = 181.0
-offset_bottom = 318.0
-theme_override_fonts/font = ExtResource("3_lmpdo")
-theme_override_font_sizes/font_size = 11
-text = "Upgrades"
-
 [node name="UpgradesAvailableLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 100.0
@@ -1254,6 +1571,10 @@ bus = &"SFX"
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneDamage" to="." method="_on_upgrade_turret_drone_damage_button_down"]
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneFireRate" to="." method="_on_upgrade_turret_drone_fire_rate_button_down"]
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneRange" to="." method="_on_upgrade_turret_drone_range_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeDroneMaxHealth" to="." method="_on_upgrade_drone_max_health_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeDroneHPRegenAmount" to="." method="_on_upgrade_drone_hp_regen_amount_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeHPRegenTime" to="." method="_on_upgrade_hp_regen_time_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DroneHealthUpgrades/UpgradeMaxDronesSlots" to="." method="_on_upgrade_max_drones_slots_button_down"]
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeRefinerySpeed" to="." method="_on_upgrade_refinery_speed_button_down"]
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeEfficiency" to="." method="_on_upgrade_efficiency_button_down"]
 [connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/PlasmaGeneratorSpeedUpgrade" to="." method="_on_plasma_generator_speed_upgrade_button_down"]

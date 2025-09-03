@@ -54,12 +54,21 @@ signal deselect_drone
 signal move_drone(selected_drone, drone_position : Vector2)
 signal clear_tracked_hostile(hostile)
 
+signal update_health_regen_time
+signal update_max_health
+
 signal update_mining_laser_speed
 signal update_owned_drones_count
 
 signal update_turret_drone_damage
 signal update_turret_drone_speed
 signal update_turret_drone_range
+
+
+signal update_drone_max_health
+signal update_drone_regen_time
+signal update_drone_regen_amount
+signal update_max_owned_drones
 
 #drone details panel
 signal hide_drone_details
