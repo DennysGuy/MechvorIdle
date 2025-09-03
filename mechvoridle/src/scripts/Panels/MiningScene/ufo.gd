@@ -115,10 +115,10 @@ func destroy_ufo() -> void:
 		queue_free()
 	#called in dead sate
 
-func damage_ufo() -> void:
+func damage_ufo(damage : int = 1) -> void:
 	play_ufo_damage_sfx()
 	animation_player.play("ufo_hit_flash")
-	health -= 1
+	health -= damage
 	health_bar.value = health
 	
 	if health <= 0:

@@ -9,7 +9,10 @@ func enter() -> void:
 	if is_instance_valid(parent.tracked_hostile):
 		if parent.tracked_hostile is Asteroid and parent.tracked_hostile.health > 0:
 			parent.tracked_hostile.damage_asteroid(parent.damage)
-
+		
+		elif parent.tracked_hostile is UFO:
+			parent.tracked_hostile.damage_ufo(parent.damage)
+		
 	await parent.animation_player.animation_finished
 	
 	if is_instance_valid(parent.tracked_hostile):

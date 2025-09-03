@@ -147,6 +147,5 @@ func decrease_health_regen_time() -> void:
 
 func _on_health_regen_timer_timeout():
 	if health < max_health:
-		health += GameManager.drone_health_regen_amount
-		if health > max_health:
-			health = max_health
+		var new_health_amount : int = health + GameManager.drone_health_regen_amount
+		health = min(new_health_amount, max_health)
