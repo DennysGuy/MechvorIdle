@@ -18,6 +18,7 @@ func _ready() -> void:
 	SignalBus.deselect_drone.connect(hide_outline)
 	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
 	SignalBus.update_max_health.connect(increase_max_health)
+	SignalBus.heal_drone.connect(heal_drone)
 	
 	health_regen_timer.wait_time = GameManager.drone_health_regen_time
 	health_regen_timer.start()
@@ -93,6 +94,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	if area.get_parent() is Asteroid or area.get_parent() is UFOLaser:
 		health -= area_parent.damage
+		SignalBus.update_drone_health_label.emit(self)
 		if health <= 0:
 			kill_mining_drone()
 		
@@ -103,6 +105,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			area_parent.queue_free() #we'll change to animation explode sequence
 		
 func kill_mining_drone():
+	SignalBus.clear_drone_details.emit(self)
 	erase()
 
 func play_mining_sfx() -> void:
@@ -144,6 +147,11 @@ func increase_max_health() -> void:
 
 func decrease_health_regen_time() -> void:
 	health_regen_timer.wait_time = GameManager.drone_health_regen_amount
+
+func heal_drone(selected_drone) -> void:
+	if selected_drone == self:
+		health = max_health
+		SignalBus.update_drone_details_while_selected.emit(self)
 
 func _on_health_regen_timer_timeout():
 	if health < max_health:

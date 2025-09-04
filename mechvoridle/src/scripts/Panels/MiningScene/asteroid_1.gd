@@ -48,6 +48,7 @@ func damage_asteroid(damage : int = 1) -> void:
 	health -= damage
 	if health <= 0:
 		deliver_resources.emit()
+		
 		spawn_explosion_and_destroy()
 
 func spawn_explosion_and_destroy():

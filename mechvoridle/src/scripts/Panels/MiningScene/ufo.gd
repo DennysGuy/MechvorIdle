@@ -110,6 +110,7 @@ func destroy_ufo() -> void:
 	animated_sprite_2d.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 5
+	SignalBus.clear_tracked_hostile.emit(self)
 	add_child(explosion)
 	if not explosion.animated_sprite_2d.is_playing():
 		queue_free()
@@ -122,6 +123,7 @@ func damage_ufo(damage : int = 1) -> void:
 	health_bar.value = health
 	
 	if health <= 0:
+		SignalBus.clear_tracked_hostile.emit( )
 		current_state = states.DEAD
 
 func _on_hover_out_timer_timeout() -> void:

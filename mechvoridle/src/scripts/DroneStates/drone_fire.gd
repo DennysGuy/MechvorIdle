@@ -6,7 +6,8 @@ class_name DroneFire extends State
 
 func enter() -> void:
 	parent.animation_player.play("fire_laser")	
-	if is_instance_valid(parent.tracked_hostile):
+	print("hey I'm in fire state")
+	if parent.tracked_hostile:
 		if parent.tracked_hostile is Asteroid and parent.tracked_hostile.health > 0:
 			parent.tracked_hostile.damage_asteroid(parent.damage)
 		
@@ -15,7 +16,7 @@ func enter() -> void:
 		
 	await parent.animation_player.animation_finished
 	
-	if is_instance_valid(parent.tracked_hostile):
+	if parent.tracked_hostile:
 		state_machine.change_state(charge_state)
 	else:
 		state_machine.change_state(idle_state)

@@ -64,7 +64,6 @@ offset_bottom = 43.5
 theme_override_fonts/font = ExtResource("3_th7se")
 theme_override_font_sizes/font_size = 6
 text = "Resource Focus:"
-horizontal_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 0
@@ -76,13 +75,32 @@ texture = ExtResource("5_afj2i")
 
 [node name="SellButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 38.0
+offset_left = 53.0
 offset_top = 56.0
 offset_right = 98.0
 offset_bottom = 69.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_th7se")
 theme_override_font_sizes/font_size = 4
-text = "Sell for 497 Plat"
+text = "Sell for 497"
+
+[node name="HealButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 56.0
+offset_right = 51.0
+offset_bottom = 69.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_th7se")
+theme_override_font_sizes/font_size = 4
+text = "Heal for 400"
+
+[node name="MiningFocusIcons" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 44.0
+offset_right = 80.0
+offset_bottom = 57.0
 
 [connection signal="button_down" from="SellButton" to="." method="_on_sell_button_button_down"]
+[connection signal="button_down" from="HealButton" to="." method="_on_heal_button_button_down"]

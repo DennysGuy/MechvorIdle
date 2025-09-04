@@ -10,7 +10,7 @@ func exit() -> void:
 
 
 func process_physics(delta: float) -> State:
-	if is_instance_valid(parent.tracked_hostile):
+	if parent.tracked_hostile:
 		return charge_state
 		
 	return null

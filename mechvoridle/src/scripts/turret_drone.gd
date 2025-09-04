@@ -34,7 +34,7 @@ func _ready() -> void:
 	
 	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
 	SignalBus.update_max_health.connect(increase_max_health)
-	
+	SignalBus.heal_drone.connect(heal_drone)
 	DroneManager.register_turret_drone(self)
 	health_regen_timer.wait_time = GameManager.drone_health_regen_time
 	health_regen_timer.start()
@@ -45,6 +45,7 @@ func _ready() -> void:
 	state_machine.init(self)
 	
 func _process(delta: float) -> void:
+	
 	queue_redraw()
 	set_outline_color()
 	state_machine.process_frame(delta)
@@ -113,6 +114,7 @@ func _on_control_gui_input(event):
 			SignalBus.show_drone_details.emit(self)
 
 func kill_mining_drone():
+	SignalBus.clear_drone_details.emit(self)
 	erase()
 
 func _on_hurt_box_area_entered(area):
@@ -120,13 +122,15 @@ func _on_hurt_box_area_entered(area):
 	
 	if area.get_parent() is Asteroid or area.get_parent() is UFOLaser:
 		health -= area_parent.damage
+		SignalBus.update_drone_health_label.emit(self)
 		if health <= 0:
 			kill_mining_drone()
 			tracked_hostile = null
-			SignalBus.clear_tracked_hostile.emit(area_parent)
+	
 		if area.get_parent() is Asteroid:
 			var asteroid : Asteroid = area.get_parent()
 			asteroid.spawn_explosion_and_destroy()
+			SignalBus.clear_tracked_hostile.emit(area_parent)
 			tracked_hostile = null
 		else:
 			area_parent.queue_free() #we'll change to animation explode sequence
@@ -151,7 +155,7 @@ func set_turret_speed() -> void:
 func _on_anamolie_detector_area_exited(area : Area2D):
 	var parent = area.get_parent()
 	
-	if parent:
+	if parent and parent == tracked_hostile:
 		tracked_hostile = null
 
 func clear_tracked_hostile(hostile) -> void:
@@ -163,6 +167,11 @@ func increase_max_health() -> void:
 
 func decrease_health_regen_time() -> void:
 	health_regen_timer.wait_time = GameManager.drone_health_regen_amount
+
+func heal_drone(selected_drone) -> void:
+	if selected_drone == self:
+		health = max_health
+		SignalBus.update_drone_details_while_selected.emit(self)
 
 func _on_health_regen_timer_timeout():
 	if health < max_health:

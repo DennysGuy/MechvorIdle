@@ -74,6 +74,9 @@ signal update_max_owned_drones
 signal hide_drone_details
 signal show_drone_details(selected_drone)
 signal update_drone_details_while_selected(drone)
+signal heal_drone(selected_drone)
+signal clear_drone_details(selected_drone)
+signal update_drone_health_label(selected_drone)
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)

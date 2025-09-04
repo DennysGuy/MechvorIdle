@@ -10,10 +10,9 @@ func exit() -> void:
 	parent.progress_bar.value = 0
 
 func process_physics(delta: float) -> State:
-	
-	
+
 	if !GameManager.can_fight_boss:
-		if is_instance_valid(parent.tracked_hostile):
+		if parent.tracked_hostile:
 			parent.sprite_2d.look_at(parent.tracked_hostile.position)
 			
 			parent.progress_bar.value += parent.speed
