@@ -18,3 +18,4 @@ show_percentage = false
 script = ExtResource("1_8whlk")
 
 [node name="click_asteroid_sfx" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

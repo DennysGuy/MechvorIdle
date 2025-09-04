@@ -26,6 +26,7 @@ func _ready() -> void:
 	
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
+	SignalBus.add_turret_drone.connect(add_turret_drone_to_scene)
 	SignalBus.check_to_start_ufo_spawn.connect(toggle_ufo_spawn)
 	SignalBus.stop_ufo_spawn.connect(stop_ufo_spawn)
 	animation_player.play("hover")
@@ -41,14 +42,33 @@ func _physics_process(delta : float) -> void:
 			ufo_spawn_timer.start()
 			start_ufo_spawn = false
 
+
+		if Input.is_action_just_pressed("set_drone_destination") and not mouse_in_asteroid_range and not is_inside_mining_area():
+			remove_all_children_in_marker_group()
+			SignalBus.deselect_drone.emit()
+			GameManager.drone_selected = false
+			
+		if Input.is_action_just_pressed("set_drone_destination") and GameManager.drone_selected and is_inside_mining_area():		
+			remove_all_children_in_marker_group()
+			var destination_marker : DestinationMarker = preload("res://src/scenes/MiningScene/DestinationMarker.tscn").instantiate()
+			destination_marker.position = get_local_mouse_position()
+			add_child(destination_marker)
+			SignalBus.move_drone.emit(GameManager.drone_selected, destination_marker.global_position)
+			
+			print(get_tree().get_nodes_in_group("DestinationMarkers"))
+				
 		if Input.is_action_just_pressed("mine_asteroid") and not mining_timer and is_inside_mining_area():
-			mining_timer = get_tree().create_timer(0.4)
-			await mining_timer.timeout
-			spawn_mining_progress_bar()
-			mining_timer = null
+				
+				mining_timer = get_tree().create_timer(0.4)
+				await mining_timer.timeout
+				spawn_mining_progress_bar()
+				mining_timer = null
+		
+
+func remove_all_children_in_marker_group() -> void:
+	for child in get_tree().get_nodes_in_group("DestinationMarkers"):
+		child.queue_free()
 	
-
-
 func spawn_mining_progress_bar():
 	var mining_progress_bar : MiningLaserProgressBar = preload("res://src/scenes/MiningScene/MiningLaserProgressBar.tscn").instantiate()
 	add_child(mining_progress_bar)
@@ -71,7 +91,15 @@ func add_platinum_drone_to_scene() -> void:
 	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 	drone_list.add_child(platinum_drone)
-	
+
+func add_turret_drone_to_scene() -> void:
+	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+	var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
+	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+	turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+	drone_list.add_child(turret_drone)
+
 
 func _on_asteroid_spawn_timer_timeout() -> void:
 	var random_spawn_time : int = randi_range(asteroid_spawn_timer_length-5, asteroid_spawn_timer_length+5)

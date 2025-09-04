@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=29 format=3 uid="uid://dio1yrjtiu67"]
-
+[gd_scene load_steps=30 format=3 uid="uid://dio1yrjtiu67"]
 
 [ext_resource type="Script" uid="uid://cetlwbelt5u36" path="res://src/scripts/Panels/central_stats_panel.gd" id="1_1x76c"]
 [ext_resource type="Texture2D" uid="uid://d1uicvdj2ugdb" path="res://assets/graphics/CentralPanel.png" id="2_m6dgc"]
@@ -19,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="8_xrjyp"]
 [ext_resource type="Texture2D" uid="uid://c46ke31j4g7i6" path="res://assets/graphics/UI/StartFightButton_Disabled.png" id="9_o5f0c"]
 [ext_resource type="PackedScene" uid="uid://cdv41op8l3500" path="res://PlayerPreview.tscn" id="16_jc6kg"]
-
 [ext_resource type="PackedScene" uid="uid://u3jbpu6c6onu" path="res://src/scenes/MechStatsPanel.tscn" id="16_m7knd"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="17_o5f0c"]
 [ext_resource type="Texture2D" uid="uid://bxnsoax0lkn0o" path="res://assets/graphics/UI/ConfirmationPanel.png" id="18_jc6kg"]

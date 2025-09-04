@@ -37,6 +37,7 @@ signal show_upgrade_panel
 signal hide_upgrade_panel
 signal add_drone
 signal add_platinum_drone
+signal add_turret_drone
 signal update_plasma_count
 signal update_plasma_generator_speed
 signal update_fuel_consumption
@@ -49,8 +50,33 @@ signal check_to_start_ufo_spawn
 signal play_ufo_escaped
 signal sound_ship_alarm
 signal silence_ship_alarm
+signal deselect_drone
+signal move_drone(selected_drone, drone_position : Vector2)
+signal clear_tracked_hostile(hostile)
+
+signal update_health_regen_time
+signal update_max_health
 
 signal update_mining_laser_speed
+signal update_owned_drones_count
+
+signal update_turret_drone_damage
+signal update_turret_drone_speed
+signal update_turret_drone_range
+
+
+signal update_drone_max_health
+signal update_drone_regen_time
+signal update_drone_regen_amount
+signal update_max_owned_drones
+
+#drone details panel
+signal hide_drone_details
+signal show_drone_details(selected_drone)
+signal update_drone_details_while_selected(drone)
+signal heal_drone(selected_drone)
+signal clear_drone_details(selected_drone)
+signal update_drone_health_label(selected_drone)
 
 #shop panel signals
 signal transfer_item_to_shop_panel(component : MechComponent)
@@ -119,4 +145,3 @@ signal update_weapon_2_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
 signal toggle_mech_stats_panels()
 signal hide_mech_stats_panels()
 signal toggle_filter(value : bool)
-

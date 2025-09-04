@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=20 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
@@ -13,10 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://dpxyxidb2quhj" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Normal.png" id="9_7bsma"]
 [ext_resource type="Texture2D" uid="uid://bkuw5k1laydet" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Hoverl.png" id="10_mtt0f"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="11_mtt0f"]
+[ext_resource type="PackedScene" uid="uid://dlq5p5jgtqwdj" path="res://src/scenes/MiningScene/DroneDetailsPanel.tscn" id="13_yw1mq"]
 
 [sub_resource type="Animation" id="Animation_t7rsg"]
 resource_name = "HideAnimationPanel"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,7 +28,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -215)]
+"values": [Vector2(0, 0), Vector2(0, -337)]
 }
 
 [sub_resource type="Animation" id="Animation_ooyll"]
@@ -42,11 +43,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -214)]
+"values": [Vector2(0, -337)]
 }
 
 [sub_resource type="Animation" id="Animation_l11te"]
 resource_name = "ShowUpgradePanel"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,7 +59,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -215), Vector2(0, 0)]
+"values": [Vector2(0, -337), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7rsg"]
@@ -132,8 +134,10 @@ mouse_filter = 0
 [node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
-size = Vector2i(480, 210)
+size = Vector2i(480, 213)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="AsteroidArea" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("2_1hqb7")]
@@ -245,10 +249,32 @@ theme_override_fonts/font = ExtResource("11_mtt0f")
 theme_override_font_sizes/font_size = 12
 text = "Buy RECON SCOUT"
 
+[node name="OwnedDronesCount" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 44.0
+offset_right = 233.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("11_mtt0f")
+theme_override_font_sizes/font_size = 8
+text = "Owned Drones 4/4"
+horizontal_alignment = 1
+
+[node name="DroneDetailsPanel" parent="ColorRect" instance=ExtResource("13_yw1mq")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 8.0
+offset_top = -80.0
+offset_right = 111.0
+offset_bottom = -7.0
+grow_horizontal = 1
+
 [node name="UpgradePanel" parent="ColorRect" node_paths=PackedStringArray("asteroid_area") instance=ExtResource("5_l11te")]
 layout_mode = 0
-offset_top = -214.0
-offset_bottom = 22.0
+offset_top = -337.0
+offset_bottom = 0.0
 asteroid_area = NodePath("../SubViewportContainer/SubViewport/AsteroidArea")
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]

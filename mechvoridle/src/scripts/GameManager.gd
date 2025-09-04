@@ -17,6 +17,8 @@ var owned_components_count : int
 var chosen_opponent : OpponentMech
 const MECH_PARTS_NEEDED = 6
 
+
+var drone_selected
 var mining_time_elapsed : String
 var fight_time_elapsed : String
 
@@ -89,6 +91,25 @@ var drone_mining_speed_upgrade_interval : float = 0.1
 var drone_damage_cost : int = 100
 var drone_damage_base_cost : int = 150
 
+var drone_max_health : int = 0
+var drone_max_health_upgrade_cost : int = 400
+var drone_max_health_upgrade_base_cost : int = 400
+var drone_max_health_upgrade_interval : int = 2
+var drone_max_health_level : int = 0
+
+var drone_health_regen_amount : int = 1
+var drone_health_regen_upgrade_cost : int = 400
+var drone_health_regen_upgrade_base_cost : int = 400
+var drone_health_regen_upgrade_interval : int = 1
+var drone_health_regen_level : int = 0
+
+var drone_health_regen_time : int = 20 #seconds it takes to regen 1 health
+var drone_health_regen_time_upgrade_cost : int = 450
+var drone_health_regen_time_base_cost : int = 450
+var drone_health_regen_time_upgrade_interval : int = 2 #decrease cycle time by 1 second per upgrade
+var drone_health_regen_time_max_upgrade : int = 4 #we're maxed out at this time - can't go any faster
+var drone_health_regen_time_level : int = 0
+
 var platinum_drone_cost : int = 100
 var platinum_drone_count : int = 0
 var platinum_drone_base_cost : int = 100
@@ -104,6 +125,30 @@ var platinum_drone_mining_speed_base_cost : float = 150
 var platinum_drone_mining_speed_level : int = 0
 var platinum_drone_mining_speed_interval : float = 0.2
 
+var turret_drone_cost : int = 200
+var turret_drone_base_cost : int = 200
+
+var turret_drone_fire_rate_cost : int = 350
+var turret_drone_fire_rate_base_cost : int = 350
+var turret_drone_fire_rate_level : int = 0
+
+var turret_drone_damage : int = 1
+var turret_drone_damage_interval : int = 1
+var turret_drone_damage_cost : int = 250
+var turret_drone_damage_base_cost : int = 250
+var turret_drone_damage_level : int = 0
+
+var turret_drone_speed : int = 5
+var turrent_drone_speed_interval = 3
+var turret_drone_speed_cost : int = 200
+var turret_drone_speed_base_cost : int = 200
+var turret_drone_speed_level : int = 0
+
+var turret_drone_range_scaler : float = 1.0
+var turret_drone_range_size_interval : float = 0.2
+var turret_drone_range_cost : int = 300
+var turret_drone_range_base_cost : int = 300
+var turret_drone_range_level : int = 0
 
 var ferrite_refinery_speed : float = 0.5
 var ferrite_refinery_speed_cost : int = 100
@@ -138,6 +183,14 @@ var plasma_generator_fuel_consumption_upgrade_interval : int = 5
 var plasma_generator_fuel_consumption_speed : float = 0.05
 var plasma_generator_fuel_cost : int = 3000
 var plasma_generator_fuel_base_cost : int = 3000
+
+
+var max_owned_drones : int = 4
+var max_owned_drones_cost : int = 600
+var max_owned_drones_base_cost : int = 600
+var max_owned_drones_upgrade_interal : int = 1
+var max_owned_drones_level : int = 0
+
 
 #tutorial checklist
 

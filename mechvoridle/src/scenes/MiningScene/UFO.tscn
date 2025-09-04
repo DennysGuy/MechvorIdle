@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ym3nha8862tm"]
+[gd_scene load_steps=19 format=3 uid="uid://ym3nha8862tm"]
 
 [ext_resource type="Script" uid="uid://cxfrencx3yeyi" path="res://src/scripts/Panels/MiningScene/ufo.gd" id="1_16gh5"]
 [ext_resource type="Texture2D" uid="uid://bjujhc6a0ipko" path="res://assets/graphics/UFO.png" id="2_w3bvv"]
@@ -114,9 +114,11 @@ _data = {
 &"ufo_hit_flash": SubResource("Animation_v8qkd")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3bvv"]
+
 [node name="Ufo" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 12
+collision_mask = 12
 script = ExtResource("1_16gh5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -175,6 +177,13 @@ show_percentage = false
 
 [node name="HitUFOSfxPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_w3bvv")
 
 [connection signal="timeout" from="LaserReleaseTimer" to="." method="_on_laser_release_timer_timeout"]
 [connection signal="timeout" from="HoverOutTimer" to="." method="_on_hover_out_timer_timeout"]

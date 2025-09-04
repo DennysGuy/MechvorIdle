@@ -57,6 +57,7 @@ animations = [{
 script = ExtResource("1_us1ck")
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3t1nn")

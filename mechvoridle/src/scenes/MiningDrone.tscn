@@ -1,8 +1,85 @@
-[gd_scene load_steps=8 format=3 uid="uid://jx188rc02x60"]
+[gd_scene load_steps=14 format=3 uid="uid://jx188rc02x60"]
 
 [ext_resource type="Script" uid="uid://c25is1a0rfa8d" path="res://src/scripts/mining_drone.gd" id="1_qsfdw"]
-[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="2_qsfdw"]
 [ext_resource type="AudioStream" uid="uid://bnmx8an5n51oy" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_08.ogg" id="3_0pwgq"]
+[ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="3_s6lhf"]
+[ext_resource type="Script" uid="uid://blec16gcmg1o1" path="res://src/scripts/DroneStates/drone_idle.gd" id="4_s6lhf"]
+[ext_resource type="Script" uid="uid://bqjmkn40dm6dd" path="res://src/scenes/drone_move.gd" id="5_moh8t"]
+
+[sub_resource type="Shader" id="Shader_0pwgq"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+// === User Controls ===
+
+// Color of the outline
+uniform vec4 outline_color    : source_color = vec4(1.0);
+// How far to search around a pixel for solid neighbors (in texels)
+uniform float outline_size    : hint_range(0.0, 16.0, 0.1) = 1.0;
+// Minimum alpha for a pixel to be considered solid
+uniform float alpha_threshold : hint_range(0.0, 1.0, 0.01) = 0.0;
+// Number of directions to sample from (max 8)
+uniform int outline_samples   : hint_range(4, 8) = 4;
+// Color to blend with solid pixels (alpha is blend strength)
+uniform vec4 shade_color      : source_color = vec4(1.0, 1.0, 1.0, 0.5); 
+
+// === Outline Sampling Directions ===
+
+const vec2[8] DIRS = vec2[8]
+(vec2(1.0, 0.0), vec2(0.0, 1.0),  vec2(-1.0, 0.0),  vec2(0.0, -1.0),
+ vec2(1.0, 1.0), vec2(-1.0, 1.0), vec2(-1.0, -1.0), vec2(1.0, -1.0));
+
+// === Main Fragment ===
+
+void fragment() {
+	vec4 tex = texture(TEXTURE, UV);
+	float alpha = tex.a;
+	
+	 // Skip fully transparent pixel with no outline
+	if (alpha <= 0.0 && outline_size <= 0.0) discard;
+
+	bool solid = alpha > alpha_threshold;
+	bool semi  = (alpha > 0.0) && !solid;
+	vec4 out_color = tex;
+
+	// Blend solid pixels toward the shade_color based on its alpha
+	if (solid && shade_color.a > 0.0) {
+		out_color.rgb = mix(tex.rgb, shade_color.rgb, shade_color.a);
+		out_color.a   = alpha;
+	}
+
+	bool found = false;
+
+	// If not solid, check surrounding pixels for solid neighbors
+	if (!solid && outline_size > 0.0) {
+		vec2 offset = TEXTURE_PIXEL_SIZE * outline_size;
+		for (int i = 0; i < outline_samples; i++) {
+			if (texture(TEXTURE, UV + DIRS[i] * offset).a > alpha_threshold) {
+				found = true;
+				break;
+			}
+		}
+	}
+
+	// Set final pixel color
+	if      (solid) COLOR = out_color;
+	else if (found) COLOR = outline_color;
+	else if (semi)  COLOR = tex;
+	else            discard;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6lhf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_0pwgq")
+shader_parameter/outline_color = Color(0, 0.501254, 0.242606, 1)
+shader_parameter/outline_size = 0.7
+shader_parameter/alpha_threshold = 0.0
+shader_parameter/outline_samples = 8
+shader_parameter/shade_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qsfdw"]
+load_path = "res://.godot/imported/mining_drone.png-8387258ce771107e390973673448edd6.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsfdw"]
 size = Vector2(14, 12)
@@ -39,17 +116,22 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, -1)]
 }
 
+[sub_resource type="Animation" id="Animation_moh8t"]
+resource_name = "move"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_moh8t"]
 _data = {
 &"RESET": SubResource("Animation_s6lhf"),
-&"idle": SubResource("Animation_0pwgq")
+&"idle": SubResource("Animation_0pwgq"),
+&"move": SubResource("Animation_moh8t")
 }
 
-[node name="MiningDrone" type="Node2D"]
+[node name="MiningDrone" type="CharacterBody2D"]
 script = ExtResource("1_qsfdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qsfdw")
+material = SubResource("ShaderMaterial_s6lhf")
+texture = SubResource("CompressedTexture2D_qsfdw")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -8.0
@@ -69,6 +151,22 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_qsfdw")
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_s6lhf")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_s6lhf")
+animation_name = "idle"
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("5_moh8t")
+idle_state = NodePath("../Idle")
+animation_name = "move"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_moh8t")
@@ -76,4 +174,18 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="DroneDataShower" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+
+[node name="HealthRegenTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="gui_input" from="DroneDataShower" to="." method="_on_drone_data_shower_gui_input"]
+[connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]

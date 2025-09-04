@@ -1,1 +1,1 @@
-class_name extends Button
+extends Button

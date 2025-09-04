@@ -1,0 +1,1262 @@
+[gd_scene load_steps=13 format=3 uid="uid://ccmj71mwg532g"]
+
+[ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
+[ext_resource type="Texture2D" uid="uid://b45m2dfvnfkjy" path="res://assets/graphics/UpgradePanelTexture.png" id="1_roafv"]
+[ext_resource type="Texture2D" uid="uid://dxoon7s3thtuq" path="res://assets/graphics/UI/upgrades_panel_show_button.png" id="3_atmsq"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_lmpdo"]
+[ext_resource type="Texture2D" uid="uid://r0oufreep8d7" path="res://assets/graphics/platinum_ui_icon.png" id="4_nnvdg"]
+[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="5_lgang"]
+[ext_resource type="Texture2D" uid="uid://cd1kbs2eu1b4o" path="res://assets/graphics/platinum_drone.png" id="6_atmsq"]
+[ext_resource type="Texture2D" uid="uid://0ehb425m0cid" path="res://assets/graphics/UI/hide_upgrades_button.png" id="6_xqeeo"]
+[ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="9_1b2tq"]
+[ext_resource type="Texture2D" uid="uid://d2qpavqc2yjec" path="res://assets/graphics/TurretDrone.png" id="9_k75g2"]
+[ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="10_165cb"]
+[ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="11_165cb"]
+
+[node name="UpgradePanel" type="TextureRect"]
+offset_top = -1.0
+offset_right = 214.0
+offset_bottom = 336.0
+texture = ExtResource("1_roafv")
+stretch_mode = 2
+script = ExtResource("1_ffqcc")
+
+[node name="UpgradesAccess" type="TextureButton" parent="."]
+layout_mode = 0
+offset_top = 337.0
+offset_right = 102.0
+offset_bottom = 367.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_atmsq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 24.0
+offset_right = 193.0
+offset_bottom = 317.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(157, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Upgrades" type="Control" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MiningLaserUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 9.0
+offset_right = 173.0
+offset_bottom = 209.0
+
+[node name="UpgradeDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 70.0
+offset_right = 34.0
+offset_bottom = 90.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+Damage"
+
+[node name="UpgradeCritChance" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_top = 108.0
+offset_right = 44.0
+offset_bottom = 128.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+Crit Chance"
+
+[node name="UpgradeMiningLaserSpeed" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 30.0
+offset_right = 32.0
+offset_bottom = 50.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+Speed"
+
+[node name="MiningLaserSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 42.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Speed"
+
+[node name="CurrentMiningLaserSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 16.0
+offset_right = 101.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="CurrentMiningLaserCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 105.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="MiningLaserlabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_right = 82.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 9
+text = "Mining Laser"
+
+[node name="CurrentDamageLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 56.0
+offset_right = 42.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Damage:"
+
+[node name="CurrentDamageTracker" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 56.0
+offset_right = 101.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="CurrentDamageCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 81.0
+offset_right = 93.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="CurrentCritChanceLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_top = 95.0
+offset_right = 59.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Crit Chance:"
+
+[node name="CurrentCritChanceTracker" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 95.0
+offset_right = 105.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "0.0%"
+
+[node name="CurrentCritChanceCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 120.0
+offset_right = 93.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PlatinumUiIcon5" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+position = Vector2(45, 74)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon6" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+position = Vector2(53, 113)
+texture = ExtResource("4_nnvdg")
+
+[node name="mining_laser_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 25.0
+offset_right = 64.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="mining_laser_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="mining_laser_crit_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 103.0
+offset_right = 73.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="PlatinumUiIcon14" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades"]
+position = Vector2(44, 34)
+texture = ExtResource("4_nnvdg")
+
+[node name="DronesUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 144.0
+offset_right = 169.0
+offset_bottom = 512.0
+
+[node name="DronesLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 50.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 9
+text = "Drones"
+
+[node name="DronesCountLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = 69.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Basic Drones:"
+
+[node name="DronesCountTrackerLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 17.0
+offset_right = 89.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "12"
+
+[node name="DronesCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 39.0
+offset_right = 98.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="MiningDroneCapacityFull" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 29.0
+offset_right = 145.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Capacity 
+Maxed Out!"
+
+[node name="PlatinumDroneCapacityFull" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 135.0
+offset_right = 153.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Capacity 
+Maxed Out!"
+
+[node name="PurchaseDrone" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 28.0
+offset_right = 34.0
+offset_bottom = 44.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+1 Drone"
+
+[node name="DroneDamageLabel" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 47.0
+offset_right = 79.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Damage:"
+
+[node name="DroneDamage" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 47.0
+offset_right = 106.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="DroneDamageCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 68.0
+offset_right = 91.0
+offset_bottom = 76.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "100"
+
+[node name="UpgradeDroneDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 59.0
+offset_right = 40.0
+offset_bottom = 75.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Damage"
+
+[node name="DroneMiningSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 78.0
+offset_right = 33.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Speed:"
+
+[node name="DroneSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 78.0
+offset_right = 91.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="DroneMiningSpeedCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 98.0
+offset_right = 100.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "100"
+
+[node name="UpgradeDroneMiningSpeed" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 87.0
+offset_right = 39.0
+offset_bottom = 103.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Speed"
+
+[node name="PlatinumDrones" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 117.0
+offset_right = 89.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Platinum Drones:"
+
+[node name="PlatinumDronesCount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 117.0
+offset_right = 100.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "12"
+
+[node name="PlatinumDronesCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 144.0
+offset_right = 79.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PurchasePlatinumDrone" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 133.0
+offset_right = 34.0
+offset_bottom = 149.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+1 Drone"
+
+[node name="PlatinumDroneDamage" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 154.0
+offset_right = 43.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Damage:"
+
+[node name="PlatDroneDamage" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 154.0
+offset_right = 79.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="PlatDroneDamageCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 175.0
+offset_right = 87.0
+offset_bottom = 183.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "100"
+
+[node name="UpgradePlatDroneDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 165.0
+offset_right = 39.0
+offset_bottom = 181.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Damage"
+
+[node name="PlatinumDroneSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 184.0
+offset_right = 35.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Speed:"
+
+[node name="PlatDroneSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 185.0
+offset_right = 71.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="PlatDroneSpeedCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 209.0
+offset_right = 93.0
+offset_bottom = 218.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradePlatinumDroneMiningSpeed" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 196.0
+offset_right = 40.0
+offset_bottom = 212.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Speed"
+
+[node name="PlatinumUiIcon2" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(43, 32)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon3" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(45, 92)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon4" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(50, 201)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon7" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(43, 137)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon8" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(46, 169)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(49, 62)
+texture = ExtResource("4_nnvdg")
+
+[node name="MiningDrone" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(6, 21)
+texture = ExtResource("5_lgang")
+
+[node name="PlatinumDrone" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(7, 121)
+texture = ExtResource("6_atmsq")
+
+[node name="FerriteUiIcon" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(90, 20)
+texture = ExtResource("11_165cb")
+
+[node name="PlatinumUiIcon15" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(104, 21)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon16" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(113, 120)
+texture = ExtResource("4_nnvdg")
+
+[node name="drone_available_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 25.0
+offset_right = 74.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="drone_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 49.0
+offset_right = 74.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="drone_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 75.0
+offset_right = 74.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_available_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 126.0
+offset_right = 77.0
+offset_bottom = 149.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 154.0
+offset_right = 77.0
+offset_bottom = 177.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Platinum_Drone_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 185.0
+offset_right = 77.0
+offset_bottom = 208.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="TurretDronesCapacityFull" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 240.0
+offset_right = 156.0
+offset_bottom = 259.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Drone Capacity 
+Maxed Out!"
+
+[node name="TurretDrones" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 225.0
+offset_right = 89.0
+offset_bottom = 236.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Turret Drones:"
+
+[node name="TurretDronesCount" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 225.0
+offset_right = 93.0
+offset_bottom = 234.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "12"
+
+[node name="TurretDronesCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 252.0
+offset_right = 79.0
+offset_bottom = 261.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="PurchaseTurretDrone" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 241.0
+offset_right = 34.0
+offset_bottom = 257.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+1 Drone"
+
+[node name="TurretDroneDamage" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 262.0
+offset_right = 43.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Damage:"
+
+[node name="TurretCurrentDroneDamage" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 262.0
+offset_right = 79.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="TurretDroneDamageCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 283.0
+offset_right = 91.0
+offset_bottom = 291.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "100"
+
+[node name="UpgradeTurretDroneDamage" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 273.0
+offset_right = 39.0
+offset_bottom = 289.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Damage"
+
+[node name="TurretDroneSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 292.0
+offset_right = 35.0
+offset_bottom = 303.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "Speed:"
+
+[node name="CurrentTurretDroneSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 293.0
+offset_right = 71.0
+offset_bottom = 302.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "5"
+
+[node name="TurretDroneSpeedCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 317.0
+offset_right = 95.0
+offset_bottom = 326.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeTurretDroneFireRate" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 304.0
+offset_right = 45.0
+offset_bottom = 320.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Fire Rate"
+
+[node name="PlatinumUiIcon5" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(52, 309)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon9" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(43, 245)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon10" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(50, 277)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumDrone2" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(7, 229)
+rotation = 1.5708
+texture = ExtResource("9_k75g2")
+
+[node name="PlatinumUiIcon17" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(107, 228)
+texture = ExtResource("4_nnvdg")
+
+[node name="Turret_Drone__Available_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 237.0
+offset_right = 80.0
+offset_bottom = 260.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Turret_Drone_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 266.0
+offset_right = 80.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Turret_Drone_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 296.0
+offset_right = 80.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="TurretDroneRange" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 328.0
+offset_right = 29.0
+offset_bottom = 336.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "A.O.E.:"
+
+[node name="CurrentTurretDroneRange" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 328.0
+offset_right = 71.0
+offset_bottom = 337.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 6
+text = "50"
+
+[node name="TurretDroneRangeCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 352.0
+offset_right = 95.0
+offset_bottom = 361.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeTurretDroneRange" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 339.0
+offset_right = 37.0
+offset_bottom = 355.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Range"
+
+[node name="PlatinumUiIcon6" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+position = Vector2(52, 344)
+texture = ExtResource("4_nnvdg")
+
+[node name="Turret_Drone_Range_Indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 331.0
+offset_right = 80.0
+offset_bottom = 354.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="RefineryUpgrades" type="Control" parent="ScrollContainer/VBoxContainer/Upgrades"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 515.0
+offset_right = 174.0
+offset_bottom = 727.0
+
+[node name="FerriteRefinery" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 86.0
+offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Ferrite Refinery"
+
+[node name="FerriteAutoSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 20.0
+offset_right = 61.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Auto Speed"
+
+[node name="FerriteRefinerySpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 20.0
+offset_right = 123.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "0"
+
+[node name="FerriteRefinerySpeedCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 42.0
+offset_right = 115.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "200"
+
+[node name="UpgradeRefinerySpeed" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 33.0
+offset_right = 41.0
+offset_bottom = 49.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Speed"
+
+[node name="RefineryEfficiency" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 54.0
+offset_right = 58.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Output:"
+
+[node name="EfficiencyBonus" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 53.0
+offset_right = 85.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="EfficiencyBonusCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 76.0
+offset_right = 97.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="UpgradeEfficiency" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 68.0
+offset_right = 47.0
+offset_bottom = 84.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Efficiency"
+
+[node name="PlasmaGenerator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 96.0
+offset_right = 97.0
+offset_bottom = 105.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Plasma Generator"
+
+[node name="PlasmaGeneratorAutoSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 110.0
+offset_right = 61.0
+offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Auto Speed:"
+
+[node name="GeneratorAutoSpeed" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 110.0
+offset_right = 118.0
+offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "0"
+
+[node name="AutoSpeedPlatCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 131.0
+offset_right = 119.0
+offset_bottom = 142.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "200"
+
+[node name="PlasmaGeneratorSpeedUpgrade" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 123.0
+offset_right = 41.0
+offset_bottom = 139.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+ Speed"
+
+[node name="PlasmaGeneratorOutput" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 140.0
+offset_right = 58.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Output:"
+
+[node name="GeneratorOutput" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 141.0
+offset_right = 120.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "1"
+
+[node name="OutputCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 160.0
+offset_right = 122.0
+offset_bottom = 171.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "100"
+
+[node name="GeneratorOutputUpgrade" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 152.0
+offset_right = 41.0
+offset_bottom = 168.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "+1 Output"
+
+[node name="GeneratorFuelCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 170.0
+offset_right = 58.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "Fuel Cost:"
+
+[node name="FuelCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 170.0
+offset_right = 118.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "8"
+
+[node name="FuelPlatinumCost" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 191.0
+offset_right = 114.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 7
+text = "500"
+
+[node name="UpgradeFuelCost" type="Button" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 183.0
+offset_right = 46.0
+offset_bottom = 199.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 4
+text = "Lower Cost"
+
+[node name="PlatinumUiIcon9" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(51, 36)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon10" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(55, 71)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon11" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(55, 126)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon12" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(54, 155)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlatinumUiIcon13" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(54, 186)
+texture = ExtResource("4_nnvdg")
+
+[node name="PlasmaUiIcon" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(105, 101)
+scale = Vector2(0.749999, 0.749999)
+texture = ExtResource("9_1b2tq")
+
+[node name="RefinedFerriteUiIcon" type="Sprite2D" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+position = Vector2(96, 6)
+texture = ExtResource("10_165cb")
+
+[node name="Ferrite_Refinery_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 28.0
+offset_right = 78.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Ferrite_Refinery_output_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 59.0
+offset_right = 78.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 114.0
+offset_right = 82.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_output_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 142.0
+offset_right = 82.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="Plasma_Generator_fuel_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 173.0
+offset_right = 82.0
+offset_bottom = 196.0
+theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 20
+text = "!"
+
+[node name="UpgradesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 302.0
+offset_right = 181.0
+offset_bottom = 318.0
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 11
+text = "Upgrades"
+
+[node name="UpgradesAvailableLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 342.0
+offset_right = 257.0
+offset_bottom = 356.0
+theme_override_colors/font_color = Color(1, 0.864342, 0.243178, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lmpdo")
+theme_override_font_sizes/font_size = 11
+text = "Upgrades Available!"
+
+[node name="HideUpgradesPanel" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 21.0
+offset_right = -19.0
+offset_bottom = 38.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_xqeeo")
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[connection signal="button_down" from="UpgradesAccess" to="." method="_on_upgrades_access_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeDamage" to="." method="_on_upgrade_damage_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeCritChance" to="." method="_on_upgrade_crit_chance_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/MiningLaserUpgrades/UpgradeMiningLaserSpeed" to="." method="_on_upgrade_mining_laser_speed_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchaseDrone" to="." method="_on_purchase_drone_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeDroneDamage" to="." method="_on_upgrade_drone_damage_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeDroneMiningSpeed" to="." method="_on_upgrade_drone_mining_speed_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchasePlatinumDrone" to="." method="_on_purchase_platinum_drone_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradePlatDroneDamage" to="." method="_on_upgrade_plat_drone_damage_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradePlatinumDroneMiningSpeed" to="." method="_on_upgrade_platinum_drone_mining_speed_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/PurchaseTurretDrone" to="." method="_on_purchase_turret_drone_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneDamage" to="." method="_on_upgrade_turret_drone_damage_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneFireRate" to="." method="_on_upgrade_turret_drone_fire_rate_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades/UpgradeTurretDroneRange" to="." method="_on_upgrade_turret_drone_range_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeRefinerySpeed" to="." method="_on_upgrade_refinery_speed_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeEfficiency" to="." method="_on_upgrade_efficiency_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/PlasmaGeneratorSpeedUpgrade" to="." method="_on_plasma_generator_speed_upgrade_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/GeneratorOutputUpgrade" to="." method="_on_generator_output_upgrade_button_down"]
+[connection signal="button_down" from="ScrollContainer/VBoxContainer/Upgrades/RefineryUpgrades/UpgradeFuelCost" to="." method="_on_upgrade_fuel_cost_button_down"]
+[connection signal="button_down" from="HideUpgradesPanel" to="." method="_on_hide_upgrades_panel_button_down"]

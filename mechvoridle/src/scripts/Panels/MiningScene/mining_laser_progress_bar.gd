@@ -20,8 +20,7 @@ func _physics_process(delta) -> void:
 		
 		if value >= max_value:
 			obtain_resources()
-			value = 0
-				
+			value = 0	
 	else:
 		queue_free()
 

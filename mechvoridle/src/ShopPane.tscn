@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://1oy74758gv62"]
+[gd_scene load_steps=24 format=3 uid="uid://1oy74758gv62"]
 
 [ext_resource type="Script" uid="uid://dipqwl7jxxyc8" path="res://src/scripts/Panels/shop_pane.gd" id="1_pkk0g"]
 [ext_resource type="Texture2D" uid="uid://dkkgm7a5y4px8" path="res://assets/graphics/ShoppingPanel.png" id="2_pkk0g"]

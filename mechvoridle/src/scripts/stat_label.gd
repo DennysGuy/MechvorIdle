@@ -11,7 +11,10 @@ func _process(delta) -> void:
 	pass
 
 func set_text_color_green() -> void:
-	add_theme_color_override("font_color", Color.SEA_GREEN)
+	add_theme_color_override("font_color", Color.GREEN)
 
 func set_text_color_red() -> void:
-	add_theme_color_override("font_color", Color.INDIAN_RED)
+	add_theme_color_override("font_color", Color.RED)
+
+func set_text_color_yellow() -> void:
+	add_theme_color_override("font_color", Color.YELLOW)
