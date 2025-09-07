@@ -203,6 +203,39 @@ offset_right = 609.0
 offset_bottom = 343.0
 mouse_filter = 2
 
+[node name="DronePurchasePanel" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -513.0
+offset_top = 41.0
+offset_right = -390.0
+offset_bottom = 129.0
+grow_horizontal = 0
+tooltip_text = "That's that dr peppa"
+color = Color(0.399001, 0.539576, 0.465822, 1)
+
+[node name="OwnedDronesCount" type="Label" parent="ColorRect/DronePurchasePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -42.0
+offset_right = 53.5
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_mtt0f")
+theme_override_font_sizes/font_size = 8
+text = "Owned Drones 4/4"
+horizontal_alignment = 1
+
 [node name="Overlay" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
 offset_right = 640.0
@@ -248,17 +281,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("11_mtt0f")
 theme_override_font_sizes/font_size = 12
 text = "Buy RECON SCOUT"
-
-[node name="OwnedDronesCount" type="Label" parent="ColorRect"]
-layout_mode = 0
-offset_left = 130.0
-offset_top = 44.0
-offset_right = 233.0
-offset_bottom = 54.0
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 8
-text = "Owned Drones 4/4"
-horizontal_alignment = 1
 
 [node name="DroneDetailsPanel" parent="ColorRect" instance=ExtResource("13_yw1mq")]
 layout_mode = 1

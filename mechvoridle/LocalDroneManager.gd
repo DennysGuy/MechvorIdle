@@ -1,4 +1,4 @@
-extends Node
+class_name LocalDroneManager extends Node
 
 signal mining_drone_cost_changed(new_cost, new_count)
 signal platinum_drone_cost_changed(new_cost, new_count)

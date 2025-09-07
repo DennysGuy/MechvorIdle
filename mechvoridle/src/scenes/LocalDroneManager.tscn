@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc2mgcssafca6"]
+
+[ext_resource type="Script" uid="uid://b12qq1j1dvtj1" path="res://LocalDroneManager.gd" id="1_ktwiq"]
+
+[node name="LocalDroneManager" type="Node"]
+script = ExtResource("1_ktwiq")

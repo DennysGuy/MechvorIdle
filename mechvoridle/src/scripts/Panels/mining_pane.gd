@@ -5,7 +5,7 @@ class_name MiningPane extends Control
 @onready var buy_mech_part_label: Label = $ColorRect/BuyMechPartLabel
 @onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
 
-@onready var owned_drones_count : Label = $ColorRect/OwnedDronesCount
+@onready var owned_drones_count : Label = %OwnedDronesCount
 
 func _ready() -> void:
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)

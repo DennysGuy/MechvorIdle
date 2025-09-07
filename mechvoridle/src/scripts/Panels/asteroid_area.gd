@@ -16,10 +16,21 @@ var asteroid_spawn_timer_length : float = 10.0
 
 @onready var click_asteroid_sfx : AudioStreamPlayer = $ClickAsteroidSfx
 
+@export_group("Drone Stats")
+@export var local_drone_manager : LocalDroneManager
 
 var start_ufo_spawn : bool = false
 var mining_timer : SceneTreeTimer
 var mouse_in_asteroid_range : bool = false
+
+#asteroid stat modifiers
+
+@export_group("Asteroid Modifiers")
+@export var drone_slots : int
+@export var drone_slot_expansion_modifier : float
+@export var drone_damage_modifier : float
+@export var drone_speed_modifier : float
+@export var hazard_spawn_modifier : float
 
 var _offset : int = 50
 func _ready() -> void:

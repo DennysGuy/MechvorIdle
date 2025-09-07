@@ -1,14 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=18 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_b11ub"]
 [ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="2_hq8q6"]
+[ext_resource type="PackedScene" uid="uid://cc2mgcssafca6" path="res://src/scenes/LocalDroneManager.tscn" id="2_jivcb"]
 [ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
 [ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="3_ocvap"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
 [ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="5_wl6gh"]
 [ext_resource type="PackedScene" uid="uid://d3siueyr5myjd" path="res://GuideBox.tscn" id="7_b11ub"]
+[ext_resource type="Script" uid="uid://dg4ayo88mhe33" path="res://src/scripts/asteroid_stats.gd" id="10_i6yq1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wl6gh"]
 shader = ExtResource("2_hq8q6")
@@ -57,8 +59,12 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/vignette_opacity = 0.742
 
-[node name="AsteroidArea" type="Node2D"]
+[node name="AsteroidArea" type="Node2D" node_paths=PackedStringArray("local_drone_manager")]
 script = ExtResource("1_6ww1j")
+local_drone_manager = NodePath("LocalDroneManager")
+drone_slots = 4
+
+[node name="LocalDroneManager" parent="." instance=ExtResource("2_jivcb")]
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
 process_callback = 0
@@ -186,6 +192,9 @@ position = Vector2(549, 30)
 
 [node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
 position = Vector2(571, 270)
+
+[node name="AsteroidStats" type="Node" parent="."]
+script = ExtResource("10_i6yq1")
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
