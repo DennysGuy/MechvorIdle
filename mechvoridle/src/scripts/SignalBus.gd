@@ -35,9 +35,9 @@ signal update_ferrite_bars_count
 signal update_platinum_count
 signal show_upgrade_panel
 signal hide_upgrade_panel
-signal add_drone
+signal add_drone()
 signal add_platinum_drone
-signal add_turret_drone
+signal add_turret_drone(current_asteroid_scene)
 signal update_plasma_count
 signal update_plasma_generator_speed
 signal update_fuel_consumption
@@ -145,3 +145,6 @@ signal update_weapon_2_crit_damage_stats_on_purchased(mech_weapon : MechWeapon)
 signal toggle_mech_stats_panels()
 signal hide_mech_stats_panels()
 signal toggle_filter(value : bool)
+
+#Asteroid Field Map
+signal change_maps

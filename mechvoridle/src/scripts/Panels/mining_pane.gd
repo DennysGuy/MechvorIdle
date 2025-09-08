@@ -1,17 +1,23 @@
 class_name MiningPane extends Control
 
 @onready var animation_player = $AnimationPlayer
-@onready var sub_viewport : SubViewport = $ColorRect/SubViewportContainer/SubViewport
+
+#location subviewports
+@onready var asteroid_field_map : SubViewportContainer = $ColorRect/AsteroidFieldMap
+@onready var asteroid_area_1 : SubViewportContainer = $ColorRect/AsteroidArea1
+
+@onready var sub_viewport : SubViewport = $ColorRect/AsteroidArea1/SubViewport
 @onready var buy_mech_part_label: Label = $ColorRect/BuyMechPartLabel
 @onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
 
-@onready var owned_drones_count : Label = %OwnedDronesCount
+#@onready var owned_drones_count : Label = %OwnedDronesCount
 
 func _ready() -> void:
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)
 	SignalBus.hide_upgrade_panel.connect(hide_upgrade_panel)
-	SignalBus.update_owned_drones_count.connect(update_drone_count)
-	update_drone_count()
+	SignalBus.change_maps.connect(play_fade_animation)
+	#SignalBus.update_owned_drones_count.connect(update_drone_count)
+	#update_drone_count()
 	
 	
 	#sub_viewport.own_world_3d = false
@@ -39,8 +45,26 @@ func show_buy_mech_part_indicator() -> bool:
 		or GameManager.ferrite_bars_count >= GameManager.MIN_LAUNCHER_FERRITE_BAR_COST and GameManager.plasma_count >= GameManager.MIN_LAUNCHER_PLASMA_COST
 	)
 
+func play_fade_animation() -> void:
+	animation_player.play("FadeBetweenLayers")
 
-func update_drone_count() -> void:
-	var current_drone_count : int = DroneManager.drones.size()
-	var max_owned_drone_count : int = GameManager.max_owned_drones
-	owned_drones_count.text = "Owned Drones " + str(current_drone_count) + "/" + str(max_owned_drone_count)
+func switch_layer() -> void:
+	
+	match GameManager.selected_location:
+		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_1:
+			asteroid_area_1.show()
+			#I'm guessing that we'll end up connecting all of the components to this field  here
+			asteroid_field_map.hide()
+			
+		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_2:
+			pass
+		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_3:
+			pass
+		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP:
+			asteroid_area_1.hide()
+			asteroid_field_map.show()
+
+#func update_drone_count() -> void:
+	#var current_drone_count : int = DroneManager.drones.size()
+	#var max_owned_drone_count : int = GameManager.max_owned_drones
+	#owned_drones_count.text = "Owned Drones " + str(current_drone_count) + "/" + str(max_owned_drone_count)

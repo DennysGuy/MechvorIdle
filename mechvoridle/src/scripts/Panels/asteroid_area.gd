@@ -84,15 +84,16 @@ func spawn_mining_progress_bar():
 	var mining_progress_bar : MiningLaserProgressBar = preload("res://src/scenes/MiningScene/MiningLaserProgressBar.tscn").instantiate()
 	add_child(mining_progress_bar)
 
-func add_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone.name = "Drone_%s" % str(Time.get_ticks_msec())
-	drone_list.add_child(drone)
-	print(drone.name)
+func add_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		drone.name = "Drone_%s" % str(Time.get_ticks_msec())
+		drone_list.add_child(drone)
+		print(drone.name)
 
 
 func add_platinum_drone_to_scene() -> void:

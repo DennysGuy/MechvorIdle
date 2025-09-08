@@ -227,3 +227,7 @@ offset_left = 0.0
 offset_top = 98.0
 offset_right = 6.0
 offset_bottom = 121.0
+
+[connection signal="button_up" from="BuyMiningDroneButton" to="." method="_on_buy_mining_drone_button_button_up"]
+[connection signal="button_up" from="BuyPlatinumDroneButton" to="." method="_on_buy_platinum_drone_button_button_up"]
+[connection signal="button_up" from="BuyTurretDroneButton" to="." method="_on_buy_turret_drone_button_button_up"]

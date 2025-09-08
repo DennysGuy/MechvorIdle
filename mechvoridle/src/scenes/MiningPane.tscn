@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=22 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
 [ext_resource type="Texture2D" uid="uid://dhx3oow401s4x" path="res://assets/graphics/MiningPanel_underlay.png" id="2_ooyll"]
 [ext_resource type="PackedScene" uid="uid://cc7liqf41bqti" path="res://src/scenes/ResourceTracker.tscn" id="3_d2ayj"]
+[ext_resource type="PackedScene" uid="uid://8gt1j8yx8lp0" path="res://src/scenes/AsteroidFieldMap.tscn" id="4_63n5c"]
 [ext_resource type="PackedScene" uid="uid://q2lvrrcqcirf" path="res://src/scenes/FerriteRefineryStation.tscn" id="5_78b4q"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="6_78b4q"]
@@ -11,12 +12,8 @@
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="7_e1r7j"]
 [ext_resource type="Texture2D" uid="uid://bp4mre5vn47ji" path="res://assets/graphics/MiningPanel_overlay.png" id="7_t7rsg"]
 [ext_resource type="Texture2D" uid="uid://dpxyxidb2quhj" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Normal.png" id="9_7bsma"]
-[ext_resource type="Texture2D" uid="uid://d7jko44kmqr3" path="res://assets/graphics/mining_drone.png" id="10_748oo"]
 [ext_resource type="Texture2D" uid="uid://bkuw5k1laydet" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Hoverl.png" id="10_mtt0f"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="11_mtt0f"]
-[ext_resource type="Texture2D" uid="uid://cd1kbs2eu1b4o" path="res://assets/graphics/platinum_drone.png" id="11_pdrka"]
-[ext_resource type="Texture2D" uid="uid://d2qpavqc2yjec" path="res://assets/graphics/TurretDrone.png" id="12_jwj81"]
-[ext_resource type="PackedScene" uid="uid://chi2uxmfxrwyi" path="res://purchase_indicator.tscn" id="13_pdrka"]
 [ext_resource type="PackedScene" uid="uid://dlq5p5jgtqwdj" path="res://src/scenes/MiningScene/DroneDetailsPanel.tscn" id="13_yw1mq"]
 
 [sub_resource type="Animation" id="Animation_t7rsg"]
@@ -66,8 +63,38 @@ tracks/0/keys = {
 "values": [Vector2(0, -337), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_63n5c"]
+resource_name = "FadeBetweenLayers"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/TransitionColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"switch_layer"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7rsg"]
 _data = {
+&"FadeBetweenLayers": SubResource("Animation_63n5c"),
 &"HideAnimationPanel": SubResource("Animation_t7rsg"),
 &"RESET": SubResource("Animation_ooyll"),
 &"ShowUpgradePanel": SubResource("Animation_l11te")
@@ -127,7 +154,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ooyll")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect"]
+[node name="AsteroidArea1" type="SubViewportContainer" parent="ColorRect"]
+visible = false
 layout_mode = 0
 offset_left = 122.0
 offset_top = 29.0
@@ -135,7 +163,27 @@ offset_right = 602.0
 offset_bottom = 242.0
 mouse_filter = 0
 
-[node name="SubViewport" type="SubViewport" parent="ColorRect/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="ColorRect/AsteroidArea1"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(480, 213)
+size_2d_override_stretch = true
+render_target_update_mode = 0
+
+[node name="AsteroidArea" parent="ColorRect/AsteroidArea1/SubViewport" instance=ExtResource("2_1hqb7")]
+position = Vector2(-53, -16)
+
+[node name="AsteroidFieldMap" type="SubViewportContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 29.0
+offset_right = 602.0
+offset_bottom = 242.0
+mouse_filter = 0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/AsteroidFieldMap"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -144,8 +192,8 @@ size = Vector2i(480, 213)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="AsteroidArea" parent="ColorRect/SubViewportContainer/SubViewport" instance=ExtResource("2_1hqb7")]
-position = Vector2(-53, -16)
+[node name="AsteroidFieldMap" parent="ColorRect/AsteroidFieldMap/SubViewport" instance=ExtResource("4_63n5c")]
+position = Vector2(-107, -59)
 
 [node name="ResourceTracker" parent="ColorRect" instance=ExtResource("3_d2ayj")]
 layout_mode = 1
@@ -207,211 +255,14 @@ offset_right = 609.0
 offset_bottom = 343.0
 mouse_filter = 2
 
-[node name="DronePurchasePanel" type="ColorRect" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -513.0
-offset_top = 41.0
-offset_right = -371.0
-offset_bottom = 179.0
-grow_horizontal = 0
-tooltip_text = "That's that dr peppa"
-color = Color(0.399001, 0.539576, 0.465822, 1)
-
-[node name="OwnedDronesCount" type="Label" parent="ColorRect/DronePurchasePanel"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.5
-offset_top = 5.0
-offset_right = 51.5
-offset_bottom = 15.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 8
-text = "Owned Drones 4/4"
-horizontal_alignment = 1
-
-[node name="MiningDroneIcon" type="TextureRect" parent="ColorRect/DronePurchasePanel"]
+[node name="TransitionColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 0
-offset_left = 11.0
-offset_top = 21.0
-offset_right = 28.0
-offset_bottom = 38.0
-texture = ExtResource("10_748oo")
-
-[node name="PlatinumDroneIcon" type="TextureRect" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 62.0
-offset_right = 28.0
-offset_bottom = 79.0
-texture = ExtResource("11_pdrka")
-
-[node name="TurretDroneIcon" type="TextureRect" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 12.5635
-offset_top = 100.297
-offset_right = 36.5635
-offset_bottom = 117.297
-rotation = 1.5708
-pivot_offset = Vector2(7.36658, 8.06994)
-texture = ExtResource("12_jwj81")
-
-[node name="MiningDroneLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 21.0
-offset_right = 96.0
-offset_bottom = 30.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Mining Drone"
-
-[node name="MiningDroneCostLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 37.0
-offset_right = 131.0
-offset_bottom = 46.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Cost: 224345"
-
-[node name="BuyMiningDroneButton" type="Button" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 35.0
-offset_right = 55.0
-offset_bottom = 51.0
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 6
-text = "Buy"
-
-[node name="MiningDroneLabelCount" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 21.0
-offset_right = 130.0
-offset_bottom = 30.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "0"
-
-[node name="PlatinumDroneLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 62.0
-offset_right = 96.0
-offset_bottom = 71.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Platinum Drone"
-
-[node name="BuyPlatinumDroneButton" type="Button" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 76.0
-offset_right = 55.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 6
-text = "Buy"
-
-[node name="PlatinumDroneCostLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 80.0
-offset_right = 134.0
-offset_bottom = 89.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Cost: 224345"
-
-[node name="PlatinumDroneLabelCount" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 62.0
-offset_right = 130.0
-offset_bottom = 71.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "0"
-
-[node name="TurretDroneLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 104.0
-offset_right = 97.0
-offset_bottom = 113.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Turret Drone"
-
-[node name="TurretDroneCostLabel" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 118.0
-offset_right = 134.0
-offset_bottom = 127.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "Cost: 224345"
-
-[node name="BuyTurretDroneButton" type="Button" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 116.0
-offset_right = 55.0
-offset_bottom = 132.0
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 6
-text = "Buy"
-
-[node name="TurretDroneLabelCount" type="Label" parent="ColorRect/DronePurchasePanel"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 104.0
-offset_right = 130.0
-offset_bottom = 113.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_mtt0f")
-theme_override_font_sizes/font_size = 7
-text = "0"
-
-[node name="MiningDronePurchaseIndicator" parent="ColorRect/DronePurchasePanel" instance=ExtResource("13_pdrka")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 16.0
-offset_right = 6.0
-offset_bottom = 39.0
-
-[node name="PlatDronePurchaseIndicator" parent="ColorRect/DronePurchasePanel" instance=ExtResource("13_pdrka")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 59.0
-offset_right = 6.0
-offset_bottom = 82.0
-
-[node name="TurretDronePurchaseIndicator" parent="ColorRect/DronePurchasePanel" instance=ExtResource("13_pdrka")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 98.0
-offset_right = 6.0
-offset_bottom = 121.0
+offset_left = 121.0
+offset_top = 26.0
+offset_right = 605.0
+offset_bottom = 246.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [node name="Overlay" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
@@ -474,6 +325,6 @@ grow_horizontal = 1
 layout_mode = 0
 offset_top = -337.0
 offset_bottom = 0.0
-asteroid_area = NodePath("../SubViewportContainer/SubViewport/AsteroidArea")
+asteroid_area = NodePath("../AsteroidArea1/SubViewport/AsteroidArea")
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]

@@ -610,6 +610,10 @@ text = "!"
 
 [node name="drone_damage_indicator" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades" instance=ExtResource("9_tts4g")]
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 6.0
+offset_bottom = 23.0
 
 [node name="drone_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 0
