@@ -83,6 +83,9 @@ signal transfer_item_to_shop_panel(component : MechComponent)
 signal update_stats_panel(component : MechComponent)
 signal update_list_item_text(component_name : String)
 
+#drone shop
+signal show_drone_panel
+
 #main panel
 signal unlock_fight_button
 
@@ -148,3 +151,8 @@ signal toggle_filter(value : bool)
 
 #Asteroid Field Map
 signal change_maps
+
+#Drone Shop
+signal set_asteroid_data(asteroid_area : AsteroidArea, drone_manager : LocalDroneManager)
+signal clear_asteroid_data
+signal show_drone_shop

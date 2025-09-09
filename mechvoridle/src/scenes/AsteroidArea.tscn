@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="5_wl6gh"]
 [ext_resource type="PackedScene" uid="uid://d3siueyr5myjd" path="res://GuideBox.tscn" id="7_b11ub"]
-[ext_resource type="Script" uid="uid://dg4ayo88mhe33" path="res://src/scripts/asteroid_stats.gd" id="10_i6yq1"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="9_u2llw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wl6gh"]
 shader = ExtResource("2_hq8q6")
@@ -62,9 +62,11 @@ shader_parameter/vignette_opacity = 0.742
 [node name="AsteroidArea" type="Node2D" node_paths=PackedStringArray("local_drone_manager")]
 script = ExtResource("1_6ww1j")
 local_drone_manager = NodePath("LocalDroneManager")
+asteroid_name = "19X-Delta"
 drone_slots = 4
 
 [node name="LocalDroneManager" parent="." instance=ExtResource("2_jivcb")]
+max_owned_drones = 4
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
 process_callback = 0
@@ -153,6 +155,21 @@ offset_top = -51.0
 offset_right = 628.0
 offset_bottom = 317.0
 
+[node name="ReturnButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -284.0
+offset_top = 197.0
+offset_right = -155.0
+offset_bottom = 217.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("9_u2llw")
+theme_override_font_sizes/font_size = 8
+text = "Back To Asteroid Map"
+
 [node name="ClickAsteroidSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0sd8y")
 bus = &"SFX"
@@ -193,12 +210,10 @@ position = Vector2(549, 30)
 [node name="AstroidSpawnPoint8" type="Marker2D" parent="AsteroidSpawnPoints"]
 position = Vector2(571, 270)
 
-[node name="AsteroidStats" type="Node" parent="."]
-script = ExtResource("10_i6yq1")
-
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
 [connection signal="mouse_entered" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_exited"]
+[connection signal="button_up" from="CanvasLayer/Control/ReturnButton" to="." method="_on_return_button_button_up"]
 
 [editable path="CanvasLayer/Control/CRTOverlay"]

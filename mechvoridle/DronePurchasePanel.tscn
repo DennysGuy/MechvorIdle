@@ -228,6 +228,20 @@ offset_top = 98.0
 offset_right = 6.0
 offset_bottom = 121.0
 
+[node name="ShowPanelButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 72.0
+offset_bottom = 18.0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_6ev0j")
+theme_override_font_sizes/font_size = 8
+text = "Drone Shop"
+
 [connection signal="button_up" from="BuyMiningDroneButton" to="." method="_on_buy_mining_drone_button_button_up"]
 [connection signal="button_up" from="BuyPlatinumDroneButton" to="." method="_on_buy_platinum_drone_button_button_up"]
 [connection signal="button_up" from="BuyTurretDroneButton" to="." method="_on_buy_turret_drone_button_button_up"]
+[connection signal="button_down" from="ShowPanelButton" to="." method="_on_show_panel_button_button_down"]

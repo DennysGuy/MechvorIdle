@@ -24,6 +24,8 @@ var mining_timer : SceneTreeTimer
 var mouse_in_asteroid_range : bool = false
 
 #asteroid stat modifiers
+@export_group("Asteroid Name")
+@export var asteroid_name : String
 
 @export_group("Asteroid Modifiers")
 @export var drone_slots : int
@@ -182,3 +184,9 @@ func is_inside_mining_area() -> bool:
 func stop_ufo_spawn() -> void:
 	start_ufo_spawn = false
 	ufo_spawn_timer.stop()
+
+
+func _on_return_button_button_up():
+	GameManager.selected_location = GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP
+	print(GameManager.selected_location)
+	SignalBus.change_maps.emit()

@@ -1,21 +1,27 @@
 class_name MiningPane extends Control
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var drone_shop_animation_player : AnimationPlayer = $DroneShopAnimationPlayer
 
 #location subviewports
 @onready var asteroid_field_map : SubViewportContainer = $ColorRect/AsteroidFieldMap
 @onready var asteroid_area_1 : SubViewportContainer = $ColorRect/AsteroidArea1
 
+@onready var asteroid_area_1_scene : AsteroidArea = $ColorRect/AsteroidArea1/SubViewport/AsteroidArea
+
 @onready var sub_viewport : SubViewport = $ColorRect/AsteroidArea1/SubViewport
 @onready var buy_mech_part_label: Label = $ColorRect/BuyMechPartLabel
 @onready var recon_scout_indicator: Label = $ColorRect/ReconScoutIndicator
+@onready var drone_purchase_panel : DronePurchasePanel = $ColorRect/DronePurchasePanel
 
+var drone_purchase_panel_showing : bool = false
 #@onready var owned_drones_count : Label = %OwnedDronesCount
 
 func _ready() -> void:
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)
 	SignalBus.hide_upgrade_panel.connect(hide_upgrade_panel)
 	SignalBus.change_maps.connect(play_fade_animation)
+	SignalBus.show_drone_shop.connect(toggle_drone_purchase_panel)
 	#SignalBus.update_owned_drones_count.connect(update_drone_count)
 	#update_drone_count()
 	
@@ -24,6 +30,8 @@ func _ready() -> void:
 func _process(_delta : float) -> void:
 	buy_mech_part_label.visible = show_buy_mech_part_indicator()
 	recon_scout_indicator.visible = GameManager.platinum_count >= GameManager.recon_scout_platinum_cost
+
+	
 func _on_central_hub_navigation_button_up():
 	SignalBus.move_to_central_hub_from_mining_page.emit()
 
@@ -32,7 +40,6 @@ func show_upgrade_panel() -> void:
 
 func hide_upgrade_panel() -> void:
 	animation_player.play("HideAnimationPanel")
-
 
 func show_buy_mech_part_indicator() -> bool:
 	return (
@@ -52,17 +59,38 @@ func switch_layer() -> void:
 	
 	match GameManager.selected_location:
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_1:
+			print("hi asteroid area 1 here")
 			asteroid_area_1.show()
 			#I'm guessing that we'll end up connecting all of the components to this field  here
 			asteroid_field_map.hide()
+			SignalBus.set_asteroid_data.emit(asteroid_area_1_scene, asteroid_area_1_scene.local_drone_manager)
 			
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_2:
 			pass
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_3:
 			pass
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP:
+			drone_shop_animation_player.play("RESET")
 			asteroid_area_1.hide()
 			asteroid_field_map.show()
+			SignalBus.clear_asteroid_data.emit()
+			print("did I get in here?")
+
+func toggle_drone_purchase_panel() -> void:
+	
+	if drone_purchase_panel_showing:
+		hide_drone_shop_panel()
+	else:
+		show_drone_shop_panel()
+		
+	drone_purchase_panel_showing = !drone_purchase_panel_showing
+
+		
+func show_drone_shop_panel() -> void:
+	drone_shop_animation_player.play("drone_shop_swoop_in")
+
+func hide_drone_shop_panel() -> void:
+	drone_shop_animation_player.play("drone_shop_swoop_out")
 
 #func update_drone_count() -> void:
 	#var current_drone_count : int = DroneManager.drones.size()
