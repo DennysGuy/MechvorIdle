@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=29 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
 [ext_resource type="Texture2D" uid="uid://dhx3oow401s4x" path="res://assets/graphics/MiningPanel_underlay.png" id="2_ooyll"]
+[ext_resource type="PackedScene" uid="uid://davrhw222g8uv" path="res://src/scenes/AsteroidArea2.tscn" id="3_748oo"]
 [ext_resource type="PackedScene" uid="uid://cc7liqf41bqti" path="res://src/scenes/ResourceTracker.tscn" id="3_d2ayj"]
+[ext_resource type="PackedScene" uid="uid://cnxjsj1ffl05m" path="res://src/scenes/AsteroidArea3.tscn" id="3_pdrka"]
 [ext_resource type="PackedScene" uid="uid://8gt1j8yx8lp0" path="res://src/scenes/AsteroidFieldMap.tscn" id="4_63n5c"]
 [ext_resource type="PackedScene" uid="uid://q2lvrrcqcirf" path="res://src/scenes/FerriteRefineryStation.tscn" id="5_78b4q"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
@@ -101,6 +103,21 @@ _data = {
 &"ShowUpgradePanel": SubResource("Animation_l11te")
 }
 
+[sub_resource type="Animation" id="Animation_pdrka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect/DronePurchasePanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(215, -139)]
+}
+
 [sub_resource type="Animation" id="Animation_748oo"]
 resource_name = "drone_shop_swoop_in"
 length = 0.2
@@ -115,21 +132,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(215, -139), Vector2(215, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_pdrka"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../ColorRect/DronePurchasePanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(215, -139)]
 }
 
 [sub_resource type="Animation" id="Animation_jwj81"]
@@ -215,6 +217,48 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ooyll")
 
+[node name="AsteroidArea3" type="SubViewportContainer" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 122.0
+offset_top = 29.0
+offset_right = 602.0
+offset_bottom = 242.0
+mouse_filter = 0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/AsteroidArea3"]
+own_world_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(480, 213)
+size_2d_override_stretch = true
+render_target_update_mode = 0
+
+[node name="AsteroidArea" parent="ColorRect/AsteroidArea3/SubViewport" instance=ExtResource("3_pdrka")]
+position = Vector2(-58, -23)
+
+[node name="AsteroidArea2" type="SubViewportContainer" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 122.0
+offset_top = 29.0
+offset_right = 602.0
+offset_bottom = 242.0
+mouse_filter = 0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/AsteroidArea2"]
+own_world_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(480, 213)
+size_2d_override_stretch = true
+render_target_update_mode = 0
+
+[node name="AsteroidArea" parent="ColorRect/AsteroidArea2/SubViewport" instance=ExtResource("3_748oo")]
+position = Vector2(-54, -26)
+
 [node name="AsteroidArea1" type="SubViewportContainer" parent="ColorRect"]
 visible = false
 layout_mode = 0
@@ -245,6 +289,7 @@ offset_bottom = 242.0
 mouse_filter = 0
 
 [node name="SubViewport" type="SubViewport" parent="ColorRect/AsteroidFieldMap"]
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0

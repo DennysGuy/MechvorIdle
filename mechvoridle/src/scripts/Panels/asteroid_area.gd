@@ -48,7 +48,6 @@ func _ready() -> void:
 	asteroid_area_2d.input_pickable = true
 
 func _physics_process(delta : float) -> void:
-	
 	if not GameManager.can_fight_boss:
 		if start_ufo_spawn:
 			ufo_spawn_timer.wait_time = randi_range(45,60)

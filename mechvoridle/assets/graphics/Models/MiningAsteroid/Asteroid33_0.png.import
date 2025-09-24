@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dov8j5dwhe10n"
-path="res://.godot/imported/AsteroidTexture.png-490f585d38cec61108731d65bc21789a.ctex"
+uid="uid://4xuxnopm0pfg"
+path.s3tc="res://.godot/imported/Asteroid33_0.png-2b92754ee386e57225bb6aec98d0d953.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "1a48028822757c34eec1ec013cf0484d"
 }
 
 [deps]
 
-source_file="res://assets/graphics/AsteroidTexture.png"
-dest_files=["res://.godot/imported/AsteroidTexture.png-490f585d38cec61108731d65bc21789a.ctex"]
+source_file="res://assets/graphics/Models/MiningAsteroid/Asteroid33_0.png"
+dest_files=["res://.godot/imported/Asteroid33_0.png-2b92754ee386e57225bb6aec98d0d953.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +27,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

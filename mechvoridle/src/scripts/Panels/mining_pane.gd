@@ -5,8 +5,15 @@ class_name MiningPane extends Control
 
 #location subviewports
 @onready var asteroid_field_map : SubViewportContainer = $ColorRect/AsteroidFieldMap
-@onready var asteroid_area_1 : SubViewportContainer = $ColorRect/AsteroidArea1
 
+@onready var asteroid_area_3: SubViewportContainer = $ColorRect/AsteroidArea3
+@onready var asteroid_area_3_scene: AsteroidArea = $ColorRect/AsteroidArea3/SubViewport/AsteroidArea
+
+
+@onready var asteroid_area_2: SubViewportContainer = $ColorRect/AsteroidArea2
+@onready var asteroid_area_2_scene: AsteroidArea = $ColorRect/AsteroidArea2/SubViewport/AsteroidArea
+
+@onready var asteroid_area_1 : SubViewportContainer = $ColorRect/AsteroidArea1
 @onready var asteroid_area_1_scene : AsteroidArea = $ColorRect/AsteroidArea1/SubViewport/AsteroidArea
 
 @onready var sub_viewport : SubViewport = $ColorRect/AsteroidArea1/SubViewport
@@ -66,15 +73,22 @@ func switch_layer() -> void:
 			SignalBus.set_asteroid_data.emit(asteroid_area_1_scene, asteroid_area_1_scene.local_drone_manager)
 			
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_2:
-			pass
+			asteroid_area_2.show()
+			asteroid_field_map.hide()
+			SignalBus.set_asteroid_data.emit(asteroid_area_2_scene, asteroid_area_1_scene.local_drone_manager)
+		
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_3:
-			pass
+			asteroid_area_3.show()
+			asteroid_field_map.hide()
+			SignalBus.set_asteroid_data.emit(asteroid_area_3_scene, asteroid_area_3_scene.local_drone_manager)
+		
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP:
 			drone_shop_animation_player.play("RESET")
 			asteroid_area_1.hide()
+			asteroid_area_2.hide()
+			asteroid_area_3.hide()
 			asteroid_field_map.show()
 			SignalBus.clear_asteroid_data.emit()
-			print("did I get in here?")
 
 func toggle_drone_purchase_panel() -> void:
 	
