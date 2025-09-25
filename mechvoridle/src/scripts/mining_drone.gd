@@ -40,7 +40,8 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	
 func _exit_tree():
-	DroneManager.unregister_mining_drone(self)
+	#DroneManager.unregister_mining_drone(self)
+	SignalBus.unregister_mining_drone.emit(self)
 	
 func erase() -> void:
 	

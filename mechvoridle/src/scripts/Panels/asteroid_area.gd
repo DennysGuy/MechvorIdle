@@ -13,6 +13,7 @@ var asteroid_spawn_timer_length : float = 10.0
 @onready var ufo_out_position : Marker2D = $UFOOutPosition
 @onready var ufo_spawn_timer : Timer = $UFOSpawnTimer
 @onready var ufo_list : Node = $UFOList
+@onready var turret_drone_list: Node = $TurretDroneList
 
 @onready var click_asteroid_sfx : AudioStreamPlayer = $ClickAsteroidSfx
 
@@ -93,25 +94,30 @@ func add_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
 		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
 		drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
 		drone.name = "Drone_%s" % str(Time.get_ticks_msec())
+		local_drone_manager.register_mining_drone(drone)
 		drone_list.add_child(drone)
 		print(drone.name)
 
 
-func add_platinum_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var platinum_drone : PlatinumMiningDrone = preload("res://src/scenes/PlatinumMiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone_list.add_child(platinum_drone)
+func add_platinum_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var platinum_drone : PlatinumMiningDrone = preload("res://src/scenes/PlatinumMiningDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		local_drone_manager.register_platinum_drone(platinum_drone)
+		platinum_drone_list.add_child(platinum_drone)
 
-func add_turret_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone_list.add_child(turret_drone)
+func add_turret_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		local_drone_manager.register_turret_drone(turret_drone)
+		turret_drone_list.add_child(turret_drone)
 
 
 func _on_asteroid_spawn_timer_timeout() -> void:

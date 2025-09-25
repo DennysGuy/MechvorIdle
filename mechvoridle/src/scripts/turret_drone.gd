@@ -58,8 +58,9 @@ func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 	
 func _exit_tree():
-	DroneManager.unregister_turret_drone(self)
-
+	#DroneManager.unregister_turret_drone(self)
+	SignalBus.unregister_turret_drone.emit(self)
+	
 func erase() -> void:
 	progress_bar.hide()
 	sprite_2d.hide()

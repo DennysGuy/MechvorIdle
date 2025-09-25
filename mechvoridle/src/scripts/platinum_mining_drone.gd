@@ -40,7 +40,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _exit_tree():
-	DroneManager.unregister_platinum_drone(self)
+	#DroneManager.unregister_platinum_drone(self)
+	SignalBus.unregister_turret_drone.emit(self)
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
@@ -72,7 +73,6 @@ func obtain_resources() -> void:
 		
 	if !GameManager.upgrade_platinum_drone_speed:
 		SignalBus.add_to_submission_counter.emit(drone_damage, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
-	
 	
 	
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()

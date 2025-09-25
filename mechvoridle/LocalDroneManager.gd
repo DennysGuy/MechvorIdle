@@ -17,6 +17,11 @@ var platinum_drone_base_cost: int = 100
 var turret_drone_base_cost : int = 200
 # === GETTERS ===
 
+func _ready() -> void:
+	SignalBus.unregister_mining_drone.connect(unregister_mining_drone)
+	SignalBus.unregister_platinum_drone.connect(unregister_platinum_drone)
+	SignalBus.unregister_turret_drone.connect(unregister_turret_drone)
+
 func get_mining_drone_count() -> int:
 	return mining_drones.size()
 
@@ -30,12 +35,15 @@ func get_total_drone_count() -> int:
 	return drones.size()
 
 func get_mining_drone_cost() -> int:
+	@warning_ignore("narrowing_conversion")
 	return mining_drone_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, get_mining_drone_count())
 
 func get_platinum_drone_cost() -> int:
+	@warning_ignore("narrowing_conversion")
 	return platinum_drone_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, get_platinum_drone_count())
 
 func get_turret_drone_cost() -> int:
+	@warning_ignore("narrowing_conversion")
 	return turret_drone_base_cost * pow(GameManager.UPGRADE_MULTIPLIER, get_turret_drone_count())
 
 # === REGISTRATION ===
@@ -45,28 +53,28 @@ func register_mining_drone(drone: Node) -> void:
 		drones.append(drone)
 		mining_drones.append(drone)
 		update_mining_drone_cost()
-		SignalBus.update_owned_drones_count.emit()
+		#SignalBus.update_owned_drones_count.emit()
 
 func unregister_mining_drone(drone: Node) -> void:
 	if drone in drones:
 		drones.erase(drone)
 		mining_drones.erase(drone)
 		update_mining_drone_cost()
-		SignalBus.update_owned_drones_count.emit()
+		#SignalBus.update_owned_drones_count.emit()
 
 func register_platinum_drone(drone: Node) -> void:
 	if drone not in drones:
 		drones.append(drone)
 		platinum_drones.append(drone)
 		update_platinum_drone_cost()
-		SignalBus.update_owned_drones_count.emit()
+		#SignalBus.update_owned_drones_count.emit()
 
 func unregister_platinum_drone(drone: Node) -> void:
 	if drone in drones:
 		drones.erase(drone)
 		platinum_drones.erase(drone)
 		update_platinum_drone_cost()
-		SignalBus.update_owned_drones_count.emit()
+		#SignalBus.update_owned_drones_count.emit()
 
 func register_turret_drone(drone : Node) -> void:
 	if drone not in drones:

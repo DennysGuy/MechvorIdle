@@ -97,6 +97,7 @@ libraries = {
 }
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
 offset_left = 30.0
 offset_top = -155.0
 offset_right = 542.0

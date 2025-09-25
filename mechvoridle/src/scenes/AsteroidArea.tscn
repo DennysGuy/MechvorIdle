@@ -97,6 +97,7 @@ libraries = {
 }
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
 offset_left = 30.0
 offset_top = -139.0
 offset_right = 542.0
@@ -129,6 +130,8 @@ shape = SubResource("RectangleShape2D_6ww1j")
 
 [node name="PlatinumDroneList" type="Node" parent="."]
 
+[node name="TurretDroneList" type="Node" parent="."]
+
 [node name="UFOList" type="Node" parent="."]
 
 [node name="UFOOutPosition" type="Marker2D" parent="."]
@@ -160,10 +163,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -284.0
-offset_top = 197.0
-offset_right = -155.0
-offset_bottom = 217.0
+offset_left = -288.0
+offset_top = 191.0
+offset_right = -159.0
+offset_bottom = 211.0
 grow_horizontal = 0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("9_u2llw")

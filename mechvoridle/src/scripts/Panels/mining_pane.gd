@@ -75,7 +75,7 @@ func switch_layer() -> void:
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_2:
 			asteroid_area_2.show()
 			asteroid_field_map.hide()
-			SignalBus.set_asteroid_data.emit(asteroid_area_2_scene, asteroid_area_1_scene.local_drone_manager)
+			SignalBus.set_asteroid_data.emit(asteroid_area_2_scene, asteroid_area_2_scene.local_drone_manager)
 		
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_3:
 			asteroid_area_3.show()
