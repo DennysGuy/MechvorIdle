@@ -63,6 +63,7 @@ shader_parameter/vignette_opacity = 0.742
 script = ExtResource("1_8a7wp")
 local_drone_manager = NodePath("LocalDroneManager")
 asteroid_name = "19X-Delta23"
+cost = 5000
 drone_slots = 4
 
 [node name="LocalDroneManager" parent="." instance=ExtResource("2_4ku6p")]
@@ -129,6 +130,8 @@ shape = SubResource("RectangleShape2D_6ww1j")
 [node name="DroneList" type="Node" parent="."]
 
 [node name="PlatinumDroneList" type="Node" parent="."]
+
+[node name="TurretDroneList" type="Node" parent="."]
 
 [node name="UFOList" type="Node" parent="."]
 

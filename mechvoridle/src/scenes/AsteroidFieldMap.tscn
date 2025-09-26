@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://8gt1j8yx8lp0"]
+[gd_scene load_steps=14 format=3 uid="uid://8gt1j8yx8lp0"]
 
 [ext_resource type="Script" uid="uid://1ye6gqa6lpll" path="res://src/scripts/asteroid_field_map.gd" id="1_eeauq"]
 [ext_resource type="Texture2D" uid="uid://bq3wxf21dwoxq" path="res://assets/graphics/AsteroidFieldMapBG.png" id="1_wkst0"]
 [ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="1_yp678"]
 [ext_resource type="Texture2D" uid="uid://jjfgc0n3vtdx" path="res://assets/graphics/AsteroidArea1ButtonNormal.png" id="2_yrwsc"]
 [ext_resource type="Texture2D" uid="uid://bry7q1cmgkh5b" path="res://assets/graphics/AsteroidArea1ButtonOutlinel.png" id="3_8insg"]
-[ext_resource type="Texture2D" uid="uid://8xspthfu00we" path="res://assets/graphics/AsteroidArea2Normal.png" id="4_od868"]
-[ext_resource type="Texture2D" uid="uid://bjot1bywjf4ld" path="res://assets/graphics/AsteroidArea2Outline.png" id="5_ctl1p"]
 [ext_resource type="Texture2D" uid="uid://bbwjwo7dhosp6" path="res://assets/graphics/AsteroidArea3Normal.png" id="6_ke0mk"]
+[ext_resource type="PackedScene" uid="uid://wisju6fg4c2a" path="res://src/scenes/AsteroidButton.tscn" id="6_us46i"]
+[ext_resource type="PackedScene" uid="uid://davrhw222g8uv" path="res://src/scenes/AsteroidArea2.tscn" id="7_f5xno"]
 [ext_resource type="Texture2D" uid="uid://cxeceiymibfyy" path="res://assets/graphics/AsteroidArea3Outline.png" id="7_yp678"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="10_us46i"]
 [ext_resource type="Texture2D" uid="uid://ddktq311v77pr" path="res://assets/graphics/map_trail_dot.png" id="11_f5xno"]
+[ext_resource type="PackedScene" uid="uid://cnxjsj1ffl05m" path="res://src/scenes/AsteroidArea3.tscn" id="12_klx67"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eeauq"]
 shader = ExtResource("1_yp678")
@@ -29,31 +30,33 @@ texture = ExtResource("1_wkst0")
 stretch_mode = 1
 
 [node name="AsteroidArea1" type="TextureButton" parent="."]
-offset_left = 231.0
+offset_left = 228.0
 offset_top = 127.0
-offset_right = 375.0
+offset_right = 372.0
 offset_bottom = 271.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_yrwsc")
 texture_hover = ExtResource("3_8insg")
 
-[node name="AsteroidArea2" type="TextureButton" parent="."]
-offset_left = 99.0
-offset_top = 119.0
-offset_right = 209.0
-offset_bottom = 229.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_od868")
-texture_hover = ExtResource("5_ctl1p")
+[node name="AsteroidArea2" parent="." instance=ExtResource("6_us46i")]
+offset_left = 101.0
+offset_top = 63.0
+offset_right = 211.0
+offset_bottom = 173.0
+cost = 5000
+asteroid_packed = ExtResource("7_f5xno")
+asteroid_num = 1
 
-[node name="AsteroidArea3" type="TextureButton" parent="."]
-offset_left = 203.0
-offset_top = 62.0
-offset_right = 267.0
-offset_bottom = 126.0
-mouse_default_cursor_shape = 2
+[node name="AsteroidArea3" parent="." instance=ExtResource("6_us46i")]
+offset_left = 265.0
+offset_top = 58.0
+offset_right = 329.0
+offset_bottom = 122.0
 texture_normal = ExtResource("6_ke0mk")
 texture_hover = ExtResource("7_yp678")
+cost = 5000
+asteroid_packed = ExtResource("12_klx67")
+asteroid_num = 2
 
 [node name="DescriptionPanel" type="ColorRect" parent="."]
 anchors_preset = 1
@@ -94,6 +97,24 @@ theme_override_fonts/font = ExtResource("10_us46i")
 theme_override_font_sizes/font_size = 6
 text = "Move To"
 
+[node name="PurchaseAsteroid" type="Button" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -19.0
+offset_right = -50.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("10_us46i")
+theme_override_font_sizes/font_size = 6
+text = "Purchase"
+
 [node name="RichTextLabel" type="RichTextLabel" parent="DescriptionPanel"]
 layout_mode = 0
 offset_left = 7.0
@@ -116,41 +137,35 @@ theme_override_font_sizes/font_size = 12
 text = "Select an Asteroid To Mine"
 
 [node name="MapTrailDot" type="Sprite2D" parent="."]
-position = Vector2(231, 192)
+position = Vector2(219, 219)
 scale = Vector2(0.289062, 0.289062)
 texture = ExtResource("11_f5xno")
 
 [node name="MapTrailDot2" type="Sprite2D" parent="."]
-position = Vector2(218, 189)
+position = Vector2(185, 198)
 scale = Vector2(0.226563, 0.226563)
 texture = ExtResource("11_f5xno")
 
 [node name="MapTrailDot3" type="Sprite2D" parent="."]
-position = Vector2(205.594, 185.594)
+position = Vector2(167, 177)
 scale = Vector2(0.15039, 0.15039)
 texture = ExtResource("11_f5xno")
 
 [node name="MapTrailDot4" type="Sprite2D" parent="."]
-position = Vector2(192.797, 138.797)
+position = Vector2(217, 111.99999)
 scale = Vector2(0.137695, 0.137695)
 texture = ExtResource("11_f5xno")
 
 [node name="MapTrailDot5" type="Sprite2D" parent="."]
-position = Vector2(201, 130)
+position = Vector2(239, 107)
 scale = Vector2(0.100098, 0.100098)
 texture = ExtResource("11_f5xno")
 
 [node name="MapTrailDot6" type="Sprite2D" parent="."]
-position = Vector2(207.85, 122.85)
+position = Vector2(259, 101)
 scale = Vector2(0.0718987, 0.0718987)
 texture = ExtResource("11_f5xno")
 
-[node name="MapTrailDot7" type="Sprite2D" parent="."]
-position = Vector2(212, 118)
-scale = Vector2(0.0406487, 0.0406487)
-texture = ExtResource("11_f5xno")
-
 [connection signal="button_up" from="AsteroidArea1" to="." method="_on_asteroid_area_1_button_up"]
-[connection signal="button_up" from="AsteroidArea2" to="." method="_on_asteroid_area_2_button_up"]
-[connection signal="button_up" from="AsteroidArea3" to="." method="_on_asteroid_area_3_button_up"]
 [connection signal="button_up" from="DescriptionPanel/MoveToAsteroid" to="." method="_on_move_to_asteroid_button_up"]
+[connection signal="button_up" from="DescriptionPanel/PurchaseAsteroid" to="." method="_on_purchase_asteroid_button_up"]

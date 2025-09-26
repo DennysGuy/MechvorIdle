@@ -281,3 +281,9 @@ signal unregister_mining_drone(mining_drone : MiningDrone)
 signal unregister_platinum_drone(platinum_drone : PlatinumMiningDrone)
 @warning_ignore("unused_signal")
 signal unregister_turret_drone(turret_drone : TurretDrone)
+
+@warning_ignore("unused_signal")
+signal update_asteroid_panel_data(asteroid_area : AsteroidArea, asteroid_index : int, is_purchased : bool)
+
+@warning_ignore("unused_signal")
+signal purchase_asteroid(asteroid_area : AsteroidArea)
