@@ -25,6 +25,7 @@ var drone_purchase_panel_showing : bool = false
 #@onready var owned_drones_count : Label = %OwnedDronesCount
 
 func _ready() -> void:
+	mute_all_asteroids()
 	SignalBus.show_upgrade_panel.connect(show_upgrade_panel)
 	SignalBus.hide_upgrade_panel.connect(hide_upgrade_panel)
 	SignalBus.change_maps.connect(play_fade_animation)
@@ -63,7 +64,6 @@ func play_fade_animation() -> void:
 	animation_player.play("FadeBetweenLayers")
 
 func switch_layer() -> void:
-	
 	match GameManager.selected_location:
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_1:
 			print("hi asteroid area 1 here")
@@ -71,17 +71,20 @@ func switch_layer() -> void:
 			#I'm guessing that we'll end up connecting all of the components to this field  here
 			asteroid_field_map.hide()
 			SignalBus.set_asteroid_data.emit(asteroid_area_1_scene, asteroid_area_1_scene.local_drone_manager)
+			un_mute_asteroid_1()
 			
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_2:
 			asteroid_area_2.show()
 			asteroid_field_map.hide()
 			SignalBus.set_asteroid_data.emit(asteroid_area_2_scene, asteroid_area_2_scene.local_drone_manager)
+			un_mute_asteroid_2()
 		
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_AREA_3:
 			asteroid_area_3.show()
 			asteroid_field_map.hide()
 			SignalBus.set_asteroid_data.emit(asteroid_area_3_scene, asteroid_area_3_scene.local_drone_manager)
-		
+			un_mute_asteroid_3()
+			
 		GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP:
 			drone_shop_animation_player.play("RESET")
 			asteroid_area_1.hide()
@@ -89,6 +92,7 @@ func switch_layer() -> void:
 			asteroid_area_3.hide()
 			asteroid_field_map.show()
 			SignalBus.clear_asteroid_data.emit()
+			mute_all_asteroids()
 
 func toggle_drone_purchase_panel() -> void:
 	
@@ -105,6 +109,28 @@ func show_drone_shop_panel() -> void:
 
 func hide_drone_shop_panel() -> void:
 	drone_shop_animation_player.play("drone_shop_swoop_out")
+
+func un_mute_asteroid_1() -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid2SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid3SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid1SFX"), 0)
+
+func un_mute_asteroid_2() -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid2SFX"), 0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid3SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid1SFX"), -50)
+
+func un_mute_asteroid_3() -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid2SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid3SFX"), 0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid1SFX"), -50)
+
+func mute_all_asteroids() -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid2SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid3SFX"), -50)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Asteroid1SFX"), -50)
+
+
 
 #func update_drone_count() -> void:
 	#var current_drone_count : int = DroneManager.drones.size()

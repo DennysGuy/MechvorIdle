@@ -6,14 +6,17 @@ enum size {SMALL, MEDIUM, LARGE, DRONE, PLATINUM_DRONE, UFO_HAZARD}
 @onready var sfx_player = $SfxPlayer
 
 var size_set : int 
+var audio_bus_name : String
 var explosion_sfx_list : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DESTROY_01, SfxManager.MIN_UNIT_DRONE_DESTROY_02, SfxManager.MIN_UNIT_DRONE_DESTROY_03]
 var drone_destroy_list : Array[AudioStream] = [SfxManager.MIN_UNIT_DRONE_DESTROY_01, SfxManager.MIN_UNIT_DRONE_DESTROY_02, SfxManager.MIN_UNIT_DRONE_DESTROY_03]
 func _ready() -> void:
 	set_asteroid_scale()
+	sfx_player.bus = audio_bus_name
 	animated_sprite_2d.play("default")
 
 func set_asteroid_scale() -> void:
 	sfx_player.volume_db = -4.0
+	sfx_player.bus = audio_bus_name
 	match size_set:
 		size.SMALL:
 			sfx_player.stream = explosion_sfx_list[0]
@@ -46,5 +49,4 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func _on_sfx_player_finished():
-
 	get_parent().queue_free()

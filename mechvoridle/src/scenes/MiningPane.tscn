@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=27 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://8gt1j8yx8lp0" path="res://src/scenes/AsteroidFieldMap.tscn" id="4_63n5c"]
 [ext_resource type="PackedScene" uid="uid://q2lvrrcqcirf" path="res://src/scenes/FerriteRefineryStation.tscn" id="5_78b4q"]
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
-[ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="6_78b4q"]
 [ext_resource type="PackedScene" uid="uid://hjbnj2tod3ol" path="res://src/scenes/PlasmaGenerator.tscn" id="6_tow8p"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="7_e1r7j"]
 [ext_resource type="Texture2D" uid="uid://bp4mre5vn47ji" path="res://assets/graphics/MiningPanel_overlay.png" id="7_t7rsg"]
@@ -156,31 +155,6 @@ _data = {
 &"drone_shop_swoop_in": SubResource("Animation_748oo"),
 &"drone_shop_swoop_out": SubResource("Animation_jwj81")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tow8p"]
-resource_local_to_scene = true
-shader = ExtResource("6_78b4q")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.029
-shader_parameter/scanlines_width = 0.11
-shader_parameter/grille_opacity = 0.0
-shader_parameter/resolution = Vector2(640, 360)
-shader_parameter/pixelate = false
-shader_parameter/roll = true
-shader_parameter/roll_speed = 3.0
-shader_parameter/roll_size = 23.92
-shader_parameter/roll_variation = 2.928
-shader_parameter/distort_intensity = 0.027
-shader_parameter/noise_opacity = 0.482
-shader_parameter/noise_speed = 1.0
-shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 4.75e-08
-shader_parameter/brightness = 1.0
-shader_parameter/discolor = false
-shader_parameter/warp_amount = 0.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.2
-shader_parameter/vignette_opacity = 0.851
 
 [node name="MiningRefiningPane" type="Control"]
 layout_mode = 3
@@ -337,33 +311,6 @@ offset_bottom = 162.0
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("7_e1r7j")
-
-[node name="CRTOverlayForMonitor" type="ColorRect" parent="ColorRect/FilterController"]
-material = SubResource("ShaderMaterial_tow8p")
-layout_mode = 0
-offset_left = 94.0
-offset_top = 266.0
-offset_right = 240.0
-offset_bottom = 343.0
-mouse_filter = 2
-
-[node name="CRTOverlayForMonitor2" type="ColorRect" parent="ColorRect/FilterController"]
-material = SubResource("ShaderMaterial_tow8p")
-layout_mode = 0
-offset_left = 281.0
-offset_top = 266.0
-offset_right = 427.0
-offset_bottom = 343.0
-mouse_filter = 2
-
-[node name="CRTOverlayForMonitor3" type="ColorRect" parent="ColorRect/FilterController"]
-material = SubResource("ShaderMaterial_tow8p")
-layout_mode = 0
-offset_left = 463.0
-offset_top = 266.0
-offset_right = 609.0
-offset_bottom = 343.0
-mouse_filter = 2
 
 [node name="TransitionColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 0

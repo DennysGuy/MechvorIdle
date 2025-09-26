@@ -16,7 +16,14 @@ var health : int = 12
 var max_health : int = 12
 var navigation_coordinates : Vector2
 
+#modifiers
+var audio_bus_name : String
+var damage_modifier : int = 0
+var speed_modifier : float = 0.0
+
 func _ready() -> void:
+	sfx_player.bus = audio_bus_name
+	audio_stream_player.bus = audio_bus_name
 	SignalBus.deselect_drone.connect(hide_outline)
 	SignalBus.move_drone.connect(change_to_move_state)
 	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
@@ -50,13 +57,14 @@ func erase() -> void:
 	hurt_box.get_child(0).disabled = true
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 3
+	explosion.audio_bus_name = audio_bus_name
 	SignalBus.issue_drone_down_alert.emit()
 	
 	add_child(explosion)
 	
 	
 func obtain_resources() -> void:
-	var drone_damage : int = GameManager.drone_damage
+	var drone_damage : int = GameManager.drone_damage + damage_modifier
 	play_mining_sfx()
 	GameManager.raw_ferrite_count += drone_damage
 			
@@ -68,8 +76,8 @@ func obtain_resources() -> void:
 	SignalBus.update_ferrite_count.emit()
 			
 	if platinum_gained():
-		var value : int = randi_range(GameManager.platinum_gain_min,GameManager.platinum_gain_max)
-		var crit_value = value * 2
+		var value : int = randi_range(GameManager.platinum_gain_min,GameManager.platinum_gain_max) + damage_modifier
+		#var crit_value = value * 2
 		var platinum_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
 		
 		if !GameManager.plat_drone_purchased:

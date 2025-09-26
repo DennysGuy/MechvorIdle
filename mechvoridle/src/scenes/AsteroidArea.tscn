@@ -63,7 +63,10 @@ shader_parameter/vignette_opacity = 0.742
 script = ExtResource("1_6ww1j")
 local_drone_manager = NodePath("LocalDroneManager")
 asteroid_name = "19X-Delta"
+audio_bus_name = "Asteroid1SFX"
 drone_slots = 4
+drone_speed_modifier = 1.0
+hazard_spawn_time_modifier = 10
 
 [node name="LocalDroneManager" parent="." instance=ExtResource("2_jivcb")]
 max_owned_drones = 4
@@ -158,16 +161,18 @@ offset_top = -51.0
 offset_right = 628.0
 offset_bottom = 317.0
 
-[node name="ReturnButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_top = 191.0
-offset_right = -159.0
-offset_bottom = 211.0
-grow_horizontal = 0
+[node name="ReturnButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 410.0
+offset_top = 209.0
+offset_right = 539.0
+offset_bottom = 229.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("9_u2llw")
 theme_override_font_sizes/font_size = 8
@@ -217,6 +222,6 @@ position = Vector2(571, 270)
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
 [connection signal="mouse_entered" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_exited"]
-[connection signal="button_up" from="CanvasLayer/Control/ReturnButton" to="." method="_on_return_button_button_up"]
+[connection signal="button_up" from="ReturnButton" to="." method="_on_return_button_button_up"]
 
 [editable path="CanvasLayer/Control/CRTOverlay"]

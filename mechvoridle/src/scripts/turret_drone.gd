@@ -16,6 +16,8 @@ var health : int = 18
 var max_health : int = 18
 var navigation_coordinates : Vector2
 
+var audio_bus_name : String
+
 @onready var anamolie_detector : Area2D = $AnamolieDetector
 
 var tracked_hostile : Node 
@@ -26,7 +28,8 @@ var speed : int
 func _ready() -> void:
 	set_range_area_scale()
 	set_turret_damage()
-	set_turret_speed() 
+	set_turret_speed()
+	 
 	radius = roundf(collision_shape_2d.radius * GameManager.turret_drone_range_scaler)
 	SignalBus.deselect_drone.connect(deselect_drone)
 	SignalBus.move_drone.connect(change_to_move_state)
@@ -67,6 +70,7 @@ func erase() -> void:
 	hurt_box.get_child(0).disabled = true
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 3
+	explosion.audio_bus_name = audio_bus_name
 	SignalBus.issue_drone_down_alert.emit()
 	
 	add_child(explosion)

@@ -6,7 +6,6 @@ class_name DroneFire extends State
 
 func enter() -> void:
 	parent.animation_player.play("fire_laser")	
-	print("hey I'm in fire state")
 	if parent.tracked_hostile:
 		if parent.tracked_hostile is Asteroid and parent.tracked_hostile.health > 0:
 			parent.tracked_hostile.damage_asteroid(parent.damage)
@@ -25,6 +24,7 @@ func exit() -> void:
 	pass
 
 
+@warning_ignore("unused_parameter")
 func process_physics(delta: float) -> State:
 
 	return null
