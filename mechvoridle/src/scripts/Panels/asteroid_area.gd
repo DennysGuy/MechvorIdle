@@ -13,17 +13,32 @@ var asteroid_spawn_timer_length : float = 10.0
 @onready var ufo_out_position : Marker2D = $UFOOutPosition
 @onready var ufo_spawn_timer : Timer = $UFOSpawnTimer
 @onready var ufo_list : Node = $UFOList
+@onready var turret_drone_list: Node = $TurretDroneList
 
 @onready var click_asteroid_sfx : AudioStreamPlayer = $ClickAsteroidSfx
 
+@export_group("Drone Stats")
+@export var local_drone_manager : LocalDroneManager
 
 var start_ufo_spawn : bool = false
 var mining_timer : SceneTreeTimer
 var mouse_in_asteroid_range : bool = false
 
+#asteroid stat modifiers
+@export_group("Asteroid Name")
+@export var asteroid_name : String
+@export var audio_bus_name : String
+
+@export_group("Asteroid Modifiers")
+@export var cost : int
+@export var drone_slots : int
+@export var drone_damage_modifier : int
+@export var drone_speed_modifier : float
+@export var hazard_spawn_time_modifier : int
+
 var _offset : int = 50
 func _ready() -> void:
-	
+	local_drone_manager.max_owned_drones = drone_slots
 	SignalBus.add_drone.connect(add_drone_to_scene)
 	SignalBus.add_platinum_drone.connect(add_platinum_drone_to_scene)
 	SignalBus.add_turret_drone.connect(add_turret_drone_to_scene)
@@ -34,14 +49,13 @@ func _ready() -> void:
 	asteroid_spawn_timer.start()
 	asteroid_area_2d.input_pickable = true
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta : float) -> void:
-	
 	if not GameManager.can_fight_boss:
 		if start_ufo_spawn:
 			ufo_spawn_timer.wait_time = randi_range(45,60)
 			ufo_spawn_timer.start()
 			start_ufo_spawn = false
-
 
 		if Input.is_action_just_pressed("set_drone_destination") and not mouse_in_asteroid_range and not is_inside_mining_area():
 			remove_all_children_in_marker_group()
@@ -64,7 +78,6 @@ func _physics_process(delta : float) -> void:
 				spawn_mining_progress_bar()
 				mining_timer = null
 		
-
 func remove_all_children_in_marker_group() -> void:
 	for child in get_tree().get_nodes_in_group("DestinationMarkers"):
 		child.queue_free()
@@ -73,36 +86,54 @@ func spawn_mining_progress_bar():
 	var mining_progress_bar : MiningLaserProgressBar = preload("res://src/scenes/MiningScene/MiningLaserProgressBar.tscn").instantiate()
 	add_child(mining_progress_bar)
 
-func add_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone.name = "Drone_%s" % str(Time.get_ticks_msec())
-	drone_list.add_child(drone)
-	print(drone.name)
+func add_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var drone : MiningDrone = preload("res://src/scenes/MiningDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		
+		drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		drone.name = "Drone_%s" % str(Time.get_ticks_msec())
+		drone.damage_modifier = drone_damage_modifier
+		drone.speed_modifier = drone_speed_modifier
+		drone.audio_bus_name = audio_bus_name
+		
+		local_drone_manager.register_mining_drone(drone)
+		drone_list.add_child(drone)
+		print(drone.name)
 
+func add_platinum_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var platinum_drone : PlatinumMiningDrone = preload("res://src/scenes/PlatinumMiningDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		
+		platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		platinum_drone.damage_modifier = drone_damage_modifier
+		platinum_drone.speed_modifier = drone_speed_modifier
+		platinum_drone.audio_bus_name = audio_bus_name
+		
+		local_drone_manager.register_platinum_drone(platinum_drone)
+		platinum_drone_list.add_child(platinum_drone)
 
-func add_platinum_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var platinum_drone : PlatinumMiningDrone = preload("res://src/scenes/PlatinumMiningDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	platinum_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone_list.add_child(platinum_drone)
-
-func add_turret_drone_to_scene() -> void:
-	var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
-	var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
-	var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
-	var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
-	turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
-	drone_list.add_child(turret_drone)
+func add_turret_drone_to_scene(asteroid_scene : AsteroidArea) -> void:
+	if asteroid_scene == self:
+		var area_collision_shape : CollisionShape2D = asteroid_area_2d.get_child(0)
+		var turret_drone : TurretDrone = preload("res://src/scenes/MiningScene/TurretDrone.tscn").instantiate()
+		var random_x_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.x+_offset, area_collision_shape.shape.get_rect().size.x-_offset)
+		var random_y_pos : float = randf_range(-area_collision_shape.shape.get_rect().size.y+_offset, area_collision_shape.shape.get_rect().size.y-_offset)
+		
+		turret_drone.global_position = area_collision_shape.global_position + Vector2(random_x_pos, random_y_pos)
+		turret_drone.audio_bus_name = audio_bus_name
+		
+		local_drone_manager.register_turret_drone(turret_drone)
+		turret_drone_list.add_child(turret_drone)
 
 
 func _on_asteroid_spawn_timer_timeout() -> void:
-	var random_spawn_time : int = randi_range(asteroid_spawn_timer_length-5, asteroid_spawn_timer_length+5)
+	var random_spawn_time : int = randi_range(hazard_spawn_time_modifier-5, hazard_spawn_time_modifier+5)
 	asteroid_spawn_timer.wait_time = random_spawn_time
 	spawn_asteroid()
 
@@ -170,3 +201,9 @@ func is_inside_mining_area() -> bool:
 func stop_ufo_spawn() -> void:
 	start_ufo_spawn = false
 	ufo_spawn_timer.stop()
+
+
+func _on_return_button_button_up():
+	GameManager.selected_location = GameManager.ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP
+	print(GameManager.selected_location)
+	SignalBus.change_maps.emit()

@@ -1,14 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://caw51s5447gtc"]
+[gd_scene load_steps=18 format=3 uid="uid://caw51s5447gtc"]
 
 [ext_resource type="Script" uid="uid://dxkkmj0baivjr" path="res://src/scripts/Panels/asteroid_area.gd" id="1_6ww1j"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_b11ub"]
 [ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="2_hq8q6"]
+[ext_resource type="PackedScene" uid="uid://cc2mgcssafca6" path="res://src/scenes/LocalDroneManager.tscn" id="2_jivcb"]
 [ext_resource type="PackedScene" uid="uid://cirgs6mk7lbc3" path="res://src/scenes/CRTOverlay.tscn" id="3_2fxli"]
 [ext_resource type="PackedScene" uid="uid://cei2jhilkfgc7" path="res://MiningAsteroid.tscn" id="3_ocvap"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="4_fde8e"]
 [ext_resource type="AudioStream" uid="uid://dcbov0sb4d4ci" path="res://assets/audio/SFX/MINING/Click/MIN_Click_Asteroid_02.ogg" id="5_0sd8y"]
 [ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="5_wl6gh"]
 [ext_resource type="PackedScene" uid="uid://d3siueyr5myjd" path="res://GuideBox.tscn" id="7_b11ub"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="9_u2llw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wl6gh"]
 shader = ExtResource("2_hq8q6")
@@ -57,8 +59,17 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/vignette_opacity = 0.742
 
-[node name="AsteroidArea" type="Node2D"]
+[node name="AsteroidArea" type="Node2D" node_paths=PackedStringArray("local_drone_manager")]
 script = ExtResource("1_6ww1j")
+local_drone_manager = NodePath("LocalDroneManager")
+asteroid_name = "19X-Delta"
+audio_bus_name = "Asteroid1SFX"
+drone_slots = 4
+drone_speed_modifier = 1.0
+hazard_spawn_time_modifier = 10
+
+[node name="LocalDroneManager" parent="." instance=ExtResource("2_jivcb")]
+max_owned_drones = 4
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
 process_callback = 0
@@ -89,6 +100,7 @@ libraries = {
 }
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
 offset_left = 30.0
 offset_top = -139.0
 offset_right = 542.0
@@ -121,6 +133,8 @@ shape = SubResource("RectangleShape2D_6ww1j")
 
 [node name="PlatinumDroneList" type="Node" parent="."]
 
+[node name="TurretDroneList" type="Node" parent="."]
+
 [node name="UFOList" type="Node" parent="."]
 
 [node name="UFOOutPosition" type="Marker2D" parent="."]
@@ -146,6 +160,23 @@ offset_left = -12.0
 offset_top = -51.0
 offset_right = 628.0
 offset_bottom = 317.0
+
+[node name="ReturnButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 410.0
+offset_top = 209.0
+offset_right = 539.0
+offset_bottom = 229.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("9_u2llw")
+theme_override_font_sizes/font_size = 8
+text = "Back To Asteroid Map"
 
 [node name="ClickAsteroidSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0sd8y")
@@ -191,5 +222,6 @@ position = Vector2(571, 270)
 [connection signal="timeout" from="UFOSpawnTimer" to="." method="_on_ufo_spawn_timer_timeout"]
 [connection signal="mouse_entered" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="AsteroidArea2D" to="." method="_on_asteroid_area_2d_mouse_exited"]
+[connection signal="button_up" from="ReturnButton" to="." method="_on_return_button_button_up"]
 
 [editable path="CanvasLayer/Control/CRTOverlay"]

@@ -21,15 +21,17 @@ var can_hit = true
 signal deliver_resources 
 @onready var nine_patch_rect : NinePatchRect = $NinePatchRect
 
+var audio_bus_name : String
+
 func _ready() -> void:
 	guide_box_animation_player.play("blink")
 	dir = mining_asteroid.position - position
-
+	sfx_player.bus = audio_bus_name
+	
 func _process(delta : float) -> void:
 	graphic.rotation += 0.02
 	
 func _physics_process(delta: float) -> void:
-	
 	if can_hit:
 		velocity = dir.normalized() * speed
 		move_and_slide()
@@ -38,9 +40,6 @@ func _physics_process(delta: float) -> void:
 func _on_delete_asteroid_timer_timeout() -> void:
 	queue_free()
 
-
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	pass
 
 func damage_asteroid(damage : int = 1) -> void:
 	play_asteroid_hit_sfx()
@@ -60,11 +59,13 @@ func spawn_explosion_and_destroy():
 	if is_instance_valid(self):
 		can_hit = false
 		graphic.hide()
-		nine_patch_rect.queue_free()
+		if is_instance_valid(nine_patch_rect):
+			nine_patch_rect.queue_free()
 		guide_box_animation_player.play("RESET")
 		area_2d.get_child(0).disabled = true
 		asteroid_click_control.hide()
 		var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
+		explosion.audio_bus_name = audio_bus_name
 		match asteroid_size:
 			ASTEROID_SIZE.SMALL:
 				explosion.size_set = ASTEROID_SIZE.SMALL
@@ -74,12 +75,12 @@ func spawn_explosion_and_destroy():
 				
 			ASTEROID_SIZE.LARGE:
 				explosion.size_set = ASTEROID_SIZE.LARGE
+				
 		area_2d.get_child(0).disabled = true
 		add_child(explosion)
 
 func _on_asteroid_click_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_hit:
-		#print("HIT!")
 		damage_asteroid()
 
 func play_asteroid_hit_sfx() -> void:

@@ -232,6 +232,16 @@ var mech_completed : bool = false
 	-- if the player happens to be on complete mech - the completed all missions animation will appear during to fight transition animation
 '''
 
+var selected_location : int = ASTEROID_FIELD_LOCATIONS.ASTEROID_FIELD_MAP
+
+enum ASTEROID_FIELD_LOCATIONS 
+{
+	ASTEROID_FIELD_MAP,
+	ASTEROID_AREA_1,
+	ASTEROID_AREA_2,
+	ASTEROID_AREA_3
+}
+
 enum CHECK_LIST_INDICATOR_TOGGLES
 {
 	VISITED_BLACK_MARKET, 

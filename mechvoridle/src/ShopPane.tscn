@@ -189,7 +189,7 @@ theme_override_font_sizes/font_size = 6
 text = "Cost: N/A"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 74.0
 offset_top = 78.0
 offset_right = 236.0
@@ -369,64 +369,6 @@ offset_right = 247.0
 offset_bottom = 213.0
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 54.0
-offset_right = 253.0
-offset_bottom = 74.0
-mouse_default_cursor_shape = 2
-theme_override_constants/separation = 2
-
-[node name="HeadsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Heads"
-
-[node name="TorsosButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Torso"
-
-[node name="ArmsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Arms"
-
-[node name="LegsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Legs"
-
-[node name="RiflesButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Rifles"
-
-[node name="SwordsButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Swords"
-
-[node name="RocketLaunchersButton" type="Button" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("3_8ov7t")
-theme_override_font_sizes/font_size = 4
-text = "Launchers"
-
 [node name="Control" type="Control" parent="ColorRect"]
 anchors_preset = 0
 offset_right = 40.0
@@ -480,7 +422,7 @@ position = Vector2(284, 57)
 texture = ExtResource("7_4k2ii")
 
 [node name="PurchaseButton" type="TextureButton" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 234.0
 offset_top = 223.0
 offset_right = 324.0
@@ -546,7 +488,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_4k2ii")
 
 [node name="HeadIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 61.0
 offset_top = 36.0
 offset_right = 66.0
@@ -556,7 +498,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="TorsoIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 89.0
 offset_top = 36.0
 offset_right = 94.0
@@ -566,7 +508,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="ArmsIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 114.0
 offset_top = 36.0
 offset_right = 119.0
@@ -576,7 +518,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="LegsIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 139.0
 offset_top = 36.0
 offset_right = 144.0
@@ -586,7 +528,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="RiflesIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 164.0
 offset_top = 36.0
 offset_right = 169.0
@@ -596,7 +538,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="SwordsIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 194.0
 offset_top = 36.0
 offset_right = 199.0
@@ -606,7 +548,7 @@ theme_override_fonts/font = ExtResource("3_8ov7t")
 text = "!"
 
 [node name="LaunchersIndicator" type="Label" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 234.0
 offset_top = 36.0
 offset_right = 239.0
@@ -628,6 +570,64 @@ theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 script = ExtResource("16_gcoiw")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 54.0
+offset_right = 253.0
+offset_bottom = 74.0
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 2
+
+[node name="HeadsButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Heads"
+
+[node name="TorsosButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Torso"
+
+[node name="ArmsButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Arms"
+
+[node name="LegsButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Legs"
+
+[node name="RiflesButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Rifles"
+
+[node name="SwordsButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Swords"
+
+[node name="RocketLaunchersButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8ov7t")
+theme_override_font_sizes/font_size = 4
+text = "Launchers"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_j2pgo")
@@ -640,23 +640,23 @@ bus = &"SFX"
 bus = &"SFX"
 
 [connection signal="button_up" from="ColorRect/CentralHubNavigation" to="." method="_on_central_hub_navigation_button_up"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_mouse_entered"]
-[connection signal="button_down" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
-[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/PurchaseButton" to="." method="_on_purchase_button_button_down"]
 [connection signal="mouse_entered" from="ColorRect/PurchaseButton" to="." method="_on_purchase_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_button_down"]
 [connection signal="mouse_entered" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_button_down"]
 [connection signal="mouse_entered" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/HeadsButton" to="." method="_on_heads_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/TorsosButton" to="." method="_on_torsos_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/ArmsButton" to="." method="_on_arms_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/LegsButton" to="." method="_on_legs_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/RiflesButton" to="." method="_on_rifles_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/SwordsButton" to="." method="_on_swords_button_mouse_entered"]
+[connection signal="button_down" from="HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_mouse_entered"]

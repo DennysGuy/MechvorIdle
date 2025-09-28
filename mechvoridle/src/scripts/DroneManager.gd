@@ -8,7 +8,7 @@ var drones: Array = []
 
 var mining_drones: Array[MiningDrone] = []
 var platinum_drones: Array[PlatinumMiningDrone] = []
-var turret_drones : Array = [] #we'll add the turret drone soon
+var turret_drones : Array = [TurretDrone] #we'll add the turret drone soon
 
 var mining_drone_base_cost: int = 100
 var platinum_drone_base_cost: int = 100

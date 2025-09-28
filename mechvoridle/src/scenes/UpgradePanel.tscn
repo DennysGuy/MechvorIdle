@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccmj71mwg532g"]
+[gd_scene load_steps=14 format=3 uid="uid://ccmj71mwg532g"]
 
 [ext_resource type="Script" uid="uid://ccfg55xd288ex" path="res://src/scripts/Panels/upgrade_panel.gd" id="1_ffqcc"]
 [ext_resource type="Texture2D" uid="uid://b45m2dfvnfkjy" path="res://assets/graphics/UpgradePanelTexture.png" id="1_roafv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://0ehb425m0cid" path="res://assets/graphics/UI/hide_upgrades_button.png" id="6_xqeeo"]
 [ext_resource type="Texture2D" uid="uid://cfkumfwr8je4a" path="res://assets/graphics/plasma_ui_icon.png" id="9_1b2tq"]
 [ext_resource type="Texture2D" uid="uid://d2qpavqc2yjec" path="res://assets/graphics/TurretDrone.png" id="9_k75g2"]
+[ext_resource type="PackedScene" uid="uid://chi2uxmfxrwyi" path="res://purchase_indicator.tscn" id="9_tts4g"]
 [ext_resource type="Texture2D" uid="uid://cwybcj71km81k" path="res://assets/graphics/refined_ferrite_ui_icon.png" id="10_165cb"]
 [ext_resource type="Texture2D" uid="uid://b5pdhj180cp31" path="res://assets/graphics/ferrite_ui_icon.png" id="11_165cb"]
 
@@ -607,17 +608,12 @@ theme_override_fonts/font = ExtResource("3_lmpdo")
 theme_override_font_sizes/font_size = 20
 text = "!"
 
-[node name="drone_damage_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
+[node name="drone_damage_indicator" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades" instance=ExtResource("9_tts4g")]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 49.0
-offset_right = 74.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(0.905955, 0.653647, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_lmpdo")
-theme_override_font_sizes/font_size = 20
-text = "!"
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 6.0
+offset_bottom = 23.0
 
 [node name="drone_speed_indicator" type="Label" parent="ScrollContainer/VBoxContainer/Upgrades/DronesUpgrades"]
 layout_mode = 0

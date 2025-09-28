@@ -6,6 +6,10 @@ class_name PlatinumMiningDrone extends CharacterBody2D
 @onready var state_machine : StateMachine = $StateMachine
 @onready var move : State = $StateMachine/Move
 
+var damage_modifier : int
+var speed_modifier : float
+var audio_bus_name : String
+
 var navigation_coordinates : Vector2
 var health : int = 15
 var max_health : int = 15
@@ -14,6 +18,7 @@ var max_health : int = 15
 var mining_sfx : Array[AudioStream] = [SfxManager.MIN_CLICK_ASTEROID_01,SfxManager.MIN_CLICK_ASTEROID_02,SfxManager.MIN_CLICK_ASTEROID_03]
 
 func _ready() -> void:
+	audio_stream_player_2d.bus = audio_bus_name
 	SignalBus.move_drone.connect(change_to_move_state)
 	SignalBus.deselect_drone.connect(hide_outline)
 	SignalBus.update_health_regen_time.connect(decrease_health_regen_time)
@@ -40,7 +45,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _exit_tree():
-	DroneManager.unregister_platinum_drone(self)
+	#DroneManager.unregister_platinum_drone(self)
+	SignalBus.unregister_turret_drone.emit(self)
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
@@ -49,12 +55,13 @@ func erase() -> void:
 	progress_bar.hide()
 	var explosion : Explosion = preload("res://src/scenes/Explosion.tscn").instantiate()
 	explosion.size_set = 4
+	explosion.audio_bus_name = audio_bus_name
 	SignalBus.issue_drone_down_alert.emit()
 	add_child(explosion)
 
 func obtain_resources() -> void:
 	play_mining_sfx()
-	var drone_damage : int = GameManager.platinum_drone_damage
+	var drone_damage : int = GameManager.platinum_drone_damage + damage_modifier
 
 	GameManager.platinum_count += drone_damage
 	
@@ -72,7 +79,6 @@ func obtain_resources() -> void:
 		
 	if !GameManager.upgrade_platinum_drone_speed:
 		SignalBus.add_to_submission_counter.emit(drone_damage, GameManager.CHECK_LIST_INDICATOR_TOGGLES.UPGRADE_PLATINUM_DRONE_SPEED)
-	
 	
 	
 	var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
@@ -140,7 +146,6 @@ func change_to_move_state(selected_drone, destination : Vector2):
 	if self == selected_drone:
 		navigation_coordinates = destination
 		state_machine.change_state(move)
-
 
 func increase_max_health() -> void:
 	max_health += GameManager.drone_max_health
