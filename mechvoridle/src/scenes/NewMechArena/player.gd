@@ -21,6 +21,10 @@ var plain_y := 0.0
 
 
 func _ready() -> void:
+	var debug_arrow = MeshInstance3D.new()
+	debug_arrow.mesh = ImmediateMesh.new()
+	debug_arrow.transform = Transform3D(Basis(), Vector3(0, 0, -2)) # forward
+	add_child(debug_arrow)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CA)
 	state_machine.init(self)
 
@@ -73,18 +77,13 @@ func get_yaw_difference() -> float:
 
 
 func fire_bullet() -> void:
-	# Load and instantiate bullet
 	var plasma_bullet : PlasmaBullet = preload("uid://b712bpq5ut01h").instantiate()
 	
-	# Position and rotate the bullet at the muzzle
-	plasma_bullet.global_transform.origin = muzzle.global_transform.origin
+	# Copy full transform from muzzle
+	plasma_bullet.global_transform = muzzle.global_transform
 	
-	var rot_y = rifle_1.rotation.y
-	var forward = Vector3(-sin(rot_y),0,-cos(rot_y))
-	forward = forward.normalized()
+	# Use muzzle forward as bullet direction
+	plasma_bullet.direction = -muzzle.global_transform.basis.z
 	
-	# Set direction along the muzzle's forward (-Z)
-	plasma_bullet.direction = forward
-	
-	# Add the bullet to the scene
+	# Add to scene root
 	get_tree().current_scene.add_child(plasma_bullet)

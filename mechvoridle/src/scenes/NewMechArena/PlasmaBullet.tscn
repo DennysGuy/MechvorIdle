@@ -7,9 +7,10 @@
 script = ExtResource("1_d4vlx")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_dvmwp")]
-transform = Transform3D(-0.068015285, 0, -0.9976843, 0, 1, 0, 0.9976843, 0, -0.068015285, 0.0022307336, 0, 0.0008844137)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
+process_callback = 0
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
