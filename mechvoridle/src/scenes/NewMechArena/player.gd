@@ -30,6 +30,11 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	
+	var upper_body_angle = atan2(upper_body.global_transform.basis.z.x, upper_body.global_transform.basis.z.z)
+	var lower_body_angle = atan2(lower_body.global_transform.basis.z.x, lower_body.global_transform.basis.z.z)
+	var diff = round(wrapf(upper_body_angle - lower_body_angle, -PI, PI))
+	print("angle diff with up and low: " +str(diff))
+	
 	if Input.is_action_pressed("mine_asteroid"):
 		animation_player_right_arm.play("FireRifle")
 	

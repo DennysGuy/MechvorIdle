@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://ndyowiskl40a"]
+
+[ext_resource type="Script" uid="uid://cerwbqtrq8wmd" path="res://src/scenes/MechArenaScene/play_ground.gd" id="1_tx0pd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tx0pd"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_a7lil"]
+sky_material = SubResource("ProceduralSkyMaterial_tx0pd")
+
+[sub_resource type="Environment" id="Environment_013t8"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_a7lil")
+ambient_light_source = 3
+ambient_light_energy = 3.5
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fih5l"]
+albedo_color = Color(0.23887148, 0.3464196, 0.807729, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tx0pd"]
+albedo_color = Color(0.7613956, 0.34975803, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7lil"]
+albedo_color = Color(2.6471912e-06, 0.6940283, 0.2958932, 1)
+
+[node name="PlayGround" type="Node3D"]
+script = ExtResource("1_tx0pd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_013t8")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.81834036, 0.574734, 0, -0.574734, 0.81834036, -1.8600769, 8.520935, 9.44999)
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1637268, -0.3491211, -0.7821791)
+material_override = SubResource("StandardMaterial3D_fih5l")
+use_collision = true
+size = Vector3(20.097229, 0.3017578, 18.99176)
+
+[node name="Coob" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2857046, 0, 4.0222607)
+
+[node name="Body" type="Node3D" parent="Coob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619704, 0)
+
+[node name="Face" type="CSGCylinder3D" parent="Coob/Body"]
+transform = Transform3D(0.9999546, 9.1806396e-05, 0.009528911, -0.009529354, 0.009633627, 0.99990827, 0, -0.9999537, 0.0096340645, 0.010304928, -0.004944086, 0.26229286)
+material_override = SubResource("StandardMaterial3D_tx0pd")
+radius = 0.39892578
+height = 0.9736328
+
+[node name="Body" type="CSGBox3D" parent="Coob/Body"]
+material_override = SubResource("StandardMaterial3D_a7lil")
+use_collision = true
+
+[node name="Coob2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.812, 0, -6.639)
+
+[node name="Body" type="Node3D" parent="Coob2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619704, 0)
+
+[node name="Face" type="CSGCylinder3D" parent="Coob2/Body"]
+transform = Transform3D(0.9999546, 9.1806396e-05, 0.009528911, -0.009529354, 0.009633627, 0.99990827, 0, -0.9999537, 0.0096340645, 0.010305047, -0.004944086, -0.16456878)
+material_override = SubResource("StandardMaterial3D_tx0pd")
+radius = 0.39892578
+height = 0.9736328
+
+[node name="Body" type="CSGBox3D" parent="Coob2/Body"]
+material_override = SubResource("StandardMaterial3D_a7lil")
+use_collision = true
+
+[node name="Globe" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35534477, 2.411573, -0.8252497)
+radius = 1.2296832
