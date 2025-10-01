@@ -6,7 +6,10 @@ class_name PlayerRun extends State
 @export var rotation_speed = 6.0
 @export var movement_speed = 4.0
 
-@onready var node: Node3D = $"../../Mech/Node"
+@export var snap_threshold = deg_to_rad(180) # legs catch up if torso is >45° off
+@export var snap_speed = 8.0 # how fast legs snap to torso
+
+@onready var node: Node3D = $"../../mech/Node"
 
 
 func enter() -> void:
@@ -21,6 +24,10 @@ func process_input(_event: InputEvent) -> State:
 
 func process_physics(_delta: float) -> State:
 
+	
+			
+
+
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
@@ -29,9 +36,10 @@ func process_physics(_delta: float) -> State:
 		parent.velocity.x = direction.x * movement_speed
 		parent.velocity.z = direction.z * movement_speed
 
-		# Rotate mech smoothly toward movement direction
+
 		var target = Transform3D().looking_at(direction, Vector3.UP).basis
-		node.basis = node.basis.slerp(target, rotation_speed * _delta)
+		parent.lower_body.basis = parent.lower_body.basis.slerp(target, rotation_speed * _delta)
+
 
 	else:
 		# No input, stop movement
@@ -39,7 +47,12 @@ func process_physics(_delta: float) -> State:
 		parent.velocity.z = move_toward(parent.velocity.z, 0, movement_speed)
 		return idle_state
 
+	
 	# Apply movement
-	parent.move_and_slide()
+	#parent.move_and_slide()
 	
 	return null
+
+func get_yaw_difference() -> float:
+	var angle_diff = wrapf(parent.upper_body.rotation.y - parent.lower_body.rotation.y, -PI, PI)
+	return angle_diff

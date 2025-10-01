@@ -2,24 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ocmpjksvpdbg"
-path.s3tc="res://.godot/imported/PlayerCharacter_4.png-aa41a3a4bd1774934437f80e1ee4fe0e.s3tc.ctex"
+uid="uid://cdmsicrqvbnwa"
+path="res://.godot/imported/PlasmaBullet.png-b3b9635bca32a8e6d1e70ff2c0904c33.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
-}
-generator_parameters={
-"md5": "0d3e709a689c3bf8b50bbc2550dadf1a"
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/Models/PlayerMech/PlayerCharacter_4.png"
-dest_files=["res://.godot/imported/PlayerCharacter_4.png-aa41a3a4bd1774934437f80e1ee4fe0e.s3tc.ctex"]
+source_file="res://assets/graphics/Models/PlayerMech/PlasmaBullet.png"
+dest_files=["res://.godot/imported/PlasmaBullet.png-b3b9635bca32a8e6d1e70ff2c0904c33.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -27,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -41,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

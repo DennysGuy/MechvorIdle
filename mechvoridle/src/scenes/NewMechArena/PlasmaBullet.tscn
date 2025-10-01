@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b712bpq5ut01h"]
+
+[ext_resource type="Script" uid="uid://eglp4s46s403" path="res://src/scripts/Weapons/plasma_bullet.gd" id="1_d4vlx"]
+[ext_resource type="PackedScene" uid="uid://bnmacq03r7rxq" path="res://assets/graphics/Models/PlayerMech/PlasmaBullet.gltf" id="1_dvmwp"]
+
+[node name="Node3D" type="Area3D"]
+script = ExtResource("1_d4vlx")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_dvmwp")]
+transform = Transform3D(-0.068015285, 0, -0.9976843, 0, 1, 0, 0.9976843, 0, -0.068015285, 0.0022307336, 0, 0.0008844137)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

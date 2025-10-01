@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ocmpjksvpdbg"
-path.s3tc="res://.godot/imported/PlayerCharacter_4.png-aa41a3a4bd1774934437f80e1ee4fe0e.s3tc.ctex"
+uid="uid://dwulrth4741ib"
+path.s3tc="res://.godot/imported/RangedArmsAnimations_0.png-1ff53468f5f24604bba4bdc7b3b4035d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "0d3e709a689c3bf8b50bbc2550dadf1a"
+"md5": "6c4eace55d8a0ce15120099fb47bfddd"
 }
 
 [deps]
 
-source_file="res://assets/graphics/Models/PlayerMech/PlayerCharacter_4.png"
-dest_files=["res://.godot/imported/PlayerCharacter_4.png-aa41a3a4bd1774934437f80e1ee4fe0e.s3tc.ctex"]
+source_file="res://assets/graphics/Models/PlayerMech/RangedArmsAnimations_0.png"
+dest_files=["res://.godot/imported/RangedArmsAnimations_0.png-1ff53468f5f24604bba4bdc7b3b4035d.s3tc.ctex"]
 
 [params]
 
