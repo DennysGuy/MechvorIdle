@@ -15,7 +15,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @onready var camera: Camera3D = $Camera3D
-
+var threshold = PI * 2.0 / 4.0  # 120 degrees
 
 var plain_y := 0.0
 
@@ -74,9 +74,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 
-func get_yaw_difference() -> float:
-	var angle_diff = wrapf(upper_body.rotation.y - lower_body.rotation.y, -PI, PI)
-	return angle_diff
+func get_yaw(obj: Node3D) -> float:
+	var forward = obj.global_transform.basis.z
+	return atan2(forward.x, forward.z)  # radians, -PI..PI
 	
 @onready var rifle_1: Node3D = $mech/Node/UpperBody/RangedArmAnime/Node/RangedArm/Shoulder2/Bicep/ForeArm3/Hand2/Rifle1
 

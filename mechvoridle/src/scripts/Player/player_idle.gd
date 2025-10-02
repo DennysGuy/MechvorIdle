@@ -15,6 +15,7 @@ var entity_to_rotate: Node3D = null
 var start_rotation = false
 
 
+
 func enter() -> void:
 	parent.animation_player.play("Idle")
 	parent.velocity.x = 0
@@ -33,6 +34,15 @@ func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
+	
+	var torso_yaw = parent.get_yaw(parent.upper_body)
+	var legs_yaw = parent.get_yaw(parent.lower_body)
+	
+	var diff = wrapf(legs_yaw-torso_yaw, -PI, PI)
+
+	if abs(diff) > parent.threshold:
+		parent.lower_body.rotation.y = torso_yaw
+	
 	parent.move_and_slide()
 	return null
 

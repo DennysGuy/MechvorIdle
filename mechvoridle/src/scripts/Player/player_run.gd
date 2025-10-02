@@ -24,10 +24,6 @@ func process_input(_event: InputEvent) -> State:
 
 func process_physics(_delta: float) -> State:
 
-	
-			
-
-
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
@@ -39,7 +35,6 @@ func process_physics(_delta: float) -> State:
 
 		var target = Transform3D().looking_at(direction, Vector3.UP).basis
 		parent.lower_body.basis = parent.lower_body.basis.slerp(target, rotation_speed * _delta)
-
 
 	else:
 		# No input, stop movement
