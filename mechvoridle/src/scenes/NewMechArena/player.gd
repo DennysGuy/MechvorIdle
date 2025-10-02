@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $mech/AnimationPlayer

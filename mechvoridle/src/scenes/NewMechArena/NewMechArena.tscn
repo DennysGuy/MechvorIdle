@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4uv74bbkc1mf"]
+[gd_scene load_steps=12 format=3 uid="uid://b4uv74bbkc1mf"]
 
 [ext_resource type="PackedScene" uid="uid://djx1fnscwbsq7" path="res://src/scenes/NewMechArena/Player.tscn" id="1_3x2wj"]
+[ext_resource type="Script" uid="uid://bacgajuwh7jjw" path="res://src/scripts/NewMechArena/new_mech_arena.gd" id="1_q7squ"]
 [ext_resource type="Texture2D" uid="uid://dykxctfnltl2x" path="res://assets/graphics/keycards1.png" id="2_nl58l"]
+[ext_resource type="PackedScene" uid="uid://bt4ei12ve4hs1" path="res://src/scenes/NewMechArena/BasicEnemy1.tscn" id="3_dgxjv"]
 [ext_resource type="Texture2D" uid="uid://cii64bvrcldlo" path="res://assets/graphics/keycards2.png" id="3_q7squ"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3x2wj"]
@@ -28,7 +30,9 @@ size = Vector3(2, 5, 65)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vmfun"]
 size = Vector3(2, 5, 90)
 
-[node name="NewMechArena" type="Node3D"]
+[node name="NewMechArena" type="Node3D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_q7squ")
+player = NodePath("Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nl58l")
@@ -66,6 +70,18 @@ shape = SubResource("BoxShape3D_vmfun")
 
 [node name="Player" parent="." instance=ExtResource("1_3x2wj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59571743, 0)
+
+[node name="BasicEnemy1" parent="." instance=ExtResource("3_dgxjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.88903, 3.1493044, 4.3199387)
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("3_dgxjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.609035, 3.1493044, 4.3199387)
+
+[node name="BasicEnemy3" parent="." instance=ExtResource("3_dgxjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.609035, 3.1493044, -30.949276)
+
+[node name="BasicEnemy4" parent="." instance=ExtResource("3_dgxjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.746723, 3.1493044, -30.949276)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

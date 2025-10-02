@@ -43,6 +43,7 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 AlertPanes=""
 "Mining Laser Progress Bar"=""
 DestinationMarkers=""
+Player=""
 
 [input]
 

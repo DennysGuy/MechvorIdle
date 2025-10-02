@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt4ei12ve4hs1"]
+
+[ext_resource type="Script" uid="uid://bc7h63ynseo1y" path="res://src/scripts/NewMechArena/basic_enemy_1.gd" id="1_hgrwr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hgrwr"]
+albedo_color = Color(0.8236535, 0, 0.16633514, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hgrwr"]
+radius = 0.84444016
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0itu5"]
+radius = 1.0555477
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v638q"]
+radius = 0.70571345
+
+[node name="BasicEnemy1" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5316087, 0)
+script = ExtResource("1_hgrwr")
+enemy_name = "Ball Man"
+health = 3
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+
+[node name="Body" type="CSGSphere3D" parent="Node3D"]
+material_override = SubResource("StandardMaterial3D_hgrwr")
+
+[node name="Eyes" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.020006299, 0.13268489, -0.4041009)
+radius = 0.21240234
+height = 0.22024536
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_hgrwr")
+
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_0itu5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+shape = SubResource("SphereShape3D_v638q")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hit_box_body_entered"]

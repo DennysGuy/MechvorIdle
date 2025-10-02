@@ -2679,7 +2679,7 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mj3g6"]
 height = 2.2612305
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_y8kuc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -2843,7 +2843,7 @@ mesh = SubResource("ArrayMesh_b5pom")
 skeleton = NodePath("")
 
 [node name="ForeArm22" type="Node3D" parent="mech/Node/UpperBody/RangedArm2/Shoulder22/Bicep2"]
-transform = Transform3D(0.13052621, 0.99144465, 0, -0.99144465, 0.13052621, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
+transform = Transform3D(0.13052621, 0.9914446, 0, -0.9914446, 0.13052621, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
 
 [node name="ForeArm4" type="MeshInstance3D" parent="mech/Node/UpperBody/RangedArm2/Shoulder22/Bicep2/ForeArm22"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041015625, -0.2278975, 0.00121875)
@@ -2970,7 +2970,7 @@ libraries = {
 transform = Transform3D(0.9848076, 0, 0.17364827, 0, 1, 0, -0.17364827, 0, 0.9848076, 0, 1.25, -0.125)
 
 [node name="UpperLeg3" type="Node3D" parent="mech/Node/LowerBody/Leg"]
-transform = Transform3D(0.99904823, -0.04361913, 0, 0.04361913, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
+transform = Transform3D(0.99904823, -0.043619107, 0, 0.043619107, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
 
 [node name="HipJoint" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg/UpperLeg3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, -0.115625)
@@ -3040,7 +3040,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.84339154, 0, 0.5372992, 0, 1, 0, -0.5372992, 0, 0.84339154, 0, 1.25, 0.125)
 
 [node name="UpperLeg2" type="Node3D" parent="mech/Node/LowerBody/Leg2"]
-transform = Transform3D(0.99904823, -0.04361913, 0, 0.04361913, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
+transform = Transform3D(0.99904823, -0.043619107, 0, 0.043619107, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
 
 [node name="HipJoint2" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg2/UpperLeg2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, 0.115625)
