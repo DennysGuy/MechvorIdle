@@ -18,6 +18,8 @@ var can_aim : bool = true
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+@export var health : int
+
 @onready var camera: Camera3D = $Camera3D
 var threshold = PI * 2.0 / 4.0  # 120 degrees
 

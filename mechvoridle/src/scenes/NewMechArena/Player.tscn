@@ -3015,6 +3015,7 @@ height = 2.2612305
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_y8kuc")
+health = 5000
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6521249, 0.7581116, 0, -0.7581116, 0.6521249, -0.2766775, 7.991624, 5.872187)
@@ -3304,7 +3305,7 @@ libraries = {
 transform = Transform3D(0.9848075, 0, 0.17364825, 0, 1.0000001, 0, -0.17364822, 0, 0.9848076, 0, 1.25, -0.125)
 
 [node name="UpperLeg3" type="Node3D" parent="mech/Node/LowerBody/Leg"]
-transform = Transform3D(0.99904823, -0.043619014, 0, 0.043619014, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
+transform = Transform3D(0.99904823, -0.043618996, 0, 0.043618996, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
 
 [node name="HipJoint" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg/UpperLeg3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, -0.115625)
@@ -3374,7 +3375,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.9972809, 0, -0.073690645, 0, 1, 0, 0.07369064, 0, 0.997281, 0, 1.25, 0.125)
 
 [node name="UpperLeg2" type="Node3D" parent="mech/Node/LowerBody/Leg2"]
-transform = Transform3D(0.99904823, -0.043619014, 0, 0.043619014, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
+transform = Transform3D(0.99904823, -0.043618996, 0, 0.043618996, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
 
 [node name="HipJoint2" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg2/UpperLeg2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, 0.115625)
