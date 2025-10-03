@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt4ei12ve4hs1"]
+[gd_scene load_steps=9 format=3 uid="uid://h5k1s4ux6fdg"]
 
 [ext_resource type="Script" uid="uid://bc7h63ynseo1y" path="res://src/scripts/NewMechArena/basic_enemy_1.gd" id="1_hgrwr"]
 
@@ -9,16 +9,53 @@ albedo_color = Color(0.8236535, 0, 0.16633514, 1)
 radius = 0.84444016
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0itu5"]
-radius = 1.0555477
+radius = 0.71058977
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v638q"]
 radius = 0.70571345
+
+[sub_resource type="Animation" id="Animation_hgrwr"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.92039025, 0), Vector3(0, -0.02323711, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v638q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.92039025, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0itu5"]
+_data = {
+&"RESET": SubResource("Animation_v638q"),
+&"bob": SubResource("Animation_hgrwr")
+}
 
 [node name="BasicEnemy1" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5316087, 0)
 script = ExtResource("1_hgrwr")
 enemy_name = "Ball Man"
-health = 3
+health = 2
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
@@ -48,6 +85,11 @@ shape = SubResource("SphereShape3D_0itu5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
 shape = SubResource("SphereShape3D_v638q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0itu5")
+}
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hit_box_body_entered"]

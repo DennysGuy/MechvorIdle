@@ -11,6 +11,10 @@ class_name Player extends CharacterBody3D
 
 @onready var muzzle: Marker3D = $mech/Node/UpperBody/RangedArmAnime/Node/RangedArm/Shoulder2/Bicep/ForeArm3/Hand2/Rifle1/Muzzle
 
+var prev_dir : Vector3 = Vector3.ZERO
+
+var can_aim : bool = true
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -33,31 +37,33 @@ func _process(delta) -> void:
 	var upper_body_angle = atan2(upper_body.global_transform.basis.z.x, upper_body.global_transform.basis.z.z)
 	var lower_body_angle = atan2(lower_body.global_transform.basis.z.x, lower_body.global_transform.basis.z.z)
 	var diff = round(wrapf(upper_body_angle - lower_body_angle, -PI, PI))
-	print("angle diff with up and low: " +str(diff))
+	#print("angle diff with up and low: " +str(diff))
 	
 	if Input.is_action_pressed("mine_asteroid"):
 		animation_player_right_arm.play("FireRifle")
 	
 	var mouse_pos = get_viewport().get_mouse_position()
 
-	# Cast ray from camera through mouse
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_dir = camera.project_ray_normal(mouse_pos)
 
-	# Intersect with Y = 0 plane (the ground)
-	var plane_y = 0.0
-	if abs(ray_dir.y) > 0.001: # avoid divide by zero
-		var t = (plane_y - ray_origin.y) / ray_dir.y
-		if t > 0:
-			var target_pos = ray_origin + ray_dir * t
+	if can_aim:
+		# Cast ray from camera through mouse
+		var ray_origin = camera.project_ray_origin(mouse_pos)
+		var ray_dir = camera.project_ray_normal(mouse_pos)
 
-			# Rotate character toward the mouse
-			var direction = target_pos - global_transform.origin
-			direction.y = 0
-			direction = direction.normalized()
+		# Intersect with Y = 0 plane (the ground)
+		var plane_y = 0.0
+		if abs(ray_dir.y) > 0.001: # avoid divide by zero
+			var t = (plane_y - ray_origin.y) / ray_dir.y
+			if t > 0:
+				var target_pos = ray_origin + ray_dir * t
 
-			var target_rotation = atan2(direction.x, direction.z)
-			upper_body.rotation.y = target_rotation + PI
+				# Rotate character toward the mouse
+				var direction = target_pos - global_transform.origin
+				direction.y = 0
+				direction = direction.normalized()
+
+				var target_rotation = atan2(direction.x, direction.z)
+				upper_body.rotation.y = target_rotation + PI
 	
 	state_machine.process_frame(delta)
 	

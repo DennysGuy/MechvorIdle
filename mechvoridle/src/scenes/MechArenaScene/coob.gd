@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 	var z = sin(angle) * radius
 	
 	
-	
 	var bob = sin(time_passed * frequency) * amplitude
 	globe.global_transform.origin.y = 2.0 + bob
 	

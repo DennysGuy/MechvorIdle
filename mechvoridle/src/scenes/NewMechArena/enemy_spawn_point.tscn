@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3eo84argrune"]
+
+[ext_resource type="Script" uid="uid://jqned8af6vi7" path="res://src/scripts/NewMechArena/enemy_spawn_point.gd" id="1_lg16a"]
+
+[node name="EnemySpawnPoint" type="Marker3D"]
+script = ExtResource("1_lg16a")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

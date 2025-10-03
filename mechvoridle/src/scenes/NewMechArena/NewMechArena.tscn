@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4uv74bbkc1mf"]
+[gd_scene load_steps=13 format=3 uid="uid://b4uv74bbkc1mf"]
 
 [ext_resource type="PackedScene" uid="uid://djx1fnscwbsq7" path="res://src/scenes/NewMechArena/Player.tscn" id="1_3x2wj"]
 [ext_resource type="Script" uid="uid://bacgajuwh7jjw" path="res://src/scripts/NewMechArena/new_mech_arena.gd" id="1_q7squ"]
 [ext_resource type="Texture2D" uid="uid://dykxctfnltl2x" path="res://assets/graphics/keycards1.png" id="2_nl58l"]
-[ext_resource type="PackedScene" uid="uid://bt4ei12ve4hs1" path="res://src/scenes/NewMechArena/BasicEnemy1.tscn" id="3_dgxjv"]
+[ext_resource type="PackedScene" uid="uid://h5k1s4ux6fdg" path="res://src/scenes/NewMechArena/BasicEnemy1.tscn" id="3_dgxjv"]
 [ext_resource type="Texture2D" uid="uid://cii64bvrcldlo" path="res://assets/graphics/keycards2.png" id="3_q7squ"]
+[ext_resource type="PackedScene" uid="uid://c3eo84argrune" path="res://src/scenes/NewMechArena/enemy_spawn_point.tscn" id="5_adyan"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3x2wj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -33,12 +34,13 @@ size = Vector3(2, 5, 90)
 [node name="NewMechArena" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_q7squ")
 player = NodePath("Player")
+room_enemy_cap = 10
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nl58l")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94066143, 0, -6.808606)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94066143, 0.0058692694, -6.808606)
 material_override = SubResource("StandardMaterial3D_b1d8n")
 use_collision = true
 size = Vector3(80.70758, 1, 62.25917)
@@ -70,18 +72,6 @@ shape = SubResource("BoxShape3D_vmfun")
 
 [node name="Player" parent="." instance=ExtResource("1_3x2wj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59571743, 0)
-
-[node name="BasicEnemy1" parent="." instance=ExtResource("3_dgxjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.88903, 3.1493044, 4.3199387)
-
-[node name="BasicEnemy2" parent="." instance=ExtResource("3_dgxjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.609035, 3.1493044, 4.3199387)
-
-[node name="BasicEnemy3" parent="." instance=ExtResource("3_dgxjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.609035, 3.1493044, -30.949276)
-
-[node name="BasicEnemy4" parent="." instance=ExtResource("3_dgxjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.746723, 3.1493044, -30.949276)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -231,3 +221,25 @@ text = "LFE Steal: 5%"
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "LFE STL CHNCE: 5%"
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="EnemySpawnPoint" parent="." instance=ExtResource("5_adyan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.852, 1.5, 19.943)
+enemy = ExtResource("3_dgxjv")
+set_time = 5.0
+
+[node name="EnemySpawnPoint2" parent="." instance=ExtResource("5_adyan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 1.5, 19.943)
+enemy = ExtResource("3_dgxjv")
+set_time = 10.0
+
+[node name="EnemySpawnPoint3" parent="." instance=ExtResource("5_adyan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 1.5, -32.68)
+enemy = ExtResource("3_dgxjv")
+set_time = 8.0
+
+[node name="EnemySpawnPoint4" parent="." instance=ExtResource("5_adyan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.288, 1.5, -32.68)
+enemy = ExtResource("3_dgxjv")
+set_time = 7.0

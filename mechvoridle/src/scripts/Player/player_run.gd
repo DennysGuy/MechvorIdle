@@ -2,7 +2,7 @@ class_name PlayerRun extends State
 
 
 @export var idle_state: State
-
+@export var dash_state : State
 @export var rotation_speed = 6.0
 @export var movement_speed = 4.0
 
@@ -10,6 +10,7 @@ class_name PlayerRun extends State
 @export var snap_speed = 8.0 # how fast legs snap to torso
 
 @onready var node: Node3D = $"../../mech/Node"
+
 
 
 func enter() -> void:
@@ -20,6 +21,10 @@ func exit() -> void:
 
 func process_input(_event: InputEvent) -> State:
 	
+	if Input.is_action_just_pressed("give_ferrite_bars"):
+		print("YOMO")
+		return dash_state
+	
 	return null
 
 func process_physics(_delta: float) -> State:
@@ -28,6 +33,7 @@ func process_physics(_delta: float) -> State:
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
 	if direction != Vector3.ZERO:
+		parent.prev_dir = (parent.global_transform.basis * direction).normalized()
 		# Set velocity in the direction of movement
 		parent.velocity.x = direction.x * movement_speed
 		parent.velocity.z = direction.z * movement_speed
