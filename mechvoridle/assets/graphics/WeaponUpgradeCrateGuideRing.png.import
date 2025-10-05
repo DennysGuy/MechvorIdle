@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dykxctfnltl2x"
-path.s3tc="res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"
+uid="uid://cw0yt04p22l4y"
+path.s3tc="res://.godot/imported/WeaponUpgradeCrateGuideRing.png-fcbd040e9df4e8169a679e4d8eb76264.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/graphics/keycards1.png"
-dest_files=["res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"]
+source_file="res://assets/graphics/WeaponUpgradeCrateGuideRing.png"
+dest_files=["res://.godot/imported/WeaponUpgradeCrateGuideRing.png-fcbd040e9df4e8169a679e4d8eb76264.s3tc.ctex"]
 
 [params]
 

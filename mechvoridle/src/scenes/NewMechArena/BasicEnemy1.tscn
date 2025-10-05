@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://h5k1s4ux6fdg"]
+[gd_scene load_steps=10 format=3 uid="uid://h5k1s4ux6fdg"]
 
 [ext_resource type="Script" uid="uid://bc7h63ynseo1y" path="res://src/scripts/NewMechArena/basic_enemy_1.gd" id="1_hgrwr"]
+[ext_resource type="Texture2D" uid="uid://ixdf3ts5t2d4" path="res://assets/graphics/Shadow.png" id="2_v638q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hgrwr"]
 albedo_color = Color(0.8236535, 0, 0.16633514, 1)
@@ -13,6 +14,21 @@ radius = 0.71058977
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v638q"]
 radius = 0.70571345
+
+[sub_resource type="Animation" id="Animation_v638q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.92039025, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_hgrwr"]
 resource_name = "bob"
@@ -28,21 +44,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0.92039025, 0), Vector3(0, -0.02323711, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_v638q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.92039025, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0itu5"]
@@ -69,13 +70,13 @@ radius = 0.21240234
 height = 0.22024536
 
 [node name="HitBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3423826, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("SphereShape3D_hgrwr")
 
 [node name="HurtBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92039025, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7385534, 0)
 collision_layer = 2
 collision_mask = 2
 
@@ -90,6 +91,11 @@ shape = SubResource("SphereShape3D_v638q")
 libraries = {
 &"": SubResource("AnimationLibrary_0itu5")
 }
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.58588696, 0, 0, 0, -2.8778501e-08, -1, 0, 0.6583754, -4.371139e-08, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.7019608)
+texture = ExtResource("2_v638q")
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hit_box_body_entered"]

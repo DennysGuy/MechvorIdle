@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4uv74bbkc1mf"]
+[gd_scene load_steps=14 format=3 uid="uid://b4uv74bbkc1mf"]
 
 [ext_resource type="PackedScene" uid="uid://djx1fnscwbsq7" path="res://src/scenes/NewMechArena/Player.tscn" id="1_3x2wj"]
 [ext_resource type="Script" uid="uid://bacgajuwh7jjw" path="res://src/scripts/NewMechArena/new_mech_arena.gd" id="1_q7squ"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://h5k1s4ux6fdg" path="res://src/scenes/NewMechArena/BasicEnemy1.tscn" id="3_dgxjv"]
 [ext_resource type="Texture2D" uid="uid://cii64bvrcldlo" path="res://assets/graphics/keycards2.png" id="3_q7squ"]
 [ext_resource type="PackedScene" uid="uid://c3eo84argrune" path="res://src/scenes/NewMechArena/enemy_spawn_point.tscn" id="5_adyan"]
+[ext_resource type="PackedScene" uid="uid://bdorcyo6gy8iy" path="res://src/scenes/NewMechArena/UpgradeCrateSpawnPoint.tscn" id="7_jxxyl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3x2wj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -135,17 +136,25 @@ theme_override_font_sizes/font_size = 11
 text = "Survival Timer: 4:59"
 
 [node name="WeaponKeyCardCount" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 38.0
-offset_top = 296.0
+offset_top = -63.0
 offset_right = 57.0
-offset_bottom = 319.0
+offset_bottom = -40.0
+grow_vertical = 0
 text = "0"
 
 [node name="SuitKeyCardCount" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 38.0
-offset_top = 327.0
+offset_top = -33.0
 offset_right = 57.0
-offset_bottom = 350.0
+offset_bottom = -10.0
+grow_vertical = 0
 text = "0"
 
 [node name="StatsPanel" type="Panel" parent="UI"]
@@ -224,22 +233,49 @@ text = "LFE STL CHNCE: 5%"
 
 [node name="Enemies" type="Node" parent="."]
 
+[node name="UpgradeCrates" type="Node" parent="."]
+
+[node name="KeyCards" type="Node" parent="."]
+
 [node name="EnemySpawnPoint" parent="." instance=ExtResource("5_adyan")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.852, 1.5, 19.943)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.852, 0.9765439, 19.943)
 enemy = ExtResource("3_dgxjv")
 set_time = 5.0
 
 [node name="EnemySpawnPoint2" parent="." instance=ExtResource("5_adyan")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 1.5, 19.943)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 0.8918214, 19.943)
 enemy = ExtResource("3_dgxjv")
 set_time = 10.0
 
 [node name="EnemySpawnPoint3" parent="." instance=ExtResource("5_adyan")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 1.5, -32.68)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.007, 0.3896942, -32.68)
 enemy = ExtResource("3_dgxjv")
 set_time = 8.0
 
 [node name="EnemySpawnPoint4" parent="." instance=ExtResource("5_adyan")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.288, 1.5, -32.68)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.288, 0.5588603, -32.68)
 enemy = ExtResource("3_dgxjv")
 set_time = 7.0
+
+[node name="UpgradeSpawnPoints" type="Node" parent="."]
+
+[node name="UpgradeSpawnPoint1" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079, 0.74098754, 17.747)
+
+[node name="UpgradeSpawnPoint2" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.070572, 1.088718, 10.104208)
+
+[node name="UpgradeSpawnPoint3" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0770283, 0.9271097, 7.9169636)
+
+[node name="UpgradeSpawnPoint4" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.546787, 1.0230451, -1.9010258)
+
+[node name="UpgradeSpawnPoint5" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.28873, 1.1329355, -32.627647)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 15.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

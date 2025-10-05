@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3h4wwpn4ns2c"]
+
+[ext_resource type="Script" uid="uid://bnpcdtceqck7v" path="res://src/scripts/NewMechArena/suit_upgrade_guide.gd" id="1_srlxp"]
+[ext_resource type="Texture2D" uid="uid://cob2pf6buevso" path="res://assets/graphics/SuitUpgradeCrateGuideRing.png" id="1_titbc"]
+
+[node name="SuitUpgradeGuidePivotPoint" type="Node3D"]
+transform = Transform3D(1.014062, 0, 0, 0, 0.99999976, 0, 0, 0, 0.98653513, 0, 0, 0)
+script = ExtResource("1_srlxp")
+
+[node name="SuitUpgradeGuide" type="Sprite3D" parent="."]
+transform = Transform3D(1.0140622, 0, 0, 0, -4.43734e-08, -2.7650006, 0, 1.0151451, -1.2086201e-07, -0.00022435188, 8.881786e-16, -0.3341288)
+modulate = Color(1, 1, 1, 0.6117647)
+texture = ExtResource("1_titbc")

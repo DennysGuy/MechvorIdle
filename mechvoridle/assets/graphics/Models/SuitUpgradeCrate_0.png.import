@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dykxctfnltl2x"
-path.s3tc="res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"
+uid="uid://u0av8autouj3"
+path.s3tc="res://.godot/imported/SuitUpgradeCrate_0.png-f5a7bea36c89286b03bd0df6c1acbacd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "187ae31b1d959a1cadb937342f47c45a"
+}
 
 [deps]
 
-source_file="res://assets/graphics/keycards1.png"
-dest_files=["res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"]
+source_file="res://assets/graphics/Models/SuitUpgradeCrate_0.png"
+dest_files=["res://.godot/imported/SuitUpgradeCrate_0.png-f5a7bea36c89286b03bd0df6c1acbacd.s3tc.ctex"]
 
 [params]
 

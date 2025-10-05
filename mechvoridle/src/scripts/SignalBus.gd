@@ -287,3 +287,23 @@ signal update_asteroid_panel_data(asteroid_area : AsteroidArea, asteroid_index :
 
 @warning_ignore("unused_signal")
 signal purchase_asteroid(asteroid_area : AsteroidArea)
+
+@warning_ignore("unused_signal")
+signal init_weapon_upgrade_guide(crate : UpgradeCrate)
+@warning_ignore("unused_signal")
+signal disable_weapon_upgrade_guide
+
+@warning_ignore("unused_signal")
+signal init_suit_upgrade_guide(crate : UpgradeCrate)
+@warning_ignore("unused_signal")
+signal disable_suit_upgrade_guide
+@warning_ignore("unused_signal")
+signal check_for_more_crates(crate : UpgradeCrate)
+
+@warning_ignore("unused_signal")
+signal check_once_for_weapon_crates(crate : UpgradeCrate)
+
+@warning_ignore("unused_signal")
+signal check_once_for_suit_crates(crate : UpgradeCrate)
+@warning_ignore("unused_signal")
+signal update_key_card_counts

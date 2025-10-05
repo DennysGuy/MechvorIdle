@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdorcyo6gy8iy"]
+
+[ext_resource type="Script" uid="uid://c01gei7vqy52w" path="res://src/scripts/NewMechArena/upgrade_crate_spawn_point.gd" id="1_0tfpj"]
+
+[node name="UpgradeCrateSpawnPoint" type="Marker3D"]
+script = ExtResource("1_0tfpj")

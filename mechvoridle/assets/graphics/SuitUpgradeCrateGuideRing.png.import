@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dykxctfnltl2x"
-path.s3tc="res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"
+uid="uid://cob2pf6buevso"
+path.s3tc="res://.godot/imported/SuitUpgradeCrateGuideRing.png-713202222d031713c0de25d4f05367d4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/graphics/keycards1.png"
-dest_files=["res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"]
+source_file="res://assets/graphics/SuitUpgradeCrateGuideRing.png"
+dest_files=["res://.godot/imported/SuitUpgradeCrateGuideRing.png-713202222d031713c0de25d4f05367d4.s3tc.ctex"]
 
 [params]
 

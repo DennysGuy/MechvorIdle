@@ -15,7 +15,7 @@ var radius := 3.0
 @onready var node_3d: Node3D = $Node3D
 
 func _ready() -> void:
-	animation_player.play("bob")
+	#animation_player.play("bob")
 	player = get_tree().get_first_node_in_group("Player")
 	super()
 

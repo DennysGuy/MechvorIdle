@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dykxctfnltl2x"
-path.s3tc="res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"
+uid="uid://bc0l1203q6ani"
+path.s3tc="res://.godot/imported/WeaponUpgradeCrate_0.png-7dd4ceb06d2670faa6817702d3727765.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "866eecd40531b4242476871dd34700c8"
+}
 
 [deps]
 
-source_file="res://assets/graphics/keycards1.png"
-dest_files=["res://.godot/imported/keycards1.png-5e59ff1736a578370499d38f003f9c6b.s3tc.ctex"]
+source_file="res://assets/graphics/Models/WeaponUpgradeCrate_0.png"
+dest_files=["res://.godot/imported/WeaponUpgradeCrate_0.png-7dd4ceb06d2670faa6817702d3727765.s3tc.ctex"]
 
 [params]
 
