@@ -264,15 +264,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079, 0.74098754, 17.747)
 
 [node name="UpgradeSpawnPoint2" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.070572, 1.088718, 10.104208)
+id = 1
 
 [node name="UpgradeSpawnPoint3" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0770283, 0.9271097, 7.9169636)
+id = 2
 
 [node name="UpgradeSpawnPoint4" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.546787, 1.0230451, -1.9010258)
+id = 3
 
 [node name="UpgradeSpawnPoint5" parent="UpgradeSpawnPoints" instance=ExtResource("7_jxxyl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.28873, 1.1329355, -32.627647)
+id = 4
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

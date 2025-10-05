@@ -6,6 +6,7 @@ class_name UpgradeCrate extends Node3D
 
 enum CRATE_TYPES {WEAPON, SUIT}
 var crate_type :int
+var stored_locate_id : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +53,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	
 			SignalBus.check_once_for_suit_crates.emit(self)
 			GameManager.suit_key_cards -= 1
-			
+		
+		SignalBus.free_crate_spawn_location.emit(stored_locate_id)
 		SignalBus.update_key_card_counts.emit()
 		queue_free()

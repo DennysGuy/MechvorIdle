@@ -13,7 +13,7 @@ class_name NewMechArena extends Node3D
 
 var prev_spawn_point_number : int = 0
 
-var max_crates_in_scene : int = 2
+var max_crates_in_scene : int = 3
 
 @onready var upgrade_spawn_points: Node = $UpgradeSpawnPoints
 
@@ -30,30 +30,48 @@ func _process(delta : float) -> void:
 
 
 func _on_timer_timeout() -> void:
+	var upgrade_spawn_point_list : Array = upgrade_spawn_points.get_children()
 	var random_int : int = prev_spawn_point_number
-	while random_int == prev_spawn_point_number:
+	
+
+	while upgrade_spawn_point_list[random_int].spot_occupied:
 		random_int = randi_range(0,4)
 	
 	prev_spawn_point_number = random_int
 	spawn_upgrade_crate(random_int)
 
 
+func check_for_crate_at_pos(point_index : int) -> bool:
+	var spawn_point : Marker3D= upgrade_spawn_points.get_child(point_index)
+	
+	for crate in upgrade_crates.get_children():
+		var c : UpgradeCrate = crate
+		if c.global_transform.origin == spawn_point.global_transform.origin:
+			print("already a crate here")
+			return true
+	return false
+
 func spawn_upgrade_crate(spawn_index : int) -> void:
+	var upgrade_spawn_point_list : Array = upgrade_spawn_points.get_children()
+	
 	if upgrade_crates.get_children().size() >= max_crates_in_scene:
 		print("max crates in scene already")
 		return
 	
+	if upgrade_spawn_point_list[spawn_index].spot_occupied:
+		return
+	
 	var crate : UpgradeCrate = preload("uid://cwgvtxn3cjgyq").instantiate()
 
-	var i : int = 0
-	for point in upgrade_spawn_points.get_children():
-		if i == spawn_index:
-			crate.global_transform.origin = point.global_transform.origin
-			upgrade_crates.add_child(crate)
-			print("crate was spawned at point " + str(i))
-			return
-		else:
-			i += 1
+	crate.global_transform.origin = upgrade_spawn_point_list[spawn_index].global_transform.origin
+	crate.stored_locate_id = spawn_index
+	upgrade_spawn_point_list[spawn_index].spot_occupied = true
+	upgrade_crates.add_child(crate)
+	print("crate was spawned at point " + str(spawn_index))
+			
+
+		
+
 
 func check_for_remaining_crate(crate : UpgradeCrate) -> void:
 	if upgrade_crates.get_children().is_empty():

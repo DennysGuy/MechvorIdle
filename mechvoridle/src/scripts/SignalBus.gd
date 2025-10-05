@@ -305,5 +305,9 @@ signal check_once_for_weapon_crates(crate : UpgradeCrate)
 
 @warning_ignore("unused_signal")
 signal check_once_for_suit_crates(crate : UpgradeCrate)
+
 @warning_ignore("unused_signal")
 signal update_key_card_counts
+
+@warning_ignore("unused_signal")
+signal free_crate_spawn_location(id : int)
