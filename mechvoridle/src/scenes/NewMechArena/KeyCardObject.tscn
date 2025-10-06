@@ -25,4 +25,9 @@ shape = SubResource("BoxShape3D_fo53r")
 transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, -0.3, 0, 0.3, -1.3113417e-08, 0, 0, 0)
 texture = ExtResource("3_qrq4r")
 
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 15.0
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

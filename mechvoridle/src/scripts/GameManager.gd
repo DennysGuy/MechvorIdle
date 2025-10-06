@@ -21,6 +21,9 @@ const MECH_PARTS_NEEDED = 6
 var weapon_key_cards : int = 0
 var suit_key_cards : int = 0
 
+var total_health : int = 10000
+var current_health : int = total_health
+
 var drone_selected
 var mining_time_elapsed : String
 var fight_time_elapsed : String
@@ -329,8 +332,7 @@ func set_mission_status(index : int, value: bool) -> void:
 var recon_scout_platinum_cost : int = 300
 var recon_scout_platinum_base_cost : int = 300
 var recon_scout_ferrite_bars_cost : int = 300
-var total_health : int = 0
-var current_health : int = 0
+
 #combat
 var player_stunned : bool = false
 var opponent_stunned  : bool = false
@@ -591,8 +593,6 @@ func reset():
 	}
 
 #Test Variables
-
-
 
 func light_build() -> void:
 	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/heads/mech_head_2.tres")

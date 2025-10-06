@@ -7,9 +7,12 @@ class_name NewMechArena extends Node3D
 
 @onready var timer: Timer = $Timer
 
+@onready var health_bar: ProgressBar = $UI/HealthBar
+
 @onready var weapon_key_card_count: Label = $UI/WeaponKeyCardCount
 @onready var suit_key_card_count: Label = $UI/SuitKeyCardCount
 @onready var key_cards: Node = $KeyCards
+@onready var health_count: Label = $UI/HealthCount
 
 var prev_spawn_point_number : int = 0
 
@@ -18,10 +21,14 @@ var max_crates_in_scene : int = 3
 @onready var upgrade_spawn_points: Node = $UpgradeSpawnPoints
 
 func _ready() -> void:
+	health_bar.max_value = GameManager.total_health
+	health_bar.value = GameManager.current_health
+	health_count.text = "["+str(GameManager.current_health)+"/"+str(GameManager.total_health)+"]"
 	randomize()
 	weapon_key_card_count.text = str(GameManager.weapon_key_cards)
 	weapon_key_card_count.text = str(GameManager.suit_key_cards)
 	SignalBus.update_key_card_counts.connect(update_key_cards_count)
+	SignalBus.update_player_health.connect(update_player_health)
 	#SignalBus.check_for_more_crates.connect(check_for_remaining_crate)
 	timer.start()
 	
@@ -70,8 +77,9 @@ func spawn_upgrade_crate(spawn_index : int) -> void:
 	print("crate was spawned at point " + str(spawn_index))
 			
 
-		
-
+func update_player_health() -> void:
+	health_count.text = "["+str(GameManager.current_health)+"/"+str(GameManager.total_health)+"]"
+	health_bar.value = GameManager.current_health
 
 func check_for_remaining_crate(crate : UpgradeCrate) -> void:
 	if upgrade_crates.get_children().is_empty():

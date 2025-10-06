@@ -3020,7 +3020,7 @@ script = ExtResource("1_y8kuc")
 health = 5000
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.6521249, 0.7581116, 0, -0.7581116, 0.6521249, -0.2766775, 7.991624, 5.872187)
+transform = Transform3D(1, 0, 0, 0, 0.6521249, 0.7581116, 0, -0.7581116, 0.6521249, -0.2766775, 9.219844, 7.118564)
 fov = 60.0
 
 [node name="mech" type="Node3D" parent="."]
@@ -3181,7 +3181,7 @@ mesh = SubResource("ArrayMesh_b5pom")
 skeleton = NodePath("")
 
 [node name="ForeArm22" type="Node3D" parent="mech/Node/UpperBody/RangedArm2/Shoulder22/Bicep2"]
-transform = Transform3D(0.13052619, 0.9914444, 0, -0.9914444, 0.13052619, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
+transform = Transform3D(0.13052619, 0.99144435, 0, -0.99144435, 0.13052619, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
 
 [node name="ForeArm4" type="MeshInstance3D" parent="mech/Node/UpperBody/RangedArm2/Shoulder22/Bicep2/ForeArm22"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041015625, -0.2278975, 0.00121875)
@@ -3308,7 +3308,7 @@ libraries = {
 transform = Transform3D(0.98480725, 0, 0.17364821, 0, 1.0000001, 0, -0.17364818, 0, 0.9848074, 0, 1.25, -0.125)
 
 [node name="UpperLeg3" type="Node3D" parent="mech/Node/LowerBody/Leg"]
-transform = Transform3D(0.99904823, -0.043618985, 0, 0.043618985, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
+transform = Transform3D(0.99904823, -0.043618977, 0, 0.043618977, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
 
 [node name="HipJoint" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg/UpperLeg3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, -0.115625)
@@ -3378,7 +3378,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.99728066, 0, -0.073690645, 0, 1, 0, 0.073690616, 0, 0.997281, 0, 1.25, 0.125)
 
 [node name="UpperLeg2" type="Node3D" parent="mech/Node/LowerBody/Leg2"]
-transform = Transform3D(0.99904823, -0.043618985, 0, 0.043618985, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
+transform = Transform3D(0.99904823, -0.043618977, 0, 0.043618977, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
 
 [node name="HipJoint2" type="MeshInstance3D" parent="mech/Node/LowerBody/Leg2/UpperLeg2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.071875, 0.115625)

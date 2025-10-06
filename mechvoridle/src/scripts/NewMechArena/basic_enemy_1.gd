@@ -15,7 +15,7 @@ var radius := 3.0
 @onready var node_3d: Node3D = $Node3D
 
 func _ready() -> void:
-	#animation_player.play("bob")
+	animation_player.play("bob")
 	player = get_tree().get_first_node_in_group("Player")
 	super()
 
@@ -38,4 +38,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_hit_box_body_entered(body: Node3D) -> void:
 	if body is Player:
+		GameManager.current_health -= damage_amount
+		SignalBus.update_player_health.emit()
 		kill()
