@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://lam3j4dmw2xs"]
+
+[ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
+[ext_resource type="PackedScene" uid="uid://b6hfhxkh5jjxo" path="res://assets/graphics/Models/PlayerMech/PlayerCharacter2.gltf" id="1_y61f8"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_8keqk")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_y61f8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)

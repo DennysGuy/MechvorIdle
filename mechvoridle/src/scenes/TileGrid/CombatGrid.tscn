@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc15c2cfpvp5y"]
+
+[ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf78d"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qlay0"]
+sky_material = SubResource("ProceduralSkyMaterial_vf78d")
+
+[sub_resource type="Environment" id="Environment_e6v0j"]
+background_mode = 1
+sky = SubResource("Sky_qlay0")
+ambient_light_source = 3
+ambient_light_energy = 2.13
+tonemap_mode = 2
+
+[node name="CombatGrid" type="Node3D"]
+script = ExtResource("1_vf78d")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e6v0j")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Tiles" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 2.801806, 16.898409)
+fov = 40.0

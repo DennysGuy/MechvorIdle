@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://jgfdd71l3y54"]
+
+[ext_resource type="Script" uid="uid://cjdkynw68i7j" path="res://src/scripts/CombatGrid/tile.gd" id="1_j5pwg"]
+
+[node name="Tile" type="Node3D"]
+script = ExtResource("1_j5pwg")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047248304, 0)
+
+[node name="Tile" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033996582, 0, 0.052604675)
+size = Vector3(2.7425537, 0.076, 2.220108)
