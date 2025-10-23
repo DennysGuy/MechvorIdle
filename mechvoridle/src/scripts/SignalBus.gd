@@ -313,3 +313,5 @@ signal update_key_card_counts
 signal free_crate_spawn_location(id : int)
 @warning_ignore("unused_signal")
 signal update_player_health
+@warning_ignore("unused_signal")
+signal move_player(direction : Vector2)

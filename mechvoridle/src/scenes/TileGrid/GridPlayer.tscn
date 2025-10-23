@@ -8,3 +8,47 @@ script = ExtResource("1_8keqk")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_y61f8")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Head2" parent="blockbench_export/Node/UpperBody" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8425518, 0)
+
+[node name="Torso2" parent="blockbench_export/Node/UpperBody" index="2"]
+transform = Transform3D(0.98480767, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.98480767, -0.043203034, 1.5685412, -0.000631875)
+
+[node name="RangedArm1" parent="blockbench_export/Node/UpperBody" index="3"]
+transform = Transform3D(0.95371693, -0.3007058, 0, 0.3007058, 0.95371693, 0, 0, 0, 1, -0.125, 1.415036, -0.375)
+
+[node name="ForeArm3" parent="blockbench_export/Node/UpperBody/RangedArm1/Shoulder2/Bicep" index="3"]
+transform = Transform3D(0.28417543, 0.95877224, 0, -0.95877224, 0.28417543, 0, 0, 0, 1, 0.038695, 0.065405, 0.02600875)
+
+[node name="RangedArm2" parent="blockbench_export/Node/UpperBody" index="4"]
+transform = Transform3D(0.8870108, -0.45999148, 0.040244132, 0.4508033, 0.88155377, 0.14014044, -0.09994078, -0.106163904, 0.9893134, 0.02336625, 1.686026, 0.30719)
+
+[node name="ForeArm22" parent="blockbench_export/Node/UpperBody/RangedArm2/Shoulder22/Bicep2" index="3"]
+transform = Transform3D(0.043758556, 0.99904215, 0, -0.99904215, 0.043758556, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
+
+[node name="Leg" parent="blockbench_export/Node/LowerBody" index="0"]
+transform = Transform3D(0.98480767, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.98480767, 0, 1.25, -0.125)
+
+[node name="UpperLeg3" parent="blockbench_export/Node/LowerBody/Leg" index="0"]
+transform = Transform3D(0.99996144, -0.008782214, 0, 0.008782214, 0.99996144, 0, 0, 0, 1, 0, 0.0828125, 0.125)
+
+[node name="Calf3" parent="blockbench_export/Node/LowerBody/Leg/UpperLeg3" index="5"]
+transform = Transform3D(0.9986339, -0.052252542, 0, 0.052252542, 0.9986339, 0, 0, 0, 1, 0, -0.6765625, -0.25)
+
+[node name="Foot3" parent="blockbench_export/Node/LowerBody/Leg/UpperLeg3/Calf3" index="1"]
+transform = Transform3D(0.9993937, 0.034816924, 0, -0.034816924, 0.9993937, 0, 0, 0, 1, 0, -0.4125, -0.03125)
+
+[node name="UpperLeg2" parent="blockbench_export/Node/LowerBody/Leg2" index="0"]
+transform = Transform3D(0.9966224, -0.04361939, -0.0695791, 0.043513473, 0.99904823, -0.0030378888, 0.06964539, -4.656613e-10, 0.9975718, 0, 0.0828125, -0.125)
+
+[node name="Calf2" parent="blockbench_export/Node/LowerBody/Leg2/UpperLeg2" index="5"]
+transform = Transform3D(0.9986339, -0.052252542, 0, 0.052252542, 0.9986339, 0, 0, 0, 1, 0, -0.6765625, 0.25)
+
+[node name="Foot2" parent="blockbench_export/Node/LowerBody/Leg2/UpperLeg2/Calf2" index="2"]
+transform = Transform3D(0.9975718, 0.069645375, 0, -0.069645375, 0.9975718, 0, 0, 0, 1, 0, -0.4125, 0.03125)
+
+[node name="HipGuard" parent="blockbench_export/Node/LowerBody" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2086097, 0.25295126)
+
+[editable path="blockbench_export"]
