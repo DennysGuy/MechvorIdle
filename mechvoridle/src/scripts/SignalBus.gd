@@ -315,3 +315,5 @@ signal free_crate_spawn_location(id : int)
 signal update_player_health
 @warning_ignore("unused_signal")
 signal move_player(direction : Vector2)
+@warning_ignore("unused_signal")
+signal move_enemy(enemy : GridEnemy, direction : Vector2, row_limit : int, col_limit : int)

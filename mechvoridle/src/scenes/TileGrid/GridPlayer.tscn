@@ -51,4 +51,10 @@ transform = Transform3D(0.9975718, 0.069645375, 0, -0.069645375, 0.9975718, 0, 0
 [node name="HipGuard" parent="blockbench_export/Node/LowerBody" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2086097, 0.25295126)
 
+[node name="Vlucan1" type="Marker3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.22429913, 1.7536805, -0.18063268)
+
+[node name="Vlucan2" type="Marker3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.24604863, 1.7536805, -0.18063268)
+
 [editable path="blockbench_export"]

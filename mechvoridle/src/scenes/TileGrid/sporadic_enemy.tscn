@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7cur5tqfwumt"]
+
+[ext_resource type="Script" uid="uid://dlen8t2tbhcym" path="res://src/scripts/CombatGrid/sporadic_enemy.gd" id="1_7h52i"]
+[ext_resource type="PackedScene" uid="uid://bylk6f5bxhnfj" path="res://assets/graphics/SporadicBot/SporadicBot.gltf" id="2_k4jur"]
+
+[node name="SporadicEnemy" type="Node3D"]
+script = ExtResource("1_7h52i")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="model" parent="." instance=ExtResource("2_k4jur")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="LowerArm" parent="model/Mob/arm" index="0"]
+transform = Transform3D(0.9664757, 0.248203, -0.06572634, 0.07763043, -0.038471438, 0.9962396, 0.24474111, -0.9679437, -0.056449823, -0.32979625, -0.24254188, -0.15625)
+
+[node name="LowerArm2" parent="model/Mob/arm2" index="1"]
+transform = Transform3D(0.9664757, 0.248203, 0.06572634, 0.07763043, -0.038471438, -0.9962396, -0.24474111, 0.9679437, -0.056449823, -0.32979625, -0.24254188, 0.15625)
+
+[node name="LaserSpout" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08886033, 1.0231531, 0.8802155)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="model"]

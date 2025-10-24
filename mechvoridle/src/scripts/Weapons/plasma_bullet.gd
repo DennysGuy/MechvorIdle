@@ -2,20 +2,19 @@ class_name PlasmaBullet extends Area3D
 
 @export var damage : int
 var speed : float = 20
-var direction : Vector3 = Vector3.ZERO
+var direction : Vector3
 @onready var timer: Timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.start()
-	look_at(global_transform.origin + direction, Vector3.UP)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if direction != Vector3.ZERO:
+	if direction:
 		#velocity = direction * speed
 		global_translate(direction * speed * delta)
 
