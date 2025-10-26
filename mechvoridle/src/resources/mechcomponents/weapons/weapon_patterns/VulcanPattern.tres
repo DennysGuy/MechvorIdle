@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackPattern" load_steps=2 format=3 uid="uid://bqfh8impxxy8"]
+
+[ext_resource type="Script" uid="uid://6cacw0wqd6ts" path="res://src/scripts/Weapons/attack_pattern.gd" id="1_nke4l"]
+
+[resource]
+script = ExtResource("1_nke4l")
+target_offset = Vector2(4, 0)
+attack_pattern = 2
+metadata/_custom_type_script = "uid://6cacw0wqd6ts"

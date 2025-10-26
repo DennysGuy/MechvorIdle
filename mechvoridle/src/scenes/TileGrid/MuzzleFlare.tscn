@@ -10,14 +10,7 @@ albedo_color = Color(1, 0.55394745, 0.35139742, 1)
 [node name="MuzzleFlare" type="Node3D"]
 script = ExtResource("1_blpts")
 
-[node name="Timer" type="Timer" parent="." groups=["VulcanFlares"]]
-process_callback = 0
-wait_time = 0.05
-autostart = true
-
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." groups=["VulcanFlares"]]
 transform = Transform3D(0.26547578, 0, 0, 0, -2.4024107e-08, 0.18059313, 0, -0.5496075, -7.893976e-09, 0, 0, -0.29537845)
 material_override = SubResource("StandardMaterial3D_dlxgj")
 mesh = SubResource("PrismMesh_u8fny")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

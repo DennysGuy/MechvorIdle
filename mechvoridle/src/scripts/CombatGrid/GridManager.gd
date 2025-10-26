@@ -42,6 +42,13 @@ func init_grid(tiles : Node) -> void:
 	print(tiles.get_children().size())
 
 func get_tile(tiles : Node, coordinates : Vector2) -> Tile:
+	
+	if coordinates.x < 0 or coordinates.x > MAX_ROWS-1:
+		return null
+	
+	if coordinates.y < 0 or coordinates.y > MAX_COLUMNS-1:
+		return null
+	
 	if tiles.get_children().is_empty():
 		return null
 	
@@ -56,7 +63,9 @@ func spawn_player(tiles : Node) -> void:
 	var starting_tile : Tile = get_tile(tiles, Vector2(4,1))
 	grid_player.global_position = starting_tile.marker_3d.global_position
 	player = grid_player
+	starting_tile.occupant = player
 	player.current_tile = starting_tile
+	player.tiles = tiles
 	add_child(grid_player)
 
 func spawn_test_enemy(tiles : Node) -> void:
@@ -64,6 +73,7 @@ func spawn_test_enemy(tiles : Node) -> void:
 	var starting_tile : Tile = get_tile(tiles, Vector2(1,1))
 	spor_enemy.global_position = starting_tile.marker_3d.global_position
 	spor_enemy.current_tile = starting_tile
+	starting_tile.occupant = spor_enemy
 	enemies.append(spor_enemy)
 	add_child(spor_enemy)
 

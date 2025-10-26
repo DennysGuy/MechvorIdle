@@ -23,7 +23,6 @@ func move_player(direction : Vector2) -> void:
 	
 func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -1, col_limit : int = -1) -> void:
 	var new_coords : Vector2 = grid_actor.current_tile.coordinates + direction
-	print(new_coords)
 	var adjacent_tile : Tile = GridManager.get_tile(tiles, new_coords)
 	
 	if not GridManager.tile_available(grid_actor, adjacent_tile, row_limit, col_limit):
@@ -33,5 +32,9 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 	
 	
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> void:
-	actor.current_tile = adjacent_tile	
+	var prev_tile = actor.current_tile
+	var next_tile = adjacent_tile
+	prev_tile.occupant = null
+	actor.current_tile = adjacent_tile
+	next_tile.occupant = actor
 	actor.global_position = adjacent_tile.marker_3d.global_position
