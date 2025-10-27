@@ -14,6 +14,8 @@ is player and their cur position is [4,1] their direction is negative and so the
 
 @export_enum("single","row", "column", "adjacent", "diagonal","sector","board", ) var attack_pattern : int
 
+@export_enum("player:-1", "enemy:1") var direction : int
+
 enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD}
 
 var patterns = {
@@ -32,9 +34,22 @@ var patterns = {
 @export_enum("hit_scan", "projectile","dash") var attack_type : int
 
 
-func issue_attack(actor : GridActor, tiles : Node, direction : int, damage : int ) -> void:
+func get_destined_tile_coordinates(actor : GridActor) -> Vector2:
+	
 	var actor_tile : Tile = actor.current_tile
-	var final_targeted_tile = actor_tile.coordinates + (direction * target_offset) #dir should be -1 if player, +1 if enemy
+	var final_targeted_tile : Vector2 = actor_tile.coordinates + (direction * target_offset) 
+	
+	if actor is GridEnemy:
+		final_targeted_tile.x = min(GridManager.MAX_ROWS-1,final_targeted_tile.x)
+	elif actor is GridPlayer:
+		final_targeted_tile.x = max(0,final_targeted_tile.x)
+		
+	return final_targeted_tile
+
+func issue_attack(actor : GridActor, tiles : Node, damage : int) -> void:
+
+	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
+	
 	var offset_list : Array = patterns[attack_pattern]
 	print(attack_pattern)
 	for offset in offset_list:
@@ -53,3 +68,4 @@ func issue_attack(actor : GridActor, tiles : Node, direction : int, damage : int
 					if !pass_through:
 						break
 				
+	

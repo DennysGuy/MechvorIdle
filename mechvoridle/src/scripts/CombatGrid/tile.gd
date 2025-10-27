@@ -4,6 +4,7 @@ class_name Tile extends Node3D
 @export var occupant : Node3D
 @export var coordinates : Vector2
 @onready var tile: CSGBox3D = $Tile
+@onready var target_marker: Marker3D = $TargetMarker
 
 const ENEMY_TILE_TEXTURE = preload("uid://3nbu2ui1tyy3")
 const PLAYER_TILE_TEXTURE = preload("uid://sv2tsq6a6wed")

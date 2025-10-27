@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://djybh7ph2xcau"]
+
+[ext_resource type="Script" uid="uid://wqrodb5p50qy" path="res://src/scripts/TileGrid/target_area.gd" id="1_obkce"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5pwg"]
+size = Vector3(2.2905426, 1.508667, 1.9224243)
+
+[node name="TargetArea" type="Area3D"]
+script = ExtResource("1_obkce")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013023376, 0.2543335, 0.043792725)
+shape = SubResource("BoxShape3D_j5pwg")

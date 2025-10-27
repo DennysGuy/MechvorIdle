@@ -5,7 +5,10 @@ class_name MechWeapon extends MechComponent
 enum WEAPON_TYPE {NORMAL, PLASMA}
 enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
 
-@export var damage : int
+enum WeaponOwner {PLAYER, ENEMY}
+@export var weapon_owner : WeaponOwner = WeaponOwner.PLAYER
+
+@export var damage : float
 @export var number_of_hits : int
 @export var charge_time : float
 @export var charge_speed : float
@@ -14,6 +17,9 @@ enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
 @export var accuracy : float
 @export var stun_chance : float
 @export var plasma_damage_bonus : float
+
+@export var attack_pattern : AttackPattern
+@export var projectile : PackedScene
 
 func get_weapon_type() -> String:
 	match(weapon_type):
@@ -34,3 +40,33 @@ func get_weapon_class() -> String:
 			return "Rocket Launcher"
 		_:
 			return ""
+
+func attack_enemy(actor : GridActor, tiles : Node ) -> void:
+	if crit_landed():
+		damage *= crit_damage
+	
+	attack_pattern.issue_attack(actor, tiles, int(damage))
+
+func crit_landed() -> bool:
+	var chance : float = crit_chance
+	if weapon_owner == WeaponOwner.PLAYER and GameManager.owned_mech_components["Head"]:
+		chance += GameManager.owned_mech_components["Head"].crit_chance
+	chance *= 100
+	
+	var random_int = randi_range(0,100)
+	if random_int <= chance:
+		return true
+	
+	return false
+
+
+func spawn_projectile(laser_spout : Marker3D, destined_tile : Tile, tiles : Node, owner : GridActor) -> GridProjectile:
+	var grid_projectile  = projectile.instantiate() as GridProjectile
+	grid_projectile.global_position = laser_spout.global_position
+	grid_projectile.direction = (destined_tile.target_marker.global_transform.origin - laser_spout.global_transform.origin).normalized()
+	grid_projectile.tile = destined_tile
+	grid_projectile.tiles = tiles
+	grid_projectile.weapon_origin = self
+	grid_projectile.weapon_owner = owner
+	
+	return grid_projectile

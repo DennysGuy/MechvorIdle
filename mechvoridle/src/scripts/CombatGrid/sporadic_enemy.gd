@@ -4,6 +4,7 @@ class_name SporadicEnemy extends GridEnemy
 @onready var animation_player: AnimationPlayer = $model/AnimationPlayer
 @onready var timer: Timer = $Timer
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
+
 @onready var laser_spout: Marker3D = $LaserSpout
 @onready var health_label: Label = $SubViewport/HealthLabel
 
@@ -28,7 +29,11 @@ func _on_timer_timeout() -> void:
 		laser_count_down = 0
 
 func fire_laser() -> void:
-	var laser : PlasmaBullet = preload("uid://b712bpq5ut01h").instantiate()
+	var laser : PlasmaBullet = weapon.projectile.instantiate()
 	laser.global_position = laser_spout.global_position
-	laser.direction = global_transform.basis.z
+	
+	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
+	
+	laser = weapon.spawn_projectile(laser_spout, destined_tile, tiles, self)
+	
 	get_parent().add_child(laser)

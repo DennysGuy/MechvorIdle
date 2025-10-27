@@ -73,6 +73,7 @@ func spawn_test_enemy(tiles : Node) -> void:
 	var starting_tile : Tile = get_tile(tiles, Vector2(1,1))
 	spor_enemy.global_position = starting_tile.marker_3d.global_position
 	spor_enemy.current_tile = starting_tile
+	spor_enemy.tiles = tiles
 	starting_tile.occupant = spor_enemy
 	enemies.append(spor_enemy)
 	add_child(spor_enemy)

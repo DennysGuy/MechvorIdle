@@ -5,10 +5,10 @@ class_name GridPlayer extends GridActor
 @onready var vlucan_2: Marker3D = $Vlucan2
 
 
-var vulcan_pattern : AttackPattern = preload("uid://bqfh8impxxy8")
+
+var mech_vulcan : MechWeapon = preload("uid://kcrfevws33d7")
 var can_shoot : bool = true
 var firing : bool = false
-var tiles : Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animation_player.play("Idle")
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("fire_vulcans") and not firing:
 		firing = true
 		add_vulcan_flares()
-		vulcan_pattern.issue_attack(GridManager.player, tiles, -1, 1)
+		mech_vulcan.attack_enemy(GridManager.player,tiles)
 		await get_tree().create_timer(0.1).timeout
 		for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 			flare.queue_free()

@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://jgfdd71l3y54"]
+[gd_scene load_steps=4 format=3 uid="uid://jgfdd71l3y54"]
 
 [ext_resource type="Script" uid="uid://cjdkynw68i7j" path="res://src/scripts/CombatGrid/tile.gd" id="1_j5pwg"]
+[ext_resource type="PackedScene" uid="uid://djybh7ph2xcau" path="res://src/scenes/TileGrid/target_area.tscn" id="2_jm0kc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6y1m"]
+size = Vector3(0.2981243, 1.6894531, 2.16687)
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_j5pwg")
+
+[node name="TargetMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8501115, 0)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047248304, 0)
@@ -11,3 +18,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047248304, 0)
 [node name="Tile" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033996582, 0, 0.052604675)
 size = Vector3(2.7425537, 0.076, 2.220108)
+
+[node name="TargetArea" parent="." instance=ExtResource("2_jm0kc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50142026, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="TargetArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.040400505, 0.34472656, 0.07757568)
+shape = SubResource("BoxShape3D_c6y1m")

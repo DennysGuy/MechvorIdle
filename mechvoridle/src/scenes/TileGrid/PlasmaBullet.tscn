@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b712bpq5ut01h"]
+
+[ext_resource type="Script" uid="uid://eglp4s46s403" path="res://src/scripts/Weapons/plasma_bullet.gd" id="1_02l4g"]
+[ext_resource type="PackedScene" uid="uid://bnmacq03r7rxq" path="res://assets/graphics/Models/PlayerMech/PlasmaBullet.gltf" id="2_5a74d"]
+[ext_resource type="PackedScene" uid="uid://44jftfrq3fuf" path="res://src/scenes/TileGrid/HitBox.tscn" id="3_5a74d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d4vlx"]
+radius = 0.34022394
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_02l4g")
+damage = 1
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_5a74d")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="HitBox" parent="." instance=ExtResource("3_5a74d")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.068801105, 0)
+shape = SubResource("SphereShape3D_d4vlx")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
