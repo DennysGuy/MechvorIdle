@@ -33,3 +33,25 @@ size = Vector3(10.587166, 1, 15.849984)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 3.329074, 18.809805)
 fov = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 402.0
+offset_bottom = 44.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_right = 112.0
+offset_bottom = 23.0
+text = "Player Health"
+
+[node name="HealthAmountLabel" type="Label" parent="CanvasLayer"]
+offset_left = 341.0
+offset_top = -1.0
+offset_right = 403.0
+offset_bottom = 22.0
+text = "100/100"

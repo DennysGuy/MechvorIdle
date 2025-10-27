@@ -3,6 +3,8 @@ class_name CombatGrid extends Node3D
 
 @onready var tiles: Node = $Tiles
 var player : GridPlayer
+@onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
+@onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,7 +16,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if GridManager.player:
+		health_amount_label.text = "%s/100" % [GridManager.player.health]
+		player_health_bar.value = GridManager.player.health
 
 
 func move_player(direction : Vector2) -> void:
