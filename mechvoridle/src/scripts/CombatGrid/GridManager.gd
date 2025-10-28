@@ -6,6 +6,8 @@ const MAX_COLUMNS = 3
 var player : GridPlayer
 var enemies : Array[GridEnemy]
 
+var targeted_tiles : Array[Tile] = []
+
 func _ready() -> void:
 	pass
 	
@@ -108,3 +110,10 @@ func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : in
 		return false
 	
 	return true
+
+
+func clear_targeted_tiles() -> void:
+	for tile in targeted_tiles:
+		tile.clear_targeted_overlay()
+	
+	targeted_tiles.clear()

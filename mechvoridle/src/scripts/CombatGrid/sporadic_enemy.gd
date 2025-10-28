@@ -33,7 +33,7 @@ func fire_laser() -> void:
 	laser.global_position = laser_spout.global_position
 	
 	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
-	
+	destined_tile.set_targeted_overlay()
 	laser = weapon.spawn_projectile(laser_spout, destined_tile, tiles, self)
 	
 	get_parent().add_child(laser)

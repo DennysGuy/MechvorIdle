@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=6 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 
@@ -16,6 +16,9 @@ ambient_light_source = 3
 ambient_light_energy = 2.13
 tonemap_mode = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf78d"]
+albedo_color = Color(2.8878452e-07, 0.32786852, 0.38140947, 1)
+
 [node name="CombatGrid" type="Node3D"]
 script = ExtResource("1_vf78d")
 
@@ -27,8 +30,9 @@ environment = SubResource("Environment_e6v0j")
 [node name="Tiles" type="Node" parent="."]
 
 [node name="Arena" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 2.924602, -0.71854496, 3.7214603)
-size = Vector3(10.587166, 1, 15.849984)
+transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 2.8955808, -0.44847298, 4.1677766)
+material_override = SubResource("StandardMaterial3D_vf78d")
+size = Vector3(10.050356, 1, 14.957357)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 3.329074, 18.809805)

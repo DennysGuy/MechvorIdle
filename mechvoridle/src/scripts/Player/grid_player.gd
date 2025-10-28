@@ -21,12 +21,14 @@ func _process(delta: float) -> void:
 		can_move = false
 		await get_tree().create_timer(wait_time).timeout
 		can_move = true
+		GridManager.clear_targeted_tiles()
 		
 	if Input.is_action_pressed("move_right") and can_move:
 		SignalBus.move_player.emit(Vector2.DOWN)
 		can_move = false
 		await get_tree().create_timer(wait_time).timeout
 		can_move = true
+		GridManager.clear_targeted_tiles()
 	
 	if Input.is_action_pressed("move_up") and can_move:
 		SignalBus.move_player.emit(Vector2.LEFT)
@@ -53,7 +55,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("fire_vulcans") and firing:
 		for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 			flare.queue_free()
-
+			
+		GridManager.clear_targeted_tiles()
 	
 	
 	

@@ -51,12 +51,12 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int) -> void:
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
 	
 	var offset_list : Array = patterns[attack_pattern]
-	print(attack_pattern)
 	for offset in offset_list:
 		var final_offset : Vector2 = final_targeted_tile + (direction * offset)
 		var selected_tile : Tile = GridManager.get_tile(tiles, final_offset)
 		if selected_tile:
-			print("attacking tile at coords : [%s,%s]" % [selected_tile.coordinates.x, selected_tile.coordinates.y])
+			GridManager.targeted_tiles.append(selected_tile)
+			selected_tile.set_targeted_overlay()
 			if selected_tile.occupant:
 				var enemy : GridActor = selected_tile.occupant
 				if  actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY and attack_type == 0: #may need to refactor later for different types of attacks

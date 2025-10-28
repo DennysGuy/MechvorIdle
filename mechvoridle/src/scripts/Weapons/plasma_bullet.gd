@@ -40,8 +40,12 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 			if !weapon_origin.attack_pattern.pass_through:
 				print("WE HIT SOMETHING!!")
 				queue_free() #will need to also add any sort of tile effects here.
+				tile.clear_targeted_overlay()
 		
 		if tile_parent == tile:
 			#tile effect
 			print("WE MADE IT HERE BABY!")
 			queue_free() # well, we might have to do something here.. but if the projectile reaches the destined tile it will queue free
+		
+			tile.clear_targeted_overlay()
+		

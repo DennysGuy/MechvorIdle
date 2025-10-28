@@ -8,16 +8,17 @@ class_name Tile extends Node3D
 
 const ENEMY_TILE_TEXTURE = preload("uid://3nbu2ui1tyy3")
 const PLAYER_TILE_TEXTURE = preload("uid://sv2tsq6a6wed")
+const TILE_TARGETED_TEXTURE = preload("uid://ccq0g4ghyym3e")
+
+
+@onready var cuboid: MeshInstance3D = $blockbench_export/cuboid
 
 enum OWNER {PLAYER, ENEMY}
 var current_owner : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if current_owner == OWNER.PLAYER:
-		tile.material = PLAYER_TILE_TEXTURE
-	else:
-		tile.material = ENEMY_TILE_TEXTURE
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -29,3 +30,9 @@ func set_owner_as_player() -> void:
 
 func set_owner_as_enemy() -> void:
 	current_owner = OWNER.ENEMY
+
+func set_targeted_overlay() -> void:
+	cuboid.material_overlay = TILE_TARGETED_TEXTURE
+
+func clear_targeted_overlay() -> void:
+	cuboid.material_overlay = null
