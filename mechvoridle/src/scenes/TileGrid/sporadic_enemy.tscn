@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://bylk6f5bxhnfj" path="res://assets/graphics/SporadicBot/SporadicBot.gltf" id="2_k4jur"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k4jur"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("EnemyHPLabel")
 
-[node name="SporadicEnemy" type="Node3D"]
+[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("weapon_spout")]
 script = ExtResource("1_7h52i")
 weapon = ExtResource("2_e7lhk")
+weapon_spout = NodePath("LaserSpout")
 health = 80
 
 [node name="Timer" type="Timer" parent="."]
@@ -30,11 +31,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08886033, 1.0231531, 0.8802
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61149, 0)
 texture = SubResource("ViewportTexture_k4jur")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(55, 34)
 
-[node name="HealthLabel" type="Label" parent="SubViewport"]
+[node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 30

@@ -1,17 +1,12 @@
-class_name State
-extends Node
+class_name EnemyShoot extends State
 
-@export
-var animation_name: String
-@export
-var move_speed : int = 200
+@export var idle: State
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-var parent
 
 func enter() -> void:
-	pass
+	parent.animation_player.play(animation_name)
+	await get_tree().create_timer(0.6667).timeout
+	parent.state_machine.change_state(idle)
 
 func exit() -> void:
 	pass

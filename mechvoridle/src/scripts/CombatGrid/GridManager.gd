@@ -77,9 +77,30 @@ func spawn_test_enemy(tiles : Node) -> void:
 	spor_enemy.current_tile = starting_tile
 	spor_enemy.tiles = tiles
 	starting_tile.occupant = spor_enemy
+	
+	var turret_enemy1 : GridEnemy = preload("uid://bdavl4sbcomxk").instantiate()
+	var starting_tile_turret_1 : Tile = get_tile(tiles, Vector2(0,0))
+	turret_enemy1.global_position = starting_tile_turret_1.marker_3d.global_position
+	turret_enemy1.current_tile = starting_tile_turret_1
+	turret_enemy1.tiles = tiles
+	starting_tile_turret_1.occupant = turret_enemy1
+	
+	var turret_enemy2 : GridEnemy = preload("uid://bdavl4sbcomxk").instantiate()
+	var starting_tile_turret_2 : Tile = get_tile(tiles, Vector2(0,2))
+	turret_enemy2.global_position = starting_tile_turret_2.marker_3d.global_position
+	turret_enemy2.current_tile = starting_tile_turret_2
+	turret_enemy2.tiles = tiles
+	starting_tile_turret_2.occupant = turret_enemy2
+		
+	
 	enemies.append(spor_enemy)
+	enemies.append(turret_enemy1)
+	enemies.append(turret_enemy2)
+	
 	add_child(spor_enemy)
-
+	add_child(turret_enemy1)
+	add_child(turret_enemy2)
+	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1) -> bool:
 	if not adjacent_tile:
 		print("no tile here, chum")

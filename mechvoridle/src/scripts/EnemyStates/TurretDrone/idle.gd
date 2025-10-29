@@ -1,17 +1,9 @@
-class_name State
-extends Node
+class_name TurretBotIdle extends State
 
-@export
-var animation_name: String
-@export
-var move_speed : int = 200
-
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-var parent
 
 func enter() -> void:
-	pass
+	parent.animation_player.play(animation_name)
+	
 
 func exit() -> void:
 	pass

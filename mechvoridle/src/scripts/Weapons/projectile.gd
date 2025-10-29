@@ -15,3 +15,22 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func impact_prjectile(area : Area3D):
+	var parent = area.get_parent()
+	if area is TargetArea:
+		var tile_parent : Tile = parent
+		print(tile_parent.occupant)
+		print(weapon_owner)
+		if tile_parent.occupant and tile_parent.occupant != weapon_owner:
+			weapon_origin.attack_enemy(weapon_owner, tiles)
+			if !weapon_origin.attack_pattern.pass_through:
+				queue_free() #will need to also add any sort of tile effects here.
+				tile.clear_targeted_overlay()
+		
+		if tile_parent == tile:
+			#tile effect
+			queue_free() # well, we might have to do something here.. but if the projectile reaches the destined tile it will queue free
+		
+			tile.clear_targeted_overlay()

@@ -8,8 +8,11 @@
 radius = 0.34022394
 
 [node name="Node3D" type="Node3D"]
+transform = Transform3D(-0.99975705, 0, -0.022041833, 0, 1, 0, 0.022041833, 0, -0.99975705, 0, 0, 0)
 script = ExtResource("1_02l4g")
 damage = 1
+speed = null
+direction = null
 
 [node name="blockbench_export" parent="." instance=ExtResource("2_5a74d")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

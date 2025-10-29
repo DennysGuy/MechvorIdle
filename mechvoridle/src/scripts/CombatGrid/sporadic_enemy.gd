@@ -6,7 +6,8 @@ class_name SporadicEnemy extends GridEnemy
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 
 @onready var laser_spout: Marker3D = $LaserSpout
-@onready var health_label: Label = $SubViewport/HealthLabel
+@onready var health_label: Label = $EnemyHPLabel/HealthLabel
+
 
 var laser_count_down : int = 0
 # Called when the node enters the scene tree for the first time.
@@ -25,15 +26,5 @@ func _on_timer_timeout() -> void:
 	SignalBus.move_enemy.emit(self, random_direction_list.pick_random(),row_limit,col_limit)
 	laser_count_down += 1
 	if laser_count_down >= 3:
-		fire_laser()
+		fire_projectile()
 		laser_count_down = 0
-
-func fire_laser() -> void:
-	var laser : PlasmaBullet = weapon.projectile.instantiate()
-	laser.global_position = laser_spout.global_position
-	
-	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
-	destined_tile.set_targeted_overlay()
-	laser = weapon.spawn_projectile(laser_spout, destined_tile, tiles, self)
-	
-	get_parent().add_child(laser)

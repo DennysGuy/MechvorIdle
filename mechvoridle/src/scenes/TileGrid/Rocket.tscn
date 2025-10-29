@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhf71vd13ccvw"]
+
+[ext_resource type="Script" uid="uid://d6gie6ney22l" path="res://src/scripts/Enemies/TurretBot/rocket.gd" id="1_klmyc"]
+[ext_resource type="PackedScene" uid="uid://1g2ns2ruc050" path="res://assets/graphics/TurretBot/Rocket.gltf" id="2_03l0n"]
+[ext_resource type="PackedScene" uid="uid://44jftfrq3fuf" path="res://src/scenes/TileGrid/HitBox.tscn" id="3_03l0n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3d8l"]
+size = Vector3(0.7155762, 0.4658203, 0.5131836)
+
+[node name="Rocket" type="Node3D"]
+script = ExtResource("1_klmyc")
+speed = 4.0
+
+[node name="PivotPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25641876, 0)
+
+[node name="Rocket" parent="PivotPoint" instance=ExtResource("2_03l0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25641876, 0)
+
+[node name="HitBox" parent="." instance=ExtResource("3_03l0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0034548044, 0.14030355, -0.18524826)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013549805, 0.122558594, 0.2434082)
+shape = SubResource("BoxShape3D_o3d8l")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
