@@ -138,3 +138,29 @@ func clear_targeted_tiles() -> void:
 		tile.clear_targeted_overlay()
 	
 	targeted_tiles.clear()
+
+
+func set_mech_as_light() -> void:
+	GameManager.owned_mech_components["Head"] = preload("uid://b7cbnbqyrpcv1")
+	GameManager.owned_mech_components["Torso"] = preload("uid://d2s3tleah2tvp")
+	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
+	GameManager.owned_mech_components["Legs"] = preload("uid://cpmb51aj71fpr")
+	
+
+func set_mech_as_heavy() -> void:
+	GameManager.owned_mech_components["Head"] = preload("uid://cmbchudcdtn2r")
+	GameManager.owned_mech_components["Torso"] = preload("uid://bjr7icnj7rnhl")
+	GameManager.owned_mech_components["Arms"] = preload("uid://4vf13bdn8i41")
+	GameManager.owned_mech_components["Legs"] = preload("uid://kkoht6ubl33m")
+	
+func set_mech_as_standard_heavy() -> void:
+	GameManager.owned_mech_components["Head"] = preload("uid://cmbchudcdtn2r")
+	GameManager.owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
+	GameManager.owned_mech_components["Arms"] = preload("uid://4vf13bdn8i41")
+	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
+
+func set_mech_as_standard_light() -> void:
+	GameManager.owned_mech_components["Head"] = preload("uid://b7cbnbqyrpcv1")
+	GameManager.owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
+	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
+	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")

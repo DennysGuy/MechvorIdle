@@ -2,6 +2,7 @@ class_name MechComponent extends Resource
 
 @export_group("Descriptors")
 @export var component_name : String
+@export var index : int
 @export_enum("Steel Fang Tech", "Palo Dynamics", "Crosshair Enterprises") var manufacture_name : int
 enum MANUFACTURER_NAME {STEEL_FANG_TECH, PALO_DYNAMICS, CROSSHAIR_ENTERPRISES}
 @export var icon : Texture2D

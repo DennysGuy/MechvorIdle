@@ -1,60 +1,153 @@
 [gd_scene load_steps=3 format=3 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
-[ext_resource type="PackedScene" uid="uid://b6hfhxkh5jjxo" path="res://assets/graphics/Models/PlayerMech/PlayerCharacter2.gltf" id="1_y61f8"]
+[ext_resource type="PackedScene" uid="uid://b2sq6b8nkvgqf" path="res://assets/graphics/Models/PlayerMech/PlayerCharacter.gltf" id="2_8keqk"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_8keqk")
-
-[node name="blockbench_export" parent="." instance=ExtResource("1_y61f8")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-
-[node name="Head2" parent="blockbench_export/Node/UpperBody" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8425518, 0)
-
-[node name="Torso2" parent="blockbench_export/Node/UpperBody" index="2"]
-transform = Transform3D(0.98480767, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.98480767, -0.043203034, 1.5685412, -0.000631875)
-
-[node name="RangedArm1" parent="blockbench_export/Node/UpperBody" index="3"]
-transform = Transform3D(0.95371693, -0.3007058, 0, 0.3007058, 0.95371693, 0, 0, 0, 1, -0.125, 1.415036, -0.375)
-
-[node name="ForeArm3" parent="blockbench_export/Node/UpperBody/RangedArm1/Shoulder2/Bicep" index="3"]
-transform = Transform3D(0.28417543, 0.95877224, 0, -0.95877224, 0.28417543, 0, 0, 0, 1, 0.038695, 0.065405, 0.02600875)
-
-[node name="RangedArm2" parent="blockbench_export/Node/UpperBody" index="4"]
-transform = Transform3D(0.8870108, -0.45999148, 0.040244132, 0.4508033, 0.88155377, 0.14014044, -0.09994078, -0.106163904, 0.9893134, 0.02336625, 1.686026, 0.30719)
-
-[node name="ForeArm22" parent="blockbench_export/Node/UpperBody/RangedArm2/Shoulder22/Bicep2" index="3"]
-transform = Transform3D(0.043758556, 0.99904215, 0, -0.99904215, 0.043758556, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
-
-[node name="Leg" parent="blockbench_export/Node/LowerBody" index="0"]
-transform = Transform3D(0.98480767, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.98480767, 0, 1.25, -0.125)
-
-[node name="UpperLeg3" parent="blockbench_export/Node/LowerBody/Leg" index="0"]
-transform = Transform3D(0.99996144, -0.008782214, 0, 0.008782214, 0.99996144, 0, 0, 0, 1, 0, 0.0828125, 0.125)
-
-[node name="Calf3" parent="blockbench_export/Node/LowerBody/Leg/UpperLeg3" index="5"]
-transform = Transform3D(0.9986339, -0.052252542, 0, 0.052252542, 0.9986339, 0, 0, 0, 1, 0, -0.6765625, -0.25)
-
-[node name="Foot3" parent="blockbench_export/Node/LowerBody/Leg/UpperLeg3/Calf3" index="1"]
-transform = Transform3D(0.9993937, 0.034816924, 0, -0.034816924, 0.9993937, 0, 0, 0, 1, 0, -0.4125, -0.03125)
-
-[node name="UpperLeg2" parent="blockbench_export/Node/LowerBody/Leg2" index="0"]
-transform = Transform3D(0.9966224, -0.04361939, -0.0695791, 0.043513473, 0.99904823, -0.0030378888, 0.06964539, -4.656613e-10, 0.9975718, 0, 0.0828125, -0.125)
-
-[node name="Calf2" parent="blockbench_export/Node/LowerBody/Leg2/UpperLeg2" index="5"]
-transform = Transform3D(0.9986339, -0.052252542, 0, 0.052252542, 0.9986339, 0, 0, 0, 1, 0, -0.6765625, 0.25)
-
-[node name="Foot2" parent="blockbench_export/Node/LowerBody/Leg2/UpperLeg2/Calf2" index="2"]
-transform = Transform3D(0.9975718, 0.069645375, 0, -0.069645375, 0.9975718, 0, 0, 0, 1, 0, -0.4125, 0.03125)
-
-[node name="HipGuard" parent="blockbench_export/Node/LowerBody" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2086097, 0.25295126)
 
 [node name="Vlucan1" type="Marker3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.22429913, 1.7536805, -0.18063268)
 
 [node name="Vlucan2" type="Marker3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.24604863, 1.7536805, -0.18063268)
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_8keqk")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -8.916855e-05, 0, 0.1006701)
+
+[node name="MeleeHead2" parent="blockbench_export/UpperBody/Head" index="0"]
+visible = false
+
+[node name="RangedHead2" parent="blockbench_export/UpperBody/Head" index="1"]
+visible = false
+
+[node name="LightTorso2" parent="blockbench_export/UpperBody/Torso" index="0"]
+visible = false
+
+[node name="HeavyTorso2" parent="blockbench_export/UpperBody/Torso" index="1"]
+visible = false
+
+[node name="StandardTorso2" parent="blockbench_export/UpperBody/Torso" index="2"]
+visible = false
+
+[node name="MeleeHand2" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand" index="0"]
+visible = false
+
+[node name="RangedHand2" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand" index="1"]
+visible = false
+
+[node name="MeleeForeArm2" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm" index="1"]
+visible = false
+
+[node name="RangedForeArm2" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm" index="2"]
+visible = false
+
+[node name="MeleeBicep" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep" index="1"]
+visible = false
+
+[node name="RangedBicep2" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep" index="2"]
+visible = false
+
+[node name="MeleeShoulder" parent="blockbench_export/UpperBody/Arm1/Shoulder" index="1"]
+visible = false
+
+[node name="RangedShoulder2" parent="blockbench_export/UpperBody/Arm1/Shoulder" index="2"]
+visible = false
+
+[node name="MeleeHand23" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2" index="0"]
+visible = false
+
+[node name="RangedHand23" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2" index="1"]
+visible = false
+
+[node name="MeleeBackGuard22" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2" index="1"]
+visible = false
+
+[node name="RangedBackGuard22" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2" index="2"]
+visible = false
+
+[node name="MeleeBicep22" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2" index="1"]
+visible = false
+
+[node name="RangedBicep23" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2" index="2"]
+visible = false
+
+[node name="MeleeShoulder22" parent="blockbench_export/UpperBody/Arm2/Shoulder2" index="1"]
+visible = false
+
+[node name="RangedShoulder23" parent="blockbench_export/UpperBody/Arm2/Shoulder2" index="2"]
+visible = false
+
+[node name="LightKneeBrace2" parent="blockbench_export/LowerBody/Leg/UpperLeg/KneeGuard" index="0"]
+visible = false
+
+[node name="StandardKneeBrace2" parent="blockbench_export/LowerBody/Leg/UpperLeg/KneeGuard" index="1"]
+visible = false
+
+[node name="HeavyKneeBrace2" parent="blockbench_export/LowerBody/Leg/UpperLeg/KneeGuard" index="2"]
+visible = false
+
+[node name="LightFood2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf/Foot" index="0"]
+visible = false
+
+[node name="StandardFoot2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf/Foot" index="1"]
+visible = false
+
+[node name="HeavyFoot2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf/Foot" index="2"]
+visible = false
+
+[node name="LightLowerLegGuard2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf" index="1"]
+visible = false
+
+[node name="HeavyLowerLegGuard2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf" index="2"]
+visible = false
+
+[node name="StandardLowerLegGuard2" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf" index="3"]
+visible = false
+
+[node name="LightUpperLeg" parent="blockbench_export/LowerBody/Leg/UpperLeg" index="2"]
+visible = false
+
+[node name="StandardUpperLeg" parent="blockbench_export/LowerBody/Leg/UpperLeg" index="3"]
+visible = false
+
+[node name="HeavyUpperLeg" parent="blockbench_export/LowerBody/Leg/UpperLeg" index="4"]
+visible = false
+
+[node name="LightKneeBrace23" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/KneeGuard2" index="0"]
+visible = false
+
+[node name="StandardKneeBrace23" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/KneeGuard2" index="1"]
+visible = false
+
+[node name="HeavyBrace22" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/KneeGuard2" index="2"]
+visible = false
+
+[node name="LightFoot22" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2/Foot2" index="0"]
+visible = false
+
+[node name="StandardFoot23" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2/Foot2" index="1"]
+visible = false
+
+[node name="HeavyFoot23" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2/Foot2" index="2"]
+visible = false
+
+[node name="LightCalf22" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2" index="1"]
+visible = false
+
+[node name="StandardCalf22" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2" index="2"]
+visible = false
+
+[node name="HeavyCalf22" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2" index="3"]
+visible = false
+
+[node name="LightUpperLeg2" parent="blockbench_export/LowerBody/Leg2/UpperLeg2" index="2"]
+visible = false
+
+[node name="StandardUpperLeg2" parent="blockbench_export/LowerBody/Leg2/UpperLeg2" index="3"]
+visible = false
+
+[node name="HeavyUpperLeg2" parent="blockbench_export/LowerBody/Leg2/UpperLeg2" index="4"]
+visible = false
 
 [editable path="blockbench_export"]
