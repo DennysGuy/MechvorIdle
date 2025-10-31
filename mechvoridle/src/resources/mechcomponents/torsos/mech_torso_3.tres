@@ -4,12 +4,11 @@
 
 [resource]
 script = ExtResource("1_6x0bj")
-charge_speed_modifier = 0.2
 component_name = "Chest of Righteousness"
 index = 2
 manufacture_name = 2
 description = "The Chest of Righteousness is heavy duty - high protection, but a little bit on the slow side."
-health = 5200
+health = 200
 refined_ferrite_cost = 4800
 category = 1
 metadata/_custom_type_script = "uid://d35b44mou7bkr"

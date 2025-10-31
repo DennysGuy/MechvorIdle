@@ -357,6 +357,9 @@ var owned_mech_components : Dictionary[String, MechComponent] = {
 	"RightWeapon" : null
 }
 
+
+	
+
 func get_owned_mech_head() -> MechHead:
 	return owned_mech_components["Head"]
 
@@ -621,6 +624,27 @@ func heavy_build() -> void:
 	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rocketlaunchers/Launcher-2.tres")
 
 #light - proper melee build vs heavy boss
+
+func equip_double_swords() -> void:
+	owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm")
+	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
+	
+func equip_double_rifles() -> void:
+	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl")
+	owned_mech_components["RightWeapon"] = preload("uid://dplngps46dubl")
+
+func equip_double_rockets() -> void:
+	owned_mech_components["LeftWeapon"] = preload("uid://bhfpkfpplvoco")
+	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
+
+func equip_sword_left_rocket_right() -> void:
+	owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm")
+	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
+
+func equip_rifle_left_sword_right() -> void:
+	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl")
+	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
+
 
 '''
 	We should see that the light build counters 

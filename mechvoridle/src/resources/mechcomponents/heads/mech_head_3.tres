@@ -10,6 +10,6 @@ component_name = "Helmet of Salvation"
 index = 1
 manufacture_name = 2
 description = "Light with lots of visuals. This mech head is designed with a high FOV in mind give the user an easy time in close combat scenarios."
-health = 1800
+health = 120
 refined_ferrite_cost = 2100
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"

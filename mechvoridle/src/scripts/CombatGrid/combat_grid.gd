@@ -6,6 +6,8 @@ var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
 @onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.init_grid(tiles)
@@ -13,11 +15,13 @@ func _ready() -> void:
 	GridManager.spawn_test_enemy(tiles)
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_enemy.connect(move_actor)
+	player_health_bar.max_value = GridManager.player.health
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if GridManager.player:
-		health_amount_label.text = "%s/100" % [GridManager.player.health]
+		health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 		player_health_bar.value = GridManager.player.health
 
 
