@@ -13,8 +13,7 @@ class_name GridPlayer extends GridActor
 @onready var heavy_torso: Node3D = $blockbench_export/UpperBody/Torso/HeavyTorso
 @onready var standard_torso: Node3D = $blockbench_export/UpperBody/Torso/StandardTorso
 
-@onready var rocket_launcher_left_side: Node3D = $blockbench_export/UpperBody/Torso/RocketLauncherLeftSide
-@onready var rocket_launcher_right_side: Node3D = $blockbench_export/UpperBody/Torso/RocketLauncherRightSide
+
 
 @onready var melee_hand: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/MeleeHand
 @onready var ranged_hand: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/RangedHand
@@ -25,7 +24,8 @@ class_name GridPlayer extends GridActor
 @onready var ranged_bicep: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/RangedBicep
 @onready var melee_shoulder: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/MeleeShoulder
 @onready var ranged_shoulder: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/RangedShoulder
-@onready var rifle_left_side: Node3D = $blockbench_export/UpperBody/Arm1/RifleLeftSide
+
+
 
 @onready var melee_hand_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/MeleeHand2
 @onready var ranged_hand_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/RangedHand2
@@ -35,8 +35,8 @@ class_name GridPlayer extends GridActor
 @onready var ranged_bicep_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/RangedBicep2
 @onready var melee_shoulder_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/MeleeShoulder2
 @onready var ranged_shoulder_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/RangedShoulder2
-@onready var standard_sword_right_side: Node3D = $blockbench_export/UpperBody/Arm2/StandardSwordRightSide
-@onready var rifle_right_side: Node3D = $blockbench_export/UpperBody/Arm2/RifleRightSide2
+
+
 
 @onready var light_knee_brace: Node3D = $blockbench_export/LowerBody/Leg/UpperLeg/KneeGuard/LightKneeBrace
 @onready var standard_knee_brace: Node3D = $blockbench_export/LowerBody/Leg/UpperLeg/KneeGuard/StandardKneeBrace
@@ -73,6 +73,17 @@ class_name GridPlayer extends GridActor
 @onready var light_upper_leg_2: Node3D = $blockbench_export/LowerBody/Leg2/UpperLeg2/LightUpperLeg2
 @onready var standard_upper_leg_2: Node3D = $blockbench_export/LowerBody/Leg2/UpperLeg2/StandardUpperLeg2
 @onready var heavy_upper_leg_2: Node3D = $blockbench_export/LowerBody/Leg2/UpperLeg2/HeavyUpperLeg2
+
+### WEAPONS ###
+
+@onready var rifle_left_side: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/RifleLeftSide
+@onready var rifle_right_side: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/RifleRightSide
+
+@onready var standard_sword_left_side: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/StandardSwordLeftSide
+@onready var standard_sword_right_side: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/StandardSwordRightSide
+
+@onready var rocket_launcher_left_side: Node3D = $blockbench_export/UpperBody/Torso/RocketLauncherLeftSide
+@onready var rocket_launcher_right_side: Node3D = $blockbench_export/UpperBody/Torso/RocketLauncherRightSide
 
 @onready var mech_components : Dictionary = {
 	"Head": {
@@ -149,7 +160,7 @@ class_name GridPlayer extends GridActor
 		
 	}
 }
-@onready var standard_sword_left_side: Node3D = $blockbench_export/UpperBody/Arm1/StandardSwordLeftSide
+
 
 @onready var mech_weapons : Dictionary = {
 	"LeftWeapon": {
