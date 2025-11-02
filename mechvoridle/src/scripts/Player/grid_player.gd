@@ -192,7 +192,7 @@ var true_wait_time : float = 0
 func _ready() -> void:
 	
 	GridManager.set_mech_as_light()
-	GameManager.equip_rifle_left_sword_right()
+
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 	
 	max_health = GameManager.calculate_current_total_health()
@@ -247,6 +247,8 @@ func _process(delta: float) -> void:
 			
 		GridManager.clear_targeted_tiles()
 	
+	
+	#work on cool down enacting
 	
 func enable_mech_parts() -> void:
 	for part in mech_components:

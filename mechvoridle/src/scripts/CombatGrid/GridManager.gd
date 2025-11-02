@@ -1,7 +1,9 @@
 extends Node
 
-const MAX_ROWS = 5
-const MAX_COLUMNS = 3
+const MAX_ROWS : int = 5
+const MAX_COLUMNS : int = 3
+const MAX_WAVES : int = 10
+var current_wave : int = 1
 
 var player : GridPlayer
 var enemies : Array[GridEnemy]
@@ -164,3 +166,10 @@ func set_mech_as_standard_light() -> void:
 	GameManager.owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
 	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
 	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
+
+
+
+
+func reset_combat() -> void:
+	current_wave = 1;
+	player.health = player.max_health

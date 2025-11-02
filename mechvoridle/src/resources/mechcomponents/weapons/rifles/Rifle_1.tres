@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_yfro8")
 weapon_class = 1
-damage = 235
+damage = 35.0
+cool_down_time = 6.0
 number_of_hits = 3
 charge_time = 0.5
 charge_speed = 0.65

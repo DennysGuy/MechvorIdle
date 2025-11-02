@@ -9,6 +9,7 @@ enum WeaponOwner {PLAYER, ENEMY}
 @export var weapon_owner : WeaponOwner = WeaponOwner.PLAYER
 
 @export var damage : float
+@export var cool_down_time : float
 @export var number_of_hits : int
 @export var charge_time : float
 @export var charge_speed : float

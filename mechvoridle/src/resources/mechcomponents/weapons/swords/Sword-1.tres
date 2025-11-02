@@ -4,26 +4,18 @@
 
 [resource]
 script = ExtResource("1_wp7av")
-weapon_type = 0
-weapon_class = 0
-damage = 200
+damage = 20.0
+cool_down_time = 5.0
 number_of_hits = 1
 charge_time = 1.0
 charge_speed = 1.4
 crit_chance = 0.1
-crit_damage = 0.0
 accuracy = 0.9
 stun_chance = 0.1
-plasma_damage_bonus = 0.0
 component_name = "Zeta Sabre"
-manufacture_name = 0
 description = "A reliable, long sword crafted by the geniuses at Steel Fang Technologies. "
-health = 0
-plasma_resistance = 0.0
 refined_ferrite_cost = 1500
 plasma_cost = 400
-platinum_cost = 0
 category = 4
 component_type = 2
-weight_class = 0
 metadata/_custom_type_script = "uid://cs720t7rvcl3x"
