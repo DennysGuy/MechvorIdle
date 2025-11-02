@@ -16,6 +16,7 @@ var millisecond : float = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.issue_weapon_attack.connect(start_cool_down_timer)
 	#GameManager.equip_rifle_left_sword_right()
 	match weapon_slot:
 		WEAPON_SLOT.WEAPON1:
@@ -38,6 +39,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if on_cool_down:
+		#print(cool_down_wheel.value)
 		count_down_process(delta)
 		
 
@@ -53,14 +55,19 @@ func set_weapon_icon() -> void:
 		equipped_weapon.WEAPON_CLASS.ROCKETLAUNCHER:
 			weapon_icon.texture = preload("uid://dbtpntjqa21i8")
 
-func start_cool_down_timer() -> void:
+func start_cool_down_timer(weapon_hand : int) -> void:
+	
+	if weapon_hand != weapon_slot:
+		return 
+	
 	cool_down_count.show()
+	cool_down_wheel.show()
 	millisecond = 60
 	cool_down_wheel.value = cool_down_wheel.max_value
 	on_cool_down = true
 
 func count_down_process(_delta : float) -> void:
-	millisecond -= 1 * _delta 
+	millisecond -= 1
 		
 	if millisecond <= 0:
 		cool_down_wheel.value -= 1
@@ -68,6 +75,13 @@ func count_down_process(_delta : float) -> void:
 		
 	if cool_down_wheel.value <= 0:
 		cool_down_count.hide()
+		cool_down_wheel.hide()
+		match weapon_slot:
+			WEAPON_SLOT.WEAPON1:
+				GameManager.can_fire_weapon_1 = true
+			WEAPON_SLOT.WEAPON2:
+				GameManager.can_fire_weapon_2 = true
+				
 		on_cool_down = false
 	else:
 		cool_down_count.text = str(int(cool_down_wheel.value))

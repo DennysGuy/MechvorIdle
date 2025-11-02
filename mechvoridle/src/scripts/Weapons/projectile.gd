@@ -24,6 +24,9 @@ func impact_prjectile(area : Area3D):
 		print(tile_parent.occupant)
 		print(weapon_owner)
 		if tile_parent.occupant and tile_parent.occupant != weapon_owner:
+			if not is_instance_valid(weapon_owner):
+				return
+			
 			weapon_origin.attack_enemy(weapon_owner, tiles)
 			if !weapon_origin.attack_pattern.pass_through:
 				queue_free() #will need to also add any sort of tile effects here.

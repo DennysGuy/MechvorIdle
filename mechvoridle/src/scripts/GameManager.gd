@@ -41,10 +41,13 @@ const MIN_LAUNCHER_PLASMA_COST = 300
 
 var audio_settings_Showing : bool = false
 
+var can_fire_weapon_1 : bool = true
+var can_fire_weapon_2 : bool = true
+
 func _ready() -> void:
 	#fight_scenario_4_test_fixture()
 	#equip_rifle_left_sword_right()
-	equip_sword_left_rocket_right()
+	equip_rifle_left_sword_right()
 	pass
 #mining panel
 var ufo_attacking : bool = false
