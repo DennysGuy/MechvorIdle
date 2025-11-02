@@ -68,6 +68,8 @@ class_name GridPlayer extends GridActor
 @onready var rifle_right_side: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/RifleRightSide
 @onready var rifle_left_side: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/RifleLeftSide
 
+var scanned_attack_pattern : Array
+
 @onready var mech_components : Dictionary = {
 	"Head": {
 		#melee head

@@ -1,4 +1,4 @@
-class_name PlayerIdle extends State
+class_name GridPlayerIdle extends State
 
 @export var weapon_1_aim : State
 

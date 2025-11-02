@@ -18,6 +18,8 @@ is player and their cur position is [4,1] their direction is negative and so the
 
 enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD}
 
+@export var can_shift : bool
+
 var patterns = {
 	ATTACK_PATTERNS.SINGLE : [Vector2(0,0)],
 	ATTACK_PATTERNS.ROW : [Vector2(0,-1),Vector2(0,0), Vector2(0,1)],
@@ -46,11 +48,16 @@ func get_destined_tile_coordinates(actor : GridActor) -> Vector2:
 		
 	return final_targeted_tile
 
-func issue_attack(actor : GridActor, tiles : Node, damage : int) -> void:
+func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = []) -> void:
 
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
 	
-	var offset_list : Array = patterns[attack_pattern]
+	var offset_list : Array
+	if !new_attack_pattern.is_empty():
+		offset_list = new_attack_pattern
+	else:
+		offset_list = patterns[attack_pattern]
+	
 	for offset in offset_list:
 		var final_offset : Vector2 = final_targeted_tile + (direction * offset)
 		var selected_tile : Tile = GridManager.get_tile(tiles, final_offset)
@@ -68,4 +75,36 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int) -> void:
 					if !pass_through:
 						break
 				
+func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0) -> Array:
+	
+	GridManager.clear_targeted_tiles()
+	
+	var final_targeted_tile: Vector2 = get_destined_tile_coordinates(actor)
+	
+	# Deep copy so we don't mutate the original pattern list
+	var base_patterns = patterns[attack_pattern]
+	var new_offset_list: Array = patterns[attack_pattern].duplicate(true)
+	
+	if can_shift:
+		new_offset_list.clear()
+		for pattern in base_patterns:
+			new_offset_list.append(pattern + Vector2(off_set, 0))
+	
+	for offset in new_offset_list:
+		var final_offset: Vector2 = final_targeted_tile + (direction * offset)
+		var selected_tile: Tile = GridManager.get_tile(tiles, final_offset)
+		
+		if selected_tile:
+			GridManager.targeted_tiles.append(selected_tile)
+			selected_tile.set_targeted_overlay()
+			
+			if selected_tile.occupant:
+				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY:
+					if !pass_through:
+						break
+				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
+					if !pass_through:
+						break
+	print(GridManager.targeted_tiles.size())
+	return new_offset_list
 	

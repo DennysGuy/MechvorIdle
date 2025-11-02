@@ -5,6 +5,10 @@ class_name Weapon1Fire extends State
 func enter() -> void:
 	parent.can_move = false
 	GameManager.can_fire_weapon_1 = false
+	
+	GameManager.get_right_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
+	
+	GridManager.clear_targeted_tiles()
 
 	match GameManager.get_right_weapon().weapon_class:
 		0:

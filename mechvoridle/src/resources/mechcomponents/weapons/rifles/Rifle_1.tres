@@ -1,16 +1,19 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://dplngps46dubl"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://dplngps46dubl"]
 
+[ext_resource type="Resource" uid="uid://be3g0tuwcydg1" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRiflePattern.tres" id="1_c13wu"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_yfro8"]
 
 [resource]
 script = ExtResource("1_yfro8")
 weapon_class = 1
-damage = 35.0
-cool_down_time = 6.0
+damage = 60.0
+cool_down_time = 7.0
 number_of_hits = 3
 charge_time = 0.5
 charge_speed = 0.65
+crit_damage = 1.0
 accuracy = 0.8
+attack_pattern = ExtResource("1_c13wu")
 component_name = "ARG-15-X"
 index = 1
 manufacture_name = 1

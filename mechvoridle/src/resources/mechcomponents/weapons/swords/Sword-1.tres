@@ -1,17 +1,20 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://baw08qvkimdvm"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://baw08qvkimdvm"]
 
+[ext_resource type="Resource" uid="uid://b6gnj16d10q56" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerWideSwordPattern.tres" id="1_f5vas"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_wp7av"]
 
 [resource]
 script = ExtResource("1_wp7av")
-damage = 20.0
+damage = 30.0
 cool_down_time = 5.0
 number_of_hits = 1
 charge_time = 1.0
 charge_speed = 1.4
 crit_chance = 0.1
+crit_damage = 1.0
 accuracy = 0.9
 stun_chance = 0.1
+attack_pattern = ExtResource("1_f5vas")
 component_name = "Zeta Sabre"
 description = "A reliable, long sword crafted by the geniuses at Steel Fang Technologies. "
 refined_ferrite_cost = 1500

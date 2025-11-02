@@ -42,11 +42,11 @@ func get_weapon_class() -> String:
 		_:
 			return ""
 
-func attack_enemy(actor : GridActor, tiles : Node ) -> void:
+func attack_enemy(actor : GridActor, tiles : Node, scanned_attack_pattern : Array = [] ) -> void:
 	if crit_landed():
 		damage *= crit_damage
 	
-	attack_pattern.issue_attack(actor, tiles, int(damage))
+	attack_pattern.issue_attack(actor, tiles, int(damage), scanned_attack_pattern)
 
 func crit_landed() -> bool:
 	var chance : float = crit_chance

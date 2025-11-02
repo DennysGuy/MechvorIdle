@@ -21,8 +21,6 @@ func impact_prjectile(area : Area3D):
 	var parent = area.get_parent()
 	if area is TargetArea:
 		var tile_parent : Tile = parent
-		print(tile_parent.occupant)
-		print(weapon_owner)
 		if tile_parent.occupant and tile_parent.occupant != weapon_owner:
 			if not is_instance_valid(weapon_owner):
 				return

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_nfncl")
-target_offset = Vector2(4, 0)
-attack_pattern = 2
+target_offset = Vector2(3, 0)
+attack_pattern = 1
 direction = -1
+can_shift = true
 pass_through = true
-attack_type = 1
 metadata/_custom_type_script = "uid://6cacw0wqd6ts"

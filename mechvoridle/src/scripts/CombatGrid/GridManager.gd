@@ -105,31 +105,31 @@ func spawn_test_enemy(tiles : Node) -> void:
 	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1) -> bool:
 	if not adjacent_tile:
-		print("no tile here, chum")
-		print(adjacent_tile)
+		#print("no tile here, chum")
+		#print(adjacent_tile)
 		return false
 	
 	if row_limit > -1 and adjacent_tile.coordinates.x >= row_limit:
-		print("out of row limit")
+		#print("out of row limit")
 		return false
 	
 	if col_limit > -1 and adjacent_tile.coordinates.y >= col_limit:
-		print("out of col limit")
+		#print("out of col limit")
 		return false
 	
 	if adjacent_tile.occupant:
-		print("tile occupied")
-		print(adjacent_tile)
+		#print("tile occupied")
+		#print(adjacent_tile)
 		return false
 	
 	if grid_actor is GridPlayer and adjacent_tile.current_owner == adjacent_tile.OWNER.ENEMY:
-		print(adjacent_tile)
-		print("tile has incorrect owner")
+		#print(adjacent_tile)
+		#print("tile has incorrect owner")
 		return false
 	
 	if grid_actor is GridEnemy and adjacent_tile.current_owner == adjacent_tile.OWNER.PLAYER:
-		print(adjacent_tile)
-		print("tile has incorrect owner")
+		#print(adjacent_tile)
+		#print("tile has incorrect owner")
 		return false
 	
 	return true

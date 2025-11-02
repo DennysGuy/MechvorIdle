@@ -7,7 +7,6 @@ var player : GridPlayer
 @onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.init_grid(tiles)
@@ -35,7 +34,7 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 	
 	if not GridManager.tile_available(grid_actor, adjacent_tile, row_limit, col_limit):
 		return
-
+   
 	translate_actor(grid_actor, adjacent_tile)
 	
 	
