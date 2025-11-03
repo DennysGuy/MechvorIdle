@@ -67,6 +67,7 @@ func spawn_projectile(laser_spout : Marker3D, destined_tile : Tile, tiles : Node
 	grid_projectile.direction = (destined_tile.target_marker.global_transform.origin - laser_spout.global_transform.origin).normalized()
 	grid_projectile.tile = destined_tile
 	grid_projectile.tiles = tiles
+	grid_projectile.damage = damage
 	grid_projectile.weapon_origin = self
 	grid_projectile.weapon_owner = owner
 	

@@ -25,7 +25,7 @@ func impact_prjectile(area : Area3D):
 			if not is_instance_valid(weapon_owner):
 				return
 			
-			weapon_origin.attack_enemy(weapon_owner, tiles)
+			tile_parent.occupant.damage_actor(damage)
 			if !weapon_origin.attack_pattern.pass_through:
 				queue_free() #will need to also add any sort of tile effects here.
 				tile.clear_targeted_overlay()
@@ -33,5 +33,5 @@ func impact_prjectile(area : Area3D):
 		if tile_parent == tile:
 			#tile effect
 			queue_free() # well, we might have to do something here.. but if the projectile reaches the destined tile it will queue free
-		
+			#weapon_origin.attack_enemy(weapon_owner, tiles)
 			tile.clear_targeted_overlay()

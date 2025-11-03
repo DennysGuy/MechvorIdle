@@ -13,6 +13,7 @@ func _ready() -> void:
 	GridManager.spawn_player(tiles)
 	GridManager.spawn_test_enemy(tiles)
 	SignalBus.move_player.connect(move_player)
+	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
 	player_health_bar.max_value = GridManager.player.health
 
@@ -24,24 +25,25 @@ func _process(delta: float) -> void:
 		player_health_bar.value = GridManager.player.health
 
 
-func move_player(direction : Vector2) -> void:
-	move_actor(GridManager.player, direction)
+func move_player(direction : Vector2, is_dash_attack : bool) -> void:
+	move_actor(GridManager.player, direction, -1, -1, is_dash_attack)
 	
 	
-func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -1, col_limit : int = -1) -> void:
+func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> void:
 	var new_coords : Vector2 = grid_actor.current_tile.coordinates + direction
 	var adjacent_tile : Tile = GridManager.get_tile(tiles, new_coords)
 	
-	if not GridManager.tile_available(grid_actor, adjacent_tile, row_limit, col_limit):
+	if not GridManager.tile_available(grid_actor, adjacent_tile, row_limit, col_limit, is_dash_attack):
 		return
    
 	translate_actor(grid_actor, adjacent_tile)
 	
-	
-func translate_actor(actor : GridActor, adjacent_tile : Tile) -> void:
+#returns previous tile for convenience	
+func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var prev_tile = actor.current_tile
 	var next_tile = adjacent_tile
 	prev_tile.occupant = null
 	actor.current_tile = adjacent_tile
 	next_tile.occupant = actor
 	actor.global_position = adjacent_tile.marker_3d.global_position
+	return prev_tile

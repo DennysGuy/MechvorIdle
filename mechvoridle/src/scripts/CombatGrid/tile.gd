@@ -1,7 +1,7 @@
 class_name Tile extends Node3D
 
 @onready var marker_3d: Marker3D = $Marker3D
-@export var occupant : Node3D
+@export var occupant : GridActor
 @export var coordinates : Vector2
 @onready var tile: CSGBox3D = $Tile
 @onready var target_marker: Marker3D = $TargetMarker

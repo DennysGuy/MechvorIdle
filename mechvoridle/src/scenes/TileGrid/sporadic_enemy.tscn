@@ -10,8 +10,8 @@ viewport_path = NodePath("EnemyHPLabel")
 [node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("weapon_spout")]
 script = ExtResource("1_7h52i")
 weapon = ExtResource("2_e7lhk")
-weapon_spout = NodePath("LaserSpout")
 health = 80
+weapon_spout = NodePath("LaserSpout")
 
 [node name="Timer" type="Timer" parent="."]
 

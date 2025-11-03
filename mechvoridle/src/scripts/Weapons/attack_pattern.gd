@@ -22,7 +22,7 @@ enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD}
 
 var patterns = {
 	ATTACK_PATTERNS.SINGLE : [Vector2(0,0)],
-	ATTACK_PATTERNS.ROW : [Vector2(0,-1),Vector2(0,0), Vector2(0,1)],
+	ATTACK_PATTERNS.ROW : [Vector2(0,0), Vector2(0,-1), Vector2(0,1)],
 	ATTACK_PATTERNS.COLUMN : [Vector2(-3,0), Vector2(-2,0), Vector2(-1,0), Vector2(0,0)],
 	ATTACK_PATTERNS.ADJACENT : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1)],
 	ATTACK_PATTERNS.DIAGONAL : [Vector2(0,0), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
@@ -36,16 +36,21 @@ var patterns = {
 @export_enum("hit_scan", "projectile","dash") var attack_type : int
 
 
-func get_destined_tile_coordinates(actor : GridActor) -> Vector2:
+func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector2 = Vector2.ZERO) -> Vector2:
 	
 	var actor_tile : Tile = actor.current_tile
-	var final_targeted_tile : Vector2 = actor_tile.coordinates + (direction * target_offset) 
+	var final_targeted_tile : Vector2
+	if new_target_offset != Vector2.ZERO:
+		final_targeted_tile = actor_tile.coordinates + (direction * new_target_offset)
+	else:
+		final_targeted_tile = actor_tile.coordinates + (direction * target_offset) 
 	
 	if actor is GridEnemy:
 		final_targeted_tile.x = min(GridManager.MAX_ROWS-1,final_targeted_tile.x)
 	elif actor is GridPlayer:
 		final_targeted_tile.x = max(0,final_targeted_tile.x)
-		
+	
+	print(final_targeted_tile)
 	return final_targeted_tile
 
 func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = []) -> void:
@@ -66,7 +71,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 			selected_tile.set_targeted_overlay()
 			if selected_tile.occupant:
 				var enemy : GridActor = selected_tile.occupant
-				if  actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY and attack_type == 0: #may need to refactor later for different types of attacks
+				if  actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
 					enemy.damage_actor(damage)
 					if !pass_through:
 						break
@@ -74,6 +79,11 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 					enemy.damage_actor(damage)
 					if !pass_through:
 						break
+
+func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
+	return GridManager.get_tile(tiles, coordinates)
+	
+
 				
 func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0) -> Array:
 	

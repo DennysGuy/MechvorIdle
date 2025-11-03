@@ -4,6 +4,8 @@ class_name GridPlayer extends GridActor
 @onready var vlucan_1: Marker3D = $Vlucan1
 @onready var vlucan_2: Marker3D = $Vlucan2
 
+@onready var rifle_2_spout: Marker3D = $Rifle2Spout
+
 @onready var mech_part_names : Array[String] = ["Head", "Torso", "Legs", "Arms"]
 
 @onready var melee_head: Node3D = $blockbench_export/UpperBody/Head/MeleeHead
@@ -179,7 +181,7 @@ var firing : bool = false
 var true_wait_time : float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+
 	GridManager.set_mech_as_light()
 
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
@@ -195,30 +197,30 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("move_left") and can_move:
-		SignalBus.move_player.emit(Vector2.UP)
+		SignalBus.move_player.emit(Vector2.UP, false)
 		can_move = false
 		await get_tree().create_timer(true_wait_time).timeout
 		can_move = true
 		GridManager.clear_targeted_tiles()
 		
 	if Input.is_action_pressed("move_right") and can_move:
-		SignalBus.move_player.emit(Vector2.DOWN)
+		SignalBus.move_player.emit(Vector2.DOWN, false)
 		can_move = false
 		await get_tree().create_timer(true_wait_time).timeout
 		can_move = true
 		GridManager.clear_targeted_tiles()
 	
-	if Input.is_action_pressed("move_up") and can_move:
-		SignalBus.move_player.emit(Vector2.LEFT)
-		can_move = false
-		await get_tree().create_timer(true_wait_time).timeout
-		can_move = true
-	
-	if Input.is_action_pressed("move_down") and can_move:
-		SignalBus.move_player.emit(Vector2.RIGHT)
-		can_move = false
-		await get_tree().create_timer(true_wait_time).timeout
-		can_move = true
+	#if Input.is_action_pressed("move_up") and can_move:
+		#SignalBus.move_player.emit(Vector2.LEFT, false)
+		#can_move = false
+		#await get_tree().create_timer(true_wait_time).timeout
+		#can_move = true
+	#
+	#if Input.is_action_pressed("move_down") and can_move:
+		#SignalBus.move_player.emit(Vector2.RIGHT, false)
+		#can_move = false
+		#await get_tree().create_timer(true_wait_time).timeout
+		#can_move = true
 
 	if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 		firing = true
@@ -273,3 +275,7 @@ func add_vulcan_flares() -> void:
 	
 	add_child(muzzle_flare_1)
 	add_child(muzzle_flare_2)
+
+func fire_rifle_2() -> void:
+	var rifle_2 : MechWeapon = GameManager.get_left_weapon()
+	fire_projectile(rifle_2, rifle_2_spout)

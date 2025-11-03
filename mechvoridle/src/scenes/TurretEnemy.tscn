@@ -1054,7 +1054,7 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"fire_projectile"
+"method": &"fire_rocket"
 }]
 }
 
@@ -1071,8 +1071,8 @@ viewport_path = NodePath("EnemyHPLabel")
 script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
 weapon = ExtResource("2_7lw6e")
-weapon_spout = NodePath("CanonSpout")
 health = 150
+weapon_spout = NodePath("CanonSpout")
 
 [node name="TurretBot" type="Node3D" parent="."]
 
@@ -1191,6 +1191,7 @@ mesh = SubResource("ArrayMesh_r2jfi")
 skeleton = NodePath("")
 
 [node name="UpperBody" type="Node3D" parent="TurretBot/TurretEnemy"]
+transform = Transform3D(1, 0, 0, 0, 0.9766028, 0.2150511, 0, -0.2150511, 0.9766028, 0, 0, 0)
 
 [node name="Base" type="Node3D" parent="TurretBot/TurretEnemy/UpperBody"]
 transform = Transform3D(1, 0, 0, 0, 0.95371693, -0.3007058, 0, 0.3007058, 0.95371693, 0, -0.265625, -0.203125)
@@ -1229,9 +1230,10 @@ mesh = SubResource("ArrayMesh_0mp63")
 skeleton = NodePath("")
 
 [node name="Outter2" type="Node3D" parent="TurretBot/TurretEnemy/UpperBody/Canon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.484375, 0.3046875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.484375, 0.28752816)
 
 [node name="Inner" type="Node3D" parent="TurretBot/TurretEnemy/UpperBody/Canon/Outter2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10048838)
 
 [node name="Funnel" type="MeshInstance3D" parent="TurretBot/TurretEnemy/UpperBody/Canon/Outter2/Inner"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)

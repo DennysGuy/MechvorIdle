@@ -314,9 +314,11 @@ signal free_crate_spawn_location(id : int)
 @warning_ignore("unused_signal")
 signal update_player_health
 @warning_ignore("unused_signal")
-signal move_player(direction : Vector2)
+signal move_player(direction : Vector2, is_dash_attack : bool)
 @warning_ignore("unused_signal")
 signal move_enemy(enemy : GridEnemy, direction : Vector2, row_limit : int, col_limit : int)
 
 @warning_ignore("unused_signal")
 signal issue_weapon_attack(slot : int)
+@warning_ignore("unused_signal")
+signal move_actor_to_tile(actor : GridActor, tile : Tile)

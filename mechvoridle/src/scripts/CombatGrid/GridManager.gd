@@ -103,7 +103,7 @@ func spawn_test_enemy(tiles : Node) -> void:
 	add_child(turret_enemy1)
 	add_child(turret_enemy2)
 	
-func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1) -> bool:
+func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
 		#print("no tile here, chum")
 		#print(adjacent_tile)
@@ -122,7 +122,7 @@ func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : in
 		#print(adjacent_tile)
 		return false
 	
-	if grid_actor is GridPlayer and adjacent_tile.current_owner == adjacent_tile.OWNER.ENEMY:
+	if grid_actor is GridPlayer and adjacent_tile.current_owner == adjacent_tile.OWNER.ENEMY and not is_dash_attack:
 		#print(adjacent_tile)
 		#print("tile has incorrect owner")
 		return false

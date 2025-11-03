@@ -20,11 +20,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	health_label.text = str(health)
 
+func fire_laser() -> void:
+	fire_projectile(weapon)
 
 func _on_timer_timeout() -> void:
 	timer.wait_time = randf_range(0.5,1.0)
 	SignalBus.move_enemy.emit(self, random_direction_list.pick_random(),row_limit,col_limit)
 	laser_count_down += 1
 	if laser_count_down >= 3:
-		fire_projectile()
+		fire_laser()
 		laser_count_down = 0

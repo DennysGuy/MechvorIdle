@@ -5,13 +5,14 @@ class_name Weapon2Fire extends State
 func enter() -> void:
 	parent.can_move = false
 	GameManager.can_fire_weapon_2 = false
-	GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
-	GridManager.clear_targeted_tiles()
+	#GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
+	
 	
 	match GameManager.get_left_weapon().weapon_class:
 		1:
 			animation_name = "RifleShotLeft"
-	
+			
+	GridManager.clear_targeted_tiles()
 	parent.animation_player.play(animation_name)
 	await get_tree().create_timer(0.5).timeout
 	parent.state_machine.change_state(idle)

@@ -41,7 +41,7 @@ func process_input(_event: InputEvent) -> State:
 func process_frame(_delta: float) -> State:
 
 	parent.scanned_attack_pattern = GameManager.get_right_weapon().attack_pattern.scan_tiles_of_effect(parent, parent.tiles, offset)
-	
+	print(parent.scanned_attack_pattern)
 	return null
 
 func process_physics(_delta: float) -> State:
