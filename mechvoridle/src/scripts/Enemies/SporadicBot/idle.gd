@@ -1,12 +1,15 @@
-class_name EnemyShoot extends State
-
-@export var idle: State
+class_name SporadicIdle extends State
 
 
+@export var random_move : State
+@export var die : State
+var timer : Timer
 func enter() -> void:
-	parent.animation_player.play(animation_name)
+
 	
-	parent.timer.wait_time = 1.8333
+	parent.animation_player.play("idle")
+	var random_time : float = randf_range(0.5,1.0)
+	parent.timer.wait_time = random_time
 	parent.timer.start()
 
 func exit() -> void:
@@ -20,6 +23,6 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	if parent.timer.time_left <= 0:
-		return idle
+		return random_move
+	
 	return null
-		

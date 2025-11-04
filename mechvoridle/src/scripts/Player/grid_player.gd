@@ -7,6 +7,7 @@ class_name GridPlayer extends GridActor
 @onready var rifle_2_spout: Marker3D = $Rifle2Spout
 
 @onready var mech_part_names : Array[String] = ["Head", "Torso", "Legs", "Arms"]
+@onready var timer: Timer = $Timer
 
 @onready var melee_head: Node3D = $blockbench_export/UpperBody/Head/MeleeHead
 @onready var ranged_head: Node3D = $blockbench_export/UpperBody/Head/RangedHead
@@ -175,7 +176,6 @@ var can_shoot : bool = true
 var can_fire_vulcans : bool = true
 var firing : bool = false
 
-@onready var state_machine: StateMachine = $StateMachine
 
 
 var true_wait_time : float = 0

@@ -1,14 +1,11 @@
-class_name EnemyShoot extends State
+class_name Zap extends State
 
-@export var idle: State
-
+@export var idle : State
 
 func enter() -> void:
-	parent.animation_player.play(animation_name)
-	
-	parent.timer.wait_time = 1.8333
-	parent.timer.start()
-
+	parent.animation_player.play("shoot")
+	await get_tree().create_timer(2.0).timeout
+	parent.state_machine.change_state(idle)
 func exit() -> void:
 	pass
 
@@ -19,7 +16,4 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	if parent.timer.time_left <= 0:
-		return idle
 	return null
-		

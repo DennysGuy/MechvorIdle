@@ -1,16 +1,14 @@
 class_name TurretEnemy extends GridEnemy
 
-@onready var state_machine: StateMachine = $StateMachine
 
-@onready var animation_player: AnimationPlayer = $TurretBot/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $Turretanimated/AnimationPlayer
+
 
 @export var shoot : State
 @onready var timer: Timer = $Timer
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel
 
 func _ready() -> void:
-	timer.wait_time = randf_range(3,4)
-	timer.start()
 	state_machine.init(self)
 
 func _process(delta) -> void:

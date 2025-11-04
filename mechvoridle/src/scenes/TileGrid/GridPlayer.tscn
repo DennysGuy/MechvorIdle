@@ -6522,8 +6522,9 @@ _data = {
 &"WideSwordSwing": SubResource("Animation_2bvhv")
 }
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_8keqk")
+state_machine = NodePath("StateMachine")
 
 [node name="blockbench_export" type="Node3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -7550,7 +7551,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.24604863,
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.22429913, 1.7536805, -0.18063268)
 
 [node name="Rifle2Spout" type="Marker3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.22429913, 1.7536805, -1.8381699)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.42973906, 1.7536805, -1.8381699)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("18_ea8pi")
@@ -7579,3 +7580,7 @@ idle = NodePath("../Idle")
 [node name="Weapon2Fire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("23_cp1m8")
 idle = NodePath("../Idle")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
