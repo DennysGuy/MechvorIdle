@@ -33,5 +33,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 
-func fire_laser() -> void:
-	fire_projectile(weapon)
+func fire_shock_wave() -> void:
+	var shock_wave : ElectricalShock = weapon.projectile.instantiate()
+	var tile_column = weapon.attack_pattern.scan_tiles_of_effect(self, tiles, 0, false)
+	shock_wave.weapon_owner = self
+	shock_wave.weapon_origin = weapon
+	shock_wave.tiles = tiles
+	shock_wave.tile_column = tile_column
+	get_parent().add_child(shock_wave)

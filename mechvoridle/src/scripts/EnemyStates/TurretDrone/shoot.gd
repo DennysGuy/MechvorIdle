@@ -20,6 +20,7 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	if parent.timer.time_left <= 0:
+
 		return idle
 	return null
 		

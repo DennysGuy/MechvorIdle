@@ -9,6 +9,7 @@ class_name Tile extends Node3D
 const ENEMY_TILE_TEXTURE = preload("uid://3nbu2ui1tyy3")
 const PLAYER_TILE_TEXTURE = preload("uid://sv2tsq6a6wed")
 const TILE_TARGETED_TEXTURE = preload("uid://ccq0g4ghyym3e")
+const ENEMY_TILE_TARGETED_TEXTURE = preload("uid://css807ne816r2")
 
 
 @onready var cuboid: MeshInstance3D = $blockbench_export/cuboid
@@ -33,6 +34,9 @@ func set_owner_as_enemy() -> void:
 
 func set_targeted_overlay() -> void:
 	cuboid.material_overlay = TILE_TARGETED_TEXTURE
+
+func set_enemy_targeted_overlay() -> void:
+	cuboid.material_overlay = ENEMY_TILE_TARGETED_TEXTURE
 
 func clear_targeted_overlay() -> void:
 	cuboid.material_overlay = null

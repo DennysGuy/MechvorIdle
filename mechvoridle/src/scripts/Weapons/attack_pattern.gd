@@ -12,11 +12,11 @@ is player and their cur position is [4,1] their direction is negative and so the
 
 @export var target_offset : Vector2 = Vector2.ZERO
 
-@export_enum("single","row", "column", "adjacent", "diagonal","sector","board", ) var attack_pattern : int
+@export_enum("single","row", "column", "adjacent", "diagonal","sector","board", "enemy_column") var attack_pattern : int
 
 @export_enum("player:-1", "enemy:1") var direction : int
 
-enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD}
+enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD, ENEMY_COLUMN}
 
 @export var can_shift : bool
 
@@ -26,7 +26,8 @@ var patterns = {
 	ATTACK_PATTERNS.COLUMN : [Vector2(-3,0), Vector2(-2,0), Vector2(-1,0), Vector2(0,0)],
 	ATTACK_PATTERNS.ADJACENT : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1)],
 	ATTACK_PATTERNS.DIAGONAL : [Vector2(0,0), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
-	ATTACK_PATTERNS.SECTOR : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)]
+	ATTACK_PATTERNS.SECTOR : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
+	ATTACK_PATTERNS.ENEMY_COLUMN : [Vector2(-1,0),Vector2(-2,0),Vector2(-3,0), Vector2(-4,0), Vector2(-5,0)]
 }
 
 
@@ -50,10 +51,9 @@ func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector
 	elif actor is GridPlayer:
 		final_targeted_tile.x = max(0,final_targeted_tile.x)
 	
-	print(final_targeted_tile)
 	return final_targeted_tile
 
-func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = []) -> void:
+func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
 
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
 	
@@ -68,11 +68,15 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 		var selected_tile : Tile = GridManager.get_tile(tiles, final_offset)
 		if selected_tile:
 			GridManager.targeted_tiles.append(selected_tile)
-			selected_tile.set_targeted_overlay()
+			if actor is GridPlayer:
+				selected_tile.set_targeted_overlay()
+			elif actor is GridEnemy:
+				selected_tile.set_enemy_targeted_overlay()
+			
 			if selected_tile.occupant:
 				var enemy : GridActor = selected_tile.occupant
 				if  actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
-					enemy.damage_actor(damage)
+					enemy.damage_actor(damage, is_vulcan)
 					if !pass_through:
 						break
 				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER and attack_type == 0:
@@ -85,7 +89,7 @@ func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	
 
 				
-func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0) -> Array:
+func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_targeted_overlay : bool = true) -> Array:
 	
 	GridManager.clear_targeted_tiles()
 	
@@ -105,8 +109,9 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0) -> Ar
 		var selected_tile: Tile = GridManager.get_tile(tiles, final_offset)
 		
 		if selected_tile:
-			GridManager.targeted_tiles.append(selected_tile)
-			selected_tile.set_targeted_overlay()
+			if set_targeted_overlay:
+				GridManager.targeted_tiles.append(selected_tile)
+				selected_tile.set_targeted_overlay()
 			
 			if selected_tile.occupant:
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY:

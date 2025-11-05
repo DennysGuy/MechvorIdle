@@ -3,6 +3,7 @@ class_name TurretBotIdle extends State
 @export var shoot : State
 
 func enter() -> void:
+
 	parent.animation_player.play("idle")
 	parent.timer.wait_time = randi_range(3,5)
 	parent.timer.start()
@@ -17,7 +18,6 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	print(parent.timer.time_left)
 	if parent.timer.time_left <= 0:
 		return shoot
 	return null

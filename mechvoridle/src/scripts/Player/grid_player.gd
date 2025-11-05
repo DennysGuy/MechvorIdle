@@ -225,7 +225,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 		firing = true
 		add_vulcan_flares()
-		mech_vulcan.attack_enemy(self,tiles)
+		mech_vulcan.attack_enemy(self,tiles,[],true)
 		await get_tree().create_timer(0.1).timeout
 		for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 			flare.queue_free()

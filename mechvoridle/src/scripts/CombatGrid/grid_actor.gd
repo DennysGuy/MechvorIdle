@@ -17,7 +17,7 @@ const  WAIT_TIME : float = 0.2
 
 var is_dead : bool = false
 
-func damage_actor(value : int) -> void:
+func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	health -= value
 	print("I was hit! Current HP:%s" % [health])
 	if is_dead:
@@ -25,10 +25,12 @@ func damage_actor(value : int) -> void:
 	
 	if health <= 0:
 		#place holder for now
+		health = 0
 		is_dead = true
 		state_machine.change_state(death)
 	else:
-		state_machine.change_state(hurt)
+		if not is_vulcan:
+			state_machine.change_state(hurt)
 
 	
 func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
@@ -36,7 +38,11 @@ func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = wea
 	projectile.global_position = selected_weapon_spout.global_position
 	
 	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
-	destined_tile.set_targeted_overlay()
+	if weapon.weapon_owner == weapon.WeaponOwner.PLAYER:
+		destined_tile.set_targeted_overlay()
+	else:
+		destined_tile.set_enemy_targeted_overlay()
+		
 	projectile = weapon.spawn_projectile(selected_weapon_spout, destined_tile, tiles, self)
 	
 	get_parent().add_child(projectile)

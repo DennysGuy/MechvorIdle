@@ -22,8 +22,6 @@ func _physics_process(delta : float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
-func _on_timer_timeout() -> void:
-	state_machine.change_state(shoot)
 
 func fire_rocket() -> void:
 	fire_projectile(weapon)
