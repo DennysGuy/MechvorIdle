@@ -9,6 +9,7 @@ class_name TurretEnemy extends GridEnemy
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel
 
 func _ready() -> void:
+	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 
 func _process(delta) -> void:
@@ -22,6 +23,13 @@ func _physics_process(delta : float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
+func _enter_tree() -> void:
+	print("TURRET ENEMY HAS ENTERED!")
+
+func _exit_tree() -> void:
+	GridManager.enemies.erase(self)
+	GridManager.check_wave_status()
+	
 
 func fire_rocket() -> void:
 	fire_projectile(weapon)

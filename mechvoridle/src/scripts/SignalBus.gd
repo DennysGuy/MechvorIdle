@@ -322,3 +322,10 @@ signal move_enemy(enemy : GridEnemy, direction : Vector2, row_limit : int, col_l
 signal issue_weapon_attack(slot : int)
 @warning_ignore("unused_signal")
 signal move_actor_to_tile(actor : GridActor, tile : Tile)
+
+@warning_ignore("unused_signal")
+signal heal_enemy
+@warning_ignore("unused_signal")
+signal spawn_next_wave
+@warning_ignore("unused_signal")
+signal add_enemy_to_grid(enemy : GridEnemy)

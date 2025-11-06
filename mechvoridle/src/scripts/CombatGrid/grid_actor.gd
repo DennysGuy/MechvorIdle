@@ -18,10 +18,10 @@ const  WAIT_TIME : float = 0.2
 var is_dead : bool = false
 
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
-	health -= value
-	print("I was hit! Current HP:%s" % [health])
+	
 	if is_dead:
 		return
+	health -= value
 	
 	if health <= 0:
 		#place holder for now

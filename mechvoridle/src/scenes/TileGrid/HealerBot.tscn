@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcrmt7013v31a"]
+
+[ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
+[ext_resource type="PackedScene" uid="uid://42g15ww0olin" path="res://assets/graphics/HealerBot/HealerBot.gltf" id="2_qwf8m"]
+[ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="3_8ngdf"]
+[ext_resource type="Script" uid="uid://bjuq72ikw7cx8" path="res://src/scripts/Enemies/HealerBot/healer_idle.gd" id="4_u7pyg"]
+[ext_resource type="Script" uid="uid://sufkxsp68cyo" path="res://src/scripts/Enemies/HealerBot/bot_heal.gd" id="5_82xbh"]
+[ext_resource type="Script" uid="uid://bscrqcerl76ix" path="res://src/scripts/Enemies/HealerBot/temp_hurt.gd" id="6_4c8f4"]
+[ext_resource type="Script" uid="uid://bgs36x2jascbv" path="res://src/scripts/Enemies/HealerBot/temp_die.gd" id="7_223we"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4c8f4"]
+viewport_path = NodePath("EnemyHPLabel")
+
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("state_machine", "hurt", "death")]
+script = ExtResource("1_8l3vx")
+state_machine = NodePath("StateMachine")
+health = 90
+max_health = 90
+hurt = NodePath("StateMachine/Hurt")
+death = NodePath("StateMachine/Die")
+
+[node name="HealerBot" parent="." instance=ExtResource("2_qwf8m")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Body2" parent="HealerBot" index="0"]
+transform = Transform3D(0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0, 1, 0.046875, 2.1534247, 0)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="EnemyHPLabel" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(100, 50)
+
+[node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+text = "100"
+horizontal_alignment = 1
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_8ngdf")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("heal")]
+script = ExtResource("4_u7pyg")
+heal = NodePath("../Heal")
+
+[node name="Heal" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("5_82xbh")
+idle = NodePath("../Idle")
+
+[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("6_4c8f4")
+idle = NodePath("../Idle")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("7_223we")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 3.6654253, 0)
+texture = SubResource("ViewportTexture_4c8f4")
+
+[node name="PulsePoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5468683, 4.7644777, -0.5109864)
+
+[node name="PulsePoint2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6759349, 4.7369537, -0.61177313)
+
+[editable path="HealerBot"]

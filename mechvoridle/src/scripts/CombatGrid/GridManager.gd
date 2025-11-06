@@ -3,12 +3,17 @@ extends Node
 const MAX_ROWS : int = 5
 const MAX_COLUMNS : int = 3
 const MAX_WAVES : int = 10
-var current_wave : int = 1
+var current_wave : int = -1
 
 var player : GridPlayer
-var enemies : Array[GridEnemy]
+var enemies : Array[GridEnemy] = []
 
 var targeted_tiles : Array[Tile] = []
+
+const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
+const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
+const HEALER_BOT = preload("uid://dcrmt7013v31a")
+
 
 func _ready() -> void:
 	pass
@@ -72,36 +77,24 @@ func spawn_player(tiles : Node) -> void:
 	player.tiles = tiles
 	add_child(grid_player)
 
-func spawn_test_enemy(tiles : Node) -> void:
-	var spor_enemy : GridEnemy = preload("uid://b7cur5tqfwumt").instantiate()
-	var starting_tile : Tile = get_tile(tiles, Vector2(1,1))
-	spor_enemy.global_position = starting_tile.marker_3d.global_position
-	spor_enemy.current_tile = starting_tile
-	spor_enemy.tiles = tiles
-	starting_tile.occupant = spor_enemy
-	
-	var turret_enemy1 : GridEnemy = preload("uid://bdavl4sbcomxk").instantiate()
-	var starting_tile_turret_1 : Tile = get_tile(tiles, Vector2(0,0))
-	turret_enemy1.global_position = starting_tile_turret_1.marker_3d.global_position
-	turret_enemy1.current_tile = starting_tile_turret_1
-	turret_enemy1.tiles = tiles
-	starting_tile_turret_1.occupant = turret_enemy1
-	
-	var turret_enemy2 : GridEnemy = preload("uid://bdavl4sbcomxk").instantiate()
-	var starting_tile_turret_2 : Tile = get_tile(tiles, Vector2(0,2))
-	turret_enemy2.global_position = starting_tile_turret_2.marker_3d.global_position
-	turret_enemy2.current_tile = starting_tile_turret_2
-	turret_enemy2.tiles = tiles
-	starting_tile_turret_2.occupant = turret_enemy2
-		
-	
-	enemies.append(spor_enemy)
-	enemies.append(turret_enemy1)
-	enemies.append(turret_enemy2)
-	
-	add_child(spor_enemy)
-	add_child(turret_enemy1)
-	add_child(turret_enemy2)
+#func spawn_test_enemy(tiles : Node) -> void:
+	#
+	#var spor_enemy = preload("uid://b7cur5tqfwumt")
+	#spawn_enemy(spor_enemy,Vector2(1,1), tiles)
+#
+	#var turret_enemy1 = preload("uid://dcrmt7013v31a")
+	#spawn_enemy(turret_enemy1,Vector2(0,0), tiles)
+	#
+	#var healer_bot = preload("uid://bdavl4sbcomxk")
+	#spawn_enemy(healer_bot,Vector2(0,2), tiles)
+
+
+func check_wave_status() -> void:
+	if enemies.is_empty():
+		SignalBus.spawn_next_wave.emit()
+
+
+
 	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
@@ -170,6 +163,67 @@ func set_mech_as_standard_light() -> void:
 
 
 
+
+var waves = [
+	[
+		{	
+			"enemy" : TURRET_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,1)
+		}
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,2)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(0,0)
+		}
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,0)
+		},
+		{
+			"enemy": TURRET_ENEMY.duplicate(true),
+			"coordinates": Vector2(0,2)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(0,1)
+		}
+		
+	],
+	[
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,2)
+		},
+		{
+			"enemy": HEALER_BOT.duplicate(true),
+			"coordinates": Vector2(0,0)
+		}
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,0)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,1)
+		},
+		{
+			"enemy": HEALER_BOT.duplicate(true),
+			"coordinates": Vector2(0,2)
+		}
+	]
+]
+
+
+
 func reset_combat() -> void:
-	current_wave = 1;
+	current_wave = -1;
 	player.health = player.max_health

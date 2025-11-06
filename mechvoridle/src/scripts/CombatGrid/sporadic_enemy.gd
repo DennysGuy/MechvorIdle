@@ -13,14 +13,12 @@ var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LE
 var laser_count_down : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
-	if is_dead:
-		print("I SHOULD BE DED")
 	health_label.text = str(health)
 	state_machine.process_frame(delta)
 
@@ -32,7 +30,13 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
+func _enter_tree() -> void:
+	print("SPORADIC ENEMY HAS ENTERED!")
 
+func _exit_tree() -> void:
+	GridManager.enemies.erase(self)
+	GridManager.check_wave_status()
+	
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()
 	var tile_column = weapon.attack_pattern.scan_tiles_of_effect(self, tiles, 0, false)

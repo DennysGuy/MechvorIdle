@@ -1,4 +1,4 @@
-[gd_scene load_steps=343 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=345 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://3f3f40j0d6nr" path="res://assets/graphics/Models/PlayerMech/PlayerCharacterWithWeapons_0.png" id="2_uffql"]
@@ -23,6 +23,8 @@
 [ext_resource type="Script" uid="uid://dv6hdn3lawyhf" path="res://src/scripts/GridPlayer/States/weapon_1_fire.gd" id="21_8ua87"]
 [ext_resource type="Script" uid="uid://bmr6ntm0g0nyx" path="res://src/scripts/GridPlayer/States/weapon_2_aim.gd" id="22_5eta7"]
 [ext_resource type="Script" uid="uid://crvls6csjm8s5" path="res://src/scripts/GridPlayer/weapon_2_fire.gd" id="23_cp1m8"]
+[ext_resource type="Script" uid="uid://bscrqcerl76ix" path="res://src/scripts/Enemies/HealerBot/temp_hurt.gd" id="24_ccc6x"]
+[ext_resource type="Script" uid="uid://bgs36x2jascbv" path="res://src/scripts/Enemies/HealerBot/temp_die.gd" id="25_hpw55"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4axj6"]
 resource_name = "material_0"
@@ -6522,9 +6524,11 @@ _data = {
 &"WideSwordSwing": SubResource("Animation_2bvhv")
 }
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("state_machine")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("state_machine", "hurt", "death")]
 script = ExtResource("1_8keqk")
 state_machine = NodePath("StateMachine")
+hurt = NodePath("StateMachine/Hurt")
+death = NodePath("StateMachine/Die")
 
 [node name="blockbench_export" type="Node3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -7580,6 +7584,13 @@ idle = NodePath("../Idle")
 [node name="Weapon2Fire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("23_cp1m8")
 idle = NodePath("../Idle")
+
+[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("24_ccc6x")
+idle = NodePath("../Idle")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("25_hpw55")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

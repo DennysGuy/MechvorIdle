@@ -1273,6 +1273,7 @@ weapon = ExtResource("2_7lw6e")
 hurt_time = 0.833
 state_machine = NodePath("StateMachine")
 health = 150
+max_health = 150
 weapon_spout = NodePath("CanonSpout")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Die")

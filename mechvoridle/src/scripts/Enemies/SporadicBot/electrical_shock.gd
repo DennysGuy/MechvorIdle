@@ -28,6 +28,8 @@ func move_shock_wave() -> void:
 		if selected_tile:
 			selected_tile.set_enemy_targeted_overlay()
 			global_position = selected_tile.marker_3d.global_position
+			if selected_tile.occupant and selected_tile.occupant is GridPlayer:
+				selected_tile.occupant.damage_actor(weapon_origin.damage)
 		#we'll also scan for entities we can attack!
 		i += 1
 		

@@ -5,7 +5,7 @@ class_name SporadicIdle extends State
 @export var die : State
 var timer : Timer
 func enter() -> void:
-
+	
 	
 	parent.animation_player.play("idle")
 	var random_time : float = randf_range(0.5,1.0)
@@ -22,6 +22,9 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
+	if parent.is_dead:
+		parent.state_machine.change_state(die)
+		
 	if parent.timer.time_left <= 0:
 		return random_move
 	

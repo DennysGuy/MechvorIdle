@@ -11,10 +11,12 @@ var player : GridPlayer
 func _ready() -> void:
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
-	GridManager.spawn_test_enemy(tiles)
+	#GridManager.spawn_test_enemy(tiles)
+	spawn_next_wave()
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
+	SignalBus.spawn_next_wave.connect(spawn_next_wave)
 	player_health_bar.max_value = GridManager.player.health
 
 
@@ -47,3 +49,25 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	next_tile.occupant = actor
 	actor.global_position = adjacent_tile.marker_3d.global_position
 	return prev_tile
+
+
+func spawn_enemy(enemy : PackedScene, tile_coords : Vector2) -> void:
+	var enemy_to_spawn : GridEnemy = enemy.instantiate()
+	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
+
+	enemy_to_spawn.global_position = init_tile.marker_3d.global_position
+	enemy_to_spawn.current_tile = init_tile
+	enemy_to_spawn.tiles = tiles
+	init_tile.occupant = enemy_to_spawn
+
+	GridManager.enemies.append(enemy_to_spawn)
+	print(GridManager.enemies)
+	add_child(enemy_to_spawn)
+
+
+func spawn_next_wave() -> void:
+	await get_tree().process_frame
+	GridManager.current_wave += 1
+	var selected_wave = GridManager.waves[GridManager.current_wave]
+	for enemy in selected_wave:
+		spawn_enemy(enemy["enemy"], enemy["coordinates"])
