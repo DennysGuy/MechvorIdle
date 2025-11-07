@@ -183,7 +183,7 @@ var true_wait_time : float = 0
 func _ready() -> void:
 
 	GridManager.set_mech_as_light()
-
+	SignalBus.apply_timer_consequences.connect(apply_time_consequences)
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 	
 	max_health = GameManager.calculate_current_total_health()
@@ -279,3 +279,6 @@ func add_vulcan_flares() -> void:
 func fire_rifle_2() -> void:
 	var rifle_2 : MechWeapon = GameManager.get_left_weapon()
 	fire_projectile(rifle_2, rifle_2_spout)
+
+func apply_time_consequences() -> void:
+	damage_actor(int(health * 0.3))

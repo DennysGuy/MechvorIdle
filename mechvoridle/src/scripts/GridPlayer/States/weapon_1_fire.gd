@@ -23,8 +23,11 @@ func enter() -> void:
 
 
 func dash_attack() -> void:
-	SignalBus.move_actor_to_tile.emit(parent, GridManager.targeted_tiles[0])
+	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
+	
 	GameManager.get_right_weapon().attack_enemy(parent, parent.tiles, parent.scanned_attack_pattern)
+	SignalBus.move_actor_to_tile.emit(parent, tile_to)
+	
 	GridManager.clear_targeted_tiles()
 		
 func exit() -> void:

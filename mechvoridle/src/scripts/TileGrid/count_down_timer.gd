@@ -1,6 +1,6 @@
 class_name CountDownTimer extends RichTextLabel
 
-var seconds : int = 60
+var seconds : int = 30
 var milliseconds : int = 0
 
 var timer_started : bool
@@ -10,7 +10,8 @@ var seconds_tracker : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start_timer()
+	SignalBus.add_time.connect(add_time)
+	#start_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
@@ -36,6 +37,11 @@ func _physics_process(delta: float) -> void:
 		if seconds <= 0:
 			stop_timer()
 		
+			SignalBus.apply_timer_consequences.emit()
+			SignalBus.spawn_next_wave.emit(true)
+
+			
+		
 		set_time(seconds,milliseconds)
 		
 	
@@ -56,3 +62,6 @@ func stop_timer() -> void:
 func set_label() -> void:
 	text = ""
 	append_text("[font_size=40]%s[/font_size][font_size=24].%s[/font_size]" % [seconds,milliseconds])
+
+func add_time(value : int) -> void:
+	seconds += value

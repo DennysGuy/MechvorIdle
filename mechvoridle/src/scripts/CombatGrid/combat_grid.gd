@@ -6,6 +6,7 @@ var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
 @onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
 
+@onready var wave_tracker: Label = $CanvasLayer/WaveTracker
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,10 +65,22 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2) -> void:
 	print(GridManager.enemies)
 	add_child(enemy_to_spawn)
 
+@onready var count_down_timer: CountDownTimer = $CanvasLayer/CountDownTimer
 
-func spawn_next_wave() -> void:
+func spawn_next_wave(on_time_out : bool = false) -> void:
 	await get_tree().process_frame
 	GridManager.current_wave += 1
+	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
+	if GridManager.current_wave > 0:
+		if on_time_out:
+			count_down_timer.add_time(30)
+		else:
+			count_down_timer.add_time(12)
+		
+	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
 	for enemy in selected_wave:
 		spawn_enemy(enemy["enemy"], enemy["coordinates"])
+		await get_tree().create_timer(0.5).timeout
+	
+	count_down_timer.start_timer()

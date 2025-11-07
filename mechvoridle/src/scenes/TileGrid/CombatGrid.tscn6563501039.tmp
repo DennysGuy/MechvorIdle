@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc15c2cfpvp5y"]
+
+[ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
+[ext_resource type="PackedScene" uid="uid://b5rrffupkskse" path="res://src/scenes/TileGrid/CountDownTimer.tscn" id="2_qlay0"]
+[ext_resource type="PackedScene" uid="uid://cud8gmsqfuiq4" path="res://src/scenes/TileGrid/WeaponIcon.tscn" id="3_e6v0j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf78d"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qlay0"]
+sky_material = SubResource("ProceduralSkyMaterial_vf78d")
+
+[sub_resource type="Environment" id="Environment_e6v0j"]
+background_mode = 1
+sky = SubResource("Sky_qlay0")
+ambient_light_source = 3
+ambient_light_energy = 2.13
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf78d"]
+albedo_color = Color(2.8878452e-07, 0.32786852, 0.38140947, 1)
+
+[node name="CombatGrid" type="Node3D"]
+script = ExtResource("1_vf78d")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e6v0j")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Tiles" type="Node" parent="."]
+
+[node name="Arena" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 2.8955808, -0.44847298, 4.1677766)
+material_override = SubResource("StandardMaterial3D_vf78d")
+size = Vector3(10.050356, 1, 14.957357)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 3.329074, 18.809805)
+fov = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 282.0
+offset_bottom = 42.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 98.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 12
+text = "Player Health"
+
+[node name="HealthAmountLabel" type="Label" parent="CanvasLayer"]
+offset_left = 231.0
+offset_top = 7.0
+offset_right = 293.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 12
+text = "100/100"
+
+[node name="CountDownTimer" parent="CanvasLayer" instance=ExtResource("2_qlay0")]
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -17.0
+offset_top = 2.0
+offset_right = 90.0
+offset_bottom = 57.0
+grow_vertical = 1
+
+[node name="WaveTracker" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = 22.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "Wave 1/10"
+horizontal_alignment = 2
+
+[node name="WeaponIcon2" parent="CanvasLayer" instance=ExtResource("3_e6v0j")]
+offset_left = 246.0
+offset_top = -97.0
+offset_right = 311.0
+offset_bottom = -32.0
+weapon_slot = 1
+
+[node name="WeaponIcon1" parent="CanvasLayer" instance=ExtResource("3_e6v0j")]
+offset_left = 214.0
+offset_top = -138.0
+offset_right = 279.0
+offset_bottom = -73.0

@@ -91,7 +91,7 @@ func spawn_player(tiles : Node) -> void:
 
 func check_wave_status() -> void:
 	if enemies.is_empty():
-		SignalBus.spawn_next_wave.emit()
+		SignalBus.spawn_next_wave.emit(false)
 
 
 

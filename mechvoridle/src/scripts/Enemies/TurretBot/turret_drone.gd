@@ -9,6 +9,7 @@ class_name TurretEnemy extends GridEnemy
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel
 
 func _ready() -> void:
+	super()
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 

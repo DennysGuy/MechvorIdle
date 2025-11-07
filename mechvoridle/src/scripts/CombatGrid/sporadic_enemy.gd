@@ -13,6 +13,7 @@ var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LE
 var laser_count_down : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 
