@@ -19,6 +19,7 @@ var is_dead : bool = false
 
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	
+	
 	if is_dead:
 		return
 	health -= value

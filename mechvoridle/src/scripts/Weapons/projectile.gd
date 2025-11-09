@@ -32,8 +32,10 @@ func impact_prjectile(area : Area3D):
 			if not is_instance_valid(weapon_owner):
 				return
 			
-			
-			tile_parent.occupant.damage_actor(damage)
+			if tile_parent.occupant == GridManager.player and GridManager.player.shield_active:
+				GameManager.current_shield_amount -= damage
+			else:
+				tile_parent.occupant.damage_actor(damage)
 			if !weapon_origin.attack_pattern.pass_through:
 				queue_free() #will need to also add any sort of tile effects here.
 				tile.clear_targeted_overlay()
