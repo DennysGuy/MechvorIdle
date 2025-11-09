@@ -23,6 +23,8 @@ var suit_key_cards : int = 0
 
 var total_health : int = 10000
 var current_health : int = total_health
+var shield_amount : int = 100
+var current_shield_amount : int = 100
 
 var drone_selected
 var mining_time_elapsed : String

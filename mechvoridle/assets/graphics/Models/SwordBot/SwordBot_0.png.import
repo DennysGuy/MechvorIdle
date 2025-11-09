@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ohxdxxup6nsp"
-path.s3tc="res://.godot/imported/HealerBot.png-1c821781d46f1ff66f443a4b3adac9f4.s3tc.ctex"
+uid="uid://qdpc8c25uy38"
+path.s3tc="res://.godot/imported/SwordBot_0.png-968a840cb668b187d6eda5f4f50ad086.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "6b09db8510a29502d00507bd1e6585c0"
+}
 
 [deps]
 
-source_file="res://assets/graphics/HealerBot/HealerBot.png"
-dest_files=["res://.godot/imported/HealerBot.png-1c821781d46f1ff66f443a4b3adac9f4.s3tc.ctex"]
+source_file="res://assets/graphics/Models/SwordBot/SwordBot_0.png"
+dest_files=["res://.godot/imported/SwordBot_0.png-968a840cb668b187d6eda5f4f50ad086.s3tc.ctex"]
 
 [params]
 

@@ -1,6 +1,7 @@
 class_name HealerBot extends GridEnemy
 
-@onready var animation_player: AnimationPlayer = $HealerBot/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $healer/AnimationPlayer
+
 
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel
 @onready var timer: Timer = $Timer
@@ -23,9 +24,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 
-func _enter_tree() -> void:
-	print("HEALER ENEMY HAS ENTERED!")
-
 func _exit_tree() -> void:
 	GridManager.enemies.erase(self)
 	GridManager.check_wave_status()
+
+
+func heal_enemies() -> void:
+	var pulse : HealPulse = preload("uid://dmyiefkprcywd").instantiate()
+	pulse.global_position = pulse_point.global_position
+	get_parent().add_child(pulse)
+	
+	var pulse_2 : HealPulse = preload("uid://dmyiefkprcywd").instantiate()
+	pulse_2.global_position = pulse_point2.global_position
+	get_parent().add_child(pulse_2)
+	SignalBus.heal_enemy.emit()

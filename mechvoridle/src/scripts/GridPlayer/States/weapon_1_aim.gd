@@ -33,9 +33,6 @@ func process_input(_event: InputEvent) -> State:
 		offset -= 1
 		print(offset)
 	
-	
-	
-	
 	return null
 
 func process_frame(_delta: float) -> State:

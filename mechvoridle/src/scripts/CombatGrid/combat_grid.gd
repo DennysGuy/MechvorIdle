@@ -5,6 +5,7 @@ class_name CombatGrid extends Node3D
 var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
 @onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
+@onready var player_shield_stamina: ProgressBar = $CanvasLayer/PlayerShieldStamina
 
 @onready var wave_tracker: Label = $CanvasLayer/WaveTracker
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 	SignalBus.move_enemy.connect(move_actor)
 	SignalBus.spawn_next_wave.connect(spawn_next_wave)
 	player_health_bar.max_value = GridManager.player.health
+	player_shield_stamina.max_value = GameManager.shield_amount
+	player_shield_stamina.value = player_shield_stamina.max_value
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,6 +29,7 @@ func _process(delta: float) -> void:
 	if GridManager.player:
 		health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 		player_health_bar.value = GridManager.player.health
+		player_shield_stamina.value = GameManager.current_shield_amount
 
 
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
@@ -69,6 +73,9 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2) -> void:
 
 func spawn_next_wave(on_time_out : bool = false) -> void:
 	await get_tree().process_frame
+	if GridManager.current_wave == GridManager.waves.size()-1:
+		return
+		
 	GridManager.current_wave += 1
 	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
 	if GridManager.current_wave > 0:
@@ -82,5 +89,9 @@ func spawn_next_wave(on_time_out : bool = false) -> void:
 	for enemy in selected_wave:
 		spawn_enemy(enemy["enemy"], enemy["coordinates"])
 		await get_tree().create_timer(0.5).timeout
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	SignalBus.enable_enemy_movement.emit()
 	
 	count_down_timer.start_timer()

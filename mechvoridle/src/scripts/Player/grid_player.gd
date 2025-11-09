@@ -174,8 +174,10 @@ var scanned_attack_pattern : Array
 var mech_vulcan : MechWeapon = preload("uid://kcrfevws33d7")
 var can_shoot : bool = true
 var can_fire_vulcans : bool = true
+var shield_active : bool = false
 var firing : bool = false
 
+@onready var shield: Shield = $Shield
 
 
 var true_wait_time : float = 0
@@ -238,7 +240,12 @@ func _process(delta: float) -> void:
 			
 		GridManager.clear_targeted_tiles()
 	
-
+	if Input.is_action_pressed("activate_shield"):
+		shield_active = true
+		shield.show()
+	else:
+		shield_active = false
+		shield.hide()
 	
 	state_machine.process_frame(delta)
 

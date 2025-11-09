@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bdavl4sbcomxk"]
+[gd_scene load_steps=47 format=4 uid="uid://bdavl4sbcomxk"]
 
 [ext_resource type="Texture2D" uid="uid://crqc42bpuql37" path="res://assets/graphics/TurretBot/TurretEnemy_0.png" id="1_1ibgu"]
 [ext_resource type="Script" uid="uid://b45s7l4f3in4f" path="res://src/scripts/Enemies/TurretBot/turret_drone.gd" id="1_1osyg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dvpxqgjvgry2n" path="res://src/scripts/EnemyStates/TurretDrone/shoot.gd" id="5_4wr3v"]
 [ext_resource type="Script" uid="uid://y02edyq550l5" path="res://src/scripts/Enemies/die.gd" id="7_of6jb"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="8_ije7j"]
+[ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="9_hlvsc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qtrn"]
 resource_name = "Material_0"
@@ -1526,7 +1527,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032635808, 1.5953583, 1.249
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_o55xx")
-initial_state = NodePath("Idle")
+initial_state = NodePath("SpawnIn")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("shoot")]
 script = ExtResource("3_1osyg")
@@ -1544,6 +1545,10 @@ idle = NodePath("../Idle")
 
 [node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("8_ije7j")
+idle = NodePath("../Idle")
+
+[node name="SpawnIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("9_hlvsc")
 idle = NodePath("../Idle")
 
 [node name="Timer" type="Timer" parent="."]

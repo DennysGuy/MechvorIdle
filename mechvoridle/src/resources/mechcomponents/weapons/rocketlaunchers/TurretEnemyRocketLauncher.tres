@@ -8,7 +8,7 @@
 script = ExtResource("1_lthdm")
 weapon_class = 2
 weapon_owner = 1
-damage = 15.0
+damage = 72.0
 attack_pattern = ExtResource("1_ieceb")
 projectile = ExtResource("2_e4spp")
 metadata/_custom_type_script = "uid://cs720t7rvcl3x"

@@ -1,12 +1,10 @@
-class_name HealerIdle extends State
+class_name EnemySpawnIn extends State
 
-@export var heal : State
+@export var idle : State
 
 func enter() -> void:
-	parent.animation_player.play("idle")
-	parent.timer.wait_time = 2.0
-	parent.timer.start()
-	
+	pass
+
 func exit() -> void:
 	pass
 
@@ -17,7 +15,7 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	if parent.timer.time_left <= 0.0:
-		return heal
-	
+	if parent.can_move:
+		return idle
 	return null
+		

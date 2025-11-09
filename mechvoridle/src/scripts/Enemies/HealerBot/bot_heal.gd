@@ -3,15 +3,9 @@ class_name EnemyHeal extends State
 @export var idle : State
 
 func enter() -> void:
-	var pulse : HealPulse = preload("uid://dmyiefkprcywd").instantiate()
-	pulse.global_position = parent.pulse_point.global_position
-	parent.get_parent().add_child(pulse)
-	
-	var pulse_2 : HealPulse = preload("uid://dmyiefkprcywd").instantiate()
-	pulse_2.global_position = parent.pulse_point2.global_position
-	parent.get_parent().add_child(pulse_2)
-	SignalBus.heal_enemy.emit()
-	parent.timer.wait_time = 0.3
+	parent.animation_player.play("heal")
+	parent.timer.wait_time = 2.5
+	parent.timer.start()
 	
 func exit() -> void:
 	pass

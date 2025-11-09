@@ -1,4 +1,4 @@
-[gd_scene load_steps=345 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=347 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://3f3f40j0d6nr" path="res://assets/graphics/Models/PlayerMech/PlayerCharacterWithWeapons_0.png" id="2_uffql"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://crvls6csjm8s5" path="res://src/scripts/GridPlayer/weapon_2_fire.gd" id="23_cp1m8"]
 [ext_resource type="Script" uid="uid://bscrqcerl76ix" path="res://src/scripts/Enemies/HealerBot/temp_hurt.gd" id="24_ccc6x"]
 [ext_resource type="Script" uid="uid://bgs36x2jascbv" path="res://src/scripts/Enemies/HealerBot/temp_die.gd" id="25_hpw55"]
+[ext_resource type="Script" uid="uid://cc8yin8dffkuf" path="res://src/scripts/Player/shield.gd" id="26_hpw55"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4axj6"]
 resource_name = "material_0"
@@ -6524,6 +6525,10 @@ _data = {
 &"WideSwordSwing": SubResource("Animation_2bvhv")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccc6x"]
+transparency = 1
+albedo_color = Color(0.75686276, 0.7921569, 0.3254902, 0.5176471)
+
 [node name="Player" type="Node3D" node_paths=PackedStringArray("state_machine", "hurt", "death")]
 script = ExtResource("1_8keqk")
 state_machine = NodePath("StateMachine")
@@ -6534,10 +6539,10 @@ death = NodePath("StateMachine/Die")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="UpperBody" type="Node3D" parent="blockbench_export"]
-transform = Transform3D(0.819152, 0, -0.57357633, 0, 1, 0, 0.57357633, 0, 0.819152, 0, 0, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Head" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.819152, 0, 0.57357633, 0, 1, 0, -0.57357633, 0, 0.819152, 0, 1.875, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 1.875, 0)
 
 [node name="MeleeHead" type="Node3D" parent="blockbench_export/UpperBody/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0089925, 0.071825, -0.005945625)
@@ -6556,7 +6561,7 @@ mesh = SubResource("ArrayMesh_425n8")
 skeleton = NodePath("")
 
 [node name="Torso" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.9848076, 0, 0.1736482, 0, 1, 0, -0.1736482, 0, 0.9848076, -0.035715, 1.6009893, -0.000631875)
+transform = Transform3D(0.98480755, 0, 0.17364816, 0, 1, 0, -0.17364816, 0, 0.98480755, -0.035715, 1.6009893, -0.000631875)
 
 [node name="LightTorso" type="Node3D" parent="blockbench_export/UpperBody/Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0622775, -0.22286437, 0.000631875)
@@ -6724,7 +6729,7 @@ mesh = SubResource("ArrayMesh_kwlxt")
 skeleton = NodePath("")
 
 [node name="Arm1" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.9537169, -0.30070573, 0, 0.30070573, 0.9537169, 0, 0, 0, 1, -0.125, 1.4375, -0.375)
+transform = Transform3D(0.9537168, -0.30070576, 0, 0.30070576, 0.9537168, 0, 0, 0, 1, -0.125, 1.4375, -0.375)
 
 [node name="Shoulder" type="Node3D" parent="blockbench_export/UpperBody/Arm1"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21643962, 0, 0.21643962, 0.976296, 0.14836624, 0.28876188, -0.012353125)
@@ -6733,7 +6738,7 @@ transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21643962, 0, 0.21643962, 0.9762
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00356375, -0.50381, 0.016071875)
 
 [node name="ForeArm" type="Node3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep"]
-transform = Transform3D(0.38268328, 0.9238795, 0, -0.9238795, 0.38268328, 0, 0, 0, 1, 0.038695, 0.065405, 0.02600875)
+transform = Transform3D(0.3826834, 0.92387944, 0, -0.92387944, 0.3826834, 0, 0, 0, 1, 0.038695, 0.065405, 0.02600875)
 
 [node name="Hand" type="Node3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0234375, -0.613835, 0.04721875)
@@ -6766,7 +6771,7 @@ mesh = SubResource("ArrayMesh_cji73")
 skeleton = NodePath("")
 
 [node name="StandardSwordRightSide" type="Node3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand"]
-transform = Transform3D(0.1702496, -0.9624259, 0.21154562, 0.9770125, 0.19281662, 0.09092931, -0.1283022, 0.19120204, 0.97312915, 0.23160659, 0.09029753, -0.112678714)
+transform = Transform3D(0.1702496, -0.9624259, 0.21154562, 0.97701246, 0.19281662, 0.09092931, -0.1283022, 0.19120204, 0.97312915, 0.23160659, 0.09029753, -0.112678714)
 visible = false
 
 [node name="StandardSwordHandleRightSide" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/StandardSwordRightSide"]
@@ -6890,7 +6895,7 @@ mesh = SubResource("ArrayMesh_rfjq4")
 skeleton = NodePath("")
 
 [node name="Arm2" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.35521895, 0.6990054, 0.62065357, -0.89178354, 0.45246157, 0.0008141696, -0.28025284, -0.55377793, 0.7840843, 0.02336625, 1.70849, 0.30719)
+transform = Transform3D(0.8870108, -0.4599915, 0.04024413, 0.4508033, 0.88155377, 0.14014043, -0.09994078, -0.106163904, 0.9893133, 0.02336625, 1.70849, 0.30719)
 
 [node name="Shoulder2" type="Node3D" parent="blockbench_export/UpperBody/Arm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
@@ -6899,7 +6904,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00356375, -0.50381, -0.016071875)
 
 [node name="ForeArm2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2"]
-transform = Transform3D(0.819152, 0.57357633, 0, -0.57357633, 0.819152, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
+transform = Transform3D(0.13052623, 0.9914447, 0, -0.9914447, 0.13052623, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
 
 [node name="Hand2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0234375, -0.613835, -0.04721875)
@@ -6956,6 +6961,7 @@ skeleton = NodePath("")
 
 [node name="RifleLeftSide" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2"]
 transform = Transform3D(0, -1, -1.0408341e-17, 1, 0, 4.135903e-25, 4.135903e-25, -1.0408341e-17, 1, -0.19689, -0.00300125, 0.04965625)
+visible = false
 
 [node name="RifleLeftSide" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/RifleLeftSide"]
 transform = Transform3D(1, 0, 0, 0, 0.98768836, 0.15643448, 0, -0.15643448, 0.98768836, -0.02656, -0.12626626, 0)
@@ -7052,13 +7058,13 @@ mesh = SubResource("ArrayMesh_f6lgh")
 skeleton = NodePath("")
 
 [node name="LowerBody" type="Node3D" parent="blockbench_export"]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0, 0, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Leg" type="Node3D" parent="blockbench_export/LowerBody"]
-transform = Transform3D(0.9848076, 0, 0.1736482, 0, 1, 0, -0.1736482, 0, 0.9848076, 0, 1.25, -0.125)
+transform = Transform3D(0.98480755, 0, 0.17364816, 0, 1, 0, -0.17364816, 0, 0.98480755, 0, 1.25, -0.125)
 
 [node name="UpperLeg" type="Node3D" parent="blockbench_export/LowerBody/Leg"]
-transform = Transform3D(0.99904823, -0.043619383, 0, 0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
+transform = Transform3D(0.99904823, -0.04361939, 0, 0.04361939, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
 
 [node name="KneeGuard" type="Node3D" parent="blockbench_export/LowerBody/Leg/UpperLeg"]
 transform = Transform3D(0.96115345, -0.2621005, 0.086529575, 0.27053717, 0.9567335, -0.10710083, -0.054714568, 0.1263498, 0.99047565, -0.1785075, -0.60180813, -0.21375813)
@@ -7286,7 +7292,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.8433915, 0, 0.5372996, 0, 1, 0, -0.5372996, 0, 0.8433915, 0, 1.25, 0.125)
 
 [node name="UpperLeg2" type="Node3D" parent="blockbench_export/LowerBody/Leg2"]
-transform = Transform3D(0.99904823, -0.043619383, 0, 0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
+transform = Transform3D(0.99904823, -0.04361939, 0, 0.04361939, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
 
 [node name="KneeGuard2" type="Node3D" parent="blockbench_export/LowerBody/Leg2/UpperLeg2"]
 transform = Transform3D(0.96115345, -0.2621005, -0.086529575, 0.27053717, 0.9567335, 0.10710083, 0.054714568, -0.1263498, 0.99047565, -0.1785075, -0.60180813, 0.21375813)
@@ -7595,3 +7601,12 @@ script = ExtResource("25_hpw55")
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
+
+[node name="Shield" type="CSGSphere3D" parent="."]
+transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
+visible = false
+radial_segments = 8
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ccc6x")
+script = ExtResource("26_hpw55")

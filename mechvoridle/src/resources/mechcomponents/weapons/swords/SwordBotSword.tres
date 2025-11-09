@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=4 format=3 uid="uid://ba1hhikbrft14"]
+
+[ext_resource type="Script" uid="uid://6cacw0wqd6ts" path="res://src/scripts/Weapons/attack_pattern.gd" id="1_30do2"]
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_ab8r2"]
+
+[sub_resource type="Resource" id="Resource_8qoyo"]
+script = ExtResource("1_30do2")
+target_offset = Vector2(4, 0)
+direction = 1
+metadata/_custom_type_script = "uid://6cacw0wqd6ts"
+
+[resource]
+script = ExtResource("1_ab8r2")
+damage = 50.0
+attack_pattern = SubResource("Resource_8qoyo")
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

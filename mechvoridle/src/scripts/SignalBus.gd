@@ -333,3 +333,5 @@ signal add_enemy_to_grid(enemy : GridEnemy)
 signal add_time(time : int)
 @warning_ignore("unused_signal")
 signal apply_timer_consequences
+@warning_ignore("unused_signal")
+signal enable_enemy_movement

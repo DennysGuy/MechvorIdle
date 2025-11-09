@@ -13,6 +13,7 @@ var targeted_tiles : Array[Tile] = []
 const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
 const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
 const HEALER_BOT = preload("uid://dcrmt7013v31a")
+const SWORD_BOT = preload("uid://df0aqkd6tb8o0")
 
 
 func _ready() -> void:
@@ -93,8 +94,6 @@ func check_wave_status() -> void:
 	if enemies.is_empty():
 		SignalBus.spawn_next_wave.emit(false)
 
-
-
 	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
@@ -167,8 +166,8 @@ func set_mech_as_standard_light() -> void:
 var waves = [
 	[
 		{	
-			"enemy" : TURRET_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1)
+			"enemy" : SWORD_BOT.duplicate(true),
+			"coordinates": Vector2(2,1)
 		}
 	],
 	[
@@ -219,7 +218,59 @@ var waves = [
 			"enemy": HEALER_BOT.duplicate(true),
 			"coordinates": Vector2(0,2)
 		}
-	]
+	],
+	[
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,1)
+		},
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,1)
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,1)
+		},
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,2)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,1)
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,0)
+		},
+		
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,0)
+		},
+		{
+			"enemy": HEALER_BOT.duplicate(true), 
+			"coordinates": Vector2(0,2)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,0)
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,2)
+		},
+		
+	],
+	
+	
 ]
 
 
