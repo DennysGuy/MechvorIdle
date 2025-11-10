@@ -269,6 +269,28 @@ var waves = [
 		},
 		
 	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,0)
+		},
+		{
+			"enemy": HEALER_BOT.duplicate(true), 
+			"coordinates": Vector2(0,2)
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,0)
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,2)
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(3,0)
+		},
+	]
 	
 	
 ]
