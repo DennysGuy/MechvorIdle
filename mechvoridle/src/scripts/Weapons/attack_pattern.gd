@@ -77,17 +77,23 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 			if selected_tile.occupant:
 				var enemy : GridActor = selected_tile.occupant
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
-					
-					enemy.damage_actor(damage, is_vulcan)
+					if enemy is SwordBot and not enemy.in_stagger_state:
+						break
+					else:
+						enemy.damage_actor(damage, is_vulcan)
 					if !pass_through:
 						break
-				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER and attack_type == 0:
-					if GridManager.player.shield_active:
+						
+				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
+					if enemy == GridManager.player and GridManager.player.shield_active:
 						GameManager.current_shield_amount -= damage
+						if GameManager.current_shield_amount <= 0:
+							GridManager.player.can_use_shield = false
 					else:
 						enemy.damage_actor(damage)
 					if !pass_through:
 						break
+
 
 func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	return GridManager.get_tile(tiles, coordinates)

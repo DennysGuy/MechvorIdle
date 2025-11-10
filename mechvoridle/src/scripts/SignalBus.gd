@@ -335,3 +335,5 @@ signal add_time(time : int)
 signal apply_timer_consequences
 @warning_ignore("unused_signal")
 signal enable_enemy_movement
+@warning_ignore("unused_signal")
+signal refil_shield_gauge

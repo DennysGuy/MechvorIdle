@@ -19,6 +19,7 @@ func _ready() -> void:
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
 	SignalBus.spawn_next_wave.connect(spawn_next_wave)
+	SignalBus.refil_shield_gauge.connect(fill_shield_guage)
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
 	player_shield_stamina.value = player_shield_stamina.max_value
@@ -80,7 +81,7 @@ func spawn_next_wave(on_time_out : bool = false) -> void:
 	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
 	if GridManager.current_wave > 0:
 		if on_time_out:
-			count_down_timer.add_time(30)
+			count_down_timer.add_time(120)
 		else:
 			count_down_timer.add_time(12)
 		
@@ -95,3 +96,11 @@ func spawn_next_wave(on_time_out : bool = false) -> void:
 	SignalBus.enable_enemy_movement.emit()
 	
 	count_down_timer.start_timer()
+
+func fill_shield_guage() -> void:
+	while GameManager.current_shield_amount <= GameManager.shield_amount:
+		GameManager.current_shield_amount += 0.02
+		player_shield_stamina.value = GameManager.current_shield_amount
+		#await get_tree().create_timer(0.2).timeout
+	
+	GridManager.player.can_use_shield = true

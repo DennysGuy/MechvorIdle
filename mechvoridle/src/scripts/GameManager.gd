@@ -23,8 +23,8 @@ var suit_key_cards : int = 0
 
 var total_health : int = 10000
 var current_health : int = total_health
-var shield_amount : int = 100
-var current_shield_amount : int = 100
+var shield_amount : float = 100
+var current_shield_amount : float = 100
 
 var drone_selected
 var mining_time_elapsed : String
@@ -601,6 +601,11 @@ func reset():
 		"LeftWeapon": null,
 		"RightWeapon": null
 	}
+
+func damage_shield(amount : int) -> void:
+	GameManager.current_shield_amount -= amount
+	if GameManager.current_shield_amount <= 0:
+		GridManager.player.can_use_shield = false
 
 #Test Variables
 

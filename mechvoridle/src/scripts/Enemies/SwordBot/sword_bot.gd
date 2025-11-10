@@ -7,6 +7,9 @@ class_name SwordBot extends GridEnemy
 
 var destined_tile : Tile
 var tile_to_attack : Tile
+var in_stagger_state : bool = false
+var is_blocking : bool = false
+@export var stagger_state : State
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +23,6 @@ func _exit_tree() -> void:
 		tile_to_attack.clear_targeted_overlay()
 		
 	GridManager.enemies.erase(self)
-	
 	GridManager.check_wave_status()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,3 +37,11 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
+
+
+func attack_player(player : GridActor) -> void:
+	if player is GridPlayer:
+		if player.shield_active:
+			in_stagger_state = true
+		else:
+			player.damage_actor(weapon.damage)

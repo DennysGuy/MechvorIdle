@@ -33,8 +33,13 @@ func impact_prjectile(area : Area3D):
 				return
 			
 			if tile_parent.occupant == GridManager.player and GridManager.player.shield_active:
-				GameManager.current_shield_amount -= damage
+				GameManager.damage_shield(weapon_origin.damage)
 			else:
+				
+				if tile_parent.occupant is SwordBot and not tile_parent.occupant.in_stagger_state:
+					queue_free()
+					return
+				
 				tile_parent.occupant.damage_actor(damage)
 			if !weapon_origin.attack_pattern.pass_through:
 				queue_free() #will need to also add any sort of tile effects here.

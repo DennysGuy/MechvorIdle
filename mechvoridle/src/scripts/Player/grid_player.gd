@@ -3,6 +3,7 @@ class_name GridPlayer extends GridActor
 @onready var animation_player: AnimationPlayer = $blockbench_export/AnimationPlayer
 @onready var vlucan_1: Marker3D = $Vlucan1
 @onready var vlucan_2: Marker3D = $Vlucan2
+@onready var shield_cool_down_timer: Timer = $ShieldCoolDownTimer
 
 @onready var rifle_2_spout: Marker3D = $Rifle2Spout
 
@@ -72,6 +73,7 @@ class_name GridPlayer extends GridActor
 @onready var rifle_left_side: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/RifleLeftSide
 
 var scanned_attack_pattern : Array
+var can_use_shield : bool = true
 
 @onready var mech_components : Dictionary = {
 	"Head": {
@@ -176,7 +178,7 @@ var can_shoot : bool = true
 var can_fire_vulcans : bool = true
 var shield_active : bool = false
 var firing : bool = false
-
+var start_shield_cool_down : bool = false
 @onready var shield: Shield = $Shield
 
 
@@ -240,12 +242,24 @@ func _process(delta: float) -> void:
 			
 		GridManager.clear_targeted_tiles()
 	
-	if Input.is_action_pressed("activate_shield"):
+	if Input.is_action_pressed("activate_shield") and can_use_shield:
 		shield_active = true
 		shield.show()
 	else:
 		shield_active = false
 		shield.hide()
+	
+		if GameManager.current_shield_amount < GameManager.shield_amount:
+			if not start_shield_cool_down:
+				
+				if can_use_shield:
+					shield_cool_down_timer.wait_time = 3.0
+				else:
+					shield_cool_down_timer.wait_time = 7.0
+				shield_cool_down_timer.start()
+				start_shield_cool_down = true
+			print(shield_cool_down_timer.time_left)
+	#
 	
 	state_machine.process_frame(delta)
 
@@ -289,3 +303,9 @@ func fire_rifle_2() -> void:
 
 func apply_time_consequences() -> void:
 	damage_actor(int(health * 0.3))
+
+
+func _on_shield_cool_down_timer_timeout() -> void:
+	start_shield_cool_down = false
+	SignalBus.refil_shield_gauge.emit()
+	

@@ -7610,3 +7610,9 @@ rings = 5
 smooth_faces = false
 material = SubResource("StandardMaterial3D_ccc6x")
 script = ExtResource("26_hpw55")
+
+[node name="ShieldCoolDownTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]

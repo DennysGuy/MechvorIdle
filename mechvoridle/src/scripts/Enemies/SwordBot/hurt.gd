@@ -1,11 +1,14 @@
-class_name TempHurt extends State
+extends State
 
 @export var idle : State
 
 func enter() -> void:
 	parent.timer.wait_time = 1.0
 	parent.timer.start()
-
+	
+	parent.tile_to_attack = null
+	parent.destined_tile = null
+	
 
 func exit() -> void:
 	pass
@@ -17,8 +20,7 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	
 	if parent.timer.time_left <= 0: 
 		return idle
-	
 	return null
+		

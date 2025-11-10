@@ -18,8 +18,6 @@ const  WAIT_TIME : float = 0.2
 var is_dead : bool = false
 
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
-	
-	
 	if is_dead:
 		return
 	health -= value
