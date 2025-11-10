@@ -19,6 +19,7 @@ func _ready() -> void:
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
 	SignalBus.spawn_next_wave.connect(spawn_next_wave)
+	SignalBus.update_shield_amount.connect(update_shield_amount)
 	SignalBus.refil_shield_gauge.connect(fill_shield_guage)
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 	if GridManager.player:
 		health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 		player_health_bar.value = GridManager.player.health
-		player_shield_stamina.value = GameManager.current_shield_amount
+		
 
 
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
@@ -97,10 +98,20 @@ func spawn_next_wave(on_time_out : bool = false) -> void:
 	
 	count_down_timer.start_timer()
 
+func update_shield_amount() -> void:
+	player_shield_stamina.value = GameManager.current_shield_amount
+
 func fill_shield_guage() -> void:
-	while GameManager.current_shield_amount <= GameManager.shield_amount:
-		GameManager.current_shield_amount += 0.02
-		player_shield_stamina.value = GameManager.current_shield_amount
-		#await get_tree().create_timer(0.2).timeout
+	var speed := 35.0  # amount per second
 	
+	while GameManager.current_shield_amount < GameManager.shield_amount:
+		var delta := get_process_delta_time()
+		GameManager.current_shield_amount = min(
+			GameManager.current_shield_amount + speed * delta,
+			GameManager.shield_amount
+		)
+		
+		update_shield_amount()
+		await get_tree().process_frame  # allow next frame to draw
+	GridManager.player.start_shield_cool_down = false
 	GridManager.player.can_use_shield = true

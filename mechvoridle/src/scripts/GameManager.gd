@@ -606,6 +606,8 @@ func damage_shield(amount : int) -> void:
 	GameManager.current_shield_amount -= amount
 	if GameManager.current_shield_amount <= 0:
 		GridManager.player.can_use_shield = false
+		
+	SignalBus.update_shield_amount.emit()
 
 #Test Variables
 

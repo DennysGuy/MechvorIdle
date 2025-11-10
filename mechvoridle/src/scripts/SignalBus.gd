@@ -337,3 +337,5 @@ signal apply_timer_consequences
 signal enable_enemy_movement
 @warning_ignore("unused_signal")
 signal refil_shield_gauge
+@warning_ignore("unused_signal")
+signal update_shield_amount

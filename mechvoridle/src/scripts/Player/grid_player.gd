@@ -306,6 +306,6 @@ func apply_time_consequences() -> void:
 
 
 func _on_shield_cool_down_timer_timeout() -> void:
-	start_shield_cool_down = false
+	#start_shield_cool_down = false
 	SignalBus.refil_shield_gauge.emit()
 	
