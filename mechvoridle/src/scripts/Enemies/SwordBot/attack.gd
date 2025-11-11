@@ -8,7 +8,8 @@ func enter() -> void:
 	print(parent.weapon.damage)
 	
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
-	parent.attack_player(parent.tile_to_attack.occupant)
+	if is_instance_valid(GridManager.player):
+		parent.attack_player(parent.tile_to_attack.occupant)
 	if parent.in_stagger_state:
 		parent.state_machine.change_state(stagger)
 	else:

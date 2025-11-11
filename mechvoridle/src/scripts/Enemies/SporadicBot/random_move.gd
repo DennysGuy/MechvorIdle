@@ -4,7 +4,7 @@ class_name RandomMove extends State
 @export var zap : State
 
 var time_to_shoot : int = 0
-var interval : int = 3
+var interval : int = 2
 func enter() -> void:
 	SignalBus.move_enemy.emit(parent, parent.random_direction_list.pick_random(),parent.row_limit,parent.col_limit)
 	time_to_shoot += 1

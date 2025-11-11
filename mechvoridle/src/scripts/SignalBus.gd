@@ -169,7 +169,7 @@ signal update_opponent_health_bar
 @warning_ignore("unused_signal")
 signal fill_bar_on_start_up
 @warning_ignore("unused_signal")
-signal shake_camera(value : int)
+signal shake_camera(value : float)
 
 #mission
 

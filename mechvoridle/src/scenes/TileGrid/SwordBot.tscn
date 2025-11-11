@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://df0aqkd6tb8o0"]
+[gd_scene load_steps=65 format=4 uid="uid://df0aqkd6tb8o0"]
 
 [ext_resource type="Script" uid="uid://jjad5qyel3ry" path="res://src/scripts/Enemies/SwordBot/sword_bot.gd" id="1_mft84"]
 [ext_resource type="Texture2D" uid="uid://qdpc8c25uy38" path="res://assets/graphics/Models/SwordBot/SwordBot_0.png" id="2_1j7qk"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dnwrq2ls8jp7a" path="res://src/scripts/Enemies/SwordBot/prepare.gd" id="10_siau0"]
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="12_58swo"]
 [ext_resource type="Script" uid="uid://sqk34dbd7j2o" path="res://src/scripts/Enemies/SwordBot/stagger.gd" id="13_ku2yv"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="14_jttd7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1p3d"]
 resource_name = "material_0"
@@ -21,6 +22,7 @@ alpha_scissor_threshold = 0.05
 alpha_antialiasing_mode = 0
 cull_mode = 2
 albedo_texture = ExtResource("2_1j7qk")
+emission_enabled = true
 texture_filter = 0
 texture_repeat = false
 
@@ -642,6 +644,115 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8gs4y")
 
+[sub_resource type="Animation" id="Animation_3x1pl"]
+resource_name = "Block"
+length = 0.25
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordBot/UpperBody/Arm")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.25, -0.475, 0.20625)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordBot/UpperBody/Arm")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "position_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordBot/UpperBody/Arm2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.3125, -0.55625, -0.46875)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordBot/UpperBody/Arm2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.9961947, 0, 0.087155744)
+tracks/4/type = "position_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwordBot/UpperBody")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -0.021875, 0.32291687, 0.008333125)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordBot/UpperBody")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, -0.57357645, 0, 0.81915206)
+tracks/6/type = "position_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("SwordBot/UpperBody/Head2")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0.009375, 0.2125, 0.1)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("SwordBot/UpperBody/Head2")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, -0.037079513, 0.5906305, 0.07258702, 0.80281496)
+tracks/8/type = "position_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, -0.506845, 0.03125, 0.09023375)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, 0.829647, 0, 0, 0.5582882, 0.1, 1, 0.90922475, 0, 0, 0.4163056, 0.13333334, 1, 0.80410004, 0, 0, 0.594494, 0.2, 1, 0.23755337, 0, 0, 0.9713745, 0.23333333, 1, 0.03503575, 0, 0, 0.9993861, 0.25, 1, -0.043619387, 0, 0, 0.99904823)
+tracks/10/type = "position_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, -0.10625, -0.06875, -0.0625)
+tracks/11/type = "rotation_3d"
+tracks/11/imported = true
+tracks/11/enabled = true
+tracks/11/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0.39231485, 0.2042262, -0.79553586, 0.41412973)
+tracks/12/type = "position_3d"
+tracks/12/imported = true
+tracks/12/enabled = true
+tracks/12/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = PackedFloat32Array(0, 1, 0.13511875, 0.11438563, -0.046875)
+tracks/13/type = "rotation_3d"
+tracks/13/imported = true
+tracks/13/enabled = true
+tracks/13/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/14/type = "rotation_3d"
+tracks/14/imported = true
+tracks/14/enabled = true
+tracks/14/path = NodePath("SwordBot/LowerBody")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
 [sub_resource type="Animation" id="Animation_b7m7w"]
 resource_name = "Idle"
 length = 2.0
@@ -748,115 +859,6 @@ tracks/14/type = "rotation_3d"
 tracks/14/imported = true
 tracks/14/enabled = true
 tracks/14/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_3x1pl"]
-resource_name = "Block"
-length = 0.25
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("SwordBot/UpperBody/Arm")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.25, -0.475, 0.20625)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("SwordBot/UpperBody/Arm")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("SwordBot/UpperBody/Arm2")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.3125, -0.55625, -0.46875)
-tracks/3/type = "rotation_3d"
-tracks/3/imported = true
-tracks/3/enabled = true
-tracks/3/path = NodePath("SwordBot/UpperBody/Arm2")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.9961947, 0, 0.087155744)
-tracks/4/type = "position_3d"
-tracks/4/imported = true
-tracks/4/enabled = true
-tracks/4/path = NodePath("SwordBot/UpperBody")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, -0.021875, 0.32291687, 0.008333125)
-tracks/5/type = "rotation_3d"
-tracks/5/imported = true
-tracks/5/enabled = true
-tracks/5/path = NodePath("SwordBot/UpperBody")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 0, -0.57357645, 0, 0.81915206)
-tracks/6/type = "position_3d"
-tracks/6/imported = true
-tracks/6/enabled = true
-tracks/6/path = NodePath("SwordBot/UpperBody/Head2")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, 0.009375, 0.2125, 0.1)
-tracks/7/type = "rotation_3d"
-tracks/7/imported = true
-tracks/7/enabled = true
-tracks/7/path = NodePath("SwordBot/UpperBody/Head2")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = PackedFloat32Array(0, 1, -0.037079513, 0.5906305, 0.07258702, 0.80281496)
-tracks/8/type = "position_3d"
-tracks/8/imported = true
-tracks/8/enabled = true
-tracks/8/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = PackedFloat32Array(0, 1, -0.506845, 0.03125, 0.09023375)
-tracks/9/type = "rotation_3d"
-tracks/9/imported = true
-tracks/9/enabled = true
-tracks/9/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, 0.829647, 0, 0, 0.5582882, 0.1, 1, 0.90922475, 0, 0, 0.4163056, 0.13333334, 1, 0.80410004, 0, 0, 0.594494, 0.2, 1, 0.23755337, 0, 0, 0.9713745, 0.23333333, 1, 0.03503575, 0, 0, 0.9993861, 0.25, 1, -0.043619387, 0, 0, 0.99904823)
-tracks/10/type = "position_3d"
-tracks/10/imported = true
-tracks/10/enabled = true
-tracks/10/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, -0.10625, -0.06875, -0.0625)
-tracks/11/type = "rotation_3d"
-tracks/11/imported = true
-tracks/11/enabled = true
-tracks/11/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0.39231485, 0.2042262, -0.79553586, 0.41412973)
-tracks/12/type = "position_3d"
-tracks/12/imported = true
-tracks/12/enabled = true
-tracks/12/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = PackedFloat32Array(0, 1, 0.13511875, 0.11438563, -0.046875)
-tracks/13/type = "rotation_3d"
-tracks/13/imported = true
-tracks/13/enabled = true
-tracks/13/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-tracks/14/type = "rotation_3d"
-tracks/14/imported = true
-tracks/14/enabled = true
-tracks/14/path = NodePath("SwordBot/LowerBody")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
@@ -970,115 +972,6 @@ tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_4fwfy"]
-resource_name = "Swing"
-length = 0.20833
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("SwordBot/UpperBody/Arm")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.625, -0.09375, -0.08125)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("SwordBot/UpperBody/Arm")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.3751412, 0.6699475, 0.22660734, 0.59923995)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("SwordBot/UpperBody/Arm2")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.3125, -0.55625, -0.46875)
-tracks/3/type = "rotation_3d"
-tracks/3/imported = true
-tracks/3/enabled = true
-tracks/3/path = NodePath("SwordBot/UpperBody/Arm2")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.9961947, 0, 0.087155744)
-tracks/4/type = "position_3d"
-tracks/4/imported = true
-tracks/4/enabled = true
-tracks/4/path = NodePath("SwordBot/UpperBody")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, -0.253125, 0.2666669, -0.06666687, 0.033333335, 1, -0.13327315, 0.2860002, 0.029592387, 0.06666667, 1, 0.019828714, 0.3110002, 0.14968498, 0.1, 1, 0.15940277, 0.33533353, 0.24455534, 0.13333334, 1, 0.24012478, 0.35441697, 0.25195652, 0.20833, 1, 0.190625, 0.37916687, -0.09791687)
-tracks/5/type = "rotation_3d"
-tracks/5/imported = true
-tracks/5/enabled = true
-tracks/5/path = NodePath("SwordBot/UpperBody")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 0.13924028, -0.7139567, 0.061267193, 0.6834649, 0.033333335, 1, 0.166598, -0.68620914, -0.07169264, 0.7044305, 0.06666667, 1, 0.15539823, -0.5533226, -0.19074933, 0.79580164, 0.1, 1, 0.080881454, -0.3748619, -0.22962528, 0.894544, 0.13333334, 1, -0.031154014, -0.22092664, -0.18282907, 0.95749384, 0.16666667, 1, -0.11059217, -0.15835889, -0.10984556, 0.9750005, 0.2, 1, -0.18827653, -0.093279816, -0.035120063, 0.9770453, 0.20833, 1, -0.20727077, -0.07674458, -0.016312564, 0.9751323)
-tracks/6/type = "position_3d"
-tracks/6/imported = true
-tracks/6/enabled = true
-tracks/6/path = NodePath("SwordBot/UpperBody/Head2")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, -0.078125, 0.2125, 0.1)
-tracks/7/type = "rotation_3d"
-tracks/7/imported = true
-tracks/7/enabled = true
-tracks/7/path = NodePath("SwordBot/UpperBody/Head2")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = PackedFloat32Array(0, 1, 0.05963272, 0.24426074, 0.042517994, 0.9669399)
-tracks/8/type = "rotation_3d"
-tracks/8/imported = true
-tracks/8/enabled = true
-tracks/8/path = NodePath("SwordBot/LowerBody")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = PackedFloat32Array(0, 1, 0, -0.087155744, 0, 0.9961947, 0.033333335, 1, 0, -0.07657959, 0, 0.9970635, 0.06666667, 1, 0, -0.062232584, 0, 0.99806166, 0.1, 1, 0, -0.045780618, 0, 0.99895155, 0.13333334, 1, 0, -0.02952563, 0, 0.9995641, 0.16666667, 1, 0, -0.016404193, 0, 0.99986553, 0.2, 1, 0, -0.0032799304, 0, 0.99999464, 0.20833, 1, 0, 0, 0, 1)
-tracks/9/type = "position_3d"
-tracks/9/imported = true
-tracks/9/enabled = true
-tracks/9/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = PackedFloat32Array(0, 1, -0.506845, 0.03125, 0.09023375, 0.033333335, 1, -0.506845, 0.03125, 0.08871372, 0.06666667, 1, -0.506845, 0.03125, 0.08665367, 0.13333334, 1, -0.506845, 0.03125, 0.0819636, 0.20833, 1, -0.506845, 0.03125, 0.07773375)
-tracks/10/type = "rotation_3d"
-tracks/10/imported = true
-tracks/10/enabled = true
-tracks/10/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, -0.22542992, 0.22794983, 0.06953592, 0.9446614, 0.1, 1, -0.27987182, 0.33186376, 0.10448985, 0.8947738, 0.13333334, 1, -0.27402097, 0.4274295, 0.13685797, 0.8505801, 0.2, 1, -0.22163208, 0.59752953, 0.1755396, 0.75034904, 0.20833, 1, -0.21436146, 0.61710817, 0.17987062, 0.73544085)
-tracks/11/type = "position_3d"
-tracks/11/imported = true
-tracks/11/enabled = true
-tracks/11/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = PackedFloat32Array(0, 1, -0.10625, -0.06875, -0.0625, 0.06666667, 1, 0.00525447, -0.110251665, -0.22550654, 0.1, 1, -0.020131402, -0.10962368, -0.19024089, 0.13333334, 1, -0.101875074, -0.097562686, -0.06799966, 0.20833, 1, -0.11875, -0.1375, 0.00625)
-tracks/12/type = "rotation_3d"
-tracks/12/imported = true
-tracks/12/enabled = true
-tracks/12/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, 0.19824888, -0.10822606, 0.09337226, 0.9696732, 0.1, 1, 0.2853632, -0.050160654, 0.15971754, 0.9436854, 0.13333334, 1, 0.3306373, 0.12715046, 0.22797137, 0.90694034, 0.16666667, 1, 0.29266283, 0.32294518, 0.24615625, 0.8657148, 0.2, 1, 0.24245277, 0.50523823, 0.2540498, 0.78829557, 0.20833, 1, 0.22823015, 0.5477749, 0.2543668, 0.7636434)
-tracks/13/type = "position_3d"
-tracks/13/imported = true
-tracks/13/enabled = true
-tracks/13/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = PackedFloat32Array(0, 1, 0.13511875, 0.11438563, -0.046875)
-tracks/14/type = "rotation_3d"
-tracks/14/imported = true
-tracks/14/enabled = true
-tracks/14/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_48yw1"]
 resource_name = "Stagger"
 length = 0.125
@@ -1188,6 +1081,115 @@ tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_4fwfy"]
+resource_name = "Swing"
+length = 0.20833
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordBot/UpperBody/Arm")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.625, -0.09375, -0.08125)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordBot/UpperBody/Arm")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.3751412, 0.6699475, 0.22660734, 0.59923995)
+tracks/2/type = "position_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordBot/UpperBody/Arm2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.3125, -0.55625, -0.46875)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordBot/UpperBody/Arm2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.9961947, 0, 0.087155744)
+tracks/4/type = "position_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwordBot/UpperBody")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -0.253125, 0.2666669, -0.06666687, 0.033333335, 1, -0.13327315, 0.2860002, 0.029592387, 0.06666667, 1, 0.019828714, 0.3110002, 0.14968498, 0.1, 1, 0.15940277, 0.33533353, 0.24455534, 0.13333334, 1, 0.24012478, 0.35441697, 0.25195652, 0.20833, 1, 0.190625, 0.37916687, -0.09791687)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordBot/UpperBody")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0.13924028, -0.7139567, 0.061267193, 0.6834649, 0.033333335, 1, 0.166598, -0.68620914, -0.07169264, 0.7044305, 0.06666667, 1, 0.15539823, -0.5533226, -0.19074933, 0.79580164, 0.1, 1, 0.080881454, -0.3748619, -0.22962528, 0.894544, 0.13333334, 1, -0.031154014, -0.22092664, -0.18282907, 0.95749384, 0.16666667, 1, -0.11059217, -0.15835889, -0.10984556, 0.9750005, 0.2, 1, -0.18827653, -0.093279816, -0.035120063, 0.9770453, 0.20833, 1, -0.20727077, -0.07674458, -0.016312564, 0.9751323)
+tracks/6/type = "position_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("SwordBot/UpperBody/Head2")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -0.078125, 0.2125, 0.1)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("SwordBot/UpperBody/Head2")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0.05963272, 0.24426074, 0.042517994, 0.9669399)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwordBot/LowerBody")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0, -0.087155744, 0, 0.9961947, 0.033333335, 1, 0, -0.07657959, 0, 0.9970635, 0.06666667, 1, 0, -0.062232584, 0, 0.99806166, 0.1, 1, 0, -0.045780618, 0, 0.99895155, 0.13333334, 1, 0, -0.02952563, 0, 0.9995641, 0.16666667, 1, 0, -0.016404193, 0, 0.99986553, 0.2, 1, 0, -0.0032799304, 0, 0.99999464, 0.20833, 1, 0, 0, 0, 1)
+tracks/9/type = "position_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, -0.506845, 0.03125, 0.09023375, 0.033333335, 1, -0.506845, 0.03125, 0.08871372, 0.06666667, 1, -0.506845, 0.03125, 0.08665367, 0.13333334, 1, -0.506845, 0.03125, 0.0819636, 0.20833, 1, -0.506845, 0.03125, 0.07773375)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2/Hand2")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, -0.22542992, 0.22794983, 0.06953592, 0.9446614, 0.1, 1, -0.27987182, 0.33186376, 0.10448985, 0.8947738, 0.13333334, 1, -0.27402097, 0.4274295, 0.13685797, 0.8505801, 0.2, 1, -0.22163208, 0.59752953, 0.1755396, 0.75034904, 0.20833, 1, -0.21436146, 0.61710817, 0.17987062, 0.73544085)
+tracks/11/type = "position_3d"
+tracks/11/imported = true
+tracks/11/enabled = true
+tracks/11/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, -0.10625, -0.06875, -0.0625, 0.06666667, 1, 0.00525447, -0.110251665, -0.22550654, 0.1, 1, -0.020131402, -0.10962368, -0.19024089, 0.13333334, 1, -0.101875074, -0.097562686, -0.06799966, 0.20833, 1, -0.11875, -0.1375, 0.00625)
+tracks/12/type = "rotation_3d"
+tracks/12/imported = true
+tracks/12/enabled = true
+tracks/12/path = NodePath("SwordBot/UpperBody/Arm/LowerArm2")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06666667, 1, 0.19824888, -0.10822606, 0.09337226, 0.9696732, 0.1, 1, 0.2853632, -0.050160654, 0.15971754, 0.9436854, 0.13333334, 1, 0.3306373, 0.12715046, 0.22797137, 0.90694034, 0.16666667, 1, 0.29266283, 0.32294518, 0.24615625, 0.8657148, 0.2, 1, 0.24245277, 0.50523823, 0.2540498, 0.78829557, 0.20833, 1, 0.22823015, 0.5477749, 0.2543668, 0.7636434)
+tracks/13/type = "position_3d"
+tracks/13/imported = true
+tracks/13/enabled = true
+tracks/13/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = PackedFloat32Array(0, 1, 0.13511875, 0.11438563, -0.046875)
+tracks/14/type = "rotation_3d"
+tracks/14/imported = true
+tracks/14/enabled = true
+tracks/14/path = NodePath("SwordBot/UpperBody/Arm2/LowerArm22")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ebey0"]
 _data = {
 &"Block": SubResource("Animation_3x1pl"),
@@ -1200,18 +1202,490 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_siau0"]
 viewport_path = NodePath("EnemyHPLabel")
 
-[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "state_machine", "hurt", "death")]
+[sub_resource type="Animation" id="Animation_jttd7"]
+resource_name = "HitFlash"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/LowerArm:mesh:surface_0/material:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Hand:mesh:surface_0/material:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/cylinder:mesh:surface_0/material:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/Blade:mesh:surface_0/material:emission")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/cylinder2:mesh:surface_0/material:emission")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/UpperArm:mesh:surface_0/material:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/Sholder:mesh:surface_0/material:emission")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/Elbow:mesh:surface_0/material:emission")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/Hand22/Hand3:mesh:surface_0/material:emission")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/Hand22/Sheath:mesh:surface_0/material:emission")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/LowerArm32/LowerArm3:mesh:surface_0/material:emission")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/UpperArm3:mesh:surface_0/material:emission")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/Sholder2:mesh:surface_0/material:emission")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/Elbow2:mesh:surface_0/material:emission")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("SwordBot/SwordBot/UpperBody/Torso2/Torso:mesh:surface_0/material:emission")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/BambooHat:mesh:surface_0/material:emission")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/Head:mesh:surface_0/material:emission")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/torus:mesh:surface_0/material:emission")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("SwordBot/SwordBot/LowerBody/Legs:mesh:surface_0/material:emission")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1p4t3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/LowerArm:mesh:surface_0/material:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Hand:mesh:surface_0/material:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/cylinder:mesh:surface_0/material:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/Blade:mesh:surface_0/material:emission")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/LowerArm2/Hand2/Sword/cylinder2:mesh:surface_0/material:emission")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/UpperArm:mesh:surface_0/material:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/Sholder:mesh:surface_0/material:emission")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SwordBot/SwordBot/UpperBody/Arm/UpperArm2/Elbow:mesh:surface_0/material:emission")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/Hand22/Hand3:mesh:surface_0/material:emission")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/Hand22/Sheath:mesh:surface_0/material:emission")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/LowerArm22/LowerArm32/LowerArm3:mesh:surface_0/material:emission")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/UpperArm3:mesh:surface_0/material:emission")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/Sholder2:mesh:surface_0/material:emission")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("SwordBot/SwordBot/UpperBody/Arm2/UpperArm22/Elbow2:mesh:surface_0/material:emission")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("SwordBot/SwordBot/UpperBody/Torso2/Torso:mesh:surface_0/material:emission")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/BambooHat:mesh:surface_0/material:emission")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/Head:mesh:surface_0/material:emission")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("SwordBot/SwordBot/UpperBody/Head2/torus:mesh:surface_0/material:emission")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("SwordBot/SwordBot/LowerBody/Legs:mesh:surface_0/material:emission")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1p4t3"]
+_data = {
+&"HitFlash": SubResource("Animation_jttd7"),
+&"RESET": SubResource("Animation_1p4t3")
+}
+
+[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
 script = ExtResource("1_mft84")
 stagger_state = NodePath("StateMachine/Stagger")
 weapon = ExtResource("2_6w8gx")
 state_machine = NodePath("StateMachine")
 health = 50
 max_health = 50
+damage_label_marker = NodePath("DamageLabelMarker")
+hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Dead")
 
 [node name="SwordBot" type="Node3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, 0, 0, 0)
 
 [node name="SwordBot" type="Node3D" parent="SwordBot"]
 transform = Transform3D(0.3173046, 0, -0.94832367, 0, 1, 0, 0.94832367, 0, 0.3173046, -0.159375, 0.8145831, -0.12708312)
@@ -1398,16 +1872,25 @@ process_callback = 0
 one_shot = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6553812, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3454306, 0)
 texture = SubResource("ViewportTexture_siau0")
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(55, 34)
+size = Vector2i(165, 34)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 30
-text = "100"
+theme_override_fonts/font = ExtResource("14_jttd7")
+theme_override_font_sizes/font_size = 28
+text = "100/100"
 horizontal_alignment = 1
+
+[node name="DamageLabelMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0340958, 0.24179867)
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1p4t3")
+}

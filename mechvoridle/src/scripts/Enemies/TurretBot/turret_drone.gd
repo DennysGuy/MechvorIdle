@@ -14,7 +14,7 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _process(delta) -> void:
-	health_label.text = str(health)
+	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 	
 func _physics_process(delta : float) -> void:

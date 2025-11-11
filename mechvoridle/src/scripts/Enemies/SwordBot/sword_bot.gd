@@ -27,7 +27,7 @@ func _exit_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	health_label.text = str(health)
+	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 
 
@@ -40,8 +40,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func attack_player(player : GridActor) -> void:
+	var shake_amount : float = 0.0
 	if player is GridPlayer:
 		if player.shield_active:
+			GameManager.damage_shield(weapon.damage)
+			shake_amount = 0.8
 			in_stagger_state = true
 		else:
+			shake_amount = 1.3
 			player.damage_actor(weapon.damage)
+		
+		SignalBus.shake_camera.emit(shake_amount)

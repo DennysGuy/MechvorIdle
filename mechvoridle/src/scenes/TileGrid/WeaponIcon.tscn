@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cud8gmsqfuiq4"]
+[gd_scene load_steps=6 format=3 uid="uid://cud8gmsqfuiq4"]
 
 [ext_resource type="Script" uid="uid://c28geo3unulk4" path="res://src/scripts/TileGrid/weapon_icon.gd" id="1_8630n"]
 [ext_resource type="Texture2D" uid="uid://bpymcpf5h2b7p" path="res://assets/graphics/UI/WeaponIconBase.png" id="1_shdgm"]
 [ext_resource type="Texture2D" uid="uid://dsmjbfcm15wyv" path="res://assets/graphics/UI/WeaponIcon_Sword.png" id="2_ve3kd"]
 [ext_resource type="Texture2D" uid="uid://dh4xvv65c8wm5" path="res://assets/graphics/UI/WeaponCoolDownWheel.png" id="4_1h5p3"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="5_1h5p3"]
 
 [node name="WeaponIcon" type="Control"]
 layout_mode = 3
@@ -76,14 +77,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -23.5
-offset_right = 19.0
-offset_bottom = 21.5
+offset_left = -23.75
+offset_top = -16.75
+offset_right = 23.75
+offset_bottom = 28.75
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("5_1h5p3")
+theme_override_font_sizes/font_size = 30
+text = "10"
 horizontal_alignment = 1
 
 [node name="WeaponNameLabel" type="Label" parent="."]
@@ -94,9 +97,10 @@ anchor_bottom = 0.5
 offset_left = -216.5
 offset_top = -4.5
 offset_right = -5.5
-offset_bottom = 12.5
+offset_bottom = 13.0
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_1h5p3")
 theme_override_font_sizes/font_size = 12
 text = "Weapon Slot 1"
 horizontal_alignment = 2

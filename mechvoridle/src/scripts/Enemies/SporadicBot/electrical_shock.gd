@@ -29,14 +29,18 @@ func move_shock_wave() -> void:
 			selected_tile.set_enemy_targeted_overlay()
 			global_position = selected_tile.marker_3d.global_position
 			if selected_tile.occupant and selected_tile.occupant == GridManager.player:
+				var shake_amount : float = 0.0
 				if GridManager.player.shield_active:
+					shake_amount = 0.7
 					GameManager.damage_shield(weapon_origin.damage)
 				else:
+					shake_amount = 1.4
 					selected_tile.occupant.damage_actor(weapon_origin.damage)
+				SignalBus.shake_camera.emit(shake_amount)
 		#we'll also scan for entities we can attack!
 		i += 1
 		
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.2).timeout
 		selected_tile.clear_targeted_overlay()
 		if final_coordinates.x == GridManager.MAX_ROWS-1:
 			queue_free()

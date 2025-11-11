@@ -61,7 +61,7 @@ func stop_timer() -> void:
 	
 func set_label() -> void:
 	text = ""
-	append_text("[font_size=40]%s[/font_size][font_size=24].%s[/font_size]" % [seconds,milliseconds])
+	append_text("[font_size=35]%s[/font_size][font_size=20].%s[/font_size]" % [seconds,milliseconds])
 
 func add_time(value : int) -> void:
 	seconds += value

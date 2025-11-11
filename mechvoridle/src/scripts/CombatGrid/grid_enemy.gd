@@ -9,7 +9,14 @@ func _ready() -> void:
 	SignalBus.enable_enemy_movement.connect(enable_enemy_movement)
 
 func heal() -> void:
-	health += int(max_health * 0.5)
+	var value : int = int(max_health * 0.5)
+	health += value
+	
+	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
+	damage_label.label.text = "+%s" % [value]
+	damage_label.set_as_heal()
+	damage_label.position = damage_label_marker.position
+	add_child(damage_label)
 	
 	if health >= max_health:
 		health = max_health

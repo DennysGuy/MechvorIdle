@@ -4,10 +4,12 @@ class_name CombatGrid extends Node3D
 @onready var tiles: Node = $Tiles
 var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
-@onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
-@onready var player_shield_stamina: ProgressBar = $CanvasLayer/PlayerShieldStamina
+@onready var player_health_bar: TextureProgressBar = $CanvasLayer/PlayerHealthBar
+@onready var player_shield_stamina: TextureProgressBar = $CanvasLayer/PlayerShieldStamina
 
 @onready var wave_tracker: Label = $CanvasLayer/WaveTracker
+
+@onready var camera: Camera3D = $Camera
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -102,7 +104,7 @@ func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
 
 func fill_shield_guage() -> void:
-	var speed := 35.0  # amount per second
+	var speed := 45.0  # amount per second
 	
 	while GameManager.current_shield_amount < GameManager.shield_amount:
 		var delta := get_process_delta_time()
@@ -112,6 +114,8 @@ func fill_shield_guage() -> void:
 		)
 		
 		update_shield_amount()
-		await get_tree().process_frame  # allow next frame to draw
-	GridManager.player.start_shield_cool_down = false
-	GridManager.player.can_use_shield = true
+		await get_tree().process_frame 
+		
+	if is_instance_valid(GridManager.player):
+		GridManager.player.start_shield_cool_down = false
+		GridManager.player.can_use_shield = true

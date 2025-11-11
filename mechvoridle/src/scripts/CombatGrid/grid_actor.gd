@@ -10,6 +10,8 @@ const  WAIT_TIME : float = 0.2
 @export var max_health : int 
 @export var tiles : Node
 @export var weapon_spout : Marker3D
+@export var damage_label_marker : Marker3D
+@export var hit_flash_animation_player : AnimationPlayer
 
 @export_group("States")
 @export var hurt : State
@@ -20,6 +22,11 @@ var is_dead : bool = false
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	if is_dead:
 		return
+		
+	create_damage_label(value)
+	if hit_flash_animation_player:
+		hit_flash_animation_player.play("HitFlash")
+	
 	health -= value
 	
 	if health <= 0:
@@ -45,3 +52,10 @@ func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = wea
 	projectile = weapon.spawn_projectile(selected_weapon_spout, destined_tile, tiles, self)
 	
 	get_parent().add_child(projectile)
+
+func create_damage_label(amount : int) -> void:
+	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
+	damage_label.set_as_damage()
+	damage_label.label.text = "-%s" % [amount]
+	damage_label.position = damage_label_marker.position
+	add_child(damage_label)

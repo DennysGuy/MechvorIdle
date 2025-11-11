@@ -8,7 +8,7 @@ func enter() -> void:
 	
 	
 	parent.animation_player.play("idle")
-	var random_time : float = randf_range(0.5,1.0)
+	var random_time : float = randf_range(0.3,0.65)
 	parent.timer.wait_time = random_time
 	parent.timer.start()
 

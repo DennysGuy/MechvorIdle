@@ -20,7 +20,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	health_label.text = str(health)
+	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://dcrmt7013v31a"]
+[gd_scene load_steps=28 format=4 uid="uid://dcrmt7013v31a"]
 
 [ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
 [ext_resource type="Texture2D" uid="uid://ohxdxxup6nsp" path="res://assets/graphics/HealerBot/HealerBot.png" id="2_223we"]
 [ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="3_8ngdf"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="3_v5ub3"]
 [ext_resource type="Script" uid="uid://bjuq72ikw7cx8" path="res://src/scripts/Enemies/HealerBot/healer_idle.gd" id="4_u7pyg"]
 [ext_resource type="Script" uid="uid://sufkxsp68cyo" path="res://src/scripts/Enemies/HealerBot/bot_heal.gd" id="5_82xbh"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="6_223we"]
@@ -67,6 +68,7 @@ bind/7/pose = Transform3D(0.96085435, 0.27654096, -0.016855069, -0.2763394, 0.96
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5ub3"]
 albedo_texture = ExtResource("2_223we")
+emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_calol"]
 resource_name = "healer_Mesh_7"
@@ -724,12 +726,172 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_4c8f4"]
 viewport_path = NodePath("EnemyHPLabel")
 
-[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("state_machine", "hurt", "death")]
+[sub_resource type="Animation" id="Animation_v5ub3"]
+resource_name = "HitFlash"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("healer/hilbot/Skeleton3D/Antenna_001:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10046381, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("healer/hilbot/Skeleton3D/Antenna_002:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("healer/hilbot/Skeleton3D/Glasses1_001:surface_material_override/0:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("healer/hilbot/Skeleton3D/Glasses2:surface_material_override/0:emission")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("healer/hilbot/Skeleton3D/Pack_001:surface_material_override/0:emission")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("healer/hilbot/Skeleton3D/Radio1:surface_material_override/0:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rshui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("healer/hilbot/Skeleton3D/Antenna_001:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("healer/hilbot/Skeleton3D/Antenna_002:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("healer/hilbot/Skeleton3D/Glasses1_001:surface_material_override/0:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("healer/hilbot/Skeleton3D/Glasses2:surface_material_override/0:emission")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("healer/hilbot/Skeleton3D/Pack_001:surface_material_override/0:emission")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("healer/hilbot/Skeleton3D/Radio1:surface_material_override/0:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rshui"]
+_data = {
+&"HitFlash": SubResource("Animation_v5ub3"),
+&"RESET": SubResource("Animation_rshui")
+}
+
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
 script = ExtResource("1_8l3vx")
 hurt_time = 0.625
 state_machine = NodePath("StateMachine")
 health = 90
 max_health = 90
+damage_label_marker = NodePath("DamageLabelMarker")
+hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Die")
 
@@ -838,13 +1000,14 @@ one_shot = true
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(100, 50)
+size = Vector2i(164, 50)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 40
-text = "100"
+theme_override_fonts/font = ExtResource("3_v5ub3")
+theme_override_font_sizes/font_size = 28
+text = "100/100"
 horizontal_alignment = 1
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -870,8 +1033,11 @@ script = ExtResource("7_223we")
 script = ExtResource("8_223we")
 idle = NodePath("../Idle")
 
+[node name="DamageLabelMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 2.8597152, 0.44904232)
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 3.6654253, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 3.8653488, 0)
 texture = SubResource("ViewportTexture_4c8f4")
 
 [node name="PulsePoint" type="Marker3D" parent="."]
@@ -879,3 +1045,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2819458, 2.8623483, 1.1205
 
 [node name="PulsePoint2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19209725, 2.8901315, 1.1106007)
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rshui")
+}
