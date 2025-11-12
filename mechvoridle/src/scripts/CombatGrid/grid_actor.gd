@@ -4,12 +4,16 @@ class_name GridActor extends Node3D
 @export var current_tile : Tile
 @export var hurt_time : float
 const  WAIT_TIME : float = 0.2
+
 @export var state_machine : StateMachine
 @export var can_move : bool = true
+var can_hurt : bool = true
+
 @export var health : int = 100
 @export var max_health : int 
 @export var tiles : Node
 @export var weapon_spout : Marker3D
+
 @export var damage_label_marker : Marker3D
 @export var hit_flash_animation_player : AnimationPlayer
 
@@ -22,12 +26,19 @@ var is_dead : bool = false
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	if is_dead:
 		return
-		
+	
+	if !can_hurt:
+		create_damage_label(0, 1)
+		return
+	
 	create_damage_label(value)
 	if hit_flash_animation_player:
 		hit_flash_animation_player.play("HitFlash")
 	
 	health -= value
+	
+	if self == GridManager.player:
+		SignalBus.update_player_health_bar.emit()
 	
 	if health <= 0:
 		#place holder for now
@@ -38,6 +49,10 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		if not is_vulcan:
 			state_machine.change_state(hurt)
 
+	if self != GridManager.player:
+		SignalBus.start_healing.emit()
+	
+		
 	
 func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
 	var projectile : GridProjectile = weapon.projectile.instantiate()
@@ -53,9 +68,19 @@ func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = wea
 	
 	get_parent().add_child(projectile)
 
-func create_damage_label(amount : int) -> void:
+func create_damage_label(amount : int, type : int = 0) -> void:
 	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
-	damage_label.set_as_damage()
-	damage_label.label.text = "-%s" % [amount]
+	
+	match type:
+		0:
+			damage_label.label.text = "-%s" % [amount]
+			damage_label.set_as_damage()
+		1:
+			damage_label.label.text = "inv."
+			damage_label.set_as_invincible()
+		2:
+			damage_label.label.text = "+%s" % [amount]
+			damage_label.set_as_heal()
+	
 	damage_label.position = damage_label_marker.position
 	add_child(damage_label)

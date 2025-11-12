@@ -3,9 +3,11 @@ class_name EnemySpawnIn extends State
 @export var idle : State
 
 func enter() -> void:
-	pass
+	parent.can_hurt = false
+	parent.hit_flash_animation_player.play("SpawnIn")
 
 func exit() -> void:
+	parent.can_hurt = true
 	pass
 
 func process_input(_event: InputEvent) -> State:

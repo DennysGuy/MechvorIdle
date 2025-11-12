@@ -3,6 +3,7 @@ class_name SporadicEnemy extends GridEnemy
 @export var col_limit : int = 3
 @onready var animation_player: AnimationPlayer = $zaper2/AnimationPlayer
 
+
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 
 @onready var laser_spout: Marker3D = $LaserSpout

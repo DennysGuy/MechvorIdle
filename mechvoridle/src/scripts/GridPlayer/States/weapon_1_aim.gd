@@ -6,7 +6,7 @@ class_name Weapon1Aim extends State
 var offset : int = 0
 
 func enter() -> void:
-	offset = 0
+	offset = -2
 	match GameManager.get_right_weapon().weapon_class:
 		0:
 			animation_name = "WideSwordAimRight"
@@ -26,19 +26,18 @@ func process_input(_event: InputEvent) -> State:
 		return idle
 	
 	if Input.is_action_just_pressed("move_up") and GameManager.get_right_weapon().attack_pattern.can_shift:
-		offset += 1 
-		print(offset)
+		var checked_x : float = parent.current_tile.coordinates.x + offset
+		var checked_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(parent.current_tile.coordinates.x + offset, parent.current_tile.coordinates.y))
+		if !checked_tile:
+			offset = -2
+		else:
+			offset += 1 
 
-	if Input.is_action_just_pressed("move_down") and GameManager.get_right_weapon().attack_pattern.can_shift:
-		offset -= 1
-		print(offset)
-	
 	return null
 
 func process_frame(_delta: float) -> State:
 
 	parent.scanned_attack_pattern = GameManager.get_right_weapon().attack_pattern.scan_tiles_of_effect(parent, parent.tiles, offset)
-	print(parent.scanned_attack_pattern)
 	return null
 
 func process_physics(_delta: float) -> State:

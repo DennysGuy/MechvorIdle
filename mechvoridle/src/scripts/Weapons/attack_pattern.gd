@@ -91,9 +91,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 						
 				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
 					if enemy == GridManager.player and GridManager.player.shield_active:
-						GameManager.current_shield_amount -= damage
-						if GameManager.current_shield_amount <= 0:
-							GridManager.player.can_use_shield = false
+						GameManager.damage_shield(damage)
 					else:
 						enemy.damage_actor(damage)
 					if !pass_through:
@@ -136,6 +134,6 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_t
 				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
 					if !pass_through:
 						break
-	print(GridManager.targeted_tiles.size())
+	#print(GridManager.targeted_tiles.size())
 	return new_offset_list
 	

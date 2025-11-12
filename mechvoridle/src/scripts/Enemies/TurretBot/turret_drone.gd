@@ -4,6 +4,7 @@ class_name TurretEnemy extends GridEnemy
 @onready var animation_player: AnimationPlayer = $Turretanimated/AnimationPlayer
 
 
+
 @export var shoot : State
 @onready var timer: Timer = $Timer
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel

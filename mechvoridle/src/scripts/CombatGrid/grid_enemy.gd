@@ -1,7 +1,7 @@
 class_name GridEnemy extends GridActor
 
 @export var weapon : MechWeapon
-
+@export var spawn_rings : Node3D
 
 func _ready() -> void:
 	can_move = false
@@ -26,3 +26,7 @@ func apply_timer_consequences() -> void:
 
 func enable_enemy_movement() -> void:
 	can_move = true
+
+func clear_rings() -> void:
+	for ring in spawn_rings.get_children():
+		ring.queue_free()

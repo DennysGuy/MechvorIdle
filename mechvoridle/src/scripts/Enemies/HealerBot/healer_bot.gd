@@ -2,6 +2,7 @@ class_name HealerBot extends GridEnemy
 
 @onready var animation_player: AnimationPlayer = $healer/AnimationPlayer
 
+@export var heal_state : State
 
 @onready var health_label: Label = $EnemyHPLabel/HealthLabel
 @onready var timer: Timer = $Timer
@@ -12,6 +13,7 @@ class_name HealerBot extends GridEnemy
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	SignalBus.start_healing.connect(start_healing)
 	state_machine.init(self)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,6 +29,10 @@ func _physics_process(delta: float) -> void:
 func _exit_tree() -> void:
 	GridManager.enemies.erase(self)
 	GridManager.check_wave_status()
+
+func start_healing() -> void:
+	if !is_dead:
+		state_machine.change_state(heal_state)
 
 
 func heal_enemies() -> void:

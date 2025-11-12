@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=17 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cco288q2r3jh3" path="res://assets/graphics/UI/GridCombat/GridShieldBar_Fill.png" id="5_02ps3"]
 [ext_resource type="FontFile" uid="uid://bbe5bn3uhqn6r" path="res://assets/graphics/Fonts/paladins3d.ttf" id="8_vgp2e"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="9_02ps3"]
+[ext_resource type="FontFile" uid="uid://dke1diyqcr0et" path="res://assets/graphics/Fonts/OriginTech personal use.ttf" id="12_0mc8c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf78d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -48,6 +49,11 @@ size = Vector3(10.050356, 1, 14.957357)
 transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 3.329074, 18.809805)
 fov = 40.0
 script = ExtResource("2_h1k12")
+
+[node name="SupplyCrateTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 15.0
+one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -105,9 +111,9 @@ horizontal_alignment = 1
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = -3.0
+offset_left = -1.0
 offset_top = 14.0
-offset_right = 154.0
+offset_right = 153.0
 offset_bottom = 55.0
 grow_vertical = 1
 theme_override_fonts/normal_font = ExtResource("8_vgp2e")
@@ -118,16 +124,32 @@ horizontal_alignment = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_top = 6.0
-offset_right = -4.0
-offset_bottom = 19.0
+offset_left = -79.0
+offset_top = 5.0
+offset_right = -3.0
+offset_bottom = 15.0
 grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 9
 text = "Wave 1/10"
+horizontal_alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 23.0
+offset_right = -68.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 7
+text = "Score"
 horizontal_alignment = 2
 
 [node name="WeaponIcon2" parent="CanvasLayer" instance=ExtResource("3_e6v0j")]
@@ -142,3 +164,21 @@ offset_left = 214.0
 offset_top = -132.0
 offset_right = 279.0
 offset_bottom = -67.0
+
+[node name="ScoreCount" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -99.0
+offset_top = 31.0
+offset_right = -3.0
+offset_bottom = 49.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("12_0mc8c")
+theme_override_font_sizes/font_size = 18
+text = "100000000"
+horizontal_alignment = 2
+
+[connection signal="timeout" from="SupplyCrateTimer" to="." method="_on_supply_crate_timer_timeout"]

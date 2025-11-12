@@ -75,6 +75,8 @@ class_name GridPlayer extends GridActor
 var scanned_attack_pattern : Array
 var can_use_shield : bool = true
 
+var regen_started : bool = false
+
 @onready var mech_components : Dictionary = {
 	"Head": {
 		#melee head
@@ -243,6 +245,8 @@ func _process(delta: float) -> void:
 		GridManager.clear_targeted_tiles()
 	
 	if Input.is_action_pressed("activate_shield") and can_use_shield:
+		start_shield_cool_down = false
+		regen_started = false
 		shield_active = true
 		shield.show()
 	else:
@@ -251,14 +255,14 @@ func _process(delta: float) -> void:
 	
 		if GameManager.current_shield_amount < GameManager.shield_amount:
 			if not start_shield_cool_down:
-				
+				regen_started = true
 				if can_use_shield:
 					shield_cool_down_timer.wait_time = 3.0
 				else:
-					shield_cool_down_timer.wait_time = 7.0
+					shield_cool_down_timer.wait_time = 5.4
 				shield_cool_down_timer.start()
 				start_shield_cool_down = true
-			print(shield_cool_down_timer.time_left)
+			
 	#
 	
 	state_machine.process_frame(delta)

@@ -46,11 +46,17 @@ func impact_prjectile(area : Area3D):
 				var shake_amount : float = 0.0
 				if GridManager.player.shield_active:
 					GameManager.damage_shield(weapon_origin.damage)
+					
 					shake_amount = 0.5
 				else:
 					shake_amount = 1.2
-					
+					if tile_parent.occupant.hit_flash_animation_player:
+						tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
+					tile_parent.occupant.damage_actor(damage)
+				
+				queue_free()
 				SignalBus.shake_camera.emit(shake_amount)
+				return
 					
 			if tile_parent.occupant.hit_flash_animation_player:
 				tile_parent.occupant.hit_flash_animation_player.play("HitFlash")

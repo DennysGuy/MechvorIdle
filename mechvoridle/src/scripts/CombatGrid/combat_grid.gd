@@ -11,6 +11,9 @@ var player : GridPlayer
 
 @onready var camera: Camera3D = $Camera
 
+var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vector2(4,2)]
+@onready var supply_crate_timer: Timer = $SupplyCrateTimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.init_grid(tiles)
@@ -21,18 +24,19 @@ func _ready() -> void:
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
 	SignalBus.spawn_next_wave.connect(spawn_next_wave)
+	SignalBus.update_player_health_bar.connect(update_health_bar)
 	SignalBus.update_shield_amount.connect(update_shield_amount)
 	SignalBus.refil_shield_gauge.connect(fill_shield_guage)
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
 	player_shield_stamina.value = player_shield_stamina.max_value
-
+	player_health_bar.max_value = GridManager.player.max_health
+	player_health_bar.value = GridManager.player.health
+	supply_crate_timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if GridManager.player:
-		health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
-		player_health_bar.value = GridManager.player.health
+	pass
 		
 
 
@@ -51,12 +55,20 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 	
 #returns previous tile for convenience	
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
-	var prev_tile = actor.current_tile
-	var next_tile = adjacent_tile
+	var prev_tile : Tile = actor.current_tile
+	var next_tile : Tile = adjacent_tile
 	prev_tile.occupant = null
 	actor.current_tile = adjacent_tile
 	next_tile.occupant = actor
 	actor.global_position = adjacent_tile.marker_3d.global_position
+	
+	#check for crate if player
+	if actor == GridManager.player and next_tile.upgrade_crate:
+		if next_tile.upgrade_crate is HealthCrate:
+			increase_player_health(next_tile.upgrade_crate.health_amount)
+			next_tile.upgrade_crate.queue_free()
+			next_tile.upgrade_crate = null
+	
 	return prev_tile
 
 
@@ -106,7 +118,7 @@ func update_shield_amount() -> void:
 func fill_shield_guage() -> void:
 	var speed := 45.0  # amount per second
 	
-	while GameManager.current_shield_amount < GameManager.shield_amount:
+	while GameManager.current_shield_amount < GameManager.shield_amount and GridManager.player.regen_started:
 		var delta := get_process_delta_time()
 		GameManager.current_shield_amount = min(
 			GameManager.current_shield_amount + speed * delta,
@@ -116,6 +128,57 @@ func fill_shield_guage() -> void:
 		update_shield_amount()
 		await get_tree().process_frame 
 		
-	if is_instance_valid(GridManager.player):
 		GridManager.player.start_shield_cool_down = false
-		GridManager.player.can_use_shield = true
+		
+		if not GridManager.player.can_use_shield and GameManager.current_shield_amount >= GameManager.shield_amount:
+			GridManager.player.can_use_shield = true
+
+func update_health_bar() -> void:
+
+	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
+	var tween := create_tween()
+	tween.tween_property(
+		player_health_bar,
+		"value",
+		GridManager.player.health,
+		0.35  # duration
+	)
+
+func increase_player_health(value : int) -> void:
+	GridManager.player.health += value
+	if GridManager.player.health > GridManager.player.max_health:
+		GridManager.player.health = GridManager.player.max_health
+		
+	create_damage_label(value,GridManager.player.damage_label_marker, 2)
+	update_health_bar()
+
+func _on_supply_crate_timer_timeout() -> void:
+	var random_num : int = randi_range(0,100)
+	print("THE NUMBER GENERATED: " + str(random_num))
+	if random_num <= 25 and GridManager.player.health < GridManager.player.max_health:
+		var tile : Tile = GridManager.get_tile(tiles, player_tile_coordinates.pick_random())
+		var health_crate : HealthCrate = preload("uid://dm63oush42xtx").instantiate()
+		health_crate.health_amount = randi_range(50,75)
+		tile.upgrade_crate = health_crate
+		health_crate.global_position = tile.global_position
+		add_child(health_crate)
+		
+	supply_crate_timer.start()
+		
+
+func create_damage_label(amount : int, marker : Marker3D, type : int = 0, ) -> void:
+	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
+	
+	match type:
+		0:
+			damage_label.label.text = "-%s" % [amount]
+			damage_label.set_as_damage()
+		1:
+			damage_label.label.text = "inv."
+			damage_label.set_as_invincible()
+		2:
+			damage_label.label.text = "+%s" % [amount]
+			damage_label.set_as_heal()
+	
+	damage_label.global_position = marker.global_position
+	add_child(damage_label)

@@ -326,6 +326,9 @@ signal move_actor_to_tile(actor : GridActor, tile : Tile)
 @warning_ignore("unused_signal")
 signal heal_enemy
 @warning_ignore("unused_signal")
+signal start_healing
+
+@warning_ignore("unused_signal")
 signal spawn_next_wave(on_time_out : bool)
 @warning_ignore("unused_signal")
 signal add_enemy_to_grid(enemy : GridEnemy)

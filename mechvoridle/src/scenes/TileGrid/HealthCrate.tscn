@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm63oush42xtx"]
+
+[ext_resource type="Script" uid="uid://clnclo81mghub" path="res://src/scripts/CombatGrid/health_crate.gd" id="1_p5f0n"]
+[ext_resource type="PackedScene" uid="uid://bujvkmr0pupo8" path="res://assets/graphics/Models/HealthCrate.gltf" id="1_s17pc"]
+
+[node name="HealthCrate" type="Node3D"]
+script = ExtResource("1_p5f0n")
+
+[node name="Crate" parent="." instance=ExtResource("1_s17pc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083817005, 0, 0)
