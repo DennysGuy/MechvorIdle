@@ -3,7 +3,10 @@ class_name TempDeath extends State
 
 func enter() -> void:
 	if parent is SwordBot and !parent.is_slave:
-		SignalBus.free_slave.emit()
+		if parent.is_slave:
+			SignalBus.slave_to_idle.emit()
+		else:
+			SignalBus.free_slave.emit()
 	parent.queue_free()
 
 func exit() -> void:

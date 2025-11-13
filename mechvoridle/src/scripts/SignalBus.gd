@@ -353,3 +353,5 @@ signal slave_attack(destined_tile : Tile, tile_to_attack : Tile)
 signal slave_prepare
 @warning_ignore("unused_signal")
 signal free_slave
+@warning_ignore("unused_signal")
+signal owner_to_idle

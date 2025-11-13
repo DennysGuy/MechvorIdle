@@ -1701,11 +1701,12 @@ _data = {
 &"SpawnIn": SubResource("Animation_kxq0i")
 }
 
-[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
+[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
 script = ExtResource("1_mft84")
 stagger_state = NodePath("StateMachine/Stagger")
 pursue_state = NodePath("StateMachine/Pursue")
 attack_state = NodePath("StateMachine/Attack")
+idle_state = NodePath("StateMachine/Idle")
 weapon = ExtResource("2_6w8gx")
 state_machine = NodePath("StateMachine")
 health = 50

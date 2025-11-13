@@ -13,6 +13,7 @@ var is_slave : bool = false
 @export var stagger_state : State
 @export var pursue_state : State
 @export var attack_state : State
+@export var idle_state : State
 
 
 '''
@@ -29,6 +30,7 @@ func _ready() -> void:
 	SignalBus.slave_follow.connect(slave_pursue)
 	SignalBus.slave_attack.connect(slave_attack)
 	SignalBus.slave_prepare.connect(slave_prepare)
+	SignalBus.owner_to_idle.connect(owner_to_idle)
 	SignalBus.free_slave.connect(free_slave)
 	
 	state_machine.init(self)
@@ -85,6 +87,10 @@ func slave_attack(new_destined_tile : Tile, new_tile_to_attack : Tile) -> void:
 func slave_prepare() -> void:
 	if is_slave:
 		state_machine.change_state(pursue_state)
+
+func owner_to_idle() -> void:
+	if is_slave:
+		state_machine.change_state(idle_state)
 
 func free_slave() -> void:
 	if is_slave:
