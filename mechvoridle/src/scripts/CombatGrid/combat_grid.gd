@@ -14,10 +14,14 @@ var player : GridPlayer
 var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vector2(4,2)]
 @onready var supply_crate_timer: Timer = $SupplyCrateTimer
 
+@onready var damage_multiplier_label: RichTextLabel = $CanvasLayer/DamageMultiplierLabel
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
+	damage_multiplier_label.hide()
 	#GridManager.spawn_test_enemy(tiles)
 	spawn_next_wave()
 	SignalBus.move_player.connect(move_player)
@@ -27,6 +31,10 @@ func _ready() -> void:
 	SignalBus.update_player_health_bar.connect(update_health_bar)
 	SignalBus.update_shield_amount.connect(update_shield_amount)
 	SignalBus.refil_shield_gauge.connect(fill_shield_guage)
+	
+	SignalBus.show_damage_multiplier_label.connect(show_damage_multipler)
+	SignalBus.hide_damage_mulitplier_label.connect(hide_damage_multiplier)
+	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
 	player_shield_stamina.value = player_shield_stamina.max_value
@@ -186,3 +194,10 @@ func create_damage_label(amount : int, marker : Marker3D, type : int = 0, ) -> v
 	
 	damage_label.global_position = marker.global_position
 	add_child(damage_label)
+
+func show_damage_multipler(value : float) -> void:
+	damage_multiplier_label.show()
+	damage_multiplier_label.text = "[font_size=16]dmgx[/font_size][font_size=32]%s[/font_size]" % [value]
+
+func hide_damage_multiplier() -> void:
+	damage_multiplier_label.hide()

@@ -355,3 +355,8 @@ signal slave_prepare
 signal free_slave
 @warning_ignore("unused_signal")
 signal owner_to_idle
+
+@warning_ignore("unused_signal")
+signal show_damage_multiplier_label(value : float)
+@warning_ignore("unused_signal")
+signal hide_damage_mulitplier_label

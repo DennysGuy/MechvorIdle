@@ -5,6 +5,7 @@ class_name Weapon1Fire extends State
 func enter() -> void:
 	parent.can_move = false
 	GameManager.can_fire_weapon_1 = false
+	SignalBus.hide_damage_mulitplier_label.emit()
 	var previous_tile = parent.current_tile
 	
 	

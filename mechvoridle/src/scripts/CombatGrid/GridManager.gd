@@ -166,16 +166,10 @@ func set_mech_as_standard_light() -> void:
 var waves = [
 	[
 		{
-			"enemy" : SWORD_BOT.duplicate(true),
-			"coordinates": Vector2(3,1),
+			"enemy" : TURRET_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,1),
 			"is_slave": false
 		},
-		{	
-			"enemy" : SWORD_BOT.duplicate(true),
-			"coordinates": Vector2(2,1),
-			"is_slave": true
-		},
-
 	],
 	[
 		{
