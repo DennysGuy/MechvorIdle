@@ -342,3 +342,14 @@ signal enable_enemy_movement
 signal refil_shield_gauge
 @warning_ignore("unused_signal")
 signal update_shield_amount
+
+
+#slave stuff
+@warning_ignore("unused_signal")
+signal slave_follow(tile : Tile, tile_to_attack : Tile)
+@warning_ignore("unused_signal")
+signal slave_attack(destined_tile : Tile, tile_to_attack : Tile)
+@warning_ignore("unused_signal")
+signal slave_prepare
+@warning_ignore("unused_signal")
+signal free_slave

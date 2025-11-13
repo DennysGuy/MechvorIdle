@@ -7613,6 +7613,10 @@ script = ExtResource("25_hpw55")
 process_callback = 0
 one_shot = true
 
+[node name="DelayTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
 [node name="Shield" type="CSGSphere3D" parent="."]
 transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
 visible = false

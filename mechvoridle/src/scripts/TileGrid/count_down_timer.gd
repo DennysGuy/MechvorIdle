@@ -36,12 +36,11 @@ func _physics_process(delta: float) -> void:
 		
 		if seconds <= 0:
 			stop_timer()
-		
+			GameManager.timed_out = true
 			SignalBus.apply_timer_consequences.emit()
-			SignalBus.spawn_next_wave.emit(true)
+			SignalBus.spawn_next_wave.emit()
 
 			
-		
 		set_time(seconds,milliseconds)
 		
 	

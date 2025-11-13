@@ -9,12 +9,27 @@ var destined_tile : Tile
 var tile_to_attack : Tile
 var in_stagger_state : bool = false
 var is_blocking : bool = false
+var is_slave : bool = false
 @export var stagger_state : State
+@export var pursue_state : State
+@export var attack_state : State
+
+
+'''
+signals needed 
+- slave follow (pursue)
+- slave attack 
+- slave free (set slave to false - if true)
+'''
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
 	SignalBus.heal_enemy.connect(heal)
+	SignalBus.slave_follow.connect(slave_pursue)
+	SignalBus.slave_attack.connect(slave_attack)
+	SignalBus.slave_prepare.connect(slave_prepare)
+	SignalBus.free_slave.connect(free_slave)
 	
 	state_machine.init(self)
 
@@ -51,3 +66,26 @@ func attack_player(player : GridActor) -> void:
 			player.damage_actor(weapon.damage)
 		
 		SignalBus.shake_camera.emit(shake_amount)
+
+func slave_pursue(set_destined_tile : Tile, slave_tile_to_attack : Tile) -> void:
+	if is_slave:
+		tile_to_attack = slave_tile_to_attack
+		destined_tile = set_destined_tile
+		state_machine.change_state(pursue_state)
+
+func slave_attack(new_destined_tile : Tile, new_tile_to_attack : Tile) -> void:
+	if is_slave:
+		if not destined_tile:
+			destined_tile = new_destined_tile
+		if not tile_to_attack:
+			tile_to_attack = new_tile_to_attack
+		
+		state_machine.change_state(attack_state)
+
+func slave_prepare() -> void:
+	if is_slave:
+		state_machine.change_state(pursue_state)
+
+func free_slave() -> void:
+	if is_slave:
+		is_slave = false

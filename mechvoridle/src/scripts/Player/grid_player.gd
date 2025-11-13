@@ -77,6 +77,10 @@ var can_use_shield : bool = true
 
 var regen_started : bool = false
 
+
+@onready var delay_timer: Timer = $DelayTimer
+
+
 @onready var mech_components : Dictionary = {
 	"Head": {
 		#melee head

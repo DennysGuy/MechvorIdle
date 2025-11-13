@@ -4,8 +4,13 @@ class_name Weapon1Aim extends State
 @export var idle : State
 
 var offset : int = 0
-
+var shift_time : float = 0.5
+var i : int = 0
 func enter() -> void:
+	i = 0
+	shift_time = 0.5
+	parent.delay_timer.wait_time = shift_time
+	parent.delay_timer.start()
 	offset = -2
 	match GameManager.get_right_weapon().weapon_class:
 		0:
@@ -25,20 +30,35 @@ func process_input(_event: InputEvent) -> State:
 		parent.can_fire_vulcans = true
 		return idle
 	
-	if Input.is_action_just_pressed("move_up") and GameManager.get_right_weapon().attack_pattern.can_shift:
-		var checked_x : float = parent.current_tile.coordinates.x + offset
-		var checked_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(parent.current_tile.coordinates.x + offset, parent.current_tile.coordinates.y))
-		if !checked_tile:
-			offset = -2
-		else:
-			offset += 1 
+	
 
 	return null
 
 func process_frame(_delta: float) -> State:
 
+
 	parent.scanned_attack_pattern = GameManager.get_right_weapon().attack_pattern.scan_tiles_of_effect(parent, parent.tiles, offset)
 	return null
 
 func process_physics(_delta: float) -> State:
+	if parent.delay_timer.time_left <= 0:
+		var checked_x : float = parent.current_tile.coordinates.x + offset
+		var checked_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(checked_x, parent.current_tile.coordinates.y))
+		if !checked_tile:
+			offset = -2
+		else:
+			offset += 1 
+
+		if i < 3:
+			shift_time -= 0.3
+			i += 1
+		else:
+			shift_time = 0.75
+			i = 0
+		
+		
+		parent.delay_timer.wait_time = shift_time
+		parent.delay_timer.start()
+		
+		
 	return null

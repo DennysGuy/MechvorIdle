@@ -7,7 +7,8 @@ func enter() -> void:
 		parent.animation_player.play('Block')
 	else:
 		parent.animation_player.play("Idle")
-	if GridManager.player:
+		
+	if GridManager.player and not parent.is_slave:
 		parent.timer.wait_time = 0.5
 		parent.timer.start()
 func exit() -> void:
@@ -21,7 +22,7 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	
-	if parent.timer.time_left <= 0 and GridManager.player:
+	if parent.timer.time_left <= 0 and GridManager.player and !parent.is_slave:
 		return pursue
 	
 	return null

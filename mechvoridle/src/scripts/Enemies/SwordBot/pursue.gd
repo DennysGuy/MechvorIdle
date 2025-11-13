@@ -19,18 +19,30 @@ issuing the attack and retreating back.
 
 func enter() -> void:
 	if GridManager.player:
-		var new_coordinates : Vector2 = Vector2(parent.current_tile.coordinates.x, GridManager.player.current_tile.coordinates.y)
-		parent.destined_tile = GridManager.get_tile(parent.tiles, new_coordinates)
-		parent.tile_to_attack = GridManager.player.current_tile
-		var i : float = parent.current_tile.coordinates.y
-		
-		while parent.current_tile.coordinates != new_coordinates:
-			i += 1.0 * multiplier(parent.current_tile.coordinates.y, new_coordinates.y)
-			var new_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(new_coordinates.x, i))
-			SignalBus.move_actor_to_tile.emit(parent, new_tile)
+		if parent.is_slave:
+			SignalBus.move_actor_to_tile.emit(parent, parent.destined_tile)
+			parent.tile_to_attack = parent.tile_to_attack
 			await get_tree().create_timer(0.5).timeout
+			parent.state_machine.change_state(idle)
 			
-		parent.state_machine.change_state(prepare) #for now
+		else:
+			var new_coordinates : Vector2 = Vector2(parent.current_tile.coordinates.x, GridManager.player.current_tile.coordinates.y)
+			parent.destined_tile = GridManager.get_tile(parent.tiles, new_coordinates)
+			parent.tile_to_attack = GridManager.player.current_tile
+			var i : float = parent.current_tile.coordinates.y
+			
+			while parent.current_tile.coordinates != new_coordinates:
+				i += 1.0 * direction(parent.current_tile.coordinates.y, new_coordinates.y)
+				var new_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(new_coordinates.x, i))
+				var slave_new_tile : Tile = GridManager.get_tile(parent.tiles, new_tile.coordinates - Vector2(1,0) )
+				SignalBus.move_actor_to_tile.emit(parent, new_tile)
+				await get_tree().create_timer(0.25).timeout
+				SignalBus.slave_follow.emit(slave_new_tile, parent.tile_to_attack)
+				await get_tree().create_timer(0.25).timeout
+				
+				
+				
+			parent.state_machine.change_state(prepare) #once we're in prepare state, we'll notify slave to
 	else:
 		parent.state_machine.change_state(idle)
 	
@@ -46,7 +58,7 @@ func process_frame(_delta: float) -> State:
 func process_physics(_delta: float) -> State:
 	return null
 		
-func multiplier(init_y_value : int, destined_y_value : int) -> float:
+func direction(init_y_value : int, destined_y_value : int) -> float:
 	if init_y_value < destined_y_value:
 		return 1
 	else:

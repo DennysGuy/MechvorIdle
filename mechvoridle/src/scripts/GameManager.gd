@@ -344,6 +344,7 @@ var recon_scout_ferrite_bars_cost : int = 300
 var player_stunned : bool = false
 var opponent_stunned  : bool = false
 var fill_bars : bool = false
+var timed_out : bool = false
 const BASE_DODGE_CHANCE : float = 0.15
 
 #light

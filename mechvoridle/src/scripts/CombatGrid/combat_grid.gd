@@ -72,10 +72,13 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	return prev_tile
 
 
-func spawn_enemy(enemy : PackedScene, tile_coords : Vector2) -> void:
+func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool) -> void:
 	var enemy_to_spawn : GridEnemy = enemy.instantiate()
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
-
+	
+	if enemy_to_spawn is SwordBot:
+		enemy_to_spawn.is_slave = is_slave
+	
 	enemy_to_spawn.global_position = init_tile.marker_3d.global_position
 	enemy_to_spawn.current_tile = init_tile
 	enemy_to_spawn.tiles = tiles
@@ -87,7 +90,7 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2) -> void:
 
 @onready var count_down_timer: CountDownTimer = $CanvasLayer/CountDownTimer
 
-func spawn_next_wave(on_time_out : bool = false) -> void:
+func spawn_next_wave() -> void:
 	await get_tree().process_frame
 	if GridManager.current_wave == GridManager.waves.size()-1:
 		return
@@ -95,15 +98,16 @@ func spawn_next_wave(on_time_out : bool = false) -> void:
 	GridManager.current_wave += 1
 	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
 	if GridManager.current_wave > 0:
-		if on_time_out:
-			count_down_timer.add_time(120)
+		if GameManager.timed_out:
+			count_down_timer.add_time(35)
+			GameManager.timed_out = false
 		else:
-			count_down_timer.add_time(12)
+			count_down_timer.add_time(15)
 		
 	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
 	for enemy in selected_wave:
-		spawn_enemy(enemy["enemy"], enemy["coordinates"])
+		spawn_enemy(enemy["enemy"], enemy["coordinates"], enemy["is_slave"])
 		await get_tree().create_timer(0.5).timeout
 	
 	await get_tree().create_timer(0.5).timeout
