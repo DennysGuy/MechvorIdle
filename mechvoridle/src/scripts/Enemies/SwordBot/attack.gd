@@ -36,8 +36,10 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	if parent.timer.time_left <= 0:
-		SignalBus.move_actor_to_tile.emit(parent, parent.destined_tile)
-		parent.tile_to_attack.clear_targeted_overlay()
+		if parent.destined_tile:
+			SignalBus.move_actor_to_tile.emit(parent, parent.destined_tile)
+		if parent.tile_to_attack:
+			parent.tile_to_attack.clear_targeted_overlay()
 		parent.state_machine.change_state(idle)
 	
 	return null

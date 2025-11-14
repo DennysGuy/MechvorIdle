@@ -7617,6 +7617,8 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
+[node name="ChargeUpTimer" type="Timer" parent="."]
+
 [node name="Shield" type="CSGSphere3D" parent="."]
 transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
 visible = false
@@ -7639,4 +7641,5 @@ libraries = {
 [node name="DamageLabelMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4472477, 0.40865052)
 
+[connection signal="timeout" from="ChargeUpTimer" to="StateMachine/Weapon2Aim" method="_on_charge_up_timer_timeout"]
 [connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]

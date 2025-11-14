@@ -5,7 +5,8 @@ class_name SwordBotPrepare extends State
 var issued_slave_signal : bool = false
 func enter() -> void:
 	issued_slave_signal = false
-	parent.tile_to_attack.set_enemy_targeted_overlay()
+	if parent.tile_to_attack:
+		parent.tile_to_attack.set_enemy_targeted_overlay()
 	parent.animation_player.play("Prepare")
 	parent.timer.wait_time = 0.5
 	parent.timer.start()

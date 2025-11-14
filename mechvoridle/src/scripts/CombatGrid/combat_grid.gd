@@ -67,8 +67,10 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var next_tile : Tile = adjacent_tile
 	prev_tile.occupant = null
 	actor.current_tile = adjacent_tile
-	next_tile.occupant = actor
-	actor.global_position = adjacent_tile.marker_3d.global_position
+	if next_tile:
+		next_tile.occupant = actor
+	if adjacent_tile:
+		actor.global_position = adjacent_tile.marker_3d.global_position
 	
 	#check for crate if player
 	if actor == GridManager.player and next_tile.upgrade_crate:
@@ -81,7 +83,7 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 
 
 func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool) -> void:
-	var enemy_to_spawn : GridEnemy = enemy.instantiate()
+	var enemy_to_spawn : GridActor = enemy.instantiate()
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
 	
 	if enemy_to_spawn is SwordBot:

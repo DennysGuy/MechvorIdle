@@ -31,3 +31,7 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	return null
+
+
+func _on_charge_up_timer_timeout() -> void:
+	pass # Replace with function body.

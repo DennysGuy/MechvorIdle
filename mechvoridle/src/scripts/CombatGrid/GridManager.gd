@@ -15,6 +15,7 @@ const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
 const HEALER_BOT = preload("uid://dcrmt7013v31a")
 const SWORD_BOT = preload("uid://df0aqkd6tb8o0")
 
+const HEAVY_BOSS = preload("uid://dolkqjjmpal6f")
 
 func _ready() -> void:
 	pass
@@ -166,7 +167,7 @@ func set_mech_as_standard_light() -> void:
 var waves = [
 	[
 		{
-			"enemy" : TURRET_ENEMY.duplicate(true),
+			"enemy" : HEAVY_BOSS.duplicate(true),
 			"coordinates": Vector2(1,1),
 			"is_slave": false
 		},
@@ -316,6 +317,13 @@ var waves = [
 			"coordinates": Vector2(2,0),
 			"is_slave": true
 		},
+	],
+	[
+		{
+			"enemy": HEAVY_BOSS.duplicate(true), 
+			"coordinates": Vector2(0,1),
+			"is_slave": false
+		}
 	]
 	
 	

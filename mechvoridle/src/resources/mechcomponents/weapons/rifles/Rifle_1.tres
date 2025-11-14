@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=4 format=3 uid="uid://dplngps46dubl"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=5 format=3 uid="uid://dplngps46dubl"]
 
 [ext_resource type="Resource" uid="uid://be3g0tuwcydg1" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRiflePattern.tres" id="1_c13wu"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_yfro8"]
 [ext_resource type="PackedScene" uid="uid://b712bpq5ut01h" path="res://src/scenes/TileGrid/PlasmaBullet.tscn" id="2_rr0hn"]
+[ext_resource type="Resource" uid="uid://br01pvgjejf84" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRifleChargePattern.tres" id="4_xxsr1"]
 
 [resource]
 script = ExtResource("1_yfro8")
@@ -15,6 +16,7 @@ charge_speed = 0.65
 crit_damage = 1.0
 accuracy = 0.8
 attack_pattern = ExtResource("1_c13wu")
+secondary_attack_pattern = ExtResource("4_xxsr1")
 projectile = ExtResource("2_rr0hn")
 component_name = "ARG-15-X"
 index = 1

@@ -58,7 +58,7 @@ func impact_prjectile(area : Area3D):
 				SignalBus.shake_camera.emit(shake_amount)
 				return
 					
-			if tile_parent.occupant.hit_flash_animation_player:
+			if tile_parent.occupant.hit_flash_animation_player and tile_parent.occupant.can_hurt:
 				tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
 			tile_parent.occupant.damage_actor(damage)
 			if !weapon_origin.attack_pattern.pass_through:

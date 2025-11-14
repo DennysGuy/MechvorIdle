@@ -69,7 +69,6 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 		if selected_tile:
 			GridManager.targeted_tiles.append(selected_tile)
 			if actor is GridPlayer:
-		
 				selected_tile.set_targeted_overlay()
 			elif actor is GridEnemy:
 				selected_tile.set_enemy_targeted_overlay()
@@ -77,16 +76,17 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 			if selected_tile.occupant:
 				var enemy : GridActor = selected_tile.occupant
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
-					if enemy is SwordBot and not enemy.in_stagger_state:
-						var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
-						damage_label.label.text = "inv."
-						damage_label.set_as_invincible()
-						damage_label.position = enemy.damage_label_marker.position
-						enemy.add_child(damage_label)
-						break
-					else:
-						enemy.damage_actor(damage, is_vulcan)
-					if !pass_through:
+					if enemy is SwordBot:
+						if not enemy.in_stagger_state and !pass_through:
+							var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
+							damage_label.label.text = "inv."
+							damage_label.set_as_invincible()
+							damage_label.position = enemy.damage_label_marker.position
+							enemy.add_child(damage_label)
+							break
+
+					enemy.damage_actor(damage, is_vulcan)
+					if !pass_through and !enemy.is_dead:
 						break
 						
 				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:

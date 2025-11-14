@@ -20,7 +20,9 @@ enum WeaponOwner {PLAYER, ENEMY}
 @export var plasma_damage_bonus : float
 
 @export var attack_pattern : AttackPattern
+@export var secondary_attack_pattern : AttackPattern
 @export var projectile : PackedScene
+@export var secondary_projectile : PackedScene
 
 func get_weapon_type() -> String:
 	match(weapon_type):

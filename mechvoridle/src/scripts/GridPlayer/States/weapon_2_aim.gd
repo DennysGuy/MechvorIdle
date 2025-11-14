@@ -4,16 +4,13 @@ class_name Weapon2Aim extends State
 @export var idle : State
 
 var offset : int = 0
-
 func enter() -> void:
 	offset = 0
-	match GameManager.get_left_weapon().weapon_class:
-		1:
-			animation_name = "AimRifleLeft"
-	
+	parent.rifle_charged_up = false
+	parent.charge_up_timer.wait_time = 1.2
+	animation_name = "AimRifleLeft"
 	parent.animation_player.play(animation_name)
-	
-	pass
+	parent.charge_up_timer.start()
 
 func exit() -> void:
 	pass
@@ -38,10 +35,18 @@ func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_frame(_delta: float) -> State:
+	if !parent.rifle_charged_up:
+		parent.scanned_attack_pattern = GameManager.get_left_weapon().attack_pattern.scan_tiles_of_effect(parent, parent.tiles)
 	
-	parent.scanned_attack_pattern = GameManager.get_left_weapon().attack_pattern.scan_tiles_of_effect(parent, parent.tiles)
+	else:
+		parent.scanned_attack_pattern = GameManager.get_left_weapon().secondary_attack_pattern.scan_tiles_of_effect(parent, parent.tiles)
 	
 	return null
 
 func process_physics(_delta: float) -> State:
 	return null
+
+
+func _on_charge_up_timer_timeout() -> void:
+	print("RIFLE CHARGED MY FELLOW!")
+	parent.rifle_charged_up = true

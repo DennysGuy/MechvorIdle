@@ -79,6 +79,7 @@ var regen_started : bool = false
 
 
 @onready var delay_timer: Timer = $DelayTimer
+@onready var charge_up_timer: Timer = $ChargeUpTimer
 
 
 @onready var mech_components : Dictionary = {
@@ -184,6 +185,7 @@ var can_shoot : bool = true
 var can_fire_vulcans : bool = true
 var shield_active : bool = false
 var firing : bool = false
+var rifle_charged_up : bool = false
 var start_shield_cool_down : bool = false
 @onready var shield: Shield = $Shield
 
@@ -307,8 +309,15 @@ func add_vulcan_flares() -> void:
 
 func fire_rifle_2() -> void:
 	var rifle_2 : MechWeapon = GameManager.get_left_weapon()
-	fire_projectile(rifle_2, rifle_2_spout)
-
+	if !rifle_charged_up:
+		fire_projectile(rifle_2, rifle_2_spout)
+	else:
+		var damage_reduction_multiplier : float = 0.75
+		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier))
+		var sniper_blast : SniperBlast = preload("uid://cboxtbu6wo1sy").instantiate()
+		sniper_blast.global_position = rifle_2_spout.global_position
+		get_parent().add_child(sniper_blast)
+		
 func apply_time_consequences() -> void:
 	damage_actor(int(health * 0.3))
 

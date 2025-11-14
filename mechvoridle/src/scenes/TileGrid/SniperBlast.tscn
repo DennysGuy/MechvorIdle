@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cboxtbu6wo1sy"]
+
+[ext_resource type="Script" uid="uid://cbhpkn0hggygu" path="res://src/scripts/TileGrid/sniper_blast.gd" id="1_q15pu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxgja"]
+transparency = 1
+albedo_color = Color(0, 0.7372549, 0.74509805, 0.70980394)
+
+[sub_resource type="PrismMesh" id="PrismMesh_0mc8c"]
+
+[node name="SniperBlast" type="Node3D" node_paths=PackedStringArray("starting_point")]
+script = ExtResource("1_q15pu")
+starting_point = NodePath("StartingPoint")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="StartingPoint" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.004638672)
+
+[node name="SniperBlast" type="CSGMesh3D" parent="StartingPoint"]
+transform = Transform3D(0.15294413, 0, 0, 0, 0.09272393, 0, 0, 0, 10.4721985, 0, 0, 5.255555)
+material_override = SubResource("StandardMaterial3D_lxgja")
+mesh = SubResource("PrismMesh_0mc8c")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
