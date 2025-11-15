@@ -2,6 +2,8 @@ class_name HeavyBoss extends GridBoss
 
 enum PHASES {
 	ATTACK_PHASE1,
+	ATTACK_PHASE2,
+	ATTACK_PHASE3
 }
 
 @export var row_limit : int = 2
@@ -43,11 +45,8 @@ func _on_phase_timer_timeout() -> void:
 	var new_phase : PHASES = current_phase
 	
 	while prev_phase == new_phase:
-		new_phase = PHASES.keys().pick_random()
+		var keys : Array[int] = [0,1,2]
+		new_phase = keys.pick_random()
 	
 	current_phase = new_phase
 	change_phase = true
-	#changing states within a state will occur in the state rather than here so that a phase can complete before moving onto next
-	#I'm thinking that we can use the taunt as the interim state between switching phases
-	#so basically, we set a boolean here, every phase will return to idle state, and if this bool is flipped true, 
-	#we will move to the taunt phase which will then move us to the in point state of the phase

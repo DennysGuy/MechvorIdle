@@ -1,7 +1,9 @@
 class_name HeavyBossIdle extends State
 
 @export var random_move : State
+@export var rocket_shots : State
 @export var taunt : State
+@export var shield_summon : State
 
 func enter() -> void:
 	parent.animation_player.play("Idle")
@@ -31,6 +33,9 @@ func process_physics(_delta: float) -> State:
 	
 	if parent.current_phase == parent.PHASES.ATTACK_PHASE1:
 		return random_move
-	
+	elif parent.current_phase == parent.PHASES.ATTACK_PHASE2:
+		return rocket_shots
+	elif parent.current_phase == parent.PHASES.ATTACK_PHASE3:
+		return shield_summon
 	return null
 		

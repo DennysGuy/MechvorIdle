@@ -24,7 +24,9 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	
-	if parent.timer.time_left <= 0: 
+	if parent.timer.time_left <= 0:
+		parent.phase_timer.wait_time = randi_range(8,10)
+		parent.phase_timer.start()
 		return idle
 	
 	return null
