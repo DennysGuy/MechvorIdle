@@ -2363,10 +2363,10 @@ script = ExtResource("6_vxkub")
 random_move = NodePath("../RandomMove")
 die = NodePath("../Die")
 
-[node name="RandomMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "zap")]
+[node name="RandomMove" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "attack")]
 script = ExtResource("7_vxkub")
 idle = NodePath("../Idle")
-zap = NodePath("../Zap")
+attack = NodePath("../Zap")
 
 [node name="Zap" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("8_r71q2")
