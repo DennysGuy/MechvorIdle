@@ -40,6 +40,7 @@ func _ready() -> void:
 	player_shield_stamina.value = player_shield_stamina.max_value
 	player_health_bar.max_value = GridManager.player.max_health
 	player_health_bar.value = GridManager.player.health
+	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 	supply_crate_timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,9 +66,13 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var prev_tile : Tile = actor.current_tile
 	var next_tile : Tile = adjacent_tile
-	prev_tile.occupant = null
-	actor.current_tile = adjacent_tile
-	if next_tile:
+	if prev_tile:
+		if prev_tile.occupant == actor:
+			prev_tile.occupant = null
+		
+	if adjacent_tile:
+		actor.current_tile = adjacent_tile
+	if next_tile and next_tile.occupant == null:
 		next_tile.occupant = actor
 	if adjacent_tile:
 		actor.global_position = adjacent_tile.marker_3d.global_position

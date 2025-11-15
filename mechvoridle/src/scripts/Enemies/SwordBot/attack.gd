@@ -19,7 +19,7 @@ func enter() -> void:
 			parent.timer.start()
 
 func exit() -> void:
-	if !parent.is_slave:
+	if !parent.is_slave and parent.destined_tile:
 		var slave_destined_tile : Tile = GridManager.get_tile(parent.tiles, parent.destined_tile.coordinates - Vector2(1,0))
 		SignalBus.slave_attack.emit(slave_destined_tile, parent.tile_to_attack)
 
