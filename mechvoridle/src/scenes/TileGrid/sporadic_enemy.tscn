@@ -2074,7 +2074,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_i65h8")
 }
 
-[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
+[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_7h52i")
 weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
@@ -2084,6 +2084,7 @@ max_health = 80
 weapon_spout = NodePath("LaserSpout")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
+health_label = NodePath("EnemyHPLabel/HealthLabel")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Die")
 

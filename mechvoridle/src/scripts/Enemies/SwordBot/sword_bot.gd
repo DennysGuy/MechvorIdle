@@ -3,7 +3,6 @@ class_name SwordBot extends GridEnemy
 @onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $SwordBot/AnimationPlayer
 
-@onready var health_label: Label = $EnemyHPLabel/HealthLabel
 
 var destined_tile : Tile
 var tile_to_attack : Tile
@@ -44,7 +43,6 @@ func _exit_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 
 

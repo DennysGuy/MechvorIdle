@@ -8,7 +8,6 @@ var time_to_shoot : int = 0
 @export var interval_max_val : int = 4
 var interval : int = 0
 func enter() -> void:
-	
 
 	interval = randi_range(interval_min_val, interval_max_val)
 	SignalBus.move_enemy.emit(parent, parent.random_direction_list.pick_random(),parent.row_limit,parent.col_limit)
@@ -17,7 +16,6 @@ func enter() -> void:
 	parent.timer.start()
 
 func exit() -> void:
-	print("LEAVING?")
 	pass
 
 func process_input(_event: InputEvent) -> State:

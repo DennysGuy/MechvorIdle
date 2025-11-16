@@ -1,4 +1,4 @@
-[gd_scene load_steps=349 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=348 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://3f3f40j0d6nr" path="res://assets/graphics/Models/PlayerMech/PlayerCharacterWithWeapons_0.png" id="2_uffql"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://crvls6csjm8s5" path="res://src/scripts/GridPlayer/weapon_2_fire.gd" id="23_cp1m8"]
 [ext_resource type="Script" uid="uid://bscrqcerl76ix" path="res://src/scripts/Enemies/HealerBot/temp_hurt.gd" id="24_ccc6x"]
 [ext_resource type="Script" uid="uid://bgs36x2jascbv" path="res://src/scripts/Enemies/HealerBot/temp_die.gd" id="25_hpw55"]
-[ext_resource type="Script" uid="uid://cc8yin8dffkuf" path="res://src/scripts/Player/shield.gd" id="26_hpw55"]
+[ext_resource type="PackedScene" uid="uid://psempt073jce" path="res://src/scenes/TileGrid/Shield.tscn" id="26_hpw55"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4axj6"]
 resource_name = "material_0"
@@ -6525,10 +6525,6 @@ _data = {
 &"WideSwordSwing": SubResource("Animation_2bvhv")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccc6x"]
-transparency = 1
-albedo_color = Color(0.75686276, 0.7921569, 0.3254902, 0.5176471)
-
 [sub_resource type="Animation" id="Animation_hpw55"]
 resource_name = "HitFlash"
 length = 0.2
@@ -7619,14 +7615,8 @@ one_shot = true
 
 [node name="ChargeUpTimer" type="Timer" parent="."]
 
-[node name="Shield" type="CSGSphere3D" parent="."]
+[node name="Shield" parent="." instance=ExtResource("26_hpw55")]
 transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
-visible = false
-radial_segments = 8
-rings = 5
-smooth_faces = false
-material = SubResource("StandardMaterial3D_ccc6x")
-script = ExtResource("26_hpw55")
 
 [node name="ShieldCoolDownTimer" type="Timer" parent="."]
 process_callback = 0

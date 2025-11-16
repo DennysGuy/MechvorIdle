@@ -3,6 +3,7 @@ class_name BossDropIn extends State
 @export var idle : State
 
 func enter() -> void:
+	GameManager.in_boss_fight = true
 	parent.misc_animation_player.play("Intro")
 	parent.timer.wait_time = 0.2
 	parent.timer.start()

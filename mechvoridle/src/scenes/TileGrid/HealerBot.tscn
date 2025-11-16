@@ -1180,16 +1180,17 @@ _data = {
 &"SpawnIn": SubResource("Animation_3jje7")
 }
 
-[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_8l3vx")
 heal_state = NodePath("StateMachine/Heal")
 spawn_rings = NodePath("SpawnRings")
 hurt_time = 0.625
 state_machine = NodePath("StateMachine")
-health = 90
-max_health = 90
+health = 135
+max_health = 135
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
+health_label = NodePath("EnemyHPLabel/HealthLabel")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Die")
 

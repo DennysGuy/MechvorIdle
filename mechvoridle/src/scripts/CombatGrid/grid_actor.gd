@@ -16,6 +16,7 @@ var can_hurt : bool = true
 
 @export var damage_label_marker : Marker3D
 @export var hit_flash_animation_player : AnimationPlayer
+@export var health_label : Label
 
 @export_group("States")
 @export var hurt : State
@@ -39,6 +40,8 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	
 	if self == GridManager.player:
 		SignalBus.update_player_health_bar.emit()
+	else:
+		update_health_bar()
 	
 	if health <= 0:
 		#place holder for now
@@ -46,7 +49,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		is_dead = true
 		state_machine.change_state(death)
 	else:
-		if not is_vulcan:
+		if not is_vulcan and hurt:
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:
@@ -84,3 +87,6 @@ func create_damage_label(amount : int, type : int = 0) -> void:
 	
 	damage_label.position = damage_label_marker.position
 	add_child(damage_label)
+
+func update_health_bar():
+	health_label.text = str(health)+"/"+str(max_health)

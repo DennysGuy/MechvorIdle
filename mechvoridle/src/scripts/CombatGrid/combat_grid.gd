@@ -27,6 +27,7 @@ func _ready() -> void:
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
+	
 	SignalBus.spawn_next_wave.connect(spawn_next_wave)
 	SignalBus.update_player_health_bar.connect(update_health_bar)
 	SignalBus.update_shield_amount.connect(update_shield_amount)
@@ -34,6 +35,7 @@ func _ready() -> void:
 	
 	SignalBus.show_damage_multiplier_label.connect(show_damage_multipler)
 	SignalBus.hide_damage_mulitplier_label.connect(hide_damage_multiplier)
+	SignalBus.spawn_enemies.connect(spawn_enemies)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -87,12 +89,15 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	return prev_tile
 
 
-func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool) -> void:
+func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
 	var enemy_to_spawn : GridActor = enemy.instantiate()
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
 	
 	if enemy_to_spawn is SwordBot:
 		enemy_to_spawn.is_slave = is_slave
+	
+	if is_boss:
+		GameManager.in_boss_fight = true
 	
 	enemy_to_spawn.global_position = init_tile.marker_3d.global_position
 	enemy_to_spawn.current_tile = init_tile
@@ -100,7 +105,7 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool) ->
 	init_tile.occupant = enemy_to_spawn
 
 	GridManager.enemies.append(enemy_to_spawn)
-	print(GridManager.enemies)
+
 	add_child(enemy_to_spawn)
 
 @onready var count_down_timer: CountDownTimer = $CanvasLayer/CountDownTimer
@@ -121,20 +126,30 @@ func spawn_next_wave() -> void:
 		
 	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
-	for enemy in selected_wave:
-		spawn_enemy(enemy["enemy"], enemy["coordinates"], enemy["is_slave"])
-		await get_tree().create_timer(0.5).timeout
+	spawn_enemies(selected_wave)
 	
+
+	
+	count_down_timer.start_timer()
+
+
+func spawn_enemies(selected_wave : Array) -> void:
+	for enemy in selected_wave:
+		spawn_enemy(enemy["enemy"], enemy["coordinates"], enemy["is_slave"], enemy["is_boss"])
+		await get_tree().create_timer(0.5).timeout
+		
 	await get_tree().create_timer(0.5).timeout
 	
 	SignalBus.enable_enemy_movement.emit()
-	
-	count_down_timer.start_timer()
 
 func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
 
 func fill_shield_guage() -> void:
+	
+	if not GridManager.player:
+		return
+		
 	var speed := 45.0  # amount per second
 	
 	while GameManager.current_shield_amount < GameManager.shield_amount and GridManager.player.regen_started:
@@ -153,7 +168,6 @@ func fill_shield_guage() -> void:
 			GridManager.player.can_use_shield = true
 
 func update_health_bar() -> void:
-
 	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 	var tween := create_tween()
 	tween.tween_property(
@@ -172,14 +186,20 @@ func increase_player_health(value : int) -> void:
 	update_health_bar()
 
 func _on_supply_crate_timer_timeout() -> void:
+	if not GridManager.player:
+		return
+		
 	var random_num : int = randi_range(0,100)
-	print("THE NUMBER GENERATED: " + str(random_num))
+	
 	if random_num <= 25 and GridManager.player.health < GridManager.player.max_health:
+		
 		var tile : Tile = GridManager.get_tile(tiles, player_tile_coordinates.pick_random())
 		var health_crate : HealthCrate = preload("uid://dm63oush42xtx").instantiate()
+		
 		health_crate.health_amount = randi_range(50,75)
 		tile.upgrade_crate = health_crate
 		health_crate.global_position = tile.global_position
+		
 		add_child(health_crate)
 		
 	supply_crate_timer.start()

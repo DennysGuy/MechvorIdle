@@ -360,3 +360,7 @@ signal owner_to_idle
 signal show_damage_multiplier_label(value : float)
 @warning_ignore("unused_signal")
 signal hide_damage_mulitplier_label
+@warning_ignore("unused_signal")
+signal spawn_enemies(wave : Array)
+@warning_ignore("unused_signal")
+signal spawn_mini_wave

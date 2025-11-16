@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://psempt073jce"]
+
+[ext_resource type="Script" uid="uid://cc8yin8dffkuf" path="res://src/scripts/Player/shield.gd" id="1_s5gt3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccc6x"]
+transparency = 1
+albedo_color = Color(0.75686276, 0.7921569, 0.3254902, 0.5176471)
+
+[node name="Shield" type="CSGSphere3D"]
+transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 0, 0)
+visible = false
+radial_segments = 8
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ccc6x")
+script = ExtResource("1_s5gt3")

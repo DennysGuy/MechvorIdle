@@ -46,6 +46,8 @@ var audio_settings_Showing : bool = false
 var can_fire_weapon_1 : bool = true
 var can_fire_weapon_2 : bool = true
 
+var in_boss_fight = false
+
 func _ready() -> void:
 	#fight_scenario_4_test_fixture()
 	#equip_rifle_left_sword_right()

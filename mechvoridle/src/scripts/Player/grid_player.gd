@@ -198,7 +198,7 @@ func _ready() -> void:
 	SignalBus.apply_timer_consequences.connect(apply_time_consequences)
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 	
-	max_health = GameManager.calculate_current_total_health()
+	max_health = 1000
 	health = max_health
 	
 	enable_mech_parts()

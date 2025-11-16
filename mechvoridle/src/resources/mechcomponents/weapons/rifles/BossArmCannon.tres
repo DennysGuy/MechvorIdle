@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://csktvgo4f04nb"]
+
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_o0p5j"]
+[ext_resource type="Resource" uid="uid://cjc762iob4j76" path="res://src/resources/mechcomponents/weapons/weapon_patterns/SwordBotPattern.tres" id="1_ujool"]
+
+[resource]
+script = ExtResource("1_o0p5j")
+weapon_class = 1
+weapon_owner = 1
+damage = 55.0
+number_of_hits = 1
+attack_pattern = ExtResource("1_ujool")
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

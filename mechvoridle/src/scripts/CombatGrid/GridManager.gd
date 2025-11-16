@@ -92,9 +92,10 @@ func spawn_player(tiles : Node) -> void:
 
 
 func check_wave_status() -> void:
-	if enemies.is_empty() and !GameManager.timed_out:
+	if enemies.is_empty() and !GameManager.timed_out and !GameManager.in_boss_fight:
 		SignalBus.spawn_next_wave.emit()
-
+	if enemies.is_empty() and GameManager.in_boss_fight:
+		SignalBus.spawn_mini_wave.emit()
 	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
@@ -111,18 +112,12 @@ func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : in
 		return false
 	
 	if adjacent_tile.occupant:
-		#print("tile occupied")
-		#print(adjacent_tile)
 		return false
 	
 	if grid_actor is GridPlayer and adjacent_tile.current_owner == adjacent_tile.OWNER.ENEMY and not is_dash_attack:
-		#print(adjacent_tile)
-		#print("tile has incorrect owner")
 		return false
 	
 	if grid_actor is GridEnemy and adjacent_tile.current_owner == adjacent_tile.OWNER.PLAYER:
-		#print(adjacent_tile)
-		#print("tile has incorrect owner")
 		return false
 	
 	return true
@@ -167,38 +162,44 @@ func set_mech_as_standard_light() -> void:
 var waves = [
 	[
 		{
-			"enemy" : HEAVY_BOSS.duplicate(true),
+			"enemy" : TURRET_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 	],
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		}
 	],
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": TURRET_ENEMY.duplicate(true),
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(0,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		}
 		
 	],
@@ -206,65 +207,76 @@ var waves = [
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true),
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		}
 	],
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true),
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		}
 	],
 	[
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(2,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 	],
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(2,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 	],
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(2,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		
 	],
@@ -272,22 +284,26 @@ var waves = [
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true), 
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(2,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		
 	],
@@ -295,40 +311,104 @@ var waves = [
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true), 
 			"coordinates": Vector2(0,2),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(3,0),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
 			"coordinates": Vector2(2,0),
-			"is_slave": true
+			"is_slave": true,
+			"is_boss": false
 		},
 	],
 	[
 		{
 			"enemy": HEAVY_BOSS.duplicate(true), 
 			"coordinates": Vector2(0,1),
-			"is_slave": false
+			"is_slave": false,
+			"is_boss": true
 		}
 	]
 	
-	
 ]
 
+var boss_mini_waves = [
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(1,0),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,2),
+			"is_slave": false,
+			"is_boss": false
+		}
+	],
+	
+	[
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true), 
+			"coordinates": Vector2(1,0),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,2),
+			"is_slave": false,
+			"is_boss": false
+		}
+	],
+	[
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true), 
+			"coordinates": Vector2(1,1),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true),
+			"coordinates": Vector2(2,0),
+			"is_slave": false,
+			"is_boss": false
+		}
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(2,0),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": TURRET_ENEMY.duplicate(true),
+			"coordinates": Vector2(2,2),
+			"is_slave": false,
+			"is_boss": false
+		}
+	]
+]
 
 
 func reset_combat() -> void:

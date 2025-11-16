@@ -2937,7 +2937,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_boe6v")
 }
 
-[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
+[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
 weapon = ExtResource("2_7lw6e")
@@ -2949,6 +2949,7 @@ max_health = 150
 weapon_spout = NodePath("CanonSpout")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashPlayer")
+health_label = NodePath("EnemyHPLabel/HealthLabel")
 hurt = NodePath("StateMachine/Hurt")
 death = NodePath("StateMachine/Die")
 

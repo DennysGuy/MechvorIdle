@@ -70,10 +70,13 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 			GridManager.targeted_tiles.append(selected_tile)
 			if actor is GridPlayer:
 				selected_tile.set_targeted_overlay()
-			elif actor is GridEnemy:
+			elif actor is GridEnemy or actor is GridBoss:
 				selected_tile.set_enemy_targeted_overlay()
 			
 			if selected_tile.occupant:
+				print("HI I SEE YOU!")
+				print(selected_tile.coordinates)
+				print(selected_tile.occupant)
 				var enemy : GridActor = selected_tile.occupant
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
 					if enemy is SwordBot:
@@ -87,16 +90,22 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 
 					enemy.damage_actor(damage, is_vulcan)
 					if !pass_through and !enemy.is_dead:
+						
 						break
 						
-				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
+				elif actor is GridEnemy or actor is GridBoss and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
+	
 					if enemy == GridManager.player and GridManager.player.shield_active:
+						SignalBus.shake_camera.emit(0.3)
 						GameManager.damage_shield(damage)
 					else:
+						SignalBus.shake_camera.emit(1.0)
 						enemy.damage_actor(damage)
 					if !pass_through:
+						
 						break
-
+				
+				selected_tile.clear_targeted_overlay()
 
 func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	return GridManager.get_tile(tiles, coordinates)

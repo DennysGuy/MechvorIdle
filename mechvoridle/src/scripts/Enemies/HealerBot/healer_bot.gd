@@ -4,7 +4,6 @@ class_name HealerBot extends GridEnemy
 
 @export var heal_state : State
 
-@onready var health_label: Label = $EnemyHPLabel/HealthLabel
 @onready var timer: Timer = $Timer
 
 @onready var pulse_point: Marker3D = $PulsePoint
@@ -17,7 +16,6 @@ func _ready() -> void:
 	state_machine.init(self)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 
 func _unhandled_input(event: InputEvent) -> void:

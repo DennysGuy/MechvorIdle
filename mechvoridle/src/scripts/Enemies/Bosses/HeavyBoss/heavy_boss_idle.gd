@@ -12,7 +12,7 @@ func enter() -> void:
 	else:
 		match parent.current_phase:
 			parent.PHASES.ATTACK_PHASE1:
-				parent.idle_time = 0.5
+				parent.idle_time = 1.0
 	
 	parent.timer.wait_time = parent.idle_time
 	parent.timer.start()
