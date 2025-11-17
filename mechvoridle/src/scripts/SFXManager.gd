@@ -145,6 +145,10 @@ const VOX_COM_ENE_TAUNT_HATEFUL_02 = preload("res://assets/audio/SFX/VOX/Combat/
 const VOX_COM_ENE_TAUNT_POWERFUL_01 = preload("res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Taunt_Powerful_01.ogg")
 const VOX_COM_ENE_TAUNT_POWERFUL_02 = preload("res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Taunt_Powerful_02.ogg")
 
+const VULCAN_BLAST_1 = preload("uid://bvx0p2o6vkgji")
+const PLAYER_STEP = preload("uid://dartft1a11so0")
+const STEP_2 = preload("uid://ff3uj2qdn7is")
+
 
 
 func play_button_hover(audio_stream_player : AudioStreamPlayer) -> void:
@@ -156,3 +160,21 @@ func play_button_click(audio_stream_player : AudioStreamPlayer) -> void:
 	var click_sfx_list = [UI_NAV_BUTTON_PRESS_01, UI_NAV_BUTTON_PRESS_02, UI_NAV_BUTTON_PRESS_03]		
 	audio_stream_player.stream = click_sfx_list.pick_random()
 	audio_stream_player.play()
+
+func play_sfx(audio_stream : AudioStream, volume_db : float = 0.0, randomized_pitch : bool = false, pitch : float = 1.0) -> void:
+	var asp : AudioStreamPlayer = AudioStreamPlayer.new()
+	asp.stream = audio_stream
+	asp.volume_db = volume_db
+	asp.pitch_scale = pitch
+	if randomized_pitch:
+		asp.pitch_scale = randomize_pitch()
+		
+	asp.bus = "SFX"
+	add_child(asp)
+	asp.play()
+	await asp.finished
+	asp.queue_free()
+
+
+func randomize_pitch() -> float:
+	return randf_range(0.5,0.7)	

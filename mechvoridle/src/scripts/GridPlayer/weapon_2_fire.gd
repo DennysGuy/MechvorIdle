@@ -13,6 +13,7 @@ func enter() -> void:
 			animation_name = "RifleShotLeft"
 			
 	GridManager.clear_targeted_tiles()
+	SfxManager.play_sfx(SfxManager.COM_PLY_ATK_RIFLE_01, 0, true)
 	parent.animation_player.play(animation_name)
 	await get_tree().create_timer(0.5).timeout
 	parent.state_machine.change_state(idle)

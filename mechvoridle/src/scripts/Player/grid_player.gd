@@ -211,6 +211,7 @@ func _process(delta: float) -> void:
 	
 	if can_move:
 		if Input.is_action_pressed("move_left"):
+			SfxManager.play_sfx(SfxManager.STEP_2, -3, true)
 			SignalBus.move_player.emit(Vector2.UP, false)
 			can_move = false
 			await get_tree().create_timer(true_wait_time).timeout
@@ -218,6 +219,7 @@ func _process(delta: float) -> void:
 			GridManager.clear_targeted_tiles()
 			
 		if Input.is_action_pressed("move_right"):
+			SfxManager.play_sfx(SfxManager.STEP_2, -3, true)
 			SignalBus.move_player.emit(Vector2.DOWN, false)
 			can_move = false
 			await get_tree().create_timer(true_wait_time).timeout
@@ -238,11 +240,15 @@ func _process(delta: float) -> void:
 
 		if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 			firing = true
+			SfxManager.play_sfx(SfxManager.VULCAN_BLAST_1, 0, true)
+		
 			add_vulcan_flares()
 			mech_vulcan.attack_enemy(self,tiles,[],true)
 			await get_tree().create_timer(0.1).timeout
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
+				
+			SfxManager.play_sfx(SfxManager.VULCAN_BLAST_1, 0, true)
 			await get_tree().create_timer(0.1).timeout
 			firing = false
 			
