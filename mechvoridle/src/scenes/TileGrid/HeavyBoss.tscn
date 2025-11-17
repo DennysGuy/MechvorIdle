@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=4 uid="uid://dolkqjjmpal6f"]
+[gd_scene load_steps=112 format=4 uid="uid://dolkqjjmpal6f"]
 
 [ext_resource type="Script" uid="uid://b2wdvidmgl1nm" path="res://src/scripts/Enemies/Bosses/HeavyBoss/heavy_boss.gd" id="1_q43lp"]
 [ext_resource type="Resource" uid="uid://csktvgo4f04nb" path="res://src/resources/mechcomponents/weapons/rifles/BossArmCannon.tres" id="2_1oodm"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://b0hrq7xd6kkt5" path="res://src/scripts/Enemies/Bosses/HeavyBoss/shield_summon.gd" id="11_bf0tx"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="12_1tfa8"]
 [ext_resource type="PackedScene" uid="uid://psempt073jce" path="res://src/scenes/TileGrid/Shield.tscn" id="12_3o55o"]
+[ext_resource type="Script" uid="uid://bnqfnufsf1e6n" path="res://src/scripts/Enemies/Bosses/HeavyBoss/death.gd" id="13_8l5xi"]
+[ext_resource type="Script" uid="uid://chld0scb15b3i" path="res://src/scripts/Enemies/Bosses/HeavyBoss/wait.gd" id="14_dlgip"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g054x"]
 resource_name = "material_0"
@@ -4412,7 +4414,7 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_1oodm"]
 viewport_path = NodePath("EnemyHPLabel")
 
-[node name="HeavyBoss" type="Node3D" node_paths=PackedStringArray("state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label")]
+[node name="HeavyBoss" type="Node3D" node_paths=PackedStringArray("state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label", "death")]
 script = ExtResource("1_q43lp")
 cannon_rifle = ExtResource("2_1oodm")
 state_machine = NodePath("StateMachine")
@@ -4421,6 +4423,7 @@ max_health = 1300
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
+death = NodePath("StateMachine/Death")
 
 [node name="HeavyBoss" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 4.588922, 0)
@@ -4474,7 +4477,7 @@ mesh = SubResource("ArrayMesh_r8wgu")
 skeleton = NodePath("")
 
 [node name="Arm" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody"]
-transform = Transform3D(0.98432577, 0.12492389, -0.1244851, -0.15740868, 0.9406373, -0.30070582, 0.07952998, 0.3155876, 0.94555765, -0.4787444, -0.043731876, -0.11175125)
+transform = Transform3D(0.9843257, 0.12492387, -0.124485075, -0.15740865, 0.9406373, -0.3007058, 0.07952997, 0.31558758, 0.9455576, -0.4787444, -0.043731876, -0.11175125)
 
 [node name="UpperArm2" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.037655625, -0.08170125, -0.07559813)
@@ -4518,10 +4521,10 @@ mesh = SubResource("ArrayMesh_ico7n")
 skeleton = NodePath("")
 
 [node name="Arm2" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody"]
-transform = Transform3D(0.9843257, 0.045345217, 0.17042994, 0.15740882, 0.20990005, -0.96496856, -0.07952996, 0.97667074, 0.1994723, 0.5224944, -0.19998187, -0.11175125)
+transform = Transform3D(0.9843257, -0.12492386, 0.12448508, 0.15740865, 0.94063723, -0.3007058, -0.07952997, 0.31558755, 0.94555765, 0.4787444, -0.043731876, -0.11175125)
 
 [node name="UpperArm22" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2"]
-transform = Transform3D(1, 0, 0, 0, -0.08715565, 0.9961947, 0, -0.9961947, -0.08715565, -0.002998125, -0.2731025, 0.1049875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002998125, -0.3981025, -0.2075125)
 
 [node name="Shoulder2" type="MeshInstance3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2/UpperArm22"]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, -0.009375, 0.26875, 0.125)
@@ -4544,7 +4547,7 @@ mesh = SubResource("ArrayMesh_kutvf")
 skeleton = NodePath("")
 
 [node name="LowerArm22" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2/UpperArm22"]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, -0.5735764, 0, 0.5735764, 0.81915206, 0.0078125, 0.0109375, -0.08125)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.0078125, -0.0890625, -0.0375)
 
 [node name="Barrels" type="MeshInstance3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2/UpperArm22/LowerArm22"]
 transform = Transform3D(1, 0, 0, 0, 0.53729963, 0.8433914, 0, -0.8433914, 0.53729963, -0.078251876, -0.356585, 0.54345)
@@ -4637,7 +4640,7 @@ mesh = SubResource("ArrayMesh_dqlfa")
 skeleton = NodePath("")
 
 [node name="UpperLeg2" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg/UpperLeg22"]
-transform = Transform3D(0.9848078, 0.16561115, 0.05221705, -0.14267747, 0.6003123, 0.786936, 0.09897884, -0.7824309, 0.6148212, 0, 0, 0)
+transform = Transform3D(0.9848078, 0.16561116, 0.05221705, -0.14267749, 0.6003123, 0.786936, 0.098978855, -0.7824309, 0.6148212, 0, 0, 0)
 
 [node name="HipJoint" type="MeshInstance3D" parent="HeavyBoss/BigBoss/LowerBody/Leg/UpperLeg22/UpperLeg2"]
 transform = Transform3D(1, 0, 0, 0, 0.96814764, -0.25038, 0, 0.25038, 0.96814764, 0, 0, 0)
@@ -4650,7 +4653,7 @@ mesh = SubResource("ArrayMesh_fu53n")
 skeleton = NodePath("")
 
 [node name="Leg2" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody"]
-transform = Transform3D(1, 0, 0, 0, 0.9659257, 0.25881898, 0, -0.25881898, 0.9659257, -0.0109375, 0.303125, 0.0453125)
+transform = Transform3D(1, 0, 0, 0, 0.96592563, 0.25881898, 0, -0.25881898, 0.96592563, -0.0109375, 0.303125, 0.0453125)
 
 [node name="UpperLeg4" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2"]
 transform = Transform3D(0.9848077, -0.17101006, 0.030153628, 0.1426775, 0.8958501, 0.42082736, -0.09897883, -0.41013178, 0.90663946, 0.13125, -0.115625, -0.0171875)
@@ -4669,10 +4672,10 @@ mesh = SubResource("ArrayMesh_qwrkx")
 skeleton = NodePath("")
 
 [node name="UpperLeg32" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2/UpperLeg4"]
-transform = Transform3D(0.98480767, 0.16561125, -0.05221698, -0.09330107, 0.25103408, -0.96347123, -0.14645344, 0.9537059, 0.262672, 0, 0, 0)
+transform = Transform3D(0.98480767, 0.1656112, -0.05221701, -0.093301125, 0.25103432, -0.9634712, -0.14645335, 0.95370585, 0.26267225, 0, 0, 0)
 
 [node name="Foot4" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2/UpperLeg4/UpperLeg32"]
-transform = Transform3D(1, 0, 0, 0, 0.81915194, 0.57357633, 0, -0.57357633, 0.81915194, 0.146875, -0.2203125, 0.0359375)
+transform = Transform3D(1, 0, 0, 0, 0.81915194, 0.5735763, 0, -0.5735763, 0.81915194, 0.146875, -0.2203125, 0.0359375)
 
 [node name="LowerLeg2" type="MeshInstance3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2/UpperLeg4/UpperLeg32/Foot4"]
 transform = Transform3D(0.9507455, 0.10355331, -0.29216373, 0.26738483, -0.75078857, 0.6040047, -0.15680651, -0.6523749, -0.7414974, -0.0484375, 0.11875, 0.20625)
@@ -4739,7 +4742,7 @@ shield_summon = NodePath("../ShieldSummon")
 
 [node name="DropIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("5_rp62s")
-idle = NodePath("../Idle")
+idle = NodePath("../Wait")
 
 [node name="Taunt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("6_lhw45")
@@ -4749,6 +4752,7 @@ idle = NodePath("../Idle")
 script = ExtResource("8_oo2l7")
 idle = NodePath("../Idle")
 attack = NodePath("../ThreeTileShots")
+timer_wait = 0.5
 interval_min_val = 5
 interval_max_val = 7
 
@@ -4763,6 +4767,13 @@ taunt = NodePath("../Taunt")
 [node name="ShieldSummon" type="Node" parent="StateMachine" node_paths=PackedStringArray("taunt")]
 script = ExtResource("11_bf0tx")
 taunt = NodePath("../Taunt")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("13_8l5xi")
+
+[node name="Wait" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("14_dlgip")
+idle = NodePath("../Idle")
 
 [node name="DamageLabelMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.001823, 1.1789756)

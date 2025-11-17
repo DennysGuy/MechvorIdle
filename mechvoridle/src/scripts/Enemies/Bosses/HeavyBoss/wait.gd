@@ -1,12 +1,10 @@
-class_name BossDropIn extends State
+class_name BossWait extends State
 
 @export var idle : State
 
 func enter() -> void:
-	parent.misc_animation_player.play("Intro")
-	parent.timer.wait_time = 0.2
-	parent.timer.start()
-	parent.change_phase = true
+	parent.animation_player.play("Idle")
+
 func exit() -> void:
 	pass
 
@@ -17,7 +15,7 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	if parent.timer.time_left <= 0:
+	if GameManager.fight_on:
 		return idle
 	
 	return null

@@ -29,7 +29,6 @@ func process_frame(_delta: float) -> State:
 func process_physics(_delta: float) -> State:
 	
 	if parent.change_phase:
-		parent.choose_new_phase()
 		return taunt
 	
 	if parent.current_phase == parent.PHASES.ATTACK_PHASE1:
@@ -38,5 +37,6 @@ func process_physics(_delta: float) -> State:
 		return rocket_shots
 	elif parent.current_phase == parent.PHASES.ATTACK_PHASE3:
 		return shield_summon
+		
 	return null
 		

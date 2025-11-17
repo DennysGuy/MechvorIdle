@@ -28,7 +28,7 @@ func process_physics(_delta: float) -> State:
 	if parent.timer.time_left <= 0:
 		
 		if time_to_shoot >= interval:
-			print("WHY???")
+
 			time_to_shoot = 0
 			return attack
 			

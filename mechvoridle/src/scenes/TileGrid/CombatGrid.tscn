@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=29 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
 [ext_resource type="Script" uid="uid://dr2u7sj8lbs62" path="res://src/scripts/TileGrid/camera.gd" id="2_h1k12"]
 [ext_resource type="PackedScene" uid="uid://b5rrffupkskse" path="res://src/scenes/TileGrid/CountDownTimer.tscn" id="2_qlay0"]
+[ext_resource type="Texture2D" uid="uid://cykhh1bns3pkp" path="res://assets/graphics/bryceship.png" id="2_ttjqf"]
 [ext_resource type="PackedScene" uid="uid://cud8gmsqfuiq4" path="res://src/scenes/TileGrid/WeaponIcon.tscn" id="3_e6v0j"]
 [ext_resource type="Texture2D" uid="uid://cvwx02hujw06g" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Fill.png" id="3_h1k12"]
 [ext_resource type="Texture2D" uid="uid://clqh2lniac8mh" path="res://assets/graphics/UI/GridHUD.png" id="3_kbvcb"]
@@ -12,6 +13,11 @@
 [ext_resource type="FontFile" uid="uid://bbe5bn3uhqn6r" path="res://assets/graphics/Fonts/paladins3d.ttf" id="8_vgp2e"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="9_02ps3"]
 [ext_resource type="FontFile" uid="uid://dke1diyqcr0et" path="res://assets/graphics/Fonts/OriginTech personal use.ttf" id="12_0mc8c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttjqf"]
+blend_mode = 4
+cull_mode = 2
+albedo_color = Color(0.17641926, 0.17641905, 0.17641908, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf78d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -350,8 +356,124 @@ _data = {
 &"RESET": SubResource("Animation_ttjqf")
 }
 
+[sub_resource type="Animation" id="Animation_4sac6"]
+resource_name = "FadeToWin"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_win_screen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_76a4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wsi4k"]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_2haw7"]
+resource_name = "FadeToLose"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_lose_screen"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_76a4t"]
+_data = {
+&"FadeIn": SubResource("Animation_wsi4k"),
+&"FadeToLose": SubResource("Animation_2haw7"),
+&"FadeToWin": SubResource("Animation_4sac6"),
+&"RESET": SubResource("Animation_76a4t")
+}
+
 [node name="CombatGrid" type="Node3D"]
 script = ExtResource("1_vf78d")
+
+[node name="BG" type="Sprite3D" parent="."]
+transform = Transform3D(1.9570267, 0, 0, 0, 1.7407987, 0, 0, 0, 1, 2.5821037, 1.1011128, -7.99559)
+material_overlay = SubResource("StandardMaterial3D_ttjqf")
+modulate = Color(0.33392802, 0.4654991, 0.45276558, 1)
+texture = ExtResource("2_ttjqf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e6v0j")
@@ -372,7 +494,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.3, 18.8)
 
 [node name="Camera" type="Camera3D" parent="Hinge"]
-transform = Transform3D(1, 0, 0, 0, 0.997564, 0.06975646, 0, -0.06975646, 0.997564, 0.048605442, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99756396, 0.06975646, 0, -0.06975646, 0.99756396, 0.048605442, 0, 0)
 rotation_order = 3
 fov = 40.0
 script = ExtResource("2_h1k12")
@@ -381,6 +503,12 @@ script = ExtResource("2_h1k12")
 root_node = NodePath("../Hinge/Camera")
 libraries = {
 &"": SubResource("AnimationLibrary_ttjqf")
+}
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasLayer/TransitionRect")
+libraries = {
+&"": SubResource("AnimationLibrary_76a4t")
 }
 
 [node name="SupplyCrateTimer" type="Timer" parent="."]
@@ -546,6 +674,15 @@ theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 50
 text = "3"
 horizontal_alignment = 1
+
+[node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [connection signal="timeout" from="SupplyCrateTimer" to="." method="_on_supply_crate_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

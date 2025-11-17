@@ -19,6 +19,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vect
 @onready var cutscene_player: AnimationPlayer = $CutscenePlayer
 
 @onready var timer: Timer = $Timer
+@onready var transition_player: AnimationPlayer = $TransitionPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,6 +42,9 @@ func _ready() -> void:
 	SignalBus.hide_damage_mulitplier_label.connect(hide_damage_multiplier)
 	SignalBus.spawn_enemies.connect(spawn_enemies)
 	
+	SignalBus.transition_win_screen.connect(play_fade_out)
+	SignalBus.transition_lose_screen.connect(play_fade_to_lose)
+	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
 	player_shield_stamina.value = player_shield_stamina.max_value
@@ -49,7 +53,7 @@ func _ready() -> void:
 	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
 	#supply_crate_timer.start()
 	cutscene_player.play("IntroCutScene")
-
+	transition_player.play("FadeIn")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -117,7 +121,7 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = f
 
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
-	if GridManager.current_wave == GridManager.waves.size()-1:
+	if GridManager.current_wave == GridManager.MAX_WAVES-1:
 		GameManager.in_boss_fight = true
 		spawn_enemies(GridManager.boss_spawn)
 		count_down_timer.stop_timer()
@@ -150,8 +154,8 @@ func spawn_enemies(selected_wave : Array) -> void:
 		await get_tree().create_timer(0.5).timeout
 		
 	await get_tree().create_timer(0.5).timeout
-	if !GameManager.in_boss_fight:
-		SignalBus.enable_enemy_movement.emit()
+	
+	SignalBus.enable_enemy_movement.emit()
 
 func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
@@ -248,13 +252,27 @@ func start_wave_combat() -> void:
 	if !GameManager.in_boss_fight:
 		spawn_next_wave()
 	else:
+		GameManager.fight_on = true
 		count_down_timer.start_timer()
 		SignalBus.change_boss_phase.emit() #otherwise boss should be on the screen and we just enable movement
 	
-	
+func commence_boss_fight() -> void:
+	GameManager.fight_on = true
+
 func play_count_down() -> void:
 	cutscene_player.play("CountDown")
 
+func play_fade_out() -> void:
+	transition_player.play("FadeToWin")
+
+func play_fade_to_lose() -> void:
+	transition_player.play("FadeToLose")
+
+func go_to_win_screen() -> void:
+	get_tree().change_scene_to_file("res://src/scenes/WinPanel.tscn")
+
+func go_to_lose_screen() -> void:
+	get_tree().change_scene_to_file("res://src/scenes/LosePanel.tscn")
 
 func _on_timer_timeout() -> void:
 	play_count_down()

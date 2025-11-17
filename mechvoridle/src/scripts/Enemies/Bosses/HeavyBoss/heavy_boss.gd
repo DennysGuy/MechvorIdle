@@ -1,7 +1,6 @@
 class_name HeavyBoss extends GridBoss
 
 enum PHASES {
-	INIT,
 	ATTACK_PHASE1,
 	ATTACK_PHASE2,
 	ATTACK_PHASE3
@@ -26,7 +25,7 @@ var fall_configs := [
 @export var row_limit : int = 2
 @export var col_limit : int = 3
 
-var current_phase : PHASES = PHASES.INIT
+var current_phase : PHASES
 var destined_tile : Tile
 @onready var animation_player: AnimationPlayer = $HeavyBoss/AnimationPlayer
 @onready var misc_animation_player: AnimationPlayer = $MiscAnimationPlayer
@@ -72,18 +71,19 @@ func _exit_tree() -> void:
 
 func _on_phase_timer_timeout() -> void:
 	choose_new_phase()
+	change_phase = true
 
 
 func choose_new_phase() -> void:
-	#var prev_phase : PHASES = current_phase
-	#var new_phase : PHASES = current_phase
-	#
-	#while prev_phase == new_phase:
-		#var keys : Array[int] = [1,2,3]
-		#new_phase = keys.pick_random()
-	#
-	#current_phase = new_phase
-	change_phase = true
+	var prev_phase : PHASES = current_phase
+	var new_phase : PHASES = current_phase
+	
+	while prev_phase == new_phase:
+		var keys : Array[int] = [0,1,2]
+		new_phase = keys.pick_random()
+	
+	current_phase = new_phase
+	#change_phase = true
 
 func show_shield() -> void:
 	shield.show()

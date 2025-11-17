@@ -2,7 +2,7 @@ extends Node
 
 const MAX_ROWS : int = 5
 const MAX_COLUMNS : int = 3
-const MAX_WAVES : int = 10
+const MAX_WAVES : int = 2
 var current_wave : int = -1
 
 var player : GridPlayer

@@ -366,3 +366,7 @@ signal spawn_enemies(wave : Array)
 signal spawn_mini_wave
 @warning_ignore("unused_signal")
 signal change_boss_phase
+@warning_ignore("unused_signal")
+signal transition_win_screen
+@warning_ignore("unused_signal")
+signal transition_lose_screen
