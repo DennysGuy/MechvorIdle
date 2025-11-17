@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=22 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -30,6 +30,326 @@ tonemap_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf78d"]
 albedo_color = Color(2.8878452e-07, 0.32786852, 0.38140947, 1)
 
+[sub_resource type="Animation" id="Animation_0mc8c"]
+resource_name = "IntroCutScene"
+length = 4.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.08726646, -3.1415927, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.0020916, 2.9988382),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3, 9.518636, -17), Vector3(3, 6.057798, -17), Vector3(3, 2, 9.1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3.98),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_camera_swoop_to_position"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ttjqf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.048605442, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.06981317, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3.3, 18.8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../CanvasLayer/CountDownLabel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-318, 154)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../CanvasLayer/CountDownLabel:text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["3"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../CanvasLayer/CountDownLabel:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(297.00018, 51)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../../CanvasLayer/CountDownLabel:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../CanvasLayer/CountDownLabel:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ssntb"]
+resource_name = "CameraSwoopToPosition"
+length = 2.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.08726646, 3.1415927, 0), Vector3(-0.07679449, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3, 2, 9.1), Vector3(7.614439, 2.8692682, 13.486912), Vector3(3, 3.3, 18.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_count_down"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_po36e"]
+resource_name = "CountDown"
+length = 5.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CanvasLayer/CountDownLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.28373292, 1, 4, 4.81, 4.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-318, 154), Vector2(172, 155), Vector2(172, 155), Vector2(172, 155), Vector2(172, 155), Vector2(666, 155)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CanvasLayer/CountDownLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.0000117, 2.009255, 3.0029154, 4.0000114),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["READY?", "3", "2", "1", "FIGHT!"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CanvasLayer/CountDownLabel:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../CanvasLayer/CountDownLabel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.199168, 2.0034454, 2.2026134, 3.0029154, 3.2020833, 4.0015717, 4.20074),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.15, 1.15), Vector2(1, 1), Vector2(1.15, 1.15), Vector2(1, 1), Vector2(1.15, 1.15), Vector2(1, 1), Vector2(1.15, 1.15)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../CanvasLayer/CountDownLabel:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.060606, 1.1301084, 1.2, 2.0034454, 2.0640514, 2.1335537, 2.2042546, 3.0029154, 3.0635214, 3.1330237, 3.2037246, 4.0015717, 4.0621777, 4.13168, 4.202381),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.08726646, -0.08726646, 0.0, 0.0, 0.08726646, -0.08726646, 0.0, 0.0, 0.08726646, -0.08726646, 0.0, 0.0, 0.08726646, -0.08726646, 0.0]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(4.99),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_wave_combat"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ttjqf"]
+_data = {
+&"CameraSwoopToPosition": SubResource("Animation_ssntb"),
+&"CountDown": SubResource("Animation_po36e"),
+&"IntroCutScene": SubResource("Animation_0mc8c"),
+&"RESET": SubResource("Animation_ttjqf")
+}
+
 [node name="CombatGrid" type="Node3D"]
 script = ExtResource("1_vf78d")
 
@@ -41,18 +361,36 @@ environment = SubResource("Environment_e6v0j")
 [node name="Tiles" type="Node" parent="."]
 
 [node name="Arena" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 2.8955808, -0.44847298, 4.1677766)
+transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 3.121862, -0.44847298, 5.987222)
 material_override = SubResource("StandardMaterial3D_vf78d")
-size = Vector3(10.050356, 1, 14.957357)
+size = Vector3(9.597794, 1, 16.35212)
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 2.968268, 3.329074, 18.809805)
+[node name="CameraDefaultMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 3, 3.3, 18.8)
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.3, 18.8)
+
+[node name="Camera" type="Camera3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.06975646, 0, -0.06975646, 0.997564, 0.048605442, 0, 0)
+rotation_order = 3
 fov = 40.0
 script = ExtResource("2_h1k12")
+
+[node name="CutscenePlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Hinge/Camera")
+libraries = {
+&"": SubResource("AnimationLibrary_ttjqf")
+}
 
 [node name="SupplyCrateTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 15.0
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -191,4 +529,23 @@ bbcode_enabled = true
 text = "dmg x1.5"
 vertical_alignment = 1
 
+[node name="CountDownLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -638.0
+offset_top = -26.0
+offset_right = -340.99982
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(149.98154, 25.821022)
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="SupplyCrateTimer" to="." method="_on_supply_crate_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

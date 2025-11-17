@@ -1,6 +1,7 @@
 class_name HeavyBoss extends GridBoss
 
 enum PHASES {
+	INIT,
 	ATTACK_PHASE1,
 	ATTACK_PHASE2,
 	ATTACK_PHASE3
@@ -25,7 +26,7 @@ var fall_configs := [
 @export var row_limit : int = 2
 @export var col_limit : int = 3
 
-var current_phase : PHASES
+var current_phase : PHASES = PHASES.INIT
 var destined_tile : Tile
 @onready var animation_player: AnimationPlayer = $HeavyBoss/AnimationPlayer
 @onready var misc_animation_player: AnimationPlayer = $MiscAnimationPlayer
@@ -48,6 +49,7 @@ var idle_time : float = 2.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
+	SignalBus.change_boss_phase.connect(change_boss_phase_on_start)
 	can_hurt = false
 	state_machine.init(self)
 
@@ -69,16 +71,19 @@ func _exit_tree() -> void:
 	GridManager.enemies.erase(self)
 
 func _on_phase_timer_timeout() -> void:
-	var prev_phase : PHASES = current_phase
-	var new_phase : PHASES = current_phase
-	
-	while prev_phase == new_phase:
-		var keys : Array[int] = [0,1,2]
-		new_phase = keys.pick_random()
-	
-	current_phase = new_phase
-	change_phase = true
+	choose_new_phase()
 
+
+func choose_new_phase() -> void:
+	#var prev_phase : PHASES = current_phase
+	#var new_phase : PHASES = current_phase
+	#
+	#while prev_phase == new_phase:
+		#var keys : Array[int] = [1,2,3]
+		#new_phase = keys.pick_random()
+	#
+	#current_phase = new_phase
+	change_phase = true
 
 func show_shield() -> void:
 	shield.show()
@@ -95,6 +100,8 @@ func spawn_launching_mini_rocket() -> void:
 	mini_rocket.global_position = rocket_launch_marker.global_position
 	get_parent().add_child(mini_rocket)
 
+func change_boss_phase_on_start() -> void:
+	change_phase = true
 
 func spawn_mini_wave() -> void:
 	if current_phase == PHASES.ATTACK_PHASE3:

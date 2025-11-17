@@ -16,6 +16,10 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vect
 
 @onready var damage_multiplier_label: RichTextLabel = $CanvasLayer/DamageMultiplierLabel
 
+@onready var cutscene_player: AnimationPlayer = $CutscenePlayer
+
+@onready var timer: Timer = $Timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +27,7 @@ func _ready() -> void:
 	GridManager.spawn_player(tiles)
 	damage_multiplier_label.hide()
 	#GridManager.spawn_test_enemy(tiles)
-	spawn_next_wave()
+	#spawn_next_wave()
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
@@ -43,7 +47,8 @@ func _ready() -> void:
 	player_health_bar.max_value = GridManager.player.max_health
 	player_health_bar.value = GridManager.player.health
 	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]
-	supply_crate_timer.start()
+	#supply_crate_timer.start()
+	cutscene_player.play("IntroCutScene")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -113,6 +118,12 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = f
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
 	if GridManager.current_wave == GridManager.waves.size()-1:
+		GameManager.in_boss_fight = true
+		spawn_enemies(GridManager.boss_spawn)
+		count_down_timer.stop_timer()
+		count_down_timer.count_down = false
+		timer.start()
+		
 		return
 		
 	GridManager.current_wave += 1
@@ -139,15 +150,15 @@ func spawn_enemies(selected_wave : Array) -> void:
 		await get_tree().create_timer(0.5).timeout
 		
 	await get_tree().create_timer(0.5).timeout
-	
-	SignalBus.enable_enemy_movement.emit()
+	if !GameManager.in_boss_fight:
+		SignalBus.enable_enemy_movement.emit()
 
 func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
 
 func fill_shield_guage() -> void:
 	
-	if not GridManager.player:
+	if not is_instance_valid(GridManager.player):
 		return
 		
 	var speed := 45.0  # amount per second
@@ -228,3 +239,22 @@ func show_damage_multipler(value : float) -> void:
 
 func hide_damage_multiplier() -> void:
 	damage_multiplier_label.hide()
+
+func play_camera_swoop_to_position() -> void:
+	cutscene_player.play("CameraSwoopToPosition")
+
+func start_wave_combat() -> void:
+	GridManager.player.can_move = true
+	if !GameManager.in_boss_fight:
+		spawn_next_wave()
+	else:
+		count_down_timer.start_timer()
+		SignalBus.change_boss_phase.emit() #otherwise boss should be on the screen and we just enable movement
+	
+	
+func play_count_down() -> void:
+	cutscene_player.play("CountDown")
+
+
+func _on_timer_timeout() -> void:
+	play_count_down()

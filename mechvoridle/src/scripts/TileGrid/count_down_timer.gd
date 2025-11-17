@@ -7,43 +7,49 @@ var timer_started : bool
 @onready var marker_2d: Marker2D = $Marker2D
 
 var seconds_tracker : int = 0
-
+var count_down : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.add_time.connect(add_time)
-	#start_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("shoot"):
-		#timer_started = true
 	pass
 
 func _physics_process(delta: float) -> void:
 	if timer_started:
-		if milliseconds == 0:
-			seconds -= 1
-			seconds_tracker += 1
-			milliseconds = 100
-				
-			if seconds_tracker >= 60:
-				seconds_tracker = 0
-				
+		if count_down:
+			count_down_time(delta)
 		else:
-			@warning_ignore("narrowing_conversion")
-			milliseconds -= delta
-		
-		if seconds <= 0:
-			stop_timer()
-			GameManager.timed_out = true
-			SignalBus.apply_timer_consequences.emit()
-			SignalBus.spawn_next_wave.emit()
-
+			increment_time(delta)
 			
 		set_time(seconds,milliseconds)
 		
+func count_down_time(_delta : float) -> void:
+	if milliseconds == 0:
+		seconds -= 1
+		seconds_tracker += 1
+		milliseconds = 100
+				
+	else:
+		milliseconds -= _delta
+		
+	if seconds <= 0:
+		stop_timer()
+		GameManager.timed_out = true
+		SignalBus.apply_timer_consequences.emit()
+		SignalBus.spawn_next_wave.emit()
+
+func increment_time(_delta : float) -> void:
+	if milliseconds >= 99:
+		seconds += 1
+		milliseconds = 0
+	else:
+		milliseconds += _delta
 	
+		
+
 func set_time(added_seconds : int, added_milliseconds : int = 0) -> void:
 	seconds = added_seconds
 	milliseconds = added_milliseconds
@@ -57,6 +63,8 @@ func stop_timer() -> void:
 	milliseconds = 0
 
 	timer_started = false
+	set_time(0,0)
+	
 	
 func set_label() -> void:
 	text = ""

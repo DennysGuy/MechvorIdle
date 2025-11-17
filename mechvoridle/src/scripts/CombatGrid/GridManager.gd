@@ -79,6 +79,15 @@ func spawn_player(tiles : Node) -> void:
 	player.tiles = tiles
 	add_child(grid_player)
 
+var boss_spawn : Array = [
+		{
+			"enemy": HEAVY_BOSS.duplicate(true), 
+			"coordinates": Vector2(0,1),
+			"is_slave": false,
+			"is_boss": true
+		}
+	]
+
 #func spawn_test_enemy(tiles : Node) -> void:
 	#
 	#var spor_enemy = preload("uid://b7cur5tqfwumt")
@@ -154,10 +163,6 @@ func set_mech_as_standard_light() -> void:
 	GameManager.owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
 	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
 	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
-
-
-
-
 
 var waves = [
 	[
@@ -339,14 +344,6 @@ var waves = [
 			"is_boss": false
 		},
 	],
-	[
-		{
-			"enemy": HEAVY_BOSS.duplicate(true), 
-			"coordinates": Vector2(0,1),
-			"is_slave": false,
-			"is_boss": true
-		}
-	]
 	
 ]
 

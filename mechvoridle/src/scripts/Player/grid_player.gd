@@ -197,7 +197,7 @@ func _ready() -> void:
 	GridManager.set_mech_as_light()
 	SignalBus.apply_timer_consequences.connect(apply_time_consequences)
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
-	
+	can_move = false
 	max_health = 1000
 	health = max_health
 	
@@ -208,66 +208,68 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("move_left") and can_move:
-		SignalBus.move_player.emit(Vector2.UP, false)
-		can_move = false
-		await get_tree().create_timer(true_wait_time).timeout
-		can_move = true
-		GridManager.clear_targeted_tiles()
-		
-	if Input.is_action_pressed("move_right") and can_move:
-		SignalBus.move_player.emit(Vector2.DOWN, false)
-		can_move = false
-		await get_tree().create_timer(true_wait_time).timeout
-		can_move = true
-		GridManager.clear_targeted_tiles()
 	
-	#if Input.is_action_pressed("move_up") and can_move:
-		#SignalBus.move_player.emit(Vector2.LEFT, false)
-		#can_move = false
-		#await get_tree().create_timer(true_wait_time).timeout
-		#can_move = true
-	#
-	#if Input.is_action_pressed("move_down") and can_move:
-		#SignalBus.move_player.emit(Vector2.RIGHT, false)
-		#can_move = false
-		#await get_tree().create_timer(true_wait_time).timeout
-		#can_move = true
-
-	if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
-		firing = true
-		add_vulcan_flares()
-		mech_vulcan.attack_enemy(self,tiles,[],true)
-		await get_tree().create_timer(0.1).timeout
-		for flare in get_tree().get_nodes_in_group("VulcanFlares"):
-			flare.queue_free()
-		await get_tree().create_timer(0.1).timeout
-		firing = false
-		
-	if Input.is_action_just_released("fire_vulcans") and firing and can_fire_vulcans:
-		for flare in get_tree().get_nodes_in_group("VulcanFlares"):
-			flare.queue_free()
+	if can_move:
+		if Input.is_action_pressed("move_left"):
+			SignalBus.move_player.emit(Vector2.UP, false)
+			can_move = false
+			await get_tree().create_timer(true_wait_time).timeout
+			can_move = true
+			GridManager.clear_targeted_tiles()
 			
-		GridManager.clear_targeted_tiles()
-	
-	if Input.is_action_pressed("activate_shield") and can_use_shield:
-		start_shield_cool_down = false
-		regen_started = false
-		shield_active = true
-		shield.show()
-	else:
-		shield_active = false
-		shield.hide()
-	
-		if GameManager.current_shield_amount < GameManager.shield_amount:
-			if not start_shield_cool_down:
-				regen_started = true
-				if can_use_shield:
-					shield_cool_down_timer.wait_time = 3.0
-				else:
-					shield_cool_down_timer.wait_time = 5.4
-				shield_cool_down_timer.start()
-				start_shield_cool_down = true
+		if Input.is_action_pressed("move_right"):
+			SignalBus.move_player.emit(Vector2.DOWN, false)
+			can_move = false
+			await get_tree().create_timer(true_wait_time).timeout
+			can_move = true
+			GridManager.clear_targeted_tiles()
+		
+		#if Input.is_action_pressed("move_up") and can_move:
+			#SignalBus.move_player.emit(Vector2.LEFT, false)
+			#can_move = false
+			#await get_tree().create_timer(true_wait_time).timeout
+			#can_move = true
+		#
+		#if Input.is_action_pressed("move_down") and can_move:
+			#SignalBus.move_player.emit(Vector2.RIGHT, false)
+			#can_move = false
+			#await get_tree().create_timer(true_wait_time).timeout
+			#can_move = true
+
+		if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
+			firing = true
+			add_vulcan_flares()
+			mech_vulcan.attack_enemy(self,tiles,[],true)
+			await get_tree().create_timer(0.1).timeout
+			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
+				flare.queue_free()
+			await get_tree().create_timer(0.1).timeout
+			firing = false
+			
+		if Input.is_action_just_released("fire_vulcans") and firing and can_fire_vulcans:
+			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
+				flare.queue_free()
+				
+			GridManager.clear_targeted_tiles()
+		
+		if Input.is_action_pressed("activate_shield") and can_use_shield:
+			start_shield_cool_down = false
+			regen_started = false
+			shield_active = true
+			shield.show()
+		else:
+			shield_active = false
+			shield.hide()
+		
+			if GameManager.current_shield_amount < GameManager.shield_amount:
+				if not start_shield_cool_down:
+					regen_started = true
+					if can_use_shield:
+						shield_cool_down_timer.wait_time = 3.0
+					else:
+						shield_cool_down_timer.wait_time = 5.4
+					shield_cool_down_timer.start()
+					start_shield_cool_down = true
 			
 	#
 	

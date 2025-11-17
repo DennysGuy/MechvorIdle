@@ -364,3 +364,5 @@ signal hide_damage_mulitplier_label
 signal spawn_enemies(wave : Array)
 @warning_ignore("unused_signal")
 signal spawn_mini_wave
+@warning_ignore("unused_signal")
+signal change_boss_phase
