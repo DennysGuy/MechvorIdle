@@ -123,11 +123,10 @@ func spawn_next_wave() -> void:
 	await get_tree().process_frame
 	if GridManager.current_wave == GridManager.MAX_WAVES-1:
 		GameManager.in_boss_fight = true
-		spawn_enemies(GridManager.boss_spawn)
+		#play_count_down()
+		cutscene_player.play("CountDownBoss")
 		count_down_timer.stop_timer()
 		count_down_timer.count_down = false
-		timer.start()
-		
 		return
 		
 	GridManager.current_wave += 1
@@ -192,6 +191,9 @@ func update_health_bar() -> void:
 		0.35  # duration
 	)
 
+func spawn_boss() -> void:
+	spawn_enemies(GridManager.boss_spawn)
+
 func increase_player_health(value : int) -> void:
 	GridManager.player.health += value
 	if GridManager.player.health > GridManager.player.max_health:
@@ -253,7 +255,7 @@ func start_wave_combat() -> void:
 		spawn_next_wave()
 	else:
 		GameManager.fight_on = true
-		count_down_timer.start_timer()
+		start_count_up_timer()
 		SignalBus.change_boss_phase.emit() #otherwise boss should be on the screen and we just enable movement
 	
 func commence_boss_fight() -> void:
@@ -276,3 +278,7 @@ func go_to_lose_screen() -> void:
 
 func _on_timer_timeout() -> void:
 	play_count_down()
+
+func start_count_up_timer() -> void:
+	count_down_timer.count_down = false
+	count_down_timer.start_timer()

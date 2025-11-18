@@ -240,7 +240,7 @@ func _process(delta: float) -> void:
 
 		if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 			firing = true
-			SfxManager.play_sfx(SfxManager.VULCAN_BLAST_1, 0, true)
+			SfxManager.play_sfx(SfxManager.get_vulcan_shot(), -4, false)
 		
 			add_vulcan_flares()
 			mech_vulcan.attack_enemy(self,tiles,[],true)
@@ -248,7 +248,7 @@ func _process(delta: float) -> void:
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
 				
-			SfxManager.play_sfx(SfxManager.VULCAN_BLAST_1, 0, true)
+			SfxManager.play_sfx(SfxManager.get_vulcan_shot(), -4, false)
 			await get_tree().create_timer(0.1).timeout
 			firing = false
 			
@@ -327,7 +327,8 @@ func fire_rifle_2() -> void:
 		get_parent().add_child(sniper_blast)
 		
 func apply_time_consequences() -> void:
-	damage_actor(int(health * 0.3))
+	if !GameManager.fight_on:
+		damage_actor(int(health * 0.3))
 
 
 func _on_shield_cool_down_timer_timeout() -> void:

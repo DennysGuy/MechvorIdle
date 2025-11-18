@@ -93,6 +93,7 @@ func hide_shield() -> void:
 
 func fire_cannon() -> void:
 	cannon_rifle.attack_pattern.issue_attack(self, tiles, cannon_rifle.damage)
+	SignalBus.shake_camera.emit(0.4)
 	await get_tree().create_timer(0.5).timeout
 	
 func spawn_launching_mini_rocket() -> void:
@@ -143,3 +144,5 @@ func rockets_impact() -> void:
 		get_parent().add_child(mini_rocket)
 		await get_tree().create_timer(0.5).timeout
 	
+func shake_camera_on_land() -> void:
+	SignalBus.shake_camera.emit(1.0)

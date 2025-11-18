@@ -21,8 +21,22 @@ enum WeaponOwner {PLAYER, ENEMY}
 
 @export var attack_pattern : AttackPattern
 @export var secondary_attack_pattern : AttackPattern
+
+@export_group("Visuals")
 @export var projectile : PackedScene
 @export var secondary_projectile : PackedScene
+
+@export_group("Projectile Audio")
+@export var primary_projectile_discharge : AudioStream
+@export var secondary_projectile_discharge : AudioStream
+
+@export_group("Impact Audio")
+@export var primary_impact : AudioStream
+@export var secondary_impact : AudioStream
+
+@export_group("Charge")
+@export var charge_up : AudioStream
+
 
 func get_weapon_type() -> String:
 	match(weapon_type):

@@ -9,6 +9,8 @@ var damage_multiplier := 1.0
 var i : int = 0
 func enter() -> void:
 	GameManager.get_right_weapon().damage = 30.0
+	var sfx := GameManager.get_right_weapon().charge_up
+	SfxManager.play_sfx(sfx)
 	damage_multiplier = 1.0
 	i = 0
 	shift_time = 0.5

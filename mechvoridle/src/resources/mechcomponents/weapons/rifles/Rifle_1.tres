@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=5 format=3 uid="uid://dplngps46dubl"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=8 format=3 uid="uid://dplngps46dubl"]
 
 [ext_resource type="Resource" uid="uid://be3g0tuwcydg1" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRiflePattern.tres" id="1_c13wu"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_yfro8"]
+[ext_resource type="AudioStream" uid="uid://mfnf61gxm4vs" path="res://assets/audio/SFX/COMBAT/RifleAim.ogg" id="2_ljhgc"]
 [ext_resource type="PackedScene" uid="uid://b712bpq5ut01h" path="res://src/scenes/TileGrid/PlasmaBullet.tscn" id="2_rr0hn"]
+[ext_resource type="AudioStream" uid="uid://dgg0c46javkxy" path="res://assets/audio/SFX/COMBAT/PlasmaRifle.ogg" id="3_m8ssy"]
 [ext_resource type="Resource" uid="uid://br01pvgjejf84" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRifleChargePattern.tres" id="4_xxsr1"]
+[ext_resource type="AudioStream" uid="uid://dwc0y37t1hfin" path="res://assets/audio/SFX/COMBAT/PlasmaRifleChargeUp.ogg" id="7_i670q"]
 
 [resource]
 script = ExtResource("1_yfro8")
@@ -18,6 +21,9 @@ accuracy = 0.8
 attack_pattern = ExtResource("1_c13wu")
 secondary_attack_pattern = ExtResource("4_xxsr1")
 projectile = ExtResource("2_rr0hn")
+primary_projectile_discharge = ExtResource("3_m8ssy")
+secondary_projectile_discharge = ExtResource("7_i670q")
+charge_up = ExtResource("2_ljhgc")
 component_name = "ARG-15-X"
 index = 1
 manufacture_name = 1

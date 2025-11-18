@@ -4,8 +4,10 @@ class_name HeavyBossIdle extends State
 @export var rocket_shots : State
 @export var taunt : State
 @export var shield_summon : State
-
+@export var death : State
 func enter() -> void:
+	
+	
 	parent.animation_player.play("Idle")
 	if parent.change_phase:
 		parent.idle_time = 2.0
@@ -27,6 +29,9 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
+	
+	if parent.is_dead:
+		return death
 	
 	if parent.change_phase:
 		return taunt

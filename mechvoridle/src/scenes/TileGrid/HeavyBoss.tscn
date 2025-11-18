@@ -4376,7 +4376,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_jwwcw"]
 resource_name = "Intro"
-length = 0.2
+length = 0.21
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -4388,6 +4388,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 4.588922, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shake_camera_on_land"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rp62s"]
@@ -4733,12 +4747,13 @@ one_shot = true
 script = ExtResource("4_jwwcw")
 initial_state = NodePath("DropIn")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("random_move", "rocket_shots", "taunt", "shield_summon")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("random_move", "rocket_shots", "taunt", "shield_summon", "death")]
 script = ExtResource("5_vucjs")
 random_move = NodePath("../RandomMove")
 rocket_shots = NodePath("../RocketShots")
 taunt = NodePath("../Taunt")
 shield_summon = NodePath("../ShieldSummon")
+death = NodePath("../Death")
 
 [node name="DropIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("5_rp62s")

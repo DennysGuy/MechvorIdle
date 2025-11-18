@@ -149,7 +149,16 @@ const VULCAN_BLAST_1 = preload("uid://bvx0p2o6vkgji")
 const PLAYER_STEP = preload("uid://dartft1a11so0")
 const STEP_2 = preload("uid://ff3uj2qdn7is")
 
+const VULCAN_SHOT_1 = preload("uid://cmvqhmxqa87gs")
+const VULCAN_SHOT_2 = preload("uid://7kio57edq6hp")
+const VULCAN_SHOT_3 = preload("uid://crit4wosexl7q")
+const VULCAN_SHOT_4 = preload("uid://d0t0ctj542xxe")
+const VULCAN_SHOT_5 = preload("uid://vfewesgcolyn")
 
+var vulcan_shots : Array[AudioStream] = [VULCAN_SHOT_1, VULCAN_SHOT_2, VULCAN_SHOT_3, VULCAN_SHOT_4, VULCAN_SHOT_5]
+
+func get_vulcan_shot() -> AudioStream:
+	return vulcan_shots.pick_random()
 
 func play_button_hover(audio_stream_player : AudioStreamPlayer) -> void:
 	var hover_sfx_list = [UI_NAV_BUTTON_HOVER_01, UI_NAV_BUTTON_HOVER_02, UI_NAV_BUTTON_HOVER_03]

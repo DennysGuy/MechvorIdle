@@ -11,7 +11,8 @@ func enter() -> void:
 	animation_name = "AimRifleLeft"
 	parent.animation_player.play(animation_name)
 	parent.charge_up_timer.start()
-
+	var sfx := GameManager.get_left_weapon().charge_up
+	SfxManager.play_sfx(sfx)
 func exit() -> void:
 	pass
 

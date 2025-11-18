@@ -2,7 +2,8 @@ class_name EnemyDead extends State
 
 @export var idle : State 
 func enter() -> void:
-	parent.animation_player.play("die")
+	if parent.animation_player:
+		parent.animation_player.play("die")
 
 func exit() -> void:
 	pass
