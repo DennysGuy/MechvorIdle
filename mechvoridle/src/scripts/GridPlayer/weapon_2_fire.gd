@@ -15,8 +15,10 @@ func enter() -> void:
 	GridManager.clear_targeted_tiles()
 	var sfx : AudioStream
 	if parent.rifle_charged_up:
+		SignalBus.shake_camera.emit(1.0)
 		sfx = GameManager.get_left_weapon().primary_projectile_discharge
 	else:
+		SignalBus.shake_camera.emit(0.7)
 		sfx = GameManager.get_left_weapon().secondary_projectile_discharge
 		
 	SfxManager.play_sfx(sfx)

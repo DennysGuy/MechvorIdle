@@ -3,10 +3,15 @@ class_name SwordBotPrepare extends State
 @export var idle : State
 @export var attack : State
 var issued_slave_signal : bool = false
+
+const SWORD_BOT_PREPARE = preload("uid://svuomkbnqg4e")
+
+
 func enter() -> void:
 	issued_slave_signal = false
 	if parent.tile_to_attack:
 		parent.tile_to_attack.set_enemy_targeted_overlay()
+	SfxManager.play_sfx(SWORD_BOT_PREPARE, -1)
 	parent.animation_player.play("Prepare")
 	parent.timer.wait_time = 0.5
 	parent.timer.start()

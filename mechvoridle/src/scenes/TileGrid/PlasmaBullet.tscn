@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b712bpq5ut01h"]
+[gd_scene load_steps=6 format=3 uid="uid://b712bpq5ut01h"]
 
 [ext_resource type="Script" uid="uid://eglp4s46s403" path="res://src/scripts/Weapons/plasma_bullet.gd" id="1_02l4g"]
 [ext_resource type="PackedScene" uid="uid://bnmacq03r7rxq" path="res://assets/graphics/Models/PlayerMech/PlasmaBullet.gltf" id="2_5a74d"]
+[ext_resource type="AudioStream" uid="uid://dvyv8tqxvgdiy" path="res://assets/audio/SFX/COMBAT/PlayerRifleImpact.wav" id="2_prsbp"]
 [ext_resource type="PackedScene" uid="uid://44jftfrq3fuf" path="res://src/scenes/TileGrid/HitBox.tscn" id="3_5a74d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4vlx"]
@@ -11,6 +12,7 @@ radius = 0.34022394
 transform = Transform3D(-0.99975705, 0, -0.022041833, 0, 1, 0, 0.022041833, 0, -0.99975705, 0, 0, 0)
 script = ExtResource("1_02l4g")
 damage = 1
+impact_sfx = ExtResource("2_prsbp")
 
 [node name="blockbench_export" parent="." instance=ExtResource("2_5a74d")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

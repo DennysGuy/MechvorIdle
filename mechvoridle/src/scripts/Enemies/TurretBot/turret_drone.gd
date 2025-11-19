@@ -33,4 +33,5 @@ func _exit_tree() -> void:
 	
 
 func fire_rocket() -> void:
+	SfxManager.play_sfx(SfxManager.ROCKET_LAUNCHER_FIRE)
 	fire_projectile(weapon)

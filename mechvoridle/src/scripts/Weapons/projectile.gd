@@ -7,6 +7,9 @@ class_name GridProjectile extends Node3D
 @export var tiles : Node
 @export var weapon_origin : MechWeapon
 @export var weapon_owner : Node3D
+
+@export var impact_sfx : AudioStream
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -45,11 +48,13 @@ func impact_prjectile(area : Area3D):
 			if tile_parent.occupant == GridManager.player:
 				var shake_amount : float = 0.0
 				if GridManager.player.shield_active:
+					SfxManager.play_sfx(SfxManager.FORCE_FIELD_IMPACT,3)
 					GameManager.damage_shield(weapon_origin.damage)
 					
 					shake_amount = 0.5
 				else:
 					shake_amount = 1.2
+					if impact_sfx: SfxManager.play_sfx(impact_sfx)
 					if tile_parent.occupant.hit_flash_animation_player:
 						tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
 					tile_parent.occupant.damage_actor(damage)
@@ -57,7 +62,7 @@ func impact_prjectile(area : Area3D):
 				queue_free()
 				SignalBus.shake_camera.emit(shake_amount)
 				return
-					
+			SfxManager.play_sfx(impact_sfx,2)
 			if tile_parent.occupant.hit_flash_animation_player and tile_parent.occupant.can_hurt:
 				tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
 			tile_parent.occupant.damage_actor(damage)

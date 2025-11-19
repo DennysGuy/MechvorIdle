@@ -36,6 +36,9 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	if hit_flash_animation_player:
 		hit_flash_animation_player.play("HitFlash")
 	
+	if is_vulcan:
+		SfxManager.play_sfx(SfxManager.get_vulcan_impact())
+	
 	health -= value
 	
 	if self == GridManager.player:

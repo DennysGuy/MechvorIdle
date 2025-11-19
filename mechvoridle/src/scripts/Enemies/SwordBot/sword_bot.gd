@@ -58,11 +58,13 @@ func attack_player(player : GridActor) -> void:
 	var shake_amount : float = 0.0
 	if player is GridPlayer:
 		if player.shield_active:
+			SfxManager.play_sfx(SfxManager.SWORD_DEFLECT_OFF_SHIELD)
 			GameManager.damage_shield(weapon.damage)
 			shake_amount = 0.8
 			in_stagger_state = true
 		else:
 			shake_amount = 1.3
+			SfxManager.play_sfx(SfxManager.SWORD_BOT_SWORD_IMPACT)
 			player.damage_actor(weapon.damage)
 		
 		SignalBus.shake_camera.emit(shake_amount)

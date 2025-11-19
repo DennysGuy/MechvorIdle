@@ -282,3 +282,18 @@ func _on_timer_timeout() -> void:
 func start_count_up_timer() -> void:
 	count_down_timer.count_down = false
 	count_down_timer.start_timer()
+
+func play_ready() -> void:
+	SfxManager.play_sfx(SfxManager.READY)
+
+func play_fight() -> void:
+	SfxManager.play_sfx(SfxManager.FIGHT)
+
+func play_three() -> void:
+	SfxManager.play_sfx(SfxManager.VOX_ANNOUNCER_COUNT_DOWN__THREE_01)
+
+func play_two() -> void:
+	SfxManager.play_sfx(SfxManager.VOX_ANNOUNCER_COUNT_DOWN__TWO_01)
+
+func play_one() -> void:
+	SfxManager.play_sfx(SfxManager.VOX_ANNOUNCER_COUNT_DOWN__ONE_01)

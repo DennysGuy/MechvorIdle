@@ -8,6 +8,7 @@ func enter() -> void:
 		tile_to  = GridManager.get_tile(parent.tiles, parent.tile_to_attack.coordinates - Vector2(1,0))
 
 	if tile_to:
+		SfxManager.play_sfx(SfxManager.SWORD_BOT_SWING)
 		SignalBus.move_actor_to_tile.emit(parent, tile_to)
 		if is_instance_valid(GridManager.player):
 			parent.attack_player(parent.tile_to_attack.occupant)

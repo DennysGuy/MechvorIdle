@@ -2922,9 +2922,12 @@ tracks/55/path = NodePath(".")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/keys = {
-"times": PackedFloat32Array(0.98),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.98),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"play_teleport_sfx"
+}, {
 "args": [],
 "method": &"clear_rings"
 }]

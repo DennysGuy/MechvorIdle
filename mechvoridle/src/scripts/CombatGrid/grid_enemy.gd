@@ -27,6 +27,9 @@ func apply_timer_consequences() -> void:
 func enable_enemy_movement() -> void:
 	can_move = true
 
+func play_teleport_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.TELEPORT_IN, 3)
+
 func clear_rings() -> void:
 	for ring in spawn_rings.get_children():
 		ring.queue_free()

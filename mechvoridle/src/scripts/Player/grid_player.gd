@@ -211,7 +211,8 @@ func _process(delta: float) -> void:
 	
 	if can_move:
 		if Input.is_action_pressed("move_left"):
-			SfxManager.play_sfx(SfxManager.STEP_2, -3, true)
+			SignalBus.shake_camera.emit(0.2)
+			SfxManager.play_sfx(SfxManager.get_player_step())
 			SignalBus.move_player.emit(Vector2.UP, false)
 			can_move = false
 			await get_tree().create_timer(true_wait_time).timeout
@@ -219,7 +220,8 @@ func _process(delta: float) -> void:
 			GridManager.clear_targeted_tiles()
 			
 		if Input.is_action_pressed("move_right"):
-			SfxManager.play_sfx(SfxManager.STEP_2, -3, true)
+			SignalBus.shake_camera.emit(0.2)
+			SfxManager.play_sfx(SfxManager.get_player_step())
 			SignalBus.move_player.emit(Vector2.DOWN, false)
 			can_move = false
 			await get_tree().create_timer(true_wait_time).timeout
@@ -240,6 +242,7 @@ func _process(delta: float) -> void:
 
 		if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 			firing = true
+			SignalBus.shake_camera.emit(0.1)
 			SfxManager.play_sfx(SfxManager.get_vulcan_shot(), -4, false)
 		
 			add_vulcan_flares()
@@ -247,7 +250,8 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(0.1).timeout
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
-				
+			
+			SignalBus.shake_camera.emit(0.1)
 			SfxManager.play_sfx(SfxManager.get_vulcan_shot(), -4, false)
 			await get_tree().create_timer(0.1).timeout
 			firing = false

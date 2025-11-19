@@ -8,7 +8,7 @@ var time_to_shoot : int = 0
 @export var interval_max_val : int = 4
 var interval : int = 0
 func enter() -> void:
-
+	SfxManager.play_sfx(SfxManager.get_enemy_movement_whoosh())
 	interval = randi_range(interval_min_val, interval_max_val)
 	SignalBus.move_enemy.emit(parent, parent.random_direction_list.pick_random(),parent.row_limit,parent.col_limit)
 	time_to_shoot += 1

@@ -39,7 +39,10 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	GridManager.enemies.erase(self)
 	GridManager.check_wave_status()
-	
+
+func play_shock_shot() -> void:
+	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST)
+
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()
 	var tile_column = weapon.attack_pattern.scan_tiles_of_effect(self, tiles, 0, false)

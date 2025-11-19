@@ -18,12 +18,15 @@ func enter() -> void:
 			animation_name = "RifleShotRight"
 
 	parent.animation_player.play(animation_name)
+	SignalBus.shake_camera.emit(0.6)
 	await get_tree().create_timer(0.3).timeout
+	
 	SignalBus.move_actor_to_tile.emit(parent, previous_tile)
 	parent.state_machine.change_state(idle)
 
 
 func dash_attack() -> void:
+	
 	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
 	var sfx := GameManager.get_right_weapon().primary_projectile_discharge
 	SfxManager.play_sfx(sfx)

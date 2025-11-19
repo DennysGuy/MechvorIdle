@@ -34,6 +34,7 @@ var patterns = {
 @export_group("Other")
 @export var lock_on : bool = false
 @export var pass_through : bool = false
+@export var impact_sfx : AudioStream
 @export_enum("hit_scan", "projectile","dash") var attack_type : int
 
 
@@ -87,7 +88,8 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 							damage_label.position = enemy.damage_label_marker.position
 							enemy.add_child(damage_label)
 							break
-
+					
+					SfxManager.play_sfx(impact_sfx)
 					enemy.damage_actor(damage, is_vulcan)
 					if !pass_through and !enemy.is_dead:
 						
@@ -96,6 +98,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 				elif actor is GridEnemy or actor is GridBoss and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
 	
 					if enemy == GridManager.player and GridManager.player.shield_active:
+						SfxManager.play_sfx(SfxManager.FORCE_FIELD_IMPACT)
 						SignalBus.shake_camera.emit(0.3)
 						GameManager.damage_shield(damage)
 					else:

@@ -157,8 +157,56 @@ const VULCAN_SHOT_5 = preload("uid://vfewesgcolyn")
 
 var vulcan_shots : Array[AudioStream] = [VULCAN_SHOT_1, VULCAN_SHOT_2, VULCAN_SHOT_3, VULCAN_SHOT_4, VULCAN_SHOT_5]
 
+const PLAYER_STEP_1 = preload("uid://da7p3hkbbepis")
+const PLAYER_STEP_2 = preload("uid://q3or7hp583u1")
+const PLAYER_STEP_3 = preload("uid://rqst1imayamd")
+
+const TELEPORT_IN = preload("uid://cjlmwl5d6ykhv")
+
+const ROCKET_LAUNCHER_FIRE = preload("uid://cskac8s8bk63y")
+const FORCE_FIELD_IMPACT = preload("uid://brpp1l4cepj4l")
+const LIGHTNING_BLAST = preload("uid://uoln6p5nh1nl")
+
+const SWORD_BOT_SWING = preload("uid://gqwglqqsu2wd")
+const SWORD_BOT_SWORD_IMPACT = preload("uid://bhf3cspij74io")
+const SWORD_DEFLECT_OFF_SHIELD = preload("uid://bndwlr23vkddv")
+
+const COMBAT_THEME = preload("uid://bsvvxjkhi4vt")
+
+const VULCAN_IMPACT_1 = preload("uid://c40tyf6t78qmn")
+const VULCAN_IMPACT_2 = preload("uid://ds7pamcas4kod")
+const VULCAN_IMPACT_3 = preload("uid://do6o6kmu78pe2")
+const VULCAN_IMPACT_4 = preload("uid://c0ffb7leqcnyj")
+const VULCAN_IMPACT_5 = preload("uid://du35eylgoa8jh")
+
+var vulcan_impacts : Array[AudioStream] = [VULCAN_IMPACT_1,VULCAN_IMPACT_2, VULCAN_IMPACT_3, VULCAN_IMPACT_4, VULCAN_IMPACT_5]
+
+const FIGHT = preload("uid://ljcggcf53d8r")
+const READY = preload("uid://dv3qyudcoyjtp")
+
+const VOX_ANNOUNCER_COUNT_DOWN__ONE_01 = preload("uid://bdxul8j4igeyd")
+const VOX_ANNOUNCER_COUNT_DOWN__THREE_01 = preload("uid://ciowknm5ug5mp")
+const VOX_ANNOUNCER_COUNT_DOWN__TWO_01 = preload("uid://bph00iu1j5x0o")
+
+const ENEMY_WHOOSH_1 = preload("uid://ds7gnlsi63j0v")
+const ENEMY_WHOOSH_2 = preload("uid://d03d6y40xmfqv")
+const ENEMY_WHOOSH_3 = preload("uid://cb5dmof7miw4g")
+
+var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
+
+func get_enemy_movement_whoosh() -> AudioStream:
+	return enemy_whooshes.pick_random()
+
+func get_vulcan_impact() -> AudioStream:
+	return vulcan_impacts.pick_random()
+
+var player_steps : Array[AudioStream] = [PLAYER_STEP_1, PLAYER_STEP_2, PLAYER_STEP_3]
+
 func get_vulcan_shot() -> AudioStream:
 	return vulcan_shots.pick_random()
+
+func get_player_step() -> AudioStream:
+	return player_steps.pick_random()
 
 func play_button_hover(audio_stream_player : AudioStreamPlayer) -> void:
 	var hover_sfx_list = [UI_NAV_BUTTON_HOVER_01, UI_NAV_BUTTON_HOVER_02, UI_NAV_BUTTON_HOVER_03]
