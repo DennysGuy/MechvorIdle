@@ -20,6 +20,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func play_impact_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.BOSS_ROCKET_IMPACT)
 
 func attack_tile() -> void:
 	var wait_time : float = 1.0

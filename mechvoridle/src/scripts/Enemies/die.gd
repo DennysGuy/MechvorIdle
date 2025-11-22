@@ -2,9 +2,10 @@ class_name EnemyDead extends State
 
 @export var idle : State 
 func enter() -> void:
+	SignalBus.spawn_health_crate.emit(parent.drop_chance)
 	if parent.animation_player:
 		parent.animation_player.play("die")
-
+	
 func exit() -> void:
 	pass
 

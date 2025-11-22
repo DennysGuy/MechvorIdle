@@ -4377,6 +4377,7 @@ _data = {
 [sub_resource type="Animation" id="Animation_jwwcw"]
 resource_name = "Intro"
 length = 0.21
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -4401,6 +4402,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"shake_camera_on_land"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.14),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_boss_landing"
 }]
 }
 
@@ -4491,7 +4506,7 @@ mesh = SubResource("ArrayMesh_r8wgu")
 skeleton = NodePath("")
 
 [node name="Arm" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody"]
-transform = Transform3D(0.9843257, 0.12492387, -0.124485075, -0.15740865, 0.9406373, -0.3007058, 0.07952997, 0.31558758, 0.9455576, -0.4787444, -0.043731876, -0.11175125)
+transform = Transform3D(0.98432565, 0.12492387, -0.12448507, -0.15740864, 0.9406373, -0.30070576, 0.07952996, 0.31558758, 0.94555753, -0.4787444, -0.043731876, -0.11175125)
 
 [node name="UpperArm2" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.037655625, -0.08170125, -0.07559813)
@@ -4535,7 +4550,7 @@ mesh = SubResource("ArrayMesh_ico7n")
 skeleton = NodePath("")
 
 [node name="Arm2" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody"]
-transform = Transform3D(0.9843257, -0.12492386, 0.12448508, 0.15740865, 0.94063723, -0.3007058, -0.07952997, 0.31558755, 0.94555765, 0.4787444, -0.043731876, -0.11175125)
+transform = Transform3D(0.98432565, -0.12492386, 0.124485075, 0.15740864, 0.94063723, -0.3007058, -0.07952996, 0.31558755, 0.9455576, 0.4787444, -0.043731876, -0.11175125)
 
 [node name="UpperArm22" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002998125, -0.3981025, -0.2075125)
@@ -4561,7 +4576,7 @@ mesh = SubResource("ArrayMesh_kutvf")
 skeleton = NodePath("")
 
 [node name="LowerArm22" type="Node3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2/UpperArm22"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.0078125, -0.0890625, -0.0375)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.49999994, 0, -0.49999994, 0.8660254, 0.0078125, -0.0890625, -0.0375)
 
 [node name="Barrels" type="MeshInstance3D" parent="HeavyBoss/BigBoss/UpperBody/Arm2/UpperArm22/LowerArm22"]
 transform = Transform3D(1, 0, 0, 0, 0.53729963, 0.8433914, 0, -0.8433914, 0.53729963, -0.078251876, -0.356585, 0.54345)
@@ -4654,7 +4669,7 @@ mesh = SubResource("ArrayMesh_dqlfa")
 skeleton = NodePath("")
 
 [node name="UpperLeg2" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg/UpperLeg22"]
-transform = Transform3D(0.9848078, 0.16561116, 0.05221705, -0.14267749, 0.6003123, 0.786936, 0.098978855, -0.7824309, 0.6148212, 0, 0, 0)
+transform = Transform3D(0.9848078, 0.16561118, 0.05221705, -0.1426775, 0.6003124, 0.7869359, 0.09897884, -0.7824308, 0.6148213, 0, 0, 0)
 
 [node name="HipJoint" type="MeshInstance3D" parent="HeavyBoss/BigBoss/LowerBody/Leg/UpperLeg22/UpperLeg2"]
 transform = Transform3D(1, 0, 0, 0, 0.96814764, -0.25038, 0, 0.25038, 0.96814764, 0, 0, 0)
@@ -4667,7 +4682,7 @@ mesh = SubResource("ArrayMesh_fu53n")
 skeleton = NodePath("")
 
 [node name="Leg2" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody"]
-transform = Transform3D(1, 0, 0, 0, 0.96592563, 0.25881898, 0, -0.25881898, 0.96592563, -0.0109375, 0.303125, 0.0453125)
+transform = Transform3D(1, 0, 0, 0, 0.9659256, 0.25881898, 0, -0.25881898, 0.9659256, -0.0109375, 0.303125, 0.0453125)
 
 [node name="UpperLeg4" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2"]
 transform = Transform3D(0.9848077, -0.17101006, 0.030153628, 0.1426775, 0.8958501, 0.42082736, -0.09897883, -0.41013178, 0.90663946, 0.13125, -0.115625, -0.0171875)
@@ -4686,7 +4701,7 @@ mesh = SubResource("ArrayMesh_qwrkx")
 skeleton = NodePath("")
 
 [node name="UpperLeg32" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2/UpperLeg4"]
-transform = Transform3D(0.98480767, 0.1656112, -0.05221701, -0.093301125, 0.25103432, -0.9634712, -0.14645335, 0.95370585, 0.26267225, 0, 0, 0)
+transform = Transform3D(0.98480767, 0.16561125, -0.05221698, -0.09330107, 0.25103408, -0.96347123, -0.14645344, 0.9537059, 0.262672, 0, 0, 0)
 
 [node name="Foot4" type="Node3D" parent="HeavyBoss/BigBoss/LowerBody/Leg2/UpperLeg4/UpperLeg32"]
 transform = Transform3D(1, 0, 0, 0, 0.81915194, 0.5735763, 0, -0.5735763, 0.81915194, 0.146875, -0.2203125, 0.0359375)

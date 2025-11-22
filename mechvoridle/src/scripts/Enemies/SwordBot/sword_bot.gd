@@ -25,6 +25,7 @@ signals needed
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	
 	SignalBus.heal_enemy.connect(heal)
 	SignalBus.slave_follow.connect(slave_pursue)
 	SignalBus.slave_attack.connect(slave_attack)

@@ -21,6 +21,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vect
 @onready var timer: Timer = $Timer
 @onready var transition_player: AnimationPlayer = $TransitionPlayer
 
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,6 +45,10 @@ func _ready() -> void:
 	
 	SignalBus.transition_win_screen.connect(play_fade_out)
 	SignalBus.transition_lose_screen.connect(play_fade_to_lose)
+	
+	SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
+	
+	SignalBus.spawn_health_crate.connect(spawn_health_crate)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -101,12 +106,15 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
 	var enemy_to_spawn : GridActor = enemy.instantiate()
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
-	
+	print("this is init tiles occupant: %s" % [init_tile.occupant])
 	if enemy_to_spawn is SwordBot:
 		enemy_to_spawn.is_slave = is_slave
 	
 	if is_boss:
 		GameManager.in_boss_fight = true
+	
+	if GameManager.in_boss_fight and enemy_to_spawn is GridEnemy:
+		enemy_to_spawn.drop_chance = 70
 	
 	enemy_to_spawn.global_position = init_tile.marker_3d.global_position
 	enemy_to_spawn.current_tile = init_tile
@@ -136,7 +144,12 @@ func spawn_next_wave() -> void:
 			count_down_timer.add_time(35)
 			GameManager.timed_out = false
 		else:
-			count_down_timer.add_time(15)
+			if GridManager.current_wave <= 5:
+				count_down_timer.add_time(8)
+			elif GridManager.current_wave > 5 and GridManager.current_wave <= 7:
+				count_down_timer.add_time(10)
+			else:
+				count_down_timer.add_time(13)
 		
 	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
@@ -146,6 +159,11 @@ func spawn_next_wave() -> void:
 	
 	count_down_timer.start_timer()
 
+
+func spawn_mini_wave() -> void:
+	await get_tree().process_frame
+	var selected_wave : Array = GridManager.boss_mini_waves.pick_random()
+	spawn_enemies(selected_wave)
 
 func spawn_enemies(selected_wave : Array) -> void:
 	for enemy in selected_wave:
@@ -222,6 +240,20 @@ func _on_supply_crate_timer_timeout() -> void:
 	supply_crate_timer.start()
 		
 
+func spawn_health_crate(drop_chance : int) -> void:
+	var random_num : int = randi_range(0,100)
+	
+	if random_num <= drop_chance and GridManager.player.health < GridManager.player.max_health:
+		
+		var tile : Tile = GridManager.get_tile(tiles, player_tile_coordinates.pick_random())
+		var health_crate : HealthCrate = preload("uid://dm63oush42xtx").instantiate()
+		
+		health_crate.health_amount = randi_range(50,75)
+		tile.upgrade_crate = health_crate
+		health_crate.global_position = tile.global_position
+		
+		add_child(health_crate)
+
 func create_damage_label(amount : int, marker : Marker3D, type : int = 0, ) -> void:
 	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
 	
@@ -297,3 +329,16 @@ func play_two() -> void:
 
 func play_one() -> void:
 	SfxManager.play_sfx(SfxManager.VOX_ANNOUNCER_COUNT_DOWN__ONE_01)
+
+func fade_out_music() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(music_player, "volume_db", -80, 4.0)
+	await tween.finished
+
+func play_alert() -> void:
+	SfxManager.play_sfx(SfxManager.SHIP_ALARM_1)
+
+func play_boss_theme() -> void:
+	music_player.volume_db = 0
+	music_player.stream = preload("uid://tum8nsa067ks")
+	music_player.play()

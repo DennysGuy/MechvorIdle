@@ -144,6 +144,7 @@ const VOX_COM_ENE_TAUNT_HATEFUL_01 = preload("res://assets/audio/SFX/VOX/Combat/
 const VOX_COM_ENE_TAUNT_HATEFUL_02 = preload("res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Taunt_Hateful_02.ogg")
 const VOX_COM_ENE_TAUNT_POWERFUL_01 = preload("res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Taunt_Powerful_01.ogg")
 const VOX_COM_ENE_TAUNT_POWERFUL_02 = preload("res://assets/audio/SFX/VOX/Combat/VOX_Com_Ene_Taunt_Powerful_02.ogg")
+const SHIP_ALARM_1 = preload("uid://clj4tymrg47g4")
 
 const VULCAN_BLAST_1 = preload("uid://bvx0p2o6vkgji")
 const PLAYER_STEP = preload("uid://dartft1a11so0")
@@ -156,6 +157,7 @@ const VULCAN_SHOT_4 = preload("uid://d0t0ctj542xxe")
 const VULCAN_SHOT_5 = preload("uid://vfewesgcolyn")
 
 var vulcan_shots : Array[AudioStream] = [VULCAN_SHOT_1, VULCAN_SHOT_2, VULCAN_SHOT_3, VULCAN_SHOT_4, VULCAN_SHOT_5]
+const BOSS_CANNON_FIRE = preload("uid://chmaxegdine1o")
 
 const PLAYER_STEP_1 = preload("uid://da7p3hkbbepis")
 const PLAYER_STEP_2 = preload("uid://q3or7hp583u1")
@@ -191,6 +193,15 @@ const VOX_ANNOUNCER_COUNT_DOWN__TWO_01 = preload("uid://bph00iu1j5x0o")
 const ENEMY_WHOOSH_1 = preload("uid://ds7gnlsi63j0v")
 const ENEMY_WHOOSH_2 = preload("uid://d03d6y40xmfqv")
 const ENEMY_WHOOSH_3 = preload("uid://cb5dmof7miw4g")
+
+const BOSS_ROCKET_IMPACT = preload("uid://ckfwm4o6qqjj4")
+const BOSS_ROCKET_LAUNCH = preload("uid://c5rser8n5btav")
+const BOSS_LAND = preload("uid://bf2thc83obbwu")
+
+const HEAL = preload("uid://cgbmvklh58dro")
+const WEAPON_2_READY = preload("uid://nciwhr7423ej")
+const WEAPON_1_READY = preload("uid://cok5ea1s6mcvo")
+
 
 var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
 

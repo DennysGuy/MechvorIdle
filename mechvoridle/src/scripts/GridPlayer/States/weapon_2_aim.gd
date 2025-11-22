@@ -49,5 +49,4 @@ func process_physics(_delta: float) -> State:
 
 
 func _on_charge_up_timer_timeout() -> void:
-	print("RIFLE CHARGED MY FELLOW!")
 	parent.rifle_charged_up = true

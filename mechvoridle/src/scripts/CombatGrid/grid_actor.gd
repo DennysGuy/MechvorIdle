@@ -50,6 +50,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		#place holder for now
 		health = 0
 		is_dead = true
+		
 		state_machine.change_state(death)
 	else:
 		if not is_vulcan and hurt:

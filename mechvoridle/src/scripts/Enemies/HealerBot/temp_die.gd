@@ -7,6 +7,9 @@ func enter() -> void:
 		SfxManager.play_sfx(PLAYER_LOSE_EXPLOSIONS)
 		SignalBus.transition_lose_screen.emit()
 	
+	if parent is GridEnemy:
+		SignalBus.spawn_health_crate.emit(parent.drop_chance)
+	
 	if parent is SwordBot and !parent.is_slave:
 		if parent.is_slave:
 			SignalBus.slave_to_idle.emit()

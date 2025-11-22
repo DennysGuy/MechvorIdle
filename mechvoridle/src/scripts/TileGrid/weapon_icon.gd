@@ -78,8 +78,10 @@ func count_down_process(_delta : float) -> void:
 		cool_down_wheel.hide()
 		match weapon_slot:
 			WEAPON_SLOT.WEAPON1:
+				SfxManager.play_sfx(SfxManager.WEAPON_1_READY,3)
 				GameManager.can_fire_weapon_1 = true
 			WEAPON_SLOT.WEAPON2:
+				SfxManager.play_sfx(SfxManager.WEAPON_2_READY,3)
 				GameManager.can_fire_weapon_2 = true
 				
 		on_cool_down = false

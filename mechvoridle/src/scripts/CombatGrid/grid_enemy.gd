@@ -3,11 +3,14 @@ class_name GridEnemy extends GridActor
 @export var weapon : MechWeapon
 @export var spawn_rings : Node3D
 
+@export var drop_chance : int
+
 func _ready() -> void:
 	can_move = false
 	SignalBus.apply_timer_consequences.connect(apply_timer_consequences)
 	SignalBus.enable_enemy_movement.connect(enable_enemy_movement)
-
+	health_label.text = "%s/%s" % [health, max_health]
+	
 func heal() -> void:
 	var value : int = int(max_health * 0.5)
 	health += value

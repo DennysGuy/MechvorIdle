@@ -370,3 +370,5 @@ signal change_boss_phase
 signal transition_win_screen
 @warning_ignore("unused_signal")
 signal transition_lose_screen
+@warning_ignore("unused_signal")
+signal spawn_health_crate(drop_chance : int)

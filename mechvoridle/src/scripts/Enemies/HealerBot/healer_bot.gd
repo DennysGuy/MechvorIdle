@@ -32,6 +32,8 @@ func start_healing() -> void:
 	if !is_dead:
 		state_machine.change_state(heal_state)
 
+func play_heal_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.HEAL)
 
 func heal_enemies() -> void:
 	var pulse : HealPulse = preload("uid://dmyiefkprcywd").instantiate()

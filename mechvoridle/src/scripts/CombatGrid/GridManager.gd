@@ -7,7 +7,7 @@ var current_wave : int = -1
 
 var player : GridPlayer
 var enemies : Array[GridEnemy] = []
-
+var boss_waves_to_beat : int = 0
 var targeted_tiles : Array[Tile] = []
 
 const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
@@ -104,7 +104,9 @@ func check_wave_status() -> void:
 	if enemies.is_empty() and !GameManager.timed_out and !GameManager.in_boss_fight:
 		SignalBus.spawn_next_wave.emit()
 	if enemies.is_empty() and GameManager.in_boss_fight:
-		SignalBus.spawn_mini_wave.emit()
+		GridManager.boss_waves_to_beat -= 1
+		if boss_waves_to_beat > 0:
+			SignalBus.spawn_mini_wave.emit()
 	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
@@ -380,7 +382,7 @@ var boss_mini_waves = [
 	[
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true), 
-			"coordinates": Vector2(1,1),
+			"coordinates": Vector2(2,2),
 			"is_slave": false,
 			"is_boss": false
 		},

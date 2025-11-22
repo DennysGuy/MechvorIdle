@@ -27,6 +27,7 @@ func enter() -> void:
 	var i : float = parent.current_tile.coordinates.y
 			
 	while i <= new_coordinates.y:
+		parent.can_hurt = true
 		parent.animation_player.play("CanonArmFire")
 		await get_tree().create_timer(0.6).timeout
 		i += 1.0

@@ -8,7 +8,8 @@ func enter() -> void:
 
 
 func exit() -> void:
-	pass
+	parent.can_move = true
+
 
 func process_input(_event: InputEvent) -> State:
 	return null

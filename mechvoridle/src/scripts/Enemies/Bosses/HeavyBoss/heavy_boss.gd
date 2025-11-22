@@ -38,6 +38,8 @@ var change_phase : bool = false
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 var idle_time : float = 2.0
 
+
+
 @onready var shield: Shield = $Shield
 
 @export var cannon_rifle : MechWeapon
@@ -47,7 +49,8 @@ var idle_time : float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
+	#SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
+	health_label.text = "%s/%s"%[health,max_health]
 	SignalBus.change_boss_phase.connect(change_boss_phase_on_start)
 	can_hurt = false
 	state_machine.init(self)
@@ -93,22 +96,19 @@ func hide_shield() -> void:
 
 func fire_cannon() -> void:
 	cannon_rifle.attack_pattern.issue_attack(self, tiles, cannon_rifle.damage)
+	SfxManager.play_sfx(SfxManager.BOSS_CANNON_FIRE,3)
 	SignalBus.shake_camera.emit(0.4)
 	await get_tree().create_timer(0.5).timeout
 	
 func spawn_launching_mini_rocket() -> void:
+	SfxManager.play_sfx(SfxManager.BOSS_ROCKET_LAUNCH)
 	var mini_rocket : MiniRocket = preload("uid://ck5biy4g3ijgw").instantiate()
 	mini_rocket.global_position = rocket_launch_marker.global_position
 	get_parent().add_child(mini_rocket)
 
 func change_boss_phase_on_start() -> void:
 	change_phase = true
-
-func spawn_mini_wave() -> void:
-	if current_phase == PHASES.ATTACK_PHASE3:
-		var selected_wave : Array = GridManager.boss_mini_waves.pick_random()
-		SignalBus.spawn_enemies.emit(selected_wave)
-	
+ 
 
 func _on_rocket_launch_timer_timeout() -> void:
 	if change_phase:
@@ -123,6 +123,8 @@ func _on_rocket_launch_timer_timeout() -> void:
 	rockets_impact()
 	rocket_launch_timer.start()
 
+func play_boss_landing() -> void:
+	SfxManager.play_sfx(SfxManager.BOSS_LAND,1)
 
 func rockets_impact() -> void:
 	var random_config : Array = fall_configs.pick_random()
@@ -145,4 +147,4 @@ func rockets_impact() -> void:
 		await get_tree().create_timer(0.5).timeout
 	
 func shake_camera_on_land() -> void:
-	SignalBus.shake_camera.emit(1.0)
+	SignalBus.shake_camera.emit(2.0)

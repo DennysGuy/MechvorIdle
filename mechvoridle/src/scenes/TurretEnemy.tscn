@@ -2945,6 +2945,7 @@ script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
 weapon = ExtResource("2_7lw6e")
 spawn_rings = NodePath("SpawnRings")
+drop_chance = 5
 hurt_time = 0.833
 state_machine = NodePath("StateMachine")
 health = 150

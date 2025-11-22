@@ -2095,6 +2095,7 @@ _data = {
 script = ExtResource("1_7h52i")
 weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
+drop_chance = 5
 state_machine = NodePath("StateMachine")
 health = 80
 max_health = 80
