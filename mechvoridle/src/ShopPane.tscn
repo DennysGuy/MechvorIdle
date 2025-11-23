@@ -370,6 +370,7 @@ offset_bottom = 213.0
 mouse_filter = 2
 
 [node name="Control" type="Control" parent="ColorRect"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -570,7 +571,7 @@ theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 script = ExtResource("16_gcoiw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
 layout_mode = 0
 offset_left = 52.0
 offset_top = 54.0
@@ -579,49 +580,49 @@ offset_bottom = 74.0
 mouse_default_cursor_shape = 2
 theme_override_constants/separation = 2
 
-[node name="HeadsButton" type="Button" parent="HBoxContainer"]
+[node name="HeadsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Heads"
 
-[node name="TorsosButton" type="Button" parent="HBoxContainer"]
+[node name="TorsosButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Torso"
 
-[node name="ArmsButton" type="Button" parent="HBoxContainer"]
+[node name="ArmsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Arms"
 
-[node name="LegsButton" type="Button" parent="HBoxContainer"]
+[node name="LegsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Legs"
 
-[node name="RiflesButton" type="Button" parent="HBoxContainer"]
+[node name="RiflesButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Rifles"
 
-[node name="SwordsButton" type="Button" parent="HBoxContainer"]
+[node name="SwordsButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
 theme_override_font_sizes/font_size = 4
 text = "Swords"
 
-[node name="RocketLaunchersButton" type="Button" parent="HBoxContainer"]
+[node name="RocketLaunchersButton" type="Button" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_8ov7t")
@@ -646,17 +647,17 @@ bus = &"SFX"
 [connection signal="mouse_entered" from="ColorRect/ConfirmationBox/ConfirmationButton" to="." method="_on_confirmation_button_mouse_entered"]
 [connection signal="button_down" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_button_down"]
 [connection signal="mouse_entered" from="ColorRect/ConfirmationBox/CancellationButton" to="." method="_on_cancellation_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/HeadsButton" to="." method="_on_heads_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/TorsosButton" to="." method="_on_torsos_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/ArmsButton" to="." method="_on_arms_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/LegsButton" to="." method="_on_legs_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/RiflesButton" to="." method="_on_rifles_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/SwordsButton" to="." method="_on_swords_button_mouse_entered"]
-[connection signal="button_down" from="HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
-[connection signal="mouse_entered" from="HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/HeadsButton" to="." method="_on_heads_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/TorsosButton" to="." method="_on_torsos_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/ArmsButton" to="." method="_on_arms_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/LegsButton" to="." method="_on_legs_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RiflesButton" to="." method="_on_rifles_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/SwordsButton" to="." method="_on_swords_button_mouse_entered"]
+[connection signal="button_down" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_button_down"]
+[connection signal="mouse_entered" from="ColorRect/HBoxContainer/RocketLaunchersButton" to="." method="_on_rocket_launchers_button_mouse_entered"]

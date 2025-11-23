@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_upxg4")
 weapon_class = 2
+shop_index = 1
 cool_down_time = 10.0
 number_of_hits = 2
 charge_time = 0.15

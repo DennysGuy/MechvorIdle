@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_3d8cd")
+shop_index = 1
 damage = 10.0
 cool_down_time = 6.0
 number_of_hits = 2

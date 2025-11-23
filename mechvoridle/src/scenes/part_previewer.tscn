@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://bthwbil816n1x"]
+[gd_scene load_steps=44 format=4 uid="uid://bthwbil816n1x"]
 
 [ext_resource type="PackedScene" uid="uid://w2yxuumflwj0" path="res://assets/graphics/Models/PlayerMech/HeavyTorso.gltf" id="1_2jres"]
 [ext_resource type="Script" uid="uid://b1rkextsam7o4" path="res://src/scripts/part_previewer.gd" id="1_vo641"]
@@ -12,12 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://clctyqmotut2w" path="res://assets/graphics/Models/PlayerMech/MeleeHead.gltf" id="6_t46vf"]
 [ext_resource type="PackedScene" uid="uid://btbxdwl1ebnfx" path="res://assets/graphics/Models/PlayerMech/StandardLegs.gltf" id="6_y73ks"]
 [ext_resource type="PackedScene" uid="uid://b8aqfv00nqxf1" path="res://assets/graphics/Models/PlayerMech/RangedHead.gltf" id="7_6sflo"]
+[ext_resource type="PackedScene" uid="uid://qkbqc1n1gjkb" path="res://assets/graphics/Models/PlayerMech/StandardArms.gltf" id="7_f1058"]
 [ext_resource type="PackedScene" uid="uid://cdqsxy3yhn45r" path="res://assets/graphics/Models/PlayerMech/RocketLauncherLeftSide.gltf" id="12_1l6oo"]
+[ext_resource type="PackedScene" uid="uid://biuhkmtrdibw3" path="res://assets/graphics/Models/PlayerMech/StandardHead.gltf" id="12_pyy4i"]
 [ext_resource type="PackedScene" uid="uid://cp4ny0gjgqh3i" path="res://assets/graphics/Models/PlayerMech/Weapons/PlasmaRocketLauncherLeftSide.gltf" id="13_xrixv"]
 [ext_resource type="PackedScene" uid="uid://b4ygxe1jmc2ci" path="res://assets/graphics/Models/PlayerMech/Weapons/SwordLeftHand.gltf" id="14_fk742"]
 [ext_resource type="Texture2D" uid="uid://c14jvs3ow25vw" path="res://assets/graphics/Models/PlayerMech/Weapons/PlasmaRifleLeftSide_0.png" id="14_slefh"]
 [ext_resource type="PackedScene" uid="uid://dm47ay1k62c1m" path="res://assets/graphics/Models/PlayerMech/Weapons/PlasmaSwordLeftHand.gltf" id="15_6imfb"]
+[ext_resource type="PackedScene" uid="uid://3ak3glubymah" path="res://assets/graphics/Models/PlayerMech/Weapons/ThyKingdomCome.gltf" id="15_dwr6e"]
+[ext_resource type="PackedScene" uid="uid://ddq3vek07n8f1" path="res://assets/graphics/Models/PlayerMech/Weapons/ArmRocket.gltf" id="15_feulp"]
 [ext_resource type="PackedScene" uid="uid://drxnk0as0pdb4" path="res://assets/graphics/Models/PlayerMech/Weapons/StandardRifleLeftSide.gltf" id="15_sl6qo"]
+[ext_resource type="PackedScene" uid="uid://f0qmsrsglk1f" path="res://assets/graphics/Models/PlayerMech/SubMachineGun.gltf" id="18_ctpo7"]
+[ext_resource type="PackedScene" uid="uid://c0ch5rt7ccajm" path="res://assets/graphics/Models/PlayerMech/SniperRifle.gltf" id="19_pc5do"]
+[ext_resource type="PackedScene" uid="uid://bwrfojtsg3j2w" path="res://assets/graphics/Models/PlayerMech/Weapons/Spear.gltf" id="21_tccud"]
+[ext_resource type="PackedScene" uid="uid://bwmsbigk6fohb" path="res://assets/graphics/Models/PlayerMech/Weapons/HeatSabre.gltf" id="23_dwr6e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvjv2"]
 resource_name = "material_0"
@@ -313,6 +321,10 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.358311, 0)
 visible = false
 
+[node name="StandardArms" parent="MechPreview" instance=ExtResource("7_f1058")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016125441, 0.39614117, 0.005816102)
+visible = false
+
 [node name="HeavyLegs" parent="MechPreview" instance=ExtResource("4_af45i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36081, 0)
 visible = false
@@ -328,11 +340,23 @@ visible = false
 [node name="MeleeHead" parent="MechPreview" instance=ExtResource("6_t46vf")]
 visible = false
 
+[node name="StandardHead" parent="MechPreview" instance=ExtResource("12_pyy4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039806366, 0.007985115, 0.0066646338)
+visible = false
+
 [node name="RangedHead" parent="MechPreview" instance=ExtResource("7_6sflo")]
 visible = false
 
 [node name="StandardRocketLauncher" parent="MechPreview" instance=ExtResource("12_1l6oo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448675, 0, -0.452987)
+visible = false
+
+[node name="ThyKingdomCome" parent="MechPreview" instance=ExtResource("15_dwr6e")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.3803525, 1.6585709, -0.08843607)
+visible = false
+
+[node name="ArmRocket" parent="MechPreview" instance=ExtResource("15_feulp")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 1.8444321, 0)
 visible = false
 
 [node name="PlasmaRocketLauncher" parent="MechPreview" instance=ExtResource("13_xrixv")]
@@ -344,7 +368,7 @@ transform = Transform3D(0.863052, 0.505115, 0, -0.501997, 0.857724, -0.110949, -
 visible = false
 
 [node name="PlasmaRifle" type="Node3D" parent="MechPreview"]
-transform = Transform3D(0.8343, 0.551311, 0, -0.551311, 0.8343, 0, 0, 0, 1, 0.30605, 0.581011, 0)
+transform = Transform3D(0.83085436, 0.5490341, -0.090789, -0.55131096, 0.83429986, 0, 0.07574526, 0.050052978, 0.9958702, 0.30605, 0.581011, 0)
 visible = false
 
 [node name="Node" type="Node3D" parent="MechPreview/PlasmaRifle"]
@@ -392,12 +416,28 @@ transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.8125, 0.1875, 0)
 mesh = SubResource("ArrayMesh_di1rh")
 skeleton = NodePath("")
 
-[node name="PlasmaSword" parent="MechPreview" instance=ExtResource("15_6imfb")]
-transform = Transform3D(0.792779, 0.609497, -0.00395129, -0.607609, 0.789778, -0.0840372, -0.0480998, 0.0690238, 0.996455, -0.283215, 0.671018, -0.550282)
+[node name="SniperRifle" parent="MechPreview" instance=ExtResource("19_pc5do")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.19723809, 1.7473338, 0)
 visible = false
 
 [node name="StandardRifle" parent="MechPreview" instance=ExtResource("15_sl6qo")]
 transform = Transform3D(0.820441, 0.571731, 0, -0.571731, 0.820441, 0, 0, 0, 1, -0.0899174, 0.824019, -0.533353)
+visible = false
+
+[node name="SubMachineGun" parent="MechPreview" instance=ExtResource("18_ctpo7")]
+transform = Transform3D(0.037254155, 0, -0.9993057, 0, 1, 0, 0.9993057, 0, 0.037254155, 0, 1.900244, 0)
+visible = false
+
+[node name="Spear" parent="MechPreview" instance=ExtResource("21_tccud")]
+transform = Transform3D(-3.558922e-08, 0.5806035, -0.81418645, 2.5378984e-08, 0.81418645, 0.5806035, 1, 0, -4.371139e-08, 0.17252117, 1.7459465, -0.040757)
+visible = false
+
+[node name="HeatSabre" parent="MechPreview" instance=ExtResource("23_dwr6e")]
+transform = Transform3D(0.010861676, 0.5945423, 0.80399126, -0.008031349, 0.8040644, -0.59448785, -0.999909, 4.065098e-10, 0.013508465, -0.13357675, 1.8790481, 0)
+visible = false
+
+[node name="PlasmaSword" parent="MechPreview" instance=ExtResource("15_6imfb")]
+transform = Transform3D(0.792779, 0.609497, -0.00395129, -0.607609, 0.789778, -0.0840372, -0.0480998, 0.0690238, 0.996455, -0.283215, 0.671018, -0.550282)
 visible = false
 
 [node name="SpotLight" type="Sprite3D" parent="MechPreview"]

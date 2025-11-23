@@ -2,7 +2,7 @@ class_name MechWeapon extends MechComponent
 
 @export_enum("Standard", "Plasma") var weapon_type : int
 @export_enum("Sword", "Rifle", "RocketLauncher") var weapon_class : int
-enum WEAPON_TYPE {NORMAL, PLASMA}
+@export var shop_index : int
 enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
 
 enum WeaponOwner {PLAYER, ENEMY}
@@ -36,16 +36,6 @@ enum WeaponOwner {PLAYER, ENEMY}
 
 @export_group("Charge")
 @export var charge_up : AudioStream
-
-
-func get_weapon_type() -> String:
-	match(weapon_type):
-		WEAPON_TYPE.NORMAL:
-			return "Standard"
-		WEAPON_TYPE.PLASMA:
-			return "Plasma"
-		_:
-			return ""
 
 func get_weapon_class() -> String:
 	match(weapon_class):

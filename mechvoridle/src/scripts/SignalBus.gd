@@ -31,7 +31,7 @@ signal remove_ufo_during_start_fight
 @warning_ignore("unused_signal")
 signal show_part(body_part : String, category : String)
 @warning_ignore("unused_signal")
-signal show_weapon(weapon_type : String, category : String, side : String)
+signal show_weapon(weapon_type : String, shop_index : int, side : String)
 @warning_ignore("unused_signal")
 signal show_part_preview(component : MechComponent)
 @warning_ignore("unused_signal")

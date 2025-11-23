@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_axnmh")
 weapon_class = 1
+shop_index = 2
 damage = 60.0
 cool_down_time = 15.0
 number_of_hits = 1

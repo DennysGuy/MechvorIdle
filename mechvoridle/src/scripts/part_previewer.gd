@@ -5,19 +5,31 @@ class_name PartPreviewer extends Node3D
 @onready var heavy_torso: Node3D = $MechPreview/HeavyTorso
 @onready var standard_torso: Node3D = $MechPreview/StandardTorso
 @onready var light_torso: Node3D = $MechPreview/LightTorso
+
 @onready var light_arms: Node3D = $MechPreview/MeleeArms
+@onready var standard_arms: Node3D = $MechPreview/StandardArms
 @onready var heavy_arms: Node3D = $MechPreview/RangedArms
+
 @onready var heavy_legs: Node3D = $MechPreview/HeavyLegs
 @onready var standard_legs: Node3D = $MechPreview/StandardLegs
 @onready var light_legs: Node3D = $MechPreview/LightLegs
+
 @onready var light_head: Node3D = $MechPreview/MeleeHead
+@onready var standard_head: Node3D = $MechPreview/StandardHead
 @onready var heavy_head: Node3D = $MechPreview/RangedHead
-@onready var standard_rocket_launcher: Node3D = $MechPreview/StandardRocketLauncher
-@onready var plasma_rocket_launcher: Node3D = $MechPreview/PlasmaRocketLauncher
-@onready var standard_sword: Node3D = $MechPreview/StandardSword
+
+
 @onready var plasma_rifle: Node3D = $MechPreview/PlasmaRifle
-@onready var plasma_sword: Node3D = $MechPreview/PlasmaSword
-@onready var standard_rifle: Node3D = $MechPreview/StandardRifle
+@onready var sniper_rifle: Node3D = $MechPreview/SniperRifle
+@onready var sub_machine_gun: Node3D = $MechPreview/SubMachineGun
+
+@onready var standard_sword: Node3D = $MechPreview/StandardSword
+@onready var spear: Node3D = $MechPreview/Spear
+@onready var heat_sabre: Node3D = $MechPreview/HeatSabre
+
+@onready var standard_rocket_launcher: Node3D = $MechPreview/StandardRocketLauncher
+@onready var thy_kingdom_come: Node3D = $MechPreview/ThyKingdomCome
+@onready var arm_rocket: Node3D = $MechPreview/ArmRocket
 
 var previously_viewed : Node3D
 
@@ -29,7 +41,7 @@ var previously_viewed : Node3D
 		},
 		"Arms": {
 			"LIGHT": light_arms, 
-			"REGULAR": null,
+			"REGULAR": standard_arms,
 			"HEAVY": heavy_arms
 		},
 		"Legs": {
@@ -39,20 +51,23 @@ var previously_viewed : Node3D
 		}, 
 		"Head": {
 			"LIGHT": light_head,
-			"REGULAR": null,
+			"REGULAR": standard_head,
 			"HEAVY": heavy_head
 		},
 		"Rifle" : {
-			"Standard": standard_rifle, 
-			"Plasma": plasma_rifle
+			0: sub_machine_gun, 
+			1: plasma_rifle,
+			2: sniper_rifle
 		}, 
 		"Sword": {
-			"Standard": standard_sword, 
-			"Plasma": plasma_sword
+			0: standard_sword, 
+			1: heat_sabre,
+			2: spear
 		},
 		"Rocket Launcher": {
-			"Standard": standard_rocket_launcher, 
-			"Plasma": plasma_rocket_launcher
+			0: standard_rocket_launcher, 
+			1: arm_rocket,
+			2: thy_kingdom_come
 		}
 
 		
@@ -81,7 +96,7 @@ func show_part(component : MechComponent) -> void:
 	
 	if category == "Weapon":
 		var weapon_component = component as MechWeapon
-		component_preview = mech_parts[weapon_component.get_weapon_class()][weapon_component.get_weapon_type()]
+		component_preview = mech_parts[weapon_component.get_weapon_class()][weapon_component.shop_index]
 	else:
 		component_preview = mech_parts[category][component_weight_class]
 

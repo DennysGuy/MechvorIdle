@@ -95,12 +95,12 @@ func update_weapon_1_charge_speed_on_weapon_purcahse(component : MechWeapon) -> 
 		charge_speed_amount.text = str(roundf(charge_speed))
 	else:
 		var owned_torso : MechTorso= GameManager.owned_mech_components["Torso"]
-		var torso_charge_speed_bonus : float = owned_torso.charge_speed_modifier
+		var torso_charge_speed_bonus : float = owned_torso.cool_down_modifier
 		var added_charge_speed_bonus : float = charge_speed * torso_charge_speed_bonus
 		charge_speed_amount.text = calculate_stat(component, owned_torso, charge_speed, added_charge_speed_bonus, charge_speed_amount)
 
 func update_weapon_charge_speed_on_torso_purchase(component : MechTorso) -> void:
-	var torso_charge_speed_bonus : float = component.charge_speed_modifier
+	var torso_charge_speed_bonus : float = component.cool_down_modifier
 	if GameManager.owned_mech_components["LeftWeapon"]:
 		var left_weapon : MechWeapon = GameManager.owned_mech_components["LeftWeapon"]
 		var charge_speed : float = roundf(left_weapon.charge_speed * 100)
@@ -210,7 +210,7 @@ func update_weapon_2_charge_speed_on_weapon_purcahse(component : MechWeapon) -> 
 		charge_speed_amount_2.text = str(charge_speed)
 	else:
 		var owned_torso : MechTorso = GameManager.owned_mech_components["Torso"]
-		var torso_charge_speed_bonus : float = owned_torso.charge_speed_modifier
+		var torso_charge_speed_bonus : float = owned_torso.cool_down_modifier
 		var added_charge_speed_bonus : float = charge_speed * torso_charge_speed_bonus
 		charge_speed_amount_2.text = calculate_stat(component, owned_torso, charge_speed, added_charge_speed_bonus, charge_speed_amount_2)
 	

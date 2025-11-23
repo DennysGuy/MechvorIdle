@@ -51,7 +51,7 @@ var in_boss_fight = false
 func _ready() -> void:
 	#fight_scenario_4_test_fixture()
 	#equip_rifle_left_sword_right()
-	equip_rifle_left_sword_right()
+	#equip_rifle_left_sword_right()
 	pass
 #mining panel
 var ufo_attacking : bool = false
@@ -422,10 +422,9 @@ func add_mech_component(component : MechComponent) -> void:
 	if component_category == "Weapon":
 		var weapon_component = component as MechWeapon
 		var weapon_class = weapon_component.get_weapon_class()
-		var weapon_type = weapon_component.get_weapon_type()
 		if owned_mech_components["LeftWeapon"] == null:
 			owned_mech_components["LeftWeapon"] = component
-			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Left")
+			SignalBus.show_weapon.emit(weapon_class,weapon_component.shop_index, "Left")
 		
 			SignalBus.update_weapon_1_name_on_purchased.emit(component)
 			SignalBus.update_weapon_1_accuracy_stats_on_purchased.emit(component)
@@ -436,7 +435,7 @@ func add_mech_component(component : MechComponent) -> void:
 		
 		else:
 			owned_mech_components["RightWeapon"] = component
-			SignalBus.show_weapon.emit(weapon_class, weapon_type, "Right")
+			SignalBus.show_weapon.emit(weapon_class, weapon_component.shop_index, "Right")
 			SignalBus.update_weapon_2_name_on_purchased.emit(component)
 			SignalBus.update_weapon_2_accuracy_stats_on_purchased.emit(component)
 			SignalBus.update_weapon_2_charge_speed_stats_on_purchased.emit(component)

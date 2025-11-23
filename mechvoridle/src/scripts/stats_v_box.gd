@@ -39,16 +39,16 @@ func update_stats_panel(mech_component : MechComponent) -> void:
 			var torso_comp : MechTorso = mech_component as MechTorso
 			if torso_comp.get_weight_class() == "HEAVY":
 				text = "Armor Bonus: " + "[color=green]+"+str(torso_comp.health)+"[/color]\n"+\
-				"Range Weapon Charge Mod: "+"[color=green]+"+ str(torso_comp.charge_speed_modifier*100)+"%[/color]\n"+\
-				"Melee Weapon Charge Mod: "+"[color=red]-"+ str(torso_comp.charge_speed_modifier*100)+"%[/color]\n"
+				"Range Weapon Cooldown Mod: "+"[color=green]+"+ str(torso_comp.cool_down_modifier*100)+"%[/color]\n"+\
+				"Melee Weapon Cooldown Mod: "+"[color=red]-"+ str(torso_comp.cool_down_modifier*100)+"%[/color]\n"
 			elif torso_comp.get_weight_class() == "LIGHT":
 				text = "Armor Bonus: " + "[color=yellow]+"+str(torso_comp.health)+"[/color]\n"+\
-				"Melee Weapon Charge Mod: " +"[color=green]+"+ str(torso_comp.charge_speed_modifier*100)+"%[/color]\n" +\
-				"Range Weapon Charge Mod: "+"[color=red]-"+ str(torso_comp.charge_speed_modifier*100)+"%[/color]\n"
+				"Melee Weapon Cooldown Mod: " +"[color=green]+"+ str(torso_comp.cool_down_modifier*100)+"%[/color]\n" +\
+				"Range Weapon Cooldown Mod: "+"[color=red]-"+ str(torso_comp.cool_down_modifier*100)+"%[/color]\n"
 			elif torso_comp.get_weight_class() == "REGULAR":
 				text = "Armor Bonus: +" +str(torso_comp.health)+"\n"+\
-				"Melee Charge Mod: [color=yellow]+" +str(torso_comp.charge_speed_modifier*100)+"[/color]\n"+\
-				"Range Weapon Charge Mod: "+"[color=yellow]+"+ str(torso_comp.charge_speed_modifier*100)+"%[/color]\n"
+				"Melee Weapon Cooldown Mod: [color=yellow]+" +str(torso_comp.cool_down_modifier*100)+"[/color]\n"+\
+				"Range Weapon Cooldown Mod: "+"[color=yellow]+"+ str(torso_comp.cool_down_modifier*100)+"%[/color]\n"
 			
 		"Arms":
 			var arms_comp : MechArms = mech_component as MechArms

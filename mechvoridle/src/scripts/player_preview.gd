@@ -25,6 +25,23 @@ class_name PlayerPreview extends Node3D
 @onready var standard_torso: Node3D = $MechPreview/StandardTorso
 @onready var standard_legs: Node3D = $MechPreview/StandardLegs
 
+@onready var standard_arms: Node3D = $MechPreview/StandardArms
+@onready var standard_head: Node3D = $MechPreview/StandardHead
+
+@onready var spear_left_hand: Node3D = $MechPreview/SpearLeftHand
+@onready var spear_right_hand: Node3D = $MechPreview/SpearRightHand
+@onready var sub_machine_gun_left_hand: Node3D = $MechPreview/SubMachineGunLeftHand
+@onready var sub_machine_gun_right_hand: Node3D = $MechPreview/SubMachineGunRightHand
+@onready var sniper_rifle_left_hand: Node3D = $MechPreview/SniperRifleLeftHand
+@onready var sniper_rifle_right_hand: Node3D = $MechPreview/SniperRifleRightHand
+@onready var thy_kingdom_come_left_side: Node3D = $MechPreview/ThyKingdomComeLeftSide
+@onready var thy_kingdom_come_right_side: Node3D = $MechPreview/ThyKingdomComeRightSide
+@onready var arm_rocket_left_arm: Node3D = $MechPreview/ArmRocketLeftArm
+@onready var arm_rocket_right_arm: Node3D = $MechPreview/ArmRocketRightArm
+
+@onready var heat_sabre_left_hand: Node3D = $MechPreview/HeatSabreLeftHand
+@onready var heat_sabre_right_hand: Node3D = $MechPreview/HeatSabreRightHand
+
 
 @onready var parts_dictionary : Dictionary = {
 	"Torso": {
@@ -35,7 +52,7 @@ class_name PlayerPreview extends Node3D
 	"Arms": {
 		"HEAVY": heavy_arms, 
 		"LIGHT": melee_arms, 
-		"REGULAR": null,
+		"REGULAR": standard_arms,
 	},
 	"Legs": {
 		"LIGHT": light_legs, 
@@ -45,37 +62,49 @@ class_name PlayerPreview extends Node3D
 	"Head": {
 		"HEAVY": ranged_head, 
 		"LIGHT": melee_head, 
-		"REGULAR": null
+		"REGULAR": standard_head
 	},
 	"Rifle": {
-		"Standard": {
-			"Left" : standard_rifle_left_side, 
-			"Right": standard_rifle_right_side
-		},
-		"Plasma" : {
-			"Left": plasma_rifle_left_side, 
+		0: {
+			"Left" : plasma_rifle_left_side, 
 			"Right": plasma_rifle_rightside
+		},
+		1: {
+			"Left": sub_machine_gun_left_hand, 
+			"Right": sub_machine_gun_right_hand
+		},
+		2: {
+			"Left": sniper_rifle_left_hand, 
+			"Right": sniper_rifle_right_hand			
 		}
 		
 	},
 	"Sword": {
-		"Standard": {
+		0: {
 			"Left": sword_left_hand, 
 			"Right": sword_right_hand
 		},
-		"Plasma": {
-			"Left": plasma_sword_left_hand, 
-			"Right": plasma_sword_right_hand
+		1: {
+			"Left": heat_sabre_left_hand, 
+			"Right": heat_sabre_right_hand
+		},
+		2: {
+			"Left": spear_left_hand,
+			"Right": spear_right_hand
 		}
 	},
 	"Rocket Launcher" : {
-		"Standard": {
+		0: {
 			"Left": rocket_launcher_left_side, 
 			"Right": rocket_launcher_right_side
 		},
-		"Plasma" : {
-			"Left" : plasma_rocket_launcher_left_side, 
-			"Right" : plasma_rocket_launcher_rite_side
+		1: {
+			"Left" : arm_rocket_left_arm, 
+			"Right" : arm_rocket_right_arm
+		},
+		2: {
+			"Left": thy_kingdom_come_left_side,
+			"Right": thy_kingdom_come_right_side
 		}
 	}
 }
@@ -96,7 +125,7 @@ func show_part(body_part : String, category : String) -> void:
 	if mech_component:
 		mech_component.show()
 
-func show_weapon(weapon : String, category : String, hand :String) -> void:
-	var selected_weapon = parts_dictionary[weapon][category][hand]
+func show_weapon(weapon : String, shop_index : int, hand :String) -> void:
+	var selected_weapon = parts_dictionary[weapon][shop_index][hand]
 	if selected_weapon:
 		selected_weapon.show()

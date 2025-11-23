@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_rvlep")
 weapon_class = 2
+shop_index = 2
 cool_down_time = 30.0
 number_of_hits = 1
 charge_time = 0.15
