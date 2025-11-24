@@ -42,6 +42,12 @@ class_name PlayerPreview extends Node3D
 @onready var heat_sabre_left_hand: Node3D = $MechPreview/HeatSabreLeftHand
 @onready var heat_sabre_right_hand: Node3D = $MechPreview/HeatSabreRightHand
 
+@onready var rifle_left_hand: Node3D = $MechPreview/RifleLeftHand
+@onready var rifle_right_hand: Node3D = $MechPreview/RifleRightHand
+
+@onready var katana_blade_left_hand: Node3D = $MechPreview/KatanaBladeLeftHand
+@onready var katana_blade_right_hand: Node3D = $MechPreview/KatanaBladeRightHand
+
 
 @onready var parts_dictionary : Dictionary = {
 	"Torso": {
@@ -66,8 +72,8 @@ class_name PlayerPreview extends Node3D
 	},
 	"Rifle": {
 		0: {
-			"Left" : plasma_rifle_left_side, 
-			"Right": plasma_rifle_rightside
+			"Left" : rifle_left_hand, 
+			"Right": rifle_right_hand
 		},
 		1: {
 			"Left": sub_machine_gun_left_hand, 
@@ -81,8 +87,8 @@ class_name PlayerPreview extends Node3D
 	},
 	"Sword": {
 		0: {
-			"Left": sword_left_hand, 
-			"Right": sword_right_hand
+			"Left": katana_blade_left_hand, 
+			"Right": katana_blade_right_hand
 		},
 		1: {
 			"Left": heat_sabre_left_hand, 

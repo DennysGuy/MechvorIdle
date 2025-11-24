@@ -19,17 +19,21 @@ class_name PartPreviewer extends Node3D
 @onready var heavy_head: Node3D = $MechPreview/RangedHead
 
 
-@onready var plasma_rifle: Node3D = $MechPreview/PlasmaRifle
+@onready var rifle: Node3D = $MechPreview/Rifle
 @onready var sniper_rifle: Node3D = $MechPreview/SniperRifle
 @onready var sub_machine_gun: Node3D = $MechPreview/SubMachineGun
 
-@onready var standard_sword: Node3D = $MechPreview/StandardSword
+@onready var katana_blade: Node3D = $MechPreview/KatanaBlade
 @onready var spear: Node3D = $MechPreview/Spear
 @onready var heat_sabre: Node3D = $MechPreview/HeatSabre
 
 @onready var standard_rocket_launcher: Node3D = $MechPreview/StandardRocketLauncher
 @onready var thy_kingdom_come: Node3D = $MechPreview/ThyKingdomCome
 @onready var arm_rocket: Node3D = $MechPreview/ArmRocket
+
+
+
+
 
 var previously_viewed : Node3D
 
@@ -55,12 +59,12 @@ var previously_viewed : Node3D
 			"HEAVY": heavy_head
 		},
 		"Rifle" : {
-			0: sub_machine_gun, 
-			1: plasma_rifle,
+			0: rifle, 
+			1: sub_machine_gun,
 			2: sniper_rifle
 		}, 
 		"Sword": {
-			0: standard_sword, 
+			0: katana_blade, 
 			1: heat_sabre,
 			2: spear
 		},
