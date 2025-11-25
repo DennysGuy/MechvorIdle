@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c50hu8w00gwc5"
-path="res://.godot/imported/MeleeArms.png-6aaf38589fdc746a6859089797376635.ctex"
+uid="uid://cuqssd3kin8rp"
+path.s3tc="res://.godot/imported/PlayerCharacter_19.png-f774aa4ae3445cd63e715f54d7fc98de.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "41e23e8620ba32579dd25025a3182101"
 }
 
 [deps]
 
-source_file="res://assets/graphics/Models/PlayerMech/MeleeArms.png"
-dest_files=["res://.godot/imported/MeleeArms.png-6aaf38589fdc746a6859089797376635.ctex"]
+source_file="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_19.png"
+dest_files=["res://.godot/imported/PlayerCharacter_19.png-f774aa4ae3445cd63e715f54d7fc98de.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +27,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

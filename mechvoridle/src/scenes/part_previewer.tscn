@@ -95,8 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448675, 0, -0.452987)
 visible = false
 
 [node name="Rifle" parent="MechPreview" instance=ExtResource("19_dwr6e")]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -0.008682847, 1.7308545, -0.037801683)
-visible = false
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -0.008682847, 2.004313, 0.0819177)
 
 [node name="SniperRifle" parent="MechPreview" instance=ExtResource("19_pc5do")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.19723809, 1.7473338, 0)
@@ -128,4 +127,5 @@ modulate = Color(1, 1, 1, 0.368627)
 texture = ExtResource("3_6pjjs")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.93666, 0.35024, 0, -0.35024, 0.93666, 0.054, 1.32587, 1.49667)
+transform = Transform3D(1, 0, 0, 0, 0.93666005, 0.35024002, 0, -0.35024002, 0.93666, 0.026140973, 1.4204395, 1.7280414)
+fov = 60.0

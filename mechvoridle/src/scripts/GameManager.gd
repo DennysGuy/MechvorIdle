@@ -51,7 +51,7 @@ var in_boss_fight = false
 func _ready() -> void:
 	#fight_scenario_4_test_fixture()
 	#equip_rifle_left_sword_right()
-	#equip_rifle_left_sword_right()
+	equip_rifle_left_sword_right()
 	pass
 #mining panel
 var ufo_attacking : bool = false

@@ -91,7 +91,11 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	if next_tile and next_tile.occupant == null:
 		next_tile.occupant = actor
 	if adjacent_tile:
-		actor.global_position = adjacent_tile.marker_3d.global_position
+		var tween : Tween = get_tree().create_tween()
+		tween.tween_property(actor,"global_position", adjacent_tile.marker_3d.global_position, 0.15)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.set_ease(Tween.EASE_OUT)
+		#actor.global_position = adjacent_tile.marker_3d.global_position
 	
 	#check for crate if player
 	if actor == GridManager.player and next_tile.upgrade_crate:
@@ -154,8 +158,6 @@ func spawn_next_wave() -> void:
 	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
 	spawn_enemies(selected_wave)
-	
-
 	
 	count_down_timer.start_timer()
 

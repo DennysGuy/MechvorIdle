@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c50hu8w00gwc5"
-path="res://.godot/imported/MeleeArms.png-6aaf38589fdc746a6859089797376635.ctex"
+uid="uid://bgv4nl2eaqee5"
+path="res://.godot/imported/ShoulderRocketComplete.png-c876333a792e63427b7afa8fe45948c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/Models/PlayerMech/MeleeArms.png"
-dest_files=["res://.godot/imported/MeleeArms.png-6aaf38589fdc746a6859089797376635.ctex"]
+source_file="res://assets/graphics/Models/PlayerMech/ShoulderRocketComplete.png"
+dest_files=["res://.godot/imported/ShoulderRocketComplete.png-c876333a792e63427b7afa8fe45948c0.ctex"]
 
 [params]
 
