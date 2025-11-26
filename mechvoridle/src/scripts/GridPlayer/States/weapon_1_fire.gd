@@ -26,7 +26,9 @@ func enter() -> void:
 
 
 func dash_attack() -> void:
-	
+	if !GridManager.targeted_tiles[0]:
+		return 
+		
 	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
 	var sfx := GameManager.get_right_weapon().primary_projectile_discharge
 	SfxManager.play_sfx(sfx)

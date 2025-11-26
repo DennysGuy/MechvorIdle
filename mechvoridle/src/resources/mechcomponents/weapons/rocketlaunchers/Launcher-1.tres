@@ -14,7 +14,7 @@ crit_chance = 0.25
 accuracy = 0.6
 stun_chance = 0.3
 component_name = "Berzerker Barrage X"
-index = 2
+index = 6
 description = "This rocket launcher issues a barrage of mini lock-on rockets. Extremely useful for bursting down the enemy. 
 
 Steel Fang Technologies saw this piece of weaponry fit for close range support.

@@ -14,6 +14,7 @@ crit_chance = 0.06
 accuracy = 0.88
 stun_chance = 0.15
 component_name = "Morning Star of Spirit"
+index = 2
 manufacture_name = 2
 description = "The Morning Star of Spirit though slower in nature than other melee weapons, has a better chance to stagger. This weapon replicates the horrifying weaponry of the darker times of Humanity's past."
 refined_ferrite_cost = 1850

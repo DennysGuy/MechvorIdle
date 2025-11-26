@@ -85,7 +85,6 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	if prev_tile:
 		if prev_tile.occupant == actor:
 			prev_tile.occupant = null
-		
 	if adjacent_tile:
 		actor.current_tile = adjacent_tile
 	if next_tile and next_tile.occupant == null:
