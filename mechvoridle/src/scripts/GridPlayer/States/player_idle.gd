@@ -1,5 +1,8 @@
 class_name GridPlayerIdle extends State
 
+#TODO Need to see the aim state on load in for whatever weapon is equipped
+#TODO Need to determine which weapon and which hand its in for proper animation and firing pos (if applicable)
+
 @export var weapon_1_aim : State
 
 @export var weapon_2_aim : State

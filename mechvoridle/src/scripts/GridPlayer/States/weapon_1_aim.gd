@@ -1,6 +1,9 @@
-class_name Weapon1Aim extends State
+class_name WideSwordAim extends State
 
-@export var weapon_1_fire : State
+
+#I NEED TO FIGURE OUT IF WE'RE DOING LEFT OR RIGHT!!!
+
+@export var wide_sword_swing_fire : State
 @export var idle : State
 
 var offset : int = 0
@@ -8,7 +11,6 @@ var shift_time : float = 0.5
 var damage_multiplier := 1.0
 var i : int = 0
 func enter() -> void:
-	GameManager.get_right_weapon().damage = 30.0
 	var sfx := GameManager.get_right_weapon().charge_up
 	SfxManager.play_sfx(sfx)
 	damage_multiplier = 1.0
@@ -28,7 +30,7 @@ func exit() -> void:
 func process_input(_event: InputEvent) -> State:
 	
 	if Input.is_action_just_released("mine_asteroid"):
-		return weapon_1_fire
+		return wide_sword_swing_fire
 	
 	if Input.is_action_just_pressed("fire_vulcans"):
 		parent.can_move = true

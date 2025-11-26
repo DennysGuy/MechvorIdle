@@ -1,4 +1,4 @@
-[gd_scene load_steps=638 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=640 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://bbueplktggyvr" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_0.png" id="2_mexru"]
@@ -30,7 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://c8lbwdy5obd05" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_23.png" id="25_bmja8"]
 [ext_resource type="Texture2D" uid="uid://dr7rtru43jgvd" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_24.png" id="26_dtlcp"]
 [ext_resource type="PackedScene" uid="uid://psempt073jce" path="res://src/scenes/TileGrid/Shield.tscn" id="26_hpw55"]
+[ext_resource type="Script" uid="uid://e7hrbcb6oon7" path="res://src/scripts/GridPlayer/States/weapon_3_aim.gd" id="30_dpvbr"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="30_xmjel"]
+[ext_resource type="Script" uid="uid://6x6ykgnjrt80" path="res://src/scripts/GridPlayer/States/arm_rocket_fire.gd" id="31_l1nc1"]
 [ext_resource type="Script" uid="uid://cykhm1hrtvvql" path="res://src/scripts/GridPlayer/States/player_death.gd" id="31_xmjel"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqbol"]
@@ -23633,27 +23635,33 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_1_aim", "weapon_2_aim")]
 script = ExtResource("18_ge2li")
-weapon_1_aim = NodePath("../Weapon1Aim")
-weapon_2_aim = NodePath("../Weapon2Aim")
+weapon_1_aim = NodePath("../WideSwordAim")
+weapon_2_aim = NodePath("../RifleAim")
 animation_name = "Idle"
 
-[node name="Weapon1Aim" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_1_fire", "idle")]
+[node name="WideSwordAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("wide_sword_swing_fire", "idle")]
 script = ExtResource("19_ttbq6")
-weapon_1_fire = NodePath("../Weapon1Fire")
+wide_sword_swing_fire = NodePath("../WideSwordSwing")
 idle = NodePath("../Idle")
 
-[node name="Weapon1Fire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="WideSwordSwing" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("21_8ua87")
 idle = NodePath("../Idle")
 
-[node name="Weapon2Aim" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_2_fire", "idle")]
+[node name="RifleAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_2_fire", "idle")]
 script = ExtResource("22_5eta7")
-weapon_2_fire = NodePath("../Weapon2Fire")
+weapon_2_fire = NodePath("../RifleFire")
 idle = NodePath("../Idle")
 
-[node name="Weapon2Fire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="RifleFire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("23_cp1m8")
 idle = NodePath("../Idle")
+
+[node name="ArmRocketAim" type="Node" parent="StateMachine"]
+script = ExtResource("30_dpvbr")
+
+[node name="ArmRocketFire" type="Node" parent="StateMachine"]
+script = ExtResource("31_l1nc1")
 
 [node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("30_xmjel")
@@ -23688,5 +23696,5 @@ libraries = {
 [node name="DamageLabelMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4472477, 0.40865052)
 
-[connection signal="timeout" from="ChargeUpTimer" to="StateMachine/Weapon2Aim" method="_on_charge_up_timer_timeout"]
+[connection signal="timeout" from="ChargeUpTimer" to="StateMachine/RifleAim" method="_on_charge_up_timer_timeout"]
 [connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]
