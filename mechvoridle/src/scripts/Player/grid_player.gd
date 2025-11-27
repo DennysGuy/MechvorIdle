@@ -115,17 +115,13 @@ class_name GridPlayer extends GridActor
 @onready var sniper_rifle: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/SniperRifle
 @onready var sniper_rifle_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/SniperRifle2
 
-
-
 var scanned_attack_pattern : Array
 var can_use_shield : bool = true
 
 var regen_started : bool = false
 
-
 @onready var delay_timer: Timer = $DelayTimer
 @onready var charge_up_timer: Timer = $ChargeUpTimer
-
 
 @onready var mech_components : Dictionary = {
 	"Head": {
@@ -212,48 +208,84 @@ var regen_started : bool = false
 	}
 }
 
-
 @onready var mech_weapons : Dictionary = {
 	"LeftWeapon": {
-		#sword_1
-		0: katanna_2,
-		#sword_2
-		1: heat_sword_2,
-		#sword_3
-		2: spear_2,
-		#rifle_1,
-		3: rifle_2,
-		#rifle_2,
-		4: sub_machine_gun_2,
-		#rifle_3
-		5: sniper_rifle_2,
-		#rocket_1
-		6: soulder_rocket_left,
-		#rocket_2
-		7: arm_rocket_launcher_2,
-		#rocket_3
-		8: thy_kingdom_come_left_side
+		"Sword": [
+			katanna_2,
+			#sword_2
+			heat_sword_2,
+			#sword_3
+			spear_2,	
+		],
+		"Rifle": [
+			#rifle_1
+			rifle_2,
+			#rifle_2,
+			sub_machine_gun_2,
+			#rifle_3
+			sniper_rifle_2,
+		],
+		"RocketLauncher": [
+			#rocket_1
+			soulder_rocket_left,
+			#rocket_2
+			arm_rocket_launcher_2,
+			#rocket_3
+			thy_kingdom_come_left_side
+		]
 	},
 	"RightWeapon": {
-		#sword_1
-		0: katanna,
-		#sword_2
-		1: heat_sword,
-		#sword_3
-		2: spear,
-		#rifle_1
-		3: rifle,
-		#rifle_2
-		4: sub_machine_gun,
-		#rifle_3
-		5: sniper_rifle,
-		#launcher_1
-		6: soulder_rocket_right,
-		#launcher_2
-		7: arm_rocket_launcher,
-		#launcher_3
-		8: thy_kingdom_come_right_side
+		"Sword": [
+			#sword_1
+			katanna,
+			#sword_2
+			heat_sword,
+			#sword_3
+			spear
+		],
+		"Rifle": [
+			#rifle_1
+			rifle,
+			#rifle_2
+			sub_machine_gun,
+			#rifle_3
+			sniper_rifle,	
+		],
+		"RocketLauncher" : [
+			#launcher_1
+			soulder_rocket_right,
+			#launcher_2
+			arm_rocket_launcher,
+			#launcher_3
+			thy_kingdom_come_right_side
+		]
 	}
+}
+
+#weapon states
+@export var wide_sword_aim: WideSwordAim
+@export var wide_sword_swing: Weapon1Fire
+
+@export var rifle_aim: Weapon2Aim
+@export var rifle_fire: Weapon2Fire
+
+@export var arm_rocket_aim: ArmRocketAim
+@export var arm_rocket_fire: ArmRocketFire
+
+@onready var weapon_states = {
+	"Sword" : {
+		0 : {
+			"Aim": wide_sword_aim,
+			"Fire": wide_sword_swing
+		}
+	},
+	"Rifle":  {
+		0 : {
+			"Aim": rifle_aim,
+			"Fire": rifle_fire
+		}
+	}
+
 }
 
 var mech_vulcan : MechWeapon = preload("uid://kcrfevws33d7")
@@ -265,6 +297,7 @@ var rifle_charged_up : bool = false
 var start_shield_cool_down : bool = false
 
 @onready var shield: Shield = $Shield
+@onready var idle: GridPlayerIdle = $StateMachine/Idle
 
 var true_wait_time : float = 0
 # Called when the node enters the scene tree for the first time.
@@ -300,19 +333,7 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(true_wait_time).timeout
 			can_move = true
 			GridManager.clear_targeted_tiles()
-		
-		#if Input.is_action_pressed("move_up") and can_move:
-			#SignalBus.move_player.emit(Vector2.LEFT, false)
-			#can_move = false
-			#await get_tree().create_timer(true_wait_time).timeout
-			#can_move = true
-		#
-		#if Input.is_action_pressed("move_down") and can_move:
-			#SignalBus.move_player.emit(Vector2.RIGHT, false)
-			#can_move = false
-			#await get_tree().create_timer(true_wait_time).timeout
-			#can_move = true
-
+	
 		if Input.is_action_pressed("fire_vulcans") and not firing and can_fire_vulcans:
 			firing = true
 			SignalBus.shake_camera.emit(0.1)
@@ -353,9 +374,6 @@ func _process(delta: float) -> void:
 						shield_cool_down_timer.wait_time = 5.4
 					shield_cool_down_timer.start()
 					start_shield_cool_down = true
-			
-	#
-	
 	state_machine.process_frame(delta)
 
 func _physics_process(delta: float) -> void:
@@ -376,8 +394,10 @@ func enable_mech_weapons() -> void:
 	var left_weapon : MechWeapon = GameManager.get_left_weapon()
 	var right_weapon : MechWeapon = GameManager.get_right_weapon()
 	
-	var equipped_left_weapon = mech_weapons["LeftWeapon"][left_weapon.index]
-	var equipped_right_weapon = mech_weapons["RightWeapon"][right_weapon.index]
+	var equipped_left_weapon = mech_weapons["LeftWeapon"][left_weapon.get_weapon_class()][left_weapon.shop_index]
+	var equipped_right_weapon = mech_weapons["RightWeapon"][right_weapon.get_weapon_class()][right_weapon.shop_index]
+	
+	init_weapon_states()
 	
 	equipped_left_weapon.show()
 	equipped_right_weapon.show()
@@ -412,3 +432,17 @@ func _on_shield_cool_down_timer_timeout() -> void:
 	#start_shield_cool_down = false
 	SignalBus.refil_shield_gauge.emit()
 	
+func init_weapon_states() -> void:
+	var aim_state_right : WeaponState =  weapon_states["Sword"][GameManager.get_right_weapon().shop_index]["Aim"]
+	var fire_state_right : WeaponState = weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
+	aim_state_right.set_position_as_right()
+	fire_state_right.set_position_as_right()
+	
+	idle.weapon_1_aim = aim_state_right
+	
+	var aim_state_left : WeaponState =  weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]
+	var fire_state_left : WeaponState = weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Fire"]
+	aim_state_left.set_position_as_left()
+	fire_state_left.set_position_as_left()
+	
+	idle.weapon_2_aim = aim_state_left

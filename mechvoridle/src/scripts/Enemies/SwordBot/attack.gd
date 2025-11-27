@@ -3,6 +3,7 @@ class_name SwordBotAttack extends State
 @export var idle : State
 @export var stagger : State
 func enter() -> void:
+	parent.is_attacking = true
 	var tile_to : Tile
 	if parent.tile_to_attack:
 		tile_to  = GridManager.get_tile(parent.tiles, parent.tile_to_attack.coordinates - Vector2(1,0))
@@ -20,6 +21,7 @@ func enter() -> void:
 			parent.timer.start()
 
 func exit() -> void:
+	parent.is_attacking = false
 	if !parent.is_slave and parent.destined_tile:
 		var slave_destined_tile : Tile = GridManager.get_tile(parent.tiles, parent.destined_tile.coordinates - Vector2(1,0))
 		SignalBus.slave_attack.emit(slave_destined_tile, parent.tile_to_attack)

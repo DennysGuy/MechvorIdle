@@ -8,7 +8,7 @@ const  WAIT_TIME : float = 0.2
 @export var state_machine : StateMachine
 @export var can_move : bool = true
 var can_hurt : bool = true
-
+var is_attacking : bool = false
 @export var health : int = 100
 @export var max_health : int 
 @export var tiles : Node
@@ -53,7 +53,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		
 		state_machine.change_state(death)
 	else:
-		if not is_vulcan and hurt:
+		if not is_vulcan and hurt and not is_attacking:
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:

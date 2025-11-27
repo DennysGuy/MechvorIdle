@@ -16,7 +16,9 @@ list of random tile configs for mini rockets
 var fall_configs := [
 	[Vector2(4,0),Vector2(4,1)],
 	[Vector2(4,0),Vector2(4,2)],
-	[Vector2(4,1),Vector2(4,2)]
+	[Vector2(4,1),Vector2(4,2)],
+	[Vector2(4,0),Vector2(4,1),Vector2(4,2)],
+	[Vector2(4,0),Vector2(4,1),Vector2(4,2)]
 ]
 
 

@@ -1,4 +1,4 @@
-class_name Weapon2Fire extends State
+class_name Weapon2Fire extends WeaponState
 
 @export var idle : State
 
@@ -30,7 +30,6 @@ func exit() -> void:
 	SignalBus.issue_weapon_attack.emit(1)
 	parent.can_fire_vulcans = true
 	parent.can_move = true
-	pass
 
 func process_input(_event: InputEvent) -> State:
 	return null

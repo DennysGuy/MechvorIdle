@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("1_wp7av")
+base_damage = 35.0
 damage = 35.0
 cool_down_time = 2.0
 number_of_hits = 1

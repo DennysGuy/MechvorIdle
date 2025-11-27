@@ -6,8 +6,8 @@ var issued_slave_signal : bool = false
 
 const SWORD_BOT_PREPARE = preload("uid://svuomkbnqg4e")
 
-
 func enter() -> void:
+	parent.is_attacking = true
 	issued_slave_signal = false
 	if parent.tile_to_attack:
 		parent.tile_to_attack.set_enemy_targeted_overlay()

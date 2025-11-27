@@ -38,9 +38,9 @@ func enter() -> void:
 				var slave_new_tile : Tile = GridManager.get_tile(parent.tiles, new_tile.coordinates - Vector2(1,0) )
 				SignalBus.move_actor_to_tile.emit(parent, new_tile)
 				SfxManager.play_sfx(SfxManager.get_enemy_movement_whoosh())
-				await get_tree().create_timer(0.25).timeout
+				await get_tree().create_timer(0.10).timeout
 				SignalBus.slave_follow.emit(slave_new_tile, parent.tile_to_attack)
-				await get_tree().create_timer(0.25).timeout
+				await get_tree().create_timer(0.10).timeout
 				
 				
 				

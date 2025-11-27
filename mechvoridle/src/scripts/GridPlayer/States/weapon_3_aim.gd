@@ -1,4 +1,4 @@
-class_name ArmRocketAim extends State
+class_name ArmRocketAim extends WeaponState
 
 func enter() -> void:
 	pass

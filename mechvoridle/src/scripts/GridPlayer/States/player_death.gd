@@ -3,6 +3,7 @@ class_name PlayerDeath extends State
 const PLAYER_LOSE_EXPLOSIONS = preload("uid://dsmnsm604ayt5")
 
 func enter() -> void:
+	parent.can_move = false
 	SfxManager.play_sfx(PLAYER_LOSE_EXPLOSIONS)
 	SignalBus.transition_lose_screen.emit()
 	parent.animation_player.speed_scale = 0.2

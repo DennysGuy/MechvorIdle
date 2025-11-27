@@ -1,4 +1,4 @@
-class_name Weapon1Fire extends State
+class_name Weapon1Fire extends WeaponState
 
 @export var idle : State
 
@@ -9,13 +9,12 @@ func enter() -> void:
 	var previous_tile = parent.current_tile
 	
 	
-	match GameManager.get_right_weapon().weapon_class:
-		0:
-			dash_attack()
-			animation_name = "WideSwordSwing"
-		1:
-			GameManager.get_right_weapon().attack_enemy(parent, parent.tiles, parent.scanned_attack_pattern)
-			animation_name = "RifleShotRight"
+
+	dash_attack()
+	if is_right_position():
+		animation_name = "WideSwordSwing"
+	elif is_left_position():
+		animation_name = "WideSwordSwingLeft"
 
 	parent.animation_player.play(animation_name)
 	SignalBus.shake_camera.emit(0.6)
@@ -26,7 +25,7 @@ func enter() -> void:
 
 
 func dash_attack() -> void:
-	if !GridManager.targeted_tiles[0]:
+	if GridManager.targeted_tiles.is_empty():
 		return 
 		
 	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
@@ -40,6 +39,7 @@ func dash_attack() -> void:
 func exit() -> void:
 	parent.can_move = true
 	parent.can_fire_vulcans = true
+	GameManager.get_right_weapon().damage = GameManager.get_right_weapon().base_damage
 	SignalBus.issue_weapon_attack.emit(0)
 	
 	pass

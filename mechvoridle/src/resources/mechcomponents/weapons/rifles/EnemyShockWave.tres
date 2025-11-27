@@ -8,7 +8,7 @@
 script = ExtResource("2_o1xip")
 weapon_class = 1
 weapon_owner = 1
-damage = 40.0
+damage = 70.0
 crit_damage = 1.0
 attack_pattern = ExtResource("1_o1xip")
 projectile = ExtResource("1_70ne5")

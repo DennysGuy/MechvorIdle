@@ -5,6 +5,8 @@ class_name GridEnemy extends GridActor
 
 @export var drop_chance : int
 
+
+
 func _ready() -> void:
 	can_move = false
 	SignalBus.apply_timer_consequences.connect(apply_timer_consequences)

@@ -196,21 +196,23 @@ var waves = [
 			"is_slave": false,
 			"is_boss": false
 		},
+
 		{
-			"enemy": TURRET_ENEMY.duplicate(true),
+			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(0,2),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(0,1),
+			"coordinates": Vector2(1,1),
 			"is_slave": false,
 			"is_boss": false
 		}
 		
 	],
 	[
+		
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,2),
@@ -226,7 +228,7 @@ var waves = [
 	],
 	[
 		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
+			"enemy": SPORADIC_ENEMY.duplicate(true), 
 			"coordinates": Vector2(0,0),
 			"is_slave": false,
 			"is_boss": false

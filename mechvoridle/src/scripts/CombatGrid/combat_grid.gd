@@ -147,13 +147,18 @@ func spawn_next_wave() -> void:
 			count_down_timer.add_time(35)
 			GameManager.timed_out = false
 		else:
+			var gained_time : int = 0
 			if GridManager.current_wave <= 5:
-				count_down_timer.add_time(8)
+				gained_time = 8
 			elif GridManager.current_wave > 5 and GridManager.current_wave <= 7:
-				count_down_timer.add_time(10)
+				gained_time = 10 
 			else:
-				count_down_timer.add_time(13)
-		
+				gained_time = 12
+				
+			count_down_timer.add_time(gained_time)
+			if GridManager.player.health < GridManager.player.max_health:
+				GridManager.player.health = min( GridManager.player.health + GridManager.player.max_health * (gained_time * 0.01), GridManager.player.max_health) 
+				update_health_bar()
 	
 	var selected_wave = GridManager.waves[GridManager.current_wave]
 	spawn_enemies(selected_wave)

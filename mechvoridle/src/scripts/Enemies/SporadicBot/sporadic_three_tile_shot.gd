@@ -1,4 +1,4 @@
-class_name ThreeTileShots extends State
+class_name SporadicThreeTileShot extends State
 
 @export var idle : State
 var initial_tile : Tile
@@ -8,8 +8,9 @@ var is_attacking : bool = false
 func enter() -> void:
 	is_active = true
 	is_attacking = true
+	parent.is_attacking = true
 	# Move to the initial tile (1,0)
-	initial_tile = GridManager.get_tile(parent.tiles, Vector2(0, 0))
+	initial_tile = GridManager.get_tile(parent.tiles, Vector2(1, 0))
 	if initial_tile:
 		SignalBus.move_actor_to_tile.emit(parent, initial_tile)
 
@@ -22,7 +23,7 @@ func enter() -> void:
 			return
 
 		# Step 1: Move to the next tile
-		var next_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(0, y))
+		var next_tile : Tile = GridManager.get_tile(parent.tiles, Vector2(1, y))
 		if next_tile:
 			SignalBus.move_actor_to_tile.emit(parent, next_tile)
 
@@ -30,11 +31,11 @@ func enter() -> void:
 			return
 
 		# Step 2: Perform attack at this tile
-		parent.animation_player.speed_scale = 1.0
-		parent.animation_player.play("CanonArmFire")
+		parent.animation_player.speed_scale = 2.5
+		parent.animation_player.play("shoot")
 
 		# Wait for shot duration
-		var timeout = await get_tree().create_timer(0.6).timeout
+		var timeout = await get_tree().create_timer(0.8).timeout
 		if !is_active:
 			return
 
@@ -48,6 +49,7 @@ func process_physics(_delta: float) -> State:
 
 
 func exit() -> void:
+	parent.is_attacking = false
 	is_active = false	# stops async continuation
 	is_attacking = false
 	parent.animation_player.speed_scale = 1.0

@@ -1,4 +1,4 @@
-class_name WideSwordAim extends State
+class_name WideSwordAim extends WeaponState
 
 
 #I NEED TO FIGURE OUT IF WE'RE DOING LEFT OR RIGHT!!!
@@ -10,6 +10,7 @@ var offset : int = 0
 var shift_time : float = 0.5
 var damage_multiplier := 1.0
 var i : int = 0
+
 func enter() -> void:
 	var sfx := GameManager.get_right_weapon().charge_up
 	SfxManager.play_sfx(sfx)
@@ -19,8 +20,11 @@ func enter() -> void:
 	parent.delay_timer.wait_time = shift_time
 	parent.delay_timer.start()
 	offset = -2
-
-	parent.animation_player.play("WideSwordAimRight")
+	
+	if is_right_position():
+		parent.animation_player.play("WideSwordAimRight")
+	elif is_left_position():
+		parent.animation_player.play("WideSwordAimLeft")
 
 func exit() -> void:
 	GameManager.get_right_weapon().damage *= damage_multiplier
