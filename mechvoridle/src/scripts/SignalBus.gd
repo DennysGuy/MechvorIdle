@@ -317,6 +317,8 @@ signal update_player_health
 signal move_player(direction : Vector2, is_dash_attack : bool)
 @warning_ignore("unused_signal")
 signal move_enemy(enemy : GridEnemy, direction : Vector2, row_limit : int, col_limit : int)
+@warning_ignore("unused_signal")
+signal send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_limit : int, col_limit : int)
 
 @warning_ignore("unused_signal")
 signal issue_weapon_attack(slot : int)

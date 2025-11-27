@@ -2094,6 +2094,7 @@ _data = {
 
 [node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_7h52i")
+row_limit = 3
 weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
 drop_chance = 10

@@ -662,7 +662,6 @@ func equip_rifle_left_sword_right() -> void:
 	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl")
 	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
 
-
 '''
 	We should see that the light build counters 
 	the heavy boss with fast output damage, 

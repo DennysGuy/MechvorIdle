@@ -4,22 +4,24 @@ class_name Weapon2Fire extends WeaponState
 
 func enter() -> void:
 	parent.can_move = false
-	GameManager.can_fire_weapon_2 = false
+	
 	#GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
 	
-	
-	match GameManager.get_left_weapon().weapon_class:
-		1:
-			animation_name = "RifleShotLeft"
+	if is_right_position():
+		animation_name = "ArmRocketFireRight"
+		GameManager.can_fire_weapon_1 = false
+	elif is_left_position():
+		animation_name = "RifleShotLeft"
+		GameManager.can_fire_weapon_2 = false
 			
 	GridManager.clear_targeted_tiles()
 	var sfx : AudioStream
 	if parent.rifle_charged_up:
 		SignalBus.shake_camera.emit(1.0)
-		sfx = GameManager.get_left_weapon().primary_projectile_discharge
+		sfx = weapon_component.primary_projectile_discharge
 	else:
 		SignalBus.shake_camera.emit(0.7)
-		sfx = GameManager.get_left_weapon().secondary_projectile_discharge
+		sfx = weapon_component.secondary_projectile_discharge
 		
 	SfxManager.play_sfx(sfx)
 	parent.animation_player.play(animation_name)

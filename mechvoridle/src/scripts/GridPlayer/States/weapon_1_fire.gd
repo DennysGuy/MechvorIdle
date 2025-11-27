@@ -8,8 +8,6 @@ func enter() -> void:
 	SignalBus.hide_damage_mulitplier_label.emit()
 	var previous_tile = parent.current_tile
 	
-	
-
 	dash_attack()
 	if is_right_position():
 		animation_name = "WideSwordSwing"
@@ -29,9 +27,9 @@ func dash_attack() -> void:
 		return 
 		
 	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
-	var sfx := GameManager.get_right_weapon().primary_projectile_discharge
+	var sfx := weapon_component.primary_projectile_discharge
 	SfxManager.play_sfx(sfx)
-	GameManager.get_right_weapon().attack_enemy(parent, parent.tiles, parent.scanned_attack_pattern)
+	weapon_component.attack_enemy(parent, parent.tiles, parent.scanned_attack_pattern)
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
 	
 	GridManager.clear_targeted_tiles()
@@ -39,7 +37,7 @@ func dash_attack() -> void:
 func exit() -> void:
 	parent.can_move = true
 	parent.can_fire_vulcans = true
-	GameManager.get_right_weapon().damage = GameManager.get_right_weapon().base_damage
+	weapon_component.damage = weapon_component.base_damage
 	SignalBus.issue_weapon_attack.emit(0)
 	
 	pass

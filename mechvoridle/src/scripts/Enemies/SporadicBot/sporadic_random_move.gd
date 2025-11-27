@@ -21,23 +21,22 @@ func enter() -> void:
 		three_shot_state = true
 
 	else:
-		random_direction_list = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 		SfxManager.play_sfx(SfxManager.get_enemy_movement_whoosh())
 		interval = 1
 		
-		if parent.current_tile.coordinates.y == 0:
-			random_direction_list.remove_at(0)
+		var coordinates : Vector2 = Vector2.ZERO
 		
-		elif parent.current_tile.coordinates.y == 2:
-			random_direction_list.remove_at(1)
+		var rand_num : int = randi_range(0,100)
+		if rand_num <= 75:
+			print("HEY PLAYA")
+			coordinates = Vector2(randi_range(0,3), GridManager.player.current_tile.coordinates.y)
+			print("THESE ARE MY NEW COORDS: %s" % [coordinates] )
+		else:
+			var random_tile : Tile = parent.tiles.get_children().pick_random()
+			coordinates = random_tile.coordinates
 		
-		elif parent.current_tile.coordinates.x == 0:
-			random_direction_list.remove_at(2)
 		
-		elif parent.current_tile.coordinates.x == parent.row_limit:
-			random_direction_list.remove_at(3)
-		
-		SignalBus.move_enemy.emit(parent, random_direction_list.pick_random(),parent.row_limit,parent.col_limit)
+		SignalBus.send_actor_to_tile.emit(parent, coordinates, parent.row_limit, parent.col_limit)
 		time_to_shoot += 1
 		parent.timer.wait_time = timer_wait
 		parent.timer.start()

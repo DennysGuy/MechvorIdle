@@ -22,7 +22,7 @@ func exit() -> void:
 	pass
 
 func process_input(_event: InputEvent) -> State:
-	if Input.is_action_just_released("set_drone_destination"):
+	if Input.is_action_just_released(input_map):
 		return weapon_2_fire
 
 	if Input.is_action_just_pressed("fire_vulcans"):

@@ -33,7 +33,7 @@ func exit() -> void:
 	
 func process_input(_event: InputEvent) -> State:
 	
-	if Input.is_action_just_released("mine_asteroid"):
+	if Input.is_action_just_released(input_map):
 		return wide_sword_swing_fire
 	
 	if Input.is_action_just_pressed("fire_vulcans"):

@@ -39,6 +39,7 @@ func _ready() -> void:
 	SignalBus.update_shield_amount.connect(update_shield_amount)
 	SignalBus.refil_shield_gauge.connect(fill_shield_guage)
 	
+	SignalBus.send_actor_to_tile.connect(send_actor_to_tile)
 	SignalBus.show_damage_multiplier_label.connect(show_damage_multipler)
 	SignalBus.hide_damage_mulitplier_label.connect(hide_damage_multiplier)
 	SignalBus.spawn_enemies.connect(spawn_enemies)
@@ -77,7 +78,13 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 		return
    
 	translate_actor(grid_actor, adjacent_tile)
+
+func send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_limit : int, col_limit : int):
+	var tile_to_send : Tile = GridManager.get_tile(tiles, tile_coordinates)
 	
+	if not GridManager.tile_available(grid_actor, tile_to_send, row_limit, col_limit):
+		return
+	translate_actor(grid_actor, tile_to_send)
 #returns previous tile for convenience	
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var prev_tile : Tile = actor.current_tile

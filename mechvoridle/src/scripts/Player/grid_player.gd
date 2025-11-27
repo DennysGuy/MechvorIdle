@@ -269,6 +269,10 @@ var regen_started : bool = false
 @export var rifle_aim: Weapon2Aim
 @export var rifle_fire: Weapon2Fire
 
+@onready var sub_machine_gun_aim: SubMachineGunAim = $StateMachine/SubMachineGunAim
+@onready var sub_machine_gun_fire: SubMachineGunFire = $StateMachine/SubMachineGunFire
+
+
 @export var arm_rocket_aim: ArmRocketAim
 @export var arm_rocket_fire: ArmRocketFire
 
@@ -283,6 +287,10 @@ var regen_started : bool = false
 		0 : {
 			"Aim": rifle_aim,
 			"Fire": rifle_fire
+		},
+		1 : {
+			"Aim": sub_machine_gun_aim,
+			"Fire": sub_machine_gun_fire
 		}
 	}
 
@@ -436,13 +444,16 @@ func init_weapon_states() -> void:
 	var aim_state_right : WeaponState =  weapon_states["Sword"][GameManager.get_right_weapon().shop_index]["Aim"]
 	var fire_state_right : WeaponState = weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
 	aim_state_right.set_position_as_right()
+	aim_state_right.input_map = "mine_asteroid"
 	fire_state_right.set_position_as_right()
+
 	
 	idle.weapon_1_aim = aim_state_right
 	
 	var aim_state_left : WeaponState =  weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]
 	var fire_state_left : WeaponState = weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Fire"]
 	aim_state_left.set_position_as_left()
+	aim_state_left.input_map = "set_drone_destination"
 	fire_state_left.set_position_as_left()
 	
 	idle.weapon_2_aim = aim_state_left
