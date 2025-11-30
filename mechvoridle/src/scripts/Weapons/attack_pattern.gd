@@ -23,11 +23,11 @@ enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD, EN
 var patterns = {
 	ATTACK_PATTERNS.SINGLE : [Vector2(0,0)],
 	ATTACK_PATTERNS.ROW : [Vector2(0,0), Vector2(0,-1), Vector2(0,1)],
-	ATTACK_PATTERNS.COLUMN : [Vector2(-3,0), Vector2(-2,0), Vector2(-1,0), Vector2(0,0)],
+	ATTACK_PATTERNS.COLUMN : [Vector2(-4,0),Vector2(-3,0), Vector2(-2,0), Vector2(-1,0), Vector2(0,0)],
 	ATTACK_PATTERNS.ADJACENT : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1)],
 	ATTACK_PATTERNS.DIAGONAL : [Vector2(0,0), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
 	ATTACK_PATTERNS.SECTOR : [Vector2(0,0), Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
-	ATTACK_PATTERNS.ENEMY_COLUMN : [Vector2(-1,0),Vector2(-2,0),Vector2(-3,0), Vector2(-4,0), Vector2(-5,0)]
+	ATTACK_PATTERNS.ENEMY_COLUMN : [Vector2(-1,0),Vector2(-2,0),Vector2(-3,0), Vector2(-4,0), Vector2(-5,0), Vector2(-6,0)]
 }
 
 

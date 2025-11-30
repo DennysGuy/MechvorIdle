@@ -47,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.08726646, 3.1415927, 0), Vector3(-0.17453292, 0, 0)]
+"values": [Vector3(-0.08726646, 3.1415927, 0), Vector3(-0.24575989, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -59,7 +59,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(3, 2, 9.1), Vector3(7.614439, 2.8692682, 13.486912), Vector3(3, 6.5, 20)]
+"values": [Vector3(3, 2, 9.1), Vector3(7.614439, 2.8692682, 13.486912), Vector3(4.639879, 11.466827, 24.445843)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -413,134 +413,110 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("../../CanvasLayer/CountDownLabel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.048605442, 0, 0)]
+"values": [Vector2(-318, 154)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
+tracks/1/path = NodePath("../../CanvasLayer/CountDownLabel:text")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.06981317, 0, 0)]
+"update": 1,
+"values": ["3"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..:position")
+tracks/2/path = NodePath("../../CanvasLayer/CountDownLabel:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(3, 3.3, 18.8)]
+"values": [Vector2(297.00018, 51)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("..:rotation")
+tracks/3/path = NodePath("../../CanvasLayer/CountDownLabel:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector2(1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../CanvasLayer/CountDownLabel:position")
+tracks/4/path = NodePath("../../CanvasLayer/CountDownLabel:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-318, 154)]
+"values": [0.0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../CanvasLayer/CountDownLabel:text")
+tracks/5/path = NodePath("../../CanvasLayer/TransitionRect:color")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["3"]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../CanvasLayer/CountDownLabel:size")
+tracks/6/path = NodePath("../../CanvasLayer/Warning:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(297.00018, 51)]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../../CanvasLayer/CountDownLabel:scale")
+tracks/7/path = NodePath("..:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector3(4.639879, 8.663349, 22.93185)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../../CanvasLayer/CountDownLabel:rotation")
+tracks/8/path = NodePath(".:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("../../CanvasLayer/TransitionRect:color")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("../../CanvasLayer/Warning:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [Vector3(-0.2882063, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ttjqf"]
@@ -673,18 +649,18 @@ environment = SubResource("Environment_e6v0j")
 [node name="Tiles" type="Node" parent="."]
 
 [node name="Arena" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 3.121862, -0.44847298, 5.987222)
+transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 4.5497, -0.56998444, 7.4714828)
 material_override = SubResource("StandardMaterial3D_vf78d")
-size = Vector3(9.597794, 1, 16.35212)
+size = Vector3(12.608919, 1, 19.158918)
 
 [node name="CameraDefaultMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 3, 3.3, 18.8)
 
 [node name="Hinge" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3, 3.3, 18.8)
+transform = Transform3D(1, 0, 0, 0, 0.9702957, 0.2419219, 0, -0.2419219, 0.9702957, 4.639879, 8.663349, 22.93185)
 
 [node name="Camera" type="Camera3D" parent="Hinge"]
-transform = Transform3D(1, 0, 0, 0, 0.9975641, 0.06975647, 0, -0.06975647, 0.9975641, 0.048605442, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9587554, 0.284233, 0, -0.284233, 0.9587554, 0.048605442, -0.9899621, -0.24682617)
 rotation_order = 3
 fov = 40.0
 script = ExtResource("2_h1k12")

@@ -13,19 +13,20 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Always reset to base
-	transform = base_transform
-	
-	if shake_timer > 0.0:
-		shake_timer -= delta * shake_decay
-		
-		var offset := Vector3(
-			rng.randf_range(-shake_strength, shake_strength),
-			rng.randf_range(-shake_strength, shake_strength),
-			rng.randf_range(-shake_strength, shake_strength)
-		) * shake_timer
-		
-		# Apply shake on top of the base transform
-		transform.origin += offset
+	#transform = base_transform
+	#
+	#if shake_timer > 0.0:
+		#shake_timer -= delta * shake_decay
+		#
+		#var offset := Vector3(
+			#rng.randf_range(-shake_strength, shake_strength),
+			#rng.randf_range(-shake_strength, shake_strength),
+			#rng.randf_range(-shake_strength, shake_strength)
+		#) * shake_timer
+		#
+		## Apply shake on top of the base transform
+		#transform.origin += offset
+	pass
 
 func start_shake(duration: float = 0.5) -> void:
 	shake_timer = duration

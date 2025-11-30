@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_sx0md")
-target_offset = Vector2(4, 0)
+target_offset = Vector2(5, 0)
 direction = 1
 metadata/_custom_type_script = "uid://6cacw0wqd6ts"

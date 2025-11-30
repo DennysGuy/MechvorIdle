@@ -14,11 +14,12 @@ list of random tile configs for mini rockets
 
 '''
 var fall_configs := [
-	[Vector2(4,0),Vector2(4,1)],
-	[Vector2(4,0),Vector2(4,2)],
-	[Vector2(4,1),Vector2(4,2)],
-	[Vector2(4,0),Vector2(4,1),Vector2(4,2)],
-	[Vector2(4,0),Vector2(4,1),Vector2(4,2)]
+	[Vector2(GridManager.PLAYER_ROW,0),Vector2(GridManager.PLAYER_ROW,1), Vector2(GridManager.PLAYER_ROW,3)],
+	[Vector2(GridManager.PLAYER_ROW,0),Vector2(GridManager.PLAYER_ROW,2), Vector2(GridManager.PLAYER_ROW,1)],
+	[Vector2(GridManager.PLAYER_ROW,1),Vector2(GridManager.PLAYER_ROW,2),Vector2(GridManager.PLAYER_ROW,3)],
+	[Vector2(GridManager.PLAYER_ROW,0),Vector2(GridManager.PLAYER_ROW,1),Vector2(GridManager.PLAYER_ROW,2),Vector2(GridManager.PLAYER_ROW,3)],
+	[Vector2(GridManager.PLAYER_ROW,0),Vector2(GridManager.PLAYER_ROW,1),Vector2(GridManager.PLAYER_ROW,2),Vector2(GridManager.PLAYER_ROW,3)],
+	[Vector2(GridManager.PLAYER_ROW,0),Vector2(GridManager.PLAYER_ROW,1),Vector2(GridManager.PLAYER_ROW,2),Vector2(GridManager.PLAYER_ROW,3)]
 ]
 
 

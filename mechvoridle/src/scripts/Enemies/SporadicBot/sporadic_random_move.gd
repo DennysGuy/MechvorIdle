@@ -29,7 +29,7 @@ func enter() -> void:
 		var rand_num : int = randi_range(0,100)
 		if rand_num <= 75:
 			print("HEY PLAYA")
-			coordinates = Vector2(randi_range(0,3), GridManager.player.current_tile.coordinates.y)
+			coordinates = Vector2(randi_range(0,4), GridManager.player.current_tile.coordinates.y)
 			print("THESE ARE MY NEW COORDS: %s" % [coordinates] )
 		else:
 			var random_tile : Tile = parent.tiles.get_children().pick_random()

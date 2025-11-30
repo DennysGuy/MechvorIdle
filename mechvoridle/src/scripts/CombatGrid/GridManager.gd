@@ -1,8 +1,9 @@
 extends Node
 
-const MAX_ROWS : int = 5
-const MAX_COLUMNS : int = 3
+const MAX_ROWS : int = 6
+const MAX_COLUMNS : int = 4
 const MAX_WAVES : int = 10
+const PLAYER_ROW : int = 5
 var current_wave : int = -1
 
 var player : GridPlayer
@@ -41,7 +42,7 @@ func init_grid(tiles : Node) -> void:
 			else: 
 				y_pos = 0
 			
-			if row == 4:
+			if row == PLAYER_ROW:
 				new_tile.set_owner_as_player()
 			else:
 				new_tile.set_owner_as_enemy()
@@ -51,6 +52,7 @@ func init_grid(tiles : Node) -> void:
 			tiles.add_child(new_tile)
 
 	print(tiles.get_children().size())
+
 
 func get_tile(tiles : Node, coordinates : Vector2) -> Tile:
 	
@@ -71,7 +73,7 @@ func get_tile(tiles : Node, coordinates : Vector2) -> Tile:
 
 func spawn_player(tiles : Node) -> void:
 	var grid_player : GridPlayer = preload("uid://lam3j4dmw2xs").instantiate()
-	var starting_tile : Tile = get_tile(tiles, Vector2(4,1))
+	var starting_tile : Tile = get_tile(tiles, Vector2(5,1))
 	grid_player.global_position = starting_tile.marker_3d.global_position
 	player = grid_player
 	starting_tile.occupant = player
@@ -205,7 +207,7 @@ var waves = [
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1),
+			"coordinates": Vector2(1,3),
 			"is_slave": false,
 			"is_boss": false
 		}
@@ -229,19 +231,19 @@ var waves = [
 	[
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,0),
+			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1),
+			"coordinates": Vector2(1,2),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true),
-			"coordinates": Vector2(0,2),
+			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false
 		}
@@ -249,7 +251,7 @@ var waves = [
 	[
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,1),
+			"coordinates": Vector2(2,2),
 			"is_slave": false,
 			"is_boss": false
 		},
@@ -271,40 +273,13 @@ var waves = [
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,2),
+			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-		
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": HEALER_BOT.duplicate(true), 
-			"coordinates": Vector2(0,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,0),
 			"is_slave": false,
 			"is_boss": false
 		},
@@ -325,25 +300,52 @@ var waves = [
 		},
 		{
 			"enemy": HEALER_BOT.duplicate(true), 
-			"coordinates": Vector2(0,2),
+			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,0),
+			"coordinates": Vector2(1,1),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(3,0),
+			"coordinates": Vector2(2,2),
+			"is_slave": false,
+			"is_boss": false
+		},
+		
+	],
+	[
+		{
+			"enemy": TURRET_ENEMY.duplicate(true), 
+			"coordinates": Vector2(0,2),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": HEALER_BOT.duplicate(true), 
+			"coordinates": Vector2(0,0),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": SPORADIC_ENEMY.duplicate(true),
+			"coordinates": Vector2(1,3),
 			"is_slave": false,
 			"is_boss": false
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,0),
+			"coordinates": Vector2(3,1),
+			"is_slave": false,
+			"is_boss": false
+		},
+		{
+			"enemy": SWORD_BOT.duplicate(true), 
+			"coordinates": Vector2(2,1),
 			"is_slave": true,
 			"is_boss": false
 		},
@@ -410,7 +412,6 @@ var boss_mini_waves = [
 		}
 	]
 ]
-
 
 func reset_combat() -> void:
 	current_wave = -1;

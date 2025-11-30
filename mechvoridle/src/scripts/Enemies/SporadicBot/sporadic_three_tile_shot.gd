@@ -15,7 +15,7 @@ func enter() -> void:
 		SignalBus.move_actor_to_tile.emit(parent, initial_tile)
 
 	# Determine vertical path (current y → 2)
-	var target_y : int = 2
+	var target_y : int = 3
 	var start_y : int = parent.current_tile.coordinates.y
 
 	for y in range(start_y, target_y + 1):

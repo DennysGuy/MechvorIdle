@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_psian")
-target_offset = Vector2(4, 0)
+target_offset = Vector2(5, 0)
 direction = -1
 attack_type = 1
 metadata/_custom_type_script = "uid://6cacw0wqd6ts"
