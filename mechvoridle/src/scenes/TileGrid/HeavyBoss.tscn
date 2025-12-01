@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=4 uid="uid://dolkqjjmpal6f"]
+[gd_scene load_steps=113 format=4 uid="uid://dolkqjjmpal6f"]
 
 [ext_resource type="Script" uid="uid://b2wdvidmgl1nm" path="res://src/scripts/Enemies/Bosses/HeavyBoss/heavy_boss.gd" id="1_q43lp"]
 [ext_resource type="Resource" uid="uid://csktvgo4f04nb" path="res://src/resources/mechcomponents/weapons/rifles/BossArmCannon.tres" id="2_1oodm"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://psempt073jce" path="res://src/scenes/TileGrid/Shield.tscn" id="12_3o55o"]
 [ext_resource type="Script" uid="uid://bnqfnufsf1e6n" path="res://src/scripts/Enemies/Bosses/HeavyBoss/death.gd" id="13_8l5xi"]
 [ext_resource type="Script" uid="uid://chld0scb15b3i" path="res://src/scripts/Enemies/Bosses/HeavyBoss/wait.gd" id="14_dlgip"]
+[ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="17_w3vgj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g054x"]
 resource_name = "material_0"
@@ -4443,12 +4444,13 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_1oodm"]
 viewport_path = NodePath("EnemyHPLabel")
 
-[node name="HeavyBoss" type="Node3D" node_paths=PackedStringArray("state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label", "death")]
+[node name="HeavyBoss" type="Node3D" node_paths=PackedStringArray("state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "death")]
 script = ExtResource("1_q43lp")
 cannon_rifle = ExtResource("2_1oodm")
 state_machine = NodePath("StateMachine")
 health = 1300
 max_health = 1300
+lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
@@ -4832,6 +4834,10 @@ theme_override_fonts/font = ExtResource("12_1tfa8")
 theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
+
+[node name="CrossHair" parent="." instance=ExtResource("17_w3vgj")]
+transform = Transform3D(1, 0, 0, 0, 0.92590356, 0.37776, 0, -0.37776, 0.92590356, -0.096421, 3.189804, 1.519511)
+visible = false
 
 [connection signal="timeout" from="PhaseTimer" to="." method="_on_phase_timer_timeout"]
 [connection signal="timeout" from="RocketLaunchTimer" to="." method="_on_rocket_launch_timer_timeout"]

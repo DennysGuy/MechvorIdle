@@ -13,6 +13,8 @@ var is_attacking : bool = false
 @export var max_health : int 
 @export var tiles : Node
 @export var weapon_spout : Marker3D
+@export var lock_on_cross_hair : LockOnCrossHair
+
 
 @export var damage_label_marker : Marker3D
 @export var hit_flash_animation_player : AnimationPlayer
@@ -53,14 +55,12 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		
 		state_machine.change_state(death)
 	else:
-		if not is_vulcan and hurt and not is_attacking:
+		if not is_vulcan and hurt:
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:
 		SignalBus.start_healing.emit()
-	
-		
-	
+
 func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
 	var projectile : GridProjectile = weapon.projectile.instantiate()
 	projectile.global_position = selected_weapon_spout.global_position

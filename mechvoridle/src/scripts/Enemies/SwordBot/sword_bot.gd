@@ -14,7 +14,6 @@ var is_slave : bool = false
 @export var attack_state : State
 @export var idle_state : State
 
-
 '''
 signals needed 
 - slave follow (pursue)

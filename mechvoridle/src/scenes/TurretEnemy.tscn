@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://bdavl4sbcomxk"]
+[gd_scene load_steps=54 format=4 uid="uid://bdavl4sbcomxk"]
 
 [ext_resource type="Texture2D" uid="uid://crqc42bpuql37" path="res://assets/graphics/TurretBot/TurretEnemy_0.png" id="1_1ibgu"]
 [ext_resource type="Script" uid="uid://b45s7l4f3in4f" path="res://src/scripts/Enemies/TurretBot/turret_drone.gd" id="1_1osyg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="9_hlvsc"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="10_rrs0b"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="11_xudhj"]
+[ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="12_boe6v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qtrn"]
 resource_name = "Material_0"
@@ -2940,7 +2941,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_boe6v")
 }
 
-[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
 weapon = ExtResource("2_7lw6e")
@@ -2951,6 +2952,7 @@ state_machine = NodePath("StateMachine")
 health = 150
 max_health = 150
 weapon_spout = NodePath("CanonSpout")
+lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
@@ -3268,5 +3270,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4666595, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_boe6v")
 }
+
+[node name="CrossHair" parent="." instance=ExtResource("12_boe6v")]
+transform = Transform3D(1, 0, 0, 0, 0.9182668, 0.39596224, 0, -0.39596224, 0.9182668, 0.061038733, 1.9748819, 1.3071463)
+visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

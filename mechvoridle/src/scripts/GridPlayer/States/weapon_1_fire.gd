@@ -7,7 +7,7 @@ func enter() -> void:
 	GameManager.can_fire_weapon_1 = false
 	SignalBus.hide_damage_mulitplier_label.emit()
 	var previous_tile = parent.current_tile
-	
+
 	dash_attack()
 	if is_right_position():
 		animation_name = "WideSwordSwing"
@@ -21,26 +21,30 @@ func enter() -> void:
 	SignalBus.move_actor_to_tile.emit(parent, previous_tile)
 	parent.state_machine.change_state(idle)
 
-
 func dash_attack() -> void:
-	if GridManager.targeted_tiles.is_empty():
-		return 
 		
-	var tile_to : Tile = GridManager.get_tile(parent.tiles, GridManager.targeted_tiles[0].coordinates + Vector2(1,0))
+	var tile_to : Tile
+	if !GridManager.locked_on_enemies.is_empty():
+		var targeted_enemy : GridActor = GridManager.locked_on_enemies[0]
+		tile_to = GridManager.get_tile(parent.tiles,targeted_enemy.current_tile.coordinates + Vector2(1,0))
+		targeted_enemy.damage_actor(weapon_component.damage)
+	else:
+		tile_to = GridManager.get_tile(parent.tiles, Vector2(1, parent.current_tile.coordinates.y))
+		var get_tile_in_front : Tile = GridManager.get_tile(parent.tiles,Vector2(0, parent.current_tile.coordinates.y))
+		if get_tile_in_front.occupant:
+			get_tile_in_front.occupant.damage_actor(weapon_component.damage)
 	var sfx := weapon_component.primary_projectile_discharge
 	SfxManager.play_sfx(sfx)
-	weapon_component.attack_enemy(parent, parent.tiles, parent.scanned_attack_pattern)
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
 	
-	GridManager.clear_targeted_tiles()
+	#GridManager.clear_targeted_tiles()
 		
 func exit() -> void:
 	parent.can_move = true
 	parent.can_fire_vulcans = true
 	weapon_component.damage = weapon_component.base_damage
 	SignalBus.issue_weapon_attack.emit(0)
-	
-	pass
+	GridManager.remove_all_enemies_from_locked_on_list()
 
 func process_input(_event: InputEvent) -> State:
 	

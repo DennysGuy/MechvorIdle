@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dcrmt7013v31a"]
+[gd_scene load_steps=31 format=4 uid="uid://dcrmt7013v31a"]
 
 [ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
 [ext_resource type="Texture2D" uid="uid://ohxdxxup6nsp" path="res://assets/graphics/HealerBot/HealerBot.png" id="2_223we"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://y02edyq550l5" path="res://src/scripts/Enemies/die.gd" id="7_223we"]
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="8_223we"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="10_rshui"]
+[ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="11_3jje7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67sei"]
 resource_name = "Material_0"
@@ -1197,7 +1198,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_3jje7")
 }
 
-[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_8l3vx")
 heal_state = NodePath("StateMachine/Heal")
 spawn_rings = NodePath("SpawnRings")
@@ -1206,6 +1207,7 @@ hurt_time = 0.625
 state_machine = NodePath("StateMachine")
 health = 135
 max_health = 135
+lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
@@ -1378,3 +1380,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.977395, 0)
 
 [node name="SpawnRing3" parent="SpawnRings" instance=ExtResource("10_rshui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.951536, 0)
+
+[node name="CrossHair" parent="." instance=ExtResource("11_3jje7")]
+transform = Transform3D(1, 0, 0, 0, 0.84442145, 0.5356794, 0, -0.5356794, 0.84442145, 0.0029376745, 2.408346, 0.8631059)
+visible = false

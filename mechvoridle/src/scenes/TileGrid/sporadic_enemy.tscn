@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=4 uid="uid://b7cur5tqfwumt"]
+[gd_scene load_steps=45 format=4 uid="uid://b7cur5tqfwumt"]
 
 [ext_resource type="Script" uid="uid://dlen8t2tbhcym" path="res://src/scripts/CombatGrid/sporadic_enemy.gd" id="1_7h52i"]
 [ext_resource type="Resource" uid="uid://cjuoawfjc576u" path="res://src/resources/mechcomponents/weapons/rifles/EnemyShockWave.tres" id="2_e7lhk"]
 [ext_resource type="Texture2D" uid="uid://q26r1fmy5xkq" path="res://assets/graphics/SporadicBot/SporadicBot_0.png" id="4_00dvy"]
+[ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="4_05hjc"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="4_oou2j"]
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="5_ffajh"]
 [ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="5_ptoct"]
@@ -2092,9 +2093,9 @@ _data = {
 &"SpawnIn": SubResource("Animation_i65h8")
 }
 
-[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "state_machine", "weapon_spout", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_7h52i")
-row_limit = 3
+row_limit = 4
 weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
 drop_chance = 10
@@ -2102,6 +2103,7 @@ state_machine = NodePath("StateMachine")
 health = 110
 max_health = 110
 weapon_spout = NodePath("LaserSpout")
+lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
@@ -2421,3 +2423,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.616596, 0)
 
 [node name="SpawnRing3" parent="SpawnRings" instance=ExtResource("12_3sskw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.06513, 0)
+
+[node name="CrossHair" parent="." instance=ExtResource("4_05hjc")]
+transform = Transform3D(1, 0, 0, 0, 0.9244329, 0.38134468, 0, -0.38134468, 0.9244329, 0.0640592, 1.9682589, 0.58665085)
+visible = false

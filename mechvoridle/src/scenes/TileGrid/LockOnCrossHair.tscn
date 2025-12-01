@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwudukx5yh7tk"]
+
+[ext_resource type="Texture2D" uid="uid://dgfikyo3eoplk" path="res://assets/graphics/UI/LockOnTargetEnlarged.png" id="1_55y5p"]
+[ext_resource type="Script" uid="uid://gi6h0cxlg3yn" path="res://src/scripts/CombatGrid/lock_on_cross_hair.gd" id="2_57hl4"]
+
+[node name="CrossHair" type="Sprite3D"]
+texture = ExtResource("1_55y5p")
+script = ExtResource("2_57hl4")

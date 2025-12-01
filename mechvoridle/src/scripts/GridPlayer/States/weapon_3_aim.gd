@@ -1,10 +1,10 @@
 class_name ArmRocketAim extends WeaponState
 
 func enter() -> void:
-	pass
-
+	parent.current_weapon_scanning = weapon_component
+	
 func exit() -> void:
-	pass
+	parent.current_weapon_scanning = null
 
 func process_input(_event: InputEvent) -> State:
 	return null

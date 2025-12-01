@@ -12,7 +12,6 @@ const PLAYER_TILE_TEXTURE = preload("uid://sv2tsq6a6wed")
 const TILE_TARGETED_TEXTURE = preload("uid://ccq0g4ghyym3e")
 const ENEMY_TILE_TARGETED_TEXTURE = preload("uid://css807ne816r2")
 
-
 @onready var cuboid: MeshInstance3D = $blockbench_export/cuboid
 
 enum OWNER {PLAYER, ENEMY}

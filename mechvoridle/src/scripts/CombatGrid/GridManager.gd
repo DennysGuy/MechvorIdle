@@ -10,6 +10,7 @@ var player : GridPlayer
 var enemies : Array[GridEnemy] = []
 var boss_waves_to_beat : int = 0
 var targeted_tiles : Array[Tile] = []
+var locked_on_enemies : Array[GridActor] = []
 
 const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
 const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
@@ -53,7 +54,6 @@ func init_grid(tiles : Node) -> void:
 
 	print(tiles.get_children().size())
 
-
 func get_tile(tiles : Node, coordinates : Vector2) -> Tile:
 	
 	if coordinates.x < 0 or coordinates.x > MAX_ROWS-1:
@@ -90,18 +90,6 @@ var boss_spawn : Array = [
 		}
 	]
 
-#func spawn_test_enemy(tiles : Node) -> void:
-	#
-	#var spor_enemy = preload("uid://b7cur5tqfwumt")
-	#spawn_enemy(spor_enemy,Vector2(1,1), tiles)
-#
-	#var turret_enemy1 = preload("uid://dcrmt7013v31a")
-	#spawn_enemy(turret_enemy1,Vector2(0,0), tiles)
-	#
-	#var healer_bot = preload("uid://bdavl4sbcomxk")
-	#spawn_enemy(healer_bot,Vector2(0,2), tiles)
-
-
 func check_wave_status() -> void:
 	if enemies.is_empty() and !GameManager.timed_out and !GameManager.in_boss_fight:
 		SignalBus.spawn_next_wave.emit()
@@ -135,6 +123,32 @@ func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : in
 	
 	return true
 
+func add_enemy_to_locked_on_list(enemy : GridActor) -> void:
+	var list_has_enemy : bool = locked_on_enemies.has(enemy)
+	
+	if !list_has_enemy:
+		enemy.lock_on_cross_hair.show()
+		locked_on_enemies.append(enemy)
+		
+	print("THIS IS LOCKED ON LIST AFTER ADD: %s" % [locked_on_enemies])
+
+## TODO Will need to call this when the enemy dies too
+func remove_enemy_from_locked_on_list(enemy : GridActor) -> void:
+	if enemy:
+		enemy.lock_on_cross_hair.hide()
+		locked_on_enemies.erase(enemy)
+		
+	print("THIS IS LOCKED ON LIST AFTER ERASE: %s" % [locked_on_enemies])
+
+func remove_all_enemies_from_locked_on_list() -> void:
+	for enemy in locked_on_enemies:
+		if is_instance_valid(enemy):
+			remove_enemy_from_locked_on_list(enemy)
+		
+	if !locked_on_enemies.is_empty():
+		locked_on_enemies.clear()
+	
+	print("THIS IS LOCKED ON LIST AFTER ERASE ALL: %s" % [locked_on_enemies])
 
 func clear_targeted_tiles() -> void:
 	for tile in targeted_tiles:
@@ -142,14 +156,12 @@ func clear_targeted_tiles() -> void:
 	
 	targeted_tiles.clear()
 
-
 func set_mech_as_light() -> void:
 	GameManager.owned_mech_components["Head"] = preload("uid://b7cbnbqyrpcv1")
 	GameManager.owned_mech_components["Torso"] = preload("uid://d2s3tleah2tvp")
 	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
 	GameManager.owned_mech_components["Legs"] = preload("uid://cpmb51aj71fpr")
 	
-
 func set_mech_as_heavy() -> void:
 	GameManager.owned_mech_components["Head"] = preload("uid://cmbchudcdtn2r")
 	GameManager.owned_mech_components["Torso"] = preload("uid://bjr7icnj7rnhl")
@@ -168,10 +180,13 @@ func set_mech_as_standard_light() -> void:
 	GameManager.owned_mech_components["Arms"] = preload("uid://cjuugvmjr36lj")
 	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
 
+func set_mech_as_standard() -> void:
+	pass
+
 var waves = [
 	[
 		{
-			"enemy" : TURRET_ENEMY.duplicate(true),
+			"enemy" : SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,1),
 			"is_slave": false,
 			"is_boss": false
@@ -180,7 +195,7 @@ var waves = [
 	[
 		{
 			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,2),
+			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false
 		},
@@ -198,7 +213,6 @@ var waves = [
 			"is_slave": false,
 			"is_boss": false
 		},
-
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(0,2),
@@ -211,10 +225,8 @@ var waves = [
 			"is_slave": false,
 			"is_boss": false
 		}
-		
 	],
 	[
-		
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,2),
@@ -350,7 +362,6 @@ var waves = [
 			"is_boss": false
 		},
 	],
-	
 ]
 
 var boss_mini_waves = [
@@ -368,11 +379,10 @@ var boss_mini_waves = [
 			"is_boss": false
 		}
 	],
-	
 	[
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true), 
-			"coordinates": Vector2(1,0),
+			"coordinates": Vector2(2,3),
 			"is_slave": false,
 			"is_boss": false
 		},

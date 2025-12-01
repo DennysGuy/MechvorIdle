@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_nfncl")
-target_offset = Vector2(3, 0)
-attack_pattern = 1
+target_offset = Vector2(4, 0)
+attack_pattern = 2
 direction = -1
-can_shift = true
-pass_through = true
+lock_on_limit = 1
+lock_on_distance = Vector2(0, 2)
+lock_on = true
 impact_sfx = ExtResource("1_ysgve")
 metadata/_custom_type_script = "uid://6cacw0wqd6ts"

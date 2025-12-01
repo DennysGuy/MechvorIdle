@@ -12,7 +12,7 @@ func enter() -> void:
 	parent.animation_player.play(animation_name)
 	#We will handle aim functionailty 
 func exit() -> void:
-	pass
+	parent.current_weapon_scanning = null
 
 func process_input(_event: InputEvent) -> State:
 	return null

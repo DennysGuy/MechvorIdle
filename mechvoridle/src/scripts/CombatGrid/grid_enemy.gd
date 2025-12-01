@@ -3,6 +3,7 @@ class_name GridEnemy extends GridActor
 @export var weapon : MechWeapon
 @export var spawn_rings : Node3D
 
+
 @export var drop_chance : int
 
 
@@ -25,6 +26,9 @@ func heal() -> void:
 	
 	if health >= max_health:
 		health = max_health
+
+func _exit_tree() -> void:
+	GridManager.remove_enemy_from_locked_on_list(self)
 
 func apply_timer_consequences() -> void:
 	damage_actor(1000)

@@ -4,11 +4,9 @@ class_name SporadicEnemy extends GridEnemy
 
 @onready var animation_player: AnimationPlayer = $zaper2/AnimationPlayer
 
-
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 
 @onready var laser_spout: Marker3D = $LaserSpout
-
 @onready var timer: Timer = $Timer
 
 var laser_count_down : int = 0
@@ -18,17 +16,14 @@ func _ready() -> void:
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	health_label.text = str(health)+"/"+str(max_health)
 	state_machine.process_frame(delta)
 
-
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 	
-
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
@@ -40,7 +35,7 @@ func _exit_tree() -> void:
 	GridManager.check_wave_status()
 
 func play_shock_shot() -> void:
-	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST)
+	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST, -2)
 
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()

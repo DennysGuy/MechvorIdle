@@ -11,7 +11,7 @@ var player : GridPlayer
 
 @onready var camera: Camera3D = $Camera
 
-var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vector2(4,2)]
+var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vector2(5,2),Vector2(5,3)]
 @onready var supply_crate_timer: Timer = $SupplyCrateTimer
 
 @onready var damage_multiplier_label: RichTextLabel = $CanvasLayer/DamageMultiplierLabel
@@ -22,6 +22,8 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(4,0), Vector2(4,1), Vect
 @onready var transition_player: AnimationPlayer = $TransitionPlayer
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,12 +65,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-		
-
-
+	
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
 	move_actor(GridManager.player, direction, -1, -1, is_dash_attack)
-	
+	player_check_if_lock_on_valid()
 	
 func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> void:
 	var new_coords : Vector2 = grid_actor.current_tile.coordinates + direction
@@ -85,7 +85,7 @@ func send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_
 	if not GridManager.tile_available(grid_actor, tile_to_send, row_limit, col_limit):
 		return
 	translate_actor(grid_actor, tile_to_send)
-#returns previous tile for convenience	
+
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var prev_tile : Tile = actor.current_tile
 	var next_tile : Tile = adjacent_tile
@@ -97,6 +97,8 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	if next_tile and next_tile.occupant == null:
 		next_tile.occupant = actor
 	if adjacent_tile:
+		if not actor is GridPlayer:
+			check_if_lock_on_valid(actor)
 		var tween : Tween = get_tree().create_tween()
 		tween.tween_property(actor,"global_position", adjacent_tile.marker_3d.global_position, 0.15)
 		tween.set_trans(Tween.TRANS_CUBIC)
@@ -112,6 +114,25 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	
 	return prev_tile
 
+func check_if_lock_on_valid(enemy : GridActor) -> void:
+	var distance_diff : float = abs(GridManager.player.current_tile.coordinates.y - enemy.current_tile.coordinates.y)
+	print("THIS IS DISTANCE DIFF FROM PLAYER TO ENEMY: %s" % [distance_diff])
+	var current_weapon_scanning : MechWeapon = GridManager.player.current_weapon_scanning
+	if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
+		GridManager.remove_enemy_from_locked_on_list(enemy)
+
+func player_check_if_lock_on_valid() -> void:
+	var locked_on_enemies : Array[GridActor] = GridManager.locked_on_enemies
+	
+	if locked_on_enemies.is_empty():
+		return
+	
+	for enemy in locked_on_enemies:
+		var distance_diff : float = abs(GridManager.player.current_tile.coordinates.y - enemy.current_tile.coordinates.y)
+		print("THIS IS DISTANCE DIFF FROM PLAYER TO ENEMY: %s" % [distance_diff])
+		var current_weapon_scanning : MechWeapon = GridManager.player.current_weapon_scanning
+		if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
+			GridManager.remove_enemy_from_locked_on_list(enemy)
 
 func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
 	var enemy_to_spawn : GridActor = enemy.instantiate()
@@ -256,7 +277,7 @@ func _on_supply_crate_timer_timeout() -> void:
 func spawn_health_crate(drop_chance : int) -> void:
 	var random_num : int = randi_range(0,100)
 	
-	if random_num <= drop_chance and GridManager.player.health < GridManager.player.max_health:
+	if random_num <= drop_chance and GridManager.player.health < GridManager.player.max_health-50:
 		
 		var tile : Tile = GridManager.get_tile(tiles, player_tile_coordinates.pick_random())
 		var health_crate : HealthCrate = preload("uid://dm63oush42xtx").instantiate()

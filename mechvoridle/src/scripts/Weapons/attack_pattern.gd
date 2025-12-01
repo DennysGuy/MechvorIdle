@@ -7,18 +7,16 @@ class_name AttackPattern extends Resource
 target off is really just an offset from the player's position (this might be able to be altered with up/down key)
 so for instance, if target offset is [0,1] and the actor 
 is player and their cur position is [4,1] their direction is negative and so the targeted tile will be at [4,0]
-
 '''
-
 @export var target_offset : Vector2 = Vector2.ZERO
-
 @export_enum("single","row", "column", "adjacent", "diagonal","sector","board", "enemy_column") var attack_pattern : int
-
 @export_enum("player:-1", "enemy:1") var direction : int
 
 enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD, ENEMY_COLUMN}
 
 @export var can_shift : bool
+@export var lock_on_limit : int = 0
+@export var lock_on_distance : Vector2 
 
 var patterns = {
 	ATTACK_PATTERNS.SINGLE : [Vector2(0,0)],
@@ -30,18 +28,16 @@ var patterns = {
 	ATTACK_PATTERNS.ENEMY_COLUMN : [Vector2(-1,0),Vector2(-2,0),Vector2(-3,0), Vector2(-4,0), Vector2(-5,0), Vector2(-6,0)]
 }
 
-
 @export_group("Other")
 @export var lock_on : bool = false
 @export var pass_through : bool = false
 @export var impact_sfx : AudioStream
 @export_enum("hit_scan", "projectile","dash") var attack_type : int
 
-
-func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector2 = Vector2.ZERO) -> Vector2:
-	
+func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector2 = Vector2.ZERO) -> Vector2:	
 	var actor_tile : Tile = actor.current_tile
 	var final_targeted_tile : Vector2
+	
 	if new_target_offset != Vector2.ZERO:
 		final_targeted_tile = actor_tile.coordinates + (direction * new_target_offset)
 	else:
@@ -55,10 +51,9 @@ func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector
 	return final_targeted_tile
 
 func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
-
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
-	
 	var offset_list : Array
+	
 	if !new_attack_pattern.is_empty():
 		offset_list = new_attack_pattern
 	else:
@@ -75,9 +70,6 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 				selected_tile.set_enemy_targeted_overlay()
 			
 			if selected_tile.occupant:
-				print("HI I SEE YOU!")
-				print(selected_tile.coordinates)
-				print(selected_tile.occupant)
 				var enemy : GridActor = selected_tile.occupant
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY: #may need to refactor later for different types of attacks
 					if enemy is SwordBot:
@@ -92,11 +84,9 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 					SfxManager.play_sfx(impact_sfx)
 					enemy.damage_actor(damage, is_vulcan)
 					if !pass_through and !enemy.is_dead:
-						
 						break
 						
 				elif actor is GridEnemy or actor is GridBoss and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
-	
 					if enemy == GridManager.player and GridManager.player.shield_active:
 						SfxManager.play_sfx(SfxManager.FORCE_FIELD_IMPACT)
 						SignalBus.shake_camera.emit(0.3)
@@ -113,8 +103,6 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	return GridManager.get_tile(tiles, coordinates)
 	
-
-				
 func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_targeted_overlay : bool = true) -> Array:
 	
 	GridManager.clear_targeted_tiles()
@@ -138,14 +126,18 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_t
 			if set_targeted_overlay:
 				GridManager.targeted_tiles.append(selected_tile)
 				selected_tile.set_targeted_overlay()
-			
+							
 			if selected_tile.occupant:
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY:
+					if lock_on and selected_tile.occupant.can_hurt and !selected_tile.occupant.is_dead and GridManager.locked_on_enemies.size() < lock_on_limit:
+						GridManager.add_enemy_to_locked_on_list(selected_tile.occupant)
+						
 					if !pass_through:
 						break
+						
 				elif actor is GridEnemy and selected_tile.current_owner == selected_tile.OWNER.PLAYER:
 					if !pass_through:
 						break
-	#print(GridManager.targeted_tiles.size())
+
 	return new_offset_list
 	

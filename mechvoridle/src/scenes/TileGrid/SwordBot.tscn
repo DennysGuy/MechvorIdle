@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://df0aqkd6tb8o0"]
+[gd_scene load_steps=67 format=4 uid="uid://df0aqkd6tb8o0"]
 
 [ext_resource type="Script" uid="uid://jjad5qyel3ry" path="res://src/scripts/Enemies/SwordBot/sword_bot.gd" id="1_mft84"]
 [ext_resource type="Texture2D" uid="uid://qdpc8c25uy38" path="res://assets/graphics/Models/SwordBot/SwordBot_0.png" id="2_1j7qk"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="12_58swo"]
 [ext_resource type="Script" uid="uid://sqk34dbd7j2o" path="res://src/scripts/Enemies/SwordBot/stagger.gd" id="13_ku2yv"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="14_jttd7"]
+[ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="15_1p4t3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1p3d"]
 resource_name = "material_0"
@@ -1701,7 +1702,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_kxq0i")
 }
 
-[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "state_machine", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_mft84")
 stagger_state = NodePath("StateMachine/Stagger")
 pursue_state = NodePath("StateMachine/Pursue")
@@ -1712,6 +1713,7 @@ drop_chance = 12
 state_machine = NodePath("StateMachine")
 health = 50
 max_health = 50
+lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
 health_label = NodePath("EnemyHPLabel/HealthLabel")
@@ -1928,3 +1930,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0340958, 0.24179867)
 libraries = {
 &"": SubResource("AnimationLibrary_1p4t3")
 }
+
+[node name="CrossHair" parent="." instance=ExtResource("15_1p4t3")]
+transform = Transform3D(1, 0, 0, 0, 0.89111745, 0.45377278, 0, -0.45377278, 0.89111745, -0.03739786, 1.5253754, 1.5350461)
+visible = false

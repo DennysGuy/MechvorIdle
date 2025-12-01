@@ -116,9 +116,13 @@ class_name GridPlayer extends GridActor
 @onready var sniper_rifle_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/SniperRifle2
 
 var scanned_attack_pattern : Array
+var current_weapon_scanning : MechWeapon
+
 var can_use_shield : bool = true
 
 var regen_started : bool = false
+
+
 
 @onready var delay_timer: Timer = $DelayTimer
 @onready var charge_up_timer: Timer = $ChargeUpTimer
@@ -339,6 +343,7 @@ func _process(delta: float) -> void:
 			SignalBus.move_player.emit(Vector2.DOWN, false)
 			can_move = false
 			await get_tree().create_timer(true_wait_time).timeout
+			
 			can_move = true
 			GridManager.clear_targeted_tiles()
 	
@@ -382,11 +387,13 @@ func _process(delta: float) -> void:
 						shield_cool_down_timer.wait_time = 5.4
 					shield_cool_down_timer.start()
 					start_shield_cool_down = true
+					
 	state_machine.process_frame(delta)
+
+
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
