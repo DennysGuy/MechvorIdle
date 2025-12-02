@@ -855,6 +855,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -884,6 +885,14 @@ text = "WARNING"
 stream = ExtResource("14_po36e")
 volume_db = 2.0
 autoplay = true
+
+[node name="NextDamageLabel" type="Label" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 76.0
+offset_right = 245.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("9_02ps3")
+text = "Next DMG: 1.0x"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")

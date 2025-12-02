@@ -4,7 +4,6 @@ class_name Weapon2Fire extends WeaponState
 
 func enter() -> void:
 	parent.can_move = false
-	
 	#GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
 	
 	if is_right_position():

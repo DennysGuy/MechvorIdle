@@ -17,6 +17,7 @@ var millisecond : float = 60
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.issue_weapon_attack.connect(start_cool_down_timer)
+	SignalBus.reduce_cooldown_value.connect(reduce_cooldown_value)
 	#GameManager.equip_rifle_left_sword_right()
 	match weapon_slot:
 		WEAPON_SLOT.WEAPON1:
@@ -87,3 +88,7 @@ func count_down_process(_delta : float) -> void:
 		on_cool_down = false
 	else:
 		cool_down_count.text = str(int(cool_down_wheel.value))
+
+func reduce_cooldown_value(value : int) -> void:
+	if on_cool_down:
+		cool_down_wheel.value -= value

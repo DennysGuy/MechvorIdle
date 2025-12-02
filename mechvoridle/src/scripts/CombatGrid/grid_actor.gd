@@ -3,7 +3,7 @@ class_name GridActor extends Node3D
 
 @export var current_tile : Tile
 @export var hurt_time : float
-const  WAIT_TIME : float = 0.2
+const  WAIT_TIME : float = 0.25
 
 @export var state_machine : StateMachine
 @export var can_move : bool = true
@@ -35,6 +35,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		return
 	
 	create_damage_label(value)
+	
 	if hit_flash_animation_player:
 		hit_flash_animation_player.play("HitFlash")
 	

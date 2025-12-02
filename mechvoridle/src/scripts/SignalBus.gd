@@ -319,7 +319,8 @@ signal move_player(direction : Vector2, is_dash_attack : bool)
 signal move_enemy(enemy : GridEnemy, direction : Vector2, row_limit : int, col_limit : int)
 @warning_ignore("unused_signal")
 signal send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_limit : int, col_limit : int)
-
+@warning_ignore("unused_signal")
+signal update_next_multiplier
 @warning_ignore("unused_signal")
 signal issue_weapon_attack(slot : int)
 @warning_ignore("unused_signal")
@@ -374,3 +375,5 @@ signal transition_win_screen
 signal transition_lose_screen
 @warning_ignore("unused_signal")
 signal spawn_health_crate(drop_chance : int)
+@warning_ignore("unused_signal")
+signal reduce_cooldown_value(value : int)

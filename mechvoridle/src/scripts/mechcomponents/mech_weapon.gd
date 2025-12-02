@@ -50,10 +50,14 @@ func get_weapon_class() -> String:
 			return ""
 
 func attack_enemy(actor : GridActor, tiles : Node, scanned_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
-	if crit_landed():
-		damage *= crit_damage
+	var true_damage := damage
+	if actor is GridPlayer:
+		true_damage *= GameManager.next_multiplier
 	
-	attack_pattern.issue_attack(actor, tiles, int(damage), scanned_attack_pattern, is_vulcan)
+	if crit_landed():
+		true_damage *= crit_damage
+	
+	attack_pattern.issue_attack(actor, tiles, int(true_damage), scanned_attack_pattern, is_vulcan)
 
 func crit_landed() -> bool:
 	var chance : float = crit_chance

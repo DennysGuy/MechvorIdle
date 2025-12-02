@@ -23698,12 +23698,17 @@ one_shot = true
 
 [node name="ChargeUpTimer" type="Timer" parent="."]
 
-[node name="Shield" parent="." instance=ExtResource("26_hpw55")]
-transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
-
 [node name="ShieldCoolDownTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
+
+[node name="ShieldBonusTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="Shield" parent="." instance=ExtResource("26_hpw55")]
+transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 1.4020683, 0)
 
 [node name="HitFlashPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../DamageLabelMarker")

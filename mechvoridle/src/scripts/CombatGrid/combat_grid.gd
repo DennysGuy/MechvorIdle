@@ -23,6 +23,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 
+@onready var next_damage_label: Label = $CanvasLayer/NextDamageLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,8 +51,8 @@ func _ready() -> void:
 	SignalBus.transition_lose_screen.connect(play_fade_to_lose)
 	
 	SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
-	
 	SignalBus.spawn_health_crate.connect(spawn_health_crate)
+	SignalBus.update_next_multiplier.connect(update_next_label)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -64,8 +65,12 @@ func _ready() -> void:
 	transition_player.play("FadeIn")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#print(GameManager.next_multiplier)
 	pass
-	
+
+func update_next_label() -> void:
+	next_damage_label.text = "Next DMG: %s" % [GameManager.next_multiplier]
+
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
 	move_actor(GridManager.player, direction, -1, -1, is_dash_attack)
 	player_check_if_lock_on_valid()

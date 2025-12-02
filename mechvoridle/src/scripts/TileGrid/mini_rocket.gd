@@ -28,7 +28,15 @@ func attack_tile() -> void:
 	if selected_tile.occupant and selected_tile.occupant == GridManager.player:
 		
 		if GridManager.player.shield_active:
-			GameManager.damage_shield(DAMAGE)
+			var true_damage := DAMAGE
+			var shield_bonus_time := GridManager.player.shield_bonus_time
+			var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, true_damage)
+					
+			if calculated_damage > 0:
+				true_damage = calculated_damage
+					
+			print("TRUE DAMAGE TO SHIELD: %s" % [true_damage])	
+			GameManager.damage_shield(true_damage)
 			wait_time = 0.3
 		else:
 			GridManager.player.damage_actor(DAMAGE)

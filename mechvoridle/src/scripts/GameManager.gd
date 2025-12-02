@@ -26,6 +26,9 @@ var current_health : int = total_health
 var shield_amount : float = 100
 var current_shield_amount : float = 100
 
+var next_multiplier : float = 1.0
+var perfect_count : int = 0
+
 var drone_selected
 var mining_time_elapsed : String
 var fight_time_elapsed : String
@@ -611,6 +614,41 @@ func damage_shield(amount : int) -> void:
 		GridManager.player.can_use_shield = false
 		
 	SignalBus.update_shield_amount.emit()
+	
+func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> int:
+	if shield_bonus_time >= 0.85:
+		print("PERFECT BLOCK!")
+		if perfect_count > 0:
+			next_multiplier += 1.0
+		else:
+			next_multiplier = 2.0
+		SignalBus.reduce_cooldown_value.emit(3.0)
+		perfect_count += 1
+		SignalBus.update_next_multiplier.emit()
+		return int(weapon_damage * 0.3)
+	elif shield_bonus_time >= 0.50:
+		print("GREAT BLOCK!")
+		perfect_count = 0
+		next_multiplier = 1.5
+		SignalBus.update_next_multiplier.emit()
+		SignalBus.reduce_cooldown_value.emit(2.0)
+		return int(weapon_damage * 0.5)
+	elif shield_bonus_time >= 0.10:
+		print("GOOD BLOCK!")
+		perfect_count = 0
+		next_multiplier = 1.2
+		SignalBus.update_next_multiplier.emit()
+		SignalBus.reduce_cooldown_value.emit(1.0)
+		return  int(weapon_damage * 0.75)
+	else:
+		next_multiplier = 1.0
+		SignalBus.update_next_multiplier.emit()
+	
+	return 0
+
+func reset_next_attack_multiplier() -> void:
+	GameManager.next_multiplier = 1.0
+	SignalBus.update_next_multiplier.emit()
 
 #Test Variables
 

@@ -308,10 +308,12 @@ var firing : bool = false
 var rifle_charged_up : bool = false
 var start_shield_cool_down : bool = false
 
+@onready var shield_bonus_timer: Timer = $ShieldBonusTimer
 @onready var shield: Shield = $Shield
 @onready var idle: GridPlayerIdle = $StateMachine/Idle
 
 var true_wait_time : float = 0
+var shield_bonus_time : float = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.set_mech_as_light()
@@ -354,6 +356,7 @@ func _process(delta: float) -> void:
 		
 			add_vulcan_flares()
 			mech_vulcan.attack_enemy(self,tiles,[],true)
+			
 			await get_tree().create_timer(0.1).timeout
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
@@ -370,11 +373,17 @@ func _process(delta: float) -> void:
 			GridManager.clear_targeted_tiles()
 		
 		if Input.is_action_pressed("activate_shield") and can_use_shield:
+			shield_bonus_time -= delta
+			if shield_bonus_time < 0:
+				shield_bonus_time = 0
+			
+			#print(shield_bonus_time)
 			start_shield_cool_down = false
 			regen_started = false
 			shield_active = true
 			shield.show()
 		else:
+			shield_bonus_time = 1.0
 			shield_active = false
 			shield.hide()
 		

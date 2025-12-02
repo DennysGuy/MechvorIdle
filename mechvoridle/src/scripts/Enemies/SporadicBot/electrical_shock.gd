@@ -31,8 +31,16 @@ func move_shock_wave() -> void:
 			if selected_tile.occupant and selected_tile.occupant == GridManager.player:
 				var shake_amount : float = 0.0
 				if GridManager.player.shield_active:
-					shake_amount = 0.7
-					GameManager.damage_shield(weapon_origin.damage)
+					shake_amount = 1.0
+					var true_damage := weapon_origin.damage
+					var shield_bonus_time := GridManager.player.shield_bonus_time
+					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, weapon_origin.damage)
+					
+					if calculated_damage > 0:
+						true_damage = calculated_damage
+					
+					print("TRUE DAMAGE TO SHIELD: %s" % [true_damage])	
+					GameManager.damage_shield(true_damage)
 				else:
 					shake_amount = 1.4
 					selected_tile.occupant.damage_actor(weapon_origin.damage)
@@ -44,5 +52,3 @@ func move_shock_wave() -> void:
 		selected_tile.clear_targeted_overlay()
 		if final_coordinates.x == GridManager.MAX_ROWS-1:
 			queue_free()
-		
-		
