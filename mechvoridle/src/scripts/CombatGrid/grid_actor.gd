@@ -57,6 +57,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		state_machine.change_state(death)
 	else:
 		if not is_vulcan and hurt:
+			GameManager.enable_hit_freeze(0.1, 0)
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:

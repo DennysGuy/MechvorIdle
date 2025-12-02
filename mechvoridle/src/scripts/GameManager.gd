@@ -625,6 +625,7 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		SignalBus.reduce_cooldown_value.emit(3.0)
 		perfect_count += 1
 		SignalBus.update_next_multiplier.emit()
+		enable_hit_freeze(0.5, 0.5)
 		return int(weapon_damage * 0.3)
 	elif shield_bonus_time >= 0.50:
 		print("GREAT BLOCK!")
@@ -632,6 +633,7 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		next_multiplier = 1.5
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(2.0)
+		enable_hit_freeze(0.3, 0.5)
 		return int(weapon_damage * 0.5)
 	elif shield_bonus_time >= 0.10:
 		print("GOOD BLOCK!")
@@ -639,6 +641,7 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		next_multiplier = 1.2
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(1.0)
+		enable_hit_freeze(0.2, 0.5)
 		return  int(weapon_damage * 0.75)
 	else:
 		next_multiplier = 1.0
@@ -649,6 +652,11 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 func reset_next_attack_multiplier() -> void:
 	GameManager.next_multiplier = 1.0
 	SignalBus.update_next_multiplier.emit()
+
+func enable_hit_freeze(duration : float, time_scale_val : float) -> void:
+	Engine.time_scale = time_scale_val
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0
 
 #Test Variables
 

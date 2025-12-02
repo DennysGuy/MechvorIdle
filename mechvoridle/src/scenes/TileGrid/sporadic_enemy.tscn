@@ -2100,8 +2100,8 @@ weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
 drop_chance = 10
 state_machine = NodePath("StateMachine")
-health = 210
-max_health = 210
+health = 160
+max_health = 160
 weapon_spout = NodePath("LaserSpout")
 lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
@@ -2351,7 +2351,7 @@ texture = SubResource("ViewportTexture_k4jur")
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(120, 120)
+size = Vector2i(125, 120)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
 anchors_preset = 8
@@ -2367,7 +2367,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_oou2j")
 theme_override_font_sizes/font_size = 26
-text = "100"
+text = "180"
+horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
