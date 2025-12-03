@@ -25,14 +25,13 @@ func enter() -> void:
 		interval = 1
 		
 		var coordinates : Vector2 = Vector2.ZERO
-		
 		var rand_num : int = randi_range(0,100)
+		
 		if rand_num <= 75:
 			coordinates = Vector2(randi_range(0,4), GridManager.player.current_tile.coordinates.y)
 		else:
 			var random_tile : Tile = parent.tiles.get_children().pick_random()
 			coordinates = random_tile.coordinates
-		
 		
 		SignalBus.send_actor_to_tile.emit(parent, coordinates, parent.row_limit, parent.col_limit)
 		time_to_shoot += 1
@@ -51,7 +50,6 @@ func process_frame(_delta: float) -> State:
 func process_physics(_delta: float) -> State:
 	
 	if parent.timer.time_left <= 0:
-		
 		if three_shot_state:
 			return three_tile_shot
 		

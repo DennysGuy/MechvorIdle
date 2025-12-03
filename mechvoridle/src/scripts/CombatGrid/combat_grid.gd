@@ -25,6 +25,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 @onready var next_damage_label: Label = $CanvasLayer/NextDamageLabel
 
+@onready var momentum_meter: TextureProgressBar = $CanvasLayer/MomentumMeter
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,6 +54,8 @@ func _ready() -> void:
 	SignalBus.spawn_mini_wave.connect(spawn_mini_wave)
 	SignalBus.spawn_health_crate.connect(spawn_health_crate)
 	SignalBus.update_next_multiplier.connect(update_next_label)
+	
+	SignalBus.update_momentum_meter_amount.connect(update_momentum_meter_amount)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -89,6 +92,7 @@ func send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_
 	
 	if not GridManager.tile_available(grid_actor, tile_to_send, row_limit, col_limit):
 		return
+		
 	translate_actor(grid_actor, tile_to_send)
 
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
@@ -121,7 +125,6 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 
 func check_if_lock_on_valid(enemy : GridActor) -> void:
 	var distance_diff : float = abs(GridManager.player.current_tile.coordinates.y - enemy.current_tile.coordinates.y)
-	print("THIS IS DISTANCE DIFF FROM PLAYER TO ENEMY: %s" % [distance_diff])
 	var current_weapon_scanning : MechWeapon = GridManager.player.current_weapon_scanning
 	if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
 		GridManager.remove_enemy_from_locked_on_list(enemy)
@@ -177,16 +180,16 @@ func spawn_next_wave() -> void:
 	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
 	if GridManager.current_wave > 0:
 		if GameManager.timed_out:
-			count_down_timer.add_time(35)
+			count_down_timer.add_time(45)
 			GameManager.timed_out = false
 		else:
 			var gained_time : int = 0
 			if GridManager.current_wave <= 5:
-				gained_time = 8
+				gained_time = 15
 			elif GridManager.current_wave > 5 and GridManager.current_wave <= 7:
-				gained_time = 10 
+				gained_time = 18 
 			else:
-				gained_time = 12
+				gained_time = 20
 				
 			count_down_timer.add_time(gained_time)
 			if GridManager.player.health < GridManager.player.max_health:
@@ -246,6 +249,21 @@ func update_health_bar() -> void:
 		"value",
 		GridManager.player.health,
 		0.35  # duration
+	)
+
+func update_momentum_meter_amount(value : int) -> void:
+	if GameManager.momentum_meter_amount >= GameManager.MAX_MOMENTUM_METER_AMOUNT:
+		return
+		
+	GameManager.momentum_meter_amount += value
+	SignalBus.update_momentum_count.emit()
+	
+	var tween := create_tween()
+	tween.tween_property(
+		momentum_meter,
+		"value",
+		GameManager.momentum_meter_amount,
+		0.3
 	)
 
 func spawn_boss() -> void:

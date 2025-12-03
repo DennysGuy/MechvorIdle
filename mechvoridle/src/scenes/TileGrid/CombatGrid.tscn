@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=32 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cco288q2r3jh3" path="res://assets/graphics/UI/GridCombat/GridShieldBar_Fill.png" id="5_02ps3"]
 [ext_resource type="FontFile" uid="uid://bbe5bn3uhqn6r" path="res://assets/graphics/Fonts/paladins3d.ttf" id="8_vgp2e"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="9_02ps3"]
+[ext_resource type="PackedScene" uid="uid://dj06scdij2c0x" path="res://src/scenes/TileGrid/MomentumMeter.tscn" id="9_4sac6"]
 [ext_resource type="FontFile" uid="uid://dke1diyqcr0et" path="res://assets/graphics/Fonts/OriginTech personal use.ttf" id="12_0mc8c"]
 [ext_resource type="AudioStream" uid="uid://dlfsctidlgyqj" path="res://assets/audio/SFX/COMBAT/ambience.ogg" id="14_po36e"]
 [ext_resource type="FontFile" uid="uid://cm80tuerk8ia" path="res://assets/graphics/Fonts/future-earth.ttf" id="14_ssntb"]
@@ -751,6 +752,19 @@ theme_override_font_sizes/font_size = 10
 text = "100/100"
 horizontal_alignment = 1
 
+[node name="MomentumMeter" parent="CanvasLayer" instance=ExtResource("9_4sac6")]
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = -231.0
+offset_right = 55.0
+offset_bottom = -17.0
+grow_horizontal = 1
+grow_vertical = 0
+
 [node name="CountDownTimer" parent="CanvasLayer" instance=ExtResource("2_qlay0")]
 anchors_preset = 5
 anchor_top = 0.0
@@ -827,10 +841,10 @@ text = "100000000"
 horizontal_alignment = 2
 
 [node name="DamageMultiplierLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 9.0
-offset_top = 92.0
-offset_right = 253.0
-offset_bottom = 178.0
+offset_left = 8.0
+offset_top = 65.0
+offset_right = 252.0
+offset_bottom = 151.0
 theme_override_fonts/normal_font = ExtResource("9_02ps3")
 bbcode_enabled = true
 text = "dmg x1.5"

@@ -22,6 +22,13 @@ func process_input(_event: InputEvent) -> State:
 			parent.can_fire_vulcans = false
 			return weapon_2_aim
 		
+		if Input.is_action_just_pressed("overdrive_activate") and GameManager.can_activate_overdrive:
+			#activate overdrive mode and timer
+			print("IN OVERDRIVE MODE!")
+			SignalBus.start_overdrive_mode.emit()
+			GameManager.in_overdrive_mode = true
+			GameManager.can_activate_overdrive = false
+		
 	return null
 
 func process_frame(_delta: float) -> State:

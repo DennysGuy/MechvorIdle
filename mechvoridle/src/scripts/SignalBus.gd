@@ -377,3 +377,17 @@ signal transition_lose_screen
 signal spawn_health_crate(drop_chance : int)
 @warning_ignore("unused_signal")
 signal reduce_cooldown_value(value : int)
+
+@warning_ignore("unused_signal")
+signal update_momentum_meter_amount(value : int)
+
+@warning_ignore("unused_signal")
+signal start_overdrive_mode 
+
+@warning_ignore("unused_signal")
+signal overdrive_mode_ready
+
+@warning_ignore("unused_signal")
+signal overdrive_mode_disabled
+@warning_ignore("unused_signal")
+signal update_momentum_count

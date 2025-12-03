@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj06scdij2c0x"]
+
+[ext_resource type="Texture2D" uid="uid://bdi6mosq7r7ny" path="res://assets/graphics/UI/MomentumMeter_BG.png" id="1_vy5oy"]
+[ext_resource type="Texture2D" uid="uid://bp16tipmvqmfw" path="res://assets/graphics/UI/MomentumMeter_Fill.png" id="2_v8d7y"]
+[ext_resource type="Script" uid="uid://cpmtow16ytp5i" path="res://src/scripts/TileGrid/momentum_meter.gd" id="3_v8d7y"]
+[ext_resource type="Texture2D" uid="uid://c4so11b4naqjb" path="res://assets/graphics/UI/MMLevel1Icon.png" id="4_n6nhy"]
+[ext_resource type="Texture2D" uid="uid://krbptvv7xgnp" path="res://assets/graphics/UI/MMLevel2Icon.png" id="5_6pg2v"]
+[ext_resource type="Texture2D" uid="uid://d2qcvg86tvtlb" path="res://assets/graphics/UI/MMLevel3Icon.png" id="6_n2jj1"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="7_6pg2v"]
+
+[node name="MomentumMeter" type="TextureProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -107.0
+offset_right = 22.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+step = 0.0
+fill_mode = 3
+texture_under = ExtResource("1_vy5oy")
+texture_progress = ExtResource("2_v8d7y")
+script = ExtResource("3_v8d7y")
+
+[node name="Level1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 136.0
+offset_right = 58.0
+offset_bottom = 145.0
+texture = ExtResource("4_n6nhy")
+stretch_mode = 2
+
+[node name="Level2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 86.0
+offset_right = 63.0
+offset_bottom = 96.0
+texture = ExtResource("5_6pg2v")
+stretch_mode = 2
+
+[node name="Level3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 45.0
+texture = ExtResource("6_n2jj1")
+stretch_mode = 2
+
+[node name="ReadyLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 2.0
+offset_right = 124.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("7_6pg2v")
+theme_override_font_sizes/font_size = 10
+text = "O.D. Mode 
+Ready!"
+
+[node name="CountTrackerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 201.0
+offset_right = 66.0
+offset_bottom = 212.0
+theme_override_fonts/font = ExtResource("7_6pg2v")
+theme_override_font_sizes/font_size = 10
+text = "5/10"

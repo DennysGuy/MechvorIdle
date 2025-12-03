@@ -1,6 +1,6 @@
 class_name CountDownTimer extends RichTextLabel
 
-var seconds : int = 30
+var seconds : int = 45
 var milliseconds : int = 0
 
 var timer_started : bool

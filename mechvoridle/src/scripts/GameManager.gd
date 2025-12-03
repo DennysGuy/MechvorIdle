@@ -49,6 +49,23 @@ var audio_settings_Showing : bool = false
 var can_fire_weapon_1 : bool = true
 var can_fire_weapon_2 : bool = true
 
+var overdrive_crit_chance_bonus : float = 0.0
+var overdrive_cooldown_bonus : float = 0.0
+var overdrive_shield_strength_bonus : float = 0.0
+var overdrive_movement_speed_bonus : float = 0.0
+var overdrive_damage_reduction_bonus : float = 0.0
+var overdrive_score_mulitplier_bonus : float = 1.0
+
+var momentum_meter_amount : float = 0.0
+var momentum_meter_level : int = 0
+var can_activate_overdrive : bool = false
+var in_overdrive_mode : bool = false
+
+const MAX_MOMENTUM_METER_AMOUNT : float = 10.0
+const LEVEL_1_MOMENTUM : float = 4.0
+const LEVEL_2_MOMENTUM : float = 7.0
+const LEVEL_3_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT
+
 var in_boss_fight = false
 
 func _ready() -> void:
@@ -202,13 +219,11 @@ var plasma_generator_fuel_consumption_speed : float = 0.05
 var plasma_generator_fuel_cost : int = 3000
 var plasma_generator_fuel_base_cost : int = 3000
 
-
 var max_owned_drones : int = 4
 var max_owned_drones_cost : int = 600
 var max_owned_drones_base_cost : int = 600
 var max_owned_drones_upgrade_interal : int = 1
 var max_owned_drones_level : int = 0
-
 
 #tutorial checklist
 
@@ -228,6 +243,40 @@ var plasma_generator_station_purchased : bool = false
 var mech_component_purchased : bool = false
 var mech_completed : bool = false
 
+func check_momentum_level() -> void:
+	if momentum_meter_amount >= LEVEL_3_MOMENTUM:
+		momentum_meter_level = 3
+		set_overdrive_bonuses(0.75,90,35,30,0.2,10)
+		return
+	if momentum_meter_amount >= LEVEL_2_MOMENTUM:
+		momentum_meter_level = 2
+		set_overdrive_bonuses(0.5,50,20,25,0.15,5)
+		return
+	if momentum_meter_amount >= LEVEL_1_MOMENTUM:
+		momentum_meter_level = 1
+		set_overdrive_bonuses(0.3,30,10,15,0.1,2)
+		SignalBus.overdrive_mode_ready.emit()
+		can_activate_overdrive = true
+		return
+
+	momentum_meter_level = 0
+	reset_overdrive_bonuses()
+
+func set_overdrive_bonuses(cooldown_bonus : float, crit_chance_bonus : float,damage_reduction_bonus : float, shield_strength_bonus : float, movement_speed_bonus : float, score_mulitplier_bonus : float) -> void:
+	overdrive_cooldown_bonus = cooldown_bonus
+	overdrive_crit_chance_bonus = crit_chance_bonus
+	overdrive_damage_reduction_bonus = damage_reduction_bonus
+	overdrive_shield_strength_bonus = shield_strength_bonus
+	overdrive_movement_speed_bonus = movement_speed_bonus
+	overdrive_score_mulitplier_bonus = score_mulitplier_bonus
+
+func reset_overdrive_bonuses() -> void:
+	overdrive_cooldown_bonus = 0.0
+	overdrive_crit_chance_bonus = 1.0
+	overdrive_damage_reduction_bonus = 0.0
+	overdrive_shield_strength_bonus = 0.0
+	overdrive_movement_speed_bonus = 0.0
+	overdrive_score_mulitplier_bonus = 0.0
 
 '''
 	MISSION LIST (15/15)
@@ -413,7 +462,6 @@ func calculate_current_total_health() -> int:
 			total_health += owned_mech_components[key].health
 	
 	return total_health
-
 #shop panel
 func add_mech_component(component : MechComponent) -> void: 
 	
@@ -421,7 +469,6 @@ func add_mech_component(component : MechComponent) -> void:
 	var component_weight_class : String = component.get_weight_class()
 	var component_focus : String = component.get_weapon_focus()
 	
-		
 	if component_category == "Weapon":
 		var weapon_component = component as MechWeapon
 		var weapon_class = weapon_component.get_weapon_class()
@@ -474,7 +521,6 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	owned_components_count += 1
 	
-
 	print(owned_mech_components)
 	print(owned_components_count)
 
@@ -594,7 +640,7 @@ func reset():
 	player_stunned = false
 	opponent_stunned = false
 	fill_bars = false
-	
+	reset_overdrive_bonuses()
 	can_fight_boss = false
 	can_traverse_panes = false
 	# Mech Component Slots
@@ -633,15 +679,15 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		next_multiplier = 1.5
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(2.0)
-		enable_hit_freeze(0.3, 0.5)
-		return int(weapon_damage * 0.5)
+		enable_hit_freeze(0.35, 0.35)
+		return int(weapon_damage * 0.35)
 	elif shield_bonus_time >= 0.10:
 		print("GOOD BLOCK!")
 		perfect_count = 0
 		next_multiplier = 1.2
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(1.0)
-		enable_hit_freeze(0.2, 0.5)
+		enable_hit_freeze(0.2, 0.35)
 		return  int(weapon_damage * 0.75)
 	else:
 		next_multiplier = 1.0

@@ -54,10 +54,14 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		health = 0
 		is_dead = true
 		
+		if self != GridPlayer and !is_vulcan:
+			SignalBus.update_momentum_meter_amount.emit(2)
+			GameManager.check_momentum_level()
+			
 		state_machine.change_state(death)
 	else:
 		if not is_vulcan and hurt:
-			GameManager.enable_hit_freeze(0.1, 0)
+			GameManager.enable_hit_freeze(0.25, 0.15)
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:

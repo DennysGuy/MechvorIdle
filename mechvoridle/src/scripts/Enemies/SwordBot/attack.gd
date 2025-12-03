@@ -17,7 +17,7 @@ func enter() -> void:
 			parent.state_machine.change_state(stagger)
 		else:
 			parent.animation_player.play("Swing")
-			parent.timer.wait_time = 0.25
+			parent.timer.wait_time = 0.3
 			parent.timer.start()
 
 func exit() -> void:

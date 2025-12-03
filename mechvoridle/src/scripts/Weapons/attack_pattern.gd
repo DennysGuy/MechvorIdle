@@ -83,6 +83,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 					
 					SfxManager.play_sfx(impact_sfx)
 					enemy.damage_actor(damage, is_vulcan)
+
 					if !pass_through and !enemy.is_dead:
 						break
 						
