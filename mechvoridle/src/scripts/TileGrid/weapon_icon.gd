@@ -57,14 +57,16 @@ func set_weapon_icon() -> void:
 			weapon_icon.texture = preload("uid://dbtpntjqa21i8")
 
 func start_cool_down_timer(weapon_hand : int) -> void:
-	
 	if weapon_hand != weapon_slot:
 		return 
-	
+		
 	cool_down_count.show()
 	cool_down_wheel.show()
 	millisecond = 60
-	cool_down_wheel.value = cool_down_wheel.max_value
+	if GameManager.in_overdrive_mode:
+		cool_down_wheel.value = int(cool_down_wheel.max_value * GameManager.overdrive_cooldown_bonus)
+	else:
+		cool_down_wheel.value = cool_down_wheel.max_value	
 	on_cool_down = true
 
 func count_down_process(_delta : float) -> void:

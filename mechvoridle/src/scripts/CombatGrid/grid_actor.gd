@@ -1,9 +1,9 @@
 class_name GridActor extends Node3D
 
 
-@export var current_tile : Tile
+@export var currentdd_tile : Tile
 @export var hurt_time : float
-const  WAIT_TIME : float = 0.25
+const  WAIT_TIME : float = 0.27
 
 @export var state_machine : StateMachine
 @export var can_move : bool = true
@@ -27,14 +27,19 @@ var is_attacking : bool = false
 var is_dead : bool = false
 
 func damage_actor(value : int, is_vulcan : bool = false) -> void:
+	var health_deduction = value
+	
 	if is_dead:
 		return
 	
 	if !can_hurt:
 		create_damage_label(0, 1)
 		return
+		
+	if self == GridManager.player and GameManager.in_overdrive_mode:
+		health_deduction = int(value - GameManager.overdrive_damage_reduction_bonus)
 	
-	create_damage_label(value)
+	create_damage_label(health_deduction)
 	
 	if hit_flash_animation_player:
 		hit_flash_animation_player.play("HitFlash")
@@ -42,15 +47,15 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 	if is_vulcan:
 		SfxManager.play_sfx(SfxManager.get_vulcan_impact())
 	
-	health -= value
-	
+	print("THIS IS HEALTH DEDUCTION: %s" % [health_deduction])
+	health -=  health_deduction
+
 	if self == GridManager.player:
 		SignalBus.update_player_health_bar.emit()
 	else:
 		update_health_bar()
 	
 	if health <= 0:
-		#place holder for now
 		health = 0
 		is_dead = true
 		

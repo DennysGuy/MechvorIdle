@@ -31,12 +31,11 @@ func impact_prjectile(area : Area3D):
 		if tile_parent.occupant and tile_parent.occupant.is_dead:
 			return
 		
-		
 		if tile_parent.occupant and tile_parent.occupant != weapon_owner:
 			if not is_instance_valid(weapon_owner):
 				return
 			
-			if tile_parent.occupant is SwordBot and not tile_parent.occupant.in_stagger_state:
+			if tile_parent.occupant is SwordBot and not tile_parent.occupant.in_stagger_state and !GameManager.in_overdrive_mode:
 				var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
 				damage_label.label.text = "inv."
 				damage_label.set_as_invincible()

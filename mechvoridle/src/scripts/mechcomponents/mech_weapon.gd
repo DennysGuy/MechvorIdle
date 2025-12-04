@@ -55,15 +55,20 @@ func attack_enemy(actor : GridActor, tiles : Node, scanned_attack_pattern : Arra
 		true_damage *= GameManager.next_multiplier
 	
 	if crit_landed():
-		true_damage *= crit_damage
+		if is_vulcan and GameManager.in_overdrive_mode:
+			true_damage *= crit_damage * 2
 	
 	attack_pattern.issue_attack(actor, tiles, int(true_damage), scanned_attack_pattern, is_vulcan)
 
 func crit_landed() -> bool:
 	var chance : float = crit_chance
 	if weapon_owner == WeaponOwner.PLAYER and GameManager.owned_mech_components["Head"]:
+		
 		chance += GameManager.owned_mech_components["Head"].crit_chance
 	chance *= 100
+	
+	if weapon_owner == WeaponOwner.PLAYER and GameManager.in_overdrive_mode:
+		chance += GameManager.overdrive_crit_chance_bonus
 	
 	var random_int = randi_range(0,100)
 	if random_int <= chance:

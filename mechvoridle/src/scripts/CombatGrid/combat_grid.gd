@@ -26,6 +26,10 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 @onready var next_damage_label: Label = $CanvasLayer/NextDamageLabel
 
 @onready var momentum_meter: TextureProgressBar = $CanvasLayer/MomentumMeter
+@onready var momentum_level_label: Label = $CanvasLayer/MomentumLevelLabel
+
+@onready var overdrive_mode_flash_player: AnimationPlayer = $OverdriveModeFlashPlayer
+@onready var over_drive_mode_on_label: Label = $CanvasLayer/OverDriveModeOnLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +60,10 @@ func _ready() -> void:
 	SignalBus.update_next_multiplier.connect(update_next_label)
 	
 	SignalBus.update_momentum_meter_amount.connect(update_momentum_meter_amount)
+	SignalBus.update_od_bonuses.connect(update_momentum_level_label)
+	
+	SignalBus.show_overdrive_visuals.connect(show_overdrive_visuals)
+	SignalBus.hide_overdrive_visuals.connect(hide_overdrive_visuals)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -73,6 +81,9 @@ func _process(delta: float) -> void:
 
 func update_next_label() -> void:
 	next_damage_label.text = "Next DMG: %s" % [GameManager.next_multiplier]
+
+func update_momentum_level_label() -> void:
+	momentum_level_label.text = "momentum lvl: %s" % [GameManager.momentum_meter_level]
 
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
 	move_actor(GridManager.player, direction, -1, -1, is_dash_attack)
@@ -122,6 +133,18 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 			next_tile.upgrade_crate = null
 	
 	return prev_tile
+	
+@onready var over_drive_flash: ColorRect = $CanvasLayer/OverDriveFlash
+
+func show_overdrive_visuals() -> void:
+	over_drive_mode_on_label.show()
+	over_drive_flash.show()
+	overdrive_mode_flash_player.play("OverDriveOnFlash")
+
+func hide_overdrive_visuals() -> void:
+	over_drive_mode_on_label.hide()
+	over_drive_flash.hide()
+	overdrive_mode_flash_player.stop()
 
 func check_if_lock_on_valid(enemy : GridActor) -> void:
 	var distance_diff : float = abs(GridManager.player.current_tile.coordinates.y - enemy.current_tile.coordinates.y)

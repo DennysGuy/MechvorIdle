@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=35 format=3 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -651,6 +651,44 @@ _data = {
 &"RESET": SubResource("Animation_76a4t")
 }
 
+[sub_resource type="Animation" id="Animation_ttjt2"]
+resource_name = "OverDriveOnFlash"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.0333333, 1.4666667, 2, 2.4968204),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.7137255, 0.59607846, 0), Color(0, 0.7137255, 0.59607846, 0.21568628), Color(0, 0.7137255, 0.59607846, 0), Color(0, 0.7137255, 0.59607846, 0.21568628), Color(0, 0.7137255, 0.59607846, 0), Color(0, 0.7137255, 0.59607846, 0.21568628)]
+}
+
+[sub_resource type="Animation" id="Animation_irucv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.7137255, 0.59607846, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4lua7"]
+_data = {
+&"OverDriveOnFlash": SubResource("Animation_ttjt2"),
+&"RESET": SubResource("Animation_irucv")
+}
+
 [node name="CombatGrid" type="Node3D"]
 script = ExtResource("1_vf78d")
 
@@ -690,6 +728,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_76a4t")
 }
 
+[node name="OverdriveModeFlashPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasLayer/OverDriveFlash")
+libraries = {
+&"": SubResource("AnimationLibrary_4lua7")
+}
+
 [node name="SupplyCrateTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 15.0
@@ -701,6 +745,32 @@ wait_time = 3.0
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OverDriveModeOnLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -74.0
+offset_right = 92.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_vgp2e")
+theme_override_font_sizes/font_size = 20
+text = "O.D. Mode ON!"
+
+[node name="OverDriveFlash" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.7137255, 0.59607846, 0)
 
 [node name="Grid" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -907,6 +977,22 @@ offset_right = 245.0
 offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("9_02ps3")
 text = "Next DMG: 1.0x"
+
+[node name="MomentumLevelLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -16.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 13
+text = "Momentum LVL: 0"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")

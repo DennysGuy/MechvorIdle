@@ -7,7 +7,7 @@ var offset : int = 0
 func enter() -> void:
 	offset = 0
 	parent.rifle_charged_up = false
-	parent.charge_up_timer.wait_time = 1.2
+	parent.charge_up_timer.wait_time = 0.6
 	parent.current_weapon_scanning = weapon_component
 	print(parent.current_weapon_scanning)
 	if is_right_position():

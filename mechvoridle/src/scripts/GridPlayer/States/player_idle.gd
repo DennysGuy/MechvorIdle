@@ -24,8 +24,9 @@ func process_input(_event: InputEvent) -> State:
 		
 		if Input.is_action_just_pressed("overdrive_activate") and GameManager.can_activate_overdrive:
 			#activate overdrive mode and timer
-			print("IN OVERDRIVE MODE!")
+			SignalBus.show_overdrive_visuals.emit()
 			SignalBus.start_overdrive_mode.emit()
+			SignalBus.set_move_speed_to_od.emit()
 			GameManager.in_overdrive_mode = true
 			GameManager.can_activate_overdrive = false
 		

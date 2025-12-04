@@ -246,15 +246,18 @@ var mech_completed : bool = false
 func check_momentum_level() -> void:
 	if momentum_meter_amount >= LEVEL_3_MOMENTUM:
 		momentum_meter_level = 3
-		set_overdrive_bonuses(0.75,90,35,30,0.2,10)
+		set_overdrive_bonuses(0.75,90,35,30,0.08,10)
+		SignalBus.update_od_bonuses.emit()
 		return
 	if momentum_meter_amount >= LEVEL_2_MOMENTUM:
 		momentum_meter_level = 2
-		set_overdrive_bonuses(0.5,50,20,25,0.15,5)
+		set_overdrive_bonuses(0.5,50,20,25,0.05,5)
+		SignalBus.update_od_bonuses.emit()
 		return
 	if momentum_meter_amount >= LEVEL_1_MOMENTUM:
 		momentum_meter_level = 1
-		set_overdrive_bonuses(0.3,30,10,15,0.1,2)
+		set_overdrive_bonuses(0.3,30,10,15,0.04,2)
+		SignalBus.update_od_bonuses.emit()
 		SignalBus.overdrive_mode_ready.emit()
 		can_activate_overdrive = true
 		return

@@ -391,3 +391,13 @@ signal overdrive_mode_ready
 signal overdrive_mode_disabled
 @warning_ignore("unused_signal")
 signal update_momentum_count
+@warning_ignore("unused_signal")
+signal update_od_bonuses
+@warning_ignore("unused_signal")
+signal show_overdrive_visuals
+@warning_ignore("unused_signal")
+signal hide_overdrive_visuals
+@warning_ignore("unused_signal")
+signal set_move_speed_to_od
+@warning_ignore("unused_signal")
+signal revert_move_speed_to_norm

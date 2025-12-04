@@ -318,6 +318,9 @@ var shield_bonus_time : float = 1.0
 func _ready() -> void:
 	GridManager.set_mech_as_light()
 	SignalBus.apply_timer_consequences.connect(apply_time_consequences)
+	SignalBus.set_move_speed_to_od.connect(set_move_speed_to_od_speed)
+	SignalBus.revert_move_speed_to_norm.connect(revert_move_speed_to_normal)
+	
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 	can_move = false
 	max_health = 500
@@ -335,7 +338,10 @@ func _process(delta: float) -> void:
 			SfxManager.play_sfx(SfxManager.get_player_step())
 			SignalBus.move_player.emit(Vector2.UP, false)
 			can_move = false
-			await get_tree().create_timer(true_wait_time).timeout
+			
+			var movement_time := true_wait_time
+			
+			await get_tree().create_timer(movement_time).timeout
 			can_move = true
 			GridManager.clear_targeted_tiles()
 			
@@ -344,7 +350,10 @@ func _process(delta: float) -> void:
 			SfxManager.play_sfx(SfxManager.get_player_step())
 			SignalBus.move_player.emit(Vector2.DOWN, false)
 			can_move = false
-			await get_tree().create_timer(true_wait_time).timeout
+			
+			var movement_time := true_wait_time
+			
+			await get_tree().create_timer(movement_time).timeout
 			
 			can_move = true
 			GridManager.clear_targeted_tiles()
@@ -399,7 +408,11 @@ func _process(delta: float) -> void:
 					
 	state_machine.process_frame(delta)
 
+func set_move_speed_to_od_speed() -> void:
+	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier - GameManager.overdrive_movement_speed_bonus
 
+func revert_move_speed_to_normal() -> void:
+	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
