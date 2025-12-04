@@ -1,7 +1,7 @@
 class_name GridActor extends Node3D
 
 
-@export var currentdd_tile : Tile
+@export var current_tile : Tile
 @export var hurt_time : float
 const  WAIT_TIME : float = 0.27
 
