@@ -95,8 +95,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 					else:
 						SignalBus.shake_camera.emit(1.0)
 						enemy.damage_actor(damage)
-					if !pass_through:
-						
+					if !pass_through or (is_vulcan and !GameManager.in_overdrive_mode):
 						break
 				
 				selected_tile.clear_targeted_overlay()
