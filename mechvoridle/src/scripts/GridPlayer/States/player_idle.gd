@@ -27,8 +27,10 @@ func process_input(_event: InputEvent) -> State:
 			SignalBus.show_overdrive_visuals.emit()
 			SignalBus.start_overdrive_mode.emit()
 			SignalBus.set_move_speed_to_od.emit()
+			SignalBus.set_slow_factor_twenty.emit()
 			GameManager.in_overdrive_mode = true
 			GameManager.can_activate_overdrive = false
+			SfxManager.play_sfx(SfxManager.OD_MODE_ACTIVATE,2)
 		
 	return null
 

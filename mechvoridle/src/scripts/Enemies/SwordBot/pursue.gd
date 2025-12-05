@@ -15,8 +15,6 @@ issuing the attack and retreating back.
 @export var idle : State
 @export var prepare : State
 
-
-
 func enter() -> void:
 	if GridManager.player:
 		if parent.is_slave:
@@ -38,11 +36,14 @@ func enter() -> void:
 				var slave_new_tile : Tile = GridManager.get_tile(parent.tiles, new_tile.coordinates - Vector2(1,0) )
 				SignalBus.move_actor_to_tile.emit(parent, new_tile)
 				SfxManager.play_sfx(SfxManager.get_enemy_movement_whoosh())
-				await get_tree().create_timer(0.10).timeout
+				
+				var wait_time := 0.10
+				if GameManager.in_overdrive_mode:
+					wait_time = 0.30
+					
+				await get_tree().create_timer(wait_time).timeout
 				SignalBus.slave_follow.emit(slave_new_tile, parent.tile_to_attack)
-				await get_tree().create_timer(0.10).timeout
-				
-				
+				await get_tree().create_timer(wait_time).timeout
 				
 			parent.state_machine.change_state(prepare) #once we're in prepare state, we'll notify slave to
 	else:

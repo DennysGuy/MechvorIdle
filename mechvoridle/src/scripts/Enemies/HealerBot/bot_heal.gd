@@ -4,14 +4,23 @@ class_name EnemyHeal extends State
 
 func enter() -> void:
 	parent.is_attacking = true
-	parent.animation_player.speed_scale = 1.5
+	var true_speed_scale := 1.5
+	if GameManager.in_overdrive_mode:
+		true_speed_scale = TimeManager.slow_time_factor
+
+	parent.animation_player.speed_scale = true_speed_scale
+		
 	parent.animation_player.play("heal")
+	
+	
 	parent.timer.wait_time = 2.5
 	parent.timer.start()
 	
 func exit() -> void:
 	parent.is_attacking = false
-	parent.animation_player.speed_scale = 1.0
+	
+	if !GameManager.in_overdrive_mode:
+		parent.animation_player.speed_scale = 1.0
 
 func process_input(_event: InputEvent) -> State:
 	return null

@@ -31,7 +31,8 @@ func enter() -> void:
 			return
 
 		# Step 2: Perform attack at this tile
-		parent.animation_player.speed_scale = 2.5
+		if !GameManager.in_overdrive_mode:
+			parent.animation_player.speed_scale = 2.5
 		parent.animation_player.play("shoot")
 
 		# Wait for shot duration
@@ -52,4 +53,5 @@ func exit() -> void:
 	parent.is_attacking = false
 	is_active = false	# stops async continuation
 	is_attacking = false
-	parent.animation_player.speed_scale = 1.0
+	if !GameManager.in_overdrive_mode:
+		parent.animation_player.speed_scale = 1.0

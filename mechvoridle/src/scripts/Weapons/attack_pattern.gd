@@ -104,7 +104,6 @@ func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	return GridManager.get_tile(tiles, coordinates)
 	
 func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_targeted_overlay : bool = true) -> Array:
-	
 	GridManager.clear_targeted_tiles()
 	
 	var final_targeted_tile: Vector2 = get_destined_tile_coordinates(actor)

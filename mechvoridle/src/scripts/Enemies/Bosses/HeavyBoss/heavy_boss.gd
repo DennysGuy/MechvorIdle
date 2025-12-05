@@ -1,5 +1,6 @@
 class_name HeavyBoss extends GridBoss
 
+
 enum PHASES {
 	ATTACK_PHASE1,
 	ATTACK_PHASE2,
@@ -30,7 +31,6 @@ var fall_configs := [
 
 var current_phase : PHASES
 var destined_tile : Tile
-@onready var animation_player: AnimationPlayer = $HeavyBoss/AnimationPlayer
 @onready var misc_animation_player: AnimationPlayer = $MiscAnimationPlayer
 
 

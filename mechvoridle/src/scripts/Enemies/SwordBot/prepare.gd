@@ -13,7 +13,11 @@ func enter() -> void:
 		parent.tile_to_attack.set_enemy_targeted_overlay()
 	SfxManager.play_sfx(SWORD_BOT_PREPARE, -1)
 	parent.animation_player.play("Prepare")
-	parent.timer.wait_time = 0.5
+	var true_wait_time = 0.5
+	if GameManager.in_overdrive_mode:
+		true_wait_time = 1.0
+
+	parent.timer.wait_time = true_wait_time
 	parent.timer.start()
 
 func exit() -> void:

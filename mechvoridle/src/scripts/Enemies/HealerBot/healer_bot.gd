@@ -1,7 +1,5 @@
 class_name HealerBot extends GridEnemy
 
-@onready var animation_player: AnimationPlayer = $healer/AnimationPlayer
-
 @export var heal_state : State
 
 @onready var timer: Timer = $Timer

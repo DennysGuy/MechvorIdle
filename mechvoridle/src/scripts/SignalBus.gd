@@ -401,3 +401,10 @@ signal hide_overdrive_visuals
 signal set_move_speed_to_od
 @warning_ignore("unused_signal")
 signal revert_move_speed_to_norm
+@warning_ignore("unused_signal")
+signal set_slow_factor_twenty
+@warning_ignore("unused_signal")
+signal revert_slow_factor_normal
+
+@warning_ignore("unused_signal")
+signal update_score(added_score : int)

@@ -1,8 +1,6 @@
 class_name SwordBot extends GridEnemy
 
 @onready var timer: Timer = $Timer
-@onready var animation_player: AnimationPlayer = $SwordBot/AnimationPlayer
-
 
 var destined_tile : Tile
 var tile_to_attack : Tile
@@ -45,14 +43,11 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
-
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
-
 
 func attack_player(player : GridActor) -> void:
 	var shake_amount : float = 0.0
@@ -71,7 +66,10 @@ func attack_player(player : GridActor) -> void:
 			in_stagger_state = true
 		else:
 			shake_amount = 1.3
-			SfxManager.play_sfx(SfxManager.SWORD_BOT_SWORD_IMPACT)
+			var pitch_scale := 1.0
+			if GameManager.in_overdrive_mode:
+				pitch_scale = 0.6
+			SfxManager.play_sfx(SfxManager.SWORD_BOT_SWORD_IMPACT,2,false,pitch_scale)
 			player.damage_actor(weapon.damage)
 		
 		SignalBus.shake_camera.emit(shake_amount)

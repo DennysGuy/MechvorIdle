@@ -2,6 +2,7 @@ class_name BossDeath extends State
 const ENEMY_DEFEAT_EXPLOSIONS = preload("uid://bficyqfbklyba")
 
 func enter() -> void:
+	GameManager.update_score(parent.score)
 	SfxManager.play_sfx(SfxManager.VOX_COM_ENE_DEATH_01)
 	SfxManager.play_sfx(ENEMY_DEFEAT_EXPLOSIONS)
 	parent.animation_player.speed_scale = 0.3

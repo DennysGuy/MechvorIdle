@@ -5,10 +5,18 @@ class_name EnemyShoot extends State
 
 func enter() -> void:
 	parent.is_attacking = true
-	parent.animation_player.speed_scale = 1.3
+	if !GameManager.in_overdrive_mode:
+		parent.animation_player.speed_scale = 1.3
+	else:
+		parent.animation_player.speed_scale = TimeManager.slow_time_factor
+		
 	parent.animation_player.play(animation_name)
 	
-	parent.timer.wait_time = 2.0
+	if !GameManager.in_overdrive_mode:
+		parent.timer.wait_time = 2.0
+	else:
+		parent.timer.wait_time = 3.5
+		
 	parent.timer.start()
 
 func exit() -> void:

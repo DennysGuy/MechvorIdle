@@ -1,10 +1,6 @@
 class_name TurretEnemy extends GridEnemy
 
 
-@onready var animation_player: AnimationPlayer = $Turretanimated/AnimationPlayer
-
-
-
 @export var shoot : State
 @onready var timer: Timer = $Timer
 
@@ -33,5 +29,8 @@ func _exit_tree() -> void:
 	
 
 func fire_rocket() -> void:
-	SfxManager.play_sfx(SfxManager.ROCKET_LAUNCHER_FIRE)
+	var pitch_scale := 1.0
+	if GameManager.in_overdrive_mode:
+		pitch_scale = 0.7
+	SfxManager.play_sfx(SfxManager.ROCKET_LAUNCHER_FIRE, 1.0, false, pitch_scale)
 	fire_projectile(weapon)

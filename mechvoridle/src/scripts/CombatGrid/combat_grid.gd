@@ -31,6 +31,11 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 @onready var overdrive_mode_flash_player: AnimationPlayer = $OverdriveModeFlashPlayer
 @onready var over_drive_mode_on_label: Label = $CanvasLayer/OverDriveModeOnLabel
 
+@onready var score_count: Label = $CanvasLayer/ScoreCount
+
+@onready var marker_2d: Marker2D = $CanvasLayer/Marker2D
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.init_grid(tiles)
@@ -38,6 +43,7 @@ func _ready() -> void:
 	damage_multiplier_label.hide()
 	#GridManager.spawn_test_enemy(tiles)
 	#spawn_next_wave()
+	
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_actor_to_tile.connect(translate_actor)
 	SignalBus.move_enemy.connect(move_actor)
@@ -64,6 +70,9 @@ func _ready() -> void:
 	
 	SignalBus.show_overdrive_visuals.connect(show_overdrive_visuals)
 	SignalBus.hide_overdrive_visuals.connect(hide_overdrive_visuals)
+	SignalBus.update_score.connect(update_score)
+	
+	update_score(0)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -117,10 +126,12 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	if next_tile and next_tile.occupant == null:
 		next_tile.occupant = actor
 	if adjacent_tile:
+		var tween_speed := 0.15
 		if not actor is GridPlayer:
 			check_if_lock_on_valid(actor)
+			tween_speed = TimeManager.enemy_tween_speed
 		var tween : Tween = get_tree().create_tween()
-		tween.tween_property(actor,"global_position", adjacent_tile.marker_3d.global_position, 0.15)
+		tween.tween_property(actor,"global_position", adjacent_tile.marker_3d.global_position, tween_speed)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.set_ease(Tween.EASE_OUT)
 		#actor.global_position = adjacent_tile.marker_3d.global_position
@@ -224,6 +235,12 @@ func spawn_next_wave() -> void:
 	
 	count_down_timer.start_timer()
 
+func update_score(added_score : int) -> void: 
+	score_count.text = str(GameManager.combat_score)
+	var score_marker : ScoreMarker = preload("uid://d1aydeepcero2").instantiate()
+	if added_score > 0:
+		score_marker.text = "+%s" % [added_score]
+		marker_2d.add_child(score_marker)
 
 func spawn_mini_wave() -> void:
 	await get_tree().process_frame

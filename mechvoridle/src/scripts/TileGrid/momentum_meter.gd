@@ -31,9 +31,11 @@ func _physics_process(delta: float) -> void:
 			GameManager.momentum_meter_amount = 0
 			SignalBus.hide_overdrive_visuals.emit()
 			SignalBus.revert_move_speed_to_norm.emit()
+			SignalBus.revert_slow_factor_normal.emit()
 			update_momentum_amount_counter()
 			SignalBus.update_od_bonuses.emit()
 			drain_momentum_meter = false
+			SfxManager.play_sfx(SfxManager.OD_POWER_DOWN)
 			
 
 func show_ready_label() -> void:

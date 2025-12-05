@@ -50,6 +50,7 @@ var can_fire_weapon_1 : bool = true
 var can_fire_weapon_2 : bool = true
 
 var overdrive_crit_chance_bonus : float = 0.0
+var overdrive_damage_multiplier : float = 1.0
 var overdrive_cooldown_bonus : float = 0.0
 var overdrive_shield_strength_bonus : float = 0.0
 var overdrive_movement_speed_bonus : float = 0.0
@@ -243,29 +244,45 @@ var plasma_generator_station_purchased : bool = false
 var mech_component_purchased : bool = false
 var mech_completed : bool = false
 
+var combat_score : int = 0
+
+func update_score(value : int) -> void:
+	
+	var final_value = value
+	
+	if in_overdrive_mode:
+		final_value *= overdrive_score_mulitplier_bonus
+	
+	combat_score += final_value
+	SignalBus.update_score.emit(value)
+
 func check_momentum_level() -> void:
 	if momentum_meter_amount >= LEVEL_3_MOMENTUM:
 		momentum_meter_level = 3
-		set_overdrive_bonuses(0.75,90,35,30,0.08,10)
+		set_overdrive_bonuses(4,0.75,90,35,30,0.08,5)
 		SignalBus.update_od_bonuses.emit()
+		update_score(500)
 		return
 	if momentum_meter_amount >= LEVEL_2_MOMENTUM:
 		momentum_meter_level = 2
-		set_overdrive_bonuses(0.5,50,20,25,0.05,5)
+		set_overdrive_bonuses(3,0.5,50,20,25,0.05,3)
 		SignalBus.update_od_bonuses.emit()
+		update_score(300)
 		return
 	if momentum_meter_amount >= LEVEL_1_MOMENTUM:
 		momentum_meter_level = 1
-		set_overdrive_bonuses(0.3,30,10,15,0.04,2)
+		set_overdrive_bonuses(2,0.3,30,10,15,0.04,2)
 		SignalBus.update_od_bonuses.emit()
 		SignalBus.overdrive_mode_ready.emit()
+		update_score(100)
 		can_activate_overdrive = true
 		return
 
 	momentum_meter_level = 0
 	reset_overdrive_bonuses()
 
-func set_overdrive_bonuses(cooldown_bonus : float, crit_chance_bonus : float,damage_reduction_bonus : float, shield_strength_bonus : float, movement_speed_bonus : float, score_mulitplier_bonus : float) -> void:
+func set_overdrive_bonuses(damage_bonus : float, cooldown_bonus : float, crit_chance_bonus : float,damage_reduction_bonus : float, shield_strength_bonus : float, movement_speed_bonus : float, score_mulitplier_bonus : float) -> void:
+	overdrive_damage_multiplier = damage_bonus
 	overdrive_cooldown_bonus = cooldown_bonus
 	overdrive_crit_chance_bonus = crit_chance_bonus
 	overdrive_damage_reduction_bonus = damage_reduction_bonus
@@ -274,12 +291,13 @@ func set_overdrive_bonuses(cooldown_bonus : float, crit_chance_bonus : float,dam
 	overdrive_score_mulitplier_bonus = score_mulitplier_bonus
 
 func reset_overdrive_bonuses() -> void:
+	overdrive_damage_multiplier = 1.0
 	overdrive_cooldown_bonus = 0.0
 	overdrive_crit_chance_bonus = 1.0
 	overdrive_damage_reduction_bonus = 0.0
 	overdrive_shield_strength_bonus = 0.0
 	overdrive_movement_speed_bonus = 0.0
-	overdrive_score_mulitplier_bonus = 0.0
+	overdrive_score_mulitplier_bonus = 1.0
 
 '''
 	MISSION LIST (15/15)
@@ -646,6 +664,7 @@ func reset():
 	reset_overdrive_bonuses()
 	can_fight_boss = false
 	can_traverse_panes = false
+	combat_score = 0
 	# Mech Component Slots
 	owned_mech_components = {
 		"Head": null,
@@ -706,6 +725,8 @@ func enable_hit_freeze(duration : float, time_scale_val : float) -> void:
 	Engine.time_scale = time_scale_val
 	await get_tree().create_timer(duration, true, false, true).timeout
 	Engine.time_scale = 1.0
+
+
 
 #Test Variables
 

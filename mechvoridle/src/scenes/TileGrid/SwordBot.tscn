@@ -1702,14 +1702,16 @@ _data = {
 &"SpawnIn": SubResource("Animation_kxq0i")
 }
 
-[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "animation_player", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_mft84")
 stagger_state = NodePath("StateMachine/Stagger")
 pursue_state = NodePath("StateMachine/Pursue")
 attack_state = NodePath("StateMachine/Attack")
 idle_state = NodePath("StateMachine/Idle")
 weapon = ExtResource("2_6w8gx")
+animation_player = NodePath("SwordBot/AnimationPlayer")
 drop_chance = 16
+score = 200
 state_machine = NodePath("StateMachine")
 health = 150
 max_health = 150
@@ -1727,10 +1729,10 @@ transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-
 transform = Transform3D(0.3173046, 0, -0.94832367, 0, 1, 0, 0.94832367, 0, 0.3173046, -0.159375, 0.8145831, -0.12708312)
 
 [node name="UpperBody" type="Node3D" parent="SwordBot/SwordBot"]
-transform = Transform3D(0.34202, 0, -0.9396926, 0, 1, 0, 0.9396926, 0, 0.34202, -0.021875, 0.32291687, 0.008333125)
+transform = Transform3D(-0.026975794, -0.28257105, -0.95886695, -0.11507511, 0.953717, -0.2778159, 0.9929904, 0.10284743, -0.058244165, -0.253125, 0.2666669, -0.06666687)
 
 [node name="Arm" type="Node3D" parent="SwordBot/SwordBot/UpperBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.475, 0.20625)
+transform = Transform3D(-0.00036102533, -0.77423424, 0.63289917, -0.23106553, 0.6158364, 0.75322926, -0.9729382, -0.14596923, -0.17912117, 0.625, -0.09375, -0.08125)
 
 [node name="LowerArm2" type="Node3D" parent="SwordBot/SwordBot/UpperBody/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.10625, -0.06875, -0.0625)
@@ -1835,7 +1837,7 @@ mesh = SubResource("ArrayMesh_nya3f")
 skeleton = NodePath("")
 
 [node name="Head2" type="Node3D" parent="SwordBot/SwordBot/UpperBody"]
-transform = Transform3D(0.29177347, -0.16034843, 0.94295096, 0.072747305, 0.9867124, 0.14528017, -0.953717, 0.026208239, 0.2995614, 0.009375, 0.2125, 0.1)
+transform = Transform3D(0.87705785, -0.053092826, 0.4774418, 0.11135656, 0.9892722, -0.094551556, -0.46729997, 0.13609345, 0.8735612, -0.078125, 0.2125, 0.1)
 
 [node name="BambooHat" type="MeshInstance3D" parent="SwordBot/SwordBot/UpperBody/Head2"]
 transform = Transform3D(1, 0, 0, 0, 0.9170601, -0.39874908, 0, 0.39874908, 0.9170601, 0, 0.1125, 0)
@@ -1853,7 +1855,7 @@ mesh = SubResource("ArrayMesh_2fdvi")
 skeleton = NodePath("")
 
 [node name="LowerBody" type="Node3D" parent="SwordBot/SwordBot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.190625, -0.8145831, -0.116666876)
+transform = Transform3D(0.9848077, 0, -0.1736482, 0, 1, 0, 0.1736482, 0, 0.9848077, 0.190625, -0.8145831, -0.116666876)
 
 [node name="Legs" type="MeshInstance3D" parent="SwordBot/SwordBot/LowerBody"]
 transform = Transform3D(0.8338858, 0, -0.551937, 0, 1, 0, 0.551937, 0, 0.8338858, 0, -0.05, 0)

@@ -202,6 +202,9 @@ const HEAL = preload("uid://cgbmvklh58dro")
 const WEAPON_2_READY = preload("uid://nciwhr7423ej")
 const WEAPON_1_READY = preload("uid://cok5ea1s6mcvo")
 
+const OD_MODE_ACTIVATE = preload("uid://bniwxfuy06te1")
+const OD_POWER_DOWN = preload("uid://d3h2oaomsi7s1")
+
 
 var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
 

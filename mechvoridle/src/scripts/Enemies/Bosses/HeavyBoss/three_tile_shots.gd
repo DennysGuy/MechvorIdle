@@ -30,11 +30,19 @@ func enter() -> void:
 			return
 
 		# Step 2: Perform attack at this tile
-		parent.animation_player.speed_scale = 1.0
+		var speed_scale := 1.0
+		if GameManager.in_overdrive_mode:
+			speed_scale = 0.5
+		
+		parent.animation_player.speed_scale = speed_scale
 		parent.animation_player.play("CanonArmFire")
 
 		# Wait for shot duration
-		var timeout = await get_tree().create_timer(0.6).timeout
+		var true_wait_time := 0.6
+		if GameManager.in_overdrive_mode:
+			true_wait_time = 1.0
+		
+		var timeout = await get_tree().create_timer(true_wait_time).timeout
 		if !is_active:
 			return
 

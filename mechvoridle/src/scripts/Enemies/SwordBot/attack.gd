@@ -9,7 +9,12 @@ func enter() -> void:
 		tile_to  = GridManager.get_tile(parent.tiles, parent.tile_to_attack.coordinates - Vector2(1,0))
 
 	if tile_to:
-		SfxManager.play_sfx(SfxManager.SWORD_BOT_SWING)
+		var pitch_scale := 1.0
+		
+		if GameManager.in_overdrive_mode:
+			pitch_scale = 0.7
+		
+		SfxManager.play_sfx(SfxManager.SWORD_BOT_SWING,0,false,pitch_scale)
 		SignalBus.move_actor_to_tile.emit(parent, tile_to)
 		if is_instance_valid(GridManager.player):
 			parent.attack_player(parent.tile_to_attack.occupant)
@@ -17,7 +22,10 @@ func enter() -> void:
 			parent.state_machine.change_state(stagger)
 		else:
 			parent.animation_player.play("Swing")
-			parent.timer.wait_time = 0.3
+			if !GameManager.in_overdrive_mode:
+				parent.timer.wait_time = 0.8
+			else:
+				parent.timer.wait_time = 0.3
 			parent.timer.start()
 
 func exit() -> void:
@@ -46,4 +54,3 @@ func process_physics(_delta: float) -> State:
 		parent.state_machine.change_state(idle)
 	
 	return null
-		

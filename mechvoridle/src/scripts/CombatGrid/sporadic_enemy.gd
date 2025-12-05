@@ -2,7 +2,7 @@ class_name SporadicEnemy extends GridEnemy
 @export var row_limit : int = 2
 @export var col_limit : int = 4
 
-@onready var animation_player: AnimationPlayer = $zaper2/AnimationPlayer
+
 
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 
@@ -35,7 +35,10 @@ func _exit_tree() -> void:
 	GridManager.check_wave_status()
 
 func play_shock_shot() -> void:
-	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST, -2)
+	var pitch_scale := 1.0
+	if GameManager.in_overdrive_mode:
+		pitch_scale = 0.6
+	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST, -4,false, pitch_scale)
 
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()

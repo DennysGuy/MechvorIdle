@@ -45,8 +45,13 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		hit_flash_animation_player.play("HitFlash")
 	
 	if is_vulcan:
+		if GameManager.in_overdrive_mode:
+			health_deduction *= GameManager.overdrive_damage_multiplier
+		
 		SfxManager.play_sfx(SfxManager.get_vulcan_impact())
 	
+	if self != GridManager.player:
+		GameManager.update_score(health_deduction)
 	print("THIS IS HEALTH DEDUCTION: %s" % [health_deduction])
 	health -=  health_deduction
 
@@ -59,7 +64,7 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 		health = 0
 		is_dead = true
 		
-		if self != GridPlayer and !is_vulcan:
+		if self != GridPlayer and !is_vulcan and !GameManager.in_overdrive_mode:
 			SignalBus.update_momentum_meter_amount.emit(2)
 			GameManager.check_momentum_level()
 			

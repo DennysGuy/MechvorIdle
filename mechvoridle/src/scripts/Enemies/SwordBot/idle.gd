@@ -9,7 +9,11 @@ func enter() -> void:
 		parent.animation_player.play("Idle")
 		
 	if GridManager.player and not parent.is_slave:
-		parent.timer.wait_time = 0.5
+		if !GameManager.in_overdrive_mode:
+			parent.timer.wait_time = 0.5
+		else:
+			parent.timer.wait_time = 1.0
+			
 		parent.timer.start()
 func exit() -> void:
 	pass

@@ -2941,12 +2941,14 @@ _data = {
 &"SpawnIn": SubResource("Animation_boe6v")
 }
 
-[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "animation_player", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
 weapon = ExtResource("2_7lw6e")
 spawn_rings = NodePath("SpawnRings")
+animation_player = NodePath("Turretanimated/AnimationPlayer")
 drop_chance = 15
+score = 150
 hurt_time = 0.833
 state_machine = NodePath("StateMachine")
 health = 300
