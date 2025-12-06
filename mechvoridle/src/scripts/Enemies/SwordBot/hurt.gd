@@ -5,7 +5,7 @@ extends State
 func enter() -> void:
 	parent.timer.wait_time = 1.0
 	parent.timer.start()
-	
+	SfxManager.play_sfx(SfxManager.get_enemy_hurt())
 	parent.tile_to_attack = null
 	parent.destined_tile = null
 	

@@ -28,7 +28,7 @@ func dash_attack() -> void:
 		var targeted_enemy : GridActor = GridManager.locked_on_enemies[0]
 		tile_to = GridManager.get_tile(parent.tiles,targeted_enemy.current_tile.coordinates + Vector2(1,0))
 		if targeted_enemy:
-			targeted_enemy.damage_actor(int(weapon_component.damage * GameManager.next_multiplier))
+			targeted_enemy.damage_actor(int(weapon_component.damage * GameManager.next_multiplier),false,weapon_component)
 	else:
 		tile_to = GridManager.get_tile(parent.tiles, Vector2(1, parent.current_tile.coordinates.y))
 		var get_tile_in_front : Tile = GridManager.get_tile(parent.tiles,Vector2(0, parent.current_tile.coordinates.y))
@@ -37,7 +37,7 @@ func dash_attack() -> void:
 			
 			
 	var sfx := weapon_component.primary_projectile_discharge
-	SfxManager.play_sfx(sfx)
+	SfxManager.play_sfx(sfx,3)
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
 	GameManager.reset_next_attack_multiplier()
 	#GridManager.clear_targeted_tiles()

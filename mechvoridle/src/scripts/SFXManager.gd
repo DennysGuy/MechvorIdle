@@ -175,6 +175,10 @@ const SWORD_DEFLECT_OFF_SHIELD = preload("uid://bndwlr23vkddv")
 
 const COMBAT_THEME = preload("uid://bsvvxjkhi4vt")
 
+const SHIELD_POWER_DOWN = preload("uid://d3v1pgmfplvko")
+const SHIELD_POWER_UP = preload("uid://cy31ecq6lsr4j")
+
+
 const VULCAN_IMPACT_1 = preload("uid://c40tyf6t78qmn")
 const VULCAN_IMPACT_2 = preload("uid://ds7pamcas4kod")
 const VULCAN_IMPACT_3 = preload("uid://do6o6kmu78pe2")
@@ -205,8 +209,33 @@ const WEAPON_1_READY = preload("uid://cok5ea1s6mcvo")
 const OD_MODE_ACTIVATE = preload("uid://bniwxfuy06te1")
 const OD_POWER_DOWN = preload("uid://d3h2oaomsi7s1")
 
+const SHIELD_IMPACT_1 = preload("uid://bnqvn2nvqss2d")
+const SHIELD_IMPACT_2 = preload("uid://d2om5k7rdf6lw")
+const SHIELD_IMPACT_3 = preload("uid://dxnohc3b7exj4")
+const SHIELD_IMPACT_4 = preload("uid://0liq5qvbvgit")
+const SHIELD_IMPACT_5 = preload("uid://d3vo7okrwioy1")
+const SHIELD_IMPACT_6 = preload("uid://bxb1c7o8y4fj4")
+const PERFECT_SHIELD_BLOCK = preload("uid://3gwdeqm1k1up")
+
+
+const SWORD_SWING = preload("uid://b0m4dnadb7tow")
+
+const ENEMY_HURT_1 = preload("uid://3xkitkmmbhhi")
+const ENEMY_HURT_2 = preload("uid://d2byhq2fhq75r")
+const ENEMY_HURT_3 = preload("uid://brc11rshc8p28")
+const ENEMY_HURT_4 = preload("uid://bca5hwvv4eoa8")
+
+var enemy_hurts : Array[AudioStream] = [ENEMY_HURT_1,ENEMY_HURT_2,ENEMY_HURT_3,ENEMY_HURT_4]
+
+var shield_impacts : Array[AudioStream] = [SHIELD_IMPACT_1,SHIELD_IMPACT_2,SHIELD_IMPACT_3,SHIELD_IMPACT_4,SHIELD_IMPACT_5,SHIELD_IMPACT_6]
 
 var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
+
+func get_shield_impact() -> AudioStream:
+	return shield_impacts.pick_random()
+
+func get_enemy_hurt() -> AudioStream:
+	return enemy_hurts.pick_random()
 
 func get_enemy_movement_whoosh() -> AudioStream:
 	return enemy_whooshes.pick_random()

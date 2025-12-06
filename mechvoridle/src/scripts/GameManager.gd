@@ -680,11 +680,16 @@ func damage_shield(amount : int) -> void:
 	if current_shield_amount <= 0:
 		current_shield_amount = 0
 		GridManager.player.can_use_shield = false
+		SfxManager.play_sfx(SfxManager.SHIELD_POWER_DOWN,3)
 		
 	SignalBus.update_shield_amount.emit()
+
+var block_pitch := 1.0
 	
 func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> int:
 	if shield_bonus_time >= 0.85:
+		SfxManager.play_sfx(SfxManager.PERFECT_SHIELD_BLOCK,0,false,block_pitch)
+		block_pitch += 0.2
 		print("PERFECT BLOCK!")
 		if perfect_count > 0:
 			next_multiplier += 1.0
@@ -697,6 +702,7 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		return int(weapon_damage * 0.3)
 	elif shield_bonus_time >= 0.50:
 		print("GREAT BLOCK!")
+		block_pitch = 1.0
 		perfect_count = 0
 		next_multiplier = 1.5
 		SignalBus.update_next_multiplier.emit()
@@ -704,6 +710,7 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		enable_hit_freeze(0.35, 0.35)
 		return int(weapon_damage * 0.35)
 	elif shield_bonus_time >= 0.10:
+		block_pitch = 1.0
 		print("GOOD BLOCK!")
 		perfect_count = 0
 		next_multiplier = 1.2
@@ -712,12 +719,14 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		enable_hit_freeze(0.2, 0.35)
 		return  int(weapon_damage * 0.75)
 	else:
+		block_pitch = 1.0
 		next_multiplier = 1.0
 		SignalBus.update_next_multiplier.emit()
 	
 	return 0
 
 func reset_next_attack_multiplier() -> void:
+	block_pitch = 1.0
 	GameManager.next_multiplier = 1.0
 	SignalBus.update_next_multiplier.emit()
 

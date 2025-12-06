@@ -6,7 +6,8 @@ class_name EnemyHurt extends State
 func enter() -> void:
 	if parent is GridPlayer:
 		parent.can_move = false
-	
+		
+	SfxManager.play_sfx(SfxManager.get_enemy_hurt())
 	parent.animation_player.play("hurt")
 	parent.timer.wait_time = parent.hurt_time
 	parent.timer.start()

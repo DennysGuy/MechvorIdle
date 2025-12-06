@@ -125,18 +125,18 @@ stretch_mode = 2
 [node name="Level2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 22.0
-offset_top = 86.0
+offset_top = 68.0
 offset_right = 63.0
-offset_bottom = 96.0
+offset_bottom = 78.0
 texture = ExtResource("5_6pg2v")
 stretch_mode = 2
 
 [node name="Level3" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 21.0
-offset_top = 35.0
+offset_top = 29.0
 offset_right = 64.0
-offset_bottom = 45.0
+offset_bottom = 39.0
 texture = ExtResource("6_n2jj1")
 stretch_mode = 2
 

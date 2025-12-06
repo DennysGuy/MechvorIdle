@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AttackPattern" load_steps=3 format=3 uid="uid://b6gnj16d10q56"]
 
 [ext_resource type="Script" uid="uid://6cacw0wqd6ts" path="res://src/scripts/Weapons/attack_pattern.gd" id="1_nfncl"]
-[ext_resource type="AudioStream" uid="uid://bp5incl4637j0" path="res://assets/audio/SFX/COMBAT/PlayerSwordImpact.wav" id="1_ysgve"]
+[ext_resource type="AudioStream" uid="uid://c5l46la065til" path="res://assets/audio/SFX/COMBAT/SwordImpact1.wav" id="1_ysgve"]
 
 [resource]
 script = ExtResource("1_nfncl")

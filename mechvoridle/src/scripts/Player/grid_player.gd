@@ -330,6 +330,9 @@ func _ready() -> void:
 	enable_mech_weapons()
 	state_machine.init(self)
 
+@onready var shield_hum: AudioStreamPlayer = $ShieldHum
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if can_move:
@@ -382,6 +385,10 @@ func _process(delta: float) -> void:
 			GridManager.clear_targeted_tiles()
 		
 		if Input.is_action_pressed("activate_shield") and can_use_shield:
+			
+			if !shield_hum.playing:
+				shield_hum.play()
+			
 			shield_bonus_time -= delta
 			if shield_bonus_time < 0:
 				shield_bonus_time = 0
@@ -392,6 +399,9 @@ func _process(delta: float) -> void:
 			shield_active = true
 			shield.show()
 		else:
+			if shield_hum.playing:
+				shield_hum.stop()
+			
 			shield_bonus_time = 1.0
 			shield_active = false
 			shield.hide()

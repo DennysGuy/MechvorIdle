@@ -1,4 +1,4 @@
-[gd_scene load_steps=642 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=643 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://bbueplktggyvr" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_0.png" id="2_mexru"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" uid="uid://6x6ykgnjrt80" path="res://src/scripts/GridPlayer/States/arm_rocket_fire.gd" id="31_l1nc1"]
 [ext_resource type="Script" uid="uid://x4uomjcq52v2" path="res://src/scripts/GridPlayer/States/sub_machine_gun_fire.gd" id="31_wvm5k"]
 [ext_resource type="Script" uid="uid://cykhm1hrtvvql" path="res://src/scripts/GridPlayer/States/player_death.gd" id="31_xmjel"]
+[ext_resource type="AudioStream" uid="uid://s2b3670o2kdk" path="res://assets/audio/SFX/COMBAT/ForceFieldHum1.wav" id="37_i40dg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqbol"]
 resource_name = "material_0"
@@ -23718,6 +23719,10 @@ libraries = {
 
 [node name="DamageLabelMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4472477, 0.40865052)
+
+[node name="ShieldHum" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_i40dg")
+bus = &"SFX"
 
 [connection signal="timeout" from="ChargeUpTimer" to="StateMachine/RifleAim" method="_on_charge_up_timer_timeout"]
 [connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]

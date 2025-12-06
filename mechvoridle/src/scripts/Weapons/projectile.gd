@@ -54,7 +54,7 @@ func impact_prjectile(area : Area3D):
 					
 					if calculated_damage > 0:
 						true_damage = calculated_damage
-					
+					SfxManager.play_sfx(SfxManager.get_shield_impact())
 					print("TRUE DAMAGE TO SHIELD: %s" % [true_damage])	
 					GameManager.damage_shield(true_damage)
 					

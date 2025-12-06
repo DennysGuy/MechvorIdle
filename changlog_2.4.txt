@@ -1,0 +1,91 @@
+Overview: 
+
+There are some big changes to the combat system to add incentives and/or even evolving 
+some of the mechanics to become core aspects of the game play. Listed below are all additions and changes:
+
+
+Mechanics:
+
+
+O.D. Mode (Overdrive Mode)
+
+Overdrive mode is essentially "over powered mode" where various stats of your mech is buffed and time slows to a crawl allowing for 
+the player a brief period of time to unleash massive damage on enemies. 
+
+In order to active Overdrive mode, the player will need to acquire Momentum power. 
+This is acquired by killing enemies with equipped weapons (i.e. sword and rifle). Kills with the Vulcan machine guns do not count towards Momentum power.
+
+The amount of Momentum power that the player acquires can be indicated by the "Momentum Meter" located on the left side of the screen. The momentum meter
+has a fill cap, but also interim levels.. meaning that the player will have reached a specific momentum level based on their acquired momentum. The player's momentum level
+indicates time allotted to be in overdrive mode as well as bonus amounts applied to the player during overdrive mode. 
+The lowest level will have the lowest bonuses and the max level will give the highest bonuses.
+
+Once the player can activate overdrive mode (animated text will indicate when O.D. mode is ready), 
+
+the player can press TAB at any point to active O.D. mode. The player will remain in O.D. mode as long as they have momentum power in their meter. The momentum power will drain rapidly
+and the player cannot turn of O.D. mode once they've entered this mode (it is commitment based mechanic - use it and lose it, so ensure you use it when you really need it!)
+
+Ultimately, you can think of O.D. mode akin to "star power mode" in Guitar Hero. It is a mode that will briefly give the player an advantage that can help them not only deal massive amounts of damage, 
+but also attain higher score (for score chasers!)
+
+Overdrive mode buffs the following stats:
+
+- weapon cooldown
+- crit chance
+- damage reduction
+- shield strength bonus
+- movement speed_bonus
+- score multiplier bonus
+- damage multiplier to Vulcan machine guns
+
+
+ONE CAVEAT: OD Mode is a little bugged from when switching out of OD mode.
+
+Shield Rework:
+
+The shield has been reworked into a mechanic that now has purpose outside of protecting the player from attacks
+Shielding is now a core mechanic for giving the player advantage. 
+
+The shield incentivizes the player to actually take on more risk as timing is the key to acquire maximum benefits as followed:
+
+- Less shield damage sustained
+- next weapon shot is given a damage multiplier
+- cooldown reduction is applied to weapons
+- Vulcans get a damage multiplier as long as next shot multiplier is available (have not shot weapon yet)
+
+
+There are 3 grades for shield timeing:
+
+Perfect
+
+- the player shields just as an attack (projectile or sword slash) is about to hit them
+
+highest cool down benefits
+highest next shot damage multiplier
+lowest shield damage sustained
+
+Getting consecutive perfects will increase the next shot multiplier by 1, 
+**You will know if you received a perfect based on a sfx that plays when shielding at the right time (it should be obvious)**
+
+Great
+
+- a bit easier to acquire, gives middle benefits - next damage multiplier is not stacked
+
+Good
+
+- lowest benefits, but still not worthless
+
+
+
+Other changes:
+
+Rifle rework
+
+- charge shot incentives enemy alignment - each enemy that the charge beam passes through will increase a damage multiplier by 0.2 -> this makes it really useful for taking out heal enemies especially in the later stages
+- charge up time for charge shot is shortened
+
+- Sfx added for shield exhaustion and ready
+- shield sfx for hum and impact
+- enemy hurt sfx
+
+

@@ -279,6 +279,7 @@ func fill_shield_guage() -> void:
 		GridManager.player.start_shield_cool_down = false
 		
 		if not GridManager.player.can_use_shield and GameManager.current_shield_amount >= GameManager.shield_amount:
+			SfxManager.play_sfx(SfxManager.SHIELD_POWER_UP,3)
 			GridManager.player.can_use_shield = true
 
 func update_health_bar() -> void:

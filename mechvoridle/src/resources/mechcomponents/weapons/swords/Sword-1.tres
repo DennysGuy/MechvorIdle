@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://b6gnj16d10q56" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerWideSwordPattern.tres" id="1_f5vas"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_wp7av"]
 [ext_resource type="AudioStream" uid="uid://br55j4ov8bag1" path="res://assets/audio/SFX/COMBAT/SwordDraw.ogg" id="2_esyi7"]
-[ext_resource type="AudioStream" uid="uid://bol71otokg8q6" path="res://assets/audio/SFX/COMBAT/PlayerSwordSwing.wav" id="3_esyi7"]
+[ext_resource type="AudioStream" uid="uid://b0m4dnadb7tow" path="res://assets/audio/SFX/COMBAT/SwordSwing.wav" id="3_esyi7"]
 
 [resource]
 script = ExtResource("1_wp7av")

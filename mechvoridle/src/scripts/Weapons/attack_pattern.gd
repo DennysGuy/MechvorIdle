@@ -15,6 +15,7 @@ is player and their cur position is [4,1] their direction is negative and so the
 enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD, ENEMY_COLUMN}
 
 @export var can_shift : bool
+@export var progressive_damage : bool
 @export var lock_on_limit : int = 0
 @export var lock_on_distance : Vector2 
 
@@ -32,6 +33,7 @@ var patterns = {
 @export var lock_on : bool = false
 @export var pass_through : bool = false
 @export var impact_sfx : AudioStream
+@export var progress_damage_interval : float
 @export_enum("hit_scan", "projectile","dash") var attack_type : int
 
 func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector2 = Vector2.ZERO) -> Vector2:	
@@ -53,6 +55,8 @@ func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector
 func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
 	var offset_list : Array
+	
+	var true_damage = damage
 	
 	if !new_attack_pattern.is_empty():
 		offset_list = new_attack_pattern
@@ -82,7 +86,11 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 							break
 					
 					SfxManager.play_sfx(impact_sfx)
-					enemy.damage_actor(damage, is_vulcan)
+					
+					if progressive_damage:
+						true_damage *= progress_damage_interval
+					
+					enemy.damage_actor(true_damage, is_vulcan)
 
 					if !pass_through and !enemy.is_dead:
 						break

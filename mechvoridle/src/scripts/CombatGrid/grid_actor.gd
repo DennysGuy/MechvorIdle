@@ -26,7 +26,7 @@ var is_attacking : bool = false
 
 var is_dead : bool = false
 
-func damage_actor(value : int, is_vulcan : bool = false) -> void:
+func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null) -> void:
 	var health_deduction = value
 	
 	if is_dead:
@@ -49,7 +49,10 @@ func damage_actor(value : int, is_vulcan : bool = false) -> void:
 			health_deduction *= GameManager.overdrive_damage_multiplier
 		
 		SfxManager.play_sfx(SfxManager.get_vulcan_impact())
-	
+		
+	elif mech_weapon:
+		SfxManager.play_sfx(mech_weapon.primary_impact)
+
 	if self != GridManager.player:
 		GameManager.update_score(health_deduction)
 	print("THIS IS HEALTH DEDUCTION: %s" % [health_deduction])

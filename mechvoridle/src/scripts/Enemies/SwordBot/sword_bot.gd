@@ -53,6 +53,7 @@ func attack_player(player : GridActor) -> void:
 	var shake_amount : float = 0.0
 	if player is GridPlayer:
 		if player.shield_active:
+			SfxManager.play_sfx(SfxManager.get_shield_impact())
 			SfxManager.play_sfx(SfxManager.SWORD_DEFLECT_OFF_SHIELD)
 			var true_damage := weapon.damage
 			var shield_bonus_time := GridManager.player.shield_bonus_time
@@ -60,8 +61,8 @@ func attack_player(player : GridActor) -> void:
 					
 			if calculated_damage > 0:
 				true_damage = calculated_damage
-			
-			
+				
+			GameManager.damage_shield(true_damage)
 			shake_amount = 0.8
 			in_stagger_state = true
 		else:

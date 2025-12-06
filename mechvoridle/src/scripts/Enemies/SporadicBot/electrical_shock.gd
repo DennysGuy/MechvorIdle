@@ -40,6 +40,7 @@ func move_shock_wave() -> void:
 						true_damage = calculated_damage
 					
 					print("TRUE DAMAGE TO SHIELD: %s" % [true_damage])	
+					SfxManager.play_sfx(SfxManager.get_shield_impact(),2)
 					GameManager.damage_shield(true_damage)
 				else:
 					shake_amount = 1.4

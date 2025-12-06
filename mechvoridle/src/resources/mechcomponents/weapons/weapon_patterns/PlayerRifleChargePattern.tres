@@ -7,5 +7,7 @@ script = ExtResource("1_c2p28")
 target_offset = Vector2(5, 0)
 attack_pattern = 2
 direction = -1
+progressive_damage = true
 pass_through = true
+progress_damage_interval = 1.5
 metadata/_custom_type_script = "uid://6cacw0wqd6ts"
