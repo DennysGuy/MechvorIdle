@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://b7cur5tqfwumt"]
+[gd_scene load_steps=46 format=4 uid="uid://b7cur5tqfwumt"]
 
 [ext_resource type="Script" uid="uid://dlen8t2tbhcym" path="res://src/scripts/CombatGrid/sporadic_enemy.gd" id="1_7h52i"]
 [ext_resource type="Resource" uid="uid://cjuoawfjc576u" path="res://src/resources/mechcomponents/weapons/rifles/EnemyShockWave.tres" id="2_e7lhk"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://y02edyq550l5" path="res://src/scripts/Enemies/die.gd" id="10_ffajh"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="12_3sskw"]
 [ext_resource type="Script" uid="uid://bt8s0nam276ac" path="res://src/scripts/Enemies/SporadicBot/sporadic_three_tile_shot.gd" id="12_i65h8"]
+[ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="15_hdcmq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7elwd"]
 resource_name = "Material_0"
@@ -2430,3 +2431,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.06513, 0)
 [node name="CrossHair" parent="." instance=ExtResource("4_05hjc")]
 transform = Transform3D(1, 0, 0, 0, 0.9244329, 0.38134468, 0, -0.38134468, 0.9244329, 0.0640592, 1.9682589, 0.58665085)
 visible = false
+
+[node name="Shadow" parent="." instance=ExtResource("15_hdcmq")]
+transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, 0.07347369, 0.06553507, 0.15459776)

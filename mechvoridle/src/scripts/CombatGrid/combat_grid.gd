@@ -6,6 +6,7 @@ var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
 @onready var player_health_bar: TextureProgressBar = $CanvasLayer/PlayerHealthBar
 @onready var player_shield_stamina: TextureProgressBar = $CanvasLayer/PlayerShieldStamina
+@onready var arena_animation_player: AnimationPlayer = $blockbench_export/AnimationPlayer
 
 @onready var wave_tracker: Label = $CanvasLayer/WaveTracker
 
@@ -38,6 +39,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	arena_animation_player.play("Wave")
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
 	damage_multiplier_label.hide()
@@ -89,7 +91,7 @@ func _process(delta: float) -> void:
 	pass
 
 func update_next_label() -> void:
-	next_damage_label.text = "Next DMG: %s" % [GameManager.next_multiplier]
+	next_damage_label.text = "Next DMG: %sx" % [GameManager.next_multiplier]
 
 func update_momentum_level_label() -> void:
 	momentum_level_label.text = "momentum lvl: %s" % [GameManager.momentum_meter_level]
@@ -123,9 +125,6 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 			prev_tile.occupant = null
 	if adjacent_tile:
 		actor.current_tile = adjacent_tile
-	if next_tile and next_tile.occupant == null:
-		next_tile.occupant = actor
-	if adjacent_tile:
 		var tween_speed := 0.15
 		if not actor is GridPlayer:
 			check_if_lock_on_valid(actor)
@@ -135,7 +134,10 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.set_ease(Tween.EASE_OUT)
 		#actor.global_position = adjacent_tile.marker_3d.global_position
-	
+		#await tween.finished
+		
+	if next_tile and next_tile.occupant == null:
+		next_tile.occupant = actor
 	#check for crate if player
 	if actor == GridManager.player and next_tile.upgrade_crate:
 		if next_tile.upgrade_crate is HealthCrate:
@@ -354,7 +356,6 @@ func spawn_health_crate(drop_chance : int) -> void:
 
 func create_damage_label(amount : int, marker : Marker3D, type : int = 0, ) -> void:
 	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
-	
 	match type:
 		0:
 			damage_label.label.text = "-%s" % [amount]

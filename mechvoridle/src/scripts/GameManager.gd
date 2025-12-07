@@ -259,19 +259,19 @@ func update_score(value : int) -> void:
 func check_momentum_level() -> void:
 	if momentum_meter_amount >= LEVEL_3_MOMENTUM:
 		momentum_meter_level = 3
-		set_overdrive_bonuses(4,0.75,90,35,30,0.08,5)
+		set_overdrive_bonuses(2,0.75,90,35,30,0.08,4)
 		SignalBus.update_od_bonuses.emit()
 		update_score(500)
 		return
 	if momentum_meter_amount >= LEVEL_2_MOMENTUM:
 		momentum_meter_level = 2
-		set_overdrive_bonuses(3,0.5,50,20,25,0.05,3)
+		set_overdrive_bonuses(1.6,0.5,50,20,25,0.05,3)
 		SignalBus.update_od_bonuses.emit()
 		update_score(300)
 		return
 	if momentum_meter_amount >= LEVEL_1_MOMENTUM:
 		momentum_meter_level = 1
-		set_overdrive_bonuses(2,0.3,30,10,15,0.04,2)
+		set_overdrive_bonuses(1.2,0.3,30,10,15,0.04,2)
 		SignalBus.update_od_bonuses.emit()
 		SignalBus.overdrive_mode_ready.emit()
 		update_score(100)

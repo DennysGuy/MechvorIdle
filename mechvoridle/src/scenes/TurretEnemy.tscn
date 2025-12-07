@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://bdavl4sbcomxk"]
+[gd_scene load_steps=55 format=4 uid="uid://bdavl4sbcomxk"]
 
 [ext_resource type="Texture2D" uid="uid://crqc42bpuql37" path="res://assets/graphics/TurretBot/TurretEnemy_0.png" id="1_1ibgu"]
 [ext_resource type="Script" uid="uid://b45s7l4f3in4f" path="res://src/scripts/Enemies/TurretBot/turret_drone.gd" id="1_1osyg"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="10_rrs0b"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="11_xudhj"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="12_boe6v"]
+[ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="13_ehsrc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qtrn"]
 resource_name = "Material_0"
@@ -3276,5 +3277,8 @@ libraries = {
 [node name="CrossHair" parent="." instance=ExtResource("12_boe6v")]
 transform = Transform3D(1, 0, 0, 0, 0.9182668, 0.39596224, 0, -0.39596224, 0.9182668, 0.061038733, 1.9748819, 1.3071463)
 visible = false
+
+[node name="Shadow" parent="." instance=ExtResource("13_ehsrc")]
+transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, -0.031464815, 0.045179605, 0.14222765)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

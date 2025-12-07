@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dcrmt7013v31a"]
+[gd_scene load_steps=32 format=4 uid="uid://dcrmt7013v31a"]
 
 [ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
 [ext_resource type="Texture2D" uid="uid://ohxdxxup6nsp" path="res://assets/graphics/HealerBot/HealerBot.png" id="2_223we"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="8_223we"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="10_rshui"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="11_3jje7"]
+[ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="12_oyrat"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67sei"]
 resource_name = "Material_0"
@@ -1234,8 +1235,8 @@ bones/1/name = "pyramid"
 bones/1/parent = 0
 bones/1/rest = Transform3D(-0.99624836, -0.0004441086, -0.08653924, -0.00186734, -0.9996436, 0.026627075, -0.08652019, 0.026688766, 0.99589294, 0.050993364, -0.26119316, 0.054420453)
 bones/1/enabled = true
-bones/1/position = Vector3(0.050993368, -0.26119304, 0.05442044)
-bones/1/rotation = Quaternion(-0.043309346, 0.013342668, 0.9989726, -0.00035617937)
+bones/1/position = Vector3(0.013651736, -0.2593647, 0.05757749)
+bones/1/rotation = Quaternion(-0.043295283, 0.014018671, 0.998648, 0.025124954)
 bones/1/scale = Vector3(1, 0.9999999, 1.0000004)
 bones/2/name = "EYEZ"
 bones/2/parent = 0
@@ -1262,22 +1263,22 @@ bones/5/name = "backpack"
 bones/5/parent = 0
 bones/5/rest = Transform3D(0.99997675, 0.0068141357, 0.00013268042, -0.00681412, 0.9999768, -0.0001145751, -0.00013345806, 0.00011366834, 1, 1.1659656, -0.2293896, 0.08410999)
 bones/5/enabled = true
-bones/5/position = Vector3(1.1664984, -0.22739011, 0.083792366)
-bones/5/rotation = Quaternion(-0.00065568456, 0.00018517833, -0.003473769, 0.9999938)
-bones/5/scale = Vector3(0.9999999, 0.99999994, 0.99999994)
+bones/5/position = Vector3(1.137233, -0.22996448, 0.08046476)
+bones/5/rotation = Quaternion(0.0004562231, -0.00025171365, -0.02724201, 0.9996288)
+bones/5/scale = Vector3(0.99999994, 0.9999999, 1)
 bones/6/name = "antenabackpack.r"
 bones/6/parent = 5
 bones/6/rest = Transform3D(1.0000001, 4.5081833e-08, -2.5029292e-08, -4.5081833e-08, 1.0000001, 6.426126e-08, 2.5029296e-08, -6.426126e-08, 1.0000001, 0.00879875, 1.869966, 0.62811536)
 bones/6/enabled = true
-bones/6/position = Vector3(0.008798647, 1.8699658, 0.62811536)
-bones/6/rotation = Quaternion(-3.2281847e-08, -1.2210776e-08, -1.0362438e-08, 1)
+bones/6/position = Vector3(0.008798867, 1.8699658, 0.6281153)
+bones/6/rotation = Quaternion(-3.2282358e-08, -1.21889485e-08, -1.03624025e-08, 1)
 bones/6/scale = Vector3(1.0000001, 1.0000001, 1.0000001)
 bones/7/name = "antenabackpack.l"
 bones/7/parent = 5
 bones/7/rest = Transform3D(1.0000001, 4.454341e-08, -2.514571e-08, -4.454341e-08, 1.0000001, 2.3283123e-10, 2.514571e-08, -2.3283009e-10, 1.0000001, 0.029661002, 1.8534456, -0.6093403)
 bones/7/enabled = true
-bones/7/position = Vector3(0.029661024, 1.8534453, -0.6093403)
-bones/7/rotation = Quaternion(4.8317166e-13, -1.1635208e-08, -1.19901316e-08, 1)
+bones/7/position = Vector3(0.029661149, 1.853445, -0.60934025)
+bones/7/rotation = Quaternion(1.4978243e-11, -1.1627932e-08, -1.1990096e-08, 1)
 bones/7/scale = Vector3(1.0000001, 1.0000001, 1.0000001)
 
 [node name="Antenna_001" type="MeshInstance3D" parent="healer/hilbot/Skeleton3D"]
@@ -1386,3 +1387,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.951536, 0)
 [node name="CrossHair" parent="." instance=ExtResource("11_3jje7")]
 transform = Transform3D(1, 0, 0, 0, 0.84442145, 0.5356794, 0, -0.5356794, 0.84442145, 0.0029376745, 2.408346, 0.8631059)
 visible = false
+
+[node name="Shadow" parent="." instance=ExtResource("12_oyrat")]
+transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, 0.0034608245, 0.07176399, -0.06192541)

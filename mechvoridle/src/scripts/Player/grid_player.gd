@@ -465,7 +465,8 @@ func fire_rifle_2() -> void:
 		fire_projectile(rifle_2, rifle_2_spout)
 	else:
 		var damage_reduction_multiplier : float = 0.75
-		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier))
+		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier * GameManager.next_multiplier))
+		GameManager.reset_next_attack_multiplier()
 		var sniper_blast : SniperBlast = preload("uid://cboxtbu6wo1sy").instantiate()
 		sniper_blast.global_position = rifle_2_spout.global_position
 		get_parent().add_child(sniper_blast)

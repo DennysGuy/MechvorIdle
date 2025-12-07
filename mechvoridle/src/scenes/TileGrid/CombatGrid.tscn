@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=49 format=4 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
 [ext_resource type="Script" uid="uid://dr2u7sj8lbs62" path="res://src/scripts/TileGrid/camera.gd" id="2_h1k12"]
+[ext_resource type="Texture2D" uid="uid://b62bdujohe785" path="res://assets/graphics/Models/kloofendal_48d_partly_cloudy_puresky_2k.exr" id="2_irucv"]
 [ext_resource type="PackedScene" uid="uid://b5rrffupkskse" path="res://src/scenes/TileGrid/CountDownTimer.tscn" id="2_qlay0"]
 [ext_resource type="PackedScene" uid="uid://cud8gmsqfuiq4" path="res://src/scenes/TileGrid/WeaponIcon.tscn" id="3_e6v0j"]
 [ext_resource type="Texture2D" uid="uid://cvwx02hujw06g" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Fill.png" id="3_h1k12"]
@@ -16,23 +17,26 @@
 [ext_resource type="AudioStream" uid="uid://dlfsctidlgyqj" path="res://assets/audio/SFX/COMBAT/ambience.ogg" id="14_po36e"]
 [ext_resource type="FontFile" uid="uid://cm80tuerk8ia" path="res://assets/graphics/Fonts/future-earth.ttf" id="14_ssntb"]
 [ext_resource type="AudioStream" uid="uid://bsvvxjkhi4vt" path="res://assets/audio/music/CombatTheme.ogg" id="15_po36e"]
+[ext_resource type="Texture2D" uid="uid://cnhck5w4en6fb" path="res://assets/graphics/UI/BossHPBar_Bar.png" id="16_wsi4k"]
+[ext_resource type="Texture2D" uid="uid://8puh8j7sckqa" path="res://assets/graphics/UI/BossHPBar_Fill.png" id="17_2haw7"]
+[ext_resource type="Texture2D" uid="uid://cvy7pb0bhv08y" path="res://assets/graphics/Models/GridArena2_0.png" id="19_ttjt2"]
+[ext_resource type="Texture2D" uid="uid://csvfmp2h5sw7t" path="res://assets/graphics/Models/Water.png" id="20_irucv"]
+[ext_resource type="Texture2D" uid="uid://cxnqo02pcjxw5" path="res://assets/graphics/Models/GridArena2_1.png" id="21_4lua7"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf78d"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_irucv"]
+panorama = ExtResource("2_irucv")
 
-[sub_resource type="Sky" id="Sky_qlay0"]
-sky_material = SubResource("ProceduralSkyMaterial_vf78d")
+[sub_resource type="Sky" id="Sky_4lua7"]
+sky_material = SubResource("PanoramaSkyMaterial_irucv")
+radiance_size = 2
 
-[sub_resource type="Environment" id="Environment_e6v0j"]
-background_mode = 1
-sky = SubResource("Sky_qlay0")
-ambient_light_source = 3
-ambient_light_energy = 2.13
+[sub_resource type="Environment" id="Environment_cvtfw"]
+background_mode = 2
+sky = SubResource("Sky_4lua7")
+sky_custom_fov = 103.5
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf78d"]
-albedo_color = Color(2.8878452e-07, 0.32786852, 0.38140947, 1)
 
 [sub_resource type="Animation" id="Animation_ssntb"]
 resource_name = "CameraSwoopToPosition"
@@ -689,20 +693,123 @@ _data = {
 &"RESET": SubResource("Animation_irucv")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76ehy"]
+resource_name = "material_0"
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("19_ttjt2")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ua8qv"]
+_surfaces = [{
+"aabb": AABB(-9.375, -9.25, -12.5, 18.75, 18.75, 25),
+"format": 34896613377,
+"index_count": 246,
+"index_data": PackedByteArray("DAAVABYADwAWABUADwALABYABwAPABUACwAXABYAGAALAA8ACwAYABcAGAAPABkABwAZAA8AGgAWABcAGgAMABYAGAAbABcAHAAaABcAHAAXABsAGAAdABsAHQAYABkAHgAcABsAHQANABsAHgAbAA0AHQAZAB8ACgAcAB4AHQAIAA0ACAAdAB8AIAAeAA0ACgAeACAACAAhAA0AIAANACEACAAfACIACAAiACEADgAgACEACgAjABwAIwAaABwACgAgACQAIwAKACQADgAkACAAIwAlABoAIwAkACYAJQAjACYAAQAmACQADgABACQAJQAMABoAAQAnACYAJwABAA4AJQAmACgAJwAoACYAJQAJAAwACQAlACgADAAJACkACQAoACkADAApABIADAASABUAFAApACgAJwAUACgABQASACkAFAAFACkAEgARABUABQAUAAYABQATABIABQAGABMAEgATABEABwAVABEAFAAnAAAAFAAAAAYAJwAOAAAAEwAGAAQAEwAEABEAEAAHABEAEAARAAQABwAQABkAEAAfABkAKgAQAAQAEAAqAB8AKgAEAAIAKgAiAB8AAwAqAAIAKgADACIAAwACACsAIgADACsAAAArAAIAAAAOACsAIgArACEADgAhACsA"),
+"lods": [1e-10, PackedByteArray("CQAMAA0ACwANAAwACgAJAA0ACwAIAA0ADgAKAA0ACAAOAA0ACwAPAAgADwALAAwABwAIAA8ABwAPAAwABwAQAAgABwAMABEAEAAHABEAEgARAAwADAAJABIAEAARAAQAEAADAAgAAwAQAAQACAADAA4AAwAEAAIAAwACAA4AAAAOAAIAEwAEABEAEgATABEAEwAGAAQABQATABIABQAGABMABQASAAkABQAUAAYAFAAAAAYAFAAFAAkAAQAOAAAAFAABAAAAFAAJAAEADgABAAoACQAKAAEA"), 0.0117123425, PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQABAAAABQAAAAYABQAGAAQAAwAHAAQABQAEAAcACAADAAEABwADAAgABQAJAAEACQAFAAcACQAKAAEACAABAAoABwALAAkABwAIAAsACwAKAAkACwAIAAoA")],
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 44,
+"vertex_data": PackedByteArray("oBP//x7wAAAAAP////8AAKAT//8FEQAAAAD//wAAAADI7///BREAAP///////wAAyO///x7wAAD/////AAAAAAAAAAAAAAAA//8AAP//AAAAAAAA//8AAP//AAAAAAAA//8AAB7wAAAAAAAABREAAAAA//8e8AAA////fwAAAADI7///AAAAAP////8FEQAA////fx7wAAD/////HvAAAMjv/////wAA////fwURAAD//wAABREAAMjvAAAFEQAAyO8AAAAAAADI7/9/AAAAAMjvAAAe8AAAoBMAAAURAACgEwAAHvAAAKATAAAAAAAAAAAAAB7wAACgE/9/AAAAAAAA/38e8AAAAAD/fwURAAAAAP9/AAAAAKATAAD//wAAAAD/f///AADI7wAA//8AAKAT/3///wAAoBP/////AADI7/9///8AAP///3///wAAoBP//wAAAAAAAP//BREAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_voog5"]
+resource_name = "blockbench_export_mesh"
+_surfaces = [{
+"aabb": AABB(-9.375, -9.25, -12.5, 18.75, 18.75, 25),
+"attribute_data": PackedByteArray("/1BZRj9L/0r/UPwEP0sAAD+W/0p/kfwEf5FZRj+WAAD/Sn/hAAB/4QAAf5b/Sn+WAAD/SgAAAAD/SgAA/0r/Sn+WAAB/4f9Kf5b/Sn/hAAA/lj+WP0s/Sz+WP0s/Sz+WAAA/lv9KP0v/Sj+WAAA/Sz+W5k8/S0KRP0tZRn+R/0o/lllGf5EAAD+W/AQ/Rn+Wf5Z/JT+bAACmBP9KpgR/JaYEAAADRgAA/0p/JVlGP0v8BD+WA0Z/JQNG/0pZRr9w/AS/cFlGP5b/UOZPf5FCkf9QQpF/keZPP0Z/4b8F/7s/Rv+7vwV/4b/b/0o/m38lv9t/JT+b/0o/S/wEv9t/JX/hfyW/2/9KP0vmT/9QQpH/UOZPvwV/4QAA/7u/Bf+7P0b/u/9K/7s/Rn/hf5HmTz+WQpF/kUKRP5v/Sj+bfyX/UFlGf5FZRv9Q/0r/UP9KP0tZRv9QWUZZRr9w/0q/cFlGP5b/UOZPP0vmT/9QP0v/UD9Lf5HmT/9Q5k9/kT9Lf5E/Sz+W5k9/keZPpgT/SgAAfyWmBH8lf5FZRj+WWUZ/kf9KpgR/JQNGfyU/m38lf5Z/JT+bAAC/238lP5t/Jb/bAAC/2wAAf+F/Jb/bfyX8BL9w/AQ/S1lGv3BZRj9L/0q/cFlGv3C/Bf+7AAD/u78Ff5a/BX+WP0b/u78F/7s/Rn+W/0r/uz9G/7umBH8lAAB/JaYEAAD/UAAAf5H8BP9Q/AR/kQAAP5b8BH+R/AQDRn8lA0YAAP9KfyUDRv9KA0Z/JX+RQpE/lkKRf5E/ln+RP5b/UEKRf5FCkf9QP5b/UD+WP0tCkf9QQpH8BL9w/AQ/lgAAv3AAAL9w/AQ/S/wEv3D/UPwEP0v8BP9QAAA="),
+"format": 34896613399,
+"index_count": 246,
+"index_data": PackedByteArray("JgAtAC4AJgAnAC0ALwAsADAALwAxACwAMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAAAA+AAIAAAAeAD4AEQA/AEAAEQBBAD8AQgBDAB0AQgBEAEMARQBGAEcARQAJAEYAIAAFACIAIAAGAAUACABIAEkACABKAEgASwBMAE0ASwAcAEwATgAkAE8ATgASACQAHwBQAFEAHwBSAFAAUwBUAFUAUwABAFQAGgBWAFcAGgBYAFYAFQBZAFoAFQBbAFkAXABdAF4AXABfAF0AYABhAGIAYAAWAGEAYwBkAGUAYwAMAGQABABmAGcABABoAGYAaQApAGoAaQAoACkAEABrAGwAEAAlAGsAbQBuAG8AbQBwAG4AcQByAHMAcQATAHIAKwB0AHUAKwB2AHQAdwB4AHkAdwAZAHgACgB6AHsACgB8AHoAfQB+AH8AfQAjAH4AgACBAIIAgAALAIEADQCDAIQADQCFAIMAhgCHAIgAhgAhAIcAiQCKAIsAiQAHAIoADgCMAI0ADgAqAIwAjgCPAJAAjgAPAI8AFACRAJIAFACTAJEAlACVAJYAlACXAJUAmACZAJoAmAAXAJkAGACbAJwAGACdAJsAngCfAKAAngAbAJ8AAwChAKIAAwCjAKEA"),
+"lods": [1e-10, PackedByteArray("FgAcAB0AFQAWAB0AFAAdABwAFAAXAB0AAAAeAAIAAwACAB4AAQAeAAAAHwABAAAAHwAAAAYABAAfAAYABAAGACAAAwAFAAIAIAAGAAUAAwAhAAUAIAAFACIAIQAiAAUAIQAHACIACAAJAAoAIwAIAAoAIwALAAgAEgAkABEAEAARACQAEAAlABEAJQATABEAJgAMACcADQAnAAwADQAoACcAJwAoACkAJwApACYADgAmACkADgAqACYAKgAPACYAKwAaACwAKwAZABoAGAArACwAGAAbACsA"), 0.0117123425, PackedByteArray("AAABAAIAAwACAAEABAABAAAAAwAFAAIABAAAAAYABAAGAAUAAwAHAAUABAAFAAcACAAJAAoACwAIAAoADAANAA4ADgAPAAwAEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkA")],
+"material": SubResource("StandardMaterial3D_76ehy"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 164,
+"vertex_data": PackedByteArray("oBP//x7w/78AAP//////v6AT//8FEf+/AAD//wAA/7//////////v8jv//8FEf+/yO///x7w/7//////AAD/v///AAD//wCAAAAAAP//AIAAAP////8AgP///////wCA//8AAP///7//////////v/////8AAP+///8AAAAA/7//////AAD//wAAAAAAAP////8AAAAA//8AAP//AAD/////AAAAAP+/AAAAAP///7///wAA////vwAAAAAAAP+/AAAAAAAA/78AAP//////vwAAAAD///+/AAD//wAA/7///wAAHvD/vwAAAAAFEf+/AAD//x7w/7/I7///////v/////8e8P+/yO///wAA/7//////BRH/v8jv/////wCA////fwAA///I7///AAD/////AAAe8P+/////fx7w/7//////HvD/v/////8FEf+/////fwAA/78AAP//HvD/vwAAAAAFEf+/////fwUR/7///wAABRH/vwAA/38e8P+/AAD/fwUR/78AAAAAHvD/v6ATAAAe8P+/yO8AAAUR/7+gEwAABRH/v8jvAAAe8P+/yO8AAP//AICgE/9///8AgMjv/3///wCAoBMAAP//AICgEwAAAAD//8jv/38AAP//oBP/fwAA///I7wAAAAD//wAA//8FEf+/oBP/fwAA//8AAP9/AAD//6ATAAAAAP//AAAAAB7w/7+gEwAABRH/v6ATAAAe8P+/oBMAAP//AIAAAP9///8AgKAT/3///wCAyO//f///AID///9///8AgMjvAAD//wCAyO8AAB7w/7///wAABRH/v8jvAAAFEf+/yO8AAAAA///I7/9/AAD//6AT//8e8P+/yO///x7w/7+gE///////v6AT//////+/AAD//x7w/7+gE///HvD/vwAA/38e8P+/AAD/f////78AAAAAHvD/v6ATAAAe8P+/AAAAAB7w/7+gEwAA////v6ATAAD///+/yO8AAB7w/7+gEwAAHvD/v8jvAAD///+/yO8AAP///7///wAAHvD/v8jvAAAe8P+///8AAB7w/7////9/////v////38e8P+/yO///x7w/7//////HvD/v8jv//////+/////fx7w/7////9/BRH/v8jv/38AAP//////fwAA///I7///AAD//6AT/38AAP//yO//fwAA//+gE///AAD//6AT//8AAP//AAD/fwAA//+gE/9/AAD//wAA/38FEf+/AAD//wUR/78AAP9/HvD/vwAA//8e8P+/AAD/f////78AAP9/HvD/v6AT/3///wCAAAD/f///AICgE/////8AgKAT/////wCAyO//f///AICgE/9///8AgMjv/////wCA////f///AIDI7/9///8AgP///38e8P+/////f////7//////HvD/v6AT//8AAP+/yO///wUR/7+gE///BRH/v8jv//8AAP+//////wUR/7/I7///BRH/v////38FEf+//////wUR/7////9/AAD/v///AAAFEf+/////fwUR/7/I7wAABRH/v///AAAFEf+/yO8AAAAA/7/I7wAAAAD/v6ATAAAFEf+/yO8AAAUR/7+gEwAAAAD/v6ATAAAAAP+/AAAAAAUR/7+gEwAABRH/vwAA/38FEf+/AAAAAAUR/78AAP9/AAD/vwAA/38AAP+/AAD//wUR/78AAP9/BRH/v6AT//8FEf+/AAD//wUR/7+gE///AAD/v////3////9/////f////3////9/////f////3////9//3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/////f////3////9///8AAP9/AAD/f////3////9/////f////3////9//3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/AAD/fwAA/3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///////f/9/////f////3///wAA/38AAP9/AAD/f/9/////f////3////9/////f////3///wAA/38AAP9/AAD/f/9/////f///////f////3////9/////f////3////9//3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/9/AAD/fwAA/38AAP///3////9/////f/9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA////f////3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/AAAAAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//3////9/////f////3////9/////f///////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ua8qv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvtfw"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.63529414)
+albedo_texture = ExtResource("20_irucv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skkip"]
+resource_name = "material_1"
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("21_4lua7")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ug87d"]
+_surfaces = [{
+"aabb": AABB(-9.09375, -6.96875, -12.3125, 18.1875, 14.4375, 24.625),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMABAAFAAEAAwAGAAAABgAEAAAABQAGAAMABgAHAAQABAAHAAUABQAHAAYA"),
+"name": "material_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAAAAD/////AAD//wAAAAAAAAAAAAD//wAAAAD//wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dr2an"]
+resource_name = "blockbench_export_mesh2"
+_surfaces = [{
+"aabb": AABB(-9.09375, -6.96875, -12.3125, 18.1875, 14.4375, 24.625),
+"attribute_data": PackedByteArray("f2K/YgAAf5wAAL9if2J/nD/Ff5y/Yr9iP8W/Yr9if5wAAH9iv0gAAL9If2IAAAAAv5F/Yv9IAAC/kQAA/0h/Yr/avzn/kQAAv9oAAP+Rvzm/SL+cAAB/1gAAv5y/SH/W"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_skkip"),
+"name": "material_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA/7///wAA////v/////////+///8AAAAA/78AAAAA////vwAA//8AAP+/AAD//////78AAAAAAAD/vwAA//////+//////wAA/7//////////vwAA//8AAP+///8AAAAA/78AAAAA////v///AAD///+/AAAAAAAA/7///wAA//8AgAAA/////wCA////////AIAAAAAA//8AgAAA//8AAP////8AAAAA////////AAD//wAAAAAAAP///38AAP9/AAD/fwAA/38AAP9/////f////3////9///////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ug87d")
+
+[sub_resource type="Animation" id="Animation_3i0ul"]
+resource_name = "Wave"
+length = 7.9583335
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.0625, 0.46875, 0, 0.033333335, 1, -0.0625, 0.4640945, 0, 0.06666667, 1, -0.0625, 0.45837134, 0, 0.1, 1, -0.0625, 0.45210662, 0, 0.13333334, 1, -0.0625, 0.4455989, 0, 0.2, 1, -0.0625, 0.43223992, 0, 0.3, 1, -0.0625, 0.41170695, 0, 0.46666667, 1, -0.0625, 0.3767451, 0, 2.5, 1, -0.0625, -0.061836205, 0, 2.7333333, 1, -0.0625, -0.11129991, 0, 2.8333333, 1, -0.0625, -0.13219005, 0, 2.9, 1, -0.0625, -0.14589405, 0, 2.9333334, 1, -0.0625, -0.15265979, 0, 3, 1, -0.0625, -0.16601878, 0, 3.0666666, 1, -0.0625, -0.17854826, 0, 3.1, 1, -0.0625, -0.18400837, 0, 3.1333334, 1, -0.0625, -0.1875, 0, 4.0666666, 1, -0.0625, -0.1875, 0, 4.1, 1, -0.0625, -0.18528779, 0, 4.1666665, 1, -0.0625, -0.17643881, 0, 4.2, 1, -0.0625, -0.17123404, 0, 4.233333, 1, -0.0625, -0.16593209, 0, 4.266667, 1, -0.0625, -0.1605555, 0, 4.3333335, 1, -0.0625, -0.14964506, 0, 4.5, 1, -0.0625, -0.12180271, 0, 7.3, 1, -0.0625, 0.3619813, 0, 7.5666666, 1, -0.0625, 0.40725973, 0, 7.6666665, 1, -0.0625, 0.42399284, 0, 7.733333, 1, -0.0625, 0.4350029, 0, 7.8, 1, -0.0625, 0.4458485, 0, 7.8333335, 1, -0.0625, 0.45118278, 0, 7.866667, 1, -0.0625, 0.4563876, 0, 7.9, 1, -0.0625, 0.46100718, 0, 7.9583335, 1, -0.0625, 0.46875, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvtuc"]
+_data = {
+&"Wave": SubResource("Animation_3i0ul")
+}
+
 [node name="CombatGrid" type="Node3D"]
 script = ExtResource("1_vf78d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_e6v0j")
+environment = SubResource("Environment_cvtfw")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 
 [node name="Tiles" type="Node" parent="."]
-
-[node name="Arena" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.0000061, 0, 0, 0, 1.0000061, 4.5497, -0.56998444, 7.4714828)
-material_override = SubResource("StandardMaterial3D_vf78d")
-size = Vector3(12.608919, 1, 19.158918)
 
 [node name="CameraDefaultMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99709946, 0.07610999, 0, -0.07610999, 0.99709946, 3, 3.3, 18.8)
@@ -911,13 +1018,15 @@ text = "100000000"
 horizontal_alignment = 2
 
 [node name="DamageMultiplierLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 8.0
-offset_top = 65.0
-offset_right = 252.0
-offset_bottom = 151.0
+offset_left = 506.0
+offset_top = 297.0
+offset_right = 637.0
+offset_bottom = 328.0
 theme_override_fonts/normal_font = ExtResource("9_02ps3")
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "dmg x1.5"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="CountDownLabel" type="Label" parent="CanvasLayer"]
@@ -939,7 +1048,6 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -971,12 +1079,14 @@ volume_db = 2.0
 autoplay = true
 
 [node name="NextDamageLabel" type="Label" parent="CanvasLayer"]
-offset_left = 7.0
-offset_top = 76.0
-offset_right = 245.0
-offset_bottom = 93.0
+offset_left = 471.0
+offset_top = 328.0
+offset_right = 637.0
+offset_bottom = 341.0
 theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 12
 text = "Next DMG: 1.0x"
+horizontal_alignment = 2
 
 [node name="MomentumLevelLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 3
@@ -985,14 +1095,34 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -208.0
-offset_top = -16.0
+offset_top = -17.0
 offset_right = -3.0
-offset_bottom = -2.0
+offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 13
 text = "Momentum LVL: 0"
+horizontal_alignment = 2
+
+[node name="BossHPBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 138.0
+offset_top = 74.0
+offset_right = 460.0
+offset_bottom = 94.0
+value = 100.0
+texture_under = ExtResource("16_wsi4k")
+texture_progress = ExtResource("17_2haw7")
+
+[node name="Label" type="Label" parent="CanvasLayer/BossHPBar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 23.0
+offset_right = 42.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 10
+text = "Boss"
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(570, 19)
@@ -1002,6 +1132,26 @@ stream = ExtResource("15_po36e")
 volume_db = 12.0
 autoplay = true
 bus = &"Music"
+
+[node name="blockbench_export" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6196375, -9.447009, 7.4070644)
+
+[node name="Arena" type="MeshInstance3D" parent="blockbench_export"]
+mesh = SubResource("ArrayMesh_voog5")
+skeleton = NodePath("")
+
+[node name="Water2" type="Node3D" parent="blockbench_export"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625, 0.46875, 0)
+
+[node name="Water" type="MeshInstance3D" parent="blockbench_export/Water2"]
+material_override = SubResource("StandardMaterial3D_cvtfw")
+mesh = SubResource("ArrayMesh_dr2an")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="blockbench_export"]
+libraries = {
+&"": SubResource("AnimationLibrary_wvtuc")
+}
 
 [connection signal="timeout" from="SupplyCrateTimer" to="." method="_on_supply_crate_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

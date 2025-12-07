@@ -1,55 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://jgfdd71l3y54"]
+[gd_scene load_steps=6 format=3 uid="uid://jgfdd71l3y54"]
 
 [ext_resource type="Script" uid="uid://cjdkynw68i7j" path="res://src/scripts/CombatGrid/tile.gd" id="1_j5pwg"]
 [ext_resource type="PackedScene" uid="uid://djybh7ph2xcau" path="res://src/scenes/TileGrid/target_area.tscn" id="2_jm0kc"]
-[ext_resource type="Texture2D" uid="uid://qwqgbucunyj3" path="res://assets/graphics/GridTile_0.png" id="3_c6y1m"]
+[ext_resource type="PackedScene" uid="uid://dcophk4eho8fe" path="res://assets/graphics/GridTile.gltf" id="3_c6y1m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6y1m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c6y1m"]
 size = Vector3(2.4389074, 1.6894531, 0.086586)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5b8ln"]
-resource_name = "material_0"
-transparency = 2
-alpha_scissor_threshold = 0.05
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("3_c6y1m")
-texture_filter = 0
-texture_repeat = false
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_8fd4b"]
-_surfaces = [{
-"aabb": AABB(-1.3125, 0, -1.25, 2.625, 0.0625, 2.5),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAAAEAAEAAQAFAAMABAAFAAEAAwAGAAAABgAEAAAABQAGAAMABgAHAAQABAAHAAUABQAHAAYA"),
-"name": "material_0",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAAAAD/////AAD//wAAAAAAAAAAAAD//wAAAAD//wAAAAAAAAAAAAAAAA==")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_ftwr4"]
-resource_name = "blockbench_export_mesh"
-_surfaces = [{
-"aabb": AABB(-1.3125, 0, -1.25, 2.625, 0.0625, 2.5),
-"attribute_data": PackedByteArray("/6X/B/9V/wn/Vf8H/6X/Cf+l/w3/Vf8L/6X/C/9V/w0AAP9P/1MAAP9T/08AAAAA/1P/oQAA/1H/U/9RAAD/of+p/wH/VQAA/6kAAP9V/wH/qf8D/1X/Bf9V/wP/qf8F"),
-"format": 34896613399,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_5b8ln"),
-"name": "material_0",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("/////wAA/7///wAA////v/////////+///8AAAAA/78AAAAA////vwAA//8AAP+/AAD//////78AAAAAAAD/vwAA//////+//////wAA/7//////////vwAA//8AAP+///8AAAAA/78AAAAA////v///AAD///+/AAAAAAAA/7///wAA//8AgAAA/////wCA////////AIAAAAAA//8AgAAA//8AAP////8AAAAA////////AAD//wAAAAAAAP///38AAP9/AAD/fwAA/38AAP9/////f////3////9///////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_8fd4b")
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_j5pwg")
@@ -73,10 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50142026, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057942748, 0.34472656, -0.047618866)
 shape = SubResource("BoxShape3D_c6y1m")
 
-[node name="blockbench_export" type="Node3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.086045384, 0, 0.08435178)
+[node name="GridTile" parent="." instance=ExtResource("3_c6y1m")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.07388389, 0, 0.07992494)
 
-[node name="cuboid" type="MeshInstance3D" parent="blockbench_export"]
-transparency = 0.75
-mesh = SubResource("ArrayMesh_ftwr4")
-skeleton = NodePath("")
+[editable path="GridTile"]

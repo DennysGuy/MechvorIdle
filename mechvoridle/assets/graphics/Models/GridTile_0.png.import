@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qwqgbucunyj3"
-path.s3tc="res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"
+uid="uid://dox45gempmom0"
+path.s3tc="res://.godot/imported/GridTile_0.png-86708b5132230114731b3fb009dff0d5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/graphics/GridTile_0.png"
-dest_files=["res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"]
+source_file="res://assets/graphics/Models/GridTile_0.png"
+dest_files=["res://.godot/imported/GridTile_0.png-86708b5132230114731b3fb009dff0d5.s3tc.ctex"]
 
 [params]
 

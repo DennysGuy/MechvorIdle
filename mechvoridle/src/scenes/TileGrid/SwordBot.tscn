@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://df0aqkd6tb8o0"]
+[gd_scene load_steps=68 format=4 uid="uid://df0aqkd6tb8o0"]
 
 [ext_resource type="Script" uid="uid://jjad5qyel3ry" path="res://src/scripts/Enemies/SwordBot/sword_bot.gd" id="1_mft84"]
 [ext_resource type="Texture2D" uid="uid://qdpc8c25uy38" path="res://assets/graphics/Models/SwordBot/SwordBot_0.png" id="2_1j7qk"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://sqk34dbd7j2o" path="res://src/scripts/Enemies/SwordBot/stagger.gd" id="13_ku2yv"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="14_jttd7"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="15_1p4t3"]
+[ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="16_kxq0i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1p3d"]
 resource_name = "material_0"
@@ -1936,3 +1937,6 @@ libraries = {
 [node name="CrossHair" parent="." instance=ExtResource("15_1p4t3")]
 transform = Transform3D(1, 0, 0, 0, 0.89111745, 0.45377278, 0, -0.45377278, 0.89111745, -0.03739786, 1.5253754, 1.5350461)
 visible = false
+
+[node name="Shadow" parent="." instance=ExtResource("16_kxq0i")]
+transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, 0.034623384, 0.012666404, 0.0033296347)

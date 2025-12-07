@@ -2,24 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qwqgbucunyj3"
-path.s3tc="res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"
+uid="uid://8puh8j7sckqa"
+path="res://.godot/imported/BossHPBar_Fill.png-6f4a33d9d723c695dd6ca8c0c51d03ef.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
-}
-generator_parameters={
-"md5": "6a912a5eb22d6f048238e853e077e5f4"
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/GridTile_0.png"
-dest_files=["res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"]
+source_file="res://assets/graphics/UI/BossHPBar_Fill.png"
+dest_files=["res://.godot/imported/BossHPBar_Fill.png-6f4a33d9d723c695dd6ca8c0c51d03ef.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -27,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -41,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

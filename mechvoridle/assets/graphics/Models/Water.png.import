@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qwqgbucunyj3"
-path.s3tc="res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"
+uid="uid://csvfmp2h5sw7t"
+path.s3tc="res://.godot/imported/Water.png-39c220d91762e86bae13bda95e5cd0a9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "6a912a5eb22d6f048238e853e077e5f4"
-}
 
 [deps]
 
-source_file="res://assets/graphics/GridTile_0.png"
-dest_files=["res://.godot/imported/GridTile_0.png-763a5eb832d6f44357969256732c9d11.s3tc.ctex"]
+source_file="res://assets/graphics/Models/Water.png"
+dest_files=["res://.godot/imported/Water.png-39c220d91762e86bae13bda95e5cd0a9.s3tc.ctex"]
 
 [params]
 
