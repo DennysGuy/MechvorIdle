@@ -10,6 +10,7 @@ func enter() -> void:
 	parent.charge_up_timer.wait_time = 0.6
 	parent.current_weapon_scanning = weapon_component
 	print(parent.current_weapon_scanning)
+	
 	if is_right_position():
 		animation_name = "AimRifleRight"
 	elif is_left_position():
@@ -17,7 +18,7 @@ func enter() -> void:
 		
 	parent.animation_player.play(animation_name)
 	parent.charge_up_timer.start()
-	var sfx := GameManager.get_left_weapon().charge_up
+	var sfx := weapon_component.charge_up
 	SfxManager.play_sfx(sfx)
 func exit() -> void:
 	parent.current_weapon_scanning = null

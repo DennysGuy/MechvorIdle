@@ -475,19 +475,25 @@ func apply_time_consequences() -> void:
 	if !GameManager.fight_on:
 		damage_actor(int(health * 0.3))
 
+func fire_smg_muzzle_flare_left_side() -> void:
+	var muzzle_flare : WeaponMuzzleFlare =  preload("uid://bqgicaqmm0vsq").instantiate()
+	muzzle_flare.position = rifle_2_spout.position
+	SfxManager.play_sfx(SfxManager.get_smg_shot())
+	add_child(muzzle_flare)
+	
 
 func _on_shield_cool_down_timer_timeout() -> void:
 	#start_shield_cool_down = false
 	SignalBus.refil_shield_gauge.emit()
 	
 func init_weapon_states() -> void:
-	var aim_state_right : WeaponState =  weapon_states["Sword"][GameManager.get_right_weapon().shop_index]["Aim"]
+	var aim_state_right : WeaponState =  weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Aim"]
 	var fire_state_right : WeaponState = weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
 	aim_state_right.set_position_as_right()
 	aim_state_right.input_map = "mine_asteroid"
 	fire_state_right.set_position_as_right()
 
-	
+
 	idle.weapon_1_aim = aim_state_right
 	
 	var aim_state_left : WeaponState =  weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]

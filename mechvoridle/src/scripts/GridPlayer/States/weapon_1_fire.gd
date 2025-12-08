@@ -43,10 +43,11 @@ func dash_attack() -> void:
 	#GridManager.clear_targeted_tiles()
 		
 func exit() -> void:
+	print("THIS IS SWORD WEAPON POSITION: %s " % [weapon_position])
 	parent.can_move = true
 	parent.can_fire_vulcans = true
 	weapon_component.damage = weapon_component.base_damage
-	SignalBus.issue_weapon_attack.emit(0)
+	SignalBus.issue_weapon_attack.emit(weapon_position)
 	GridManager.remove_all_enemies_from_locked_on_list()
 
 func process_input(_event: InputEvent) -> State:

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqgicaqmm0vsq"]
+
+[ext_resource type="PackedScene" uid="uid://c0lw26sffo648" path="res://assets/graphics/Models/PlayerMech/Weapons/MuzzleFlare.gltf" id="1_k1smy"]
+[ext_resource type="Script" uid="uid://yn3861alem3i" path="res://src/scripts/Weapons/weapon_muzzle_flare.gd" id="1_uts62"]
+
+[node name="WeaponMuzzleFlare" type="Node3D"]
+script = ExtResource("1_uts62")
+
+[node name="Flare" parent="." instance=ExtResource("1_k1smy")]

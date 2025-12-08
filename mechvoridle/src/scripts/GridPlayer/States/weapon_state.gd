@@ -1,7 +1,7 @@
 class_name WeaponState extends State
 
-enum POSITION {NONE, LEFT, RIGHT}
-@export var weapon_position : POSITION = POSITION.NONE
+enum POSITION {LEFT, RIGHT}
+@export var weapon_position : POSITION
 @export var input_map : String
 
 var weapon_component : MechWeapon

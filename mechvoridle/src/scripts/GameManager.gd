@@ -784,7 +784,8 @@ func equip_sword_left_rocket_right() -> void:
 	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
 
 func equip_rifle_left_sword_right() -> void:
-	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl")
+	#owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl")
+	owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr")
 	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
 
 '''

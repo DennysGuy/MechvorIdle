@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackPattern" load_steps=3 format=3 uid="uid://debu0i84q34w8"]
+
+[ext_resource type="AudioStream" uid="uid://c5l46la065til" path="res://assets/audio/SFX/COMBAT/SwordImpact1.wav" id="1_o4mpa"]
+[ext_resource type="Script" uid="uid://6cacw0wqd6ts" path="res://src/scripts/Weapons/attack_pattern.gd" id="2_l5fcj"]
+
+[resource]
+script = ExtResource("2_l5fcj")
+target_offset = Vector2(4, 0)
+attack_pattern = 2
+direction = -1
+lock_on_limit = 1
+lock_on_distance = Vector2(0, 2)
+lock_on = true
+impact_sfx = ExtResource("1_o4mpa")
+metadata/_custom_type_script = "uid://6cacw0wqd6ts"

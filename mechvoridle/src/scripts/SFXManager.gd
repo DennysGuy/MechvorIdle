@@ -178,12 +178,19 @@ const COMBAT_THEME = preload("uid://bsvvxjkhi4vt")
 const SHIELD_POWER_DOWN = preload("uid://d3v1pgmfplvko")
 const SHIELD_POWER_UP = preload("uid://cy31ecq6lsr4j")
 
-
 const VULCAN_IMPACT_1 = preload("uid://c40tyf6t78qmn")
 const VULCAN_IMPACT_2 = preload("uid://ds7pamcas4kod")
 const VULCAN_IMPACT_3 = preload("uid://do6o6kmu78pe2")
 const VULCAN_IMPACT_4 = preload("uid://c0ffb7leqcnyj")
 const VULCAN_IMPACT_5 = preload("uid://du35eylgoa8jh")
+
+const SMG_1 = preload("uid://bhopy8oluxwpw")
+const SMG_2 = preload("uid://sdvpmb6rtxh")
+const SMG_3 = preload("uid://b77jy3snsq1j")
+const SMG_4 = preload("uid://bkwytsbuo3mud")
+const SMG_5 = preload("uid://ctl4pu8snsg1p")
+
+var smg_shots : Array[AudioStream] = [SMG_1,SMG_2,SMG_3,SMG_4,SMG_5]
 
 var vulcan_impacts : Array[AudioStream] = [VULCAN_IMPACT_1,VULCAN_IMPACT_2, VULCAN_IMPACT_3, VULCAN_IMPACT_4, VULCAN_IMPACT_5]
 
@@ -230,6 +237,9 @@ var enemy_hurts : Array[AudioStream] = [ENEMY_HURT_1,ENEMY_HURT_2,ENEMY_HURT_3,E
 var shield_impacts : Array[AudioStream] = [SHIELD_IMPACT_1,SHIELD_IMPACT_2,SHIELD_IMPACT_3,SHIELD_IMPACT_4,SHIELD_IMPACT_5,SHIELD_IMPACT_6]
 
 var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
+
+func get_smg_shot() -> AudioStream:
+	return smg_shots.pick_random()
 
 func get_shield_impact() -> AudioStream:
 	return shield_impacts.pick_random()

@@ -28,7 +28,7 @@ func enter() -> void:
 	parent.state_machine.change_state(idle)
 	
 func exit() -> void:
-	SignalBus.issue_weapon_attack.emit(1)
+	SignalBus.issue_weapon_attack.emit(weapon_position)
 	parent.can_fire_vulcans = true
 	parent.can_move = true
 

@@ -1,6 +1,6 @@
 class_name WeaponIconHud extends Control
 
-enum WEAPON_SLOT {WEAPON1, WEAPON2}
+enum WEAPON_SLOT {WEAPON2, WEAPON1}
 @export var weapon_slot : WEAPON_SLOT
 @onready var weapon_icon: TextureRect = $WeaponIcon
 

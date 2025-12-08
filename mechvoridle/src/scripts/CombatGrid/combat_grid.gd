@@ -6,7 +6,7 @@ var player : GridPlayer
 @onready var health_amount_label: Label = $CanvasLayer/HealthAmountLabel
 @onready var player_health_bar: TextureProgressBar = $CanvasLayer/PlayerHealthBar
 @onready var player_shield_stamina: TextureProgressBar = $CanvasLayer/PlayerShieldStamina
-@onready var arena_animation_player: AnimationPlayer = $blockbench_export/AnimationPlayer
+@onready var arena_animation_player: AnimationPlayer = $Arena/AnimationPlayer
 
 @onready var wave_tracker: Label = $CanvasLayer/WaveTracker
 

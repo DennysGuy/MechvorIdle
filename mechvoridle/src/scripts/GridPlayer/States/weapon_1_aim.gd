@@ -36,7 +36,6 @@ func exit() -> void:
 		GridManager.remove_all_enemies_from_locked_on_list()
 	weapon_component.damage *= damage_multiplier
 	
-	
 func process_input(_event: InputEvent) -> State:
 	if Input.is_action_just_released(input_map):
 		is_attacking = true
@@ -46,8 +45,6 @@ func process_input(_event: InputEvent) -> State:
 		parent.can_move = true
 		parent.can_fire_vulcans = true
 		return idle
-	
-	
 
 	return null
 

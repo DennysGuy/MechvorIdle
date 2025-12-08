@@ -1,22 +1,20 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=4 format=3 uid="uid://dbxh8e0i8qfhr"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://dbxh8e0i8qfhr"]
 
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_fd1e0"]
-[ext_resource type="Resource" uid="uid://be3g0tuwcydg1" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRiflePattern.tres" id="1_i2eak"]
-[ext_resource type="Resource" uid="uid://br01pvgjejf84" path="res://src/resources/mechcomponents/weapons/weapon_patterns/PlayerRifleChargePattern.tres" id="3_ed5d5"]
+[ext_resource type="Resource" uid="uid://bqfh8impxxy8" path="res://src/resources/mechcomponents/weapons/weapon_patterns/VulcanPattern.tres" id="1_vbyji"]
 
 [resource]
 script = ExtResource("1_fd1e0")
 weapon_class = 1
 shop_index = 1
-damage = 60.0
-cool_down_time = 6.0
+damage = 15.0
+cool_down_time = 3.0
 number_of_hits = 10
 charge_speed = 0.8
 crit_chance = 0.03
 accuracy = 0.7
 stun_chance = 0.03
-attack_pattern = ExtResource("1_i2eak")
-secondary_attack_pattern = ExtResource("3_ed5d5")
+attack_pattern = ExtResource("1_vbyji")
 component_name = "Sub Ultima Machinegun"
 index = 4
 description = "This sub machine gun is known best for CQC, as in typical use it is known to be the \"Sprayer and Prayer\". 

@@ -6,9 +6,10 @@ class_name SubMachineGunAim extends WeaponState
 func enter() -> void:
 	if is_right_position():
 		animation_name = "AimRifleRight"
+
 	elif is_left_position():
 		animation_name = "AimRifleLeft"
-	
+
 	parent.animation_player.play(animation_name)
 	#We will handle aim functionailty 
 func exit() -> void:
@@ -29,4 +30,5 @@ func process_frame(_delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
+	parent.scanned_attack_pattern = weapon_component.attack_pattern.scan_tiles_of_effect(parent, parent.tiles)
 	return null
