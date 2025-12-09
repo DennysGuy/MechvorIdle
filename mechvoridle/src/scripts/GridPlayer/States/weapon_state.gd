@@ -5,7 +5,7 @@ enum POSITION {LEFT, RIGHT}
 @export var input_map : String
 
 var weapon_component : MechWeapon
-
+var selected_tile : Tile
 func get_position() -> POSITION:
 	return weapon_position
 

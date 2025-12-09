@@ -22707,6 +22707,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03735875, -0.59575814, -0.
 
 [node name="MeleeHand2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01392125, -0.018076874, -0.013795)
+visible = false
 
 [node name="MeleeHandGuard2" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/MeleeHand2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00774125, 0.0975525, 0.09539313)
@@ -23001,6 +23002,7 @@ skeleton = NodePath("")
 
 [node name="MeleeBackGuard2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02684875, -0.178125, 0.125)
+visible = false
 
 [node name="MeleeForeArm22" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/MeleeBackGuard2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014166875, -0.0497725, -0.12378125)
@@ -23071,6 +23073,7 @@ skeleton = NodePath("")
 
 [node name="MeleeBicep2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00356375, 0.06631, -0.026271874)
+visible = false
 
 [node name="MeleeElbowJoint2" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/MeleeBicep2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11875, 0.00169375)
@@ -23124,6 +23127,7 @@ mesh = SubResource("ArrayMesh_bsnij")
 skeleton = NodePath("")
 
 [node name="MeleeShoulder2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2"]
+visible = false
 
 [node name="MeleeArm2Connector" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/MeleeShoulder2"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, -0.22671875)
