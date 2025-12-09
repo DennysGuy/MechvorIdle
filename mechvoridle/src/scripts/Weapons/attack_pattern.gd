@@ -16,6 +16,8 @@ enum ATTACK_PATTERNS {SINGLE, ROW, COLUMN, ADJACENT, DIAGONAL, SECTOR, BOARD, EN
 
 @export var can_shift : bool
 @export var progressive_damage : bool
+@export var number_of_hits : int
+@export var interval_between_hits : float = 0.1
 @export var lock_on_limit : int = 0
 @export var lock_on_distance : Vector2 
 
@@ -52,7 +54,7 @@ func get_destined_tile_coordinates(actor : GridActor, new_target_offset : Vector
 	
 	return final_targeted_tile
 
-func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
+func issue_attack(actor : GridActor, tiles : Node, damage : int, hit_freeze : float, new_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
 	var final_targeted_tile : Vector2 = get_destined_tile_coordinates(actor)
 	var offset_list : Array
 	
@@ -90,7 +92,11 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 					if progressive_damage:
 						true_damage *= progress_damage_interval
 					
-					enemy.damage_actor(true_damage, is_vulcan)
+					if number_of_hits > 0:
+						for num in number_of_hits:
+							enemy.damage_actor(true_damage, is_vulcan, null, interval_between_hits,hit_freeze)
+					else:
+						enemy.damage_actor(true_damage, is_vulcan)
 
 					if !pass_through and !enemy.is_dead:
 						break
@@ -111,7 +117,7 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, new_attack_patt
 func get_targeted_tile(coordinates : Vector2, tiles : Node) -> Tile:
 	return GridManager.get_tile(tiles, coordinates)
 	
-func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_targeted_overlay : bool = true) -> Array:
+func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set_x: int = 0, off_set_y : int = 0, set_targeted_overlay : bool = true) -> Array:
 	GridManager.clear_targeted_tiles()
 	
 	var final_targeted_tile: Vector2 = get_destined_tile_coordinates(actor)
@@ -123,7 +129,9 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_t
 	if can_shift:
 		new_offset_list.clear()
 		for pattern in base_patterns:
-			new_offset_list.append(pattern + Vector2(off_set, 0))
+			new_offset_list.append(pattern + Vector2(off_set_x,off_set_y))
+	
+	print(new_offset_list)
 	
 	for offset in new_offset_list:
 		var final_offset: Vector2 = final_targeted_tile + (direction * offset)
@@ -148,3 +156,32 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set: int = 0, set_t
 
 	return new_offset_list
 	
+func scan_sniper_tile(tiles : Node, y_offset : int) -> Array:
+
+	var base_patterns = patterns[attack_pattern]
+	var new_offset_list: Array = patterns[attack_pattern].duplicate(true)
+
+	new_offset_list.clear()
+	new_offset_list.append(base_patterns[0] + Vector2(0, y_offset))
+
+	for offset in new_offset_list:
+		var selected_tile: Tile = GridManager.get_tile(tiles, offset)
+		
+		if selected_tile:
+			GridManager.targeted_tiles.append(selected_tile)
+			selected_tile.set_targeted_overlay()
+
+	return new_offset_list
+
+func pattern_is_in_bounds(actor: GridActor, tiles: Node, test_off_x: int, test_off_y: int) -> bool:
+	var final_targeted_tile = get_destined_tile_coordinates(actor)
+	var base_patterns = patterns[attack_pattern]
+
+	for pattern in base_patterns:
+		var offset = pattern + Vector2(test_off_x, test_off_y)
+		var final_offset = final_targeted_tile + (direction * offset)
+
+		if GridManager.get_tile(tiles, final_offset) == null:
+			return false
+
+	return true

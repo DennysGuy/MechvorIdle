@@ -276,6 +276,8 @@ var regen_started : bool = false
 @onready var sub_machine_gun_aim: SubMachineGunAim = $StateMachine/SubMachineGunAim
 @onready var sub_machine_gun_fire: SubMachineGunFire = $StateMachine/SubMachineGunFire
 
+@onready var sniper_rifle_aim: SniperRifleAIm = $StateMachine/SniperRifleAim
+@onready var sniper_rifle_fire: SniperRifleFire = $StateMachine/SniperRifleFire
 
 @export var arm_rocket_aim: ArmRocketAim
 @export var arm_rocket_fire: ArmRocketFire
@@ -295,6 +297,10 @@ var regen_started : bool = false
 		1 : {
 			"Aim": sub_machine_gun_aim,
 			"Fire": sub_machine_gun_fire
+		},
+		2 : {
+			"Aim": sniper_rifle_aim,
+			"Fire": sniper_rifle_fire
 		}
 	}
 
@@ -465,7 +471,7 @@ func fire_rifle_2() -> void:
 		fire_projectile(rifle_2, rifle_2_spout)
 	else:
 		var damage_reduction_multiplier : float = 0.75
-		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier * GameManager.next_multiplier))
+		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier * GameManager.next_multiplier),rifle_2.hit_freeze)
 		GameManager.reset_next_attack_multiplier()
 		var sniper_blast : SniperBlast = preload("uid://cboxtbu6wo1sy").instantiate()
 		sniper_blast.global_position = rifle_2_spout.global_position
@@ -476,10 +482,13 @@ func apply_time_consequences() -> void:
 		damage_actor(int(health * 0.3))
 
 func fire_smg_muzzle_flare_left_side() -> void:
+	var smg_2 : MechWeapon = GameManager.get_left_weapon()
 	var muzzle_flare : WeaponMuzzleFlare =  preload("uid://bqgicaqmm0vsq").instantiate()
 	muzzle_flare.position = rifle_2_spout.position
 	SfxManager.play_sfx(SfxManager.get_smg_shot())
 	add_child(muzzle_flare)
+	smg_2.attack_enemy(self,tiles,[])
+	print("HIT WITH SMG!")
 	
 
 func _on_shield_cool_down_timer_timeout() -> void:
@@ -492,7 +501,6 @@ func init_weapon_states() -> void:
 	aim_state_right.set_position_as_right()
 	aim_state_right.input_map = "mine_asteroid"
 	fire_state_right.set_position_as_right()
-
 
 	idle.weapon_1_aim = aim_state_right
 	

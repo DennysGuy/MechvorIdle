@@ -1,19 +1,19 @@
 [gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://dbxh8e0i8qfhr"]
 
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_fd1e0"]
-[ext_resource type="Resource" uid="uid://bqfh8impxxy8" path="res://src/resources/mechcomponents/weapons/weapon_patterns/VulcanPattern.tres" id="1_vbyji"]
+[ext_resource type="Resource" uid="uid://des8plnh1ci8y" path="res://src/resources/mechcomponents/weapons/weapon_patterns/SMGPattern.tres" id="1_vbyji"]
 
 [resource]
 script = ExtResource("1_fd1e0")
 weapon_class = 1
 shop_index = 1
-damage = 15.0
-cool_down_time = 3.0
-number_of_hits = 10
+damage = 5.0
+cool_down_time = 4.0
 charge_speed = 0.8
 crit_chance = 0.03
 accuracy = 0.7
 stun_chance = 0.03
+hit_freeze = 1.0
 attack_pattern = ExtResource("1_vbyji")
 component_name = "Sub Ultima Machinegun"
 index = 4

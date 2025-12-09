@@ -3,6 +3,7 @@ class_name GridActor extends Node3D
 
 @export var current_tile : Tile
 @export var hurt_time : float
+@export var hit_freeze : float
 const  WAIT_TIME : float = 0.27
 
 @export var state_machine : StateMachine
@@ -26,7 +27,7 @@ var is_attacking : bool = false
 
 var is_dead : bool = false
 
-func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null) -> void:
+func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null, wait_time : float = 0, hit_freeze : float = 1.0) -> void:
 	var health_deduction = value
 	
 	if is_dead:
@@ -74,12 +75,15 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 		state_machine.change_state(death)
 	else:
 		if not is_vulcan and hurt:
-			GameManager.enable_hit_freeze(0.25, 0.15)
+			if hit_freeze < 1:
+				GameManager.enable_hit_freeze(hit_freeze, 0.15)
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:
 		SignalBus.start_healing.emit()
-
+		
+	await get_tree().create_timer(wait_time).timeout
+	
 func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
 	var projectile : GridProjectile = weapon.projectile.instantiate()
 	projectile.global_position = selected_weapon_spout.global_position

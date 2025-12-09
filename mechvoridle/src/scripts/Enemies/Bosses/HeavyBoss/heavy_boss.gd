@@ -98,7 +98,7 @@ func hide_shield() -> void:
 	shield.hide()
 
 func fire_cannon() -> void:
-	cannon_rifle.attack_pattern.issue_attack(self, tiles, cannon_rifle.damage)
+	cannon_rifle.attack_pattern.issue_attack(self, tiles, cannon_rifle.damage, cannon_rifle.hit_freeze)
 	SfxManager.play_sfx(SfxManager.BOSS_CANNON_FIRE,3)
 	SignalBus.shake_camera.emit(0.4)
 	await get_tree().create_timer(0.5).timeout

@@ -1,18 +1,28 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://bs55jm2j143et"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=4 format=3 uid="uid://bs55jm2j143et"]
 
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_axnmh"]
+[ext_resource type="Script" uid="uid://6cacw0wqd6ts" path="res://src/scripts/Weapons/attack_pattern.gd" id="1_ttibh"]
+
+[sub_resource type="Resource" id="Resource_2ov7t"]
+script = ExtResource("1_ttibh")
+target_offset = Vector2(5, 0)
+direction = -1
+can_shift = true
+metadata/_custom_type_script = "uid://6cacw0wqd6ts"
 
 [resource]
 script = ExtResource("1_axnmh")
 weapon_class = 1
 shop_index = 2
-damage = 60.0
-cool_down_time = 15.0
+weapon_owner = 1
+damage = 90.0
+cool_down_time = 8.0
 number_of_hits = 1
 charge_speed = 0.45
 crit_chance = 0.25
 accuracy = 0.8
 stun_chance = 0.35
+attack_pattern = SubResource("Resource_2ov7t")
 component_name = "Soul Plucker"
 index = 5
 manufacture_name = 2

@@ -186,8 +186,8 @@ func set_mech_as_standard() -> void:
 var waves = [
 	[
 		{
-			"enemy" : SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1),
+			"enemy" : TURRET_ENEMY.duplicate(true),
+			"coordinates": Vector2(0,0),
 			"is_slave": false,
 			"is_boss": false
 		},

@@ -19,6 +19,7 @@ enum WeaponOwner {PLAYER, ENEMY}
 @export var accuracy : float
 @export var stun_chance : float
 @export var plasma_damage_bonus : float
+@export var hit_freeze : float = 0.25
 
 @export var attack_pattern : AttackPattern
 @export var secondary_attack_pattern : AttackPattern
@@ -56,9 +57,9 @@ func attack_enemy(actor : GridActor, tiles : Node, scanned_attack_pattern : Arra
 	
 	if crit_landed():
 		if is_vulcan and GameManager.in_overdrive_mode:
-			true_damage *= crit_damage * 2
+			true_damage *= 2
 	
-	attack_pattern.issue_attack(actor, tiles, int(true_damage), scanned_attack_pattern, is_vulcan)
+	attack_pattern.issue_attack(actor, tiles, int(true_damage),hit_freeze,scanned_attack_pattern,is_vulcan)
 
 func crit_landed() -> bool:
 	var chance : float = crit_chance
