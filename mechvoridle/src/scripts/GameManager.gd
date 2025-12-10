@@ -49,6 +49,18 @@ var audio_settings_Showing : bool = false
 var can_fire_weapon_1 : bool = true
 var can_fire_weapon_2 : bool = true
 
+const VULCAN_OVERHEAT_AMOUNT = 4
+
+var max_heat_contained : int = 200
+var current_heat_contained : float = 0
+var over_heated : bool = false
+
+var vulcan_damage_interval : float = 0.15
+var movement_speed_affix : float = 0.0
+var cooldown_affix : int = 0
+var overheat_damage_affix : float = 1.0
+var overdrive_heat_reduction_affix : float = 0.0
+
 var overdrive_crit_chance_bonus : float = 0.0
 var overdrive_damage_multiplier : float = 1.0
 var overdrive_cooldown_bonus : float = 0.0
@@ -259,19 +271,19 @@ func update_score(value : int) -> void:
 func check_momentum_level() -> void:
 	if momentum_meter_amount >= LEVEL_3_MOMENTUM:
 		momentum_meter_level = 3
-		set_overdrive_bonuses(2,0.75,90,35,30,0.08,4)
+		set_overdrive_bonuses(2,0.75,90,35,30,0.08,4,20)
 		SignalBus.update_od_bonuses.emit()
 		update_score(500)
 		return
 	if momentum_meter_amount >= LEVEL_2_MOMENTUM:
 		momentum_meter_level = 2
-		set_overdrive_bonuses(1.6,0.5,50,20,25,0.05,3)
+		set_overdrive_bonuses(1.6,0.5,50,20,25,0.05,3,10)
 		SignalBus.update_od_bonuses.emit()
 		update_score(300)
 		return
 	if momentum_meter_amount >= LEVEL_1_MOMENTUM:
 		momentum_meter_level = 1
-		set_overdrive_bonuses(1.2,0.3,30,10,15,0.04,2)
+		set_overdrive_bonuses(1.2,0.3,30,10,15,0.04,2,5)
 		SignalBus.update_od_bonuses.emit()
 		SignalBus.overdrive_mode_ready.emit()
 		update_score(100)
@@ -281,7 +293,7 @@ func check_momentum_level() -> void:
 	momentum_meter_level = 0
 	reset_overdrive_bonuses()
 
-func set_overdrive_bonuses(damage_bonus : float, cooldown_bonus : float, crit_chance_bonus : float,damage_reduction_bonus : float, shield_strength_bonus : float, movement_speed_bonus : float, score_mulitplier_bonus : float) -> void:
+func set_overdrive_bonuses(damage_bonus : float, cooldown_bonus : float, crit_chance_bonus : float,damage_reduction_bonus : float, shield_strength_bonus : float, movement_speed_bonus : float, score_mulitplier_bonus : float, heat_reduction : float) -> void:
 	overdrive_damage_multiplier = damage_bonus
 	overdrive_cooldown_bonus = cooldown_bonus
 	overdrive_crit_chance_bonus = crit_chance_bonus
@@ -289,6 +301,7 @@ func set_overdrive_bonuses(damage_bonus : float, cooldown_bonus : float, crit_ch
 	overdrive_shield_strength_bonus = shield_strength_bonus
 	overdrive_movement_speed_bonus = movement_speed_bonus
 	overdrive_score_mulitplier_bonus = score_mulitplier_bonus
+	overdrive_heat_reduction_affix = heat_reduction
 
 func reset_overdrive_bonuses() -> void:
 	overdrive_damage_multiplier = 1.0
@@ -570,6 +583,8 @@ func reset():
 	owned_components_count = 0
 	chosen_opponent = null
 	can_traverse_panes = false
+	max_heat_contained = 200
+	current_heat_contained = 0
 	# Mining panel
 	ufo_attacking = false
 	ferrite_refinery_cost = ferrite_cost_platinum_base_cost
@@ -687,6 +702,7 @@ func damage_shield(amount : int) -> void:
 var block_pitch := 1.0
 	
 func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> int:
+	var heat_reduction : float = 0
 	if shield_bonus_time >= 0.85:
 		SfxManager.play_sfx(SfxManager.PERFECT_SHIELD_BLOCK,0,false,block_pitch)
 		block_pitch += 0.2
@@ -695,6 +711,9 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 			next_multiplier += 1.0
 		else:
 			next_multiplier = 2.0
+			
+		heat_reduction = 25
+		reduce_heat_level(heat_reduction)
 		SignalBus.reduce_cooldown_value.emit(3.0)
 		perfect_count += 1
 		SignalBus.update_next_multiplier.emit()
@@ -705,6 +724,9 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		block_pitch = 1.0
 		perfect_count = 0
 		next_multiplier = 1.5
+		heat_reduction = 18
+		reduce_heat_level(heat_reduction)
+		
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(2.0)
 		enable_hit_freeze(0.35, 0.35)
@@ -714,6 +736,8 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		print("GOOD BLOCK!")
 		perfect_count = 0
 		next_multiplier = 1.2
+		heat_reduction = 13
+		reduce_heat_level(heat_reduction)
 		SignalBus.update_next_multiplier.emit()
 		SignalBus.reduce_cooldown_value.emit(1.0)
 		enable_hit_freeze(0.2, 0.35)
@@ -724,6 +748,20 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		SignalBus.update_next_multiplier.emit()
 	
 	return 0
+
+func reduce_heat_level(heat_reduction : float) -> void:
+	if !over_heated and !in_overdrive_mode:
+		current_heat_contained -= heat_reduction
+		if current_heat_contained < 0:
+			current_heat_contained = 0
+		 
+		print("HEAT REDUCED BY: "+ str(heat_reduction))
+		SignalBus.update_heat_level.emit()
+
+func add_heat(input : float, divisor : int = 1) -> void:
+	if !over_heated and !in_overdrive_mode:
+		current_heat_contained += input/divisor
+		SignalBus.update_heat_level.emit()
 
 func reset_next_attack_multiplier() -> void:
 	block_pitch = 1.0
@@ -736,7 +774,17 @@ func enable_hit_freeze(duration : float, time_scale_val : float) -> void:
 	Engine.time_scale = 1.0
 
 
+func set_stats_overheated() -> void:
+	vulcan_damage_interval = 0.3
+	movement_speed_affix = 0.2
+	overheat_damage_affix = 0.5
+	cooldown_affix = 4
 
+func reset_stats_overheated() -> void:
+	vulcan_damage_interval = 0.1
+	movement_speed_affix = 0.0
+	overheat_damage_affix = 1.0
+	cooldown_affix = 0
 #Test Variables
 
 func light_build() -> void:
@@ -784,9 +832,9 @@ func equip_sword_left_rocket_right() -> void:
 	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
 
 func equip_rifle_left_sword_right() -> void:
-	#owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") rifle
-	#owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr") smg
-	owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et")
+	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") #rifle
+	#owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
+	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniperd 
 	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
 
 '''

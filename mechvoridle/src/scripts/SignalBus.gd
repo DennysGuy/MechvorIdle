@@ -408,3 +408,5 @@ signal revert_slow_factor_normal
 
 @warning_ignore("unused_signal")
 signal update_score(added_score : int)
+@warning_ignore("unused_signal")
+signal update_heat_level

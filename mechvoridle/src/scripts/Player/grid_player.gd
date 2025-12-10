@@ -348,7 +348,7 @@ func _process(delta: float) -> void:
 			SignalBus.move_player.emit(Vector2.UP, false)
 			can_move = false
 			
-			var movement_time := true_wait_time
+			var movement_time := true_wait_time + GameManager.movement_speed_affix
 			
 			await get_tree().create_timer(movement_time).timeout
 			can_move = true
@@ -360,7 +360,7 @@ func _process(delta: float) -> void:
 			SignalBus.move_player.emit(Vector2.DOWN, false)
 			can_move = false
 			
-			var movement_time := true_wait_time
+			var movement_time := true_wait_time + GameManager.movement_speed_affix
 			
 			await get_tree().create_timer(movement_time).timeout
 			
@@ -375,7 +375,7 @@ func _process(delta: float) -> void:
 			add_vulcan_flares()
 			mech_vulcan.attack_enemy(self,tiles,[],true)
 			
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(GameManager.vulcan_damage_interval).timeout
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
 			
@@ -384,11 +384,19 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(0.1).timeout
 			firing = false
 			
-		if Input.is_action_just_released("fire_vulcans") and firing and can_fire_vulcans:
+		elif Input.is_action_just_released("fire_vulcans") and firing and can_fire_vulcans:
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
 				
 			GridManager.clear_targeted_tiles()
+			
+		else:
+			if !GameManager.over_heated and GameManager.current_heat_contained > 0:
+				if GameManager.in_overdrive_mode:
+					GameManager.current_heat_contained -= 3 * delta + GameManager.overdrive_heat_reduction_affix
+				else:
+					GameManager.current_heat_contained -= 3 * delta
+				SignalBus.update_heat_level.emit()
 		
 		if Input.is_action_pressed("activate_shield") and can_use_shield:
 			
@@ -466,12 +474,13 @@ func add_vulcan_flares() -> void:
 	add_child(muzzle_flare_2)
 
 func fire_rifle_2() -> void:
-	var rifle_2 : MechWeapon = GameManager.get_left_weapon()
+	var left_rifle : MechWeapon = GameManager.get_left_weapon()
 	if !rifle_charged_up:
-		fire_projectile(rifle_2, rifle_2_spout)
+		GameManager.add_heat(left_rifle.damage,3)
+		fire_projectile(left_rifle, rifle_2_spout)
 	else:
 		var damage_reduction_multiplier : float = 0.75
-		rifle_2.secondary_attack_pattern.issue_attack(self, tiles, int(rifle_2.damage * damage_reduction_multiplier * GameManager.next_multiplier),rifle_2.hit_freeze)
+		left_rifle.secondary_attack_pattern.issue_attack(self, tiles, int(left_rifle.damage * damage_reduction_multiplier * GameManager.next_multiplier),left_rifle.hit_freeze)
 		GameManager.reset_next_attack_multiplier()
 		var sniper_blast : SniperBlast = preload("uid://cboxtbu6wo1sy").instantiate()
 		sniper_blast.global_position = rifle_2_spout.global_position

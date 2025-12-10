@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=57 format=4 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cvy7pb0bhv08y" path="res://assets/graphics/Models/GridArena2_0.png" id="19_ttjt2"]
 [ext_resource type="Texture2D" uid="uid://csvfmp2h5sw7t" path="res://assets/graphics/Models/Water.png" id="20_irucv"]
 [ext_resource type="Texture2D" uid="uid://cxnqo02pcjxw5" path="res://assets/graphics/Models/GridArena2_1.png" id="21_4lua7"]
+[ext_resource type="PackedScene" uid="uid://cjyp30n7h0u1d" path="res://src/scenes/TileGrid/OverHeatMeter.tscn" id="21_eupt6"]
 [ext_resource type="Texture2D" uid="uid://vvqojbrjrhh8" path="res://assets/graphics/ArenaBG/ArenaBG_Base.png" id="22_irucv"]
 [ext_resource type="Texture2D" uid="uid://b0wsu42mc51fh" path="res://assets/graphics/ArenaBG/ArenaBG_1.png" id="23_72613"]
 [ext_resource type="Texture2D" uid="uid://bafo7x4drv3pj" path="res://assets/graphics/ArenaBG/ArenaBG_3.2.png" id="24_ekmuk"]
@@ -1030,9 +1031,9 @@ text = "Score"
 horizontal_alignment = 2
 
 [node name="WeaponIcon2" parent="CanvasLayer" instance=ExtResource("3_e6v0j")]
-offset_left = 245.0
+offset_left = 246.0
 offset_top = -90.0
-offset_right = 310.0
+offset_right = 311.0
 offset_bottom = -25.0
 
 [node name="WeaponIcon1" parent="CanvasLayer" instance=ExtResource("3_e6v0j")]
@@ -1089,6 +1090,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1120,13 +1122,15 @@ volume_db = 2.0
 autoplay = true
 
 [node name="NextDamageLabel" type="Label" parent="CanvasLayer"]
-offset_left = 471.0
+offset_left = 382.0
 offset_top = 328.0
 offset_right = 637.0
 offset_bottom = 341.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 12
-text = "Next DMG: 1.0x"
+text = "Vulcan Multiplier: 1.0x"
 horizontal_alignment = 2
 
 [node name="MomentumLevelLabel" type="Label" parent="CanvasLayer"]
@@ -1141,6 +1145,8 @@ offset_right = -3.0
 offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 13
 text = "Momentum LVL: 0"
@@ -1168,14 +1174,28 @@ text = "Boss"
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(570, 19)
 
+[node name="TextureProgressBar" parent="CanvasLayer" instance=ExtResource("21_eupt6")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = -29.0
+offset_right = 10.0
+offset_bottom = 115.0
+grow_horizontal = 0
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
-volume_db = 12.0
+volume_db = 10.0
 autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.202585, -1.779316, -19.035877)
+
+[node name="Base5" type="Sprite3D" parent="SkyBox"]
+transform = Transform3D(6.001016e-08, 2.5314596, 0.0061434805, 0, -0.015552281, 0.9999813, -1.3728724, 1.1065363e-07, 2.685545e-10, -5.378799, -21.629326, 24.75472)
+texture = ExtResource("22_irucv")
 
 [node name="Wall" type="Node3D" parent="SkyBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09859085, 0, -10.548677)
@@ -1199,7 +1219,7 @@ material_override = SubResource("ShaderMaterial_8cjp7")
 texture = ExtResource("25_8cjp7")
 
 [node name="Wall4" type="Node3D" parent="SkyBox"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.9893589, 0, 56.63385)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.989359, 0, 54.96393)
 
 [node name="Base" type="Sprite3D" parent="SkyBox/Wall4"]
 transform = Transform3D(1.2170602, 0, 0, 0, 1.144503, 0, 0, 0, 1, 0, 0, 0)
@@ -1241,7 +1261,7 @@ material_override = SubResource("ShaderMaterial_8cjp7")
 texture = ExtResource("25_8cjp7")
 
 [node name="Wall3" type="Node3D" parent="SkyBox"]
-transform = Transform3D(4.4298844e-08, 0, -1.0000001, 0, 1, 0, -1.0134394, 0, -4.3711392e-08, 35.33438, -0.9005928, 22.437792)
+transform = Transform3D(4.4298844e-08, 0, -1.0000001, 0, 1, 0, -1.0134394, 0, -4.3711392e-08, 34.023598, -0.9005928, 24.75472)
 
 [node name="Base" type="Sprite3D" parent="SkyBox/Wall3"]
 transform = Transform3D(1.2170602, 0, 0, 0, 1.144503, 0, 0, 0, 1, 0, 0, 0)

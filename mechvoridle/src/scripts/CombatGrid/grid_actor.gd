@@ -27,8 +27,8 @@ var is_attacking : bool = false
 
 var is_dead : bool = false
 
-func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null, wait_time : float = 0, hit_freeze : float = 1.0) -> void:
-	var health_deduction = value
+func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null, wait_time : float = 0, _hit_freeze : float = 1.0) -> void:
+	var health_deduction = int(value * GameManager.overheat_damage_affix)
 	
 	if is_dead:
 		return
@@ -75,8 +75,8 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 		state_machine.change_state(death)
 	else:
 		if not is_vulcan and hurt:
-			if hit_freeze < 1:
-				GameManager.enable_hit_freeze(hit_freeze, 0.15)
+			if _hit_freeze < 1:
+				GameManager.enable_hit_freeze(_hit_freeze, 0.15)
 			state_machine.change_state(hurt)
 
 	if self != GridManager.player:
@@ -85,6 +85,7 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 	await get_tree().create_timer(wait_time).timeout
 	
 func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
+
 	var projectile : GridProjectile = weapon.projectile.instantiate()
 	projectile.global_position = selected_weapon_spout.global_position
 	

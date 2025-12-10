@@ -7,7 +7,7 @@ func enter() -> void:
 	GameManager.can_fire_weapon_1 = false
 	SignalBus.hide_damage_mulitplier_label.emit()
 	var previous_tile = parent.current_tile
-	
+	GameManager.add_heat(weapon_component.damage,2)
 	dash_attack()
 	if is_right_position():
 		animation_name = "WideSwordSwing"

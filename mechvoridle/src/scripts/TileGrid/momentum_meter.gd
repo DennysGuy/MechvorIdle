@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 		if value <= 0:
 			GameManager.in_overdrive_mode = false
 			GameManager.momentum_meter_amount = 0
+		
 			SignalBus.hide_overdrive_visuals.emit()
 			SignalBus.revert_move_speed_to_norm.emit()
 			SignalBus.revert_slow_factor_normal.emit()

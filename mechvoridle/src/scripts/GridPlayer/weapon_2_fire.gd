@@ -12,7 +12,7 @@ func enter() -> void:
 	elif is_left_position():
 		animation_name = "RifleShotLeft"
 		GameManager.can_fire_weapon_2 = false
-			
+		
 	GridManager.clear_targeted_tiles()
 	var sfx : AudioStream
 	if parent.rifle_charged_up:

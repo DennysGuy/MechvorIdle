@@ -232,6 +232,11 @@ const ENEMY_HURT_2 = preload("uid://d2byhq2fhq75r")
 const ENEMY_HURT_3 = preload("uid://brc11rshc8p28")
 const ENEMY_HURT_4 = preload("uid://bca5hwvv4eoa8")
 
+const OVER_HEATED = preload("uid://gp8c4hhvp87w")
+const MECH_STATUS_RECOVERED = preload("uid://dnqvv4r4hquu0")
+const OVER_HEAT_WARNING = preload("uid://b566fx2vv7vfq")
+
+
 var enemy_hurts : Array[AudioStream] = [ENEMY_HURT_1,ENEMY_HURT_2,ENEMY_HURT_3,ENEMY_HURT_4]
 
 var shield_impacts : Array[AudioStream] = [SHIELD_IMPACT_1,SHIELD_IMPACT_2,SHIELD_IMPACT_3,SHIELD_IMPACT_4,SHIELD_IMPACT_5,SHIELD_IMPACT_6]

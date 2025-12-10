@@ -26,7 +26,7 @@ func _ready() -> void:
 			equipped_weapon = GameManager.get_left_weapon()
 	
 	weapon_name_label.text = equipped_weapon.component_name
-	cool_down_wheel.max_value = equipped_weapon.cool_down_time
+	cool_down_wheel.max_value = equipped_weapon.cool_down_time 
 	cool_down_wheel.value = 0
 	
 	cool_down_wheel.hide()
@@ -66,10 +66,13 @@ func start_cool_down_timer(weapon_hand : int) -> void:
 	if GameManager.in_overdrive_mode:
 		cool_down_wheel.value = int(cool_down_wheel.max_value * GameManager.overdrive_cooldown_bonus)
 	else:
-		cool_down_wheel.value = cool_down_wheel.max_value	
+		cool_down_wheel.value = cool_down_wheel.max_value + GameManager.cooldown_affix
 	on_cool_down = true
 
 func count_down_process(_delta : float) -> void:
+
+
+	
 	millisecond -= 1
 		
 	if millisecond <= 0:

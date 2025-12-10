@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 	pass
 
 func update_next_label() -> void:
-	next_damage_label.text = "Next DMG: %sx" % [GameManager.next_multiplier]
+	next_damage_label.text = "Vulcan Multiplier: %sx" % [GameManager.next_multiplier]
 
 func update_momentum_level_label() -> void:
 	momentum_level_label.text = "momentum lvl: %s" % [GameManager.momentum_meter_level]
@@ -293,6 +293,9 @@ func update_health_bar() -> void:
 		GridManager.player.health,
 		0.35  # duration
 	)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_IN)
+	
 
 func update_momentum_meter_amount(value : int) -> void:
 	if GameManager.momentum_meter_amount >= GameManager.MAX_MOMENTUM_METER_AMOUNT:

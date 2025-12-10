@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjyp30n7h0u1d"]
+
+[ext_resource type="Texture2D" uid="uid://ctoqsdslgdckl" path="res://assets/graphics/OverheatMeter/OverheatMeter_Under.png" id="1_u1c7i"]
+[ext_resource type="Texture2D" uid="uid://bg5aemnlpb0eg" path="res://assets/graphics/OverheatMeter/OverheatMeter_OVer.png" id="2_2kyrc"]
+[ext_resource type="Texture2D" uid="uid://d0hpfn2c6hdbc" path="res://assets/graphics/OverheatMeter/OverheatMeter_Fill.png" id="3_jeyg7"]
+[ext_resource type="Script" uid="uid://bs4tggu2i82v7" path="res://src/scripts/TileGrid/over_heat_meter.gd" id="4_2kyrc"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="5_jeyg7"]
+[ext_resource type="Texture2D" uid="uid://0qgn0lcfxkir" path="res://assets/graphics/UI/HeatMeterWarningSign.png" id="6_qhj7w"]
+
+[sub_resource type="Animation" id="Animation_qhj7w"]
+resource_name = "Blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconIndicator:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_warning_sfx"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gwoyp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconIndicator:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwoyp"]
+_data = {
+&"Blink": SubResource("Animation_qhj7w"),
+&"RESET": SubResource("Animation_gwoyp")
+}
+
+[node name="OverHeatMeter" type="TextureProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -72.0
+offset_right = 24.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.0
+fill_mode = 3
+texture_under = ExtResource("1_u1c7i")
+texture_over = ExtResource("2_2kyrc")
+texture_progress = ExtResource("3_jeyg7")
+script = ExtResource("4_2kyrc")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 94.0
+offset_right = 1.0
+offset_bottom = 115.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_jeyg7")
+theme_override_font_sizes/font_size = 8
+text = "Heat
+Meter"
+
+[node name="NumberCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 11.0
+offset_right = 40.0
+offset_bottom = 20.0
+rotation = -0.44418052
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_jeyg7")
+theme_override_font_sizes/font_size = 8
+text = "100/100"
+
+[node name="IconIndicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 23.0
+offset_right = -2.0
+offset_bottom = 52.0
+texture = ExtResource("6_qhj7w")
+stretch_mode = 2
+
+[node name="IndicatorAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gwoyp")
+}
