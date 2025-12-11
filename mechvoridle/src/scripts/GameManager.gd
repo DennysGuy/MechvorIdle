@@ -832,11 +832,15 @@ func equip_sword_left_rocket_right() -> void:
 	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
 
 func equip_rifle_left_sword_right() -> void:
-	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") #rifle
+	#owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") #rifle
 	#owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
-	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniperd 
-	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm")
-
+	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniper
+	owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm") #sword
+	#owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm") #sword
+	owned_mech_components["RightWeapon"] = preload("uid://dplngps46dubl") #rifle
+	#owned_mech_components["RightWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
+	#owned_mech_components["RightWeapon"] = preload("uid://bs55jm2j143et") #sniper
+	
 '''
 	We should see that the light build counters 
 	the heavy boss with fast output damage, 

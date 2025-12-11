@@ -1,4 +1,4 @@
-[gd_scene load_steps=646 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=655 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://bbueplktggyvr" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_0.png" id="2_mexru"]
@@ -30,16 +30,24 @@
 [ext_resource type="Texture2D" uid="uid://c8lbwdy5obd05" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_23.png" id="25_bmja8"]
 [ext_resource type="Texture2D" uid="uid://dr7rtru43jgvd" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_24.png" id="26_dtlcp"]
 [ext_resource type="PackedScene" uid="uid://psempt073jce" path="res://src/scenes/TileGrid/Shield.tscn" id="26_hpw55"]
+[ext_resource type="Script" uid="uid://cdhoqcjqoqkwb" path="res://src/scripts/GridPlayer/States/wide_sword_aim_left.gd" id="28_8bc8k"]
+[ext_resource type="Script" uid="uid://domqq2a65m53x" path="res://src/scripts/GridPlayer/States/wide_sword_swing_left.gd" id="29_ptq2e"]
 [ext_resource type="Script" uid="uid://e7hrbcb6oon7" path="res://src/scripts/GridPlayer/States/weapon_3_aim.gd" id="30_dpvbr"]
 [ext_resource type="Script" uid="uid://cw320vi4fs8da" path="res://src/scripts/GridPlayer/States/sub_machine_gun_aim.gd" id="30_mexru"]
+[ext_resource type="Script" uid="uid://5jsc7n5qygpi" path="res://src/scripts/GridPlayer/States/rifle_aim_left.gd" id="30_xhrg2"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="30_xmjel"]
 [ext_resource type="Script" uid="uid://6x6ykgnjrt80" path="res://src/scripts/GridPlayer/States/arm_rocket_fire.gd" id="31_l1nc1"]
+[ext_resource type="Script" uid="uid://cxhv8v4s1q73p" path="res://src/scripts/GridPlayer/States/rifle_fire_left.gd" id="31_pc3sq"]
+[ext_resource type="Script" uid="uid://bo6ckn203agim" path="res://src/scripts/GridPlayer/States/sub_machine_gun_aim_right.gd" id="31_uxkdr"]
 [ext_resource type="Script" uid="uid://x4uomjcq52v2" path="res://src/scripts/GridPlayer/States/sub_machine_gun_fire.gd" id="31_wvm5k"]
 [ext_resource type="Script" uid="uid://cykhm1hrtvvql" path="res://src/scripts/GridPlayer/States/player_death.gd" id="31_xmjel"]
 [ext_resource type="Script" uid="uid://hduo2qc4sfj" path="res://src/scripts/GridPlayer/States/sniper_rifle_aim.gd" id="32_gq85y"]
 [ext_resource type="Script" uid="uid://cbi62wf0upxei" path="res://src/scripts/GridPlayer/States/sniper_rifle_fire.gd" id="33_csb3y"]
+[ext_resource type="Script" uid="uid://qu1kdc3w6l5l" path="res://src/scripts/GridPlayer/States/sub_machine_gun_fire_right.gd" id="33_quyey"]
 [ext_resource type="AudioStream" uid="uid://s2b3670o2kdk" path="res://assets/audio/SFX/COMBAT/ForceFieldHum1.wav" id="37_i40dg"]
+[ext_resource type="Script" uid="uid://bj70ubvlqo1x6" path="res://src/scripts/GridPlayer/States/sniper_rifle_aim_left.gd" id="38_v16an"]
 [ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="38_xvbyb"]
+[ext_resource type="Script" uid="uid://cctghl7p87hm1" path="res://src/scripts/GridPlayer/States/sniper_rifle_fire_left.gd" id="39_u62yh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqbol"]
 resource_name = "material_0"
@@ -14337,12 +14345,9 @@ tracks/53/path = NodePath("..")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"fire_rifle_2"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_cb8fw"]
@@ -17723,7 +17728,7 @@ tracks/52/keys = PackedFloat32Array(0, 1, 0.032801818, 0.11117318, 0.63444126, 0
 [sub_resource type="Animation" id="Animation_1xrem"]
 resource_name = "SubMachineGunShotLeft"
 length = 0.41666666
-step = 0.001
+step = 0.0001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -18098,33 +18103,34 @@ tracks/52/keys = PackedFloat32Array(0, 1, 0.032801818, 0.11117318, 0.63444126, 0
 tracks/53/type = "method"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("..")
+tracks/53/path = NodePath("../StateMachine/SubMachineGunFireLeft")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
-"times": PackedFloat32Array(0.094, 0.13953485, 0.237, 0.30956227, 0.4058047),
+"times": PackedFloat32Array(0.094, 0.1395, 0.237, 0.3095, 0.4058),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": [],
-"method": &"fire_smg_muzzle_flare_left_side"
+"method": &"fire_smg_muzzle_flare_left"
 }, {
 "args": [],
-"method": &"fire_smg_muzzle_flare_left_side"
+"method": &"fire_smg_muzzle_flare_left"
 }, {
 "args": [],
-"method": &"fire_smg_muzzle_flare_left_side"
+"method": &"fire_smg_muzzle_flare_left"
 }, {
 "args": [],
-"method": &"fire_smg_muzzle_flare_left_side"
+"method": &"fire_smg_muzzle_flare_left"
 }, {
 "args": [],
-"method": &"fire_smg_muzzle_flare_left_side"
+"method": &"fire_smg_muzzle_flare_left"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_4vk7l"]
 resource_name = "SubmachinegunFireRight"
 length = 0.33333334
+step = 0.0001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -18496,6 +18502,32 @@ tracks/52/path = NodePath("UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/StandardSw
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, 0.032801818, 0.11117318, 0.63444126, 0.7642309)
+tracks/53/type = "method"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("../StateMachine/SubMachineGunFireRight")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0.0787, 0.1446, 0.1793, 0.2366, 0.2979),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"fire_smg_muzzle_flare_right"
+}, {
+"args": [],
+"method": &"fire_smg_muzzle_flare_right"
+}, {
+"args": [],
+"method": &"fire_smg_muzzle_flare_right"
+}, {
+"args": [],
+"method": &"fire_smg_muzzle_flare_right"
+}, {
+"args": [],
+"method": &"fire_smg_muzzle_flare_right"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_007mu"]
 resource_name = "TKCAimLeft"
@@ -21910,6 +21942,10 @@ _data = {
 &"hurt": SubResource("Animation_5618s")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csb3y"]
+transparency = 1
+albedo_color = Color(0.930098, 0.00028065042, 0.2578539, 0.3764706)
+
 [sub_resource type="Animation" id="Animation_hpw55"]
 resource_name = "HitFlash"
 length = 0.2
@@ -21919,12 +21955,8 @@ _data = {
 &"HitFlash": SubResource("Animation_hpw55")
 }
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("wide_sword_aim", "wide_sword_swing", "rifle_aim", "rifle_fire", "arm_rocket_aim", "arm_rocket_fire", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("arm_rocket_aim", "arm_rocket_fire", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
 script = ExtResource("1_8keqk")
-wide_sword_aim = NodePath("StateMachine/WideSwordAim")
-wide_sword_swing = NodePath("StateMachine/WideSwordSwing")
-rifle_aim = NodePath("StateMachine/RifleAim")
-rifle_fire = NodePath("StateMachine/RifleFire")
 arm_rocket_aim = NodePath("StateMachine/ArmRocketAim")
 arm_rocket_fire = NodePath("StateMachine/ArmRocketFire")
 hurt_time = 0.5
@@ -21938,10 +21970,10 @@ death = NodePath("StateMachine/Die")
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
 
 [node name="UpperBody" type="Node3D" parent="blockbench_export"]
-transform = Transform3D(0.81915194, 0, -0.5735763, 0, 1, 0, 0.5735763, 0, 0.81915194, -0.078886874, 1.686745, 0.025788125)
+transform = Transform3D(0.81915194, 0, 0.5735763, 0, 1, 0, -0.5735763, 0, 0.81915194, -0.078886874, 1.624245, 0.025788125)
 
 [node name="Head" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.81915194, 0, 0.5735763, 0, 1, 0, -0.5735763, 0, 0.81915194, 0.08121187, 0.188255, 0.017110625)
+transform = Transform3D(0.9238793, 0, -0.3826834, 0, 1, 0, 0.3826834, 0, 0.9238793, 0.08121187, 0.188255, 0.017110625)
 
 [node name="MeleeHead" type="Node3D" parent="blockbench_export/UpperBody/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0089925, 0.071825, -0.005945625)
@@ -21968,7 +22000,7 @@ mesh = SubResource("ArrayMesh_2uvf2")
 skeleton = NodePath("")
 
 [node name="Torso" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.9848074, 0, 0.17364815, 0, 1, 0, -0.17364815, 0, 0.9848074, 0.045496874, -0.085755624, 0.01647875)
+transform = Transform3D(0.9848073, 0, 0.17364813, 0, 1, 0, -0.17364813, 0, 0.9848073, 0.045496874, -0.085755624, 0.01647875)
 
 [node name="LightTorso" type="Node3D" parent="blockbench_export/UpperBody/Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0622775, -0.22286437, 0.000631875)
@@ -22214,7 +22246,7 @@ mesh = SubResource("ArrayMesh_0utcq")
 skeleton = NodePath("")
 
 [node name="Arm1" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.9537168, -0.30070573, 0, 0.30070573, 0.9537168, 0, 0, 0, 1, 0.08121187, 0.000755, -0.35788938)
+transform = Transform3D(0.9046731, 0.31514877, 0.28678825, -0.35306165, 0.93122, 0.09042397, -0.23856595, -0.18305805, 0.95371693, -0.17503813, 0.107005, -0.25163937)
 
 [node name="Shoulder" type="Node3D" parent="blockbench_export/UpperBody/Arm1"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21643962, 0, 0.21643962, 0.976296, 0.02336625, 0.038761877, -0.012353125)
@@ -22223,7 +22255,7 @@ transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21643962, 0, 0.21643962, 0.9762
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00356375, -0.50381, 0.016071875)
 
 [node name="ForeArm" type="Node3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep"]
-transform = Transform3D(0.3826832, 0.92387927, 0, -0.92387927, 0.3826832, 0, 0, 0, 0.99999994, 0.038695, 0.065405, 0.02600875)
+transform = Transform3D(-0.3168014, 0.847922, 0.42504635, -0.4587715, 0.25523597, -0.8511069, -0.8301595, -0.46463114, 0.30814353, 0.038695, 0.065405, 0.02600875)
 
 [node name="Hand" type="Node3D" parent="blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09289812, -0.52690876, -0.022550626)
@@ -22691,7 +22723,7 @@ mesh = SubResource("ArrayMesh_f16si")
 skeleton = NodePath("")
 
 [node name="Arm2" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.35521892, 0.6990054, 0.62065357, -0.8917835, 0.45246157, 0.0008141695, -0.2802528, -0.55377793, 0.78408426, 0.10457812, 0.021745, 0.32430062)
+transform = Transform3D(0.50588083, -0.8378901, -0.20499922, 0.8567942, 0.46054423, 0.23195396, -0.09994073, -0.2929833, 0.95087975, 0.10457812, 0.021745, 0.32430062)
 
 [node name="Shoulder2" type="Node3D" parent="blockbench_export/UpperBody/Arm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
@@ -22700,7 +22732,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00356375, -0.50381, -0.016071875)
 
 [node name="ForeArm2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2"]
-transform = Transform3D(0.81915194, 0.5735763, 0, -0.5735763, 0.81915194, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
+transform = Transform3D(0.7071066, 0.7071067, 0, -0.7071067, 0.7071066, 0, 0, 0, 1, 0.038695, 0.065405, -0.02600875)
 
 [node name="Hand2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03735875, -0.59575814, -0.03342375)
@@ -23165,10 +23197,10 @@ mesh = SubResource("ArrayMesh_e6a0r")
 skeleton = NodePath("")
 
 [node name="LowerBody" type="Node3D" parent="blockbench_export"]
-transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09375, 0)
 
 [node name="Leg" type="Node3D" parent="blockbench_export/LowerBody"]
-transform = Transform3D(0.98480743, 0, 0.17364815, 0, 0.99999994, 0, -0.17364816, 0, 0.9848074, 0, 1.25, -0.125)
+transform = Transform3D(0.8528682, 0.5, 0.15038368, -0.49240375, 0.86602527, -0.08682406, -0.17364813, -1.490116e-08, 0.9848073, 0, 1.25, -0.125)
 
 [node name="UpperLeg" type="Node3D" parent="blockbench_export/LowerBody/Leg"]
 transform = Transform3D(0.99904823, -0.043619383, 0, 0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, 0.125)
@@ -23234,10 +23266,10 @@ mesh = SubResource("ArrayMesh_ibwbo")
 skeleton = NodePath("")
 
 [node name="Calf" type="Node3D" parent="blockbench_export/LowerBody/Leg/UpperLeg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6765625, -0.25)
+transform = Transform3D(0.7372773, -0.6755902, 0, 0.6755902, 0.7372773, 0, 0, 0, 1, 0, -0.6765625, -0.25)
 
 [node name="Foot" type="Node3D" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, -0.4125, -0.03125)
+transform = Transform3D(0.96592575, 0.258819, 0, -0.258819, 0.96592575, 0, 0, 0, 1, 0, -0.4125, -0.03125)
 
 [node name="LightFoot" type="Node3D" parent="blockbench_export/LowerBody/Leg/UpperLeg/Calf/Foot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0421875, -0.24375, -0.00625)
@@ -23396,7 +23428,7 @@ mesh = SubResource("ArrayMesh_gkhjp")
 skeleton = NodePath("")
 
 [node name="Leg2" type="Node3D" parent="blockbench_export/LowerBody"]
-transform = Transform3D(0.8433915, 0, 0.5372996, 0, 1, 0, -0.5372996, 0, 0.8433915, 0, 1.25, 0.125)
+transform = Transform3D(0.71130913, -0.53729963, 0.45315394, 0.45315394, 0.8433915, 0.28869087, -0.53729963, 2.9802322e-08, 0.8433915, 0, 1.25, 0.125)
 
 [node name="UpperLeg2" type="Node3D" parent="blockbench_export/LowerBody/Leg2"]
 transform = Transform3D(0.99904823, -0.043619383, 0, 0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0.0828125, -0.125)
@@ -23462,10 +23494,10 @@ mesh = SubResource("ArrayMesh_wfacy")
 skeleton = NodePath("")
 
 [node name="Calf2" type="Node3D" parent="blockbench_export/LowerBody/Leg2/UpperLeg2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6765625, 0.25)
+transform = Transform3D(0.9914449, -0.13052619, 0, 0.13052619, 0.9914449, 0, 0, 0, 1, 0, -0.6765625, 0.25)
 
 [node name="Foot2" type="Node3D" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4125, 0.03125)
+transform = Transform3D(0.95371693, 0.3007058, 0, -0.3007058, 0.95371693, 0, 0, 0, 1, 0, -0.4125, 0.03125)
 
 [node name="LightFoot2" type="Node3D" parent="blockbench_export/LowerBody/Leg2/UpperLeg2/Calf2/Foot2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0421875, -0.24375, 0.00625)
@@ -23660,11 +23692,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_44gna")
 }
 
+[node name="LaserSightLeft" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.99989885, 0.014189282, 4.2770424e-08, -4.2893646e-08, -8.4155145e-09, -1.0000112, -0.014189091, -0.9999127, 9.023276e-09, -0.38757384, 1.8820877, -7.798797)
+visible = false
+material_override = SubResource("StandardMaterial3D_csb3y")
+radius = 0.034179688
+height = 11.395416
+
+[node name="LaserSightRight" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.99999094, -0.004136432, 4.292859e-08, -4.289365e-08, -8.4155145e-09, -1.0000112, 0.004136365, -1.0000049, 8.237995e-09, 0.22151577, 1.8820877, -7.798797)
+visible = false
+material_override = SubResource("StandardMaterial3D_csb3y")
+radius = 0.034179688
+height = 11.395416
+
 [node name="Vlucan2" type="Marker3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.24604863, 1.7536805, -0.18063268)
 
 [node name="Vlucan1" type="Marker3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.22429913, 1.7536805, -0.18063268)
+
+[node name="Rifle1Spout" type="Marker3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.16304785, 1.3531873, -2.0042515)
 
 [node name="Rifle2Spout" type="Marker3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.42973906, 1.7536805, -1.8381699)
@@ -23675,44 +23724,81 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_1_aim", "weapon_2_aim")]
 script = ExtResource("18_ge2li")
-weapon_1_aim = NodePath("../WideSwordAim")
-weapon_2_aim = NodePath("../RifleAim")
+weapon_1_aim = NodePath("../WideSwordAimRight")
+weapon_2_aim = NodePath("../RifleAimRight")
 animation_name = "Idle"
 
-[node name="WideSwordAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("wide_sword_swing_fire", "idle")]
+[node name="WideSwordAimRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("wide_sword_swing_fire", "idle")]
 script = ExtResource("19_ttbq6")
-wide_sword_swing_fire = NodePath("../WideSwordSwing")
+wide_sword_swing_fire = NodePath("../WideSwordSwingRight")
 idle = NodePath("../Idle")
 
-[node name="WideSwordSwing" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="WideSwordSwingRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("21_8ua87")
 idle = NodePath("../Idle")
 
-[node name="RifleAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon_2_fire", "idle")]
-script = ExtResource("22_5eta7")
-weapon_2_fire = NodePath("../RifleFire")
+[node name="WideSwordAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("wide_sword_swing_fire", "idle")]
+script = ExtResource("28_8bc8k")
+wide_sword_swing_fire = NodePath("../WideSwordSwingLeft")
 idle = NodePath("../Idle")
 
-[node name="RifleFire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="WideSwordSwingLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("29_ptq2e")
+idle = NodePath("../Idle")
+
+[node name="RifleAimRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("rifle_right_fire", "idle")]
+script = ExtResource("22_5eta7")
+rifle_right_fire = NodePath("../RifleFireRight")
+idle = NodePath("../Idle")
+
+[node name="RifleFireRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("23_cp1m8")
 idle = NodePath("../Idle")
 
-[node name="SubMachineGunAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sub_machine_gun_fire")]
+[node name="RifleAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("rifle_fire_left", "idle")]
+script = ExtResource("30_xhrg2")
+rifle_fire_left = NodePath("../RifleFireLeft")
+idle = NodePath("../Idle")
+
+[node name="RifleFireLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("31_pc3sq")
+idle = NodePath("../Idle")
+
+[node name="SubMachineGunAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sub_machine_gun_fire_left")]
 script = ExtResource("30_mexru")
 idle = NodePath("../Idle")
-sub_machine_gun_fire = NodePath("../SubMachineGunFire")
+sub_machine_gun_fire_left = NodePath("../SubMachineGunFireLeft")
 
-[node name="SubMachineGunFire" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="SubMachineGunFireLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("31_wvm5k")
 idle = NodePath("../Idle")
 
-[node name="SniperRifleAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sniper_rifle_fire")]
+[node name="SubMachineGunAimRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sub_machine_gun_fire_right")]
+script = ExtResource("31_uxkdr")
+idle = NodePath("../Idle")
+sub_machine_gun_fire_right = NodePath("../SubMachineGunFireRight")
+
+[node name="SubMachineGunFireRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("33_quyey")
+idle = NodePath("../Idle")
+
+[node name="SniperRifleAimRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sniper_rifle_fire")]
 script = ExtResource("32_gq85y")
 idle = NodePath("../Idle")
-sniper_rifle_fire = NodePath("../SniperRifleFire")
+sniper_rifle_fire = NodePath("../SniperRifleFireRight")
 
-[node name="SniperRifleFire" type="Node" parent="StateMachine"]
+[node name="SniperRifleFireRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("33_csb3y")
+idle = NodePath("../Idle")
+
+[node name="SniperRifleAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sniper_rifle_fire")]
+script = ExtResource("38_v16an")
+idle = NodePath("../Idle")
+sniper_rifle_fire = NodePath("../SniperRifleFireLeft")
+
+[node name="SniperRifleFireLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("39_u62yh")
+idle = NodePath("../Idle")
 
 [node name="ArmRocketAim" type="Node" parent="StateMachine"]
 script = ExtResource("30_dpvbr")
@@ -23765,5 +23851,5 @@ bus = &"SFX"
 [node name="Shadow" parent="." instance=ExtResource("38_xvbyb")]
 transform = Transform3D(0.7849772, 0, 0, 0, -0.019145932, 0.9891577, 0, -0.66424936, -0.0285109, 0.14685702, 0.13933337, -0.004360676)
 
-[connection signal="timeout" from="ChargeUpTimer" to="StateMachine/RifleAim" method="_on_charge_up_timer_timeout"]
+[connection signal="timeout" from="ChargeUpTimer" to="StateMachine/RifleAimRight" method="_on_charge_up_timer_timeout"]
 [connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]

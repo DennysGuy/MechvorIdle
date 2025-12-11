@@ -5,7 +5,7 @@ enum POSITION {LEFT, RIGHT}
 @export var input_map : String
 
 var weapon_component : MechWeapon
-var selected_tile : Tile
+
 func get_position() -> POSITION:
 	return weapon_position
 
@@ -22,3 +22,9 @@ func is_left_position() -> bool:
 
 func is_right_position() -> bool:
 	return weapon_position == POSITION.RIGHT
+
+func attack_tile(multiplier : int = 1) -> void:
+	
+	if parent.locked_on_tile and parent.locked_on_tile.occupant:
+		parent.locked_on_tile.occupant.damage_actor(weapon_component.damage * multiplier, false, weapon_component)
+	

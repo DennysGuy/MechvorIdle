@@ -1,6 +1,6 @@
-class_name RifleAimRight extends WeaponState
+class_name RifleAimLeft extends WeaponState
 
-@export var rifle_right_fire : State
+@export var rifle_fire_left : State
 @export var idle : State
 
 var offset : int = 0
@@ -9,9 +9,10 @@ func enter() -> void:
 	parent.rifle_charged_up = false
 	parent.charge_up_timer.wait_time = 0.6
 	parent.current_weapon_scanning = weapon_component
-	
-	animation_name = "AimRifleRight"
+	print(parent.current_weapon_scanning)
 
+	animation_name = "AimRifleLeft"
+		
 	parent.animation_player.play(animation_name)
 	parent.charge_up_timer.start()
 	var sfx := weapon_component.charge_up
@@ -22,7 +23,7 @@ func exit() -> void:
 
 func process_input(_event: InputEvent) -> State:
 	if Input.is_action_just_released(input_map):
-		return rifle_right_fire
+		return rifle_fire_left
 
 	if Input.is_action_just_pressed("fire_vulcans"):
 		parent.can_move = true

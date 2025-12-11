@@ -1,4 +1,4 @@
-class_name WideSwordAimRight extends WeaponState
+class_name WideSwordAimLeft extends WeaponState
 
 
 #I NEED TO FIGURE OUT IF WE'RE DOING LEFT OR RIGHT!!!
@@ -24,9 +24,8 @@ func enter() -> void:
 	parent.delay_timer.wait_time = shift_time
 	parent.delay_timer.start()
 	offset = -2
-
-	parent.animation_player.play("WideSwordAimRight")
-
+	
+	parent.animation_player.play("WideSwordAimLeft")
 
 func exit() -> void:
 	parent.current_weapon_scanning = null

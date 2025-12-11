@@ -152,7 +152,8 @@ func remove_all_enemies_from_locked_on_list() -> void:
 
 func clear_targeted_tiles() -> void:
 	for tile in targeted_tiles:
-		tile.clear_targeted_overlay()
+		if is_instance_valid(tile):
+			tile.clear_targeted_overlay()
 	
 	targeted_tiles.clear()
 

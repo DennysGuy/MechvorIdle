@@ -5,7 +5,11 @@ class_name GridPlayer extends GridActor
 @onready var vlucan_2: Marker3D = $Vlucan2
 @onready var shield_cool_down_timer: Timer = $ShieldCoolDownTimer
 
+@onready var rifle_1_spout: Marker3D = $Rifle1Spout
 @onready var rifle_2_spout: Marker3D = $Rifle2Spout
+
+@onready var laser_sight_right: CSGCylinder3D = $LaserSightRight
+@onready var laser_sight_left: CSGCylinder3D = $LaserSightLeft
 
 @onready var mech_part_names : Array[String] = ["Head", "Torso", "Legs", "Arms"]
 @onready var timer: Timer = $Timer
@@ -122,7 +126,10 @@ var can_use_shield : bool = true
 
 var regen_started : bool = false
 
-
+var target_location : Marker3D
+var rotate_speed: float = 10.0  # higher = faster turn
+var initial_player_rotation = Vector3.ZERO
+var initial_head_rotation = Vector3.ZERO
 
 @onready var delay_timer: Timer = $DelayTimer
 @onready var charge_up_timer: Timer = $ChargeUpTimer
@@ -267,43 +274,76 @@ var regen_started : bool = false
 }
 
 #weapon states
-@export var wide_sword_aim: WideSwordAim
-@export var wide_sword_swing: Weapon1Fire
+@onready var wide_sword_aim_right: WideSwordAimRight = $StateMachine/WideSwordAimRight
+@onready var wide_sword_swing_right: WideSwordSwingRight = $StateMachine/WideSwordSwingRight
+@onready var wide_sword_aim_left: WideSwordAimLeft = $StateMachine/WideSwordAimLeft
+@onready var wide_sword_swing_left: WideSwordFireLeft = $StateMachine/WideSwordSwingLeft
 
-@export var rifle_aim: Weapon2Aim
-@export var rifle_fire: Weapon2Fire
 
-@onready var sub_machine_gun_aim: SubMachineGunAim = $StateMachine/SubMachineGunAim
-@onready var sub_machine_gun_fire: SubMachineGunFire = $StateMachine/SubMachineGunFire
+@onready var rifle_aim_left: RifleAimLeft = $StateMachine/RifleAimLeft
+@onready var rifle_fire_left: RifleFireLeft = $StateMachine/RifleFireLeft
+@onready var rifle_aim_right: RifleAimRight = $StateMachine/RifleAimRight
+@onready var rifle_fire_right: RifleFireRight = $StateMachine/RifleFireRight
 
-@onready var sniper_rifle_aim: SniperRifleAIm = $StateMachine/SniperRifleAim
-@onready var sniper_rifle_fire: SniperRifleFire = $StateMachine/SniperRifleFire
+
+@onready var sub_machine_gun_aim_left: SubMachineGunAimLeft = $StateMachine/SubMachineGunAimLeft
+@onready var sub_machine_gun_fire_left: SubMachineGunFireLeft = $StateMachine/SubMachineGunFireLeft
+@onready var sub_machine_gun_aim_right: SubMachineGunAimRight = $StateMachine/SubMachineGunAimRight
+@onready var sub_machine_gun_fire_right: SubMachineGunFireRight = $StateMachine/SubMachineGunFireRight
+
+@onready var sniper_rifle_aim_right: SniperRifleAimRight = $StateMachine/SniperRifleAimRight
+@onready var sniper_rifle_fire_right: SniperRifleFireRight = $StateMachine/SniperRifleFireRight
+@onready var sniper_rifle_aim_left: SniperRifleAimLeft = $StateMachine/SniperRifleAimLeft
+@onready var sniper_rifle_fire_left: SniperRifleFireLeft = $StateMachine/SniperRifleFireLeft
+
 
 @export var arm_rocket_aim: ArmRocketAim
 @export var arm_rocket_fire: ArmRocketFire
 
-@onready var weapon_states = {
+@onready var left_weapon_states = {
 	"Sword" : {
 		0 : {
-			"Aim": wide_sword_aim,
-			"Fire": wide_sword_swing
+			"Aim": wide_sword_aim_left,
+			"Fire": wide_sword_swing_left
 		}
 	},
 	"Rifle":  {
 		0 : {
-			"Aim": rifle_aim,
-			"Fire": rifle_fire
+			"Aim": rifle_aim_left,
+			"Fire": rifle_fire_left
 		},
 		1 : {
-			"Aim": sub_machine_gun_aim,
-			"Fire": sub_machine_gun_fire
+			"Aim": sub_machine_gun_aim_left,
+			"Fire": sub_machine_gun_fire_left
 		},
 		2 : {
-			"Aim": sniper_rifle_aim,
-			"Fire": sniper_rifle_fire
+			"Aim": sniper_rifle_aim_left,
+			"Fire": sniper_rifle_fire_left
 		}
 	}
+}
 
+@onready var right_weapon_states = {
+	"Sword" : {
+		0 : {
+			"Aim": wide_sword_aim_right,
+			"Fire": wide_sword_swing_right
+		}
+	},
+	"Rifle":  {
+		0 : {
+			"Aim": rifle_aim_right,
+			"Fire": rifle_fire_right
+		},
+		1 : {
+			"Aim": sub_machine_gun_aim_right,
+			"Fire": sub_machine_gun_fire_right
+		},
+		2 : {
+			"Aim": sniper_rifle_aim_right,
+			"Fire": sniper_rifle_fire_right
+		}
+	}
 }
 
 var mech_vulcan : MechWeapon = preload("uid://kcrfevws33d7")
@@ -332,12 +372,14 @@ func _ready() -> void:
 	max_health = 500
 	health = max_health
 	
+	initial_player_rotation = rotation
+	initial_head_rotation = rotation
+	
 	enable_mech_parts()
 	enable_mech_weapons()
 	state_machine.init(self)
 
 @onready var shield_hum: AudioStreamPlayer = $ShieldHum
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -383,13 +425,13 @@ func _process(delta: float) -> void:
 			SfxManager.play_sfx(SfxManager.get_vulcan_shot(), -4, false)
 			await get_tree().create_timer(0.1).timeout
 			firing = false
-			
+
 		elif Input.is_action_just_released("fire_vulcans") and firing and can_fire_vulcans:
 			for flare in get_tree().get_nodes_in_group("VulcanFlares"):
 				flare.queue_free()
-				
+
 			GridManager.clear_targeted_tiles()
-			
+
 		else:
 			if !GameManager.over_heated and GameManager.current_heat_contained > 0:
 				if GameManager.in_overdrive_mode:
@@ -397,9 +439,9 @@ func _process(delta: float) -> void:
 				else:
 					GameManager.current_heat_contained -= 3 * delta
 				SignalBus.update_heat_level.emit()
-		
+
 		if Input.is_action_pressed("activate_shield") and can_use_shield:
-			
+
 			if !shield_hum.playing:
 				shield_hum.play()
 			
@@ -407,7 +449,6 @@ func _process(delta: float) -> void:
 			if shield_bonus_time < 0:
 				shield_bonus_time = 0
 			
-			#print(shield_bonus_time)
 			start_shield_cool_down = false
 			regen_started = false
 			shield_active = true
@@ -439,6 +480,7 @@ func revert_move_speed_to_normal() -> void:
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 
 func _physics_process(delta: float) -> void:
+	rotate_player(delta)
 	state_machine.process_physics(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -473,50 +515,53 @@ func add_vulcan_flares() -> void:
 	add_child(muzzle_flare_1)
 	add_child(muzzle_flare_2)
 
-func fire_rifle_2() -> void:
-	var left_rifle : MechWeapon = GameManager.get_left_weapon()
-	if !rifle_charged_up:
-		GameManager.add_heat(left_rifle.damage,3)
-		fire_projectile(left_rifle, rifle_2_spout)
-	else:
-		var damage_reduction_multiplier : float = 0.75
-		left_rifle.secondary_attack_pattern.issue_attack(self, tiles, int(left_rifle.damage * damage_reduction_multiplier * GameManager.next_multiplier),left_rifle.hit_freeze)
-		GameManager.reset_next_attack_multiplier()
-		var sniper_blast : SniperBlast = preload("uid://cboxtbu6wo1sy").instantiate()
-		sniper_blast.global_position = rifle_2_spout.global_position
-		get_parent().add_child(sniper_blast)
+var locked_on_tile : Tile
 		
 func apply_time_consequences() -> void:
 	if !GameManager.fight_on:
 		damage_actor(int(health * 0.3))
 
-func fire_smg_muzzle_flare_left_side() -> void:
-	var smg_2 : MechWeapon = GameManager.get_left_weapon()
-	var muzzle_flare : WeaponMuzzleFlare =  preload("uid://bqgicaqmm0vsq").instantiate()
-	muzzle_flare.position = rifle_2_spout.position
-	SfxManager.play_sfx(SfxManager.get_smg_shot())
-	add_child(muzzle_flare)
-	smg_2.attack_enemy(self,tiles,[])
-	print("HIT WITH SMG!")
-	
 
 func _on_shield_cool_down_timer_timeout() -> void:
 	#start_shield_cool_down = false
 	SignalBus.refil_shield_gauge.emit()
 	
 func init_weapon_states() -> void:
-	var aim_state_right : WeaponState =  weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Aim"]
-	var fire_state_right : WeaponState = weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
+	var aim_state_right : WeaponState =  right_weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Aim"]
+	var fire_state_right : WeaponState = right_weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
 	aim_state_right.set_position_as_right()
 	aim_state_right.input_map = "mine_asteroid"
 	fire_state_right.set_position_as_right()
 
 	idle.weapon_1_aim = aim_state_right
 	
-	var aim_state_left : WeaponState =  weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]
-	var fire_state_left : WeaponState = weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Fire"]
+	var aim_state_left : WeaponState =  left_weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]
+	var fire_state_left : WeaponState = left_weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Fire"]
 	aim_state_left.set_position_as_left()
 	aim_state_left.input_map = "set_drone_destination"
 	fire_state_left.set_position_as_left()
 	
 	idle.weapon_2_aim = aim_state_left
+
+@onready var player_model: Node3D = $blockbench_export
+
+
+func rotate_player(delta: float) -> void:
+	if target_location:
+		var target_pos = target_location.global_transform.origin
+		var my_pos = global_transform.origin
+
+		var to_target = target_pos - my_pos
+		to_target.y = 0.0  # keep rotation on the horizontal plane
+
+		# Correct yaw for Godot (facing -Z forward)
+		var target_yaw = atan2(-to_target.x, -to_target.z)
+
+		rotation.y = lerp_angle(rotation.y, target_yaw, delta * rotate_speed)
+
+	else:
+		rotation.y = lerp_angle(rotation.y, initial_player_rotation.y, delta * rotate_speed)
+
+
+
+		

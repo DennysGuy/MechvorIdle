@@ -1,13 +1,14 @@
-class_name RifleFireRight extends WeaponState
+class_name RifleFireLeft extends WeaponState
 
 @export var idle : State
 
 func enter() -> void:
 	parent.can_move = false
+	#GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
 	
-	animation_name = "AimRifleFire"
-	GameManager.can_fire_weapon_1 = false
-	
+
+	animation_name = "RifleShotLeft"
+	GameManager.can_fire_weapon_2 = false
 	fire_rifle()
 	GridManager.clear_targeted_tiles()
 	var sfx : AudioStream
@@ -37,13 +38,15 @@ func process_frame(_delta: float) -> State:
 func process_physics(_delta: float) -> State:
 	return null
 
+
 func _on_charge_up_timer_timeout() -> void:
 	pass # Replace with function body.
 
+
 func fire_rifle() -> void:
 	var weapon_spout : Marker3D
-	weapon_spout = parent.rifle_1_spout
-		
+	weapon_spout = parent.rifle_2_spout
+
 	if !parent.rifle_charged_up:
 		GameManager.add_heat(weapon_component.damage,3)
 		parent.fire_projectile(weapon_component, weapon_spout)

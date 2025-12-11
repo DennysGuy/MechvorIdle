@@ -1,21 +1,20 @@
-class_name WideSwordSwingRight extends WeaponState
+class_name WideSwordFireLeft extends WeaponState
 
 @export var idle : State
 
 func enter() -> void:
 	parent.can_move = false
-	GameManager.can_fire_weapon_1 = false
+	GameManager.can_fire_weapon_2 = false
 	SignalBus.hide_damage_mulitplier_label.emit()
 	var previous_tile = parent.current_tile
 	GameManager.add_heat(weapon_component.damage,2)
 	dash_attack()
-
-	animation_name = "WideSwordSwing"
+	
+	animation_name = "WideSwordSwingLeft"
 
 	parent.animation_player.play(animation_name)
 	SignalBus.shake_camera.emit(0.6)
 	await get_tree().create_timer(0.3).timeout
-	
 	SignalBus.move_actor_to_tile.emit(parent, previous_tile)
 	parent.state_machine.change_state(idle)
 
@@ -33,7 +32,6 @@ func dash_attack() -> void:
 		if get_tile_in_front.occupant:
 			get_tile_in_front.occupant.damage_actor(int(weapon_component.damage * GameManager.next_multiplier))
 			
-			
 	var sfx := weapon_component.primary_projectile_discharge
 	SfxManager.play_sfx(sfx,3)
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
@@ -41,7 +39,6 @@ func dash_attack() -> void:
 	GridManager.clear_targeted_tiles()
 		
 func exit() -> void:
-	print("THIS IS SWORD WEAPON POSITION: %s " % [weapon_position])
 	parent.can_move = true
 	parent.can_fire_vulcans = true
 	weapon_component.damage = weapon_component.base_damage

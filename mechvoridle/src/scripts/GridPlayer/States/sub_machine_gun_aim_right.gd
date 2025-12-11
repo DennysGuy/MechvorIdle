@@ -1,10 +1,10 @@
-class_name SubMachineGunAimLeft extends WeaponState
+class_name SubMachineGunAimRight extends WeaponState
 
 @export var idle : State
-@export var sub_machine_gun_fire_left : State
+@export var sub_machine_gun_fire_right : State
 
 func enter() -> void:
-	animation_name = "AimRifleLeft"
+	animation_name = "AimRifleRight"
 	parent.animation_player.play(animation_name)
 	#We will handle aim functionailty 
 	
@@ -16,7 +16,7 @@ func process_input(_event: InputEvent) -> State:
 
 func process_frame(_delta: float) -> State:
 	if Input.is_action_just_released(input_map):
-		return sub_machine_gun_fire_left
+		return sub_machine_gun_fire_right
 
 	if Input.is_action_just_pressed("fire_vulcans"):
 		parent.can_move = true

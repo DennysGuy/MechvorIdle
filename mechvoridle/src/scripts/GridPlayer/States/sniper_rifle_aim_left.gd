@@ -1,4 +1,4 @@
-class_name SniperRifleAimRight extends WeaponState
+class_name SniperRifleAimLeft extends WeaponState
 
 const MIN_COLUMN := 0
 const MAX_COLUMN := 3
@@ -15,9 +15,10 @@ func enter() -> void:
 	parent.current_weapon_scanning = weapon_component
 	offset_y = parent.current_tile.coordinates.y
 	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(0, offset_y))
+	print(parent.locked_on_tile)
 
-	animation_name = "AimRifleRight"
-	parent.laser_sight_right.show()
+	animation_name = "AimRifleLeft"
+	parent.laser_sight_left.show()
 		
 	parent.animation_player.play(animation_name)
 
@@ -28,9 +29,8 @@ func exit() -> void:
 		parent.can_fire_vulcans = true
 		parent.locked_on_tile.clear_targeted_overlay()
 		parent.locked_on_tile = null
-		
-		parent.laser_sight_right.hide()
 
+		parent.laser_sight_left.hide()
 
 func process_input(_event: InputEvent) -> State:
 	
@@ -55,6 +55,7 @@ func process_input(_event: InputEvent) -> State:
 			offset_y = MAX_COLUMN
 	
 	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(0, offset_y))
+	
 	if parent.locked_on_tile:
 		parent.target_location = parent.locked_on_tile.marker_3d
 		parent.locked_on_tile.set_targeted_overlay()
@@ -69,8 +70,6 @@ func process_frame(_delta: float) -> State:
 		
 	if Input.is_action_just_pressed("fire_vulcans"):
 		return idle
-	
-
 	
 	return null
 
