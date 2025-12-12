@@ -236,12 +236,26 @@ const OVER_HEATED = preload("uid://gp8c4hhvp87w")
 const MECH_STATUS_RECOVERED = preload("uid://dnqvv4r4hquu0")
 const OVER_HEAT_WARNING = preload("uid://b566fx2vv7vfq")
 
+const SHIFT_1 = preload("uid://bvrxjuxtiq1sr")
+
+const SNIPER_2 = preload("uid://bhltg8qx42hb6")
+const SNIPER_3 = preload("uid://c6heglmy5pm6m")
+const SNIPER_4 = preload("uid://dq77ljuy1ly6t")
+const SNIPER_SHOT_1 = preload("uid://csxeqtwmcsa4i")
+
+const SNIPER_AIM = preload("uid://6vcgg07gc7h2")
+
+
+var sniper_shots : Array[AudioStream] = [SNIPER_SHOT_1, SNIPER_2, SNIPER_3, SNIPER_4]
 
 var enemy_hurts : Array[AudioStream] = [ENEMY_HURT_1,ENEMY_HURT_2,ENEMY_HURT_3,ENEMY_HURT_4]
 
 var shield_impacts : Array[AudioStream] = [SHIELD_IMPACT_1,SHIELD_IMPACT_2,SHIELD_IMPACT_3,SHIELD_IMPACT_4,SHIELD_IMPACT_5,SHIELD_IMPACT_6]
 
 var enemy_whooshes : Array[AudioStream] = [ENEMY_WHOOSH_1, ENEMY_WHOOSH_2, ENEMY_WHOOSH_3]
+
+func get_sniper_shot() -> AudioStream:
+	return sniper_shots.pick_random()
 
 func get_smg_shot() -> AudioStream:
 	return smg_shots.pick_random()

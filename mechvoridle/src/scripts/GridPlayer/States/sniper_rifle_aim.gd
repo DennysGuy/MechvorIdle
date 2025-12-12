@@ -15,7 +15,7 @@ func enter() -> void:
 	parent.current_weapon_scanning = weapon_component
 	offset_y = parent.current_tile.coordinates.y
 	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(0, offset_y))
-
+	SfxManager.play_sfx(SfxManager.SNIPER_AIM)
 	animation_name = "AimRifleRight"
 	parent.laser_sight_right.show()
 		
@@ -35,6 +35,7 @@ func exit() -> void:
 func process_input(_event: InputEvent) -> State:
 	
 	if Input.is_action_just_pressed("move_left"):
+		SfxManager.play_sfx(SfxManager.SHIFT_1)
 		if parent.locked_on_tile:
 			parent.locked_on_tile.clear_targeted_overlay()
 
@@ -48,6 +49,7 @@ func process_input(_event: InputEvent) -> State:
 		parent.locked_on_tile.set_targeted_overlay()
 
 	if Input.is_action_just_pressed("move_right"):
+		SfxManager.play_sfx(SfxManager.SHIFT_1)
 		if parent.locked_on_tile:
 			parent.locked_on_tile.clear_targeted_overlay()
 		offset_y += 1
