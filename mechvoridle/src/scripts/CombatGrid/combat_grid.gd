@@ -37,6 +37,9 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 @onready var marker_2d: Marker2D = $CanvasLayer/Marker2D
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
+@onready var level_tracker: Label = $CanvasLayer/LevelTracker
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	arena_animation_player.play("Wave")
@@ -178,7 +181,7 @@ func player_check_if_lock_on_valid() -> void:
 		if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
 			GridManager.remove_enemy_from_locked_on_list(enemy)
 
-func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
+func spawn_enemy(enemy : PackedScene, level : int, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
 	var enemy_to_spawn : GridActor = enemy.instantiate()
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
 	print("this is init tiles occupant: %s" % [init_tile.occupant])
@@ -194,6 +197,7 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = f
 	enemy_to_spawn.global_position = init_tile.marker_3d.global_position
 	enemy_to_spawn.current_tile = init_tile
 	enemy_to_spawn.tiles = tiles
+	enemy_to_spawn.level = level
 	init_tile.occupant = enemy_to_spawn
 
 	GridManager.enemies.append(enemy_to_spawn)
@@ -204,19 +208,31 @@ func spawn_enemy(enemy : PackedScene, tile_coords : Vector2, is_slave : bool = f
 
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
-	if GridManager.current_wave == GridManager.MAX_WAVES-1:
+
+	
+	var current_wave : Array = GridManager.level_configurations[GridManager.wave_level]["waves"]
+	
+	if GridManager.wave_level < 1 or GridManager.current_wave == current_wave.size()-1:
+		GridManager.wave_level += 1
+		GridManager.current_wave = -1 #reset wave #
+	
+	if GridManager.wave_level > GridManager.MAX_LEVEL:
 		GameManager.in_boss_fight = true
 		#play_count_down()
 		cutscene_player.play("CountDownBoss")
 		count_down_timer.stop_timer()
 		count_down_timer.count_down = false
 		return
-		
-	GridManager.current_wave += 1
-	wave_tracker.text = "Wave %s/10" % [GridManager.current_wave+1]
+	
+	if GridManager.current_wave < current_wave.size()-1:
+		GridManager.current_wave += 1
+		GridManager.total_waves_completed += 1
+	
+	level_tracker.text = "Level: %s Wave: %s" % [GridManager.wave_level,GridManager.current_wave]
+	wave_tracker.text = "Wave %s/15" % [GridManager.total_waves_completed+1]
 	if GridManager.current_wave > 0:
 		if GameManager.timed_out:
-			count_down_timer.add_time(45)
+			count_down_timer.add_time(45) #EHHH MAN! WE NEED TO FIGURE SOMETHING HERE
 			GameManager.timed_out = false
 		else:
 			var gained_time : int = 0
@@ -232,7 +248,7 @@ func spawn_next_wave() -> void:
 				GridManager.player.health = min( GridManager.player.health + GridManager.player.max_health * (gained_time * 0.01), GridManager.player.max_health) 
 				update_health_bar()
 	
-	var selected_wave = GridManager.waves[GridManager.current_wave]
+	var selected_wave = GridManager.level_configurations[GridManager.wave_level]["waves"][GridManager.current_wave]
 	spawn_enemies(selected_wave)
 	
 	count_down_timer.start_timer()
@@ -251,7 +267,7 @@ func spawn_mini_wave() -> void:
 
 func spawn_enemies(selected_wave : Array) -> void:
 	for enemy in selected_wave:
-		spawn_enemy(enemy["enemy"], enemy["coordinates"], enemy["is_slave"], enemy["is_boss"])
+		spawn_enemy(enemy["enemy"], enemy["level"], enemy["coordinates"], enemy["is_slave"], enemy["is_boss"])
 		await get_tree().create_timer(0.5).timeout
 		
 	await get_tree().create_timer(0.5).timeout

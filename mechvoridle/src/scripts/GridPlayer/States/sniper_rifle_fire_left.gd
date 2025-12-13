@@ -7,6 +7,7 @@ func enter() -> void:
 	parent.laser_sight_left.hide()
 	GameManager.can_fire_weapon_2 = false
 	SfxManager.play_sfx(SfxManager.get_sniper_shot())
+	SignalBus.shake_camera.emit(0.8)
 	var multiplier : int = 1
 	if parent.locked_on_tile:
 		multiplier += abs(parent.current_tile.coordinates.y - parent.locked_on_tile.coordinates.y)

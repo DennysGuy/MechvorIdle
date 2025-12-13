@@ -35,6 +35,7 @@ func fire_smg_muzzle_flare_right() -> void:
 	muzzle_flare.global_position = parent.rifle_1_spout.global_position
 	
 	SfxManager.play_sfx(SfxManager.get_smg_shot())
+	SignalBus.shake_camera.emit(0.8)
 	add_child(muzzle_flare)
 	weapon_component.attack_enemy(parent,parent.tiles,[])
 	print("HIT WITH SMG!")

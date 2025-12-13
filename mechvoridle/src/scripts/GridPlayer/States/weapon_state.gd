@@ -27,4 +27,4 @@ func attack_tile(multiplier : int = 1) -> void:
 	
 	if parent.locked_on_tile and parent.locked_on_tile.occupant:
 		parent.locked_on_tile.occupant.damage_actor(weapon_component.damage * multiplier, false, weapon_component)
-	
+		GameManager.enable_hit_freeze(0.2,0.3)

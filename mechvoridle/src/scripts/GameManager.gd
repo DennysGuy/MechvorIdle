@@ -74,6 +74,9 @@ var momentum_meter_level : int = 0
 var can_activate_overdrive : bool = false
 var in_overdrive_mode : bool = false
 
+
+
+
 const MAX_MOMENTUM_METER_AMOUNT : float = 10.0
 const LEVEL_1_MOMENTUM : float = 4.0
 const LEVEL_2_MOMENTUM : float = 7.0
@@ -832,13 +835,13 @@ func equip_sword_left_rocket_right() -> void:
 	owned_mech_components["RightWeapon"] = preload("uid://bhfpkfpplvoco")
 
 func equip_rifle_left_sword_right() -> void:
-	#owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") #rifle
+	owned_mech_components["LeftWeapon"] = preload("uid://dplngps46dubl") #rifle
 	#owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
-	owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniper
+	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniper
 	#owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm") #sword
-	#owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm") #sword
+	owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm") #sword
 	#owned_mech_components["RightWeapon"] = preload("uid://dplngps46dubl") #rifle
-	owned_mech_components["RightWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
+	#owned_mech_components["RightWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
 	#owned_mech_components["RightWeapon"] = preload("uid://bs55jm2j143et") #sniper
 '''
 	We should see that the light build counters s

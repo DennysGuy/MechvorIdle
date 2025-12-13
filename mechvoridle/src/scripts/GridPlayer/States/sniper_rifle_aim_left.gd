@@ -19,7 +19,6 @@ func enter() -> void:
 	SfxManager.play_sfx(SfxManager.SNIPER_AIM)
 	animation_name = "AimRifleLeft"
 	parent.laser_sight_left.show()
-		
 	parent.animation_player.play(animation_name)
 
 func exit() -> void:

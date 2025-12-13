@@ -6,7 +6,7 @@ class_name GridEnemy extends GridActor
 
 @export var drop_chance : int
 @export var score : int
-
+@export var level : int = 1
 
 func _ready() -> void:
 	can_move = false

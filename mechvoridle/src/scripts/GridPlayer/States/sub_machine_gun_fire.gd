@@ -6,7 +6,7 @@ func enter() -> void:
 	parent.can_move = false
 	animation_name = "SubMachineGunShotLeft"
 	GameManager.can_fire_weapon_2 = false
-	
+	SignalBus.shake_camera.emit(0.8)
 	parent.animation_player.play(animation_name)
 	weapon_component.attack_enemy(parent,parent.tiles)
 	parent.timer.wait_time = 0.5

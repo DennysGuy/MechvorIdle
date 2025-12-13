@@ -2,7 +2,8 @@ extends Node
 
 const MAX_ROWS : int = 6
 const MAX_COLUMNS : int = 4
-const MAX_WAVES : int = 10
+const MAX_WAVES : int = 15
+const MAX_LEVEL : int = 3
 const PLAYER_ROW : int = 5
 var current_wave : int = -1
 
@@ -11,7 +12,8 @@ var enemies : Array[GridEnemy] = []
 var boss_waves_to_beat : int = 0
 var targeted_tiles : Array[Tile] = []
 var locked_on_enemies : Array[GridActor] = []
-
+var wave_level : int = 1 #used for wave level and challenge level --increments after challenge level ends
+var total_waves_completed : int = 0
 const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
 const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
 const HEALER_BOT = preload("uid://dcrmt7013v31a")
@@ -86,7 +88,8 @@ var boss_spawn : Array = [
 			"enemy": HEAVY_BOSS.duplicate(true), 
 			"coordinates": Vector2(0,1),
 			"is_slave": false,
-			"is_boss": true
+			"is_boss": true,
+			"level" : 1
 		}
 	]
 
@@ -184,186 +187,360 @@ func set_mech_as_standard_light() -> void:
 func set_mech_as_standard() -> void:
 	pass
 
-var waves = [
-	[
-		{
-			"enemy" : TURRET_ENEMY.duplicate(true),
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,3),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		}
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(0,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,3),
-			"is_slave": false,
-			"is_boss": false
-		}
-	],
-	[
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": HEALER_BOT.duplicate(true),
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		}
-	],
-	[
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,3),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": HEALER_BOT.duplicate(true),
-			"coordinates": Vector2(0,3),
-			"is_slave": false,
-			"is_boss": false
-		}
-	],
-	[
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,3),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": HEALER_BOT.duplicate(true), 
-			"coordinates": Vector2(0,3),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		
-	],
-	[
-		{
-			"enemy": TURRET_ENEMY.duplicate(true), 
-			"coordinates": Vector2(0,2),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": HEALER_BOT.duplicate(true), 
-			"coordinates": Vector2(0,0),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SPORADIC_ENEMY.duplicate(true),
-			"coordinates": Vector2(1,3),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(3,1),
-			"is_slave": false,
-			"is_boss": false
-		},
-		{
-			"enemy": SWORD_BOT.duplicate(true), 
-			"coordinates": Vector2(2,1),
-			"is_slave": true,
-			"is_boss": false
-		},
-	],
-]
+var level_configurations : Dictionary = {
+	1 : {
+		"waves": [
+			##WAVE 1
+			[
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			],
+			##WAVE 2
+			[
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			],
+			##WAVE 3
+			[
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			],
+			##WAVE 4
+			[
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			],
+			##WAVE 5
+			[
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			]
+		]
+	},
+	2 : {
+		"waves": [
+			##WAVE 1
+			[
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				}
+			],
+			##WAVE 2
+			[
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+			],
+			##WAVE 3
+			[
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+			],
+			##WAVE 4
+			[
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+			],
+			##WAVE 5
+			[
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+			]
+		]
+	},
+	3 : {
+		"waves" : [
+			##WAVE 1
+			[
+				{
+					"enemy": SWORD_BOT.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				}
+			],
+			##WAVE 2
+			[
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				}
+			],
+			##WAVE 3
+			[
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(2,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				}
+			],
+			##WAVE 4
+			[
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SWORD_BOT.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 1
+				},
+			],
+			##WAVE 5
+			[
+				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(0,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": SPORADIC_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,3),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SWORD_BOT.duplicate(true),
+					"coordinates": Vector2(3,2),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": SWORD_BOT.duplicate(true),
+					"coordinates": Vector2(2,2),
+					"is_slave": true,
+					"is_boss": false,
+					"level" : 1
+				},
+			],			
+		],
+	},
+
+}
 
 var boss_mini_waves = [
 	[
@@ -371,13 +548,15 @@ var boss_mini_waves = [
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(1,0),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,2),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		}
 	],
 	[
@@ -385,13 +564,15 @@ var boss_mini_waves = [
 			"enemy": SPORADIC_ENEMY.duplicate(true), 
 			"coordinates": Vector2(2,3),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 2,
 		},
 		{
 			"enemy": SPORADIC_ENEMY.duplicate(true),
 			"coordinates": Vector2(1,2),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		}
 	],
 	[
@@ -399,13 +580,15 @@ var boss_mini_waves = [
 			"enemy": SPORADIC_ENEMY.duplicate(true), 
 			"coordinates": Vector2(2,2),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level":2
 		},
 		{
 			"enemy": SWORD_BOT.duplicate(true),
 			"coordinates": Vector2(2,0),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		}
 	],
 	[
@@ -413,17 +596,21 @@ var boss_mini_waves = [
 			"enemy": TURRET_ENEMY.duplicate(true), 
 			"coordinates": Vector2(2,0),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		},
 		{
 			"enemy": TURRET_ENEMY.duplicate(true),
 			"coordinates": Vector2(2,2),
 			"is_slave": false,
-			"is_boss": false
+			"is_boss": false,
+			"level": 1
 		}
 	]
 ]
 
 func reset_combat() -> void:
 	current_wave = -1;
+	total_waves_completed = 0
 	player.health = player.max_health
+	wave_level = 1
