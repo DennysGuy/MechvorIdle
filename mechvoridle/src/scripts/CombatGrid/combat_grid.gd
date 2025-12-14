@@ -209,12 +209,15 @@ func spawn_enemy(enemy : PackedScene, level : int, tile_coords : Vector2, is_sla
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
 
-	
 	var current_wave : Array = GridManager.level_configurations[GridManager.wave_level]["waves"]
 	
-	if GridManager.wave_level < 1 or GridManager.current_wave == current_wave.size()-1:
+	if GridManager.wave_level < 1:
 		GridManager.wave_level += 1
 		GridManager.current_wave = -1 #reset wave #
+	
+	if GridManager.current_wave == current_wave.size()-1:
+		#we will go into challenge round
+		pass
 	
 	if GridManager.wave_level > GridManager.MAX_LEVEL:
 		GameManager.in_boss_fight = true

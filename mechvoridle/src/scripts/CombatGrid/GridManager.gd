@@ -94,6 +94,14 @@ var boss_spawn : Array = [
 		}
 	]
 
+var chest_spawn : Dictionary = {
+	1: {
+		"chest": CHALLENGE_CHEST.duplicate(true),
+		"coordinates": Vector2(0,3),
+		"mode": 0
+	}
+}
+
 func check_wave_status() -> void:
 	if enemies.is_empty() and !GameManager.timed_out and !GameManager.in_boss_fight:
 		SignalBus.spawn_next_wave.emit()
