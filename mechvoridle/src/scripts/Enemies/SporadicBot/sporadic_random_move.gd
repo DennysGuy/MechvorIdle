@@ -17,7 +17,7 @@ func enter() -> void:
 	
 	var random_num : int = randi_range(0,100)
 	
-	if random_num <= 25:
+	if random_num <= 25 and parent.level == 3:
 		three_shot_state = true
 
 	else:
@@ -28,10 +28,11 @@ func enter() -> void:
 		var rand_num : int = randi_range(0,100)
 		
 		if rand_num <= 75:
-			coordinates = Vector2(randi_range(0,4), GridManager.player.current_tile.coordinates.y)
+			coordinates = Vector2(randi_range(0,2), GridManager.player.current_tile.coordinates.y)
 		else:
-			var random_tile : Tile = parent.tiles.get_children().pick_random()
-			coordinates = random_tile.coordinates
+			if parent.level == 2:
+				var random_tile : Tile = parent.tiles.get_children().pick_random()
+				coordinates = random_tile.coordinates
 		
 		SignalBus.send_actor_to_tile.emit(parent, coordinates, parent.row_limit, parent.col_limit)
 		time_to_shoot += 1

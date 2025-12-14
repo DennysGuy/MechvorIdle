@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 			GameManager.reset_stats_overheated()
 			GameManager.current_heat_contained = 0
 			GameManager.over_heated = false
+			GridManager.player.can_use_shield = true
 			SfxManager.play_sfx(SfxManager.MECH_STATUS_RECOVERED,5)
 			#change altered values back to normal
 		update_number_count()
@@ -51,6 +52,7 @@ func update_heat_amount() -> void:
 	if value >= max_value:
 		value = max_value
 		GameManager.over_heated = true
+		GridManager.player.can_use_shield = false
 		GameManager.can_activate_overdrive = false
 		GameManager.set_stats_overheated()
 		SfxManager.play_sfx(SfxManager.OVER_HEATED,5)

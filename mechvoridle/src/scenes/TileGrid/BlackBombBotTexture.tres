@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://chpkcdtqne2f2"]
+
+[ext_resource type="Texture2D" uid="uid://by87oxcqtuw21" path="res://assets/graphics/Models/PlayerMech/BombBotBlack.png" id="1_86cs0"]
+
+[resource]
+albedo_texture = ExtResource("1_86cs0")

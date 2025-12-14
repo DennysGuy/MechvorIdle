@@ -100,6 +100,9 @@ func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = wea
 	get_parent().add_child(projectile)
 
 func create_damage_label(amount : int, type : int = 0) -> void:
+	if !damage_label_marker:
+		return
+	
 	var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
 	
 	match type:

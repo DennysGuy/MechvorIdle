@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://cqaa4w6bc6pue"]
+
+[ext_resource type="PackedScene" uid="uid://y0jrc0sbpbn2" path="res://src/scenes/BombBot.tscn" id="1_jbk1d"]
+[ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_nq50r"]
+
+[resource]
+script = ExtResource("1_nq50r")
+weapon_class = 2
+weapon_owner = 1
+base_damage = 10.0
+damage = 10.0
+projectile = ExtResource("1_jbk1d")
+metadata/_custom_type_script = "uid://cs720t7rvcl3x"

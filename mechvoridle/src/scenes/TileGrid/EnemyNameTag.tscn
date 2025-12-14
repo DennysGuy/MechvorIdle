@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://m6q5xj73obyg"]
+
+[node name="EnemyNameTag" type="SubViewport"]
+transparent_bg = true
+size = Vector2i(200, 22)
+
+[node name="NameTag" type="Label" parent="."]
+offset_left = 5.0
+offset_right = 138.0
+offset_bottom = 23.0
+text = "Lv.1 Sporadic Bot"
+horizontal_alignment = 1

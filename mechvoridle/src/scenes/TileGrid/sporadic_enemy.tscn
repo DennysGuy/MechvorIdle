@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=4 uid="uid://b7cur5tqfwumt"]
+[gd_scene load_steps=48 format=4 uid="uid://b7cur5tqfwumt"]
 
 [ext_resource type="Script" uid="uid://dlen8t2tbhcym" path="res://src/scripts/CombatGrid/sporadic_enemy.gd" id="1_7h52i"]
 [ext_resource type="Resource" uid="uid://cjuoawfjc576u" path="res://src/resources/mechcomponents/weapons/rifles/EnemyShockWave.tres" id="2_e7lhk"]
 [ext_resource type="Texture2D" uid="uid://q26r1fmy5xkq" path="res://assets/graphics/SporadicBot/SporadicBot_0.png" id="4_00dvy"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="4_05hjc"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="4_oou2j"]
+[ext_resource type="PackedScene" uid="uid://m6q5xj73obyg" path="res://src/scenes/TileGrid/EnemyNameTag.tscn" id="5_dm1jv"]
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="5_ffajh"]
 [ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="5_ptoct"]
 [ext_resource type="Script" uid="uid://x6ipbxc37756" path="res://src/scripts/Enemies/SporadicBot/idle.gd" id="6_vxkub"]
@@ -954,6 +955,9 @@ _data = {
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k4jur"]
 viewport_path = NodePath("EnemyHPLabel")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3682b"]
+viewport_path = NodePath("EnemyNameTag")
 
 [sub_resource type="Animation" id="Animation_oou2j"]
 resource_name = "HitFlash"
@@ -2373,6 +2377,19 @@ theme_override_font_sizes/font_size = 26
 text = "180"
 horizontal_alignment = 1
 
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8066406, 0.5910422, 0, -0.5910422, 0.8066406, 0.45259863, 0.53930485, 1.0667033)
+texture = SubResource("ViewportTexture_3682b")
+
+[node name="EnemyNameTag" parent="." instance=ExtResource("5_dm1jv")]
+size = Vector2i(400, 40)
+
+[node name="NameTag" parent="EnemyNameTag" index="0"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 32
+
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
@@ -2434,3 +2451,5 @@ visible = false
 
 [node name="Shadow" parent="." instance=ExtResource("15_hdcmq")]
 transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, 0.07347369, 0.06553507, 0.15459776)
+
+[editable path="EnemyNameTag"]

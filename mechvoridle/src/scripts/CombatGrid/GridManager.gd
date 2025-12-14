@@ -18,6 +18,7 @@ const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
 const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
 const HEALER_BOT = preload("uid://dcrmt7013v31a")
 const SWORD_BOT = preload("uid://df0aqkd6tb8o0")
+const CHALLENGE_CHEST = preload("uid://mutb6sqjaftb")
 
 const HEAVY_BOSS = preload("uid://dolkqjjmpal6f")
 
@@ -193,7 +194,7 @@ var level_configurations : Dictionary = {
 			##WAVE 1
 			[
 				{
-					"enemy": TURRET_ENEMY.duplicate(true),
+					"enemy": CHALLENGE_CHEST.duplicate(true),
 					"coordinates": Vector2(0,3),
 					"is_slave": false,
 					"is_boss": false,

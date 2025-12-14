@@ -2,6 +2,7 @@ class_name SporadicEnemy extends GridEnemy
 @export var row_limit : int = 2
 @export var col_limit : int = 4
 
+@onready var name_tag: Label = $EnemyNameTag/NameTag
 
 
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
@@ -15,6 +16,7 @@ func _ready() -> void:
 	super()
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
+	name_tag.text = "LV.%s Sporadic Bot" % [level]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,6 +45,14 @@ func play_shock_shot() -> void:
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()
 	var tile_column = weapon.attack_pattern.scan_tiles_of_effect(self, tiles, 0, false)
+	match level:
+		1:
+			shock_wave.speed = 30
+		2:
+			shock_wave.speed = 50
+		3:
+			shock_wave.speed = 70
+			
 	shock_wave.weapon_owner = self
 	shock_wave.weapon_origin = weapon
 	shock_wave.tiles = tiles

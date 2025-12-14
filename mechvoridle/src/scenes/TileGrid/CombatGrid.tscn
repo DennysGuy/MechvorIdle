@@ -1197,7 +1197,6 @@ text = "level: 1, Wave: 1"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
-autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]
