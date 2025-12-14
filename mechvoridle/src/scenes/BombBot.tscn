@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://y0jrc0sbpbn2"]
+[gd_scene load_steps=13 format=4 uid="uid://y0jrc0sbpbn2"]
 
 [ext_resource type="Script" uid="uid://bd8nosnsitd7v" path="res://src/scripts/Enemies/bomb_bot.gd" id="1_opyop"]
 [ext_resource type="PackedScene" uid="uid://44jftfrq3fuf" path="res://src/scenes/TileGrid/HitBox.tscn" id="2_aud16"]
 [ext_resource type="Texture2D" uid="uid://djnu85adon0ah" path="res://assets/graphics/Models/BombBot_0.png" id="2_opyop"]
 [ext_resource type="Material" uid="uid://dpdi62vmt11so" path="res://src/scenes/TileGrid/BombBotRedTexture.tres" id="3_y0cw6"]
+[ext_resource type="Texture2D" uid="uid://ixdf3ts5t2d4" path="res://assets/graphics/Shadow.png" id="5_j53hp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j53hp"]
 size = Vector3(3.0512085, 3.2772217, 1.2577515)
@@ -113,6 +114,7 @@ _data = {
 
 [node name="BombBot" type="Node3D"]
 script = ExtResource("1_opyop")
+speed = 10.0
 
 [node name="HitBox" parent="." instance=ExtResource("2_aud16")]
 
@@ -136,5 +138,9 @@ root_node = NodePath("../HitBox")
 libraries = {
 &"": SubResource("AnimationLibrary_rp4jt")
 }
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.68169624, 0, 0, 0, 0.0005713085, 1.0001311, 0, -0.8182999, 0.0006982568, 0, 0.17508447, 0)
+texture = ExtResource("5_j53hp")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

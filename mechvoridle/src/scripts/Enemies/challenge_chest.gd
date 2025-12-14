@@ -1,7 +1,7 @@
 class_name ChallengeChest extends GridEnemy
 
 var spawn_bomb_bots : bool = false
-var spawn_timer : float = 0.5
+var spawn_timer : float = 0.35
 @onready var misc_animation_player: AnimationPlayer = $MiscAnimationPlayer
 
 
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 			var random_tile : Vector2 = Vector2(0, randi_range(0,2))
 			var random_num : int = randi_range(0,1)
 			spawn_bomb_bot(random_tile, random_num)
-			spawn_timer = 0.5
+			spawn_timer = 0.35
 
 func spawn_bomb_bot(tile_coordinates : Vector2, bomb_bot_type : int) -> void:
 	var tile : Tile = GridManager.get_tile(tiles, tile_coordinates)
