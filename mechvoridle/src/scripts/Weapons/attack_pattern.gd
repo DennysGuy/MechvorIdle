@@ -60,9 +60,8 @@ func issue_attack(actor : GridActor, tiles : Node, damage : int, hit_freeze : fl
 	
 	var true_damage = damage
 	
-
-	GameManager.add_heat(true_damage,2)
-
+	if actor == GridManager.player:
+		GameManager.add_heat(true_damage,3)
 	
 	if !new_attack_pattern.is_empty():
 		offset_list = new_attack_pattern

@@ -231,13 +231,13 @@ func spawn_next_wave() -> void:
 		play_challenge_wave_animation()
 		return
 
-	if GridManager.wave_level > GridManager.MAX_LEVEL:
-		GameManager.in_boss_fight = true
-		#play_count_down()
-		cutscene_player.play("CountDownBoss")
-		count_down_timer.stop_timer()
-		count_down_timer.count_down = false
-		return
+	#if GridManager.wave_level == GridManager.MAX_LEVEL:
+		#GameManager.in_boss_fight = true
+		##play_count_down()
+		#cutscene_player.play("CountDownBoss")
+		#count_down_timer.stop_timer()
+		#count_down_timer.count_down = false
+		#return
 	
 
 	if GridManager.current_wave < current_wave.size()-1 and !ChallengeWaveManager.in_challenge_wave:
@@ -331,8 +331,10 @@ func play_challenge_wave_animation() -> void:
 			set_challenge_level_1()
 			challenge_wave_player.play("ChallengeWave1Intro")
 		3:
-			set_challenge_level_1()
-			challenge_wave_player.play("ChallengeWave1Intro")
+			#set_challenge_level_1()
+			#challenge_wave_player.play("ChallengeWave1Intro")
+			GameManager.in_boss_fight = true
+			cutscene_player.play("CountDownBoss")
 
 func set_challenge_level_1() -> void:
 	ChallengeWaveManager.current_count = 0
