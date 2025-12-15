@@ -959,6 +959,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/WinThresholdLabel:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ohpnn"]
 resource_name = "ChallengeWave1Success"
@@ -1495,7 +1507,6 @@ theme_override_font_sizes/font_size = 10
 text = "level: 1, Wave: 1"
 
 [node name="ChallengeWaveLabel" type="Label" parent="CanvasLayer"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1517,7 +1528,6 @@ INCOMING!"
 horizontal_alignment = 1
 
 [node name="WinThresholdLabel" type="Label" parent="CanvasLayer"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
