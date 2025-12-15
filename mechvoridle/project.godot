@@ -26,6 +26,7 @@ DroneManager="*res://src/scripts/DroneManager.gd"
 SFXQueueManager="*res://src/scripts/SFXQueueManager.gd"
 GridManager="*res://src/scripts/CombatGrid/GridManager.gd"
 TimeManager="*res://src/scripts/time_manager.gd"
+ChallengeWaveManager="*res://src/scripts/CombatGrid/ChallengeWaveManager.gd"
 
 [display]
 

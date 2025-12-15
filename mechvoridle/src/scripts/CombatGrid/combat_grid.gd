@@ -39,6 +39,11 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 @onready var level_tracker: Label = $CanvasLayer/LevelTracker
 
+@onready var challenge_wave_player: AnimationPlayer = $ChallengeWavePlayer
+
+@onready var win_threshold_label: Label = $CanvasLayer/WinThresholdLabel
+@onready var lives: Label = $CanvasLayer/Lives
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -77,7 +82,14 @@ func _ready() -> void:
 	SignalBus.hide_overdrive_visuals.connect(hide_overdrive_visuals)
 	SignalBus.update_score.connect(update_score)
 	
+	SignalBus.play_failure_animation.connect(play_challenge_failed_outro)
+	
+	SignalBus.update_current_challenge_count.connect(update_current_challenge_count)
+	SignalBus.update_chances_left.connect(update_chances_left)
+	
 	update_score(0)
+	
+	SignalBus.move_to_next_level.connect(move_to_next_level)
 	
 	player_health_bar.max_value = GridManager.player.health
 	player_shield_stamina.max_value = GameManager.shield_amount
@@ -212,13 +224,13 @@ func spawn_next_wave() -> void:
 	var current_wave : Array = GridManager.level_configurations[GridManager.wave_level]["waves"]
 	
 	if GridManager.wave_level < 1:
-		GridManager.wave_level += 1
-		GridManager.current_wave = -1 #reset wave #
+		GridManager.move_to_next_level()
 	
-	if GridManager.current_wave == current_wave.size()-1:
-		#we will go into challenge round
-		pass
-	
+	if GridManager.current_wave == current_wave.size()-1 and !ChallengeWaveManager.in_challenge_wave:
+		count_down_timer.stop_timer()
+		play_challenge_wave_animation()
+		return
+
 	if GridManager.wave_level > GridManager.MAX_LEVEL:
 		GameManager.in_boss_fight = true
 		#play_count_down()
@@ -227,9 +239,11 @@ func spawn_next_wave() -> void:
 		count_down_timer.count_down = false
 		return
 	
-	if GridManager.current_wave < current_wave.size()-1:
+
+	if GridManager.current_wave < current_wave.size()-1 and !ChallengeWaveManager.in_challenge_wave:
 		GridManager.current_wave += 1
 		GridManager.total_waves_completed += 1
+		
 	
 	level_tracker.text = "Level: %s Wave: %s" % [GridManager.wave_level,GridManager.current_wave]
 	wave_tracker.text = "Wave %s/15" % [GridManager.total_waves_completed+1]
@@ -256,6 +270,20 @@ func spawn_next_wave() -> void:
 	
 	count_down_timer.start_timer()
 
+func move_to_next_level() -> void:
+	ChallengeWaveManager.end_challenge_wave()
+	ChallengeWaveManager.reset_wave_details()
+	GridManager.move_to_next_level()
+	
+	count_down_timer.add_time(45)
+	var selected_wave = GridManager.level_configurations[GridManager.wave_level]["waves"][GridManager.current_wave]
+	
+	spawn_enemies(selected_wave)
+	count_down_timer.start_timer()
+
+func remove_challenge_chest() -> void:
+	SignalBus.remove_challenge_chest.emit()
+
 func update_score(added_score : int) -> void: 
 	score_count.text = str(GameManager.combat_score)
 	var score_marker : ScoreMarker = preload("uid://d1aydeepcero2").instantiate()
@@ -277,11 +305,68 @@ func spawn_enemies(selected_wave : Array) -> void:
 	
 	SignalBus.enable_enemy_movement.emit()
 
+func spawn_challenge_chest(level : int) -> void:
+	var chest = ChallengeWaveManager.challenge_chests[level]
+	spawn_enemy(chest["enemy"],chest["level"],chest["coordinates"], chest["is_slave"], chest["is_boss"])
+
+func spawn_level_chest() -> void:
+	count_down_timer.set_time(ChallengeWaveManager.WAVE_TIME,0)
+	
+	#var cur_level : int = GridManager.wave_level
+	spawn_challenge_chest(1) ##TODO: THIS WILL NEED TO CHANGE TO CUR LEVEL ONCE I GET OTHER CHALLENGES IN
+
+##TODO: WE WILL PROBABLY HAVE TO CHANGE THIS SO THAT IT CHOOSE WIN OR LOSE OR BOSS
+func play_challenge_failed_outro() -> void:
+	if ChallengeWaveManager.challenge_mode_won:
+		challenge_wave_player.play("ChallengeWave1Success")
+	else:
+		challenge_wave_player.play("ChallengeWave1Fail")
+
+func play_challenge_wave_animation() -> void:
+	match GridManager.wave_level:
+		1:
+			set_challenge_level_1()
+			challenge_wave_player.play("ChallengeWave1Intro")
+		2: ##TODO: NEED TO CHANGE TO CHALLENGE 2 and so on 
+			set_challenge_level_1()
+			challenge_wave_player.play("ChallengeWave1Intro")
+		3:
+			set_challenge_level_1()
+			challenge_wave_player.play("ChallengeWave1Intro")
+
+func set_challenge_level_1() -> void:
+	ChallengeWaveManager.current_count = 0
+	ChallengeWaveManager.chances_left = ChallengeWaveManager.MAX_CHANCES
+	ChallengeWaveManager.win_threshold_count = 10
+	
+	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
+	lives.text = "LIVES: %s/%s" % [ChallengeWaveManager.chances_left, ChallengeWaveManager.MAX_CHANCES]
+
+func start_challenge_wave() -> void:
+	ChallengeWaveManager.start_challenge_wave()
+	count_down_timer.start_timer()
+	ChallengeWaveManager.start_challenge.emit()
+
 func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
 
+func update_current_challenge_count() -> void:
+	if ChallengeWaveManager.current_count >= ChallengeWaveManager.win_threshold_count:
+		win_threshold_label.text = "Challenge Succeeded!"
+		
+	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
+
+
+func update_chances_left() -> void:
+	lives.text = "LIVES: %s/%s" % [ChallengeWaveManager.chances_left, ChallengeWaveManager.MAX_CHANCES]
+	if ChallengeWaveManager.chances_left <= 0:
+		count_down_timer.set_time(0)
+
+
+func open_challenge_chest() -> void:
+	SignalBus.open_challenge_chest.emit()
+
 func fill_shield_guage() -> void:
-	
 	if not is_instance_valid(GridManager.player):
 		return
 		
@@ -405,6 +490,9 @@ func play_camera_swoop_to_position() -> void:
 func start_wave_combat() -> void:
 	GridManager.player.can_move = true
 	if !GameManager.in_boss_fight:
+		if ChallengeWaveManager.in_challenge_wave:
+			move_to_next_level()
+			return
 		spawn_next_wave()
 	else:
 		GameManager.fight_on = true
@@ -415,6 +503,10 @@ func commence_boss_fight() -> void:
 	GameManager.fight_on = true
 
 func play_count_down() -> void:
+	if GridManager.wave_level == GridManager.MAX_LEVEL:
+		GameManager.in_boss_fight = true
+		cutscene_player.play("CountDownBoss")
+		return
 	cutscene_player.play("CountDown")
 
 func play_fade_out() -> void:

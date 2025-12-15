@@ -5,7 +5,7 @@ const MAX_COLUMNS : int = 4
 const MAX_WAVES : int = 15
 const MAX_LEVEL : int = 3
 const PLAYER_ROW : int = 5
-var current_wave : int = -1
+var current_wave : int = 4
 
 var player : GridPlayer
 var enemies : Array[GridEnemy] = []
@@ -24,7 +24,12 @@ const HEAVY_BOSS = preload("uid://dolkqjjmpal6f")
 
 func _ready() -> void:
 	pass
-	
+
+
+func move_to_next_level() -> void:
+	wave_level += 1
+	current_wave = 0
+
 func init_grid(tiles : Node) -> void:
 	var x_pos : int = 0
 	for row in range(MAX_ROWS):
@@ -110,6 +115,8 @@ func check_wave_status() -> void:
 		if boss_waves_to_beat > 0:
 			SignalBus.spawn_mini_wave.emit()
 	
+	print("THESE ARE THE REMAINING ENEMIES CHECKED: %s" % [enemies])
+	
 func tile_available(grid_actor : GridActor, adjacent_tile : Tile, row_limit : int = -1, col_limit : int = -1, is_dash_attack : bool = false) -> bool:
 	if not adjacent_tile:
 		#print("no tile here, chum")
@@ -144,10 +151,11 @@ func add_enemy_to_locked_on_list(enemy : GridActor) -> void:
 		
 	print("THIS IS LOCKED ON LIST AFTER ADD: %s" % [locked_on_enemies])
 
-## TODO Will need to call this when the enemy dies too
+
 func remove_enemy_from_locked_on_list(enemy : GridActor) -> void:
 	if enemy:
-		enemy.lock_on_cross_hair.hide()
+		if enemy.lock_on_cross_hair:
+			enemy.lock_on_cross_hair.hide()
 		locked_on_enemies.erase(enemy)
 		
 	print("THIS IS LOCKED ON LIST AFTER ERASE: %s" % [locked_on_enemies])
@@ -202,7 +210,7 @@ var level_configurations : Dictionary = {
 			##WAVE 1
 			[
 				{
-					"enemy": CHALLENGE_CHEST.duplicate(true),
+					"enemy": TURRET_ENEMY.duplicate(true),
 					"coordinates": Vector2(0,3),
 					"is_slave": false,
 					"is_boss": false,
@@ -323,7 +331,7 @@ var level_configurations : Dictionary = {
 				},
 				{
 					"enemy": SPORADIC_ENEMY.duplicate(true),
-					"coordinates": Vector2(0,0),
+					"coordinates": Vector2(0,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 2
@@ -378,14 +386,14 @@ var level_configurations : Dictionary = {
 				},
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
-					"coordinates": Vector2(1,2),
+					"coordinates": Vector2(1,0),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 2
 				},
 				{
 					"enemy": SPORADIC_ENEMY.duplicate(true),
-					"coordinates": Vector2(1,1),
+					"coordinates": Vector2(2,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 2

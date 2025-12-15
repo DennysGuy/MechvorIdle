@@ -11,6 +11,7 @@ enum BOMB_TYPE {BLACK,RED}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	ChallengeWaveManager.end_challenge.connect(destroy)
 	match type:
 		BOMB_TYPE.BLACK:
 			sphere.material_override = BOMB_BOT_BLACK
@@ -22,6 +23,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func destroy() -> void:
+	queue_free()
 
 func _physics_process(delta: float) -> void:
 	global_translate(direction * speed * TimeManager.slow_time_factor * delta)

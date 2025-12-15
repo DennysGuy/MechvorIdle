@@ -410,3 +410,17 @@ signal revert_slow_factor_normal
 signal update_score(added_score : int)
 @warning_ignore("unused_signal")
 signal update_heat_level
+@warning_ignore("unused_signal")
+signal move_to_next_level
+@warning_ignore("unused_signal")
+signal remove_challenge_chest
+@warning_ignore("unused_signal")
+signal play_failure_animation
+@warning_ignore("unused_signal")
+signal play_success_animation
+@warning_ignore("unused_signal")
+signal open_challenge_chest
+@warning_ignore("unused_signal")
+signal update_chances_left
+@warning_ignore("unused_signal")
+signal update_current_challenge_count

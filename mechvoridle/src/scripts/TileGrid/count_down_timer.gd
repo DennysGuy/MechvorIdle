@@ -38,8 +38,15 @@ func count_down_time(_delta : float) -> void:
 	if seconds <= 0:
 		stop_timer()
 		GameManager.timed_out = true
-		SignalBus.apply_timer_consequences.emit()
-		SignalBus.spawn_next_wave.emit()
+		if ChallengeWaveManager.in_challenge_wave:
+			ChallengeWaveManager.end_challenge.emit()
+			SignalBus.play_failure_animation.emit()
+			
+		else:
+			SignalBus.apply_timer_consequences.emit()
+			SignalBus.spawn_next_wave.emit()
+		
+		GameManager.timed_out = false
 
 func increment_time(_delta : float) -> void:
 	if milliseconds >= 99:

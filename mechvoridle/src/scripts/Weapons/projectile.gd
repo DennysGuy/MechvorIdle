@@ -49,13 +49,20 @@ func impact_prjectile(area : Area3D):
 				if GridManager.player.shield_active:
 					SfxManager.play_sfx(SfxManager.FORCE_FIELD_IMPACT,3)
 					var true_damage := weapon_origin.damage
-					var shield_bonus_time := GridManager.player.shield_bonus_time
+					var shield_bonus_time = GridManager.player.shield_bonus_time
 					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, weapon_origin.damage)
 					
 					if calculated_damage > 0:
 						true_damage = calculated_damage
 					SfxManager.play_sfx(SfxManager.get_shield_impact())
 					print("TRUE DAMAGE TO SHIELD: %s" % [true_damage])	
+					
+					if ChallengeWaveManager.in_challenge_wave:
+						if self is BombBot and self.type == self.BOMB_TYPE.RED:
+							ChallengeWaveManager.increment_win_threshold()
+						elif self is BombBot and self.type == self.BOMB_TYPE.BLACK:
+							ChallengeWaveManager.decrement_chances()
+							
 					GameManager.damage_shield(true_damage)
 					
 					shake_amount = 1.0
@@ -64,6 +71,8 @@ func impact_prjectile(area : Area3D):
 					if impact_sfx: SfxManager.play_sfx(impact_sfx)
 					if tile_parent.occupant.hit_flash_animation_player:
 						tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
+					if self is BombBot and self.type == self.BOMB_TYPE.BLACK:
+						ChallengeWaveManager.decrement_chances()	
 						
 					tile_parent.occupant.damage_actor(damage)
 				
