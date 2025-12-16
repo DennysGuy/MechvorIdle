@@ -2,9 +2,6 @@ class_name SporadicEnemy extends GridEnemy
 @export var row_limit : int = 2
 @export var col_limit : int = 4
 
-@onready var name_tag: Label = $EnemyNameTag/NameTag
-
-
 var random_direction_list : Array[Vector2] = [Vector2.UP,Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT]
 
 @onready var laser_spout: Marker3D = $LaserSpout
@@ -16,7 +13,7 @@ func _ready() -> void:
 	super()
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
-	name_tag.text = "LV.%s Sporadic Bot" % [level]
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

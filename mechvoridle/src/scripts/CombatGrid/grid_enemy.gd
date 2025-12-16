@@ -1,5 +1,6 @@
 class_name GridEnemy extends GridActor
 
+@export var enemy_name : String
 @export var weapon : MechWeapon
 @export var spawn_rings : Node3D
 @export var animation_player : AnimationPlayer
@@ -8,6 +9,7 @@ class_name GridEnemy extends GridActor
 @export var score : int
 @export var level : int = 1
 @export var explosion_marker : Marker3D
+@export var name_tag : Label
 
 @export var level_1_hp : int
 @export var level_2_hp : int
@@ -18,7 +20,11 @@ func _ready() -> void:
 	animation_player.speed_scale = TimeManager.slow_time_factor
 	SignalBus.apply_timer_consequences.connect(apply_timer_consequences)
 	SignalBus.enable_enemy_movement.connect(enable_enemy_movement)
-	health_label.text = "%s/%s" % [health, max_health]
+	if health_label:
+		health_label.text = "%s/%s" % [health, max_health]
+	
+	if name_tag:
+		name_tag.text = "LV.%s %s" % [level,enemy_name]
 	
 	match level:
 		1: max_health = level_1_hp

@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=4 uid="uid://dcrmt7013v31a"]
+[gd_scene load_steps=35 format=4 uid="uid://dcrmt7013v31a"]
 
 [ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
 [ext_resource type="Texture2D" uid="uid://ohxdxxup6nsp" path="res://assets/graphics/HealerBot/HealerBot.png" id="2_223we"]
 [ext_resource type="Script" uid="uid://r0gfj0eqedqp" path="res://src/scripts/state_machine.gd" id="3_8ngdf"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="3_v5ub3"]
+[ext_resource type="PackedScene" uid="uid://m6q5xj73obyg" path="res://src/scenes/TileGrid/EnemyNameTag.tscn" id="4_jdreg"]
 [ext_resource type="Script" uid="uid://bjuq72ikw7cx8" path="res://src/scripts/Enemies/HealerBot/healer_idle.gd" id="4_u7pyg"]
 [ext_resource type="Script" uid="uid://sufkxsp68cyo" path="res://src/scripts/Enemies/HealerBot/bot_heal.gd" id="5_82xbh"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="6_223we"]
@@ -734,6 +735,9 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_4c8f4"]
 viewport_path = NodePath("EnemyHPLabel")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xkvm6"]
+viewport_path = NodePath("EnemyNameTag")
+
 [sub_resource type="Animation" id="Animation_oyrat"]
 resource_name = "Death"
 step = 0.01
@@ -1293,14 +1297,16 @@ _data = {
 &"SpawnIn": SubResource("Animation_3jje7")
 }
 
-[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "animation_player", "explosion_marker", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "animation_player", "explosion_marker", "name_tag", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_8l3vx")
 heal_state = NodePath("StateMachine/Heal")
+enemy_name = "Medic Bot"
 spawn_rings = NodePath("SpawnRings")
 animation_player = NodePath("healer/AnimationPlayer")
 drop_chance = 10
 score = 130
 explosion_marker = NodePath("ExplosionMarker")
+name_tag = NodePath("EnemyNameTag/NameTag")
 level_1_hp = 110
 level_2_hp = 150
 level_3_hp = 190
@@ -1420,15 +1426,21 @@ one_shot = true
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(164, 50)
+size = Vector2i(250, 30)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 45.0
+offset_right = 209.0
+offset_bottom = 29.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 1
 theme_override_fonts/font = ExtResource("3_v5ub3")
 theme_override_font_sizes/font_size = 28
 text = "100/100"
 horizontal_alignment = 1
+
+[node name="EnemyNameTag" parent="." instance=ExtResource("4_jdreg")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_8ngdf")
@@ -1459,6 +1471,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 2.8597152, 0.449
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070296526, 3.8653488, 0)
 texture = SubResource("ViewportTexture_4c8f4")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.85431373, 0.5197577, 0, -0.5197577, 0.85431373, 0.22730851, 0.55880594, 0.48663378)
+texture = SubResource("ViewportTexture_xkvm6")
 
 [node name="PulsePoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2819458, 2.8623483, 1.12054)
@@ -1491,3 +1507,5 @@ transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0
 
 [node name="ExplosionMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0926518, 0.95704615)
+
+[editable path="EnemyNameTag"]

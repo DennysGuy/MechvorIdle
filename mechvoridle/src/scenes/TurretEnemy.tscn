@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://bdavl4sbcomxk"]
+[gd_scene load_steps=58 format=4 uid="uid://bdavl4sbcomxk"]
 
 [ext_resource type="Texture2D" uid="uid://crqc42bpuql37" path="res://assets/graphics/TurretBot/TurretEnemy_0.png" id="1_1ibgu"]
 [ext_resource type="Script" uid="uid://b45s7l4f3in4f" path="res://src/scripts/Enemies/TurretBot/turret_drone.gd" id="1_1osyg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="8_ije7j"]
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="9_hlvsc"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="10_rrs0b"]
+[ext_resource type="PackedScene" uid="uid://m6q5xj73obyg" path="res://src/scenes/TileGrid/EnemyNameTag.tscn" id="11_o1ffa"]
 [ext_resource type="PackedScene" uid="uid://b4bsx7dv1msm8" path="res://assets/graphics/Models/SpawnInRing.gltf" id="11_xudhj"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="12_boe6v"]
 [ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="13_ehsrc"]
@@ -1273,6 +1274,9 @@ _data = {
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7lw6e"]
 viewport_path = NodePath("EnemyHPLabel")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_osp1p"]
+viewport_path = NodePath("EnemyNameTag")
 
 [sub_resource type="Animation" id="Animation_ehsrc"]
 resource_name = "Death"
@@ -3277,15 +3281,17 @@ _data = {
 &"SpawnIn": SubResource("Animation_boe6v")
 }
 
-[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "animation_player", "explosion_marker", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="TurretEnemy" type="Node3D" node_paths=PackedStringArray("shoot", "spawn_rings", "animation_player", "explosion_marker", "name_tag", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_1osyg")
 shoot = NodePath("StateMachine/Shoot")
+enemy_name = "Turret Bot"
 weapon = ExtResource("2_7lw6e")
 spawn_rings = NodePath("SpawnRings")
 animation_player = NodePath("Turretanimated/AnimationPlayer")
 drop_chance = 15
 score = 150
 explosion_marker = NodePath("ExplosionMarker")
+name_tag = NodePath("EnemyNameTag/NameTag")
 level_1_hp = 220
 level_2_hp = 250
 level_3_hp = 280
@@ -3582,17 +3588,25 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3437045, 0)
 texture = SubResource("ViewportTexture_7lw6e")
 
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8475761, 0.5306739, 0, -0.5306739, 0.8475761, 0.2830274, 0.35976398, 0.63661265)
+texture = SubResource("ViewportTexture_osp1p")
+
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(200, 34)
+size = Vector2i(220, 30)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 220.0
+offset_bottom = 31.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("10_rrs0b")
 theme_override_font_sizes/font_size = 30
 text = "100/100"
 horizontal_alignment = 1
+
+[node name="EnemyNameTag" parent="." instance=ExtResource("11_o1ffa")]
 
 [node name="DamageLabelMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0351095, 0.68612003)
@@ -3624,3 +3638,5 @@ transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01832354, 1.3079772, 1.3694725)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="EnemyNameTag"]

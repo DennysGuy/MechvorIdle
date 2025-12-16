@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://df0aqkd6tb8o0"]
+[gd_scene load_steps=71 format=4 uid="uid://df0aqkd6tb8o0"]
 
 [ext_resource type="Script" uid="uid://jjad5qyel3ry" path="res://src/scripts/Enemies/SwordBot/sword_bot.gd" id="1_mft84"]
 [ext_resource type="Texture2D" uid="uid://qdpc8c25uy38" path="res://assets/graphics/Models/SwordBot/SwordBot_0.png" id="2_1j7qk"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bxvxtd5j63htv" path="res://src/scripts/Enemies/spawn_in.gd" id="12_58swo"]
 [ext_resource type="Script" uid="uid://sqk34dbd7j2o" path="res://src/scripts/Enemies/SwordBot/stagger.gd" id="13_ku2yv"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="14_jttd7"]
+[ext_resource type="PackedScene" uid="uid://m6q5xj73obyg" path="res://src/scenes/TileGrid/EnemyNameTag.tscn" id="14_swvcc"]
 [ext_resource type="PackedScene" uid="uid://dwudukx5yh7tk" path="res://src/scenes/TileGrid/LockOnCrossHair.tscn" id="15_1p4t3"]
 [ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="16_kxq0i"]
 
@@ -1204,6 +1205,9 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_siau0"]
 viewport_path = NodePath("EnemyHPLabel")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_sv8pm"]
+viewport_path = NodePath("EnemyNameTag")
+
 [sub_resource type="Animation" id="Animation_swvcc"]
 resource_name = "Death"
 length = 0.8
@@ -1954,7 +1958,7 @@ _data = {
 &"SpawnIn": SubResource("Animation_kxq0i")
 }
 
-[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "animation_player", "explosion_marker", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="SwordBot" type="Node3D" node_paths=PackedStringArray("stagger_state", "pursue_state", "attack_state", "idle_state", "animation_player", "explosion_marker", "name_tag", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_mft84")
 stagger_state = NodePath("StateMachine/Stagger")
 pursue_state = NodePath("StateMachine/Pursue")
@@ -1965,6 +1969,7 @@ animation_player = NodePath("SwordBot/AnimationPlayer")
 drop_chance = 16
 score = 200
 explosion_marker = NodePath("ExplosionMarker")
+name_tag = NodePath("EnemyHPLabel/HealthLabel")
 level_1_hp = 130
 level_2_hp = 160
 level_3_hp = 180
@@ -2169,13 +2174,21 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3454306, 0)
 texture = SubResource("ViewportTexture_siau0")
 
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9189634, 0.3943429, 0, -0.3943429, 0.9189634, 0.35963678, 0.3396963, 1.1885929)
+texture = SubResource("ViewportTexture_sv8pm")
+
+[node name="EnemyNameTag" parent="." instance=ExtResource("14_swvcc")]
+
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(165, 34)
+size = Vector2i(220, 34)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 220.0
+offset_bottom = 29.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("14_jttd7")
 theme_override_font_sizes/font_size = 28
 text = "100/100"
@@ -2198,3 +2211,5 @@ transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0
 
 [node name="ExplosionMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6496105, 1.0526779)
+
+[editable path="EnemyNameTag"]

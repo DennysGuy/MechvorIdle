@@ -2,11 +2,14 @@
 
 [node name="EnemyNameTag" type="SubViewport"]
 transparent_bg = true
-size = Vector2i(200, 22)
+size = Vector2i(350, 40)
 
 [node name="NameTag" type="Label" parent="."]
 offset_left = 5.0
 offset_right = 138.0
 offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
 text = "Lv.1 Sporadic Bot"
 horizontal_alignment = 1

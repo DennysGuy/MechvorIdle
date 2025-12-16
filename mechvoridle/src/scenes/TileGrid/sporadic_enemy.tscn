@@ -2325,15 +2325,17 @@ _data = {
 &"SpawnIn": SubResource("Animation_i65h8")
 }
 
-[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "animation_player", "explosion_marker", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="SporadicEnemy" type="Node3D" node_paths=PackedStringArray("spawn_rings", "animation_player", "explosion_marker", "name_tag", "state_machine", "weapon_spout", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_7h52i")
 row_limit = 4
+enemy_name = "Shocker Bot"
 weapon = ExtResource("2_e7lhk")
 spawn_rings = NodePath("SpawnRings")
 animation_player = NodePath("zaper2/AnimationPlayer")
 drop_chance = 18
 score = 200
 explosion_marker = NodePath("ExplosionMarker")
+name_tag = NodePath("EnemyNameTag/NameTag")
 level_1_hp = 160
 level_2_hp = 200
 level_3_hp = 220
@@ -2589,7 +2591,7 @@ texture = SubResource("ViewportTexture_k4jur")
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(125, 120)
+size = Vector2i(200, 40)
 
 [node name="HealthLabel" type="Label" parent="EnemyHPLabel"]
 anchors_preset = 8
@@ -2597,18 +2599,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.5
-offset_top = -21.0
-offset_right = 25.5
-offset_bottom = 21.0
+offset_left = -76.0
+offset_top = -15.0
+offset_right = 76.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("4_oou2j")
 theme_override_font_sizes/font_size = 26
-text = "180"
+text = "180/180"
 horizontal_alignment = 1
 
-[node name="Sprite3D2" type="Sprite3D" parent="."]
+[node name="NameSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8066406, 0.5910422, 0, -0.5910422, 0.8066406, 0.45259863, 0.53930485, 1.0667033)
 texture = SubResource("ViewportTexture_3682b")
 
