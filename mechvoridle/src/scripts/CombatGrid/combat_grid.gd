@@ -367,7 +367,7 @@ func set_challenge_level_1() -> void:
 
 func set_challenge_level_2() -> void:
 	ChallengeWaveManager.current_count = 0
-	ChallengeWaveManager.win_threshold_count = 8
+	ChallengeWaveManager.win_threshold_count = 6
 	ChallengeWaveManager.can_spawn_targets = true
 	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
 		
@@ -382,9 +382,11 @@ func update_shield_amount() -> void:
 func update_current_challenge_count() -> void:
 	if ChallengeWaveManager.current_count >= ChallengeWaveManager.win_threshold_count:
 		win_threshold_label.text = "Challenge Succeeded!"
+		count_down_timer.set_time(0)
+		return
 		
 	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
-
+	
 
 func update_chances_left() -> void:
 	lives.text = "LIVES: %s/%s" % [ChallengeWaveManager.chances_left, ChallengeWaveManager.MAX_CHANCES]
@@ -428,6 +430,12 @@ func fill_shield_guage() -> void:
 		if not GridManager.player.can_use_shield and GameManager.current_shield_amount >= GameManager.shield_amount:
 			SfxManager.play_sfx(SfxManager.SHIELD_POWER_UP,3)
 			GridManager.player.can_use_shield = true
+
+func play_challenge_won_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.CHALLENGE_WON)
+
+func play_challenge_lost_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.CHALLENGE_FAILED)
 
 func update_health_bar() -> void:
 	health_amount_label.text = "%s/%s" % [GridManager.player.health, GridManager.player.max_health]

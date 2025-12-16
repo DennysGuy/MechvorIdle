@@ -103,20 +103,26 @@ var challenge_chests : Dictionary = {
 			"level" : 2
 		}
 }
-
+var hit_pitch : float = 1.0
 func check_order(index : int) -> void:
 	if target_list.is_empty():
 		return
 	
 	if target_list.size() == 1:
 		increment_win_threshold()
+		SfxManager.play_sfx(SfxManager.ROUND_WON)
 		spawn_challenge_targets.emit()
+		hit_pitch = 1.0
 	else:
 		if is_instance_valid(target_list.get(0)) and target_list.get(0).order_index == index:
 			target_list.remove_at(0)
+			SfxManager.play_sfx(SfxManager.PERFECT_SHIELD_BLOCK,0,false,hit_pitch)
+			hit_pitch += 0.2
 		else:
+			SfxManager.play_sfx(SfxManager.ROUND_FAILED)
 			clear_targets.emit()
 			spawn_challenge_targets.emit()
+			hit_pitch = 1.0
 
 func create_target_list() -> void:
 	var random_int : int = randi_range(1,4)

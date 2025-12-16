@@ -4,8 +4,8 @@ class_name EnemyDead extends State
 func enter() -> void:
 	GameManager.update_score(parent.score)
 	SignalBus.spawn_health_crate.emit(parent.drop_chance)
-	if parent.animation_player:
-		parent.animation_player.play("die")
+	if parent.hit_flash_animation_player:
+		parent.hit_flash_animation_player.play("Death")
 	
 func exit() -> void:
 	pass

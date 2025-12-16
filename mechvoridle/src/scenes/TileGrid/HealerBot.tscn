@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dcrmt7013v31a"]
+[gd_scene load_steps=33 format=4 uid="uid://dcrmt7013v31a"]
 
 [ext_resource type="Script" uid="uid://pmdersmuv5sa" path="res://src/scripts/Enemies/HealerBot/healer_bot.gd" id="1_8l3vx"]
 [ext_resource type="Texture2D" uid="uid://ohxdxxup6nsp" path="res://assets/graphics/HealerBot/HealerBot.png" id="2_223we"]
@@ -736,7 +736,7 @@ viewport_path = NodePath("EnemyHPLabel")
 
 [sub_resource type="Animation" id="Animation_v5ub3"]
 resource_name = "HitFlash"
-length = 0.1
+length = 0.2
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -757,7 +757,7 @@ tracks/1/path = NodePath("healer/hilbot/Skeleton3D/Antenna_002:surface_material_
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
@@ -769,7 +769,7 @@ tracks/2/path = NodePath("healer/hilbot/Skeleton3D/Glasses1_001:surface_material
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
@@ -781,7 +781,7 @@ tracks/3/path = NodePath("healer/hilbot/Skeleton3D/Glasses2:surface_material_ove
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
@@ -793,7 +793,7 @@ tracks/4/path = NodePath("healer/hilbot/Skeleton3D/Pack_001:surface_material_ove
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
@@ -805,7 +805,7 @@ tracks/5/path = NodePath("healer/hilbot/Skeleton3D/Radio1:surface_material_overr
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
@@ -1192,24 +1192,119 @@ tracks/15/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_oyrat"]
+resource_name = "Death"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("healer/hilbot/Skeleton3D/Antenna_001:surface_material_override/0:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.30046383),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("healer/hilbot/Skeleton3D/Antenna_002:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("healer/hilbot/Skeleton3D/Glasses1_001:surface_material_override/0:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("healer/hilbot/Skeleton3D/Glasses2:surface_material_override/0:emission")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("healer/hilbot/Skeleton3D/Pack_001:surface_material_override/0:emission")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("healer/hilbot/Skeleton3D/Radio1:surface_material_override/0:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.27, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawn_basic_explosion"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rshui"]
 _data = {
+&"Death": SubResource("Animation_oyrat"),
 &"HitFlash": SubResource("Animation_v5ub3"),
 &"RESET": SubResource("Animation_rshui"),
 &"SpawnIn": SubResource("Animation_3jje7")
 }
 
-[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "animation_player", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
+[node name="HealerBot" type="Node3D" node_paths=PackedStringArray("heal_state", "spawn_rings", "animation_player", "explosion_marker", "state_machine", "lock_on_cross_hair", "damage_label_marker", "hit_flash_animation_player", "health_label", "hurt", "death")]
 script = ExtResource("1_8l3vx")
 heal_state = NodePath("StateMachine/Heal")
 spawn_rings = NodePath("SpawnRings")
 animation_player = NodePath("healer/AnimationPlayer")
 drop_chance = 10
 score = 130
+explosion_marker = NodePath("ExplosionMarker")
 hurt_time = 0.625
 state_machine = NodePath("StateMachine")
-health = 200
-max_health = 200
+health = 110
+max_health = 110
 lock_on_cross_hair = NodePath("CrossHair")
 damage_label_marker = NodePath("DamageLabelMarker")
 hit_flash_animation_player = NodePath("HitFlashAnimationPlayer")
@@ -1390,3 +1485,6 @@ visible = false
 
 [node name="Shadow" parent="." instance=ExtResource("12_oyrat")]
 transform = Transform3D(1, 0, 0, 0, -0.028811445, 0.99958485, 0, -0.99958485, -0.028811445, 0.0034608245, 0.07176399, -0.06192541)
+
+[node name="ExplosionMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0926518, 0.95704615)

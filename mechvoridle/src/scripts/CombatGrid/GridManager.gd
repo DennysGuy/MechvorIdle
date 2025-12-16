@@ -5,14 +5,14 @@ const MAX_COLUMNS : int = 4
 const MAX_WAVES : int = 15
 const MAX_LEVEL : int = 3
 const PLAYER_ROW : int = 5
-var current_wave : int = 4
+var current_wave : int = -1
 
 var player : GridPlayer
 var enemies : Array[GridEnemy] = []
 var boss_waves_to_beat : int = 0
 var targeted_tiles : Array[Tile] = []
 var locked_on_enemies : Array[GridActor] = []
-var wave_level : int = 2 #used for wave level and challenge level --increments after challenge level ends
+var wave_level : int = 1 #used for wave level and challenge level --increments after challenge level ends
 var total_waves_completed : int = 0
 const SPORADIC_ENEMY = preload("uid://b7cur5tqfwumt")
 const TURRET_ENEMY = preload("uid://bdavl4sbcomxk")
@@ -24,7 +24,6 @@ const HEAVY_BOSS = preload("uid://dolkqjjmpal6f")
 
 func _ready() -> void:
 	pass
-
 
 func move_to_next_level() -> void:
 	wave_level += 1

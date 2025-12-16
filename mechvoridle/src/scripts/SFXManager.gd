@@ -244,7 +244,13 @@ const SNIPER_4 = preload("uid://dq77ljuy1ly6t")
 const SNIPER_SHOT_1 = preload("uid://csxeqtwmcsa4i")
 
 const SNIPER_AIM = preload("uid://6vcgg07gc7h2")
+const ROUND_FAILED = preload("uid://cuopvwi82prjp")
+const ROUND_WON = preload("uid://ctk0jtxxc6gai")
 
+const CHALLENGE_FAILED = preload("uid://n1axv35rt051")
+const CHALLENGE_WON = preload("uid://21akavc5cnjy")
+
+const BASIC_ENEMY_EXPLOSION = preload("uid://o3cdh2e8si7r")
 
 var sniper_shots : Array[AudioStream] = [SNIPER_SHOT_1, SNIPER_2, SNIPER_3, SNIPER_4]
 

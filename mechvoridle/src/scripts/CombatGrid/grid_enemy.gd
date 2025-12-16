@@ -7,7 +7,7 @@ class_name GridEnemy extends GridActor
 @export var drop_chance : int
 @export var score : int
 @export var level : int = 1
-
+@export var explosion_marker : Marker3D
 func _ready() -> void:
 	can_move = false
 	animation_player.speed_scale = TimeManager.slow_time_factor
@@ -43,3 +43,10 @@ func play_teleport_sfx() -> void:
 func clear_rings() -> void:
 	for ring in spawn_rings.get_children():
 		ring.queue_free()
+
+
+func spawn_basic_explosion() -> void:
+	var explosion = preload("uid://dv6sujg7ehpfx").instantiate()
+	explosion.position = explosion_marker.position
+	add_child(explosion)
+	SfxManager.play_sfx(SfxManager.BASIC_ENEMY_EXPLOSION,1)

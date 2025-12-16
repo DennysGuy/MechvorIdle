@@ -58,3 +58,4 @@ func fire_shock_wave() -> void:
 	shock_wave.tiles = tiles
 	shock_wave.tile_column = tile_column
 	get_parent().add_child(shock_wave)
+	 

@@ -61,6 +61,7 @@ func impact_prjectile(area : Area3D):
 						if self is BombBot and self.type == self.BOMB_TYPE.RED:
 							ChallengeWaveManager.increment_win_threshold()
 						elif self is BombBot and self.type == self.BOMB_TYPE.BLACK:
+							SfxManager.play_sfx(SfxManager.ROUND_FAILED)
 							ChallengeWaveManager.decrement_chances()
 							
 					GameManager.damage_shield(true_damage)
@@ -72,6 +73,7 @@ func impact_prjectile(area : Area3D):
 					if tile_parent.occupant.hit_flash_animation_player:
 						tile_parent.occupant.hit_flash_animation_player.play("HitFlash")
 					if self is BombBot and self.type == self.BOMB_TYPE.BLACK:
+						SfxManager.play_sfx(SfxManager.ROUND_FAILED)
 						ChallengeWaveManager.decrement_chances()	
 						
 					tile_parent.occupant.damage_actor(damage)
