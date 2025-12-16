@@ -71,8 +71,10 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 		if self != GridPlayer and !is_vulcan and !GameManager.in_overdrive_mode:
 			SignalBus.update_momentum_meter_amount.emit(2)
 			GameManager.check_momentum_level()
-			
-		state_machine.change_state(death)
+		if state_machine:
+			state_machine.change_state(death)
+		else:
+			queue_free()
 	else:
 		if not is_vulcan and hurt:
 			if _hit_freeze < 1:
@@ -119,5 +121,7 @@ func create_damage_label(amount : int, type : int = 0) -> void:
 	damage_label.position = damage_label_marker.position
 	add_child(damage_label)
 
-func update_health_bar():
+func update_health_bar() -> void:
+	if !health_label:
+		return
 	health_label.text = str(health)+"/"+str(max_health)

@@ -30,7 +30,7 @@ we will then take the newly created array and add the target objects to the scen
 
 '''
 
-const WAVE_TIME : int = 15
+var wave_time : int = 15
 const MAX_CHANCES : int = 3
 var chances_left : int = 3
 
@@ -38,8 +38,8 @@ var in_challenge_wave : bool = false
 var challenge_mode_won : bool = false
 var win_threshold_count : int = 0
 var current_count : int = 0
-
-var target_list : Array = []
+var can_spawn_targets : bool = false
+var target_list : Array[ChallengeTarget] = []
 
 const CHALLENGE_CHEST = preload("uid://mutb6sqjaftb")
 
@@ -48,6 +48,15 @@ signal start_challenge
 
 @warning_ignore("unused_signal")
 signal end_challenge
+
+@warning_ignore("unused_signal")
+signal spawn_challenge_targets
+
+@warning_ignore("unused_signal")
+signal reveal_target_order
+
+@warning_ignore("unused_signal")
+signal clear_targets
 
 func _ready() -> void:
 	challenge_mode_won = false
@@ -91,33 +100,37 @@ var challenge_chests : Dictionary = {
 			"coordinates": Vector2(0,3),
 			"is_slave": false,
 			"is_boss": false,
-			"level" : 1 ##WE WILL NEED TO CHANGE THIS EVENTUALLY
+			"level" : 2
 		}
 }
+
+func check_order(index : int) -> void:
+	if target_list.is_empty():
+		return
+	
+	if target_list.size() == 1:
+		increment_win_threshold()
+		spawn_challenge_targets.emit()
+	else:
+		if is_instance_valid(target_list.get(0)) and target_list.get(0).order_index == index:
+			target_list.remove_at(0)
+		else:
+			clear_targets.emit()
+			spawn_challenge_targets.emit()
 
 func create_target_list() -> void:
 	var random_int : int = randi_range(1,4)
 	var random_direction_list : Array = target_positions.get(random_int)
 	target_list.clear()
 	
+	var i :int = 0
 	for position in random_direction_list:
-		'''
-		-- create a new target object
-		-- assign the target object a position
-		-- assign the target reference number
-		-- add target to target list
-		'''
-		pass
+		var challenge_target : ChallengeTarget = preload("uid://bmiwjkdgt0q3s").instantiate()
+		challenge_target.spawn_coordinates = position 
+		challenge_target.order_index = i
+		target_list.append(challenge_target)
+		i+=1
 	
-func spawn_targets() -> void:
-	create_target_list()
-	for target in target_list:
-		'''
-		-- create a variable and store the object inside
-		-- add target to scene
-		xx hopefully this works
-		'''
-
 var target_positions : Dictionary = {
 	1: [Vector2(1,0),Vector2(1,1),Vector2(1,2),Vector2(1,3)],
 	2: [Vector2(1,1),Vector2(1,0),Vector2(1,3),Vector2(1,2)],

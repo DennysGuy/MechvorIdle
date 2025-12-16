@@ -146,8 +146,9 @@ func add_enemy_to_locked_on_list(enemy : GridActor) -> void:
 	var list_has_enemy : bool = locked_on_enemies.has(enemy)
 	
 	if !list_has_enemy:
-		enemy.lock_on_cross_hair.show()
-		locked_on_enemies.append(enemy)
+		if enemy.lock_on_cross_hair:
+			enemy.lock_on_cross_hair.show()
+			locked_on_enemies.append(enemy)
 		
 	print("THIS IS LOCKED ON LIST AFTER ADD: %s" % [locked_on_enemies])
 

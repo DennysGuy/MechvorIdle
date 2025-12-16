@@ -50,6 +50,7 @@ func _ready() -> void:
 	arena_animation_player.play("Wave")
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
+	ChallengeWaveManager.spawn_challenge_targets.connect(spawn_challenge_targets)
 	damage_multiplier_label.hide()
 	#GridManager.spawn_test_enemy(tiles)
 	#spawn_next_wave()
@@ -194,7 +195,9 @@ func player_check_if_lock_on_valid() -> void:
 			GridManager.remove_enemy_from_locked_on_list(enemy)
 
 func spawn_enemy(enemy : PackedScene, level : int, tile_coords : Vector2, is_slave : bool = false, is_boss : bool = false) -> void:
+
 	var enemy_to_spawn : GridActor = enemy.instantiate()
+		
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
 	print("this is init tiles occupant: %s" % [init_tile.occupant])
 	if enemy_to_spawn is SwordBot:
@@ -217,6 +220,19 @@ func spawn_enemy(enemy : PackedScene, level : int, tile_coords : Vector2, is_sla
 	add_child(enemy_to_spawn)
 
 @onready var count_down_timer: CountDownTimer = $CanvasLayer/CountDownTimer
+
+func spawn_target(target : ChallengeTarget, level : int, tile_coords : Vector2) -> void:
+	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
+	print("this is init tiles occupant: %s" % [init_tile.occupant])
+	
+	target.global_position = init_tile.marker_3d.global_position
+	target.current_tile = init_tile
+	target.tiles = tiles
+	target.level = level
+	init_tile.occupant = target
+
+	add_child(target)
+	
 
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
@@ -310,10 +326,17 @@ func spawn_challenge_chest(level : int) -> void:
 	spawn_enemy(chest["enemy"],chest["level"],chest["coordinates"], chest["is_slave"], chest["is_boss"])
 
 func spawn_level_chest() -> void:
-	count_down_timer.set_time(ChallengeWaveManager.WAVE_TIME,0)
 	
-	#var cur_level : int = GridManager.wave_level
-	spawn_challenge_chest(1) ##TODO: THIS WILL NEED TO CHANGE TO CUR LEVEL ONCE I GET OTHER CHALLENGES IN
+	var wave_time : int = 0
+	var cur_level : int = GridManager.wave_level
+	match cur_level:
+		1:
+			wave_time = 15
+		2:
+			wave_time = 30
+	
+	count_down_timer.set_time(wave_time,0)
+	spawn_challenge_chest(cur_level)
 
 ##TODO: WE WILL PROBABLY HAVE TO CHANGE THIS SO THAT IT CHOOSE WIN OR LOSE OR BOSS
 func play_challenge_failed_outro() -> void:
@@ -327,23 +350,27 @@ func play_challenge_wave_animation() -> void:
 		1:
 			set_challenge_level_1()
 			challenge_wave_player.play("ChallengeWave1Intro")
-		2: ##TODO: NEED TO CHANGE TO CHALLENGE 2 and so on 
-			set_challenge_level_1()
-			challenge_wave_player.play("ChallengeWave1Intro")
+		2: 
+			set_challenge_level_2()
+			challenge_wave_player.play("ChallengeWave2Intro")
 		3:
-			#set_challenge_level_1()
-			#challenge_wave_player.play("ChallengeWave1Intro")
 			GameManager.in_boss_fight = true
 			cutscene_player.play("CountDownBoss")
 
 func set_challenge_level_1() -> void:
 	ChallengeWaveManager.current_count = 0
 	ChallengeWaveManager.chances_left = ChallengeWaveManager.MAX_CHANCES
-	ChallengeWaveManager.win_threshold_count = 10
+	ChallengeWaveManager.win_threshold_count = 16
 	
 	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
 	lives.text = "LIVES: %s/%s" % [ChallengeWaveManager.chances_left, ChallengeWaveManager.MAX_CHANCES]
 
+func set_challenge_level_2() -> void:
+	ChallengeWaveManager.current_count = 0
+	ChallengeWaveManager.win_threshold_count = 8
+	ChallengeWaveManager.can_spawn_targets = true
+	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
+		
 func start_challenge_wave() -> void:
 	ChallengeWaveManager.start_challenge_wave()
 	count_down_timer.start_timer()
@@ -364,7 +391,19 @@ func update_chances_left() -> void:
 	if ChallengeWaveManager.chances_left <= 0:
 		count_down_timer.set_time(0)
 
-
+func spawn_challenge_targets() -> void:
+	await get_tree().process_frame 
+	if !ChallengeWaveManager.in_challenge_wave or !ChallengeWaveManager.can_spawn_targets:
+		ChallengeWaveManager.clear_targets.emit()
+		return
+	ChallengeWaveManager.create_target_list()
+	for target in ChallengeWaveManager.target_list:
+		spawn_target(target,1,target.spawn_coordinates)
+		await get_tree().create_timer(0.25).timeout
+	
+	await get_tree().create_timer(1.0).timeout
+	ChallengeWaveManager.reveal_target_order.emit()
+	
 func open_challenge_chest() -> void:
 	SignalBus.open_challenge_chest.emit()
 

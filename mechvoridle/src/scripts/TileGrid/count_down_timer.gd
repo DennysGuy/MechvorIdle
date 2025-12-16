@@ -39,6 +39,11 @@ func count_down_time(_delta : float) -> void:
 		stop_timer()
 		GameManager.timed_out = true
 		if ChallengeWaveManager.in_challenge_wave:
+			
+			if GridManager.wave_level == 2:
+				ChallengeWaveManager.can_spawn_targets = false
+				ChallengeWaveManager.clear_targets.emit()
+			
 			ChallengeWaveManager.end_challenge.emit()
 			SignalBus.play_failure_animation.emit()	
 		else:

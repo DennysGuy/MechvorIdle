@@ -60,11 +60,15 @@ func start_challenge() -> void:
 	match level:
 		1:
 			spawn_bomb_bots = true
+		2:
+			ChallengeWaveManager.spawn_challenge_targets.emit()
 
 func stop_challenge() -> void:
 	match level:
 		1:
 			spawn_bomb_bots = false
+		2:
+			pass
 
 func open_challenge_chest() -> void:
 	animation_player.play("Open")
