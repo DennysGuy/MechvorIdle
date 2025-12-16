@@ -37,7 +37,6 @@ func _ready() -> void:
 			max_health = level_3_hp
 			health = max_health
 	
-	
 func heal() -> void:
 	var value : int = int(max_health * 0.5)
 	health += value

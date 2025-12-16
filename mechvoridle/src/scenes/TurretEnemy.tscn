@@ -3589,7 +3589,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3437045, 0)
 texture = SubResource("ViewportTexture_7lw6e")
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8475761, 0.5306739, 0, -0.5306739, 0.8475761, 0.2830274, 0.35976398, 0.63661265)
+transform = Transform3D(1, 0, 0, 0, 0.8475761, 0.5306739, 0, -0.5306739, 0.8475761, 0.2830274, 0.50164294, 1.0026356)
 texture = SubResource("ViewportTexture_osp1p")
 
 [node name="EnemyHPLabel" type="SubViewport" parent="."]
