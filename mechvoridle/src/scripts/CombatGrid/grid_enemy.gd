@@ -27,9 +27,15 @@ func _ready() -> void:
 		name_tag.text = "LV.%s %s" % [level,enemy_name]
 	
 	match level:
-		1: max_health = level_1_hp
-		2: max_health = level_2_hp
-		3: max_health = level_3_hp
+		1: 
+			max_health = level_1_hp
+			health = max_health
+		2: 
+			max_health = level_2_hp
+			health = max_health
+		3: 
+			max_health = level_3_hp
+			health = max_health
 	
 	
 func heal() -> void:
