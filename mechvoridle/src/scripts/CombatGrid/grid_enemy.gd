@@ -8,12 +8,23 @@ class_name GridEnemy extends GridActor
 @export var score : int
 @export var level : int = 1
 @export var explosion_marker : Marker3D
+
+@export var level_1_hp : int
+@export var level_2_hp : int
+@export var level_3_hp : int
+
 func _ready() -> void:
 	can_move = false
 	animation_player.speed_scale = TimeManager.slow_time_factor
 	SignalBus.apply_timer_consequences.connect(apply_timer_consequences)
 	SignalBus.enable_enemy_movement.connect(enable_enemy_movement)
 	health_label.text = "%s/%s" % [health, max_health]
+	
+	match level:
+		1: max_health = level_1_hp
+		2: max_health = level_2_hp
+		3: max_health = level_3_hp
+	
 	
 func heal() -> void:
 	var value : int = int(max_health * 0.5)

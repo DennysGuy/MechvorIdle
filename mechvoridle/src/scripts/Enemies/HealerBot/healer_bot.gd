@@ -9,8 +9,8 @@ class_name HealerBot extends GridEnemy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super()
-	SignalBus.start_healing.connect(start_healing)
+	super()	
+	SignalBus.start_healing.connect(start_healing)	
 	state_machine.init(self)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
