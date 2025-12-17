@@ -33,4 +33,4 @@ func fire_rocket() -> void:
 	if GameManager.in_overdrive_mode:
 		pitch_scale = 0.7
 	SfxManager.play_sfx(SfxManager.ROCKET_LAUNCHER_FIRE, 1.0, false, pitch_scale)
-	fire_projectile(weapon)
+	fire_projectile(weapon,level)

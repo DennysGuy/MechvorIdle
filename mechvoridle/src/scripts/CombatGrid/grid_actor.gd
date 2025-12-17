@@ -59,7 +59,6 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 
 	if self != GridManager.player:
 		GameManager.update_score(health_deduction)
-	print("THIS IS HEALTH DEDUCTION: %s" % [health_deduction])
 	health -=  health_deduction
 
 	if self == GridManager.player:
@@ -89,10 +88,16 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 		
 	await get_tree().create_timer(wait_time).timeout
 	
-func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout) -> void:
-
+func fire_projectile(weapon : MechWeapon, level :int = 0, selected_weapon_spout : Marker3D = weapon_spout) -> void:
+	
 	var projectile : GridProjectile = weapon.projectile.instantiate()
 	projectile.global_position = selected_weapon_spout.global_position
+	
+	if level > 0:
+		match level:
+			1: projectile.speed = 8
+			2: projectile.speed = 12
+			3: projectile.speed = 16
 	
 	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
 	if weapon.weapon_owner == weapon.WeaponOwner.PLAYER:

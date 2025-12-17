@@ -77,9 +77,9 @@ var in_overdrive_mode : bool = false
 
 
 
-const MAX_MOMENTUM_METER_AMOUNT : float = 10.0
-const LEVEL_1_MOMENTUM : float = 4.0
-const LEVEL_2_MOMENTUM : float = 7.0
+const MAX_MOMENTUM_METER_AMOUNT : float = 20.0
+const LEVEL_1_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT/4
+const LEVEL_2_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT/2
 const LEVEL_3_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT
 
 var in_boss_fight = false
@@ -698,7 +698,7 @@ func damage_shield(amount : int) -> void:
 	if current_shield_amount <= 0:
 		current_shield_amount = 0
 		GridManager.player.shield_disabled = true
-		SfxManager.play_sfx(SfxManager.SHIELD_POWER_DOWN,3)
+		SfxManager.play_sfx(SfxManager.SHIELD_POWER_DOWN,1)
 		
 	SignalBus.update_shield_amount.emit()
 
@@ -709,7 +709,6 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 	if shield_bonus_time >= 0.95:
 		SfxManager.play_sfx(SfxManager.PERFECT_SHIELD_BLOCK,0,false,block_pitch)
 		block_pitch += 0.2
-		print("PERFECT BLOCK!")
 		if perfect_count > 0:
 			next_multiplier += 1.0
 		else:
@@ -724,7 +723,6 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		SignalBus.show_shield_grade.emit(0)
 		return int(weapon_damage * 0.3)
 	elif shield_bonus_time >= 0.60:
-		print("GREAT BLOCK!")
 		block_pitch = 1.0
 		perfect_count = 0
 		next_multiplier = 1.5
@@ -738,7 +736,6 @@ func calculate_shield_bonus(shield_bonus_time : float, weapon_damage : int) -> i
 		return int(weapon_damage * 0.35)
 	elif shield_bonus_time >= 0.35:
 		block_pitch = 1.0
-		print("GOOD BLOCK!")
 		perfect_count = 0
 		next_multiplier = 1.2
 		heat_reduction = 13

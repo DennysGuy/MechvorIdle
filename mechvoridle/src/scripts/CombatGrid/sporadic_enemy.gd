@@ -14,7 +14,6 @@ func _ready() -> void:
 	SignalBus.heal_enemy.connect(heal)
 	state_machine.init(self)
 	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	health_label.text = str(health)+"/"+str(max_health)
@@ -26,9 +25,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
-func _enter_tree() -> void:
-	print("SPORADIC ENEMY HAS ENTERED!")
-
 func _exit_tree() -> void:
 	GridManager.enemies.erase(self)
 	GridManager.check_wave_status()
@@ -37,7 +33,7 @@ func play_shock_shot() -> void:
 	var pitch_scale := 1.0
 	if GameManager.in_overdrive_mode:
 		pitch_scale = 0.6
-	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST, -4,false, pitch_scale)
+	SfxManager.play_sfx(SfxManager.LIGHTNING_BLAST, -8,false, pitch_scale)
 
 func fire_shock_wave() -> void:
 	var shock_wave : ElectricalShock = weapon.projectile.instantiate()
@@ -48,7 +44,7 @@ func fire_shock_wave() -> void:
 		2:
 			shock_wave.speed = 50
 		3:
-			shock_wave.speed = 70
+			shock_wave.speed = 80
 			
 	shock_wave.weapon_owner = self
 	shock_wave.weapon_origin = weapon

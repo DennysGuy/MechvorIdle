@@ -10,6 +10,8 @@ var drain_momentum_meter : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ready_player.play("ReadLabelPulse")
+	max_value = GameManager.MAX_MOMENTUM_METER_AMOUNT
+	min_value = 0
 	SignalBus.overdrive_mode_ready.connect(show_ready_label)
 	SignalBus.overdrive_mode_disabled.connect(hide_ready_label)
 	SignalBus.start_overdrive_mode.connect(start_overdrive_mode)

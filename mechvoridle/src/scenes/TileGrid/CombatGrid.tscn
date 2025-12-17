@@ -1322,6 +1322,21 @@ _data = {
 &"RESET": SubResource("Animation_64hw0")
 }
 
+[sub_resource type="Animation" id="Animation_a4x7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ShieldGradeLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-111, 102)]
+}
+
 [sub_resource type="Animation" id="Animation_e10wx"]
 resource_name = "ShowGrade"
 length = 2.0
@@ -1336,21 +1351,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5358868, 0.5358868, 0.5358868, 0.5358868),
 "update": 0,
 "values": [Vector2(-111, 91), Vector2(21, 91), Vector2(21, 91), Vector2(-111, 91)]
-}
-
-[sub_resource type="Animation" id="Animation_a4x7n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ShieldGradeLabel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-111, 102)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3hwxa"]
@@ -1821,7 +1821,6 @@ text = "PERFECT Guard!"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
-autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]
