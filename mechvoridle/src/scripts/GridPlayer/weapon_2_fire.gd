@@ -3,7 +3,7 @@ class_name RifleFireRight extends WeaponState
 @export var idle : State
 
 func enter() -> void:
-	parent.can_move = false
+	parent.can_move = true
 	
 	animation_name = "AimRifleFire"
 	GameManager.can_fire_weapon_1 = false
@@ -26,7 +26,7 @@ func enter() -> void:
 func exit() -> void:
 	SignalBus.issue_weapon_attack.emit(weapon_position)
 	parent.can_fire_vulcans = true
-	parent.can_move = true
+	
 
 func process_input(_event: InputEvent) -> State:
 	return null

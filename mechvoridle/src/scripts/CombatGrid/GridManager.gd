@@ -268,14 +268,14 @@ var level_configurations : Dictionary = {
 					"coordinates": Vector2(2,1),
 					"is_slave": false,
 					"is_boss": false,
-					"level" : 2
+					"level" : 1
 				},
 				{
 					"enemy": SPORADIC_ENEMY.duplicate(true),
 					"coordinates": Vector2(2,2),
 					"is_slave": false,
 					"is_boss": false,
-					"level" : 2
+					"level" : 1
 				},
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
@@ -320,14 +320,14 @@ var level_configurations : Dictionary = {
 					"coordinates": Vector2(1,1),
 					"is_slave": false,
 					"is_boss": false,
-					"level" : 2
+					"level" : 1
 				},
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
 					"coordinates": Vector2(1,2),
 					"is_slave": false,
 					"is_boss": false,
-					"level" : 2
+					"level" : 1
 				},
 				{
 					"enemy": SPORADIC_ENEMY.duplicate(true),

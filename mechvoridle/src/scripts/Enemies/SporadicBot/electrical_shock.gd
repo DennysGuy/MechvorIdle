@@ -30,10 +30,10 @@ func move_shock_wave() -> void:
 			global_position = selected_tile.marker_3d.global_position
 			if selected_tile.occupant and selected_tile.occupant == GridManager.player:
 				var shake_amount : float = 0.0
-				if GridManager.player.shield_active:
+				if GridManager.player.shine_value > 0:
 					shake_amount = 1.0
 					var true_damage := weapon_origin.damage
-					var shield_bonus_time := GridManager.player.shield_bonus_time
+					var shield_bonus_time := GridManager.player.shine_value
 					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, weapon_origin.damage)
 					
 					if calculated_damage > 0:

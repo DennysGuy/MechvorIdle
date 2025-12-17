@@ -1,7 +1,8 @@
-[gd_scene load_steps=655 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=659 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://bbueplktggyvr" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_0.png" id="2_mexru"]
+[ext_resource type="Shader" uid="uid://bdn8p7viw62hf" path="res://src/scripts/Shaders/Shine.gdshader" id="3_0rna0"]
 [ext_resource type="Texture2D" uid="uid://b3nu0y4fn8l0l" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_1.png" id="3_wvm5k"]
 [ext_resource type="Texture2D" uid="uid://btdhlj57ie2fe" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_2.png" id="4_i40dg"]
 [ext_resource type="Texture2D" uid="uid://biouomwky4jtt" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_3.png" id="5_xvbyb"]
@@ -49,8 +50,11 @@
 [ext_resource type="PackedScene" uid="uid://c05p44g25u5j4" path="res://src/scenes/TileGrid/Shadow.tscn" id="38_xvbyb"]
 [ext_resource type="Script" uid="uid://cctghl7p87hm1" path="res://src/scripts/GridPlayer/States/sniper_rifle_fire_left.gd" id="39_u62yh"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rna0"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqbol"]
 resource_name = "material_0"
+next_pass = SubResource("ShaderMaterial_0rna0")
 transparency = 2
 alpha_scissor_threshold = 0.05
 alpha_antialiasing_mode = 0
@@ -21955,6 +21959,17 @@ _data = {
 &"HitFlash": SubResource("Animation_hpw55")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4s5b"]
+render_priority = 0
+shader = ExtResource("3_0rna0")
+shader_parameter/shine_color = Color(1, 1, 0, 1)
+shader_parameter/cycle_interval = 3.8200001577
+shader_parameter/shine_speed = 5.0
+shader_parameter/shine_width = 100.0
+shader_parameter/shine_strength = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dhlrv"]
+
 [node name="Player" type="Node3D" node_paths=PackedStringArray("arm_rocket_aim", "arm_rocket_fire", "state_machine", "damage_label_marker", "hit_flash_animation_player", "hurt", "death")]
 script = ExtResource("1_8keqk")
 arm_rocket_aim = NodePath("StateMachine/ArmRocketAim")
@@ -21977,7 +21992,6 @@ transform = Transform3D(0.9238793, 0, -0.3826834, 0, 1, 0, 0.3826834, 0, 0.92387
 
 [node name="MeleeHead" type="Node3D" parent="blockbench_export/UpperBody/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0089925, 0.071825, -0.005945625)
-visible = false
 
 [node name="MeleeHead" type="MeshInstance3D" parent="blockbench_export/UpperBody/Head/MeleeHead"]
 mesh = SubResource("ArrayMesh_e1rg6")
@@ -23850,6 +23864,11 @@ bus = &"SFX"
 
 [node name="Shadow" parent="." instance=ExtResource("38_xvbyb")]
 transform = Transform3D(0.7849772, 0, 0, 0, -0.019145932, 0.9891577, 0, -0.66424936, -0.0285109, 0.14685702, 0.13933337, -0.004360676)
+
+[node name="CounterGuardShine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.300108, 0)
+material_override = SubResource("ShaderMaterial_p4s5b")
+mesh = SubResource("CapsuleMesh_dhlrv")
 
 [connection signal="timeout" from="ChargeUpTimer" to="StateMachine/RifleAimRight" method="_on_charge_up_timer_timeout"]
 [connection signal="timeout" from="ShieldCoolDownTimer" to="." method="_on_shield_cool_down_timer_timeout"]

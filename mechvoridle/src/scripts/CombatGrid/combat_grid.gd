@@ -43,6 +43,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 @onready var win_threshold_label: Label = $CanvasLayer/WinThresholdLabel
 @onready var lives: Label = $CanvasLayer/Lives
+@onready var shield_grade_label: RichTextLabel = $CanvasLayer/ShieldGradeLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -51,6 +52,7 @@ func _ready() -> void:
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
 	ChallengeWaveManager.spawn_challenge_targets.connect(spawn_challenge_targets)
+	SignalBus.show_shield_grade.connect(show_guard_grade)
 	damage_multiplier_label.hide()
 	#GridManager.spawn_test_enemy(tiles)
 	#spawn_next_wave()
@@ -220,6 +222,7 @@ func spawn_enemy(enemy : PackedScene, level : int, tile_coords : Vector2, is_sla
 	add_child(enemy_to_spawn)
 
 @onready var count_down_timer: CountDownTimer = $CanvasLayer/CountDownTimer
+@onready var grade_player: AnimationPlayer = $GradePlayer
 
 func spawn_target(target : ChallengeTarget, level : int, tile_coords : Vector2) -> void:
 	var init_tile : Tile = GridManager.get_tile(tiles, tile_coords)
@@ -286,6 +289,17 @@ func spawn_next_wave() -> void:
 	
 	count_down_timer.start_timer()
 
+func show_guard_grade(place : int) -> void:
+	match place:
+		0:
+			shield_grade_label.text = "[color=yellow]Perfect\nGuard![/color]"
+		1:
+			shield_grade_label.text = "[color=green]Great\nGuard![/color]"
+		2:
+			shield_grade_label.text = "[color=blue]Okay\nGuard![/color]"
+	
+	grade_player.play("ShowGrade")
+
 func move_to_next_level() -> void:
 	ChallengeWaveManager.end_challenge_wave()
 	ChallengeWaveManager.reset_wave_details()
@@ -344,6 +358,9 @@ func play_challenge_failed_outro() -> void:
 		challenge_wave_player.play("ChallengeWave1Success")
 	else:
 		challenge_wave_player.play("ChallengeWave1Fail")
+
+func play_challenge_alert_sfx() -> void:
+	SfxManager.play_sfx(SfxManager.CHALLENGE_ALERT)
 
 func play_challenge_wave_animation() -> void:
 	match GridManager.wave_level:
@@ -427,9 +444,9 @@ func fill_shield_guage() -> void:
 		
 		GridManager.player.start_shield_cool_down = false
 		
-		if not GridManager.player.can_use_shield and GameManager.current_shield_amount >= GameManager.shield_amount:
+		if GridManager.player.shield_disabled and GameManager.current_shield_amount >= GameManager.shield_amount:
 			SfxManager.play_sfx(SfxManager.SHIELD_POWER_UP,3)
-			GridManager.player.can_use_shield = true
+			GridManager.player.shield_disabled = false
 
 func play_challenge_won_sfx() -> void:
 	SfxManager.play_sfx(SfxManager.CHALLENGE_WON)

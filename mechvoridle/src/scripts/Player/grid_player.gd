@@ -119,6 +119,14 @@ class_name GridPlayer extends GridActor
 @onready var sniper_rifle: Node3D = $blockbench_export/UpperBody/Arm1/Shoulder/Bicep/ForeArm/Hand/SniperRifle
 @onready var sniper_rifle_2: Node3D = $blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/Hand2/SniperRifle2
 
+@onready var counter_guard_shine: MeshInstance3D = $CounterGuardShine
+@onready var shine_material := counter_guard_shine.get_active_material(0)
+
+var shield_disabled : bool = false
+
+var shine_value := 0.0
+const SHINE_DECAY := 3.0
+
 var scanned_attack_pattern : Array
 var current_weapon_scanning : MechWeapon
 
@@ -439,39 +447,64 @@ func _process(delta: float) -> void:
 				else:
 					GameManager.current_heat_contained -= 3 * delta
 				SignalBus.update_heat_level.emit()
-
-		if Input.is_action_pressed("activate_shield") and can_use_shield:
-
-			if !shield_hum.playing:
-				shield_hum.play()
-			
-			shield_bonus_time -= delta
-			if shield_bonus_time < 0:
-				shield_bonus_time = 0
-			
-			start_shield_cool_down = false
-			regen_started = false
-			shield_active = true
-			shield.show()
-		else:
-			if shield_hum.playing:
-				shield_hum.stop()
-			
-			shield_bonus_time = 1.0
-			shield_active = false
-			shield.hide()
 		
-			if GameManager.current_shield_amount < GameManager.shield_amount:
-				if not start_shield_cool_down:
-					regen_started = true
-					if can_use_shield:
-						shield_cool_down_timer.wait_time = 3.0
-					else:
-						shield_cool_down_timer.wait_time = 5.4
-					shield_cool_down_timer.start()
-					start_shield_cool_down = true
-					
+		if Input.is_action_just_pressed("activate_shield") and !shield_disabled:
+			SfxManager.play_sfx(SfxManager.COUNTER_GUARD,3)
+			trigger_shine()
+			
+			#if Input.is_action_pressed("activate_shield") and can_use_shield:
+	#
+				#if !shield_hum.playing:
+					#shield_hum.play()
+				#
+				#shield_bonus_time -= delta
+				#if shield_bonus_time < 0:
+					#shield_bonus_time = 0
+				#
+				#start_shield_cool_down = false
+				#regen_started = false
+				#shield_active = true
+				#shield.show()
+			#else:
+				#if shield_hum.playing:
+					#shield_hum.stop()
+				#
+				#shield_bonus_time = 1.0
+				#shield_active = false
+				#shield.hide()
+			#
+		if GameManager.current_shield_amount < GameManager.shield_amount:
+			if not start_shield_cool_down:
+				regen_started = true
+				if can_use_shield:
+					shield_cool_down_timer.wait_time = 3.0
+				else:
+					shield_cool_down_timer.wait_time = 5.4
+				shield_cool_down_timer.start()
+				start_shield_cool_down = true
+				
+		if shine_value <= 0.5:
+			can_use_shield = true
+		else:
+			can_use_shield = false
+			
 	state_machine.process_frame(delta)
+
+func trigger_shine() -> void:
+	
+	if !can_use_shield:
+		return
+	
+	shine_value = 0.0
+	shine_material.set_shader_parameter("shine_strength", 0.0)
+	shine_value = 1.3
+	shine_material.set_shader_parameter("shine_strength", 1.0)
+	
+	if start_shield_cool_down:
+		if can_use_shield:
+			shield_cool_down_timer.wait_time = 3.0
+		start_shield_cool_down = false
+
 
 func set_move_speed_to_od_speed() -> void:
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier - GameManager.overdrive_movement_speed_bonus
@@ -480,6 +513,9 @@ func revert_move_speed_to_normal() -> void:
 	true_wait_time = WAIT_TIME + GameManager.get_owned_mech_legs().movement_speed_modifier
 
 func _physics_process(delta: float) -> void:
+	shine_value = max(shine_value - SHINE_DECAY * delta, 0.0)
+	shine_material.set_shader_parameter("shine_strength", shine_value)
+	
 	rotate_player(delta)
 	state_machine.process_physics(delta)
 

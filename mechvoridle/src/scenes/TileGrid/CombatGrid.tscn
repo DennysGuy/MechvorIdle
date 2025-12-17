@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=66 format=4 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -868,10 +868,40 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.1658957, 1.6851894, 2.2332356, 2.770731),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_eupt6"]
 resource_name = "ChallengeWave1Intro"
 length = 11.0
+step = 0.0001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -903,11 +933,41 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(6.6, 10.033334),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.6, 1.2009, 1.9038, 2.6006, 4.3329, 6.0022, 6.6, 7.0094, 8.0137, 9, 10.033334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
 "method": &"spawn_level_chest"
+}, {
+"args": [],
+"method": &"play_three"
+}, {
+"args": [],
+"method": &"play_two"
+}, {
+"args": [],
+"method": &"play_one"
 }, {
 "args": [],
 "method": &"start_challenge_wave"
@@ -925,7 +985,7 @@ tracks/3/keys = {
 "update": 1,
 "values": ["CHALLENGE WAVE 
 INCOMING!", "CHALLENGE WAVE 
-INCOMING!", "PERFECT GUARD RED!", "DODGE BLACK!", "15 Seconds.", "3", "2", "1", "Let's Go!"]
+INCOMING!", "COUNTER GUARD RED!", "DODGE BLACK!", "15 Seconds.", "3", "2", "1", "Let's Go!"]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -946,9 +1006,12 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
+"times": PackedFloat32Array(10.03288),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1101,7 +1164,7 @@ tracks/3/path = NodePath("CanvasLayer/ChallengeWaveLabel:text")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.5, 3, 4.966676, 5.973795, 6.9784546, 7.966666, 9),
+"times": PackedFloat32Array(0, 2.5, 3, 4.966676, 5.973795, 6.9784546, 8, 9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": ["CHALLENGE WAVE 
@@ -1127,9 +1190,39 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
+"times": PackedFloat32Array(0, 0.6006812, 1.2013601, 1.9007679, 2.9994478, 4.9653835, 5.9710407, 6.9789414, 8.002068, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}, {
+"args": [],
+"method": &"play_challenge_alert_sfx"
+}]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1229,6 +1322,43 @@ _data = {
 &"RESET": SubResource("Animation_64hw0")
 }
 
+[sub_resource type="Animation" id="Animation_e10wx"]
+resource_name = "ShowGrade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ShieldGradeLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 1.7666667, 1.9966667),
+"transitions": PackedFloat32Array(0.5358868, 0.5358868, 0.5358868, 0.5358868),
+"update": 0,
+"values": [Vector2(-111, 91), Vector2(21, 91), Vector2(21, 91), Vector2(-111, 91)]
+}
+
+[sub_resource type="Animation" id="Animation_a4x7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ShieldGradeLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-111, 102)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hwxa"]
+_data = {
+&"RESET": SubResource("Animation_a4x7n"),
+&"ShowGrade": SubResource("Animation_e10wx")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eupt6"]
 render_priority = 0
 shader = ExtResource("25_ekmuk")
@@ -1306,6 +1436,11 @@ libraries = {
 [node name="ChallengeWavePlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_64hw0")
+}
+
+[node name="GradePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3hwxa")
 }
 
 [node name="SupplyCrateTimer" type="Timer" parent="."]
@@ -1670,6 +1805,18 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("9_02ps3")
 text = "Lives 3/3"
+
+[node name="ShieldGradeLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = -111.0
+offset_top = 102.0
+offset_right = -12.0
+offset_bottom = 136.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("9_02ps3")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "PERFECT Guard!"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")

@@ -3,7 +3,7 @@ class_name RifleFireLeft extends WeaponState
 @export var idle : State
 
 func enter() -> void:
-	parent.can_move = false
+	parent.can_move = true
 	#GameManager.get_left_weapon().attack_enemy(parent,parent.tiles,parent.scanned_attack_pattern)
 	
 

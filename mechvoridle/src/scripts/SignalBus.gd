@@ -424,3 +424,5 @@ signal open_challenge_chest
 signal update_chances_left
 @warning_ignore("unused_signal")
 signal update_current_challenge_count
+@warning_ignore("unused_signal")
+signal show_shield_grade(place : int)

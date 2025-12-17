@@ -52,7 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func attack_player(player : GridActor) -> void:
 	var shake_amount : float = 0.0
 	if player is GridPlayer:
-		if player.shield_active:
+		if player.shine_value > 0:
 			SfxManager.play_sfx(SfxManager.get_shield_impact())
 			SfxManager.play_sfx(SfxManager.SWORD_DEFLECT_OFF_SHIELD)
 			var true_damage := weapon.damage

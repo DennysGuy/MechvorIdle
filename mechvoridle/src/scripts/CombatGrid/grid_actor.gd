@@ -25,6 +25,9 @@ var is_attacking : bool = false
 @export var hurt : State
 @export var death : State
 
+@export_group("Stat Modifiers")
+@export var crit_chance : float 
+
 var is_dead : bool = false
 
 func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapon = null, wait_time : float = 0, _hit_freeze : float = 1.0) -> void:

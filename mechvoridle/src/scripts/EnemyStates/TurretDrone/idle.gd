@@ -5,7 +5,13 @@ class_name TurretBotIdle extends State
 func enter() -> void:
 
 	parent.animation_player.play("idle")
-	parent.timer.wait_time = randf_range(0.5,1.3)
+	var wait_time : float
+	match parent.level:
+		1 : wait_time = randf_range(0.5,1.3)
+		2 : wait_time = randf_range(0.4,1.0)
+		3 : wait_time = randf_range(0.3,0.7)
+	
+	parent.timer.wait_time = wait_time
 	parent.timer.start()
 
 func exit() -> void:

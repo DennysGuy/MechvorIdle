@@ -252,6 +252,11 @@ const CHALLENGE_WON = preload("uid://21akavc5cnjy")
 
 const BASIC_ENEMY_EXPLOSION = preload("uid://o3cdh2e8si7r")
 
+const COUNTER_GUARD = preload("uid://jew5n876x2je")
+
+const CHALLENGE_ALERT = preload("uid://cgp2cm1pueshn")
+
+
 var sniper_shots : Array[AudioStream] = [SNIPER_SHOT_1, SNIPER_2, SNIPER_3, SNIPER_4]
 
 var enemy_hurts : Array[AudioStream] = [ENEMY_HURT_1,ENEMY_HURT_2,ENEMY_HURT_3,ENEMY_HURT_4]
