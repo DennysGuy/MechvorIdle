@@ -447,16 +447,22 @@ text = "Basic Movement"
 layout_mode = 0
 offset_left = 27.0
 offset_top = 58.0
-offset_right = 313.0
+offset_right = 336.0
 offset_bottom = 293.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 10
-text = "Grid System: All combat participants operate on a grid—every movement and combat action is grid-bound and executed in real time. Combat revolves around timing, tempo, and positioning.
+text = "Grid System: 
 
-Player Movement: Confined to the leftmost row, moving linearly across lanes. Another movement input cannot be made until reaching the destination tile.
+All combat participants operate on a 4x6 grid—every movement and combat action is grid-bound and executed in real time. Combat revolves around timing, tempo, and positioning.
 
-Controls: Use [Left/Right] to move across lanes."
+Player Movement: 
+
+Confined to the leftmost row, moving linearly across lanes. Another movement input cannot be made until reaching the destination tile.
+
+Controls: 
+
+Use [Left/Right] to move across lanes."
 autowrap_mode = 3
 
 [node name="BackFromMovementTutorial" type="Button" parent="TutorialPanels/BasicMovementPane"]
@@ -489,6 +495,7 @@ offset_right = -307.0
 offset_bottom = -316.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.8934795, 0.92056715, 7.70092e-07, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 text = "TRY!"
 
@@ -562,11 +569,11 @@ offset_bottom = -316.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8068986, 0.9503184, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 text = "TRY!"
 
 [node name="VulcanMachineGunPane" type="ColorRect" parent="TutorialPanels"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -590,8 +597,8 @@ text = "Vulcan Machine Gun"
 layout_mode = 0
 offset_left = 26.0
 offset_top = 58.0
-offset_right = 389.0
-offset_bottom = 246.0
+offset_right = 380.0
+offset_bottom = 265.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
@@ -1109,6 +1116,7 @@ theme_override_fonts/font = ExtResource("1_pbvyl")
 text = "Try"
 
 [node name="PatchNotes" type="ColorRect" parent="TutorialPanels"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
