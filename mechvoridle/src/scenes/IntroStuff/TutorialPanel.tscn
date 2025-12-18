@@ -17,6 +17,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7w6cd"]
 resource_name = "Fade_Out"
@@ -46,6 +58,18 @@ tracks/1/keys = {
 "method": &"go_to_combat"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_yh7jp"]
 length = 0.001
@@ -60,6 +84,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oty06"]
@@ -89,42 +125,42 @@ color = Color(0.22670749, 0.22670749, 0.22670746, 1)
 
 [node name="BG2" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 78.0
-offset_right = 422.0
-offset_bottom = 199.0
+offset_left = 221.0
+offset_top = 102.0
+offset_right = 420.0
+offset_bottom = 223.0
 color = Color(0.14044744, 0.14044744, 0.14044744, 0.5019608)
 
 [node name="BG5" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 4.0
+offset_left = 9.0
+offset_top = 9.0
 offset_right = 636.0
-offset_bottom = 72.0
+offset_bottom = 99.0
 color = Color(0.14044744, 0.14044744, 0.14044744, 0.5019608)
 
 [node name="BG3" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 202.0
-offset_right = 422.0
-offset_bottom = 324.0
+offset_left = 221.0
+offset_top = 226.0
+offset_right = 420.0
+offset_bottom = 348.0
 color = Color(0.14044744, 0.14044744, 0.14044744, 0.5019608)
 
 [node name="BG4" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 429.0
-offset_top = 150.0
-offset_right = 628.0
-offset_bottom = 252.0
+offset_left = 423.0
+offset_top = 174.0
+offset_right = 622.0
+offset_bottom = 276.0
 color = Color(0.14044744, 0.14044744, 0.14044744, 0.5019608)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 6.0
+offset_top = 17.0
 offset_right = 144.0
-offset_bottom = 24.0
+offset_bottom = 35.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("1_pbvyl")
@@ -133,9 +169,9 @@ text = "TUTORIALS"
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 31.0
-offset_right = 630.0
-offset_bottom = 68.0
+offset_top = 56.0
+offset_right = 632.0
+offset_bottom = 93.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 8
@@ -149,10 +185,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -66.0
-offset_right = -12.0
-offset_bottom = -32.0
+offset_left = -77.0
+offset_top = -345.0
+offset_right = -10.0
+offset_bottom = -311.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
@@ -164,10 +200,10 @@ GAME!"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 83.0
-offset_right = 381.0
-offset_bottom = 98.0
+offset_left = 258.0
+offset_top = 107.0
+offset_right = 379.0
+offset_bottom = 122.0
 theme_override_colors/font_color = Color(0.69288, 0.7156994, 7.70092e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -177,10 +213,10 @@ text = "The Basics"
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 261.0
-offset_top = 208.0
-offset_right = 382.0
-offset_bottom = 223.0
+offset_left = 259.0
+offset_top = 232.0
+offset_right = 380.0
+offset_bottom = 247.0
 theme_override_colors/font_color = Color(0.87915874, 0, 0.17455262, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -190,10 +226,10 @@ text = "Pressure"
 
 [node name="Label5" type="Label" parent="."]
 layout_mode = 0
-offset_left = 468.0
-offset_top = 154.0
-offset_right = 578.0
-offset_bottom = 169.0
+offset_left = 462.0
+offset_top = 178.0
+offset_right = 572.0
+offset_bottom = 193.0
 theme_override_colors/font_color = Color(0.99999994, 0.2981996, 0.06098458, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -203,18 +239,18 @@ text = "Advanced"
 
 [node name="BG" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 78.0
-offset_right = 216.0
-offset_bottom = 324.0
+offset_left = 9.0
+offset_top = 102.0
+offset_right = 218.0
+offset_bottom = 348.0
 color = Color(0.08627451, 0.08627451, 0.08627451, 0.5019608)
 
 [node name="Label7" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 83.0
-offset_right = 166.0
-offset_bottom = 98.0
+offset_left = 58.0
+offset_top = 107.0
+offset_right = 168.0
+offset_bottom = 122.0
 theme_override_colors/font_color = Color(0, 0.8073777, 0.7405929, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -224,10 +260,10 @@ text = "Controls"
 
 [node name="Label8" type="Label" parent="."]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 108.0
-offset_right = 210.0
-offset_bottom = 247.0
+offset_left = 15.0
+offset_top = 132.0
+offset_right = 212.0
+offset_bottom = 271.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("1_pbvyl")
@@ -245,10 +281,10 @@ Activate O.D. Mode - Tab"
 
 [node name="Label6" type="Label" parent="."]
 layout_mode = 0
-offset_left = 451.0
-offset_top = 174.0
-offset_right = 620.0
-offset_bottom = 191.0
+offset_left = 445.0
+offset_top = 198.0
+offset_right = 614.0
+offset_bottom = 215.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("1_pbvyl")
@@ -258,10 +294,10 @@ You've done at least 1 playthough"
 
 [node name="ControllerMappings" type="Button" parent="."]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 278.0
-offset_right = 164.0
-offset_bottom = 310.0
+offset_left = 52.0
+offset_top = 298.0
+offset_right = 166.0
+offset_bottom = 330.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
@@ -275,10 +311,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -92.5
-offset_top = -79.0
-offset_right = 94.5
-offset_bottom = 13.0
+offset_left = -94.5
+offset_top = -55.0
+offset_right = 92.5
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -310,19 +346,30 @@ theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
 text = "Counter Guard"
 
+[node name="ViewPatchNotes" type="Button" parent="."]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 325.0
+offset_right = 615.0
+offset_bottom = 345.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "View Patch Notes"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 227.5
-offset_top = 227.0
-offset_right = 418.0
-offset_bottom = 319.0
+offset_left = 225.5
+offset_top = 251.0
+offset_right = 416.0
+offset_bottom = 343.0
 
 [node name="Heat" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
-text = "Over Heating"
+text = "Heat Meter"
 
 [node name="HPEnergy" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
@@ -338,19 +385,19 @@ theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
 text = "OverDrive Mode"
 
-[node name="OverDriveMode2" type="Button" parent="VBoxContainer2"]
+[node name="Waves" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 11
-text = "Waves and Timer"
+text = "Waves"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 434.0
-offset_top = 202.0
-offset_right = 624.5
-offset_bottom = 246.0
+offset_left = 428.0
+offset_top = 226.0
+offset_right = 618.5
+offset_bottom = 270.0
 
 [node name="GuardSlide" type="Button" parent="VBoxContainer3"]
 layout_mode = 2
@@ -367,7 +414,6 @@ theme_override_font_sizes/font_size = 11
 text = "Grading Multiplier"
 
 [node name="TutorialPanels" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -384,7 +430,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.11858138, 0.11858138, 0.11858138, 0.9490196)
+color = Color(0.11764706, 0.11764706, 0.11764706, 0.98039216)
 
 [node name="Title" type="Label" parent="TutorialPanels/BasicMovementPane"]
 layout_mode = 0
@@ -399,20 +445,18 @@ text = "Basic Movement"
 
 [node name="Body" type="Label" parent="TutorialPanels/BasicMovementPane"]
 layout_mode = 0
-offset_left = 26.0
+offset_left = 27.0
 offset_top = 58.0
-offset_right = 312.0
-offset_bottom = 349.0
+offset_right = 313.0
+offset_bottom = 293.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
-theme_override_font_sizes/font_size = 9
-text = "All Combat participants operate on a 'Grid System' meaning every movement or combat option will be bound to the Grid. 
+theme_override_font_sizes/font_size = 10
+text = "Grid System: All combat participants operate on a grid—every movement and combat action is grid-bound and executed in real time. Combat revolves around timing, tempo, and positioning.
 
-All actions are executed in real time. combat is about timing, tempo, and positioning.
+Player Movement: Confined to the leftmost row, moving linearly across lanes. Another movement input cannot be made until reaching the destination tile.
 
-Player movement is confined to the Left most row of the grid. This can be best visualized as traversing linerally across lanes. Another movement input cannot be made until you have reached a destined tile.
-
-Moving across lanes can be executed using the [left/right] movement controls"
+Controls: Use [Left/Right] to move across lanes."
 autowrap_mode = 3
 
 [node name="BackFromMovementTutorial" type="Button" parent="TutorialPanels/BasicMovementPane"]
@@ -456,7 +500,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.12591085, 0.12591085, 0.12591082, 0.9490196)
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
 
 [node name="Title" type="Label" parent="TutorialPanels/ActiveCoolDownAttacksPane"]
 layout_mode = 0
@@ -473,22 +517,18 @@ text = "Active Cooldown Attacks"
 layout_mode = 0
 offset_left = 26.0
 offset_top = 58.0
-offset_right = 371.0
-offset_bottom = 380.0
+offset_right = 313.0
+offset_bottom = 341.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
-theme_override_font_sizes/font_size = 8
-text = "You will have access to 2 active Cooldown weapons that will be (eventually) Equipped In the Mech Customization Menu. 
+theme_override_font_sizes/font_size = 9
+text = "Active Cooldown Weapons are your primary damage dealers. You have access to 2 weapons (eventually equipped via Mech Customization Menu).
 
-Active cooldown Weapons are your Primary Way of dealing damage!
+Grid-Based Attacks: Weapons target grid patterns i.e. whole lanes, rows, grid sections, or individual tiles. Attack patterns vary by weapon and sub-class.
 
-Weapons will have an active cooldown that vary per weapon and Weapon Sub-Class. 
+Cooldown System: After executing an attack, weapons enter cooldown before becoming available again. Cooldowns vary per weapon and can be reduced through gameplay options.
 
-Active Cooldown attacks rely on a grid pattern to do damage. For example: Some Attacks will attack whole lanes, rows, Target sections of the grid or an individual tile.
-
-once a weapon attack is executed, The player will have to wait a brief cooldown before the weapon becomes available once more; however, during down time, the player will have options to reduce cooldown.
-
-**Heat is generated after each attack. This is based on applying a fraction of the damage output of the weapon."
+Heat Generation: Each attack generates heat based on a fraction of the weapon's damage output."
 autowrap_mode = 3
 
 [node name="BackFromCooldownAttacks" type="Button" parent="TutorialPanels/ActiveCoolDownAttacksPane"]
@@ -533,7 +573,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.12591085, 0.12591085, 0.12591082, 0.9490196)
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
 
 [node name="Title" type="Label" parent="TutorialPanels/VulcanMachineGunPane"]
 layout_mode = 0
@@ -550,20 +590,16 @@ text = "Vulcan Machine Gun"
 layout_mode = 0
 offset_left = 26.0
 offset_top = 58.0
-offset_right = 323.0
-offset_bottom = 343.0
+offset_right = 389.0
+offset_bottom = 246.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
-theme_override_font_sizes/font_size = 9
-text = "The Vulcan Machine Gun is a low damage yet reliable fallback Weapon for when weapons are on cooldown. 
+theme_override_font_sizes/font_size = 11
+text = "Vulcan Machine Gun is a low-damage, reliable fallback weapon for when other weapons are on cooldown. Always available but generates small amounts of heat.
 
-This weapon is available to the player at all times, yet the weapon will generate small amounts of heat which you must take into account with the usage of other weapons.
+Activation: Press and hold [Space Bar].
 
-The player can activate the vulcan Machine Gun by pressing and holding [space bar].
-
-The vulcan machine gun's damage Synergizes with the Counter Guard mechanic. a temporary multiplier will be applied based on the grade of the counter guard (more on this in the Counter Guard Tutorial)
-
-"
+Synergy: Damage synergizes with Counter Guard—a temporary multiplier applies based on Counter Guard grade (detailed in Counter Guard Tutorial)."
 autowrap_mode = 3
 
 [node name="BackFromVulcanMachineGun" type="Button" parent="TutorialPanels/VulcanMachineGunPane"]
@@ -609,7 +645,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.12591085, 0.12591085, 0.12591082, 0.9490196)
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
 
 [node name="Title" type="Label" parent="TutorialPanels/CounterGuardPane"]
 layout_mode = 0
@@ -626,22 +662,22 @@ text = "Counter Guard"
 layout_mode = 0
 offset_left = 26.0
 offset_top = 58.0
-offset_right = 399.0
+offset_right = 359.0
 offset_bottom = 354.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
-theme_override_font_sizes/font_size = 9
-text = "Counter guard is primarily a tempo and attack enhancer. It will also block incoming enemy damage, but will consume Energy. If energy bar is depleted, Counter guard will be disabled until the bar refils.
+theme_override_font_sizes/font_size = 10
+text = "Counter Guard is primarily a tempo and attack enhancer that also blocks incoming damage by consuming Energy. 
 
-When encountering an enemy attack, the player will have the ability to execute a \"counter guard\". 
+Depleting Energy disables Counter Guard until the bar refills.
 
-This is an ability represented with a brief yellow \"shine\" effect around the player. 
+Activation: When facing enemy attacks, execute Counter Guard (indicated by a brief yellow \"shine\" effect around the player).
 
-Counter guard is necessary for keeping fast paced gameplay and survival. Counter guarding with precise timing will provide the following benefits:
+ Importance: Essential for fast-paced gameplay and survival. Precise timing provides:
 
 - Weapon cooldown reduction
-- less Counter-Guard Energy Consumption
-- heat reduction"
+- Reduced Energy consumption
+- Heat reduction"
 autowrap_mode = 3
 
 [node name="BackFromCounterGuarding" type="Button" parent="TutorialPanels/CounterGuardPane"]
@@ -651,9 +687,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -129.0
+offset_left = -77.0
 offset_top = -38.0
-offset_right = -84.0
+offset_right = -6.0
 offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -679,8 +715,480 @@ theme_override_colors/font_color = Color(0.90213317, 0.91730773, 0, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 text = "TRY!"
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="HeatMeterPane" type="ColorRect" parent="TutorialPanels"]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/HeatMeterPane"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 19.0
+offset_right = 154.0
+offset_bottom = 42.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "Heat Meter"
+
+[node name="Body" type="Label" parent="TutorialPanels/HeatMeterPane"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 58.0
+offset_right = 451.0
+offset_bottom = 354.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Heat is generated by all attacks. The Heat Meter (right side of HUD) shows current and max heat capacity.
+
+Overheat State: Filling the meter triggers temporary overheat with severe penalties:
+
+- Movement speed drastically decreased
+- Counter Guard disabled
+- Vulcan machine gun slowed
+- Damage output halved
+- O.D. Mode activation disabled
+
+Heat Management: 
+Reduce accumulated heat by:
+
+- Not attacking (heat auto-reduces slowly)
+- Shield Guarding (reduction based on grade)
+- Health pickups (restore health and reduce heat)"
+autowrap_mode = 3
+
+[node name="BackFromHeatMeter" type="Button" parent="TutorialPanels/HeatMeterPane"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -38.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="HealthAndEnergy" type="ColorRect" parent="TutorialPanels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/HealthAndEnergy"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 19.0
+offset_right = 154.0
+offset_bottom = 42.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "Health and Energy"
+
+[node name="Body" type="Label" parent="TutorialPanels/HealthAndEnergy"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 58.0
+offset_right = 295.0
+offset_bottom = 354.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Health is the mech's functionality state, shown by the large red bar (upper left HUD). 
+
+- Reaching zero ends the game. 
+- Restore health via crates occasionally dropped by defeated enemies.
+
+Energy powers Counter Guard activation. Each successful Counter Guard drains energy, shown by the yellow bar below health. 
+
+- Depleting energy temporarily disables Counter Guard until the bar refills."
+autowrap_mode = 3
+
+[node name="BackFromHealthAndEnergy" type="Button" parent="TutorialPanels/HealthAndEnergy"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -38.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="OverdriveMode" type="ColorRect" parent="TutorialPanels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/OverdriveMode"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 259.0
+offset_bottom = 34.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "OverDrive Mode"
+
+[node name="Body" type="Label" parent="TutorialPanels/OverdriveMode"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 40.0
+offset_right = 410.0
+offset_bottom = 345.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Overdrive Mode (O.D. Mode) is a brief activation that grants super abilities:
+
+- Time slows down (enemy movements and attacks)
+- Vulcan damage doubles
+- Crit rate increases
+- Damage taken reduces
+- Weapon cooldowns reduce
+- Heat completely dissipates
+
+Activation: Fill the momentum meter (left side of HUD) by finishing enemies with cooldown weapons (Vulcan doesn't build momentum).
+Tiers: O.D. Mode has 3 levels (1, 2, and Max) based on meter fill. Each level increases:
+
+- O.D. Mode duration
+- Vulcan damage multiplier
+- Score multiplier
+- Cooldown reduction amount"
+autowrap_mode = 3
+
+[node name="BackFromOverDriveMode" type="Button" parent="TutorialPanels/OverdriveMode"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="Waves" type="ColorRect" parent="TutorialPanels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/Waves"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 121.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "Waves"
+
+[node name="Body" type="Label" parent="TutorialPanels/Waves"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 44.0
+offset_right = 353.0
+offset_bottom = 341.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Waves are timed micro-challenges the player must complete to win. Combat is divided into 3 level each containing 5 combat waves and 1 challenge wave.
+
+Combat waves spawn enemy groups to defeat. Beat them before the timer expires to earn extra time and healing. If time runs out, enemies despawn and you take damage (WIP).
+
+Challenge waves are brief skill tests requiring players to reach a threshold count (e.g., \"Do X 10 times\"). Completion grants 2 random stat buffs that persist through the combat scenario."
+autowrap_mode = 3
+
+[node name="BackFromWaves" type="Button" parent="TutorialPanels/Waves"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="GuardSlide" type="ColorRect" parent="TutorialPanels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/GuardSlide"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 121.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "Guard-Slide"
+
+[node name="Body" type="Label" parent="TutorialPanels/GuardSlide"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 44.0
+offset_right = 353.0
+offset_bottom = 341.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Problem: Since movement inputs require reaching the destination tile first, waiting to Guard after arrival can result in significant damage during transit.
+
+Guard-Sliding Solution: A technique that carries Counter Guard activation into the next tile. Execute by activating Counter Guard right before moving. This may require fast input to maintain the highest guard grade (think of this akin to a simpler wave dash).
+
+Benefits: Makes navigating dense enemy fire sequences manageable and survivable (also useful for certain challenge waves)."
+autowrap_mode = 3
+
+[node name="BackFromGuardSlide" type="Button" parent="TutorialPanels/GuardSlide"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="BackFromGuardSlide2" type="Button" parent="TutorialPanels/GuardSlide"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -413.0
+offset_top = -353.0
+offset_right = -342.0
+offset_bottom = -322.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8775543, 0.9264243, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Try"
+
+[node name="GradingMultiplier" type="ColorRect" parent="TutorialPanels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/GradingMultiplier"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 121.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 18
+text = "Guard Grade Multiplier"
+
+[node name="Body" type="Label" parent="TutorialPanels/GradingMultiplier"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 55.0
+offset_right = 426.0
+offset_bottom = 325.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 9
+text = "Counter Guard Grading System: Grades are awarded based on timing, following a \"risk\" model—the closer the enemy attack is upon activation (less time Counter Guard is active), the higher the reward.
+Grading Tiers:
+
+- Perfect (highest rewards)
+- Great
+- Okay (lowest rewards)
+- No Grade (no rewards)
+
+Perfect Guard Multiplier: 
+
+Landing a Perfect Guard grants a Vulcan multiplier stack that increments with consecutive Perfects. Breaking the streak resets the stack to the lower grade's multiplier.
+
+Multiplier Application: The stack is consumed and applied when executing a cooldown weapon attack, then resets to default."
+autowrap_mode = 3
+
+[node name="BackFromGradingMultiplier" type="Button" parent="TutorialPanels/GradingMultiplier"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="StartGradingTutorial" type="Button" parent="TutorialPanels/GradingMultiplier"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -258.0
+offset_top = -354.0
+offset_right = -187.0
+offset_bottom = -323.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8993119, 0.9183765, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Try"
+
+[node name="PatchNotes" type="ColorRect" parent="TutorialPanels"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.98039216)
+
+[node name="Title" type="Label" parent="TutorialPanels/PatchNotes"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 121.0
+offset_bottom = 30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 14
+text = "Recent Patch Notes"
+
+[node name="Body" type="Label" parent="TutorialPanels/PatchNotes"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 30.0
+offset_right = 553.0
+offset_bottom = 347.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 6
+text = "Patch Notes – v2.5.0a
+
+- Wave Progression Rework
+
+- Waves split into 3 tiers
+- Enemy Scale In level from 1-3 Increasing their difficulty (Not Fully Implemented)
+
+- New Challenge Waves: non-combat tests of skill
+- Complete the challenge before time expires to earn 2 random rewards
+
+Reward Pool (Test Values)
+
++10% Crit Chance
++200 Max HP
++100 Shield Energy
++100 Heat Containment
++1.0 Vulcan Multiplier
+
+- Shield Reworked into the new mechanic \"Counter Guard\" (Name WIP)
+
+- Shield hold removed
+
+- Tap to activate timing-based Counter Guard
+- Timing Grading tiers: Perfect / Great / Okay - Label displayed when one of these grades are awarded
+- Better timing of counter guard reduces: shield energy, heat accumulated, and weapon cooldowns
+
+Other Changes
+
+- Pixel-art enemy death explosions
+- Reduced enemy spawn invincibility and Hp tuned
+- Max HP now reduces heat generation
+can move While Firing Rifle"
+autowrap_mode = 3
+
+[node name="BackFromPatchNotes" type="Button" parent="TutorialPanels/PatchNotes"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -39.0
+offset_right = -11.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "Back"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -701,9 +1209,11 @@ libraries = {
 [connection signal="button_down" from="VBoxContainer/Attacking" to="." method="_on_attacking_button_down"]
 [connection signal="button_down" from="VBoxContainer/VulcanMachineGun" to="." method="_on_vulcan_machine_gun_button_down"]
 [connection signal="button_down" from="VBoxContainer/CounterGuard" to="." method="_on_counter_guard_button_down"]
+[connection signal="button_down" from="ViewPatchNotes" to="." method="_on_view_patch_notes_button_down"]
 [connection signal="button_up" from="VBoxContainer2/Heat" to="." method="_on_heat_button_up"]
 [connection signal="button_up" from="VBoxContainer2/HPEnergy" to="." method="_on_hp_energy_button_up"]
 [connection signal="button_up" from="VBoxContainer2/OverDriveMode" to="." method="_on_over_drive_mode_button_up"]
+[connection signal="button_down" from="VBoxContainer2/Waves" to="." method="_on_waves_button_down"]
 [connection signal="button_up" from="VBoxContainer3/GuardSlide" to="." method="_on_guard_slide_button_up"]
 [connection signal="button_up" from="VBoxContainer3/GradingMultiplier" to="." method="_on_grading_multiplier_button_up"]
 [connection signal="button_up" from="TutorialPanels/BasicMovementPane/BackFromMovementTutorial" to="." method="_on_back_from_movement_tutorial_button_up"]
@@ -714,3 +1224,12 @@ libraries = {
 [connection signal="button_up" from="TutorialPanels/VulcanMachineGunPane/StartVulcanMachineGunTutorial" to="." method="_on_start_vulcan_machine_gun_tutorial_button_up"]
 [connection signal="button_up" from="TutorialPanels/CounterGuardPane/BackFromCounterGuarding" to="." method="_on_back_from_counter_guarding_button_up"]
 [connection signal="button_up" from="TutorialPanels/CounterGuardPane/StartCounterGuardingTutorial" to="." method="_on_start_counter_guarding_tutorial_button_up"]
+[connection signal="button_up" from="TutorialPanels/HeatMeterPane/BackFromHeatMeter" to="." method="_on_back_from_heat_meter_button_up"]
+[connection signal="button_up" from="TutorialPanels/HealthAndEnergy/BackFromHealthAndEnergy" to="." method="_on_back_from_health_and_energy_button_up"]
+[connection signal="button_up" from="TutorialPanels/OverdriveMode/BackFromOverDriveMode" to="." method="_on_back_from_over_drive_mode_button_up"]
+[connection signal="button_up" from="TutorialPanels/Waves/BackFromWaves" to="." method="_on_back_from_waves_button_up"]
+[connection signal="button_up" from="TutorialPanels/GuardSlide/BackFromGuardSlide" to="." method="_on_back_from_guard_slide_button_up"]
+[connection signal="button_up" from="TutorialPanels/GuardSlide/BackFromGuardSlide2" to="." method="_on_back_from_guard_slide_button_up"]
+[connection signal="button_up" from="TutorialPanels/GradingMultiplier/BackFromGradingMultiplier" to="." method="_on_back_from_grading_multiplier_button_up"]
+[connection signal="button_up" from="TutorialPanels/GradingMultiplier/StartGradingTutorial" to="." method="_on_start_grading_tutorial_button_up"]
+[connection signal="button_up" from="TutorialPanels/PatchNotes/BackFromPatchNotes" to="." method="_on_back_from_patch_notes_button_up"]

@@ -81,13 +81,17 @@ func crit_landed() -> bool:
 	return false
 
 
-func spawn_projectile(laser_spout : Marker3D, destined_tile : Tile, tiles : Node, owner : GridActor) -> GridProjectile:
+func spawn_projectile(laser_spout : Marker3D, destined_tile : Tile, tiles : Node, owner : GridActor, override_damage : int = 0, ) -> GridProjectile:
 	var grid_projectile  = projectile.instantiate() as GridProjectile
 	grid_projectile.global_position = laser_spout.global_position
 	grid_projectile.direction = (destined_tile.target_marker.global_transform.origin - laser_spout.global_transform.origin).normalized()
 	grid_projectile.tile = destined_tile
 	grid_projectile.tiles = tiles
+	
 	grid_projectile.damage = damage
+	if override_damage > 0:
+		grid_projectile.damage = override_damage
+	
 	grid_projectile.weapon_origin = self
 	grid_projectile.weapon_owner = owner
 	

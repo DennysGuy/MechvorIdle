@@ -7,7 +7,14 @@ extends Control
 @onready var active_cool_down_attacks_pane: ColorRect = $TutorialPanels/ActiveCoolDownAttacksPane
 @onready var vulcan_machine_gun_pane: ColorRect = $TutorialPanels/VulcanMachineGunPane
 @onready var counter_guard_pane: ColorRect = $TutorialPanels/CounterGuardPane
+@onready var health_and_energy: ColorRect = $TutorialPanels/HealthAndEnergy
+@onready var overdrive_mode: ColorRect = $TutorialPanels/OverdriveMode
+@onready var guard_slide: ColorRect = $TutorialPanels/GuardSlide
+@onready var grading_multiplier: ColorRect = $TutorialPanels/GradingMultiplier
+@onready var patch_notes: ColorRect = $TutorialPanels/PatchNotes
 
+@onready var heat_meter_pane: ColorRect = $TutorialPanels/HeatMeterPane
+@onready var waves: ColorRect = $TutorialPanels/Waves
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,23 +48,23 @@ func _on_counter_guard_button_down() -> void:
 
 
 func _on_heat_button_up() -> void:
-	pass # Replace with function body.
+	heat_meter_pane.show()
 
 
 func _on_hp_energy_button_up() -> void:
-	pass # Replace with function body.
+	health_and_energy.show()
 
 
 func _on_guard_slide_button_up() -> void:
-	pass # Replace with function body.
+	guard_slide.show()
 
 
 func _on_grading_multiplier_button_up() -> void:
-	pass # Replace with function body.
+	grading_multiplier.show()
 
 
 func _on_over_drive_mode_button_up() -> void:
-	pass # Replace with function body.
+	overdrive_mode.show()
 
 func go_to_combat() -> void:
 	get_tree().change_scene_to_file("res://src/scenes/TileGrid/CombatGrid.tscn")
@@ -105,3 +112,43 @@ func _on_start_counter_guarding_tutorial_button_up() -> void:
 
 func _on_back_from_counter_guarding_button_up() -> void:
 	counter_guard_pane.hide()
+
+
+func _on_back_from_heat_meter_button_up() -> void:
+	heat_meter_pane.hide()
+
+
+func _on_back_from_health_and_energy_button_up() -> void:
+	health_and_energy.hide()
+
+
+func _on_back_from_over_drive_mode_button_up() -> void:
+	overdrive_mode.hide()
+
+
+func _on_back_from_waves_button_up() -> void:
+	waves.hide()
+
+
+func _on_waves_button_down() -> void:
+	waves.show()
+
+
+func _on_back_from_guard_slide_button_up() -> void:
+	guard_slide.hide()
+
+
+func _on_start_grading_tutorial_button_up() -> void:
+	pass # Replace with function body.
+
+
+func _on_back_from_grading_multiplier_button_up() -> void:
+	grading_multiplier.hide()
+
+
+func _on_view_patch_notes_button_down() -> void:
+	patch_notes.show()
+
+
+func _on_back_from_patch_notes_button_up() -> void:
+	patch_notes.hide()

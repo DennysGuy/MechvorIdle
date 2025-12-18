@@ -47,7 +47,7 @@ func impact_prjectile(area : Area3D):
 				var shake_amount : float = 0.0
 				if GridManager.player.shine_value > 0:
 					SfxManager.play_sfx(SfxManager.FORCE_FIELD_IMPACT,3)
-					var true_damage := weapon_origin.damage
+					var true_damage := damage
 					var shield_bonus_time = GridManager.player.shine_value
 					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, weapon_origin.damage)
 					

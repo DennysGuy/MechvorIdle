@@ -95,11 +95,11 @@ text = "Patch Notes – v2.5.0a
 
 Wave Progression Rework
 
-Waves split into 3 tiers
-Enemy Scale In level from 1-3 Increasing their difficulty (Not Fully Implemented)
+- Waves split into 3 tiers
+- Enemy Scale In level from 1-3 Increasing their - difficulty (Not Fully Implemented)
 
-New Challenge Waves: non-combat tests of skill
-Complete the challenge before time expires to earn 2 random rewards
+- New Challenge Waves: non-combat tests of skill
+- Complete the challenge before time expires to earn 2 random rewards
 
 Reward Pool (Test Values)
 
@@ -109,19 +109,19 @@ Reward Pool (Test Values)
 +100 Heat Containment
 +1.0 Vulcan Multiplier
 
-Shield Reworked into the new mechanic \"Counter Guard\" (Name WIP)
+- Shield Reworked into the new mechanic \"Counter Guard\" (Name WIP)
 
-Shield hold removed
+- Shield hold removed
 
-Tap to activate timing-based Counter Guard
+- Tap to activate timing-based Counter Guard
 Timing Grading tiers: Perfect / Great / Okay - Label displayed when one of these grades are awarded
-Better timing of counter guard reduces: shield energy, heat accumulated, and weapon cooldowns
+- Better timing of counter guard reduces: shield energy, heat accumulated, and weapon cooldowns
 
 Other Changes
 
-Pixel-art enemy death explosions
-Reduced enemy spawn invincibility and Hp tuned
-Max HP now reduces heat generation"
+- Pixel-art enemy death explosions
+- Reduced enemy spawn invincibility and Hp tuned
+- Max HP now reduces heat generation"
 autowrap_mode = 3
 
 [node name="Next" type="Button" parent="."]

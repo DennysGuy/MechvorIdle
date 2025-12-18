@@ -211,7 +211,7 @@ var level_configurations : Dictionary = {
 			[
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
-					"coordinates": Vector2(0,3),
+					"coordinates": Vector2(1,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 1
@@ -378,7 +378,7 @@ var level_configurations : Dictionary = {
 					"level" : 2
 				},
 				{
-					"enemy": TURRET_ENEMY.duplicate(true),
+					"enemy": HEALER_BOT.duplicate(true),
 					"coordinates": Vector2(0,3),
 					"is_slave": false,
 					"is_boss": false,
@@ -387,6 +387,13 @@ var level_configurations : Dictionary = {
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
 					"coordinates": Vector2(1,0),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 2
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,3),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 2
@@ -447,8 +454,16 @@ var level_configurations : Dictionary = {
 			##WAVE 2
 			[
 				{
+					"enemy": HEALER_BOT.duplicate(true),
+					"coordinates": Vector2(0,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				
+				{
 					"enemy": TURRET_ENEMY.duplicate(true),
-					"coordinates": Vector2(0,0),
+					"coordinates": Vector2(1,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 3
@@ -521,6 +536,13 @@ var level_configurations : Dictionary = {
 				{
 					"enemy": HEALER_BOT.duplicate(true),
 					"coordinates": Vector2(0,1),
+					"is_slave": false,
+					"is_boss": false,
+					"level" : 3
+				},
+				{
+					"enemy": TURRET_ENEMY.duplicate(true),
+					"coordinates": Vector2(1,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 3

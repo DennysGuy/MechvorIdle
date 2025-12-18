@@ -49,7 +49,7 @@ func fire_rifle() -> void:
 
 	if !parent.rifle_charged_up:
 		GameManager.add_heat(weapon_component.damage,3)
-		parent.fire_projectile(weapon_component,0,weapon_spout)
+		parent.fire_projectile(weapon_component,weapon_spout,14)
 	else:
 		var damage_reduction_multiplier : float = 0.75
 		weapon_component.secondary_attack_pattern.issue_attack(parent, parent.tiles, int(weapon_component.damage * damage_reduction_multiplier * GameManager.next_multiplier),weapon_component.hit_freeze)

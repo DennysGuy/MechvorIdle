@@ -42,10 +42,13 @@ func fire_shock_wave() -> void:
 	match level:
 		1:
 			shock_wave.speed = 30
+			shock_wave.damage = 70
 		2:
 			shock_wave.speed = 50
+			shock_wave.damage = 110
 		3:
 			shock_wave.speed = 80
+			shock_wave.damage = 130
 			
 	shock_wave.weapon_owner = self
 	shock_wave.weapon_origin = weapon

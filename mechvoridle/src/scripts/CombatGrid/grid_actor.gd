@@ -88,24 +88,18 @@ func damage_actor(value : int, is_vulcan : bool = false, mech_weapon : MechWeapo
 		
 	await get_tree().create_timer(wait_time).timeout
 	
-func fire_projectile(weapon : MechWeapon, level :int = 0, selected_weapon_spout : Marker3D = weapon_spout) -> void:
+func fire_projectile(weapon : MechWeapon, selected_weapon_spout : Marker3D = weapon_spout, speed : int = 10, damage : int = 0) -> void:
 	
 	var projectile : GridProjectile = weapon.projectile.instantiate()
 	projectile.global_position = selected_weapon_spout.global_position
-	
-	if level > 0:
-		match level:
-			1: projectile.speed = 8
-			2: projectile.speed = 12
-			3: projectile.speed = 16
-	
+	projectile.speed = speed
 	var destined_tile : Tile = GridManager.get_tile(tiles, weapon.attack_pattern.get_destined_tile_coordinates(self))
 	if weapon.weapon_owner == weapon.WeaponOwner.PLAYER:
 		destined_tile.set_targeted_overlay()
 	else:
 		destined_tile.set_enemy_targeted_overlay()
 		
-	projectile = weapon.spawn_projectile(selected_weapon_spout, destined_tile, tiles, self)
+	projectile = weapon.spawn_projectile(selected_weapon_spout, destined_tile, tiles, self, damage)
 	
 	get_parent().add_child(projectile)
 
