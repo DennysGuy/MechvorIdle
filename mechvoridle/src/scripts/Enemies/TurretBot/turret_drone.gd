@@ -4,6 +4,7 @@ class_name TurretEnemy extends GridEnemy
 @export var shoot : State
 @onready var timer: Timer = $Timer
 
+@onready var spawn_in_animation_player: AnimationPlayer = $SpawnInPlayer
 
 func _ready() -> void:
 	super()

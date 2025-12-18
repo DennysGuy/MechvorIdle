@@ -59,6 +59,9 @@ func apply_timer_consequences() -> void:
 func enable_enemy_movement() -> void:
 	can_move = true
 
+func enable_enemy_hurt() -> void:
+	can_hurt = true
+
 func play_teleport_sfx() -> void:
 	SfxManager.play_sfx(SfxManager.TELEPORT_IN, 3)
 

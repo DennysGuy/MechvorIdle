@@ -4,7 +4,7 @@ class_name EnemySpawnIn extends State
 
 func enter() -> void:
 	parent.can_hurt = false
-	parent.hit_flash_animation_player.play("SpawnIn")
+	parent.spawn_in_animation_player.play("SpawnIn")
 
 func exit() -> void:
 	parent.can_hurt = true

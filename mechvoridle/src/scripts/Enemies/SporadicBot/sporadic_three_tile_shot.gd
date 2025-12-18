@@ -48,7 +48,6 @@ func process_physics(_delta: float) -> State:
 		return idle
 	return null
 
-
 func exit() -> void:
 	parent.is_attacking = false
 	is_active = false	# stops async continuation

@@ -1,0 +1,158 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlsshogd0w6u5"]
+
+[ext_resource type="Script" uid="uid://ctgk4w2rr66ug" path="res://src/scripts/IntroStuff/patch_notes.gd" id="1_itpau"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="1_tgkp2"]
+
+[sub_resource type="Animation" id="Animation_itpau"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3ykby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qo6ru"]
+resource_name = "Fade_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_tutorial_panel"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo6ru"]
+_data = {
+&"Fade_In": SubResource("Animation_itpau"),
+&"Fade_Out": SubResource("Animation_qo6ru"),
+&"RESET": SubResource("Animation_3ykby")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_itpau")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 17.0
+offset_right = -12.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_tgkp2")
+theme_override_font_sizes/font_size = 7
+text = "Patch Notes – v2.5.0a
+
+Wave Progression Rework
+
+Waves split into 3 tiers
+New Challenge Waves: non-combat tests of skill
+Enemy Scale In level from 1-3 Increasing their difficulty (Not Fully IMplemented)
+Complete the challenge before time expires to earn 2 random rewards
+
+Reward Pool (Test Values)
+
++10% Crit Chance
++200 Max HP
++100 Shield Energy
++100 Heat Containment
++1.0 Vulcan Multiplier
+
+Shield Reworked into the new mechanic \"Counter Guard\" (Name WIP)
+
+Shield hold removed
+
+Tap to activate timing-based Counter Guard
+Timing Grading tiers: Perfect / Great / Okay - Label displayed when one of these grades are awarded
+Better timing of counter guard reduces: shield energy, heat accumulated, and weapon cooldowns
+
+Other Changes
+
+Pixel-art enemy death explosions
+Reduced enemy spawn invincibility
+Max HP now reduces heat generation"
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qo6ru")
+}
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -35.0
+offset_right = -12.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_tgkp2")
+text = "Next"
+
+[connection signal="button_down" from="Next" to="." method="_on_next_button_down"]

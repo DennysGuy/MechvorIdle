@@ -11,8 +11,8 @@ func enter() -> void:
 		SignalBus.free_slave.emit()
 	
 	SignalBus.spawn_health_crate.emit(parent.drop_chance)
-	if parent.hit_flash_animation_player:
-		parent.hit_flash_animation_player.play("Death")
+	if parent.spawn_in_animation_player:
+		parent.spawn_in_animation_player.play("Death")
 	
 func exit() -> void:
 	pass

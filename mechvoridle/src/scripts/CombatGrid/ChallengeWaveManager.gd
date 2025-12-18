@@ -58,6 +58,31 @@ signal reveal_target_order
 @warning_ignore("unused_signal")
 signal clear_targets
 
+
+
+'''
+How to deliver rewards:
+	
+- Pick from an array of random boolean variables
+- if checks? i.e. if deliver_crit_rewards: add +0.1 to crit chance variable
+- then we need to fill a string with,i.e., "You've been rewarded: 10% crit" 
+- that gets added to a string that the label on the UI side pulls from
+- when we apply rewards we also need to update the UI based on the reward we're granting
+'''
+
+var deliver_crit_rewards : bool = false
+var deliver_hp_rewards : bool = false
+var deliver_heat_rewards : bool = false
+var deliver_double_vulcan_damage_reward : bool = false
+var deliver_shield_reward : bool = false
+
+var reward_list : Array[bool] = [deliver_crit_rewards, deliver_hp_rewards, deliver_heat_rewards, deliver_double_vulcan_damage_reward, deliver_shield_reward]
+
+var display_rewards_string : String = ""
+
+signal update_shield_max_value 
+signal update_heat_meter
+
 func _ready() -> void:
 	challenge_mode_won = false
 	in_challenge_wave = false
@@ -143,3 +168,52 @@ var target_positions : Dictionary = {
 	3: [Vector2(1,2),Vector2(1,3),Vector2(1,1),Vector2(1,0)],
 	4: [Vector2(1,3),Vector2(1,2),Vector2(1,0),Vector2(1,1)]
 }
+
+func pick_random_reward() -> void:
+	
+	while true:
+		var random_int : int = randi_range(0, reward_list.size()-1)
+		
+		if reward_list[random_int] == false:
+			reward_list[random_int] = true
+			return
+	
+func reset_reward_granting() -> void:
+	reward_list.fill(false)
+
+func deliver_rewards() -> void:
+	var i : int = 0
+	while i < 2:
+		pick_random_reward()
+		i += 1
+	
+	print(reward_list)
+	
+	if reward_list[0]:
+		GridManager.player.crit_chance += 0.1
+		display_rewards_string += "Crit Chance +10%\n"
+		
+	if reward_list[1]:
+		GridManager.player.max_health += 200
+		display_rewards_string += "Max Health +200\n"
+		SignalBus.update_player_health.emit()
+		
+	if reward_list[2]:
+		GameManager.max_heat_contained += 100
+		update_heat_meter.emit()
+		display_rewards_string += "Max Heat +100\n"
+		
+	if reward_list[3]:
+		GameManager.vulcan_damage_multiplier += 1
+		display_rewards_string += "Vulcan Damage Multiplier +1.0\n"
+		
+	if reward_list[4]:
+		GameManager.shield_amount += 100
+		display_rewards_string += "Shield Energy Increase +100\n"
+		update_shield_max_value.emit()
+	
+	print(display_rewards_string)
+
+func reset_rewards() -> void:
+	display_rewards_string = ""
+	reset_reward_granting()

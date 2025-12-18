@@ -12,6 +12,9 @@ var is_slave : bool = false
 @export var attack_state : State
 @export var idle_state : State
 
+@onready var spawn_in_animation_player: AnimationPlayer = $SpawnInAnimationPlayer
+
+
 '''
 signals needed 
 - slave follow (pursue)

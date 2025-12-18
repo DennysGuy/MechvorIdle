@@ -1,0 +1,342 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0os23iq51slp"]
+
+[ext_resource type="Script" uid="uid://du4qagfu0wgb3" path="res://src/scripts/IntroStuff/tutorial_panel.gd" id="1_eopd0"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="1_pbvyl"]
+
+[sub_resource type="Animation" id="Animation_eopd0"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yh7jp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7w6cd"]
+resource_name = "Fade_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_combat"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oty06"]
+_data = {
+&"Fade_In": SubResource("Animation_eopd0"),
+&"Fade_Out": SubResource("Animation_7w6cd"),
+&"RESET": SubResource("Animation_yh7jp")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eopd0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22670749, 0.22670749, 0.22670746, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 144.0
+offset_bottom = 28.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+text = "TUTORIALS"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 24.0
+offset_right = 634.0
+offset_bottom = 80.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 8
+text = "As there is Currently no in game tutorial, This is a temporary Tutorial Panel Explaining The mechanics of the game will have to do. Feel Free To Click Through Each mechanic, or come Back To iT later if there Is any Confusion. CLick start to Enter Game!"
+autowrap_mode = 3
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -39.0
+offset_right = -8.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 12
+text = "START 
+GAME!"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 72.0
+offset_right = 381.0
+offset_bottom = 87.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 14
+text = "The Basics"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 217.0
+offset_right = 382.0
+offset_bottom = 232.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 14
+text = "Pressure"
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 127.0
+offset_right = 585.0
+offset_bottom = 142.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 14
+text = "Advanced"
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 83.0
+offset_right = 145.0
+offset_bottom = 98.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 14
+text = "Controls"
+
+[node name="Label8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 108.0
+offset_right = 210.0
+offset_bottom = 245.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 10
+text = "Keyboard Bindings
+
+Move - a/d (left/right)
+Fire Wpn1 - Left Click
+Fire Wpn2 - Right Click
+Fire Vulcan - Spacebar
+
+Counter Guard - Shift/s
+
+Activate O.D. Mode - Tab"
+
+[node name="Label6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 147.0
+offset_right = 627.0
+offset_bottom = 164.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 6
+text = "Please Only Look at this once
+You've done at least 1 playthough"
+
+[node name="ControllerMappings" type="Button" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 260.0
+offset_right = 159.0
+offset_bottom = 292.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "COntroller 
+Mappings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -86.0
+offset_right = 94.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BasicMovement" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Basic Movement"
+
+[node name="Attacking" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "CoolDown Attacks"
+
+[node name="VulcanMachineGun" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Vulcan Machine Gun"
+
+[node name="CounterGuard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Counter Guard"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 227.5
+offset_top = 238.0
+offset_right = 418.0
+offset_bottom = 306.0
+
+[node name="Heat" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Over Heating"
+
+[node name="HPEnergy" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Health And Energy"
+
+[node name="OverDriveMode" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "OverDrive Mode"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 175.0
+offset_right = 631.5
+offset_bottom = 243.0
+
+[node name="GuardSlide" type="Button" parent="VBoxContainer3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Guard Slide"
+
+[node name="GradingMultiplier" type="Button" parent="VBoxContainer3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_pbvyl")
+theme_override_font_sizes/font_size = 11
+text = "Grading Multiplier"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oty06")
+}
+
+[connection signal="button_up" from="StartGame" to="." method="_on_start_game_button_up"]
+[connection signal="button_up" from="ControllerMappings" to="." method="_on_controller_mappings_button_up"]
+[connection signal="button_down" from="VBoxContainer/BasicMovement" to="." method="_on_basic_movement_button_down"]
+[connection signal="button_down" from="VBoxContainer/Attacking" to="." method="_on_attacking_button_down"]
+[connection signal="button_down" from="VBoxContainer/VulcanMachineGun" to="." method="_on_vulcan_machine_gun_button_down"]
+[connection signal="button_down" from="VBoxContainer/CounterGuard" to="." method="_on_counter_guard_button_down"]
+[connection signal="button_up" from="VBoxContainer2/Heat" to="." method="_on_heat_button_up"]
+[connection signal="button_up" from="VBoxContainer2/HPEnergy" to="." method="_on_hp_energy_button_up"]
+[connection signal="button_up" from="VBoxContainer2/OverDriveMode" to="." method="_on_over_drive_mode_button_up"]
+[connection signal="button_up" from="VBoxContainer3/GuardSlide" to="." method="_on_guard_slide_button_up"]
+[connection signal="button_up" from="VBoxContainer3/GradingMultiplier" to="." method="_on_grading_multiplier_button_up"]

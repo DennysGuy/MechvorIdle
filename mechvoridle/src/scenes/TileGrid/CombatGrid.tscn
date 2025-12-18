@@ -1112,6 +1112,23 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.0666666, 3.4333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"deliver_rewards"
+}, {
+"args": [],
+"method": &"reset_rewards"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_luboo"]
 resource_name = "ChallengeWave2Intro"
@@ -1776,15 +1793,35 @@ text = "CHALLENGE WAVE
 INCOMING!"
 horizontal_alignment = 1
 
+[node name="RewardsLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -20.5
+offset_right = 141.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
 [node name="WinThresholdLabel" type="Label" parent="CanvasLayer"]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -103.0
-offset_top = 109.0
-offset_right = 69.0
-offset_bottom = 182.0
+offset_left = -81.0
+offset_top = 99.0
+offset_right = 91.0
+offset_bottom = 172.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 3
@@ -1796,10 +1833,10 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 97.0
-offset_top = 248.0
-offset_right = 237.0
-offset_bottom = 265.0
+offset_left = -81.0
+offset_top = 124.0
+offset_right = 59.0
+offset_bottom = 141.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 3
@@ -1817,6 +1854,36 @@ theme_override_fonts/normal_font = ExtResource("9_02ps3")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "PERFECT Guard!"
+
+[node name="LMB" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -79.0
+offset_top = 91.0
+offset_right = -46.0
+offset_bottom = 102.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 10
+text = "LMB"
+
+[node name="RMB" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 133.0
+offset_right = -11.0
+offset_bottom = 144.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 10
+text = "RMB"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")

@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://beegj3qquii3q"]
+
+[ext_resource type="Script" uid="uid://kkf5ck4cx3ra" path="res://src/scripts/IntroStuff/intro_panel.gd" id="1_eidkf"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="1_yexw2"]
+
+[sub_resource type="Animation" id="Animation_yexw2"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eidkf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cy5qy"]
+resource_name = "Fade_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_patch_panel"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cy5qy"]
+_data = {
+&"Fade_In": SubResource("Animation_yexw2"),
+&"Fade_Out": SubResource("Animation_cy5qy"),
+&"RESET": SubResource("Animation_eidkf")
+}
+
+[node name="IntroPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eidkf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -163.5
+offset_right = 233.0
+offset_bottom = 163.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_yexw2")
+theme_override_font_sizes/font_size = 10
+text = "Welcome to the Mechvor Idle – Combat 2.0 Rework!
+
+You’re playing an early test build showcasing experimental combat systems from what could become a much larger game.
+
+This build has no meaningful progression and exists as a vertical slice - a high-level look at a potential core gameplay loop. 
+
+The content here should not be considered final or fully representative of the intended experience. 
+
+You may also experience Bugs and General Unpolish. That is to be expected, but Please Report Any bugs you encounter! (Duplicate Reports are okay for now)
+
+Your feedback matters.
+
+Please take a moment to complete the survey attached to this build. Thoughtful responses will directly inform future changes and direction.
+
+Thank you for helping shape Mechvor Idle.
+Enjoy the build!"
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cy5qy")
+}
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -38.0
+offset_right = -12.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_yexw2")
+text = "Next"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="button_down" from="Next" to="." method="_on_next_button_down"]

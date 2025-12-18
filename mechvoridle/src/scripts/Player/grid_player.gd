@@ -445,7 +445,7 @@ func _process(delta: float) -> void:
 				if GameManager.in_overdrive_mode:
 					GameManager.current_heat_contained -= 3 * delta + GameManager.overdrive_heat_reduction_affix
 				else:
-					GameManager.current_heat_contained -= 3 * delta
+					GameManager.current_heat_contained -= 5 * delta
 				SignalBus.update_heat_level.emit()
 		
 		if Input.is_action_just_pressed("activate_shield") and !shield_disabled:

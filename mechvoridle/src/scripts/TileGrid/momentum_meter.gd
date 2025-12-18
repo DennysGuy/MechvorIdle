@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if drain_momentum_meter:
-		value -= delta * 2
+		value -= delta * 3
 		if value <= 0:
 			GameManager.in_overdrive_mode = false
 			GameManager.momentum_meter_amount = 0

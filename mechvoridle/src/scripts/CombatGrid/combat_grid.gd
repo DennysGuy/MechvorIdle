@@ -51,6 +51,7 @@ func _ready() -> void:
 	arena_animation_player.play("Wave")
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
+	ChallengeWaveManager.update_shield_max_value.connect(update_max_shield_amount)
 	ChallengeWaveManager.spawn_challenge_targets.connect(spawn_challenge_targets)
 	SignalBus.show_shield_grade.connect(show_guard_grade)
 	damage_multiplier_label.hide()
@@ -160,6 +161,8 @@ func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	if actor == GridManager.player and next_tile.upgrade_crate:
 		if next_tile.upgrade_crate is HealthCrate:
 			increase_player_health(next_tile.upgrade_crate.health_amount)
+			GameManager.reduce_heat_level(next_tile.upgrade_crate.health_amount/2)
+
 			next_tile.upgrade_crate.queue_free()
 			next_tile.upgrade_crate = null
 	
@@ -236,6 +239,17 @@ func spawn_target(target : ChallengeTarget, level : int, tile_coords : Vector2) 
 
 	add_child(target)
 	
+@onready var rewards_label: Label = $CanvasLayer/RewardsLabel
+
+func deliver_rewards() -> void:
+	ChallengeWaveManager.deliver_rewards()
+	rewards_label.text = "Rewards:\n"
+	rewards_label.text += ChallengeWaveManager.display_rewards_string
+	rewards_label.show()
+
+func reset_rewards() -> void:
+	ChallengeWaveManager.reset_rewards()
+	rewards_label.hide()
 
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
@@ -331,7 +345,7 @@ func spawn_enemies(selected_wave : Array) -> void:
 		spawn_enemy(enemy["enemy"], enemy["level"], enemy["coordinates"], enemy["is_slave"], enemy["is_boss"])
 		await get_tree().create_timer(0.5).timeout
 		
-	await get_tree().create_timer(0.5).timeout
+	#sawait get_tree().create_timer(0.5).timeout
 	
 	SignalBus.enable_enemy_movement.emit()
 
@@ -377,7 +391,7 @@ func play_challenge_wave_animation() -> void:
 func set_challenge_level_1() -> void:
 	ChallengeWaveManager.current_count = 0
 	ChallengeWaveManager.chances_left = ChallengeWaveManager.MAX_CHANCES
-	ChallengeWaveManager.win_threshold_count = 16
+	ChallengeWaveManager.win_threshold_count = 12
 	
 	win_threshold_label.text = "WIN: %s/%s" % [ChallengeWaveManager.current_count, ChallengeWaveManager.win_threshold_count]
 	lives.text = "LIVES: %s/%s" % [ChallengeWaveManager.chances_left, ChallengeWaveManager.MAX_CHANCES]
@@ -395,6 +409,9 @@ func start_challenge_wave() -> void:
 
 func update_shield_amount() -> void:
 	player_shield_stamina.value = GameManager.current_shield_amount
+
+func update_max_shield_amount() -> void:
+	player_shield_stamina.max_value = GameManager.shield_amount
 
 func update_current_challenge_count() -> void:
 	if ChallengeWaveManager.current_count >= ChallengeWaveManager.win_threshold_count:

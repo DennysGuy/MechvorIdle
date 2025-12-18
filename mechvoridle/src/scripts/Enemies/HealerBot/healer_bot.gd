@@ -3,6 +3,7 @@ class_name HealerBot extends GridEnemy
 @export var heal_state : State
 
 @onready var timer: Timer = $Timer
+@onready var spawn_in_animation_player: AnimationPlayer = $SpawnInAnimationPlayer
 
 @onready var pulse_point: Marker3D = $PulsePoint
 @onready var pulse_point2: Marker3D = $PulsePoint2

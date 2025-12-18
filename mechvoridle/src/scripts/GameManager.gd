@@ -56,6 +56,7 @@ var current_heat_contained : float = 0
 var over_heated : bool = false
 
 var vulcan_damage_interval : float = 0.15
+var vulcan_damage_multiplier : float = 1.0
 var movement_speed_affix : float = 0.0
 var cooldown_affix : int = 0
 var overheat_damage_affix : float = 1.0
@@ -76,8 +77,7 @@ var in_overdrive_mode : bool = false
 
 
 
-
-const MAX_MOMENTUM_METER_AMOUNT : float = 20.0
+const MAX_MOMENTUM_METER_AMOUNT : float = 16.0
 const LEVEL_1_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT/4
 const LEVEL_2_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT/2
 const LEVEL_3_MOMENTUM : float = MAX_MOMENTUM_METER_AMOUNT
@@ -592,7 +592,7 @@ func reset():
 	ufo_attacking = false
 	ferrite_refinery_cost = ferrite_cost_platinum_base_cost
 	plasma_generator_cost = plasma_generator_fuel_base_cost
-
+	
 	# Mining Laser
 	mining_laser_level = 1
 	mining_laser_damage = 1
@@ -674,7 +674,7 @@ func reset():
 	plasma_generator_station_purchased = false
 	mech_component_purchased = false
 	mech_completed = false
-
+	
 	# Combat
 	player_stunned = false
 	opponent_stunned = false
@@ -683,6 +683,7 @@ func reset():
 	can_fight_boss = false
 	can_traverse_panes = false
 	combat_score = 0
+	vulcan_damage_multiplier = 1.0
 	# Mech Component Slots
 	owned_mech_components = {
 		"Head": null,

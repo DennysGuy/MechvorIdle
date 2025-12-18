@@ -12,6 +12,7 @@ const HEAT_METER_WARNING_SIGN = preload("uid://0qgn0lcfxkir")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.update_heat_level.connect(update_heat_amount)
+	ChallengeWaveManager.update_heat_meter.connect(update_heat_meter)
 	max_value = GameManager.max_heat_contained
 	value = GameManager.current_heat_contained
 	number_count.text = "%s/%s" % [int(value),int(max_value)]
@@ -35,6 +36,10 @@ func _process(delta: float) -> void:
 			SfxManager.play_sfx(SfxManager.MECH_STATUS_RECOVERED,5)
 			#change altered values back to normal
 		update_number_count()
+
+func update_heat_meter() -> void:
+	number_count.text = "%s/%s" % [int(value),int(GameManager.max_heat_contained)]
+	max_value = GameManager.max_heat_contained
 
 func update_heat_amount() -> void:
 

@@ -38,6 +38,9 @@ func reveal_number() -> void:
 func can_hurt_target() -> void:
 	can_hurt = true
 
+func disable_hurt() -> void:
+	can_hurt = false
+
 func _exit_tree() -> void:
 	if !round_lost:
 		ChallengeWaveManager.check_order(order_index)
