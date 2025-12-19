@@ -133,8 +133,7 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set_x: int = 0, off
 		new_offset_list.clear()
 		for pattern in base_patterns:
 			new_offset_list.append(pattern + Vector2(off_set_x,off_set_y))
-	
-	print(new_offset_list)
+
 	
 	for offset in new_offset_list:
 		var final_offset: Vector2 = final_targeted_tile + (direction * offset)

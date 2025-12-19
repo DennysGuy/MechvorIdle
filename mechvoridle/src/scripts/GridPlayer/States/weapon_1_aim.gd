@@ -16,7 +16,6 @@ func enter() -> void:
 	is_attacking = false
 	var sfx := weapon_component.charge_up
 	parent.current_weapon_scanning = weapon_component
-	print(parent.current_weapon_scanning)
 	SfxManager.play_sfx(sfx)
 	damage_multiplier = 1.0
 	i = 0

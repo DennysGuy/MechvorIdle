@@ -32,9 +32,9 @@ func move_shock_wave() -> void:
 				var shake_amount : float = 0.0
 				if GridManager.player.shine_value > 0:
 					shake_amount = 1.0
-					var true_damage := weapon_origin.damage
+					var true_damage := damage
 					var shield_bonus_time := GridManager.player.shine_value
-					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, weapon_origin.damage)
+					var calculated_damage := GameManager.calculate_shield_bonus(shield_bonus_time, damage)
 					
 					if calculated_damage > 0:
 						true_damage = calculated_damage
@@ -44,7 +44,8 @@ func move_shock_wave() -> void:
 					GameManager.damage_shield(true_damage)
 				else:
 					shake_amount = 1.4
-					selected_tile.occupant.damage_actor(weapon_origin.damage)
+					selected_tile.occupant.damage_actor(damage)
+					print("I DAMAGED PLAYER: %s" % [damage])
 				SignalBus.shake_camera.emit(shake_amount)
 		#we'll also scan for entities we can attack!
 		i += 1

@@ -12,3 +12,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	crate.rotation.y += 0.01
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

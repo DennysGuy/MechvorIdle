@@ -9,7 +9,6 @@ func enter() -> void:
 	parent.rifle_charged_up = false
 	parent.charge_up_timer.wait_time = 0.6
 	parent.current_weapon_scanning = weapon_component
-	print(parent.current_weapon_scanning)
 
 	animation_name = "AimRifleLeft"
 		

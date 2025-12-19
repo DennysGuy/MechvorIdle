@@ -69,6 +69,15 @@ func stop_challenge() -> void:
 			spawn_bomb_bots = false
 		2:
 			pass
+			
+@onready var aura: AudioStreamPlayer = $Aura
+@onready var aura_rays: CSGCylinder3D = $AuraRays
 
 func open_challenge_chest() -> void:
+	SfxManager.play_sfx(SfxManager.CHEST_OPEN,2)
 	animation_player.play("Open")
+	
+
+func show_aura_rays() -> void:
+	aura.play()
+	aura_rays.show()

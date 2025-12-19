@@ -41,7 +41,6 @@ func dash_attack() -> void:
 	GridManager.clear_targeted_tiles()
 		
 func exit() -> void:
-	print("THIS IS SWORD WEAPON POSITION: %s " % [weapon_position])
 	parent.can_move = true
 	parent.can_fire_vulcans = true
 	weapon_component.damage = weapon_component.base_damage

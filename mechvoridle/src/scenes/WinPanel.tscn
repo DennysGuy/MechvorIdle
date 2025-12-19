@@ -193,7 +193,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_wnke8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
-text = "Main Menu"
+text = "Back To Tutorial Menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Replay")
@@ -202,6 +202,7 @@ libraries = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

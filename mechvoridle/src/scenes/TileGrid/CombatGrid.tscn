@@ -1040,7 +1040,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_ohpnn"]
 resource_name = "ChallengeWave1Success"
-length = 4.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1060,7 +1060,7 @@ tracks/1/path = NodePath("CanvasLayer/WinThresholdLabel:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 4),
+"times": PackedFloat32Array(0, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1072,10 +1072,10 @@ tracks/2/path = NodePath("CanvasLayer/WinThresholdLabel:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.30067384, 0.6013477, 0.9013477, 0.9020215, 1.3002119, 1.6002119, 1.6008857, 2, 2.3, 2.300674, 2.7333333, 3.0333333, 3.0340073, 3.44, 3.74, 3.740674),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.30067384, 0.6013477, 0.9013477, 0.9020215, 1.3002119, 1.6002119, 1.6008857, 2, 2.3, 2.300674, 2.7333333, 3.0333333, 3.0340073, 3.44, 3.74, 3.740674, 4.266667, 4.5666666, 4.567341, 5.133333, 5.433333, 5.434007),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -1084,7 +1084,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.0666666, 3.4333334, 4),
+"times": PackedFloat32Array(0, 2.0666666, 5.6, 6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -1107,7 +1107,7 @@ tracks/4/path = NodePath("CanvasLayer/Lives:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(4),
+"times": PackedFloat32Array(6),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -1119,7 +1119,7 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(2.0666666, 3.4333334),
+"times": PackedFloat32Array(3.0333333, 5.6),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -1887,6 +1887,7 @@ text = "RMB"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
+autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]

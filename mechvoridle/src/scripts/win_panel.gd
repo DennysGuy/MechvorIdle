@@ -16,4 +16,4 @@ func _on_replay_button_down():
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
 	GameManager.reset()
-	get_tree().change_scene_to_file("res://src/scenes/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/IntroStuff/TutorialPanel.tscn")
