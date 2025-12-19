@@ -653,3 +653,6 @@ func reset_combat() -> void:
 	total_waves_completed = 0
 	player.health = player.max_health
 	wave_level = 1
+	enemies = []
+	locked_on_enemies = []
+	targeted_tiles = []
