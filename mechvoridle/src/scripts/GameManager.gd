@@ -684,15 +684,6 @@ func reset():
 	can_traverse_panes = false
 	combat_score = 0
 	vulcan_damage_multiplier = 1.0
-	# Mech Component Slots
-	owned_mech_components = {
-		"Head": null,
-		"Torso": null,
-		"Legs": null,
-		"Arms": null,
-		"LeftWeapon": null,
-		"RightWeapon": null
-	}
 
 func damage_shield(amount : int) -> void:
 	current_shield_amount -= amount
