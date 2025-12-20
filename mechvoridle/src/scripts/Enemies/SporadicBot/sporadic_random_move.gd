@@ -17,7 +17,7 @@ func enter() -> void:
 	
 	var random_num : int = randi_range(0,100)
 	
-	if random_num <= 25 and parent.level == 3:
+	if random_num <= 35 and parent.level == 3:
 		var random_row : int = randi_range(1,2)
 		if row_free(random_row):
 			three_shot_state = true
@@ -69,7 +69,7 @@ func row_free(row_number : int) -> bool:
 	for i in range(3):
 		var tile : Tile = GridManager.get_tile(parent.tiles, Vector2(row_number, i))
 		print("CHECKING TILE ... %s" % [tile.coordinates])
-		if tile.occupant:
+		if tile.occupant and tile.occupant != parent:
 			print("THERE IS AN OCCUPANT HERE!")
 			return false
 	

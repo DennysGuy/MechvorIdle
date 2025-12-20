@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bl0iu3a7d1v1x"]
+[gd_scene load_steps=12 format=3 uid="uid://bl0iu3a7d1v1x"]
 
 [ext_resource type="Script" uid="uid://dx0rd5nlc4tlo" path="res://src/scripts/win_panel.gd" id="1_v34tx"]
 [ext_resource type="Texture2D" uid="uid://befjeyulwsx5p" path="res://assets/graphics/space_bg.png" id="2_5tmw8"]
 [ext_resource type="FontFile" uid="uid://cu3flnhfbiwql" path="res://assets/graphics/Fonts/BladeLogicDemoRegular-ALnVD.otf" id="2_b5sgr"]
 [ext_resource type="AudioStream" uid="uid://d1g8v0q4pdv0c" path="res://assets/audio/music/victory.ogg" id="2_xr1xk"]
-[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_wnke8"]
 [ext_resource type="Shader" uid="uid://bps8igr40uxnm" path="res://src/scenes/WinPanel.gdshader" id="5_fe6es"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fe6es"]
@@ -144,7 +143,6 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_wnke8")
 theme_override_font_sizes/font_size = 14
 text = "Perhaps a glimpse of a true warrior is in you. This can
 only surface if you press on. Good luck. You need it."
@@ -165,7 +163,6 @@ offset_top = 253.0
 offset_right = 270.0
 offset_bottom = 276.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_wnke8")
 text = "Fight Time: 00:05:23"
 
 [node name="MineTime" type="Label" parent="."]
@@ -175,7 +172,6 @@ offset_top = 213.0
 offset_right = 316.0
 offset_bottom = 236.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_wnke8")
 text = "Gathering Time: 00:12:46"
 
 [node name="Replay" type="Button" parent="."]
@@ -191,7 +187,6 @@ offset_right = 71.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_wnke8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
 text = "Back To Tutorial Menu"
 

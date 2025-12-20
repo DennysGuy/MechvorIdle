@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://lrhtvn2njd2c"]
+[gd_scene load_steps=9 format=3 uid="uid://lrhtvn2njd2c"]
 
 [ext_resource type="Script" uid="uid://7tpb3a8uq0w8" path="res://src/scripts/lose_panel.gd" id="1_jvq76"]
 [ext_resource type="FontFile" uid="uid://cu3flnhfbiwql" path="res://assets/graphics/Fonts/BladeLogicDemoRegular-ALnVD.otf" id="2_18tug"]
 [ext_resource type="AudioStream" uid="uid://cnrkjtdn7pmhc" path="res://assets/audio/music/gameover.ogg" id="2_81yop"]
-[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="3_5i0qs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b37tf"]
 bg_color = Color(0.136771, 0.464389, 0.411784, 1)
@@ -133,7 +132,6 @@ offset_right = 197.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_5i0qs")
 theme_override_font_sizes/font_size = 14
 text = "It's understandable. The chances of getting out of
 Prison Planet (TM) is slim to none - good luck next time."
@@ -151,7 +149,6 @@ offset_right = 49.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_5i0qs")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b37tf")
 text = "Back To Tutorial Menu"
 

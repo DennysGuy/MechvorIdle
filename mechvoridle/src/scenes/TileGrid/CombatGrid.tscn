@@ -1679,7 +1679,6 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1905,6 +1904,7 @@ text = "RMB"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
+autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]
