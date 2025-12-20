@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://w3nvxv0mdub"]
 
-[ext_resource type="Script" uid="uid://dh7qxef68k34g" path="res://src/scripts/TileGrid/damage_label.gd" id="1_0cl2c"]
+[ext_resource type="Script" uid="uid://dh7qxef68k34g" path="res://src/scripts/GridPlayer/TileGrid/damage_label.gd" id="1_0cl2c"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="1_8c403"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0cl2c"]

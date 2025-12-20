@@ -684,12 +684,16 @@ func reset():
 	can_traverse_panes = false
 	combat_score = 0
 	vulcan_damage_multiplier = 1.0
+	
+	can_fire_weapon_1 = true
+	can_fire_weapon_2 = true
 
 func damage_shield(amount : int) -> void:
 	current_shield_amount -= amount
 	if current_shield_amount <= 0:
 		current_shield_amount = 0
 		GridManager.player.shield_disabled = true
+		SignalBus.show_guard_down_label.emit()
 		SfxManager.play_sfx(SfxManager.SHIELD_POWER_DOWN,1)
 		
 	SignalBus.update_shield_amount.emit()

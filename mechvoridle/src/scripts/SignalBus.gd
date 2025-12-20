@@ -426,3 +426,7 @@ signal update_chances_left
 signal update_current_challenge_count
 @warning_ignore("unused_signal")
 signal show_shield_grade(place : int)
+@warning_ignore("unused_signal")
+signal show_guard_down_label
+@warning_ignore("unused_signal")
+signal hide_guard_down_label

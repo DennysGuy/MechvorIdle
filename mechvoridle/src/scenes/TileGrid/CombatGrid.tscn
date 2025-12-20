@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
-[ext_resource type="Script" uid="uid://dr2u7sj8lbs62" path="res://src/scripts/TileGrid/camera.gd" id="2_h1k12"]
+[ext_resource type="Script" uid="uid://dr2u7sj8lbs62" path="res://src/scripts/GridPlayer/TileGrid/camera.gd" id="2_h1k12"]
 [ext_resource type="PackedScene" uid="uid://b5rrffupkskse" path="res://src/scenes/TileGrid/CountDownTimer.tscn" id="2_qlay0"]
 [ext_resource type="PackedScene" uid="uid://cud8gmsqfuiq4" path="res://src/scenes/TileGrid/WeaponIcon.tscn" id="3_e6v0j"]
 [ext_resource type="Texture2D" uid="uid://cvwx02hujw06g" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Fill.png" id="3_h1k12"]
@@ -1536,6 +1536,18 @@ value = 100.0
 texture_under = ExtResource("4_vgp2e")
 texture_progress = ExtResource("5_02ps3")
 
+[node name="GuardDown" type="Label" parent="CanvasLayer"]
+offset_left = 13.0
+offset_top = 49.0
+offset_right = 155.0
+offset_bottom = 60.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 10
+text = "Guard Down!"
+
 [node name="HealthAmountLabel" type="Label" parent="CanvasLayer"]
 offset_left = 234.0
 offset_top = 8.0
@@ -1667,6 +1679,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1783,6 +1796,7 @@ offset_right = 125.0
 offset_bottom = 20.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.99999994, 0.39398524, 0.044974066, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -1805,11 +1819,13 @@ offset_right = 141.0
 offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0.34901962, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 16
+text = "sdsdsd"
 horizontal_alignment = 1
 
 [node name="WinThresholdLabel" type="Label" parent="CanvasLayer"]
@@ -1822,6 +1838,7 @@ offset_top = 99.0
 offset_right = 91.0
 offset_bottom = 172.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.69260865, 0.69260865, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("9_02ps3")
@@ -1837,6 +1854,7 @@ offset_top = 124.0
 offset_right = 59.0
 offset_bottom = 141.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("9_02ps3")
@@ -1887,7 +1905,6 @@ text = "RMB"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
-autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]

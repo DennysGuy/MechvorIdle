@@ -44,6 +44,7 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 @onready var win_threshold_label: Label = $CanvasLayer/WinThresholdLabel
 @onready var lives: Label = $CanvasLayer/Lives
 @onready var shield_grade_label: RichTextLabel = $CanvasLayer/ShieldGradeLabel
+@onready var guard_down: Label = $CanvasLayer/GuardDown
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,9 +55,9 @@ func _ready() -> void:
 	ChallengeWaveManager.update_shield_max_value.connect(update_max_shield_amount)
 	ChallengeWaveManager.spawn_challenge_targets.connect(spawn_challenge_targets)
 	SignalBus.show_shield_grade.connect(show_guard_grade)
+	SignalBus.show_guard_down_label.connect(show_guard_down_label)
+	SignalBus.hide_guard_down_label.connect(hide_guard_down_label)
 	damage_multiplier_label.hide()
-	#GridManager.spawn_test_enemy(tiles)
-	#spawn_next_wave()
 	
 	SignalBus.move_player.connect(move_player)
 	SignalBus.move_actor_to_tile.connect(translate_actor)
@@ -92,7 +93,7 @@ func _ready() -> void:
 	SignalBus.update_chances_left.connect(update_chances_left)
 	
 	update_score(0)
-	
+	hide_guard_down_label()
 	SignalBus.move_to_next_level.connect(move_to_next_level)
 	
 	player_health_bar.max_value = GridManager.player.health
@@ -250,6 +251,12 @@ func deliver_rewards() -> void:
 func reset_rewards() -> void:
 	ChallengeWaveManager.reset_rewards()
 	rewards_label.hide()
+
+func show_guard_down_label() -> void:
+	guard_down.show()
+
+func hide_guard_down_label() -> void:
+	guard_down.hide()
 
 func spawn_next_wave() -> void:
 	await get_tree().process_frame
@@ -463,6 +470,7 @@ func fill_shield_guage() -> void:
 		
 		if GridManager.player.shield_disabled and GameManager.current_shield_amount >= GameManager.shield_amount:
 			SfxManager.play_sfx(SfxManager.SHIELD_POWER_UP,3)
+			hide_guard_down_label()
 			GridManager.player.shield_disabled = false
 
 func play_challenge_won_sfx() -> void:
@@ -599,9 +607,11 @@ func play_fade_to_lose() -> void:
 	transition_player.play("FadeToLose")
 
 func go_to_win_screen() -> void:
+	GridManager.player.queue_free()
 	get_tree().change_scene_to_file("res://src/scenes/WinPanel.tscn")
 
 func go_to_lose_screen() -> void:
+	GridManager.player.queue_free()
 	get_tree().change_scene_to_file("res://src/scenes/LosePanel.tscn")
 
 func _on_timer_timeout() -> void:

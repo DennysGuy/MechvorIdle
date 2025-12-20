@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ck5biy4g3ijgw"]
 
-[ext_resource type="Script" uid="uid://dy8g1nq60m3iu" path="res://src/scripts/TileGrid/mini_rocket.gd" id="1_sa7l2"]
+[ext_resource type="Script" uid="uid://dy8g1nq60m3iu" path="res://src/scripts/GridPlayer/TileGrid/mini_rocket.gd" id="1_sa7l2"]
 [ext_resource type="PackedScene" uid="uid://c54hos1tk78i" path="res://assets/graphics/Models/HeavyBoss/MiniRocket.gltf" id="2_r8okg"]
 
 [sub_resource type="Animation" id="Animation_s1a8t"]

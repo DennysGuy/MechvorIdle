@@ -121,7 +121,7 @@ Other Changes
 
 - Pixel-art enemy death explosions
 - Reduced enemy spawn invincibility and Hp tuned
-- Max HP now reduces heat generation"
+- HP Crates now reduces heat generation"
 autowrap_mode = 3
 
 [node name="Next" type="Button" parent="."]

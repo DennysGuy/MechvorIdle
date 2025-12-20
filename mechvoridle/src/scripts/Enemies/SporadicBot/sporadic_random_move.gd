@@ -18,7 +18,9 @@ func enter() -> void:
 	var random_num : int = randi_range(0,100)
 	
 	if random_num <= 25 and parent.level == 3:
-		three_shot_state = true
+		var random_row : int = randi_range(1,2)
+		if row_free(random_row):
+			three_shot_state = true
 
 	else:
 		SfxManager.play_sfx(SfxManager.get_enemy_movement_whoosh())
@@ -61,3 +63,14 @@ func process_physics(_delta: float) -> State:
 		return idle
 	
 	return null
+
+func row_free(row_number : int) -> bool:
+	
+	for i in range(3):
+		var tile : Tile = GridManager.get_tile(parent.tiles, Vector2(row_number, i))
+		print("CHECKING TILE ... %s" % [tile.coordinates])
+		if tile.occupant:
+			print("THERE IS AN OCCUPANT HERE!")
+			return false
+	
+	return true

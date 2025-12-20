@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5rrffupkskse"]
 
-[ext_resource type="Script" uid="uid://bq2rtss5lifkb" path="res://src/scripts/TileGrid/count_down_timer.gd" id="1_ovc4j"]
+[ext_resource type="Script" uid="uid://bq2rtss5lifkb" path="res://src/scripts/GridPlayer/TileGrid/count_down_timer.gd" id="1_ovc4j"]
 
 [node name="CountDownTimer" type="RichTextLabel"]
 anchors_preset = 8

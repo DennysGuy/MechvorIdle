@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bdi6mosq7r7ny" path="res://assets/graphics/UI/MomentumMeter_BG.png" id="1_vy5oy"]
 [ext_resource type="Texture2D" uid="uid://bp16tipmvqmfw" path="res://assets/graphics/UI/MomentumMeter_Fill.png" id="2_v8d7y"]
-[ext_resource type="Script" uid="uid://cpmtow16ytp5i" path="res://src/scripts/TileGrid/momentum_meter.gd" id="3_v8d7y"]
+[ext_resource type="Script" uid="uid://cpmtow16ytp5i" path="res://src/scripts/GridPlayer/TileGrid/momentum_meter.gd" id="3_v8d7y"]
 [ext_resource type="Texture2D" uid="uid://c4so11b4naqjb" path="res://assets/graphics/UI/MMLevel1Icon.png" id="4_n6nhy"]
 [ext_resource type="Texture2D" uid="uid://krbptvv7xgnp" path="res://assets/graphics/UI/MMLevel2Icon.png" id="5_6pg2v"]
 [ext_resource type="Texture2D" uid="uid://d2qcvg86tvtlb" path="res://assets/graphics/UI/MMLevel3Icon.png" id="6_n2jj1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://dv6sujg7ehpfx"]
 
 [ext_resource type="Texture2D" uid="uid://hvlh81g76esa" path="res://assets/graphics/BasicEnemyExplosion.png" id="1_m73mw"]
-[ext_resource type="Script" uid="uid://bb5oq3h3r8r3a" path="res://src/scripts/TileGrid/basic_enemy_explosion.gd" id="2_mweh6"]
+[ext_resource type="Script" uid="uid://bb5oq3h3r8r3a" path="res://src/scripts/GridPlayer/TileGrid/basic_enemy_explosion.gd" id="2_mweh6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mweh6"]
 atlas = ExtResource("1_m73mw")

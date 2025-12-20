@@ -463,7 +463,7 @@ var level_configurations : Dictionary = {
 				
 				{
 					"enemy": TURRET_ENEMY.duplicate(true),
-					"coordinates": Vector2(1,1),
+					"coordinates": Vector2(2,1),
 					"is_slave": false,
 					"is_boss": false,
 					"level" : 3
@@ -651,7 +651,6 @@ var boss_mini_waves = [
 func reset_combat() -> void:
 	current_wave = -1;
 	total_waves_completed = 0
-	player.health = player.max_health
 	wave_level = 1
 	enemies = []
 	locked_on_enemies = []

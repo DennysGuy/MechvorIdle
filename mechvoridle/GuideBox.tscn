@@ -4,6 +4,21 @@
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_3bej5"]
 [ext_resource type="Script" uid="uid://dibkfn5t1qgec" path="res://src/scripts/guide_box.gd" id="2_wybhb"]
 
+[sub_resource type="Animation" id="Animation_3bej5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_wybhb"]
 resource_name = "flash"
 loop_mode = 1
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_3bej5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ooujy"]

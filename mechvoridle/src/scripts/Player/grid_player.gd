@@ -479,7 +479,8 @@ func _process(delta: float) -> void:
 				if can_use_shield:
 					shield_cool_down_timer.wait_time = 3.0
 				else:
-					shield_cool_down_timer.wait_time = 5.4
+					shield_cool_down_timer.wait_time = 5.5
+					
 				shield_cool_down_timer.start()
 				start_shield_cool_down = true
 				
