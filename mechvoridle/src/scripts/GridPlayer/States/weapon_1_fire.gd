@@ -33,7 +33,6 @@ func dash_attack() -> void:
 		if get_tile_in_front.occupant:
 			get_tile_in_front.occupant.damage_actor(int(weapon_component.damage * GameManager.next_multiplier))
 			
-			
 	var sfx := weapon_component.primary_projectile_discharge
 	SfxManager.play_sfx(sfx,3)
 	SignalBus.move_actor_to_tile.emit(parent, tile_to)
@@ -48,7 +47,6 @@ func exit() -> void:
 	GridManager.remove_all_enemies_from_locked_on_list()
 
 func process_input(_event: InputEvent) -> State:
-	
 	return null
 
 func process_frame(_delta: float) -> State:

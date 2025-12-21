@@ -46,9 +46,14 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 @onready var shield_grade_label: RichTextLabel = $CanvasLayer/ShieldGradeLabel
 @onready var guard_down: Label = $CanvasLayer/GuardDown
 
+@onready var lhs_stacks: Label = $CanvasLayer/LHSStacks
+@onready var rhs_stacks: Label = $CanvasLayer/RHSStacks
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	lhs_stacks.hide()
+	rhs_stacks.hide()
 	arena_animation_player.play("Wave")
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
@@ -92,6 +97,8 @@ func _ready() -> void:
 	SignalBus.update_current_challenge_count.connect(update_current_challenge_count)
 	SignalBus.update_chances_left.connect(update_chances_left)
 	
+	SignalBus.update_damage_multiplier_label.connect(update_damage_multi_label)
+	
 	update_score(0)
 	hide_guard_down_label()
 	SignalBus.move_to_next_level.connect(move_to_next_level)
@@ -125,6 +132,7 @@ func move_actor(grid_actor : GridActor, direction : Vector2, row_limit : int = -
 	var adjacent_tile : Tile = GridManager.get_tile(tiles, new_coords)
 	
 	if not GridManager.tile_available(grid_actor, adjacent_tile, row_limit, col_limit, is_dash_attack):
+		print("HEY WE ARE NOT AVAILABLE!")
 		return
    
 	translate_actor(grid_actor, adjacent_tile)
@@ -136,6 +144,10 @@ func send_actor_to_tile(grid_actor : GridActor, tile_coordinates : Vector2, row_
 		return
 		
 	translate_actor(grid_actor, tile_to_send)
+
+func update_damage_multi_label(text : String) -> void:
+	damage_multiplier_label.show()
+	damage_multiplier_label.text = text
 
 func translate_actor(actor : GridActor, adjacent_tile : Tile) -> Tile:
 	var prev_tile : Tile = actor.current_tile
@@ -506,6 +518,12 @@ func update_momentum_meter_amount(value : int) -> void:
 		GameManager.momentum_meter_amount,
 		0.3
 	)
+
+func update_lhs_stacks(stacks : int) -> void:
+	lhs_stacks.text = "LHS Stacks: %s" % [stacks]
+
+func update_rhs_stacks(stacks : String) -> void:
+	rhs_stacks.text = "RHS Stacks: %s" % [stacks]
 
 func spawn_boss() -> void:
 	spawn_enemies(GridManager.boss_spawn)

@@ -3,9 +3,9 @@ class_name SniperRifleFireRight extends WeaponState
 @export var idle : State
 
 func enter() -> void:
-
 	animation_name = "AimRifleFire"
 	GameManager.can_fire_weapon_1 = false
+	SignalBus.hide_damage_mulitplier_label.emit()
 	parent.laser_sight_right.hide()
 	SfxManager.play_sfx(SfxManager.get_sniper_shot())
 	SignalBus.shake_camera.emit(0.8)

@@ -3,6 +3,9 @@ class_name SniperRifleAimLeft extends WeaponState
 const MIN_COLUMN := 0
 const MAX_COLUMN := 3
 
+const MIN_ROW := 0
+const MAX_ROW := 1
+
 var firing : bool = false
 var offset_x : int = 0 
 var offset_y : int = 0
@@ -10,6 +13,7 @@ var offset_y : int = 0
 @export var sniper_rifle_fire : WeaponState
 
 func enter() -> void:
+	SignalBus.hide_damage_mulitplier_label.emit()
 	firing = false
 	parent.can_move = false
 	parent.current_weapon_scanning = weapon_component
@@ -22,6 +26,7 @@ func enter() -> void:
 	parent.animation_player.play(animation_name)
 
 func exit() -> void:
+	SignalBus.hide_damage_mulitplier_label.emit()
 	if !firing:
 		parent.target_location = null
 		parent.can_move = true
@@ -41,21 +46,39 @@ func process_input(_event: InputEvent) -> State:
 		offset_y -= 1
 		if offset_y < MIN_COLUMN:
 			offset_y = MIN_COLUMN
+		var y_diff = get_distance_between(offset_y)
+		SignalBus.update_damage_multiplier_label.emit("DMG x"+str(y_diff))
+	
+	if Input.is_action_pressed("move_down"):
+		SfxManager.play_sfx(SfxManager.SHIFT_1)
+		if parent.locked_on_tile:
+			parent.locked_on_tile.clear_targeted_overlay()
 		
-	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(0, offset_y))
-	if parent.locked_on_tile:
-		parent.target_location = parent.locked_on_tile.marker_3d
-		parent.locked_on_tile.set_targeted_overlay()
-
+		offset_x += 1
+		if offset_x > MAX_ROW:
+			offset_x = MAX_ROW
+		
 	if Input.is_action_just_pressed("move_right"):
 		SfxManager.play_sfx(SfxManager.SHIFT_1)
 		if parent.locked_on_tile:
 			parent.locked_on_tile.clear_targeted_overlay()
+			
 		offset_y += 1
 		if offset_y > MAX_COLUMN:
 			offset_y = MAX_COLUMN
+		var y_diff = get_distance_between(offset_y)
+		SignalBus.update_damage_multiplier_label.emit("DMG x"+str(y_diff))
 	
-	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(0, offset_y))
+	if Input.is_action_pressed("move_up"):
+		SfxManager.play_sfx(SfxManager.SHIFT_1)
+		if parent.locked_on_tile:
+			parent.locked_on_tile.clear_targeted_overlay()
+			
+		offset_x -= 1
+		if offset_x < MIN_ROW:
+			offset_x = MIN_ROW
+		
+	parent.locked_on_tile = GridManager.get_tile(parent.tiles, Vector2(offset_x, offset_y))
 	
 	if parent.locked_on_tile:
 		parent.target_location = parent.locked_on_tile.marker_3d
@@ -76,3 +99,9 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	return null
+
+func get_distance_between(y_offset : float) -> float:
+	var player_coordinates : Vector2 = parent.current_tile.coordinates
+	var y_diff : float = abs(y_offset-player_coordinates.y)+1
+
+	return y_diff

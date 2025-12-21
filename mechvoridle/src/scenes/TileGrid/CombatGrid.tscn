@@ -1653,6 +1653,8 @@ offset_left = 506.0
 offset_top = 297.0
 offset_right = 637.0
 offset_bottom = 328.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/normal_font = ExtResource("9_02ps3")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
@@ -1679,6 +1681,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1901,10 +1904,35 @@ theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 10
 text = "RMB"
 
+[node name="LHSStacks" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -50.0
+offset_right = 198.0
+offset_bottom = -38.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 11
+text = "L H.S. stacks: 0"
+
+[node name="RHSStacks" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -33.0
+offset_right = 198.0
+offset_bottom = -21.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_02ps3")
+theme_override_font_sizes/font_size = 11
+text = "R H.S. stacks: 0"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_po36e")
 volume_db = 10.0
-autoplay = true
 bus = &"Music"
 
 [node name="SkyBox" type="Node3D" parent="."]

@@ -286,6 +286,8 @@ var initial_head_rotation = Vector3.ZERO
 @onready var wide_sword_swing_right: WideSwordSwingRight = $StateMachine/WideSwordSwingRight
 @onready var wide_sword_aim_left: WideSwordAimLeft = $StateMachine/WideSwordAimLeft
 @onready var wide_sword_swing_left: WideSwordFireLeft = $StateMachine/WideSwordSwingLeft
+@onready var heat_sabre_aim_right: HeatSabreAimRight = $StateMachine/HeatSabreAimRight
+@onready var heat_sabre_fire_right: HeatSabreFireRight = $StateMachine/HeatSabreFireRight
 
 
 @onready var rifle_aim_left: RifleAimLeft = $StateMachine/RifleAimLeft
@@ -313,6 +315,14 @@ var initial_head_rotation = Vector3.ZERO
 		0 : {
 			"Aim": wide_sword_aim_left,
 			"Fire": wide_sword_swing_left
+		},
+		1 : {
+			"Aim": null,
+			"Fire": null
+		},
+		2 : {
+			"Aim": null,
+			"Fire": null
 		}
 	},
 	"Rifle":  {
@@ -336,6 +346,14 @@ var initial_head_rotation = Vector3.ZERO
 		0 : {
 			"Aim": wide_sword_aim_right,
 			"Fire": wide_sword_swing_right
+		},
+		1 : {
+			"Aim": heat_sabre_aim_right,
+			"Fire": heat_sabre_fire_right
+		},
+		2: {
+			"Aim": null,
+			"Fire": null
 		}
 	},
 	"Rifle":  {
@@ -368,6 +386,7 @@ var start_shield_cool_down : bool = false
 
 var true_wait_time : float = 0
 var shield_bonus_time : float = 1.0
+var heat_sabre_stacks : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GridManager.set_mech_as_light()
@@ -598,7 +617,3 @@ func rotate_player(delta: float) -> void:
 
 	else:
 		rotation.y = lerp_angle(rotation.y, initial_player_rotation.y, delta * rotate_speed)
-
-
-
-		

@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=2 format=3 uid="uid://brltesmvysom"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=3 format=3 uid="uid://brltesmvysom"]
 
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_3d8cd"]
+[ext_resource type="Resource" uid="uid://bwyj2u8mdqodc" path="res://src/resources/mechcomponents/weapons/weapon_patterns/HeatSabrePattern.tres" id="1_5lpir"]
 
 [resource]
 script = ExtResource("1_3d8cd")
 shop_index = 1
-damage = 10.0
-cool_down_time = 6.0
+damage = 15.0
+cool_down_time = 2.0
 number_of_hits = 2
 charge_time = 0.5
 charge_speed = 1.8
 crit_chance = 0.05
 accuracy = 0.96
 stun_chance = 0.05
+attack_pattern = ExtResource("1_5lpir")
 component_name = "HYPR-XS22"
 index = 1
 manufacture_name = 1

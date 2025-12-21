@@ -430,3 +430,5 @@ signal show_shield_grade(place : int)
 signal show_guard_down_label
 @warning_ignore("unused_signal")
 signal hide_guard_down_label
+@warning_ignore("unused_signal")
+signal update_damage_multiplier_label(text : String)
