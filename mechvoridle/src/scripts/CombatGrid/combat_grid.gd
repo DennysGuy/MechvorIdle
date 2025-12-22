@@ -52,8 +52,8 @@ var player_tile_coordinates : Array[Vector2] = [Vector2(5,0), Vector2(5,1), Vect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	lhs_stacks.hide()
-	rhs_stacks.hide()
+	#lhs_stacks.hide()
+	#rhs_stacks.hide()
 	arena_animation_player.play("Wave")
 	GridManager.init_grid(tiles)
 	GridManager.spawn_player(tiles)
@@ -99,6 +99,12 @@ func _ready() -> void:
 	
 	SignalBus.update_damage_multiplier_label.connect(update_damage_multi_label)
 	
+	SignalBus.update_heat_stacks_right.connect(update_rhs_stacks)
+	SignalBus.update_heat_stacks_left.connect(update_lhs_stacks)
+	
+	SignalBus.show_heat_stacks_left.connect(show_heat_stacks_left)
+	SignalBus.show_heat_stacks_right.connect(show_heat_stacks_right)
+	
 	update_score(0)
 	hide_guard_down_label()
 	SignalBus.move_to_next_level.connect(move_to_next_level)
@@ -112,6 +118,10 @@ func _ready() -> void:
 	#supply_crate_timer.start()
 	cutscene_player.play("IntroCutScene")
 	transition_player.play("FadeIn")
+	
+	update_lhs_stacks("LHS Stacks: 0")
+	update_rhs_stacks("RHS Stacks: 0")
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#print(GameManager.next_multiplier)
@@ -122,6 +132,12 @@ func update_next_label() -> void:
 
 func update_momentum_level_label() -> void:
 	momentum_level_label.text = "momentum lvl: %s" % [GameManager.momentum_meter_level]
+
+func show_heat_stacks_left() -> void:
+	lhs_stacks.show()
+
+func show_heat_stacks_right() -> void:
+	rhs_stacks.show()
 
 func move_player(direction : Vector2, is_dash_attack : bool) -> void:
 	move_actor(GridManager.player, direction, -1, -1, is_dash_attack)
@@ -198,6 +214,7 @@ func check_if_lock_on_valid(enemy : GridActor) -> void:
 	var current_weapon_scanning : MechWeapon = GridManager.player.current_weapon_scanning
 	if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
 		GridManager.remove_enemy_from_locked_on_list(enemy)
+
 
 func player_check_if_lock_on_valid() -> void:
 	var locked_on_enemies : Array[GridActor] = GridManager.locked_on_enemies
@@ -290,7 +307,6 @@ func spawn_next_wave() -> void:
 		#count_down_timer.stop_timer()
 		#count_down_timer.count_down = false
 		#return
-	
 
 	if GridManager.current_wave < current_wave.size()-1 and !ChallengeWaveManager.in_challenge_wave:
 		GridManager.current_wave += 1
@@ -301,7 +317,7 @@ func spawn_next_wave() -> void:
 	wave_tracker.text = "Wave %s/15" % [GridManager.total_waves_completed+1]
 	if GridManager.current_wave > 0:
 		if GameManager.timed_out:
-			count_down_timer.add_time(45) #EHHH MAN! WE NEED TO FIGURE SOMETHING HERE
+			count_down_timer.add_time(40) #EHHH MAN! WE NEED TO FIGURE SOMETHING HERE
 			GameManager.timed_out = false
 		else:
 			var gained_time : int = 0
@@ -373,7 +389,6 @@ func spawn_challenge_chest(level : int) -> void:
 	spawn_enemy(chest["enemy"],chest["level"],chest["coordinates"], chest["is_slave"], chest["is_boss"])
 
 func spawn_level_chest() -> void:
-	
 	var wave_time : int = 0
 	var cur_level : int = GridManager.wave_level
 	match cur_level:
@@ -385,7 +400,6 @@ func spawn_level_chest() -> void:
 	count_down_timer.set_time(wave_time,0)
 	spawn_challenge_chest(cur_level)
 
-##TODO: WE WILL PROBABLY HAVE TO CHANGE THIS SO THAT IT CHOOSE WIN OR LOSE OR BOSS
 func play_challenge_failed_outro() -> void:
 	if ChallengeWaveManager.challenge_mode_won:
 		challenge_wave_player.play("ChallengeWave1Success")
@@ -503,7 +517,6 @@ func update_health_bar() -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN)
 	
-
 func update_momentum_meter_amount(value : int) -> void:
 	if GameManager.momentum_meter_amount >= GameManager.MAX_MOMENTUM_METER_AMOUNT:
 		return
@@ -519,11 +532,11 @@ func update_momentum_meter_amount(value : int) -> void:
 		0.3
 	)
 
-func update_lhs_stacks(stacks : int) -> void:
-	lhs_stacks.text = "LHS Stacks: %s" % [stacks]
+func update_lhs_stacks(text : String) -> void:
+	lhs_stacks.text = text
 
-func update_rhs_stacks(stacks : String) -> void:
-	rhs_stacks.text = "RHS Stacks: %s" % [stacks]
+func update_rhs_stacks(text : String) -> void:
+	rhs_stacks.text = text
 
 func spawn_boss() -> void:
 	spawn_enemies(GridManager.boss_spawn)

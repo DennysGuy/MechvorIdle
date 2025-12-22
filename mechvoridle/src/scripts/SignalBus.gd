@@ -432,3 +432,11 @@ signal show_guard_down_label
 signal hide_guard_down_label
 @warning_ignore("unused_signal")
 signal update_damage_multiplier_label(text : String)
+@warning_ignore("unused_signal")
+signal update_heat_stacks_left(text : String)
+@warning_ignore("unused_signal")
+signal update_heat_stacks_right(text : String)
+@warning_ignore("unused_signal")
+signal show_heat_stacks_left
+@warning_ignore("unused_signal")
+signal show_heat_stacks_right

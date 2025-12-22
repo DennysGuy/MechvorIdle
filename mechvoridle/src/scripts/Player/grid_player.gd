@@ -8,6 +8,8 @@ class_name GridPlayer extends GridActor
 @onready var rifle_1_spout: Marker3D = $Rifle1Spout
 @onready var rifle_2_spout: Marker3D = $Rifle2Spout
 
+@onready var arm_rocket_1_spout: Marker3D = $ArmRocket1Spout
+
 @onready var laser_sight_right: CSGCylinder3D = $LaserSightRight
 @onready var laser_sight_left: CSGCylinder3D = $LaserSightLeft
 
@@ -244,7 +246,7 @@ var initial_head_rotation = Vector3.ZERO
 			#rifle_3
 			sniper_rifle_2,
 		],
-		"RocketLauncher": [
+		"Rocket Launcher": [
 			#rocket_1
 			soulder_rocket_left,
 			#rocket_2
@@ -270,7 +272,7 @@ var initial_head_rotation = Vector3.ZERO
 			#rifle_3
 			sniper_rifle,	
 		],
-		"RocketLauncher" : [
+		"Rocket Launcher" : [
 			#launcher_1
 			soulder_rocket_right,
 			#launcher_2
@@ -286,8 +288,12 @@ var initial_head_rotation = Vector3.ZERO
 @onready var wide_sword_swing_right: WideSwordSwingRight = $StateMachine/WideSwordSwingRight
 @onready var wide_sword_aim_left: WideSwordAimLeft = $StateMachine/WideSwordAimLeft
 @onready var wide_sword_swing_left: WideSwordFireLeft = $StateMachine/WideSwordSwingLeft
+
 @onready var heat_sabre_aim_right: HeatSabreAimRight = $StateMachine/HeatSabreAimRight
 @onready var heat_sabre_fire_right: HeatSabreFireRight = $StateMachine/HeatSabreFireRight
+@onready var heat_sabre_aim_left: HeatSabreAimLeft = $StateMachine/HeatSabreAimLeft
+@onready var heat_sabre_fire_left: HeatSabreFireLeft = $StateMachine/HeatSabreFireLeft
+
 
 
 @onready var rifle_aim_left: RifleAimLeft = $StateMachine/RifleAimLeft
@@ -306,9 +312,10 @@ var initial_head_rotation = Vector3.ZERO
 @onready var sniper_rifle_aim_left: SniperRifleAimLeft = $StateMachine/SniperRifleAimLeft
 @onready var sniper_rifle_fire_left: SniperRifleFireLeft = $StateMachine/SniperRifleFireLeft
 
+@onready var arm_rocket_aim_right: ArmRocketAimRight = $StateMachine/ArmRocketAimRight
+@onready var arm_rocket_fire_right: ArmRocketFireRight = $StateMachine/ArmRocketFireRight
 
-@export var arm_rocket_aim: ArmRocketAim
-@export var arm_rocket_fire: ArmRocketFire
+
 
 @onready var left_weapon_states = {
 	"Sword" : {
@@ -317,8 +324,8 @@ var initial_head_rotation = Vector3.ZERO
 			"Fire": wide_sword_swing_left
 		},
 		1 : {
-			"Aim": null,
-			"Fire": null
+			"Aim": heat_sabre_aim_left,
+			"Fire": heat_sabre_fire_left
 		},
 		2 : {
 			"Aim": null,
@@ -338,6 +345,20 @@ var initial_head_rotation = Vector3.ZERO
 			"Aim": sniper_rifle_aim_left,
 			"Fire": sniper_rifle_fire_left
 		}
+	},
+	"Rocket Launcher": {
+		0 : {
+			"Aim":  null,
+			"Fire": null
+		},
+		1 : {
+			"Aim":  null,
+			"Fire": null
+		},
+		2 : {
+			"Aim":  null,
+			"Fire": null
+		}		
 	}
 }
 
@@ -368,6 +389,20 @@ var initial_head_rotation = Vector3.ZERO
 		2 : {
 			"Aim": sniper_rifle_aim_right,
 			"Fire": sniper_rifle_fire_right
+		}
+	},
+	"Rocket Launcher": {
+		0 : {
+			"Aim":  null,
+			"Fire": null
+		},
+		1 : {
+			"Aim":  arm_rocket_aim_right,
+			"Fire": arm_rocket_fire_right
+		},
+		2 : {
+			"Aim":  null,
+			"Fire": null
 		}
 	}
 }
@@ -585,6 +620,7 @@ func _on_shield_cool_down_timer_timeout() -> void:
 func init_weapon_states() -> void:
 	var aim_state_right : WeaponState =  right_weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Aim"]
 	var fire_state_right : WeaponState = right_weapon_states[GameManager.get_right_weapon().get_weapon_class()][GameManager.get_right_weapon().shop_index]["Fire"]
+	
 	aim_state_right.set_position_as_right()
 	aim_state_right.input_map = "mine_asteroid"
 	fire_state_right.set_position_as_right()
@@ -593,6 +629,8 @@ func init_weapon_states() -> void:
 	
 	var aim_state_left : WeaponState =  left_weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Aim"]
 	var fire_state_left : WeaponState = left_weapon_states[GameManager.get_left_weapon().get_weapon_class()][GameManager.get_left_weapon().shop_index]["Fire"]
+	#if aim_state_left is HeatSabreAimLeft:
+		#SignalBus.show_heat_stacks_left.emit()
 	aim_state_left.set_position_as_left()
 	aim_state_left.input_map = "set_drone_destination"
 	fire_state_left.set_position_as_left()

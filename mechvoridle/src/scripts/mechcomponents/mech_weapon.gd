@@ -53,8 +53,8 @@ func get_weapon_class() -> String:
 func attack_enemy(actor : GridActor, tiles : Node, scanned_attack_pattern : Array = [], is_vulcan : bool = false) -> void:
 	var true_damage := damage
 	if actor is GridPlayer:
-		
 		true_damage *= GameManager.next_multiplier
+	
 	if is_vulcan:
 		true_damage *= GameManager.vulcan_damage_multiplier
 	

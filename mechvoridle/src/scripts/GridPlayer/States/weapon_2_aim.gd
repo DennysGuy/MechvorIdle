@@ -28,12 +28,6 @@ func process_input(_event: InputEvent) -> State:
 		parent.can_move = true
 		parent.can_fire_vulcans = true
 		return idle
-
-	if Input.is_action_just_pressed("move_up") and GameManager.get_left_weapon().attack_pattern.can_shift:
-		offset += 1
-
-	if Input.is_action_just_pressed("move_down") and GameManager.get_left_weapon().attack_pattern.can_shift:
-		offset -= 1
 		
 	return null
 

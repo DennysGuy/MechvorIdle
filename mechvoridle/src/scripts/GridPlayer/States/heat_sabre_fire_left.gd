@@ -1,11 +1,11 @@
-class_name HeatSabreFireRight extends WeaponState
+class_name HeatSabreFireLeft extends WeaponState
 
 @export var idle : State
 
 var dashing : bool = false
 var super_attack : bool = false
 func enter() -> void:
-	GameManager.can_fire_weapon_1 = false
+	GameManager.can_fire_weapon_2 = false
 	parent.can_move = false
 	dashing = true
 	SfxManager.play_sfx(SfxManager.H_SABRE_DASH)
@@ -41,7 +41,7 @@ func move_to_end_of_grid() -> void:
 			update_heat_stacks()
 			
 			parent.locked_on_tile = tile
-			parent.animation_player.play("HeatSabreSwingRight")
+			parent.animation_player.play("HeatSabreSwingLeft")
 			issue_attack()
 			await get_tree().create_timer(0.3).timeout
 			issue_attack_2()
@@ -61,16 +61,16 @@ func update_heat_stacks() -> void:
 	if heat_stacks == 4:
 		label_text = "Heat Attack Ready!"
 	else:
-		label_text = "RHS Stacks : %s" % [heat_stacks]
+		label_text = "LHS Stacks : %s" % [heat_stacks]
 	
 	if heat_stacks > 4:
 		heat_stacks = 0
 		super_attack = true
-		label_text = "RHS Stacks : %s" % [heat_stacks]
+		label_text = "LHS Stacks : %s" % [heat_stacks]
 	
 	
 	
-	SignalBus.update_heat_stacks_right.emit(label_text)
+	SignalBus.update_heat_stacks_left.emit(label_text)
 
 func issue_attack() -> void:
 	if super_attack:

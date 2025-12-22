@@ -33,6 +33,8 @@ const SWORD_BOT_SWING = preload("uid://gqwglqqsu2wd")
 const SWORD_BOT_SWORD_IMPACT = preload("uid://bhf3cspij74io")
 const SWORD_DEFLECT_OFF_SHIELD = preload("uid://bndwlr23vkddv")
 
+
+
 const COMBAT_THEME = preload("uid://bsvvxjkhi4vt")
 
 const SHIELD_POWER_DOWN = preload("uid://d3v1pgmfplvko")
@@ -50,6 +52,14 @@ const SMG_2 = preload("uid://sdvpmb6rtxh")
 const SMG_3 = preload("uid://b77jy3snsq1j")
 const SMG_4 = preload("uid://bkwytsbuo3mud")
 const SMG_5 = preload("uid://ctl4pu8snsg1p")
+
+const H_SABRE_DASH = preload("uid://bbf12kkh76vd1")
+const H_SABRE_DASH_SPECIAL = preload("uid://cufbr83ynvahg")
+const H_SABRE_SWING_1 = preload("uid://b1fq6ku37juic")
+const H_SABRE_SWING_1_SPECIAL = preload("uid://di56j1bh1q70d")
+const H_SABRE_SWING_2 = preload("uid://dosgfr4omg705")
+const H_SABRE_SWING_2_SPECIAL = preload("uid://bpufatb8ymtcq")
+
 
 var smg_shots : Array[AudioStream] = [SMG_1,SMG_2,SMG_3,SMG_4,SMG_5]
 
