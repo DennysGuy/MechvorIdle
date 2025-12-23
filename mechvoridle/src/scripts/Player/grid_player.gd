@@ -130,6 +130,7 @@ var shield_disabled : bool = false
 var shine_value := 0.0
 const SHINE_DECAY := 3.0
 
+var targeted_tiles : Array[Tile]
 var scanned_attack_pattern : Array
 var current_weapon_scanning : MechWeapon
 
@@ -617,6 +618,11 @@ func apply_time_consequences() -> void:
 	if !GameManager.fight_on:
 		damage_actor(int(health * 0.3))
 
+func clear_targeted_tiles() -> void:
+	for tile in targeted_tiles:
+		tile.clear_targeted_overlay()
+	
+	targeted_tiles.clear()
 
 func _on_shield_cool_down_timer_timeout() -> void:
 	#start_shield_cool_down = false
