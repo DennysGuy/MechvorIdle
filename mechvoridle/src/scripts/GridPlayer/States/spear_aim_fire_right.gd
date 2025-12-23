@@ -29,17 +29,17 @@ func process_physics(_delta: float) -> State:
 
 func move_to_end_of_grid() -> void:
 	var starting_tile : Tile= parent.current_tile
-	
+	var incremental_affix = 1.0
 	for coordinates in parent.scanned_attack_pattern:
-		print("THESE ARE COORDINATES SCANNED: %s" % coordinates)
+		incremental_affix += 0.2
 		var tile : Tile = GridManager.get_tile(parent.tiles, coordinates)
 		if tile.occupant:
-			tile.occupant.damage_actor(weapon_component.damage)
-			GameManager.enable_hit_freeze(0.2,0.2)
+			tile.occupant.damage_actor(weapon_component.damage * GameManager.next_multiplier * incremental_affix)
+			GameManager.enable_hit_freeze(0.3,0.15)
 			
 		SignalBus.move_actor_to_tile.emit(parent,tile)
 		
 	await get_tree().create_timer(0.3).timeout
 	dashing = false
-
+	GameManager.reset_next_attack_multiplier()
 	SignalBus.move_actor_to_tile.emit(parent,starting_tile)
