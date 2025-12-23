@@ -1,4 +1,4 @@
-[gd_scene load_steps=667 format=4 uid="uid://lam3j4dmw2xs"]
+[gd_scene load_steps=669 format=4 uid="uid://lam3j4dmw2xs"]
 
 [ext_resource type="Script" uid="uid://b8n420i22yedk" path="res://src/scripts/Player/grid_player.gd" id="1_8keqk"]
 [ext_resource type="Texture2D" uid="uid://bbueplktggyvr" path="res://assets/graphics/Models/PlayerMech/Weapons/PlayerCharacter_0.png" id="2_mexru"]
@@ -36,11 +36,13 @@
 [ext_resource type="Script" uid="uid://da0crntww776f" path="res://src/scripts/GridPlayer/States/spear_aim_fire_right.gd" id="29_affye"]
 [ext_resource type="Script" uid="uid://domqq2a65m53x" path="res://src/scripts/GridPlayer/States/wide_sword_swing_left.gd" id="29_ptq2e"]
 [ext_resource type="Script" uid="uid://e7hrbcb6oon7" path="res://src/scripts/GridPlayer/States/weapon_3_aim.gd" id="30_dpvbr"]
+[ext_resource type="Script" uid="uid://dqoagvc4wi6vi" path="res://src/scripts/GridPlayer/States/spear_aim_left.gd" id="30_dtlcp"]
 [ext_resource type="Script" uid="uid://cw320vi4fs8da" path="res://src/scripts/GridPlayer/States/sub_machine_gun_aim.gd" id="30_mexru"]
 [ext_resource type="Script" uid="uid://5jsc7n5qygpi" path="res://src/scripts/GridPlayer/States/rifle_aim_left.gd" id="30_xhrg2"]
 [ext_resource type="Script" uid="uid://dg2vofuhpqxgv" path="res://src/scripts/Enemies/hurt.gd" id="30_xmjel"]
 [ext_resource type="Script" uid="uid://6x6ykgnjrt80" path="res://src/scripts/GridPlayer/States/arm_rocket_fire.gd" id="31_l1nc1"]
 [ext_resource type="Script" uid="uid://cxhv8v4s1q73p" path="res://src/scripts/GridPlayer/States/rifle_fire_left.gd" id="31_pc3sq"]
+[ext_resource type="Script" uid="uid://p2hp8nirjyq0" path="res://src/scripts/GridPlayer/States/spear_fire_left.gd" id="31_q4f4r"]
 [ext_resource type="Script" uid="uid://bo6ckn203agim" path="res://src/scripts/GridPlayer/States/sub_machine_gun_aim_right.gd" id="31_uxkdr"]
 [ext_resource type="Script" uid="uid://x4uomjcq52v2" path="res://src/scripts/GridPlayer/States/sub_machine_gun_fire.gd" id="31_wvm5k"]
 [ext_resource type="Script" uid="uid://cykhm1hrtvvql" path="res://src/scripts/GridPlayer/States/player_death.gd" id="31_xmjel"]
@@ -22266,7 +22268,7 @@ mesh = SubResource("ArrayMesh_0utcq")
 skeleton = NodePath("")
 
 [node name="Arm1" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.95371664, -0.30070573, 0, 0.3007057, 0.95371675, 0, 0, 0, 1, 0.08121187, 0.000755, -0.35788938)
+transform = Transform3D(0.9537166, -0.30070573, 0, 0.30070567, 0.9537167, 0, 0, 0, 1, 0.08121187, 0.000755, -0.35788938)
 
 [node name="Shoulder" type="Node3D" parent="blockbench_export/UpperBody/Arm1"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21643962, 0, 0.21643962, 0.976296, 0.02336625, 0.038761877, -0.012353125)
@@ -22743,7 +22745,7 @@ mesh = SubResource("ArrayMesh_f16si")
 skeleton = NodePath("")
 
 [node name="Arm2" type="Node3D" parent="blockbench_export/UpperBody"]
-transform = Transform3D(0.8870106, -0.45999148, 0.04024413, 0.4508032, 0.8815537, 0.14014043, -0.099940754, -0.1061639, 0.9893133, 0.10457812, 0.021745, 0.32430062)
+transform = Transform3D(0.8870106, -0.45999148, 0.04024413, 0.45080316, 0.8815537, 0.14014043, -0.09994075, -0.1061639, 0.9893133, 0.10457812, 0.021745, 0.32430062)
 
 [node name="Shoulder2" type="Node3D" parent="blockbench_export/UpperBody/Arm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
@@ -22752,7 +22754,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08210938)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00356375, -0.50381, -0.016071875)
 
 [node name="ForeArm2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2"]
-transform = Transform3D(0.1305262, 0.9914446, 0, -0.99144447, 0.13052621, 0, 0, 0, 0.99999994, 0.038695, 0.065405, -0.02600875)
+transform = Transform3D(0.13052619, 0.9914445, 0, -0.9914444, 0.1305262, 0, 0, 0, 0.99999994, 0.038695, 0.065405, -0.02600875)
 
 [node name="Hand2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03735875, -0.59575814, -0.03342375)
@@ -23096,6 +23098,7 @@ skeleton = NodePath("")
 
 [node name="ArmRocketLauncher2" type="Node3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2"]
 transform = Transform3D(0.9989943, 0.040626645, -0.018970586, -0.019164925, 0.004399419, -0.99980664, -0.040535334, 0.9991647, 0.0051736236, -0.06671875, -0.37720188, 0.19857188)
+visible = false
 
 [node name="Tube3" type="MeshInstance3D" parent="blockbench_export/UpperBody/Arm2/Shoulder2/Bicep2/ForeArm2/ArmRocketLauncher2"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.071875, -0.001875, 0.061018124)
@@ -23768,6 +23771,15 @@ spear_fire = NodePath("../SpearAimFireRight")
 
 [node name="SpearAimFireRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("29_affye")
+idle = NodePath("../Idle")
+
+[node name="SpearAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "spear_fire")]
+script = ExtResource("30_dtlcp")
+idle = NodePath("../Idle")
+spear_fire = NodePath("../SpearFireLeft")
+
+[node name="SpearFireLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("31_q4f4r")
 idle = NodePath("../Idle")
 
 [node name="WideSwordAimLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("wide_sword_swing_fire", "idle")]

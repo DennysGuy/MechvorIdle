@@ -298,6 +298,8 @@ var initial_head_rotation = Vector3.ZERO
 
 @onready var spear_aim_right: SpearAimRight = $StateMachine/SpearAimRight
 @onready var spear_aim_fire_right: SpearAimFireRight = $StateMachine/SpearAimFireRight
+@onready var spear_aim_left: SpearAimLeft = $StateMachine/SpearAimLeft
+@onready var spear_fire_left: SpearAimFireLeft = $StateMachine/SpearFireLeft
 
 
 @onready var rifle_aim_left: RifleAimLeft = $StateMachine/RifleAimLeft
@@ -323,6 +325,7 @@ var initial_head_rotation = Vector3.ZERO
 
 
 
+
 @onready var left_weapon_states = {
 	"Sword" : {
 		0 : {
@@ -334,8 +337,8 @@ var initial_head_rotation = Vector3.ZERO
 			"Fire": heat_sabre_fire_left
 		},
 		2 : {
-			"Aim": null,
-			"Fire": null
+			"Aim": spear_aim_left,
+			"Fire": spear_fire_left
 		}
 	},
 	"Rifle":  {

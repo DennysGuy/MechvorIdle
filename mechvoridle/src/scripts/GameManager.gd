@@ -832,7 +832,8 @@ func equip_rifle_left_sword_right() -> void:
 	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniper
 	#owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm") #sword
 	#owned_mech_components["LeftWeapon"] =  preload("uid://brltesmvysom")#heat sabre
-	owned_mech_components["LeftWeapon"] =  preload("uid://d0us0h3brlcaf")#arm rocket
+	#owned_mech_components["LeftWeapon"] =  preload("uid://d0us0h3brlcaf")#arm rocket
+	owned_mech_components["LeftWeapon"] =  preload("uid://dyau5slcsx26u")#spear
 	#owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm") #sword
 	#owned_mech_components["RightWeapon"] = preload("uid://brltesmvysom") #heat sabre
 	#owned_mech_components["RightWeapon"] = preload("uid://dplngps46dubl") #rifle

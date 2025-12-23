@@ -1,12 +1,11 @@
-class_name SpearAimFireRight extends WeaponState
+class_name SpearAimFireLeft extends WeaponState
 
 @export var idle : State
 var dashing = false
 func enter() -> void:
 	dashing = true
 	parent.can_hurt = false
-	GameManager.can_fire_weapon_1 = false
-	parent.animation_player.play("SpearAimLungeRight")
+	parent.animation_player.play("SpearAttackLeft")
 	
 	move_to_end_of_grid()
 
@@ -15,6 +14,7 @@ func exit() -> void:
 	parent.can_hurt = true
 	parent.can_fire_vulcans = true
 	parent.scanned_attack_pattern.clear()
+	GameManager.can_fire_weapon_2 = false
 	SignalBus.issue_weapon_attack.emit(weapon_position)
 	parent.clear_targeted_tiles()
 
