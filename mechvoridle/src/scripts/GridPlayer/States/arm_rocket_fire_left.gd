@@ -1,4 +1,4 @@
-class_name ArmRocketFireRight extends WeaponState
+class_name ArmRocketFireLeft extends WeaponState
 
 
 @export var idle : State
@@ -6,8 +6,8 @@ class_name ArmRocketFireRight extends WeaponState
 func enter() -> void:
 	parent.can_move = false
 	
-	animation_name = "ArmRocketFireRight"
-	GameManager.can_fire_weapon_1 = false
+	animation_name = "ArmRocketShotLeft"
+	GameManager.can_fire_weapon_2 = false
 	
 	GridManager.clear_targeted_tiles()
 	var sfx : AudioStream
@@ -16,7 +16,7 @@ func enter() -> void:
 	sfx = weapon_component.primary_projectile_discharge
 	
 	GameManager.add_heat(weapon_component.damage,2)
-	parent.fire_projectile(weapon_component,parent.arm_rocket_1_spout,8)
+	parent.fire_projectile(weapon_component,parent.arm_rocket_2_spout,8)
 	
 	SfxManager.play_sfx(sfx,3)
 	parent.animation_player.play(animation_name)

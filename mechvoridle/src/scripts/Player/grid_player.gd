@@ -9,6 +9,7 @@ class_name GridPlayer extends GridActor
 @onready var rifle_2_spout: Marker3D = $Rifle2Spout
 
 @onready var arm_rocket_1_spout: Marker3D = $ArmRocket1Spout
+@onready var arm_rocket_2_spout: Marker3D = $ArmRocket2Spout
 
 @onready var laser_sight_right: CSGCylinder3D = $LaserSightRight
 @onready var laser_sight_left: CSGCylinder3D = $LaserSightLeft
@@ -294,6 +295,8 @@ var initial_head_rotation = Vector3.ZERO
 @onready var heat_sabre_aim_left: HeatSabreAimLeft = $StateMachine/HeatSabreAimLeft
 @onready var heat_sabre_fire_left: HeatSabreFireLeft = $StateMachine/HeatSabreFireLeft
 
+@onready var spear_aim_right: SpearAimRight = $StateMachine/SpearAimRight
+@onready var spear_aim_fire_right: SpearAimFireRight = $StateMachine/SpearAimFireRight
 
 
 @onready var rifle_aim_left: RifleAimLeft = $StateMachine/RifleAimLeft
@@ -314,6 +317,8 @@ var initial_head_rotation = Vector3.ZERO
 
 @onready var arm_rocket_aim_right: ArmRocketAimRight = $StateMachine/ArmRocketAimRight
 @onready var arm_rocket_fire_right: ArmRocketFireRight = $StateMachine/ArmRocketFireRight
+@onready var arm_rocket_aim_left: ArmRocketAimLeft = $StateMachine/ArmRocketAimLeft
+@onready var arm_rocket_fire_left: ArmRocketFireLeft = $StateMachine/ArmRocketFireLeft
 
 
 
@@ -352,8 +357,8 @@ var initial_head_rotation = Vector3.ZERO
 			"Fire": null
 		},
 		1 : {
-			"Aim":  null,
-			"Fire": null
+			"Aim":  arm_rocket_aim_left,
+			"Fire": arm_rocket_fire_left
 		},
 		2 : {
 			"Aim":  null,
@@ -373,8 +378,8 @@ var initial_head_rotation = Vector3.ZERO
 			"Fire": heat_sabre_fire_right
 		},
 		2: {
-			"Aim": null,
-			"Fire": null
+			"Aim": spear_aim_right,
+			"Fire": spear_aim_fire_right
 		}
 	},
 	"Rifle":  {

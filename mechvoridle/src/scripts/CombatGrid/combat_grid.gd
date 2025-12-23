@@ -225,7 +225,7 @@ func player_check_if_lock_on_valid() -> void:
 	for enemy in locked_on_enemies:
 		var distance_diff : float = abs(GridManager.player.current_tile.coordinates.y - enemy.current_tile.coordinates.y)
 		print("THIS IS DISTANCE DIFF FROM PLAYER TO ENEMY: %s" % [distance_diff])
-		var current_weapon_scanning : MechWeapon = GridManager.player.current_weapon_scanning
+		var current_weapon_scanning : MechWeapon = GridManager.playerd.current_weapon_scanning
 		if current_weapon_scanning and current_weapon_scanning.attack_pattern.lock_on_distance.y <= distance_diff:
 			GridManager.remove_enemy_from_locked_on_list(enemy)
 

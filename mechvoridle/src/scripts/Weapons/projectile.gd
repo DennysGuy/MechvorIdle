@@ -9,6 +9,12 @@ class_name GridProjectile extends Node3D
 @export var weapon_owner : GridActor
 @export var impact_sfx : AudioStream
 
+var surrounding_tile_patterns : Array = [
+	[Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1)],
+	[Vector2(1,0), Vector2(0,-1), Vector2(-1,0),Vector2(0,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)],
+]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -19,20 +25,20 @@ func _process(delta: float) -> void:
 	pass
 
 
-func impact_prjectile(area : Area3D):
+func impact_prjectile(area : Area3D) -> Tile:
 	var parent = area.get_parent()
 	if area is TargetArea:
 		var tile_parent : Tile = parent
 		
 		if is_instance_valid(weapon_owner) and weapon_owner is GridEnemy and is_instance_valid(tile_parent.occupant) and tile_parent.occupant is GridEnemy:
-			return
+			return null
 		
 		if tile_parent.occupant and tile_parent.occupant.is_dead:
-			return
+			return null
 		
 		if tile_parent.occupant and tile_parent.occupant != weapon_owner:
 			if not is_instance_valid(weapon_owner):
-				return
+				return null
 			
 			if tile_parent.occupant is SwordBot and not tile_parent.occupant.in_stagger_state and !GameManager.in_overdrive_mode:
 				var damage_label : GridDamageLabel = preload("uid://w3nvxv0mdub").instantiate()
@@ -41,7 +47,7 @@ func impact_prjectile(area : Area3D):
 				damage_label.position = tile_parent.occupant.damage_label_marker.position
 				tile_parent.occupant.add_child(damage_label)
 				queue_free()
-				return
+				return null
 			
 			if tile_parent.occupant == GridManager.player:
 				var shake_amount : float = 0.0
@@ -79,7 +85,7 @@ func impact_prjectile(area : Area3D):
 				
 				queue_free()
 				SignalBus.shake_camera.emit(shake_amount)
-				return
+				return null
 				
 			SfxManager.play_sfx(impact_sfx,2)
 			
@@ -91,6 +97,9 @@ func impact_prjectile(area : Area3D):
 				all_damage *= 2
 			
 			tile_parent.occupant.damage_actor(all_damage)
+			##TODO: if we are a wrist rocket, do something here!!###
+			if self is WristRockets:
+				attack_surrounding_tiles(tile_parent)
 			
 			if !weapon_origin.attack_pattern.pass_through:
 				GameManager.reset_next_attack_multiplier()
@@ -105,6 +114,10 @@ func impact_prjectile(area : Area3D):
 			queue_free() # well, we might have to do something here.. but if the projectile reaches the destined tile it will queue free
 			#weapon_origin.attack_enemy(weapon_owner, tiles)
 			tile.clear_targeted_overlay()
+			
+		return tile
+		
+	return null
 
 func roll_crit() -> bool:
 	var rand_int : int = randi_range(0,100)
@@ -112,3 +125,23 @@ func roll_crit() -> bool:
 		return true
 	
 	return false
+
+
+func attack_surrounding_tiles(tile : Tile) -> void:
+	SfxManager.play_sfx(SfxManager.GROUND_FLARES,2)
+	var selected_pattern_list : Array = surrounding_tile_patterns[0]
+	
+	var rand_num : int = randi_range(0,100)
+	
+	if rand_num < 20:
+		selected_pattern_list = surrounding_tile_patterns[1]
+		
+	for coordinates in selected_pattern_list:
+		var selected_tile = GridManager.get_tile(tiles, tile.coordinates + coordinates)
+		if selected_tile:
+			var ground_flare : GroundFlare= preload("uid://b8av6222v3s48").instantiate()
+			ground_flare.global_position = selected_tile.marker_3d.global_position
+			get_parent().add_child(ground_flare)
+			
+			if selected_tile.occupant:
+				selected_tile.occupant.damage_actor(damage/3)

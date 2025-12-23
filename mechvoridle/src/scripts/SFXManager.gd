@@ -113,8 +113,12 @@ const SNIPER_2 = preload("uid://bhltg8qx42hb6")
 const SNIPER_3 = preload("uid://c6heglmy5pm6m")
 const SNIPER_4 = preload("uid://dq77ljuy1ly6t")
 const SNIPER_SHOT_1 = preload("uid://csxeqtwmcsa4i")
-
 const SNIPER_AIM = preload("uid://6vcgg07gc7h2")
+
+const ARM_ROCKET_1 = preload("uid://b4p660dspolof")
+const GROUND_FLARES = preload("uid://bc5yywis2igxe")
+
+
 const ROUND_FAILED = preload("uid://cuopvwi82prjp")
 const ROUND_WON = preload("uid://ctk0jtxxc6gai")
 

@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="MechWeapon" load_steps=4 format=3 uid="uid://d0us0h3brlcaf"]
+[gd_resource type="Resource" script_class="MechWeapon" load_steps=5 format=3 uid="uid://d0us0h3brlcaf"]
 
 [ext_resource type="Resource" uid="uid://bqh4sdlb7bd33" path="res://src/resources/mechcomponents/weapons/weapon_patterns/ArmRocketPattern.tres" id="1_ff7o7"]
 [ext_resource type="Script" uid="uid://cs720t7rvcl3x" path="res://src/scripts/mechcomponents/mech_weapon.gd" id="1_upxg4"]
 [ext_resource type="PackedScene" uid="uid://c5qsendwqgmky" path="res://src/scenes/TileGrid/WristRockets.tscn" id="2_080ti"]
+[ext_resource type="AudioStream" uid="uid://b4p660dspolof" path="res://assets/audio/SFX/COMBAT/ArmRocket1.wav" id="2_jr17m"]
 
 [resource]
 script = ExtResource("1_upxg4")
 weapon_class = 2
 shop_index = 1
-damage = 85.0
+damage = 70.0
 cool_down_time = 10.0
 number_of_hits = 2
 charge_time = 0.15
@@ -18,6 +19,7 @@ accuracy = 0.45
 stun_chance = 0.4
 attack_pattern = ExtResource("1_ff7o7")
 projectile = ExtResource("2_080ti")
+primary_projectile_discharge = ExtResource("2_jr17m")
 component_name = "DUAL-ARM-TT68D"
 index = 7
 manufacture_name = 1

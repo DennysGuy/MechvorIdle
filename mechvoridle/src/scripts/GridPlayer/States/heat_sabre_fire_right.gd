@@ -46,7 +46,6 @@ func move_to_end_of_grid() -> void:
 			await get_tree().create_timer(0.3).timeout
 			issue_attack_2()
 			break
-		print(tile.coordinates)
 		SignalBus.move_actor_to_tile.emit(parent,tile)
 		
 	await get_tree().create_timer(0.3).timeout

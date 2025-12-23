@@ -8,7 +8,7 @@ var weapon_component : MechWeapon
 var heat_stacks : int = 0
 
 func _process(delta: float) -> void:
-	print(weapon_component)
+	pass
 
 func get_position() -> POSITION:
 	return weapon_position

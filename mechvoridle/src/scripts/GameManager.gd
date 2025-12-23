@@ -558,9 +558,6 @@ func add_mech_component(component : MechComponent) -> void:
 	
 	owned_components_count += 1
 	
-	print(owned_mech_components)
-	print(owned_components_count)
-
 
 func mech_component_slot_is_empty(category : String) -> bool:
 	if category == "Weapon":
@@ -834,13 +831,15 @@ func equip_rifle_left_sword_right() -> void:
 	#owned_mech_components["LeftWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
 	#owned_mech_components["LeftWeapon"] = preload("uid://bs55jm2j143et") #sniper
 	#owned_mech_components["LeftWeapon"] = preload("uid://baw08qvkimdvm") #sword
-	owned_mech_components["LeftWeapon"] =  preload("uid://brltesmvysom")#heat sabre
+	#owned_mech_components["LeftWeapon"] =  preload("uid://brltesmvysom")#heat sabre
+	owned_mech_components["LeftWeapon"] =  preload("uid://d0us0h3brlcaf")#arm rocket
 	#owned_mech_components["RightWeapon"] = preload("uid://baw08qvkimdvm") #sword
 	#owned_mech_components["RightWeapon"] = preload("uid://brltesmvysom") #heat sabre
 	#owned_mech_components["RightWeapon"] = preload("uid://dplngps46dubl") #rifle
 	#owned_mech_components["RightWeapon"] = preload("uid://dbxh8e0i8qfhr") #smg
 	#owned_mech_components["RightWeapon"] = preload("uid://bs55jm2j143et") #sniper
-	owned_mech_components["RightWeapon"] = preload("uid://d0us0h3brlcaf") #arm rocket
+	#owned_mech_components["RightWeapon"] = preload("uid://d0us0h3brlcaf") #arm rocket
+	owned_mech_components["RightWeapon"] = preload("uid://dyau5slcsx26u") #spear
 
 func fight_scenario_1_test_fixture() -> void:
 	light_build()

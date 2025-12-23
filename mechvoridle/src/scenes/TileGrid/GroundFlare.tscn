@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8av6222v3s48"]
+
+[ext_resource type="Script" uid="uid://dg1prrncnga0o" path="res://src/scripts/CombatGrid/ground_flare.gd" id="1_hbs04"]
+[ext_resource type="PackedScene" uid="uid://6vfbwwkgkw2" path="res://assets/graphics/Models/PlayerMech/Weapons/GroundFlare.gltf" id="2_tuoa7"]
+
+[node name="GroundFlare" type="Node3D"]
+script = ExtResource("1_hbs04")
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_tuoa7")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="blockbench_export"]

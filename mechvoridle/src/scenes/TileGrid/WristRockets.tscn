@@ -1,24 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5qsendwqgmky"]
+[gd_scene load_steps=7 format=3 uid="uid://c5qsendwqgmky"]
 
 [ext_resource type="PackedScene" uid="uid://cxqxu7bi6xmsf" path="res://assets/graphics/Models/PlayerMech/Weapons/WristRockets.gltf" id="1_r1kx6"]
 [ext_resource type="Script" uid="uid://cpgvm1b041evp" path="res://src/scripts/Weapons/wrist_rockets.gd" id="1_w224m"]
+[ext_resource type="PackedScene" uid="uid://6vfbwwkgkw2" path="res://assets/graphics/Models/PlayerMech/Weapons/GroundFlare.gltf" id="3_boj47"]
 [ext_resource type="PackedScene" uid="uid://44jftfrq3fuf" path="res://src/scenes/TileGrid/HitBox.tscn" id="3_cut8j"]
+[ext_resource type="AudioStream" uid="uid://c24vnh0ur5who" path="res://assets/audio/SFX/COMBAT/WristRocketSoar.wav" id="5_12k7v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_boj47"]
 size = Vector3(0.60595703, 0.34191895, 0.54345703)
 
 [node name="WristRockets" type="Node3D"]
 script = ExtResource("1_w224m")
+damage = null
+speed = null
+direction = null
 
 [node name="WristRockets" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11107108, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.11107108, 0)
 
 [node name="blockbench_export" parent="WristRockets" instance=ExtResource("1_r1kx6")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.1889292, -0.09)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.1889292, -0.09)
+
+[node name="FlareLeft" parent="WristRockets" instance=ExtResource("3_boj47")]
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0.29381675, 0.19151202, -0.13977575)
+
+[node name="FlareRight" parent="WristRockets" instance=ExtResource("3_boj47")]
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, -0.20737463, 0.19151202, -0.13977575)
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 3.0
+one_shot = true
+autostart = true
 
 [node name="HitBox" parent="." instance=ExtResource("3_cut8j")]
 
@@ -26,5 +39,13 @@ wait_time = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0061035156, 0.08258057, 0.07006836)
 shape = SubResource("BoxShape3D_boj47")
 
+[node name="Soar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_12k7v")
+volume_db = 5.0
+bus = &"SFX"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+
+[editable path="WristRockets/FlareLeft"]
+[editable path="WristRockets/FlareRight"]
