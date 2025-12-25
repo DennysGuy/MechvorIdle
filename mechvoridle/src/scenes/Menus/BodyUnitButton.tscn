@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbegeuet33770"]
+
+[ext_resource type="Texture2D" uid="uid://coo35hhbvbexn" path="res://assets/graphics/SteelFangTechIcon.png" id="1_7dmpj"]
+[ext_resource type="Script" uid="uid://djol6eyeomtcw" path="res://src/scripts/Menus/body_unit_button.gd" id="1_vj5x0"]
+[ext_resource type="FontFile" uid="uid://drleh5fhih638" path="res://assets/graphics/Fonts/BITSUMIS.TTF" id="2_5cd7n"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="3_vj5x0"]
+
+[node name="BodyUnitButton" type="Control"]
+custom_minimum_size = Vector2(196, 36)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -14.0
+offset_right = 98.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vj5x0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32167956, 0.32645667, 0.32850158, 1)
+
+[node name="CorporationIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.5
+offset_right = 18.0
+offset_bottom = 17.5
+texture = ExtResource("1_7dmpj")
+stretch_mode = 2
+
+[node name="BodyPartLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = -0.5
+offset_right = 194.0
+offset_bottom = 12.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_5cd7n")
+theme_override_font_sizes/font_size = 12
+text = "Head Unit"
+horizontal_alignment = 2
+
+[node name="UnitName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 21.5
+offset_right = 171.0
+offset_bottom = 33.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_vj5x0")
+theme_override_font_sizes/font_size = 11
+text = "STEEL-HELM"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 36.0
+mouse_default_cursor_shape = 2
+
+[connection signal="button_up" from="TextureButton" to="." method="_on_texture_button_button_up"]

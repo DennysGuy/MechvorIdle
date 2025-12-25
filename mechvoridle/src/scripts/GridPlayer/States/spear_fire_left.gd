@@ -6,7 +6,7 @@ func enter() -> void:
 	dashing = true
 	parent.can_hurt = false
 	parent.animation_player.play("SpearAttackLeft")
-	
+	GameManager.add_heat(weapon_component.damage,2)
 	move_to_end_of_grid()
 
 func exit() -> void:
@@ -15,6 +15,7 @@ func exit() -> void:
 	parent.can_fire_vulcans = true
 	parent.scanned_attack_pattern.clear()
 	GameManager.can_fire_weapon_2 = false
+	SfxManager.play_sfx(SfxManager.SPEAR_DASH,2)
 	SignalBus.issue_weapon_attack.emit(weapon_position)
 	parent.clear_targeted_tiles()
 
@@ -38,9 +39,10 @@ func move_to_end_of_grid() -> void:
 		incremental_affix += 0.4
 		GameManager.add_heat(weapon_component.damage)
 		var tile : Tile = GridManager.get_tile(parent.tiles, coordinates)
-		if tile.occupant:
+		if tile and tile.occupant:
 			tile.occupant.damage_actor(weapon_component.damage * GameManager.next_multiplier * incremental_affix)
 			GameManager.enable_hit_freeze(0.3,0.15)
+			SfxManager.play_sfx(SfxManager.SPEAR_HIT,3)
 		SignalBus.move_actor_to_tile.emit(parent,tile)
 		
 	await get_tree().create_timer(0.3).timeout

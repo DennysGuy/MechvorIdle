@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc51ym7w3jhsv"]
+
+[ext_resource type="Texture2D" uid="uid://jt77eo3js1np" path="res://assets/graphics/PaloDynamicsLogo.png" id="1_peboo"]
+[ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="2_ojbj5"]
+
+[node name="UnitPanelButton" type="Control"]
+custom_minimum_size = Vector2(170, 40)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -20.0
+offset_right = 81.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.022076407, 0.22271308, 0.27346966, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 27.0
+offset_bottom = 31.0
+texture = ExtResource("1_peboo")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 14.0
+offset_right = 176.0
+offset_bottom = 27.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ojbj5")
+theme_override_font_sizes/font_size = 12
+text = "RG-723-ALPHA"

@@ -116,3 +116,7 @@ func show_part(component : MechComponent) -> void:
 		if previously_viewed:
 			previously_viewed.show() #show the new one
 	
+
+
+func _on_back_button_up() -> void:
+	hide()

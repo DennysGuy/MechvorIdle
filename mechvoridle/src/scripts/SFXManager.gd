@@ -133,6 +133,10 @@ const CHALLENGE_ALERT = preload("uid://cgp2cm1pueshn")
 
 const CHEST_OPEN = preload("uid://dlxokrrll2rn7")
 
+const SPEAR_DASH = preload("uid://buq752fb57lwq")
+const SPEAR_HIT = preload("uid://bdulg87nkrhmt")
+const TILE_LOCKED_ON = preload("uid://gfb2e1dt05hu")
+
 
 var sniper_shots : Array[AudioStream] = [SNIPER_SHOT_1, SNIPER_2, SNIPER_3, SNIPER_4]
 

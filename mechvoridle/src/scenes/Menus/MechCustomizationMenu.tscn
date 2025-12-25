@@ -1,0 +1,199 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqfeg1sfsrvqd"]
+
+[ext_resource type="Script" uid="uid://bmqfevc3v5k8h" path="res://src/scripts/Menus/mech_customization_menu.gd" id="1_t1ixj"]
+[ext_resource type="PackedScene" uid="uid://dbegeuet33770" path="res://src/scenes/Menus/BodyUnitButton.tscn" id="2_rfvtj"]
+[ext_resource type="FontFile" uid="uid://drleh5fhih638" path="res://assets/graphics/Fonts/BITSUMIS.TTF" id="3_hbr0g"]
+[ext_resource type="PackedScene" uid="uid://c8ijm2cc85k8u" path="res://src/scenes/Menus/MechPreview.tscn" id="4_y0pr7"]
+[ext_resource type="PackedScene" uid="uid://cugm5162v1e8s" path="res://src/scenes/Menus/ComponentSelectionMenu.tscn" id="5_wi7xq"]
+[ext_resource type="PackedScene" uid="uid://b0os23iq51slp" path="res://src/scenes/IntroStuff/TutorialPanel.tscn" id="6_hf5it"]
+
+[node name="MechCustomizationMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t1ixj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22492862, 0.43506038, 0.4951082, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 29.0
+offset_right = 219.0
+offset_bottom = 120.0
+color = Color(0.6013873, 0.5128377, 0.58485776, 1)
+
+[node name="BodyUnitContainer2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(198, 0)
+layout_mode = 0
+offset_left = 15.0
+offset_top = 35.0
+offset_right = 213.0
+offset_bottom = 115.0
+theme_override_constants/separation = 8
+
+[node name="BodyUnitButton" parent="BodyUnitContainer2" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyPartLabel" parent="BodyUnitContainer2/BodyUnitButton" index="2"]
+text = "R-Hand Weapon"
+
+[node name="BodyUnitButton2" parent="BodyUnitContainer2" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyPartLabel" parent="BodyUnitContainer2/BodyUnitButton2" index="2"]
+text = "L-Hand Weapon"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 149.0
+offset_right = 218.0
+offset_bottom = 333.0
+color = Color(0.62362295, 0.5271616, 0.41443518, 1)
+
+[node name="BodyUnitContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(198, 0)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 157.0
+offset_right = 212.0
+offset_bottom = 325.0
+theme_override_constants/separation = 8
+
+[node name="BodyUnitButton" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyUnitButton2" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton2" index="2"]
+text = "Torso Unit"
+
+[node name="BodyUnitButton3" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton3" index="2"]
+text = "Arms Unit"
+
+[node name="BodyUnitButton4" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
+layout_mode = 2
+
+[node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton4" index="2"]
+text = "Legs Uniit"
+
+[node name="Frame" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 130.0
+offset_right = 62.0
+offset_bottom = 147.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hbr0g")
+text = "Frame"
+
+[node name="Weapons" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 85.0
+offset_bottom = 28.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hbr0g")
+text = "Weapons"
+
+[node name="MechAssembly" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -238.0
+offset_right = -6.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hbr0g")
+theme_override_font_sizes/font_size = 28
+text = "MECH ASSEMBLY"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 34.0
+offset_right = 630.0
+offset_bottom = 284.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(230, 250)
+render_target_update_mode = 4
+
+[node name="MechPreview" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_y0pr7")]
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -46.0
+offset_right = -11.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("3_hbr0g")
+theme_override_font_sizes/font_size = 24
+text = "Start"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -241.0
+offset_top = -46.0
+offset_right = -104.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("3_hbr0g")
+theme_override_font_sizes/font_size = 24
+text = "Tutorials"
+
+[node name="ComponentSelectionMenu" parent="." instance=ExtResource("5_wi7xq")]
+visible = false
+layout_mode = 1
+
+[node name="Tutorials" parent="." instance=ExtResource("6_hf5it")]
+visible = false
+layout_mode = 1
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Button2" to="." method="_on_button_2_button_up"]
+
+[editable path="BodyUnitContainer2/BodyUnitButton"]
+[editable path="BodyUnitContainer2/BodyUnitButton2"]
+[editable path="BodyUnitContainer/BodyUnitButton"]
+[editable path="BodyUnitContainer/BodyUnitButton2"]
+[editable path="BodyUnitContainer/BodyUnitButton3"]
+[editable path="BodyUnitContainer/BodyUnitButton4"]

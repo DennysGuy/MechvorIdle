@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://bc15c2cfpvp5y"]
+[gd_scene load_steps=64 format=4 uid="uid://bc15c2cfpvp5y"]
 
 [ext_resource type="Script" uid="uid://e4g2fruftb4p" path="res://src/scripts/CombatGrid/combat_grid.gd" id="1_vf78d"]
 [ext_resource type="Texture2D" uid="uid://kslp36drdbhu" path="res://assets/graphics/UI/GridCombat/GridHealthBar_Bar.png" id="2_epvlr"]
@@ -16,8 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://dlfsctidlgyqj" path="res://assets/audio/SFX/COMBAT/ambience.ogg" id="14_po36e"]
 [ext_resource type="FontFile" uid="uid://cm80tuerk8ia" path="res://assets/graphics/Fonts/future-earth.ttf" id="14_ssntb"]
 [ext_resource type="AudioStream" uid="uid://bsvvxjkhi4vt" path="res://assets/audio/music/CombatTheme.ogg" id="15_po36e"]
-[ext_resource type="Texture2D" uid="uid://cnhck5w4en6fb" path="res://assets/graphics/UI/BossHPBar_Bar.png" id="16_wsi4k"]
-[ext_resource type="Texture2D" uid="uid://8puh8j7sckqa" path="res://assets/graphics/UI/BossHPBar_Fill.png" id="17_2haw7"]
 [ext_resource type="Texture2D" uid="uid://cvy7pb0bhv08y" path="res://assets/graphics/Models/GridArena2_0.png" id="19_ttjt2"]
 [ext_resource type="Texture2D" uid="uid://csvfmp2h5sw7t" path="res://assets/graphics/Models/Water.png" id="20_irucv"]
 [ext_resource type="Texture2D" uid="uid://cxnqo02pcjxw5" path="res://assets/graphics/Models/GridArena2_1.png" id="21_4lua7"]
@@ -1742,25 +1740,6 @@ theme_override_fonts/font = ExtResource("9_02ps3")
 theme_override_font_sizes/font_size = 13
 text = "Momentum LVL: 0"
 horizontal_alignment = 2
-
-[node name="BossHPBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 138.0
-offset_top = 74.0
-offset_right = 460.0
-offset_bottom = 94.0
-value = 100.0
-texture_under = ExtResource("16_wsi4k")
-texture_progress = ExtResource("17_2haw7")
-
-[node name="Label" type="Label" parent="CanvasLayer/BossHPBar"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 23.0
-offset_right = 42.0
-offset_bottom = 34.0
-theme_override_fonts/font = ExtResource("9_02ps3")
-theme_override_font_sizes/font_size = 10
-text = "Boss"
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(570, 19)

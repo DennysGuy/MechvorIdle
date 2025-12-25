@@ -1,4 +1,4 @@
-[gd_scene load_steps=423 format=3 uid="uid://b0os23iq51slp"]
+[gd_scene load_steps=419 format=3 uid="uid://b0os23iq51slp"]
 
 [ext_resource type="Script" uid="uid://du4qagfu0wgb3" path="res://src/scripts/IntroStuff/tutorial_panel.gd" id="1_eopd0"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="1_pbvyl"]
@@ -2840,108 +2840,6 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="Animation" id="Animation_eopd0"]
-resource_name = "Fade_In"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_7w6cd"]
-resource_name = "Fade_Out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"go_to_combat"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect2:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_yh7jp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oty06"]
-_data = {
-&"Fade_In": SubResource("Animation_eopd0"),
-&"Fade_Out": SubResource("Animation_7w6cd"),
-&"RESET": SubResource("Animation_yh7jp")
-}
-
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -3022,18 +2920,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -77.0
+offset_left = -74.0
 offset_top = -345.0
-offset_right = -10.0
-offset_bottom = -311.0
+offset_right = -18.0
+offset_bottom = -324.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.59149826, 0.99999994, 0.31573603, 1)
 theme_override_fonts/font = ExtResource("1_pbvyl")
 theme_override_font_sizes/font_size = 12
-text = "START 
-GAME!"
+text = "Back"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
@@ -4101,6 +3998,7 @@ sprite_frames = SubResource("SpriteFrames_vd6a8")
 frame_progress = 0.27624288
 
 [node name="ControlMappings" type="ColorRect" parent="TutorialPanels"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4227,21 +4125,6 @@ grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_pbvyl")
 text = "Back"
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_oty06")
-}
 
 [connection signal="button_up" from="StartGame" to="." method="_on_start_game_button_up"]
 [connection signal="button_up" from="ControllerMappings" to="." method="_on_controller_mappings_button_up"]

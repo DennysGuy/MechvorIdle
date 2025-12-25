@@ -17,8 +17,8 @@ func enter() -> void:
 	parent.scanned_attack_pattern.append(starting_coords)
 	var starting_tile : Tile = GridManager.get_tile(parent.tiles,starting_coords)
 	starting_tile.set_targeted_overlay()
-
 	parent.targeted_tiles.append(starting_tile)
+	SfxManager.play_sfx(SfxManager.TILE_LOCKED_ON,2)
 	parent.animation_player.play("SpearAimLeft")
 	
 func exit() -> void:
@@ -41,7 +41,7 @@ func process_frame(_delta: float) -> State:
 		var appended_tile : Tile = GridManager.get_tile(parent.tiles, coordinates)
 		appended_tile.set_targeted_overlay()
 		parent.targeted_tiles.append(appended_tile)
-			
+		SfxManager.play_sfx(SfxManager.TILE_LOCKED_ON,2)	
 		time = 1
 	
 	return null

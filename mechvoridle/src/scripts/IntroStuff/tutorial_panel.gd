@@ -32,7 +32,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide_tutorial_panes()
-	animation_player.play("Fade_In")
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,7 +91,7 @@ func go_to_combat() -> void:
 	get_tree().change_scene_to_file("res://src/scenes/TileGrid/CombatGrid.tscn")
 
 func _on_start_game_button_up() -> void:
-	animation_player.play("Fade_Out")
+	hide()
 
 
 func _on_start_movment_tutorial_button_up() -> void:

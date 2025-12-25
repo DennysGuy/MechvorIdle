@@ -7,7 +7,7 @@ func enter() -> void:
 	parent.can_hurt = false
 	GameManager.can_fire_weapon_1 = false
 	parent.animation_player.play("SpearAimLungeRight")
-	
+	SfxManager.play_sfx(SfxManager.SPEAR_DASH,2)
 	move_to_end_of_grid()
 
 func exit() -> void:
@@ -40,6 +40,7 @@ func move_to_end_of_grid() -> void:
 		var tile : Tile = GridManager.get_tile(parent.tiles, coordinates)
 		if tile.occupant:
 			tile.occupant.damage_actor(weapon_component.damage * GameManager.next_multiplier * incremental_affix)
+			SfxManager.play_sfx(SfxManager.SPEAR_HIT,3)
 			GameManager.enable_hit_freeze(0.3,0.15)
 		SignalBus.move_actor_to_tile.emit(parent,tile)
 		

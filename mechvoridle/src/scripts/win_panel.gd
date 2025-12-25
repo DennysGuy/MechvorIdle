@@ -17,4 +17,4 @@ func _on_replay_button_down():
 	await animation_player.animation_finished
 	GameManager.reset()
 	GridManager.reset_combat()
-	get_tree().change_scene_to_file("res://src/scenes/IntroStuff/TutorialPanel.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/Menus/MechCustomizationMenu.tscn")

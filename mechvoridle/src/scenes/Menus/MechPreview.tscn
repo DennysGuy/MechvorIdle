@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8ijm2cc85k8u"]
+
+[ext_resource type="Script" uid="uid://tkgwnaqqv6va" path="res://src/scenes/Menus/mech_preview.gd" id="1_5idj6"]
+[ext_resource type="PackedScene" uid="uid://yc3v4ovuur3" path="res://src/scenes/TileGrid/blockbench_export.tscn" id="2_5idj6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idj6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_i2qfw"]
+sky_material = SubResource("ProceduralSkyMaterial_5idj6")
+
+[sub_resource type="Environment" id="Environment_rka4e"]
+sky = SubResource("Sky_i2qfw")
+ambient_light_source = 3
+tonemap_mode = 2
+
+[node name="MechPreview" type="Node3D"]
+script = ExtResource("1_5idj6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.14135017, 0.20357338, -0.9688024, 0.029390585, 0.9790597, 0.20144059, 0.98952335, -7.529464e-09, -0.14437337, -2.268371, 1.6556827, -0.42014557)
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_5idj6")]
+
+[node name="MeleeHead" parent="blockbench_export/UpperBody/Head" index="0"]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rka4e")
+
+[editable path="blockbench_export"]

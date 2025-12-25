@@ -323,7 +323,8 @@ var initial_head_rotation = Vector3.ZERO
 @onready var arm_rocket_aim_left: ArmRocketAimLeft = $StateMachine/ArmRocketAimLeft
 @onready var arm_rocket_fire_left: ArmRocketFireLeft = $StateMachine/ArmRocketFireLeft
 
-
+@onready var shoulder_rocket_aim_right: ShoulderRocketAimRight = $StateMachine/ShoulderRocketAimRight
+@onready var shoulder_rocket_fire_right: ShoulderRocketFireRight = $StateMachine/ShoulderRocketFireRight
 
 
 @onready var left_weapon_states = {
@@ -357,8 +358,8 @@ var initial_head_rotation = Vector3.ZERO
 	},
 	"Rocket Launcher": {
 		0 : {
-			"Aim":  null,
-			"Fire": null
+			"Aim":  shoulder_rocket_aim_right,
+			"Fire": shoulder_rocket_fire_right
 		},
 		1 : {
 			"Aim":  arm_rocket_aim_left,
@@ -402,8 +403,8 @@ var initial_head_rotation = Vector3.ZERO
 	},
 	"Rocket Launcher": {
 		0 : {
-			"Aim":  null,
-			"Fire": null
+			"Aim":  shoulder_rocket_aim_right,
+			"Fire": shoulder_rocket_fire_right
 		},
 		1 : {
 			"Aim":  arm_rocket_aim_right,
@@ -433,7 +434,7 @@ var shield_bonus_time : float = 1.0
 var heat_sabre_stacks : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GridManager.set_mech_as_light()
+	#GridManager.set_mech_as_light()
 	SignalBus.apply_timer_consequences.connect(apply_time_consequences)
 	SignalBus.set_move_speed_to_od.connect(set_move_speed_to_od_speed)
 	SignalBus.revert_move_speed_to_norm.connect(revert_move_speed_to_normal)

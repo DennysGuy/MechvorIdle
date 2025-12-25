@@ -135,6 +135,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_s1a8t")
 }
 
+[node name="FloorMarker" type="Marker3D" parent="."]
+
 [node name="MiniRocket" parent="." instance=ExtResource("2_r8okg")]
 transform = Transform3D(2, 0, 0, 0, -8.742278e-08, 2, 0, -2, -8.742278e-08, 0, 0.149, 0.01)
 

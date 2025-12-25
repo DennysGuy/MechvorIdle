@@ -5,6 +5,8 @@ class_name MiniRocket extends Node3D
 
 var is_launching : bool = true
 
+@onready var floor_marker: Marker3D = $FloorMarker
+
 var selected_tile : Tile
 
 const DAMAGE = 70
@@ -46,4 +48,11 @@ func attack_tile() -> void:
 	SignalBus.shake_camera.emit(wait_time)
 	
 	selected_tile.clear_targeted_overlay()
+	
+	add_ground_flare()
 	queue_free() #replace with explosion anime later
+
+func add_ground_flare() -> void:
+	var ground_flare : GroundFlare = preload("uid://b8av6222v3s48").instantiate()
+	ground_flare.position = floor_marker.position
+	add_child(ground_flare)

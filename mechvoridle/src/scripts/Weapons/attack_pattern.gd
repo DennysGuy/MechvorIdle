@@ -148,6 +148,7 @@ func scan_tiles_of_effect(actor: GridActor, tiles: Node, off_set_x: int = 0, off
 				if actor is GridPlayer and selected_tile.current_owner == selected_tile.OWNER.ENEMY:
 					if lock_on and selected_tile.occupant.can_hurt and !selected_tile.occupant.is_dead and GridManager.locked_on_enemies.size() < lock_on_limit:
 						GridManager.add_enemy_to_locked_on_list(selected_tile.occupant)
+						#SfxManager.play_sfx(SfxManager.TILE_LOCKED_ON,2)
 						
 					if !pass_through:
 						break

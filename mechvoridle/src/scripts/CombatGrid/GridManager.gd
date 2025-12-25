@@ -161,12 +161,15 @@ func remove_enemy_from_locked_on_list(enemy : GridActor) -> void:
 	print("THIS IS LOCKED ON LIST AFTER ERASE: %s" % [locked_on_enemies])
 
 func remove_all_enemies_from_locked_on_list() -> void:
+	
 	for enemy in locked_on_enemies:
-		if is_instance_valid(enemy):
-			remove_enemy_from_locked_on_list(enemy)
+		remove_enemy_from_locked_on_list(enemy)
 		
 	if !locked_on_enemies.is_empty():
-		locked_on_enemies.clear()
+		for enemy in locked_on_enemies:
+			remove_enemy_from_locked_on_list(enemy)	
+	
+		
 	
 	print("THIS IS LOCKED ON LIST AFTER ERASE ALL: %s" % [locked_on_enemies])
 
@@ -202,7 +205,10 @@ func set_mech_as_standard_light() -> void:
 	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
 
 func set_mech_as_standard() -> void:
-	pass
+	GameManager.owned_mech_components["Head"] = preload("uid://upu7rl2b14if")
+	GameManager.owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
+	GameManager.owned_mech_components["Arms"] = preload("uid://dx4e1hvellmxq")
+	GameManager.owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
 
 var level_configurations : Dictionary = {
 	1 : {
