@@ -27,7 +27,15 @@ charge_up = ExtResource("2_ljhgc")
 component_name = "ARG-15-X"
 index = 3
 manufacture_name = 1
+stats = "Type: RIFLE
+[color=green]Difficulty: Easy[/color]
+Base Damage: 60
+Pierce multiplier : +2%
+Cooldown: 7 seconds"
 description = "A reliable all-rounder, military graded rifle. the ARG-15-X is a slightly modified version of the famous Palo Dynamics standard issue rifle - famously used during the Corpo-Faction Wars."
+how_to_play = "Fire a single shot that hits 1 enemy with tapping the corresponding fire button. 
+
+Hold down fire button to charge up into a piercing shot that passes through all tiles in player's column"
 refined_ferrite_cost = 1200
 plasma_cost = 200
 category = 4

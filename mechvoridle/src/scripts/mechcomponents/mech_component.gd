@@ -7,7 +7,9 @@ class_name MechComponent extends Resource
 enum MANUFACTURER_NAME {STEEL_FANG_TECH, PALO_DYNAMICS, CROSSHAIR_ENTERPRISES}
 @export var icon : Texture2D
 
+@export_multiline var stats : String
 @export_multiline var description : String
+@export_multiline var how_to_play : String
 
 @export_group("Bonus Stats")
 @export var health : int

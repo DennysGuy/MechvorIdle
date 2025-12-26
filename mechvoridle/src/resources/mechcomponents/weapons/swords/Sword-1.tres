@@ -21,7 +21,12 @@ attack_pattern = ExtResource("1_f5vas")
 primary_projectile_discharge = ExtResource("3_esyi7")
 charge_up = ExtResource("2_esyi7")
 component_name = "Zeta Sabre"
+stats = "Type: SWORD
+[color=green]Difficulty: Easy[/color]
+Base Damage: 35
+Cooldown: 2 seconds"
 description = "A reliable, long sword crafted by the geniuses at Steel Fang Technologies. "
+how_to_play = "Lock on to single enemy in current column or 1 column adjacent. Low cool down, low damage"
 refined_ferrite_cost = 1500
 plasma_cost = 400
 category = 4

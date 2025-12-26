@@ -7,6 +7,7 @@ script = ExtResource("1_ct6rc")
 accuracy_bonus = 0.1
 crit_chance = 0.15
 component_name = "STEEL Helm"
+stats = "Added Health: 75"
 description = "Fixed with some of the best overhead scopes on the market. This mech head provides accuracy with ranged weapons."
 health = 75
 refined_ferrite_cost = 1600

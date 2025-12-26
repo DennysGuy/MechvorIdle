@@ -96,6 +96,7 @@ visible = false
 
 [node name="Rifle" parent="MechPreview" instance=ExtResource("19_dwr6e")]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -0.008682847, 2.004313, 0.0819177)
+visible = false
 
 [node name="SniperRifle" parent="MechPreview" instance=ExtResource("19_pc5do")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.19723809, 1.7473338, 0)

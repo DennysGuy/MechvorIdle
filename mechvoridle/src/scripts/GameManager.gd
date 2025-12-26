@@ -87,6 +87,7 @@ var in_boss_fight = false
 func _ready() -> void:
 	#fight_scenario_4_test_fixture()
 	#equip_rifle_left_sword_right()
+	standard_build()
 	equip_rifle_left_sword_right()
 	pass
 #mining panel
@@ -792,12 +793,11 @@ func light_build() -> void:
 
 
 func standard_build() -> void:
-	owned_mech_components["Head"] = preload("res://src/resources/mechcomponents/heads/mech_head_1.tres")
-	owned_mech_components["Torso"] = preload("res://src/resources/mechcomponents/torsos/mech_torso_3.tres")
-	owned_mech_components["Arms"] = preload("res://src/resources/mechcomponents/arms/mech_arms_1.tres")
-	owned_mech_components["Legs"] = preload("res://src/resources/mechcomponents/legs/mech_legs_3.tres")
-	owned_mech_components["LeftWeapon"] = preload("res://src/resources/mechcomponents/weapons/swords/Sword-1.tres")
-	owned_mech_components["RightWeapon"] = preload("res://src/resources/mechcomponents/weapons/rifles/Rifle_1.tres")
+	owned_mech_components["Head"] = preload("uid://upu7rl2b14if")
+	owned_mech_components["Torso"] = preload("uid://lr8shvddq7me")
+	owned_mech_components["Arms"] = preload("uid://dx4e1hvellmxq")
+	owned_mech_components["Legs"] = preload("uid://k1p5grxnndv3")
+
 	
 
 func heavy_build() -> void:

@@ -3,13 +3,10 @@ class_name WinPanel extends Control
 
 @onready var replay = $Replay
 @onready var animation_player = $AnimationPlayer
-@onready var fight_time : Label = $FightTime
-@onready var mine_time : Label = $MineTime
 
 func _ready() -> void:
 	animation_player.play("fade_in")
-	fight_time.text = "Fight Finished Time: " + GameManager.fight_time_elapsed
-	mine_time.text = "Mech Contstruction Time: " + GameManager.mining_time_elapsed
+	pass
 
 func _on_replay_button_down():
 	

@@ -7,6 +7,7 @@ script = ExtResource("1_ebm0g")
 component_name = "TORSO44XCIRLY"
 index = 1
 manufacture_name = 1
+stats = "Added Health: 160"
 description = "Providing great protection yet, slower charge speeds. Great against faster melee based builds as they can tank lots of hits."
 health = 160
 refined_ferrite_cost = 4350

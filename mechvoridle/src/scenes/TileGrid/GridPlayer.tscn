@@ -76,7 +76,7 @@ death = NodePath("StateMachine/Die")
 
 [node name="blockbench_export" parent="." instance=ExtResource("2_csb3y")]
 
-[node name="MeleeHead" parent="blockbench_export/UpperBody/Head/MeleeHead" index="0"]
+[node name="MeleeHead" parent="blockbench_export/UpperBody/Head" index="0"]
 visible = false
 
 [node name="LaserSightLeft" type="CSGCylinder3D" parent="."]

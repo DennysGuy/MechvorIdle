@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_fyltt")
 component_name = "STEEL Chest"
+stats = "Added Health: 120"
 description = "Light and nimble, great for melee weapons."
 health = 120
 refined_ferrite_cost = 4000

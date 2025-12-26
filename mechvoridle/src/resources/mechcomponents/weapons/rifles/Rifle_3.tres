@@ -26,9 +26,19 @@ attack_pattern = SubResource("Resource_2ov7t")
 component_name = "Soul Plucker"
 index = 5
 manufacture_name = 2
+stats = "Type: RIFLE
+[color=red]Difficulty: Hard[/color]
+Base Damage: 50
+Max Base Damage : 50 * 4 = 200
+Cooldown: 8 seconds"
 description = "Soul Plucker is a deadly high powered precision rifle. Aimed to be used at long distances as it is armed with a special scope with an interchangable lens. 
 
 During the Corpo-Faction wars, Crosshair Enterprises earned their name with the high usage of these high powered rifles."
+how_to_play = "Hold corresponding fire button down to target one of the tiles on back 2 rows. Use arrow keys to adjust locked on tile.
+
+You cannot move while aiming this weapon.
+
+You will get a multiplier added to shot based on distance from tile you have targeted (x1-x4)"
 refined_ferrite_cost = 2200
 plasma_cost = 300
 category = 4

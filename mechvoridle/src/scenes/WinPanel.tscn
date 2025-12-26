@@ -147,33 +147,6 @@ theme_override_font_sizes/font_size = 14
 text = "Perhaps a glimpse of a true warrior is in you. This can
 only surface if you press on. Good luck. You need it."
 
-[node name="Results" type="Label" parent="."]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 174.0
-offset_right = 121.0
-offset_bottom = 197.0
-theme_override_fonts/font = ExtResource("2_b5sgr")
-text = "RESULTS:"
-
-[node name="FightTime" type="Label" parent="."]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 253.0
-offset_right = 270.0
-offset_bottom = 276.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "Fight Time: 00:05:23"
-
-[node name="MineTime" type="Label" parent="."]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 213.0
-offset_right = 316.0
-offset_bottom = 236.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "Gathering Time: 00:12:46"
-
 [node name="Replay" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -197,7 +170,6 @@ libraries = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

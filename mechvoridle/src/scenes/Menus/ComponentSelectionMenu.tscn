@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cugm5162v1e8s"]
+[gd_scene load_steps=5 format=3 uid="uid://cugm5162v1e8s"]
 
 [ext_resource type="Script" uid="uid://bk1y44mhqxilo" path="res://src/scenes/Menus/component_selection_menu.gd" id="1_1yejm"]
 [ext_resource type="FontFile" uid="uid://drleh5fhih638" path="res://assets/graphics/Fonts/BITSUMIS.TTF" id="1_ck8td"]
 [ext_resource type="FontFile" uid="uid://byjub1up85wpy" path="res://assets/graphics/Fonts/paladinsstraight.ttf" id="2_psrc7"]
 [ext_resource type="PackedScene" uid="uid://bthwbil816n1x" path="res://src/scenes/part_previewer.tscn" id="2_vtn8r"]
-[ext_resource type="PackedScene" uid="uid://bc51ym7w3jhsv" path="res://src/scenes/Menus/UnitPanelButton.tscn" id="4_54ooi"]
 
 [node name="ComponentSelectionMenu" type="ColorRect"]
 anchors_preset = 15
@@ -85,7 +84,7 @@ text = "How to Play"
 layout_mode = 0
 offset_left = 12.0
 offset_top = 166.0
-offset_right = 190.0
+offset_right = 207.0
 offset_bottom = 354.0
 color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
@@ -121,23 +120,15 @@ offset_right = 633.0
 offset_bottom = 352.0
 color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
-[node name="UnitsContainer" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 174.0
-offset_right = 186.0
-offset_bottom = 346.0
+offset_left = 23.0
+offset_top = 175.0
+offset_right = 201.0
+offset_bottom = 349.0
 
-[node name="UnitPanelButton" parent="UnitsContainer" instance=ExtResource("4_54ooi")]
-layout_mode = 2
-
-[node name="UnitPanelButton2" parent="UnitsContainer" instance=ExtResource("4_54ooi")]
-layout_mode = 2
-
-[node name="UnitPanelButton3" parent="UnitsContainer" instance=ExtResource("4_54ooi")]
-layout_mode = 2
-
-[node name="UnitPanelButton4" parent="UnitsContainer" instance=ExtResource("4_54ooi")]
+[node name="UnitsContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(150, 170)
 layout_mode = 2
 
 [node name="Stats" type="RichTextLabel" parent="."]
@@ -233,4 +224,16 @@ theme_override_fonts/font = ExtResource("1_ck8td")
 theme_override_font_sizes/font_size = 15
 text = "Part Selected!"
 
+[node name="CurrentlySelected" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 208.0
+offset_bottom = 81.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ck8td")
+theme_override_font_sizes/font_size = 12
+text = "Selected:"
+
 [connection signal="button_up" from="Back" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="Back2" to="." method="_on_back_2_button_up"]

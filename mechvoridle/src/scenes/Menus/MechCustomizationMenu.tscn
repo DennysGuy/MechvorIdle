@@ -44,12 +44,14 @@ theme_override_constants/separation = 8
 
 [node name="BodyUnitButton" parent="BodyUnitContainer2" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 5
 
 [node name="BodyPartLabel" parent="BodyUnitContainer2/BodyUnitButton" index="2"]
 text = "R-Hand Weapon"
 
 [node name="BodyUnitButton2" parent="BodyUnitContainer2" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 4
 
 [node name="BodyPartLabel" parent="BodyUnitContainer2/BodyUnitButton2" index="2"]
 text = "L-Hand Weapon"
@@ -73,21 +75,25 @@ theme_override_constants/separation = 8
 
 [node name="BodyUnitButton" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 0
 
 [node name="BodyUnitButton2" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 3
 
 [node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton2" index="2"]
 text = "Torso Unit"
 
 [node name="BodyUnitButton3" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 1
 
 [node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton3" index="2"]
 text = "Arms Unit"
 
 [node name="BodyUnitButton4" parent="BodyUnitContainer" instance=ExtResource("2_rfvtj")]
 layout_mode = 2
+part_list = 2
 
 [node name="BodyPartLabel" parent="BodyUnitContainer/BodyUnitButton4" index="2"]
 text = "Legs Uniit"
@@ -111,6 +117,16 @@ offset_bottom = 28.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_hbr0g")
 text = "Weapons"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 340.0
+offset_right = 85.0
+offset_bottom = 357.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hbr0g")
+text = "Mechvor Combat Proto-type 1.0"
 
 [node name="MechAssembly" type="Label" parent="."]
 layout_mode = 1

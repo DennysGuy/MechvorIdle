@@ -9,6 +9,8 @@ stun_chance = 0.05
 component_name = "HOP113456"
 index = 1
 manufacture_name = 1
+stats = "Added Health: 100
+Move Speed: %0"
 description = "Middle of the road - useful legs."
 health = 100
 refined_ferrite_cost = 3000

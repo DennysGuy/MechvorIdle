@@ -7,6 +7,7 @@ script = ExtResource("1_aa1gm")
 crit_damage_modifier = 0.2
 max_hits_chance = 0.6
 component_name = "STEEL-Breakers "
+stats = "Added Health: 85"
 description = "From the factory, these arms are tuned to handle all types of ranged weaponry. Its enforced metals allows the user to use even heavier weapons with more precision."
 health = 85
 refined_ferrite_cost = 2000

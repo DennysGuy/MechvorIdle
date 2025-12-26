@@ -10,6 +10,8 @@ movement_speed_modifier = 0.15
 component_name = "Legs of Peace"
 index = 2
 manufacture_name = 2
+stats = "Added Health: 150
+Move Speed: -15%"
 description = "Heavy - great to plant your feet in the ground and take aim!"
 health = 150
 refined_ferrite_cost = 3600

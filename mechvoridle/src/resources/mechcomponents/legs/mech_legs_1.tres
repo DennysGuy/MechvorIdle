@@ -8,6 +8,8 @@ dodge_chance_modifier = 0.15
 stun_chance = -0.05
 movement_speed_modifier = -0.05
 component_name = "STEEL Trackers"
+stats = "Added Health: 80
+Move Speed : +5%"
 description = "Light weight legs - designed for quick responsive hits."
 health = 80
 refined_ferrite_cost = 2600

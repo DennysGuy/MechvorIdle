@@ -16,7 +16,15 @@ stun_chance = 0.15
 component_name = "Morning Star of Spirit"
 index = 2
 manufacture_name = 2
+stats = "Type: SWORD
+[color=red]Difficulty: Hard[/color]
+Base Damage: 12
+Pierce Multiplier : +2% each succeeding tile
+Cooldown: 4 seconds"
 description = "The Morning Star of Spirit though slower in nature than other melee weapons, has a better chance to stagger. This weapon replicates the horrifying weaponry of the darker times of Humanity's past."
+how_to_play = "Unleash a lunge attack that pierces tiles. The player will target current column and cannot move during targeting phase.
+
+Hold down the fire button, the longer held down the further the lunge."
 refined_ferrite_cost = 1850
 plasma_cost = 350
 category = 4

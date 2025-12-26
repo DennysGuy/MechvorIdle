@@ -17,9 +17,17 @@ hit_freeze = 1.0
 attack_pattern = ExtResource("1_vbyji")
 component_name = "Sub Ultima Machinegun"
 index = 4
+stats = "Type: RIFLE
+[color=yellow]Difficulty: Medium[/color]
+Base Damage: 5 x 5
+Burst weapon
+Cooldown: 4 seconds"
 description = "This sub machine gun is known best for CQC, as in typical use it is known to be the \"Sprayer and Prayer\". 
 
 During the Corpo-Faction wars, Steel Fang Technologies issued these to their secret aquatic mech units. They were a deadly force to be reckon with. "
+how_to_play = "High cool down, low damage. Shoot weapon by tapping corresponding fire weapon.
+
+Weapon synergizes well with next shot mulitplier."
 refined_ferrite_cost = 1600
 plasma_cost = 400
 category = 4

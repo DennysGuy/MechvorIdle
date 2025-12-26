@@ -7,6 +7,7 @@ script = ExtResource("1_6x0bj")
 component_name = "Chest of Righteousness"
 index = 2
 manufacture_name = 2
+stats = "Added Health: 200"
 description = "The Chest of Righteousness is heavy duty - high protection, but a little bit on the slow side."
 health = 200
 refined_ferrite_cost = 4800

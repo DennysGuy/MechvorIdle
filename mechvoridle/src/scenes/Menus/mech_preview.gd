@@ -249,7 +249,8 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GridManager.set_mech_as_standard()
+	#GridManager.set_mech_as_standard()
+	MenuController.set_selected_part.connect(display_selected_parts)
 	display_selected_parts()
 
 

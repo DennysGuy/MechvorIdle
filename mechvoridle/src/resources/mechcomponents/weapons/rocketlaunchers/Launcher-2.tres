@@ -23,9 +23,17 @@ primary_projectile_discharge = ExtResource("2_jr17m")
 component_name = "DUAL-ARM-TT68D"
 index = 7
 manufacture_name = 1
+stats = "Type: ROCKET LAUNCHER
+[color=green]Difficulty: Easy[/color]
+Base Damage: 50
+Max Base Damage : 50 * 4 = 200
+Cooldown: 10 seconds"
 description = "A powerful dual chamber rocket launcher, strapped to the arm to allow for further utility. Great for mid to close range combat. 
 
 Palo Dynamics intended this rocket launcher to be modifications to the arms rather than a launcher to be gripped - that way, more weapon options can be added."
+how_to_play = "hitting enemy with rocket will hit adjacent tiles for half damage.
+
+There is a 20% chance to hit diagonal tiles."
 refined_ferrite_cost = 3200
 plasma_cost = 400
 category = 4
