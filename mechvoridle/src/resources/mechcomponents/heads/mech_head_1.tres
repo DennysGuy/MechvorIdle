@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_ct6rc")
-accuracy_bonus = 0.25
-component_name = "HELM18XQC4"
+accuracy_bonus = 0.1
+crit_chance = 0.15
+component_name = "STEEL Helm"
+manufacture_name = 0
 description = "Fixed with some of the best overhead scopes on the market. This mech head provides accuracy with ranged weapons."
-health = 2400
+health = 1200
 plasma_resistance = 0.0
-refined_ferrite_cost = 2000
+refined_ferrite_cost = 1600
 plasma_cost = 0
 platinum_cost = 0
 category = 0
-component_type = 1
+component_type = 2
 weight_class = 2
 metadata/_custom_type_script = "uid://byj1i2hfctw2l"

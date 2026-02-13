@@ -6,8 +6,9 @@
 script = ExtResource("1_072s6")
 charge_speed_modifier = 0.05
 component_name = "Boss 3  torso"
+manufacture_name = 0
 description = ""
-health = 3125
+health = 4000
 plasma_resistance = 0.1
 refined_ferrite_cost = 0
 plasma_cost = 0

@@ -57,7 +57,6 @@ func unregister_platinum_drone(drone: Node) -> void:
 # === COST UPDATERS ===
 
 func update_mining_drone_cost() -> void:
-	
 	var new_cost = get_mining_drone_cost()
 	var new_count = get_mining_drone_count()
 	emit_signal("mining_drone_cost_changed", new_cost, new_count)

@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_tbmo3")
-dodge_chance_modifier = 0.2
-component_name = "STX237HI453"
-description = "Heavy duty. Intended to provide a lot of protection, yet not the fastest legs on the market."
-health = 3700
+dodge_chance_modifier = 0.15
+stun_chance = -0.05
+component_name = "STEEL Trackers"
+manufacture_name = 0
+description = "Light weight legs - designed for quick responsive hits."
+health = 2600
 plasma_resistance = 0.0
-refined_ferrite_cost = 3500
+refined_ferrite_cost = 2600
 plasma_cost = 0
 platinum_cost = 0
 category = 2
 component_type = 0
-weight_class = 0
+weight_class = 2
 metadata/_custom_type_script = "uid://cqa88tl10c011"

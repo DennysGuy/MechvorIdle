@@ -98,9 +98,9 @@ func _on_control_gui_input(event):
 			vulcan_sfx_player.stream = vulcan_firing_sfx.pick_random()
 			vulcan_sfx_player.play()
 			
-			boss_health_bar.current_health_tracker -= 10
+			boss_health_bar.current_health_tracker -= 25
 			var resource_acquired_label : ResourceAcquiredLabel = preload("res://src/scripts/ResourceAcquiredLabel.tscn").instantiate()
-			resource_acquired_label.output = "-10"
+			resource_acquired_label.output = "-25"
 			resource_acquired_label.global_position = get_viewport().get_mouse_position()
 			resource_acquired_label.resource = ResourceAcquiredLabel.RESOURCE.VULCAN
 			get_parent().add_child(resource_acquired_label)

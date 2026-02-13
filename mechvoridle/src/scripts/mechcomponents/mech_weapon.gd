@@ -10,8 +10,10 @@ enum WEAPON_CLASS {SWORD, RIFLE, ROCKETLAUNCHER}
 @export var charge_time : float
 @export var charge_speed : float
 @export var crit_chance : float
+@export var crit_damage : float
 @export var accuracy : float
 @export var stun_chance : float
+@export var plasma_damage_bonus : float
 
 func get_weapon_type() -> String:
 	match(weapon_type):

@@ -4,20 +4,23 @@
 
 [resource]
 script = ExtResource("1_3d8cd")
-weapon_type = 1
+weapon_type = 0
 weapon_class = 0
-damage = 200
+damage = 120
 number_of_hits = 2
 charge_time = 0.5
-charge_speed = 1.25
-crit_chance = 0.0
-accuracy = 0.9
-stun_chance = 0.0
-component_name = "SAMJ-PSAM-MKII"
-description = "Designed for precision - forged with a plasma sealant. It is for the perfectionist who intends to land powerful strikes on their foe."
+charge_speed = 1.8
+crit_chance = 0.05
+crit_damage = 0.0
+accuracy = 0.96
+stun_chance = 0.05
+plasma_damage_bonus = 0.0
+component_name = "HYPR-XS22"
+manufacture_name = 1
+description = "A quick, heated blade - not powerful, but a fast and fluid short sword aimed to overwhelm the enemy and chip away armor a extreme rates"
 health = 0
 plasma_resistance = 0.0
-refined_ferrite_cost = 1400
+refined_ferrite_cost = 1300
 plasma_cost = 600
 platinum_cost = 0
 category = 4

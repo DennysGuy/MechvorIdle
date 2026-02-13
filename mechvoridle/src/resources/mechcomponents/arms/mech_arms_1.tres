@@ -4,16 +4,17 @@
 
 [resource]
 script = ExtResource("1_aa1gm")
-crit_chance_modifier = 0.3
-charge_time_modifier = 0.0
-component_name = "GUARDS23XY34Z"
+crit_damage_modifier = 0.2
+max_hits_chance = 0.6
+component_name = "STEEL-Breakers "
+manufacture_name = 0
 description = "From the factory, these arms are tuned to handle all types of ranged weaponry. Its enforced metals allows the user to use even heavier weapons with more precision."
-health = 1200
+health = 1400
 plasma_resistance = 0.0
-refined_ferrite_cost = 2800
+refined_ferrite_cost = 2000
 plasma_cost = 0
 platinum_cost = 0
 category = 3
-component_type = 1
-weight_class = 1
+component_type = 2
+weight_class = 2
 metadata/_custom_type_script = "uid://marmnfdtywpd"

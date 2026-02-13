@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cu5ql32vaxyid"]
+[gd_scene load_steps=19 format=3 uid="uid://cu5ql32vaxyid"]
 
 [ext_resource type="Script" uid="uid://cfnionvj6lols" path="res://src/scripts/Panels/mining_pane.gd" id="1_tutbl"]
 [ext_resource type="PackedScene" uid="uid://caw51s5447gtc" path="res://src/scenes/AsteroidArea.tscn" id="2_1hqb7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ccmj71mwg532g" path="res://src/scenes/UpgradePanel.tscn" id="5_l11te"]
 [ext_resource type="Shader" uid="uid://cn65vgwd8wjfu" path="res://src/scripts/CRTShader.gdshader" id="6_78b4q"]
 [ext_resource type="PackedScene" uid="uid://hjbnj2tod3ol" path="res://src/scenes/PlasmaGenerator.tscn" id="6_tow8p"]
+[ext_resource type="Script" uid="uid://dlt0pvi2tpywm" path="res://src/scripts/filter_controller.gd" id="7_e1r7j"]
 [ext_resource type="Texture2D" uid="uid://bp4mre5vn47ji" path="res://assets/graphics/MiningPanel_overlay.png" id="7_t7rsg"]
 [ext_resource type="Texture2D" uid="uid://dpxyxidb2quhj" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Normal.png" id="9_7bsma"]
 [ext_resource type="Texture2D" uid="uid://bkuw5k1laydet" path="res://assets/graphics/UI/FromMiningPaneToCentralPaneButton_Hoverl.png" id="10_mtt0f"]
@@ -166,7 +167,12 @@ offset_top = 90.0
 offset_right = -80.0
 offset_bottom = 162.0
 
-[node name="CRTOverlayForMonitor" type="ColorRect" parent="ColorRect"]
+[node name="FilterController" type="Control" parent="ColorRect"]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("7_e1r7j")
+
+[node name="CRTOverlayForMonitor" type="ColorRect" parent="ColorRect/FilterController"]
 material = SubResource("ShaderMaterial_tow8p")
 layout_mode = 0
 offset_left = 94.0
@@ -175,7 +181,7 @@ offset_right = 240.0
 offset_bottom = 343.0
 mouse_filter = 2
 
-[node name="CRTOverlayForMonitor2" type="ColorRect" parent="ColorRect"]
+[node name="CRTOverlayForMonitor2" type="ColorRect" parent="ColorRect/FilterController"]
 material = SubResource("ShaderMaterial_tow8p")
 layout_mode = 0
 offset_left = 281.0
@@ -184,7 +190,7 @@ offset_right = 427.0
 offset_bottom = 343.0
 mouse_filter = 2
 
-[node name="CRTOverlayForMonitor3" type="ColorRect" parent="ColorRect"]
+[node name="CRTOverlayForMonitor3" type="ColorRect" parent="ColorRect/FilterController"]
 material = SubResource("ShaderMaterial_tow8p")
 layout_mode = 0
 offset_left = 463.0

@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("1_rja25")
-crit_chance_modifier = 0.0
-charge_time_modifier = 0.0
+crit_damage_modifier = 0.0
+max_hits_chance = 0.0
 component_name = ""
+manufacture_name = 0
 description = ""
 health = 2500
 plasma_resistance = 0.0

@@ -5,14 +5,15 @@
 [resource]
 script = ExtResource("1_ebm0g")
 charge_speed_modifier = 0.1
-component_name = "TORO44XCIRLY"
+component_name = "TORSO44XCIRLY"
+manufacture_name = 1
 description = "Providing great protection yet, slower charge speeds. Great against faster melee based builds as they can tank lots of hits."
-health = 5000
+health = 4800
 plasma_resistance = 0.0
-refined_ferrite_cost = 5000
+refined_ferrite_cost = 4350
 plasma_cost = 0
 platinum_cost = 0
 category = 1
 component_type = 0
-weight_class = 0
+weight_class = 1
 metadata/_custom_type_script = "uid://d35b44mou7bkr"

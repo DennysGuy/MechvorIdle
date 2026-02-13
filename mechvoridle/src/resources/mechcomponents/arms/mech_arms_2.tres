@@ -4,16 +4,17 @@
 
 [resource]
 script = ExtResource("1_e578v")
-crit_chance_modifier = 0.35
-charge_time_modifier = 25.0
+crit_damage_modifier = 0.05
+max_hits_chance = 0.8
 component_name = "ARM2YSAB343"
+manufacture_name = 1
 description = "These arms were developed with efficient yet sturdy frame. Designed to handle melee weapons with ease."
-health = 1000
+health = 1800
 plasma_resistance = 0.0
-refined_ferrite_cost = 2500
+refined_ferrite_cost = 2200
 plasma_cost = 0
 platinum_cost = 0
 category = 3
-component_type = 2
-weight_class = 2
+component_type = 0
+weight_class = 1
 metadata/_custom_type_script = "uid://marmnfdtywpd"

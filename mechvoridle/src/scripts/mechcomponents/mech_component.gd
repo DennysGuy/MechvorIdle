@@ -2,7 +2,10 @@ class_name MechComponent extends Resource
 
 @export_group("Descriptors")
 @export var component_name : String
+@export_enum("Steel Fang Tech", "Palo Dynamics", "Crosshair Enterprises") var manufacture_name : int
+enum MANUFACTURER_NAME {STEEL_FANG_TECH, PALO_DYNAMICS, CROSSHAIR_ENTERPRISES}
 @export var icon : Texture2D
+
 @export_multiline var description : String
 
 @export_group("Bonus Stats")
@@ -67,3 +70,30 @@ func is_ranged_type() -> bool:
 
 func is_melee_type() -> bool:
 	return component_type == COMPONENT_TYPE.MELEE
+
+func is_no_type() -> bool:
+	return component_type == COMPONENT_TYPE.NA
+
+func get_manufacturer_name() -> String:
+	match manufacture_name:
+		MANUFACTURER_NAME.STEEL_FANG_TECH:
+			return "STEEL Fang Tech"
+		MANUFACTURER_NAME.PALO_DYNAMICS:
+			return "Palo Dynamics"
+		MANUFACTURER_NAME.CROSSHAIR_ENTERPRISES:
+			return "Crosshair Enterprises"
+		_:
+			return ""
+
+
+
+func get_manufacturer_icon() -> Texture2D:
+	match manufacture_name:
+		MANUFACTURER_NAME.STEEL_FANG_TECH:
+			return preload("res://assets/graphics/SteelFangTechIcon.png")
+		MANUFACTURER_NAME.PALO_DYNAMICS:
+			return preload("res://assets/graphics/PaloDynamicsLogo.png")
+		MANUFACTURER_NAME.CROSSHAIR_ENTERPRISES:
+			return preload("res://assets/graphics/CrosshairEnterprisesLogo.png")
+		_:
+			return null

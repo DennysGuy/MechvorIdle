@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu5pva60xy6h4"]
+
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="1_v5m0b"]
+[ext_resource type="Script" uid="uid://ffh620hgym14" path="res://src/scripts/stat_label.gd" id="2_je3mu"]
+
+[node name="StatLabel" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -4.0
+offset_right = 35.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_v5m0b")
+theme_override_font_sizes/font_size = 6
+text = "Mobile Mod - 5%"
+script = ExtResource("2_je3mu")

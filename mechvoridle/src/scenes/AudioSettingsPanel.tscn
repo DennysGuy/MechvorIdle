@@ -1,7 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjcihcy5w5pon"]
+[gd_scene load_steps=6 format=3 uid="uid://cjcihcy5w5pon"]
 
 [ext_resource type="Script" uid="uid://bh6sgrurocqrf" path="res://src/scripts/audio_settings_panel.gd" id="1_y0cla"]
 [ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_urkah"]
+
+[sub_resource type="Animation" id="Animation_urkah"]
+resource_name = "fade_out_music"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.98),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -67.6]
+}
+
+[sub_resource type="Animation" id="Animation_2wme4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wme4"]
+_data = {
+&"RESET": SubResource("Animation_2wme4"),
+&"fade_out_music": SubResource("Animation_urkah")
+}
 
 [node name="AudioSettings" type="Panel"]
 anchors_preset = 8
@@ -12,7 +49,7 @@ anchor_bottom = 0.5
 offset_left = -150.0
 offset_top = -41.0
 offset_right = 61.0
-offset_bottom = 79.0
+offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y0cla")
@@ -59,9 +96,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -36.0
-offset_top = -50.0
+offset_top = -61.0
 offset_right = -3.0
-offset_bottom = -38.0
+offset_bottom = -49.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_urkah")
@@ -76,9 +113,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -24.0
-offset_top = -25.0
+offset_top = -35.0
 offset_right = -4.0
-offset_bottom = -13.0
+offset_bottom = -23.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_urkah")
@@ -102,6 +139,23 @@ theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
 text = "Ambience"
 
+[node name="Ambience2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = 27.5
+offset_right = -4.0
+offset_bottom = 39.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_urkah")
+theme_override_font_sizes/font_size = 8
+text = "Toggle Filter"
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -123,10 +177,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -95.5
-offset_top = -22.0
-offset_right = 21.5
-offset_bottom = -13.0
+offset_left = -102.5
+offset_top = -15.0
+offset_right = 28.5
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -137,16 +191,36 @@ text = "Red Comet Perspective - PMYA"
 [node name="NextTrack" type="Button" parent="."]
 layout_mode = 0
 offset_left = 140.0
-offset_top = 92.0
+offset_top = 122.0
 offset_right = 209.0
-offset_bottom = 110.0
+offset_bottom = 140.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("2_urkah")
 theme_override_font_sizes/font_size = 8
 text = "Next Track"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../JukeBox")
+libraries = {
+&"": SubResource("AnimationLibrary_2wme4")
+}
+
 [node name="JukeBox" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -40.0
+offset_right = 27.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SFXSlider" to="." method="_on_sfx_slider_value_changed"]
@@ -154,3 +228,4 @@ bus = &"Music"
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="NextTrack" to="." method="_on_next_track_button_up"]
 [connection signal="finished" from="JukeBox" to="." method="_on_juke_box_finished"]
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

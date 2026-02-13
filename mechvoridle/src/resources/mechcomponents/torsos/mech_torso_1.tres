@@ -4,12 +4,13 @@
 
 [resource]
 script = ExtResource("1_fyltt")
-charge_speed_modifier = 0.05
-component_name = "TORS456XY23"
+charge_speed_modifier = 0.3
+component_name = "STEEL Chest"
+manufacture_name = 0
 description = "Light and nimble, great for melee weapons."
-health = 4600
+health = 4400
 plasma_resistance = 0.0
-refined_ferrite_cost = 4600
+refined_ferrite_cost = 4000
 plasma_cost = 0
 platinum_cost = 0
 category = 1

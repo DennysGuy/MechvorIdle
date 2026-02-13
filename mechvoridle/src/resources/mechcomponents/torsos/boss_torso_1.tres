@@ -6,6 +6,7 @@
 script = ExtResource("1_mr1i3")
 charge_speed_modifier = 0.2
 component_name = ""
+manufacture_name = 0
 description = ""
 health = 3000
 plasma_resistance = 0.0

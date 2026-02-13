@@ -1,0 +1,325 @@
+[gd_scene load_steps=4 format=3 uid="uid://u3jbpu6c6onu"]
+
+[ext_resource type="Script" uid="uid://bom128sb3rer0" path="res://src/scripts/mech_stats_panel.gd" id="1_4bvmg"]
+[ext_resource type="FontFile" uid="uid://50qlm4au2mjm" path="res://assets/graphics/Fonts/Valorax-lg25V.otf" id="2_dbrwj"]
+[ext_resource type="Script" uid="uid://ffh620hgym14" path="res://src/scripts/stat_label.gd" id="3_jfulb"]
+
+[node name="MechStatsPanel" type="ColorRect"]
+modulate = Color(1, 1, 1, 0.713726)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -98.5
+offset_right = 97.0
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.235294, 0.141176, 1)
+script = ExtResource("1_4bvmg")
+
+[node name="TotalArmor" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 58.0
+offset_bottom = 16.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Total Armor (HP)"
+
+[node name="TotalArmorAmount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 15.0
+offset_right = 82.0
+offset_bottom = 27.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 8
+text = "12000"
+
+[node name="Mobility" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 35.5
+offset_right = 96.0
+offset_bottom = 45.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Mobility (Dodge Rate)"
+
+[node name="MobilityAmount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 46.0
+offset_right = 190.0
+offset_bottom = 58.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "35% (30% + 5%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="Weapon1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 65.0
+offset_right = 176.0
+offset_bottom = 76.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "Weapon 1 - Sword"
+
+[node name="DamagePerCycle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 77.0
+offset_right = 23.0
+offset_bottom = 85.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "DPC "
+
+[node name="DPCW1Amount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 87.0
+offset_right = 44.0
+offset_bottom = 97.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "1450"
+
+[node name="Accuracy" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 77.5
+offset_right = 73.0
+offset_bottom = 85.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Hit Rate"
+
+[node name="AccuracyRate" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 87.5
+offset_right = 108.0
+offset_bottom = 97.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "30% (15% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="Accuracy2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 150.0
+offset_right = 72.0
+offset_bottom = 158.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Hit Rate"
+
+[node name="AccuracyRate2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 161.0
+offset_right = 108.0
+offset_bottom = 171.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "30% (15% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="ChargeSpeed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 77.0
+offset_right = 178.0
+offset_bottom = 85.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Chrge Speed"
+
+[node name="ChargeSpeedAmount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 87.0
+offset_right = 194.0
+offset_bottom = 97.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "35% (45% - 10%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="CritChance" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 100.5
+offset_right = 54.0
+offset_bottom = 108.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Crit CHNCE"
+
+[node name="CritChancePerc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 109.5
+offset_right = 77.0
+offset_bottom = 119.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "15% (30% - 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="StunChance" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 101.5
+offset_right = 172.0
+offset_bottom = 109.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Stun Chnce"
+
+[node name="StunChanceW1Perc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 110.5
+offset_right = 192.0
+offset_bottom = 120.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "15% (30% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="Weapon2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 138.0
+offset_right = 169.0
+offset_bottom = 149.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 7
+text = "Weapon 2 - Rifle"
+
+[node name="DamagePerCycle2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 150.0
+offset_right = 21.0
+offset_bottom = 158.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "DPC"
+
+[node name="DPCW1Amount2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 160.0
+offset_right = 46.0
+offset_bottom = 170.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "1450"
+
+[node name="ChargeSpeed2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 150.0
+offset_right = 175.0
+offset_bottom = 158.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Charge Speed"
+
+[node name="ChargeSpeedAmount2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 160.0
+offset_right = 192.0
+offset_bottom = 170.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "35% (45% - 10%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="CritChance2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 172.5
+offset_right = 54.0
+offset_bottom = 180.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Crit Chance"
+
+[node name="CritChancePerc2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 182.5
+offset_right = 77.0
+offset_bottom = 192.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "15% (30% - 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"
+
+[node name="StunChance2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 172.5
+offset_right = 169.0
+offset_bottom = 180.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "Stun Chance"
+
+[node name="StunChanceW1Perc2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 182.5
+offset_right = 189.0
+offset_bottom = 192.5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbrwj")
+theme_override_font_sizes/font_size = 6
+text = "15% (30% + 15%)"
+script = ExtResource("3_jfulb")
+metadata/_custom_type_script = "uid://ffh620hgym14"

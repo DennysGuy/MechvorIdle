@@ -33,8 +33,9 @@ class_name PlayerPreview extends Node3D
 		"HEAVY": heavy_torso
 	},
 	"Arms": {
-		"Ranged": heavy_arms, 
-		"Melee": melee_arms
+		"HEAVY": heavy_arms, 
+		"LIGHT": melee_arms, 
+		"REGULAR": null,
 	},
 	"Legs": {
 		"LIGHT": light_legs, 
@@ -42,8 +43,9 @@ class_name PlayerPreview extends Node3D
 		"HEAVY": heavy_legs 
 	},
 	"Head": {
-		"Ranged": ranged_head, 
-		"Melee": melee_head
+		"HEAVY": ranged_head, 
+		"LIGHT": melee_head, 
+		"REGULAR": null
 	},
 	"Rifle": {
 		"Standard": {
@@ -91,8 +93,10 @@ func _physics_process(delta) -> void:
 
 func show_part(body_part : String, category : String) -> void:
 	var mech_component = parts_dictionary[body_part][category]
-	mech_component.show()
+	if mech_component:
+		mech_component.show()
 
 func show_weapon(weapon : String, category : String, hand :String) -> void:
 	var selected_weapon = parts_dictionary[weapon][category][hand]
-	selected_weapon.show()
+	if selected_weapon:
+		selected_weapon.show()
